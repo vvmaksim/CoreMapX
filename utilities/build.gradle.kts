@@ -3,5 +3,6 @@ plugins {
 }
 
 dependencies {
-
+    implementation(libs.kotlin.logging)
+    implementation(libs.logback.classic)
 }

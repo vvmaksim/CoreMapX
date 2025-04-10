@@ -3,10 +3,12 @@ plugins {
 }
 
 dependencies {
-    implementation("org.apache.commons:commons-text")
+    implementation(libs.commons.text)
+    implementation(libs.kotlin.logging)
+    implementation(libs.logback.classic)
     implementation(project(":utilities"))
 }
 
 application {
-    mainClass = "com.example.coremapx.app.AppKt"
+    mainClass = "org.coremapx.app.AppKt"
 }
