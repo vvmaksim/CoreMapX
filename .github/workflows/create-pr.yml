@@ -1,6 +1,11 @@
 name: Create Pull Request
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'dev/**'
+    branches-ignore:
+      - 'main'
 
 jobs:
   create-pull-request:
