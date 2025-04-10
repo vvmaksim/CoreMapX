@@ -47,3 +47,6 @@ bin/
 
 # Any files
 Main.kt
+
+# Any directory
+logs/

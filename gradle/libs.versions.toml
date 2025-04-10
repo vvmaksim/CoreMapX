@@ -2,7 +2,18 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-kotlin-gradle-plugin = "1.9.22"
+kotlin = "1.9.22"
+compose = "1.6.10"
+commons-text = "1.11.0"
+junit = "5.10.1"
+kotlin-logging = "3.0.5"
+logback = "1.5.6"
 
 [libraries]
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin-gradle-plugin" }
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+compose-gradle-plugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
+commons-text = { module = "org.apache.commons:commons-text", version.ref = "commons-text" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+kotlin-logging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlin-logging" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
