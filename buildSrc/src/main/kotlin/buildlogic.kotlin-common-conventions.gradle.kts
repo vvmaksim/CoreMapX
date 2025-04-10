@@ -5,14 +5,22 @@
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     id("org.jetbrains.kotlin.jvm")
+    id("org.jetbrains.compose")
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    google()
 }
 
 dependencies {
+    implementation(compose.desktop.currentOs)
+    implementation(compose.material)
+    implementation(compose.runtime)
+    implementation(compose.foundation)
+    implementation(compose.ui)
+
     constraints {
         // Define dependency versions as constraints
         implementation("org.apache.commons:commons-text:1.11.0")
