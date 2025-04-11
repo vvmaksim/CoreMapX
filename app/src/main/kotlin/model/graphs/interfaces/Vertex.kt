@@ -1,5 +1,5 @@
 package model.graphs.interfaces
 
-interface Vertex<V: Comparable<V>> {
+interface Vertex<V : Comparable<V>> {
     val id: V
 }
