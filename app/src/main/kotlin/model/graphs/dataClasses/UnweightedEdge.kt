@@ -1,0 +1,10 @@
+package model.graphs.dataClasses
+
+import model.graphs.interfaces.Edge
+import model.graphs.interfaces.Vertex
+
+data class UnweightedEdge<E: Comparable<E>, V: Comparable<V>>(
+    override val id: E,
+    override val from: Vertex<V>,
+    override val to: Vertex<V>
+): Edge<E, V>
