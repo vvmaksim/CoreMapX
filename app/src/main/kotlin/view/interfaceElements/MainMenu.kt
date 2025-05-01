@@ -15,30 +15,31 @@ import androidx.compose.ui.unit.sp
 fun MainMenu(
     isMenuVisible: Boolean,
     onMenuVisibilityChange: (Boolean) -> Unit,
-    onNewGraphClick: () -> Unit
+    onNewGraphClick: () -> Unit,
 ) {
     if (isMenuVisible) {
         Column(
-            modifier = Modifier
-                .width(200.dp)
-                .fillMaxHeight()
-                .background(Color(0xFFF0F0F0))
-                .padding(8.dp)
+            modifier =
+                Modifier
+                    .width(200.dp)
+                    .fillMaxHeight()
+                    .background(Color(0xFFF0F0F0))
+                    .padding(8.dp),
         ) {
             Text("CoreMapX", fontSize = 20.sp, modifier = Modifier.padding(bottom = 16.dp))
             TextButton(onClick = onNewGraphClick) {
                 Text("New Graph")
             }
-            TextButton(onClick = {  }) {
+            TextButton(onClick = { }) {
                 Text("Save Graph")
             }
-            TextButton(onClick = {  }) {
+            TextButton(onClick = { }) {
                 Text("Open Graph")
             }
-            TextButton(onClick = {  }) {
+            TextButton(onClick = { }) {
                 Text("Analytics")
             }
-            TextButton(onClick = {  }) {
+            TextButton(onClick = { }) {
                 Text("Settings")
             }
             Spacer(Modifier.weight(1f))
@@ -48,13 +49,14 @@ fun MainMenu(
         }
     } else {
         Column(
-            modifier = Modifier
-                .width(50.dp)
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.Center
+            modifier =
+                Modifier
+                    .width(50.dp)
+                    .fillMaxHeight(),
+            verticalArrangement = Arrangement.Center,
         ) {
             Button(
-                onClick = { onMenuVisibilityChange(true) }
+                onClick = { onMenuVisibilityChange(true) },
             ) {
                 Text(">")
             }

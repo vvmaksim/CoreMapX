@@ -1,6 +1,6 @@
 package model.graphs.dataClasses
 
-data class Vertex<V: Comparable<V>>(
+data class Vertex<V : Comparable<V>>(
     val id: V,
-    val label: String
+    val label: String,
 )

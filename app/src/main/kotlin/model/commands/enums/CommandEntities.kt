@@ -5,5 +5,5 @@ enum class CommandEntities {
     EDGE,
     GRAPH,
     COMMAND_OUTPUT,
-    APP
+    APP,
 }

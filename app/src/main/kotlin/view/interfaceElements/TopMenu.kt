@@ -11,18 +11,19 @@ import androidx.compose.ui.unit.dp
 import viewmodel.MainScreenViewModel
 
 @Composable
-fun <E: Comparable<E>, V: Comparable<V>> TopMenu(
+fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
     viewModel: MainScreenViewModel<E, V>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var actionsExpanded by remember { mutableStateOf(false) }
     var verticesExpanded by remember { mutableStateOf(false) }
     var edgesExpanded by remember { mutableStateOf(false) }
 
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(8.dp),
     ) {
         Box {
             Button(onClick = { actionsExpanded = true }) {
@@ -30,7 +31,7 @@ fun <E: Comparable<E>, V: Comparable<V>> TopMenu(
             }
             DropdownMenu(
                 expanded = actionsExpanded,
-                onDismissRequest = { actionsExpanded = false }
+                onDismissRequest = { actionsExpanded = false },
             ) {
                 DropdownMenuItem(onClick = {
                     viewModel.resetGraphView()
@@ -49,7 +50,7 @@ fun <E: Comparable<E>, V: Comparable<V>> TopMenu(
             }
             DropdownMenu(
                 expanded = verticesExpanded,
-                onDismissRequest = { verticesExpanded = false }
+                onDismissRequest = { verticesExpanded = false },
             ) {
                 DropdownMenuItem(onClick = {
                     viewModel.setShowVerticesLabels(!viewModel.showVerticesLabels.value)

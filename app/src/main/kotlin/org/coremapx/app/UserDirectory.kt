@@ -9,12 +9,13 @@ private val logger = KotlinLogging.logger {}
 
 object UserDirectory {
     private val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
-    private val directories = listOf(
-        "$baseUserDirPath/logs",
-        "$baseUserDirPath/config",
-        "$baseUserDirPath/data",
-        "$baseUserDirPath/data/temp"
-    )
+    private val directories =
+        listOf(
+            "$baseUserDirPath/logs",
+            "$baseUserDirPath/config",
+            "$baseUserDirPath/data",
+            "$baseUserDirPath/data/temp",
+        )
 
     fun init() {
         logger.info { "Checking the existence of a user directory" }

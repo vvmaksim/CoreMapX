@@ -18,52 +18,56 @@ import androidx.compose.ui.unit.dp
 fun CommandLine(
     modifier: Modifier = Modifier,
     outputMessages: MutableList<String> = mutableListOf(),
-    onCommand: (String) -> Unit = {}
+    onCommand: (String) -> Unit = {},
 ) {
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     val scrollState = rememberScrollState()
-    val formattedText = buildAnnotatedString {
-        outputMessages.forEachIndexed { index, message ->
-            val parts = message.split("Command:", limit = 2)
-            if (parts.size == 2) {
-                withStyle(style = SpanStyle(color = Color.Red)) {
-                    append("Command:")
+    val formattedText =
+        buildAnnotatedString {
+            outputMessages.forEachIndexed { index, message ->
+                val parts = message.split("Command:", limit = 2)
+                if (parts.size == 2) {
+                    withStyle(style = SpanStyle(color = Color.Red)) {
+                        append("Command:")
+                    }
+                    withStyle(style = SpanStyle(color = Color.Black)) {
+                        append(parts[1])
+                    }
+                } else {
+                    withStyle(style = SpanStyle(color = Color.Black)) {
+                        append(message)
+                    }
                 }
-                withStyle(style = SpanStyle(color = Color.Black)) {
-                    append(parts[1])
+                if (index < outputMessages.size - 1) {
+                    append("\n")
                 }
-            } else {
-                withStyle(style = SpanStyle(color = Color.Black)) {
-                    append(message)
-                }
-            }
-            if (index < outputMessages.size - 1) {
-                append("\n")
             }
         }
-    }
 
     LaunchedEffect(outputMessages) {
         scrollState.animateScrollTo(scrollState.maxValue)
     }
 
     Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(8.dp),
     ) {
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(max = 150.dp)
-                .padding(8.dp)
-                .verticalScroll(scrollState)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .heightIn(max = 150.dp)
+                    .padding(8.dp)
+                    .verticalScroll(scrollState),
         ) {
             Text(
                 text = formattedText,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
             )
         }
 
@@ -79,10 +83,11 @@ fun CommandLine(
                     commandText = TextFieldValue("")
                 }
             },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp),
-            placeholder = { Text("Enter command") }
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(56.dp),
+            placeholder = { Text("Enter command") },
         )
     }
 }

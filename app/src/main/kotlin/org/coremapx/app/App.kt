@@ -12,7 +12,6 @@ import java.awt.Dimension
 
 private val logger = KotlinLogging.logger {}
 
-
 @Composable
 @Preview
 fun App() {
@@ -31,7 +30,7 @@ fun main() =
                 logger.info("Closed CoreMapX app")
                 exitApplication()
             },
-            title = "CoreMapX"
+            title = "CoreMapX",
         ) {
             window.minimumSize = Dimension(1280, 720)
             App()

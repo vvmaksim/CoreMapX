@@ -4,7 +4,7 @@ import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
 
 class Command(
-    command: String
+    command: String,
 ) {
     private val elements: List<String> = command.trim().split("\\s+".toRegex())
     private val keysForAddVertex = listOf("id", "label")
@@ -23,23 +23,16 @@ class Command(
         validateParameters()
     }
 
-    private fun getType(elements: List<String>): CommandTypes? {
-        return when (elements[0].lowercase()) {
+    private fun getType(elements: List<String>): CommandTypes? =
+        when (elements[0].lowercase()) {
             "add" -> CommandTypes.ADD
             "rm", "remove" -> CommandTypes.RM
             "graph_clear", "clear" -> CommandTypes.CLEAR
             "help" -> CommandTypes.HELP
             else -> null
         }
-    }
 
     private fun getEntity(elements: List<String>): CommandEntities? {
-//        when (elements.getOrNull(0)?.lowercase()) {     почему я сделал тут именно так?
-//            "graph_clear" -> return CommandEntities.GRAPH
-//            "clear" -> return CommandEntities.COMMAND_OUTPUT
-//            "help" -> return CommandEntities.APP
-//        }
-
         when (elements[0].lowercase()) {
             "graph_clear" -> return CommandEntities.GRAPH
             "clear" -> return CommandEntities.COMMAND_OUTPUT
@@ -70,7 +63,7 @@ class Command(
     private fun getParametersForAddType(
         isCommandWithExplicitParameters: Boolean,
         paramElements: List<String>,
-        params: MutableMap<String, String>
+        params: MutableMap<String, String>,
     ) {
         if (isCommandWithExplicitParameters) {
             paramElements.forEach { param ->
@@ -91,7 +84,9 @@ class Command(
                     params["id"] = paramElements[0]
                     params["label"] = paramElements[1]
                 } else {
-                    throw IllegalArgumentException("Invalid parameter format. When adding a vertex, you must specify 2 required parameters: id and label")
+                    throw IllegalArgumentException(
+                        "Invalid parameter format. When adding a vertex, you must specify 2 required parameters: id and label",
+                    )
                 }
             } else if (entity == CommandEntities.EDGE) {
                 when (paramElements.size) {
@@ -104,7 +99,10 @@ class Command(
                         params["to"] = paramElements[1]
                         params["weight"] = paramElements[2]
                     }
-                    else -> IllegalArgumentException("Invalid parameter format. When adding an edge, you must specify 2 or 3 required parameters: id and label or id, label and weight")
+                    else ->
+                        IllegalArgumentException(
+                            "Invalid parameter format. When adding an edge, you must specify 2 or 3 required parameters: id and label or id, label and weight",
+                        )
                 }
             }
         }
