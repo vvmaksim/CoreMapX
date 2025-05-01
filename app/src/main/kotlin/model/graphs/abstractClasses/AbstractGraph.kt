@@ -1,10 +1,10 @@
 package model.graphs.abstractClasses
 
+import model.graphs.dataClasses.Vertex
 import model.graphs.interfaces.Edge
 import model.graphs.interfaces.Graph
-import model.graphs.interfaces.Vertex
 
-abstract class AbstractGraph<E: Comparable<E>, V: Comparable<V>>: Graph<E, V> {
+abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V> {
     protected var nextEdgeId = 0
     protected val _vertices = HashMap<V, Vertex<V>>()
     protected val _edges = HashMap<E, Edge<E, V>>()
@@ -15,15 +15,12 @@ abstract class AbstractGraph<E: Comparable<E>, V: Comparable<V>>: Graph<E, V> {
     override val edges: Map<E, Edge<E, V>>
         get() = _edges.toMap()
 
-    override val countVertices: Int
-        get() = _vertices.size
-
-    override val countEdges: Int
-        get() = _edges.size
-
     override fun getVertex(id: V): Vertex<V>? = _vertices[id]
+
     override fun getEdge(id: E): Edge<E, V>? = _edges[id]
+
     override fun getAllVertices(): List<Vertex<V>> = _vertices.values.toList()
+
     override fun getAllEdges(): List<Edge<E, V>> = _edges.values.toList()
 
     override fun getNeighbors(vertex: Vertex<V>): List<Vertex<V>> {
@@ -54,5 +51,11 @@ abstract class AbstractGraph<E: Comparable<E>, V: Comparable<V>>: Graph<E, V> {
         _vertices.remove(id) ?: return null
         _edges.entries.removeIf { it.value.from.id == id || it.value.to.id == id }
         return id
+    }
+
+    override fun clear() {
+        _vertices.clear()
+        _edges.clear()
+        nextEdgeId = 0
     }
 }

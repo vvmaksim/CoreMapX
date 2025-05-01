@@ -2,10 +2,13 @@ package model.graphs.classes
 
 import model.graphs.abstractClasses.AbstractGraph
 import model.graphs.dataClasses.UnweightedEdge
-import model.graphs.interfaces.Vertex
+import model.graphs.dataClasses.Vertex
 
-class DirectedUnweightedGraph<V: Comparable<V>>: AbstractGraph<Int, V>() {
-    fun addEdge(from: Vertex<V>, to: Vertex<V>): Int? = addEdge(UnweightedEdge(nextEdgeId++, from, to))
+class DirectedUnweightedGraph<V : Comparable<V>> : AbstractGraph<Int, V>() {
+    fun addEdge(
+        from: Vertex<V>,
+        to: Vertex<V>,
+    ): Int? = addEdge(UnweightedEdge(nextEdgeId++, from, to))
 
     override fun getNeighbors(vertex: Vertex<V>): List<Vertex<V>> {
         if (vertex !in _vertices.values) return emptyList()
