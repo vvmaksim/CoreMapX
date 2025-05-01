@@ -1,12 +1,10 @@
 package model.graphs.interfaces
 
+import model.graphs.dataClasses.Vertex
+
 interface Graph<E : Comparable<E>, V : Comparable<V>> {
     val vertices: Map<V, Vertex<V>>
     val edges: Map<E, Edge<E, V>>
-    val countVertices: Int
-        get() = vertices.size
-    val countEdges: Int
-        get() = edges.size
 
     fun addVertex(vertex: Vertex<V>): V
 
@@ -25,4 +23,6 @@ interface Graph<E : Comparable<E>, V : Comparable<V>> {
     fun getAllEdges(): List<Edge<E, V>>
 
     fun getAllVertices(): List<Vertex<V>>
+
+    fun clear()
 }
