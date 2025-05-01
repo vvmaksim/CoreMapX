@@ -1,7 +1,6 @@
 package model.graphs.dataClasses
 
 import model.graphs.interfaces.Edge
-import model.graphs.interfaces.Vertex
 
 data class WeightedEdge<E : Comparable<E>, V : Comparable<V>>(
     override val id: E,
