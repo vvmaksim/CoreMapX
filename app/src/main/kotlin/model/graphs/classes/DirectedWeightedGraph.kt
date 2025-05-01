@@ -1,8 +1,8 @@
 package model.graphs.classes
 
 import model.graphs.abstractClasses.AbstractGraph
+import model.graphs.dataClasses.Vertex
 import model.graphs.dataClasses.WeightedEdge
-import model.graphs.interfaces.Vertex
 
 class DirectedWeightedGraph<V : Comparable<V>> : AbstractGraph<Int, V>() {
     fun addEdge(
