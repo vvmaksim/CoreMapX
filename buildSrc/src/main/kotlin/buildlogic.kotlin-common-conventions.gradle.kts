@@ -1,6 +1,7 @@
 plugins {
     id("org.jetbrains.kotlin.jvm")
     id("org.jetbrains.compose")
+    id("jacoco")
 }
 
 repositories {
@@ -30,4 +31,24 @@ java {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.named<JacocoReport>("jacocoTestReport") {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required = false
+        csv.required = false
+        html.required = true
+
+        html.outputLocation = file("${buildDir}/reports/jacoco/test/html")
+    }
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
 }
