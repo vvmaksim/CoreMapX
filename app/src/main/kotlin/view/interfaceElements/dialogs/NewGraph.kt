@@ -13,7 +13,7 @@ import androidx.compose.ui.window.Dialog
 @Composable
 fun NewGraph(
     onDismiss: () -> Unit,
-    onCreate: (isDirected: Boolean, isWeighted: Boolean) -> Unit
+    onCreate: (isDirected: Boolean, isWeighted: Boolean) -> Unit,
 ) {
     var newGraphName by remember { mutableStateOf("") }
     var isWeightedGraph by remember { mutableStateOf(false) }
@@ -21,51 +21,55 @@ fun NewGraph(
 
     Dialog(onDismissRequest = onDismiss) {
         Surface(
-            modifier = Modifier
-                .width(300.dp)
-                .padding(8.dp),
-            color = Color.White
+            modifier =
+                Modifier
+                    .width(300.dp)
+                    .padding(8.dp),
+            color = Color.White,
         ) {
             Column(
                 modifier = Modifier.padding(8.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text("Create New Graph", fontSize = 18.sp, modifier = Modifier.padding(bottom = 8.dp))
                 OutlinedTextField(
                     value = newGraphName,
                     onValueChange = { newGraphName = it },
                     label = { Text("Graph Name") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Checkbox(
                         checked = isDirectedGraph,
-                        onCheckedChange = { isDirectedGraph = it }
+                        onCheckedChange = { isDirectedGraph = it },
                     )
                     Text("Directed", modifier = Modifier.padding(start = 8.dp))
                 }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Checkbox(
                         checked = isWeightedGraph,
-                        onCheckedChange = { isWeightedGraph = it }
+                        onCheckedChange = { isWeightedGraph = it },
                     )
                     Text("Weighted", modifier = Modifier.padding(start = 8.dp))
                 }
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
                     Button(onClick = { onCreate(isDirectedGraph, isWeightedGraph) }) {
                         Text("Create")

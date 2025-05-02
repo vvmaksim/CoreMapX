@@ -17,52 +17,57 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 @Composable
-fun <E: Comparable<E>, V: Comparable<V>> EdgeView(
+fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
     viewModel: EdgeViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = modifier.fillMaxSize()) {
-            val start = Offset(
-                viewModel.from.x.toPx() + viewModel.from.radius.toPx(),
-                viewModel.from.y.toPx() + viewModel.from.radius.toPx()
-            )
-            val end = Offset(
-                viewModel.to.x.toPx() + viewModel.to.radius.toPx(),
-                viewModel.to.y.toPx() + viewModel.to.radius.toPx()
-            )
+            val start =
+                Offset(
+                    viewModel.from.x.toPx() + viewModel.from.radius.toPx(),
+                    viewModel.from.y.toPx() + viewModel.from.radius.toPx(),
+                )
+            val end =
+                Offset(
+                    viewModel.to.x.toPx() + viewModel.to.radius.toPx(),
+                    viewModel.to.y.toPx() + viewModel.to.radius.toPx(),
+                )
 
             drawLine(
                 start = start,
                 end = end,
                 color = Color.Black,
-                strokeWidth = 2f
+                strokeWidth = 2f,
             )
 
             if (viewModel.isDirected) {
                 val arrowSize = 10f
                 val angle = atan2(end.y - start.y, end.x - start.x)
 
-                val arrowPoint1 = Offset(
-                    end.x - arrowSize * cos(angle - Math.PI / 6).toFloat(),
-                    end.y - arrowSize * sin(angle - Math.PI / 6).toFloat()
-                )
-                val arrowPoint2 = Offset(
-                    end.x - arrowSize * cos(angle + Math.PI / 6).toFloat(),
-                    end.y - arrowSize * sin(angle + Math.PI / 6).toFloat()
-                )
+                val arrowPoint1 =
+                    Offset(
+                        end.x - arrowSize * cos(angle - Math.PI / 6).toFloat(),
+                        end.y - arrowSize * sin(angle - Math.PI / 6).toFloat(),
+                    )
+                val arrowPoint2 =
+                    Offset(
+                        end.x - arrowSize * cos(angle + Math.PI / 6).toFloat(),
+                        end.y - arrowSize * sin(angle + Math.PI / 6).toFloat(),
+                    )
 
-                val path = Path().apply {
-                    moveTo(end.x, end.y)
-                    lineTo(arrowPoint1.x, arrowPoint1.y)
-                    moveTo(end.x, end.y)
-                    lineTo(arrowPoint2.x, arrowPoint2.y)
-                }
+                val path =
+                    Path().apply {
+                        moveTo(end.x, end.y)
+                        lineTo(arrowPoint1.x, arrowPoint1.y)
+                        moveTo(end.x, end.y)
+                        lineTo(arrowPoint2.x, arrowPoint2.y)
+                    }
 
                 drawPath(
                     path = path,
                     color = Color.Black,
-                    style = Stroke(width = 2f)
+                    style = Stroke(width = 2f),
                 )
             }
         }
@@ -73,7 +78,7 @@ fun <E: Comparable<E>, V: Comparable<V>> EdgeView(
             Text(
                 text = weight.toString(),
                 modifier = Modifier.offset(midX, midY),
-                color = Color.Black
+                color = Color.Black,
             )
         }
     }

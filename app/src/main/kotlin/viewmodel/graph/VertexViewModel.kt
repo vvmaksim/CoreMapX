@@ -8,13 +8,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.graphs.dataClasses.Vertex
 
-class VertexViewModel<V: Comparable<V>>(
+class VertexViewModel<V : Comparable<V>>(
     x: Dp = 0.dp,
     y: Dp = 0.dp,
     color: Color,
     private val vertex: Vertex<V>,
     private val _labelVisible: State<Boolean>,
-    val radius: Dp = 20.dp
+    val radius: Dp = 20.dp,
 ) {
     private var _x = mutableStateOf(x)
     var x: Dp

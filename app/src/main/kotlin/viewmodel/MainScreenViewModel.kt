@@ -8,8 +8,8 @@ import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategies.RandomStrategy
 import viewmodel.visualizationStrategies.VisualizationStrategy
 
-class MainScreenViewModel<E: Comparable<E>, V: Comparable<V>>(
-    private val visualizationStrategy: VisualizationStrategy = RandomStrategy()
+class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
+    private val visualizationStrategy: VisualizationStrategy = RandomStrategy(),
 ) {
     private var _showVerticesLabels = mutableStateOf(false)
     val showVerticesLabels: State<Boolean>

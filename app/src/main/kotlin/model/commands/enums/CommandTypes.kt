@@ -4,5 +4,5 @@ enum class CommandTypes {
     ADD,
     RM,
     CLEAR,
-    HELP
+    HELP,
 }

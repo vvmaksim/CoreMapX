@@ -7,12 +7,11 @@ import androidx.compose.ui.Modifier
 import viewmodel.graph.GraphViewModel
 
 @Composable
-fun <E: Comparable<E>, V: Comparable<V>>GraphView(
-    viewModel: GraphViewModel<E, V>,
-) {
-    Box(modifier = Modifier
-        .fillMaxSize()
-
+fun <E : Comparable<E>, V : Comparable<V>> GraphView(viewModel: GraphViewModel<E, V>) {
+    Box(
+        modifier =
+            Modifier
+                .fillMaxSize(),
     ) {
         viewModel.vertices.forEach { v ->
             VertexView(v, Modifier)

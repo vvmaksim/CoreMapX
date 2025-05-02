@@ -13,30 +13,31 @@ import androidx.compose.ui.unit.dp
 import viewmodel.graph.VertexViewModel
 
 @Composable
-fun <V: Comparable<V>> VertexView(
+fun <V : Comparable<V>> VertexView(
     viewModel: VertexViewModel<V>,
     modifier: Modifier = Modifier,
 ) {
-    Box(modifier = modifier
-        .size(viewModel.radius * 2, viewModel.radius * 2)
-        .offset(viewModel.x, viewModel.y)
-        .background(
-            color = viewModel.color,
-            shape = CircleShape
-        )
-        .pointerInput(viewModel) {
-            detectDragGestures { change, dragAmount ->
-                change.consume()
-                viewModel.onDrag(dragAmount)
-            }
-        }
+    Box(
+        modifier =
+            modifier
+                .size(viewModel.radius * 2, viewModel.radius * 2)
+                .offset(viewModel.x, viewModel.y)
+                .background(
+                    color = viewModel.color,
+                    shape = CircleShape,
+                ).pointerInput(viewModel) {
+                    detectDragGestures { change, dragAmount ->
+                        change.consume()
+                        viewModel.onDrag(dragAmount)
+                    }
+                },
     ) {
         if (viewModel.labelVisible) {
             Text(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .offset(0.dp, -viewModel.radius - 10.dp)
-                ,
+                modifier =
+                    Modifier
+                        .align(Alignment.Center)
+                        .offset(0.dp, -viewModel.radius - 10.dp),
                 text = viewModel.label,
             )
         }

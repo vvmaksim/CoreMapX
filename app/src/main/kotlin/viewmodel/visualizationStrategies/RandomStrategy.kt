@@ -4,8 +4,12 @@ import androidx.compose.ui.unit.dp
 import viewmodel.graph.VertexViewModel
 import kotlin.random.Random
 
-class RandomStrategy: VisualizationStrategy {
-    override fun <V: Comparable<V>> place(width: Double, height: Double, vertices: Collection<VertexViewModel<V>>?) {
+class RandomStrategy : VisualizationStrategy {
+    override fun <V : Comparable<V>> place(
+        width: Double,
+        height: Double,
+        vertices: Collection<VertexViewModel<V>>?,
+    ) {
         val padding = 50.0
         val minX = padding
         val maxX = width - padding
