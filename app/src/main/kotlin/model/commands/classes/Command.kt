@@ -114,9 +114,27 @@ class Command(
                 if (!parameters.containsKey("id") || !parameters.containsKey("label")) {
                     throw IllegalArgumentException("Add vertex command must specify 'id' and 'label'")
                 }
+                try {
+                    parameters["id"]?.toInt() ?: throw IllegalArgumentException("Vertex id cannot be null")
+                } catch (ex: NumberFormatException) {
+                    throw IllegalArgumentException("Vertex id must be Int type")
+                }
             } else if (entity == CommandEntities.EDGE) {
                 if (!parameters.containsKey("from") || !parameters.containsKey("to")) {
                     throw IllegalArgumentException("Add edge command must specify 'from' and 'to'")
+                }
+                try {
+                    parameters["from"]?.toInt() ?: throw IllegalArgumentException("Edge from cannot be null")
+                    parameters["to"]?.toInt() ?: throw IllegalArgumentException("Edge to cannot be null")
+                } catch (ex: NumberFormatException) {
+                    throw IllegalArgumentException("Edge from and to must be Int type")
+                }
+                if (parameters.containsKey("weight")) {
+                    try {
+                        parameters["weight"]?.toInt() ?: throw IllegalArgumentException("Edge weight cannot be null")
+                    } catch (ex: NumberFormatException) {
+                        throw IllegalArgumentException("Edge weight must be Int type")
+                    }
                 }
             }
         } else if (type in allTypesWithoutParameters) {
