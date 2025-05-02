@@ -9,6 +9,8 @@ class Command(
     private val elements: List<String> = command.trim().split("\\s+".toRegex())
     private val keysForAddVertex = listOf("id", "label")
     private val keysForAddEdge = listOf("from", "to", "weight")
+    private val keyForRmVertex = listOf("id")
+    private val keysForRmEdge = listOf("from", "to")
     private val allTypesWithoutParameters = listOf(CommandTypes.HELP, CommandTypes.CLEAR)
 
     val type: CommandTypes
@@ -56,8 +58,55 @@ class Command(
 
         if (type == CommandTypes.ADD) {
             getParametersForAddType(isCommandWithExplicitParameters, paramElements, params)
+        } else if (type == CommandTypes.RM) {
+            getParametersForRmType(isCommandWithExplicitParameters, paramElements, params)
         }
         return params
+    }
+
+    private fun getParametersForRmType(
+        isCommandWithExplicitParameters: Boolean,
+        paramElements: List<String>,
+        params: MutableMap<String, String>,
+    ) {
+        if (isCommandWithExplicitParameters) {
+            paramElements.forEach { param ->
+                val subitems = param.split(":")
+                if (subitems.size != 2) {
+                    throw IllegalArgumentException("Invalid parameter format")
+                }
+                val key = subitems[0].lowercase()
+                if (key in keyForRmVertex || key in keysForRmEdge) {
+                    params[key] = subitems[1]
+                } else {
+                    throw IllegalArgumentException("Invalid parameter $key")
+                }
+            }
+        } else {
+            if (entity == CommandEntities.VERTEX) {
+                if (paramElements.size == 1) {
+                    params["id"] = paramElements[0]
+                } else {
+                    throw IllegalArgumentException(
+                        "Invalid parameter format. When removing a vertex, you must specify 1 required parameter: id",
+                    )
+                }
+            } else if (entity == CommandEntities.EDGE) {
+                when (paramElements.size) {
+                    1 -> {
+                        params["id"] = paramElements[0]
+                    }
+                    2 -> {
+                        params["from"] = paramElements[0]
+                        params["to"] = paramElements[1]
+                    }
+                    else ->
+                        IllegalArgumentException(
+                            "Invalid parameter format. When removing an edge, you must specify 1 or 2 required parameters: id or from and to",
+                        )
+                }
+            }
+        }
     }
 
     private fun getParametersForAddType(
@@ -137,6 +186,38 @@ class Command(
                     }
                 }
             }
+        } else if (type == CommandTypes.RM) {
+            if (entity == CommandEntities.VERTEX) {
+                if (!parameters.containsKey("id")) {
+                    throw IllegalArgumentException("Remove vertex command must specify 'id'")
+                }
+                try {
+                    parameters["id"]?.toInt() ?: throw IllegalArgumentException("Vertex id cannot be null")
+                } catch (ex: NumberFormatException) {
+                    throw IllegalArgumentException("Vertex id must be Int type")
+                }
+            } else if (entity == CommandEntities.EDGE) {
+                if (!((parameters.containsKey("id")) || (parameters.containsKey("from") && parameters.containsKey("to")))) {
+                    throw IllegalArgumentException("Remove edge command must specify 'from' and 'to' or 'id'")
+                }
+                if (parameters.containsKey("id")) {
+                    try {
+                        parameters["id"]?.toInt() ?: throw IllegalArgumentException("Edge id cannot be null")
+                    } catch (ex: NumberFormatException) {
+                        throw IllegalArgumentException("Edge id must be Int type")
+                    }
+                } else if (parameters.containsKey("from") && parameters.containsKey("to")) {
+                    try {
+                        parameters["from"]?.toInt() ?: throw IllegalArgumentException("Edge from cannot be null")
+                        parameters["to"]?.toInt() ?: throw IllegalArgumentException("Edge to cannot be null")
+                    } catch (ex: NumberFormatException) {
+                        throw IllegalArgumentException("Edge from and to must be Int type")
+                    }
+                } else {
+                    throw IllegalArgumentException("Remove edge command must specify 'from' and 'to' or 'id'")
+                }
+            }
+
         } else if (type in allTypesWithoutParameters) {
             if (parameters.isNotEmpty()) {
                 throw IllegalArgumentException("This command should have no parameters")
