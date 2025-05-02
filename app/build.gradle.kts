@@ -7,6 +7,7 @@ dependencies {
     implementation(libs.kotlin.logging)
     implementation(libs.logback.classic)
     implementation(project(":utilities"))
+    testImplementation(kotlin("test"))
 }
 
 application {
