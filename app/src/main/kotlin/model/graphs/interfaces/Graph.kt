@@ -14,6 +14,8 @@ interface Graph<E : Comparable<E>, V : Comparable<V>> {
 
     fun removeEdge(id: E): E?
 
+    fun removeEdge(from: V, to: V): E?
+
     fun getVertex(id: V): Vertex<V>?
 
     fun getEdge(id: E): Edge<E, V>?
