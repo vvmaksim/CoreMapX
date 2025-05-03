@@ -23,6 +23,13 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
                     else -> "Unsupported entity for add command"
                 }
             }
+            CommandTypes.RM -> {
+                when (command.entity) {
+                    CommandEntities.VERTEX -> removeVertex()
+                    CommandEntities.EDGE -> removeEdge()
+                    else -> "Unsupported entity for rm command"
+                }
+            }
             CommandTypes.CLEAR -> {
                 when (command.entity) {
                     CommandEntities.GRAPH -> graphClear()
@@ -30,8 +37,6 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
                     else -> "Unsupported entity for clear command"
                 }
             }
-
-            CommandTypes.RM -> TODO()
             CommandTypes.HELP -> TODO()
         }
 
@@ -83,6 +88,30 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             else -> {
                 "Something didn't go according to plan"
             }
+        }
+    }
+
+    private fun removeVertex(): String {
+        val id = command.parameters["id"] as V
+        graph.removeVertex(id)
+        return "Vertex with id:$id removed"
+    }
+
+    private fun removeEdge(): String {
+        if (command.parameters.containsKey("from") && command.parameters.containsKey("to")) {
+            val from = command.parameters["from"] as V
+            val to = command.parameters["to"] as V
+            graph.removeEdge(from, to)
+            if (graph is UndirectedUnweightedGraph || graph is UndirectedWeightedGraph) {
+                graph.removeEdge(to, from)
+            }
+            return "Edge with fromId:$from and toId:$to removed"
+        } else if (command.parameters.containsKey("id")) {
+            val id = command.parameters["id"] as E
+            graph.removeEdge(id)
+            return "Edge with id:$id removed"
+        } else {
+            return "Remove edge command must specify 'from' and 'to' or 'id'"
         }
     }
 

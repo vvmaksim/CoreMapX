@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'dev/**'
-    branches-ignore:
-      - 'main'
 
 jobs:
   test:
