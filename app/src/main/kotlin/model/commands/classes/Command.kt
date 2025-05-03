@@ -2,6 +2,7 @@ package model.commands.classes
 
 import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
+import java.util.Locale
 
 class Command(
     command: String,
@@ -160,59 +161,25 @@ class Command(
     private fun validateParameters() {
         if (type == CommandTypes.ADD) {
             if (entity == CommandEntities.VERTEX) {
-                if (!parameters.containsKey("id") || !parameters.containsKey("label")) {
-                    throw IllegalArgumentException("Add vertex command must specify 'id' and 'label'")
-                }
-                try {
-                    parameters["id"]?.toInt() ?: throw IllegalArgumentException("Vertex id cannot be null")
-                } catch (ex: NumberFormatException) {
-                    throw IllegalArgumentException("Vertex id must be Int type")
-                }
+                checkRequiredParametersForAddVertex()
+                checkOneIntParameter("id", "Vertex")
             } else if (entity == CommandEntities.EDGE) {
-                if (!parameters.containsKey("from") || !parameters.containsKey("to")) {
-                    throw IllegalArgumentException("Add edge command must specify 'from' and 'to'")
-                }
-                try {
-                    parameters["from"]?.toInt() ?: throw IllegalArgumentException("Edge from cannot be null")
-                    parameters["to"]?.toInt() ?: throw IllegalArgumentException("Edge to cannot be null")
-                } catch (ex: NumberFormatException) {
-                    throw IllegalArgumentException("Edge from and to must be Int type")
-                }
+                checkRequiredParametersForAddEdge()
+                checkTwoIntParameters("from", "to", "Edge")
                 if (parameters.containsKey("weight")) {
-                    try {
-                        parameters["weight"]?.toInt() ?: throw IllegalArgumentException("Edge weight cannot be null")
-                    } catch (ex: NumberFormatException) {
-                        throw IllegalArgumentException("Edge weight must be Int type")
-                    }
+                    checkOneIntParameter("weight", "Edge")
                 }
             }
         } else if (type == CommandTypes.RM) {
             if (entity == CommandEntities.VERTEX) {
-                if (!parameters.containsKey("id")) {
-                    throw IllegalArgumentException("Remove vertex command must specify 'id'")
-                }
-                try {
-                    parameters["id"]?.toInt() ?: throw IllegalArgumentException("Vertex id cannot be null")
-                } catch (ex: NumberFormatException) {
-                    throw IllegalArgumentException("Vertex id must be Int type")
-                }
+                checkRequiredParameterForRmVertex()
+                checkOneIntParameter("id", "Vertex")
             } else if (entity == CommandEntities.EDGE) {
-                if (!((parameters.containsKey("id")) || (parameters.containsKey("from") && parameters.containsKey("to")))) {
-                    throw IllegalArgumentException("Remove edge command must specify 'from' and 'to' or 'id'")
-                }
+                checkRequiredParametersForRmEdge()
                 if (parameters.containsKey("id")) {
-                    try {
-                        parameters["id"]?.toInt() ?: throw IllegalArgumentException("Edge id cannot be null")
-                    } catch (ex: NumberFormatException) {
-                        throw IllegalArgumentException("Edge id must be Int type")
-                    }
+                    checkOneIntParameter("id", "Edge")
                 } else if (parameters.containsKey("from") && parameters.containsKey("to")) {
-                    try {
-                        parameters["from"]?.toInt() ?: throw IllegalArgumentException("Edge from cannot be null")
-                        parameters["to"]?.toInt() ?: throw IllegalArgumentException("Edge to cannot be null")
-                    } catch (ex: NumberFormatException) {
-                        throw IllegalArgumentException("Edge from and to must be Int type")
-                    }
+                    checkTwoIntParameters("from", "to", "Edge")
                 } else {
                     throw IllegalArgumentException("Remove edge command must specify 'from' and 'to' or 'id'")
                 }
@@ -222,6 +189,49 @@ class Command(
             if (parameters.isNotEmpty()) {
                 throw IllegalArgumentException("This command should have no parameters")
             }
+        }
+    }
+
+    private fun checkRequiredParametersForAddVertex() {
+        if (!parameters.containsKey("id") || !parameters.containsKey("label")) {
+            throw IllegalArgumentException("Add vertex command must specify 'id' and 'label'")
+        }
+    }
+
+    private fun checkRequiredParametersForAddEdge() {
+        if (!parameters.containsKey("from") || !parameters.containsKey("to")) {
+            throw IllegalArgumentException("Add edge command must specify 'from' and 'to'")
+        }
+    }
+
+    private fun checkRequiredParameterForRmVertex() {
+        if (!parameters.containsKey("id")) {
+            throw IllegalArgumentException("Remove vertex command must specify 'id'")
+        }
+    }
+
+    private fun checkRequiredParametersForRmEdge() {
+        if (!((parameters.containsKey("id")) || (parameters.containsKey("from") && parameters.containsKey("to")))) {
+            throw IllegalArgumentException("Remove edge command must specify 'from' and 'to' or 'id'")
+        }
+    }
+
+    private fun checkOneIntParameter(param: String, entity: String) {
+        val entity = entity.replaceFirstChar { it.uppercase() }
+        try {
+            parameters[param]?.toInt() ?: throw IllegalArgumentException("$entity `$param` cannot be null")
+        } catch (ex: NumberFormatException) {
+            throw IllegalArgumentException("$entity `$param` must be Int type")
+        }
+    }
+
+    private fun checkTwoIntParameters(firstParam: String, secondParam: String, entity: String) {
+        val entity = entity.replaceFirstChar { it.uppercase() }
+        try {
+            parameters[firstParam]?.toInt() ?: throw IllegalArgumentException("$entity `$firstParam` cannot be null")
+            parameters[secondParam]?.toInt() ?: throw IllegalArgumentException("$entity `$secondParam` cannot be null")
+        } catch (ex: NumberFormatException) {
+            throw IllegalArgumentException("$entity `$firstParam` and `$secondParam` must be Int type")
         }
     }
 }
