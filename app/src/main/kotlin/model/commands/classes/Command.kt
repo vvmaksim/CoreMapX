@@ -2,7 +2,6 @@ package model.commands.classes
 
 import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
-import java.util.Locale
 
 class Command(
     command: String,
