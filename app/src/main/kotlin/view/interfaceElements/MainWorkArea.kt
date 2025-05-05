@@ -2,6 +2,7 @@ package view.interfaceElements
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -31,6 +32,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             }
             viewModel.graphViewModel
         }
+    }
+
+    fun updateOutputMessages(newMessage: String) {
+        outputMessages.value.add(newMessage)
+        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
     }
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -70,17 +76,14 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 onCommand = { command ->
                     try {
                         if (graph == null) {
-                            outputMessages.value.add("Error: No graph selected. Create a new graph first")
-                            outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+                            updateOutputMessages("Error: No graph selected. Create a new graph first")
                             return@CommandLine
                         }
                         val result = Commands<E, V>(Command(command), graph, outputMessages.value).execute()
-                        outputMessages.value.add(result)
-                        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+                        updateOutputMessages(result)
                         commandCount++
                     } catch (ex: IllegalArgumentException) {
-                        outputMessages.value.add("Error: ${ex.message}")
-                        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+                        updateOutputMessages("Error: ${ex.message}")
                     }
                 },
             )
