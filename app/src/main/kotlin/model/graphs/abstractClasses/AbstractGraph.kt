@@ -47,12 +47,16 @@ abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V>
 
     override fun removeEdge(id: E): E? = if (_edges.remove(id) == null) null else id
 
-    override fun removeEdge(from: V, to: V): E? {
+    override fun removeEdge(
+        from: V,
+        to: V,
+    ): E? {
         val fromVertex = _vertices[from] ?: return null
         val toVertex = _vertices[to] ?: return null
-        val edgeEntry = _edges.entries.find {
-            it.value.from == fromVertex && it.value.to == toVertex
-        } ?: return null
+        val edgeEntry =
+            _edges.entries.find {
+                it.value.from == fromVertex && it.value.to == toVertex
+            } ?: return null
         _edges.remove(edgeEntry.key)
         return edgeEntry.key
     }

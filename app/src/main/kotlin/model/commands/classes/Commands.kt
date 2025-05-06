@@ -68,7 +68,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
                 }
             }
             is UndirectedWeightedGraph -> {
-                val weight = command.parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("weight", "Int"))
+                val weight =
+                    command.parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("weight", "Int"))
                 val edgeId = (graph as UndirectedWeightedGraph).addEdge(fromVertex, toVertex, weight)
                 if (edgeId != null) {
                     Result.Success("Edge added: from=$from, to=$to, weight=$weight")
@@ -85,7 +86,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
                 }
             }
             is DirectedWeightedGraph -> {
-                val weight = command.parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("weight", "Int"))
+                val weight =
+                    command.parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("weight", "Int"))
                 val edgeId = (graph as DirectedWeightedGraph).addEdge(fromVertex, toVertex, weight)
                 if (edgeId != null) {
                     Result.Success("Edge added: from=$from, to=$to, weight=$weight")
@@ -140,7 +142,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
     }
 
     private fun help(): Result.Success<String> {
-        val text = "Base commands:\n" +
+        val text =
+            "Base commands:\n" +
                 "add vertex id:* label:* - add vertex by unique id\n" +
                 "add edge from:* to:* (weight:*)? - add edge by from and to vertex id and optional weight\n" +
                 "rm vertex id:* - remove vertex by id\n" +

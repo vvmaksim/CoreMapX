@@ -6,7 +6,7 @@ import model.commands.enums.CommandTypes
 class Command private constructor(
     val type: CommandTypes,
     val entity: CommandEntities,
-    val parameters: Map<String, String>
+    val parameters: Map<String, String>,
 ) {
     companion object {
         private val keysForAddVertex = listOf("id", "label")
@@ -51,7 +51,11 @@ class Command private constructor(
             }
         }
 
-        private fun getParameters(elements: List<String>, type: CommandTypes, entity: CommandEntities): Map<String, String> {
+        private fun getParameters(
+            elements: List<String>,
+            type: CommandTypes,
+            entity: CommandEntities,
+        ): Map<String, String> {
             if (type in allTypesWithoutParameters) return emptyMap()
             if (elements.size <= 2) return emptyMap()
 
@@ -141,7 +145,11 @@ class Command private constructor(
             }
         }
 
-        private fun validateParameters(type: CommandTypes, entity: CommandEntities, parameters: Map<String, String>): Result<Command> {
+        private fun validateParameters(
+            type: CommandTypes,
+            entity: CommandEntities,
+            parameters: Map<String, String>,
+        ): Result<Command> {
             if (type == CommandTypes.ADD) {
                 if (entity == CommandEntities.VERTEX) {
                     if (!parameters.containsKey("id") || !parameters.containsKey("label")) {
@@ -166,7 +174,9 @@ class Command private constructor(
                     parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("id", "Int"))
                 } else if (entity == CommandEntities.EDGE) {
                     val allTogether = parameters.containsKey("id") && parameters.containsKey("from") && parameters.containsKey("to")
-                    if (!(parameters.containsKey("id") || (parameters.containsKey("from") && parameters.containsKey("to"))) && !allTogether) {
+                    if (!(parameters.containsKey("id") || (parameters.containsKey("from") && parameters.containsKey("to"))) &&
+                        !allTogether
+                    ) {
                         return Result.Error(CommandError.MissingParameters("Remove edge command must specify 'from' and 'to' or 'id'"))
                     }
                     if (parameters.containsKey("id")) {
