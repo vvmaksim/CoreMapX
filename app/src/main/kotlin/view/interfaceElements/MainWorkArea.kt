@@ -2,14 +2,15 @@ package view.interfaceElements
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.add
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
+import model.commands.classes.CommandError
 import model.commands.classes.Commands
+import model.commands.classes.Result
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
@@ -37,6 +38,27 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     fun updateOutputMessages(newMessage: String) {
         outputMessages.value.add(newMessage)
         outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+    }
+
+    fun handleCommand(command: String) {
+        if (graph == null) {
+            updateOutputMessages("Error: ${CommandError.NoGraphSelected().type}.${CommandError.NoGraphSelected().description}")
+            return
+        }
+        val commandResult = Command.create(command)
+        when (commandResult) {
+            is Result.Success -> {
+                val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
+                when (executeResult) {
+                    is Result.Success -> {
+                        updateOutputMessages(executeResult.data)
+                        commandCount++
+                    }
+                    is Result.Error -> updateOutputMessages("Error:${executeResult.error.type}.${executeResult.error.description}")
+                }
+            }
+            is Result.Error -> updateOutputMessages("Error:${commandResult.error.type}.${commandResult.error.description}")
+        }
     }
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -73,19 +95,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         .width(666.dp)
                         .align(Alignment.CenterVertically),
                 outputMessages = outputMessages.value,
-                onCommand = { command ->
-                    try {
-                        if (graph == null) {
-                            updateOutputMessages("Error: No graph selected. Create a new graph first")
-                            return@CommandLine
-                        }
-                        val result = Commands<E, V>(Command(command), graph, outputMessages.value).execute()
-                        updateOutputMessages(result)
-                        commandCount++
-                    } catch (ex: IllegalArgumentException) {
-                        updateOutputMessages("Error: ${ex.message}")
-                    }
-                },
+                onCommand = { command -> handleCommand(command) },
             )
 
             Spacer(Modifier.weight(1f))
