@@ -8,6 +8,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class CommandTests {
+    // Correct commands
+
     @Test
     fun `add vertex with implicit params`() {
         val result = Command.create("add vertex 1 Bob")
@@ -276,5 +278,153 @@ class CommandTests {
         assertEquals(CommandTypes.CLEAR, command.type)
         assertEquals(CommandEntities.GRAPH, command.entity)
         assertTrue(command.parameters.isEmpty())
+    }
+
+    @Test
+    fun `remove edge by implicit id`() {
+        val result = Command.create("rm edge 0")
+        assertIs<Result.Success<Command>>(result)
+        val command = result.data
+        assertEquals(CommandTypes.RM, command.type)
+        assertEquals(CommandEntities.EDGE, command.entity)
+    }
+
+    @Test
+    fun `remove edge by explicit id`() {
+        val result = Command.create("rm edge id:0")
+        assertIs<Result.Success<Command>>(result)
+        val command = result.data
+        assertEquals(CommandTypes.RM, command.type)
+        assertEquals(CommandEntities.EDGE, command.entity)
+    }
+
+    // Incorrect commands
+
+    @Test
+    fun `empty command`() {
+        val result = Command.create("")
+        assertIs<Result.Error>(result)
+        assertEquals("EmptyCommand", result.error.type)
+        assertEquals("Command cannot be empty", result.error.description)
+    }
+
+    @Test
+    fun `unknown command type`() {
+        val result = Command.create("example vertex 1 Bob")
+        assertIs<Result.Error>(result)
+        assertEquals("UnknownType", result.error.type)
+        assertEquals("Unknown type for command: example", result.error.description)
+    }
+
+    @Test
+    fun `add vertex with missing id`() {
+        val result = Command.create("add vertex label:Bob")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Add vertex command must specify 'id' and 'label'", result.error.description)
+    }
+
+    @Test
+    fun `add vertex with invalid id`() {
+        val result = Command.create("add vertex id:invalid label:Bob")
+        assertIs<Result.Error>(result)
+        assertEquals("InvalidParameterType", result.error.type)
+        assertEquals("Parameter id must be Int", result.error.description)
+    }
+
+    @Test
+    fun `add edge with missing from`() {
+        val result = Command.create("add edge to:2")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Add edge command must specify 'from' and 'to'", result.error.description)
+    }
+
+    @Test
+    fun `add edge with missing to`() {
+        val result = Command.create("add edge from:2")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Add edge command must specify 'from' and 'to'", result.error.description)
+    }
+
+    @Test
+    fun `add edge with invalid from`() {
+        val result = Command.create("add edge from:invalid to:2")
+        assertIs<Result.Error>(result)
+        assertEquals("InvalidParameterType", result.error.type)
+        assertEquals("Parameter from must be Int", result.error.description)
+    }
+
+    @Test
+    fun `add edge with invalid to`() {
+        val result = Command.create("add edge from:2 to:invalid")
+        assertIs<Result.Error>(result)
+        assertEquals("InvalidParameterType", result.error.type)
+        assertEquals("Parameter to must be Int", result.error.description)
+    }
+
+    @Test
+    fun `add weighted edge with invalid weight`() {
+        val result = Command.create("add edge from:1 to:2 weight:invalid")
+        assertIs<Result.Error>(result)
+        assertEquals("InvalidParameterType", result.error.type)
+        assertEquals("Parameter weight must be Int", result.error.description)
+    }
+
+    @Test
+    fun `remove vertex with missing id`() {
+        val result = Command.create("rm vertex")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Remove vertex command must specify 'id'", result.error.description)
+    }
+
+    @Test
+    fun `remove edge with missing parameters`() {
+        val result = Command.create("rm edge")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Remove edge command must specify 'from' and 'to' or 'id'", result.error.description)
+    }
+
+    @Test
+    fun `invalid parameter format for add vertex version 1`() {
+        val result = Command.create("add vertex id:1:label:Bob")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Add vertex command must specify 'id' and 'label'", result.error.description)
+    }
+
+    @Test
+    fun `invalid parameter format for add vertex version 2`() {
+        val result = Command.create("add vertex id:1 label:Bob:)")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Add vertex command must specify 'id' and 'label'", result.error.description)
+    }
+
+    @Test
+    fun `invalid parameter format for rm vertex`() {
+        val result = Command.create("rm vertex id::1")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Remove vertex command must specify 'id'", result.error.description)
+    }
+
+    @Test
+    fun `unknown entity`() {
+        val result = Command.create("add unknown_entity")
+        assertIs<Result.Error>(result)
+        assertEquals("UnknownEntity", result.error.type)
+        assertEquals("Unknown entity for command: unknown_entity", result.error.description)
+    }
+
+    @Test
+    fun `invalid id type for add vertex`() {
+        val result = Command.create("add vertex id:invalid label:correct")
+        assertIs<Result.Error>(result)
+        assertEquals("InvalidParameterType", result.error.type)
+        assertEquals("Parameter id must be Int", result.error.description)
     }
 }
