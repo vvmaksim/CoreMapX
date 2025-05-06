@@ -37,7 +37,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
                     else -> Result.Error(CommandError.UnknownEntity("Unsupported entity for clear command"))
                 }
             }
-            CommandTypes.HELP -> TODO()
+            CommandTypes.HELP -> help()
         }
 
     private fun addVertex(): Result<String> {
@@ -137,5 +137,19 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
     private fun graphClear(): Result<String> {
         graph.clear()
         return Result.Success("Graph cleared")
+    }
+
+    private fun help(): Result.Success<String> {
+        val text = "Base commands:\n" +
+                "add vertex id:* label:* - add vertex by unique id\n" +
+                "add edge from:* to:* (weight:*)? - add edge by from and to vertex id and optional weight\n" +
+                "rm vertex id:* - remove vertex by id\n" +
+                "rm edge id:* - remove edge by id\n" +
+                "rn edge from:* to:* - remove edge by from and to vertex id\n" +
+                "clear - output messages clear\n" +
+                "graph_clear - graph clear\n" +
+                "help - show help information"
+        outputMessages.add(text)
+        return Result.Success("Help information")
     }
 }
