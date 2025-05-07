@@ -63,7 +63,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     Box(modifier = modifier.fillMaxSize()) {
         graphViewModel?.let { graphViewModel ->
-            GraphView(graphViewModel)
+            GraphView(
+                viewModel = graphViewModel,
+                offsetX = viewModel.offsetX.value,
+                offsetY = viewModel.offsetY.value,
+                onPan = { dx, dy -> viewModel.moveCanvas(dx, dy) },
+            )
         }
 
         TopMenu(
