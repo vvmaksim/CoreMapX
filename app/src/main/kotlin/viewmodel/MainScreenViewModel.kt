@@ -28,6 +28,27 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     var graphViewModel: GraphViewModel<E, V>? = null
 
+    private var _offsetX = mutableStateOf(0f)
+    val offsetX: State<Float>
+        get() = _offsetX
+
+    private var _offsetY = mutableStateOf(0f)
+    val offsetY: State<Float>
+        get() = _offsetY
+
+    fun moveCanvas(
+        dx: Float,
+        dy: Float,
+    ) {
+        _offsetX.value = (_offsetX.value + dx).coerceIn(-2000f, 2000f)
+        _offsetY.value = (_offsetY.value + dy).coerceIn(-2000f, 2000f)
+    }
+
+    fun resetCanvas() {
+        _offsetX.value = 0f
+        _offsetY.value = 0f
+    }
+
     fun resetGraphView() {
         graphViewModel?.let {
             visualizationStrategy.place(1280.0, 720.0, it.vertices)

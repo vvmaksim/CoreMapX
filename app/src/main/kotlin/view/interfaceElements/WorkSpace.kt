@@ -1,0 +1,21 @@
+package view.interfaceElements
+
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import viewmodel.MainScreenViewModel
+
+@Composable
+fun <E : Comparable<E>, V : Comparable<V>> WorkSpace(
+    viewModel: MainScreenViewModel<E, V>,
+    modifier: Modifier,
+) {
+    if (viewModel.isGraphActive) {
+        MainWorkArea(
+            viewModel,
+            modifier = modifier,
+        )
+    } else {
+        Spacer(modifier = modifier)
+    }
+}

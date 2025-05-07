@@ -8,7 +8,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
+import model.commands.classes.CommandError
 import model.commands.classes.Commands
+import model.commands.classes.Result
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
@@ -33,9 +35,40 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         }
     }
 
+    fun updateOutputMessages(newMessage: String) {
+        outputMessages.value.add(newMessage)
+        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+    }
+
+    fun handleCommand(command: String) {
+        if (graph == null) {
+            updateOutputMessages("Error: ${CommandError.NoGraphSelected().type}.${CommandError.NoGraphSelected().description}")
+            return
+        }
+        val commandResult = Command.create(command)
+        when (commandResult) {
+            is Result.Success -> {
+                val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
+                when (executeResult) {
+                    is Result.Success -> {
+                        updateOutputMessages(executeResult.data)
+                        commandCount++
+                    }
+                    is Result.Error -> updateOutputMessages("Error:${executeResult.error.type}.${executeResult.error.description}")
+                }
+            }
+            is Result.Error -> updateOutputMessages("Error:${commandResult.error.type}.${commandResult.error.description}")
+        }
+    }
+
     Box(modifier = modifier.fillMaxSize()) {
         graphViewModel?.let { graphViewModel ->
-            GraphView(graphViewModel)
+            GraphView(
+                viewModel = graphViewModel,
+                offsetX = viewModel.offsetX.value,
+                offsetY = viewModel.offsetY.value,
+                onPan = { dx, dy -> viewModel.moveCanvas(dx, dy) },
+            )
         }
 
         TopMenu(
@@ -67,22 +100,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         .width(666.dp)
                         .align(Alignment.CenterVertically),
                 outputMessages = outputMessages.value,
-                onCommand = { command ->
-                    try {
-                        if (graph == null) {
-                            outputMessages.value.add("Error: No graph selected. Create a new graph first")
-                            outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
-                            return@CommandLine
-                        }
-                        val result = Commands<E, V>(Command(command), graph, outputMessages.value).execute()
-                        outputMessages.value.add(result)
-                        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
-                        commandCount++
-                    } catch (ex: IllegalArgumentException) {
-                        outputMessages.value.add("Error: ${ex.message}")
-                        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
-                    }
-                },
+                onCommand = { command -> handleCommand(command) },
             )
 
             Spacer(Modifier.weight(1f))

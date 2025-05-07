@@ -39,6 +39,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                 }) {
                     Text("Reset default settings")
                 }
+                DropdownMenuItem(onClick = {
+                    viewModel.resetCanvas()
+                    actionsExpanded = false
+                }) {
+                    Text("Reset default canvas state")
+                }
             }
         }
 

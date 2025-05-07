@@ -20,6 +20,7 @@ dependencies {
         implementation("org.apache.commons:commons-text:1.11.0")
     }
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+    testImplementation("io.mockk:mockk:1.13.10")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
@@ -45,7 +46,7 @@ tasks.named<JacocoReport>("jacocoTestReport") {
         csv.required = false
         html.required = true
 
-        html.outputLocation = file("${buildDir}/reports/jacoco/test/html")
+        html.outputLocation = file("$buildDir/reports/jacoco/test/html")
     }
 }
 
