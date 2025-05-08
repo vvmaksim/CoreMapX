@@ -11,9 +11,12 @@ import model.commands.classes.Command
 import model.commands.classes.CommandError
 import model.commands.classes.Commands
 import model.commands.classes.Result
+import mu.KotlinLogging
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
+
+private val logger = KotlinLogging.logger {}
 
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
@@ -40,6 +43,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
     }
 
+    fun errorMessage(errorResult: Result.Error): String {
+        return "Error:${errorResult.error.type}.${errorResult.error.description}"
+    }
+
     fun handleCommand(command: String) {
         if (graph == null) {
             updateOutputMessages("Error: ${CommandError.NoGraphSelected().type}.${CommandError.NoGraphSelected().description}")
@@ -52,12 +59,19 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 when (executeResult) {
                     is Result.Success -> {
                         updateOutputMessages(executeResult.data)
+                        logger.info(executeResult.data)
                         commandCount++
                     }
-                    is Result.Error -> updateOutputMessages("Error:${executeResult.error.type}.${executeResult.error.description}")
+                    is Result.Error -> {
+                        updateOutputMessages(errorMessage(executeResult))
+                        logger.warn(errorMessage(executeResult))
+                    }
                 }
             }
-            is Result.Error -> updateOutputMessages("Error:${commandResult.error.type}.${commandResult.error.description}")
+            is Result.Error -> {
+                updateOutputMessages(errorMessage(commandResult))
+                logger.warn(errorMessage(commandResult))
+            }
         }
     }
 
