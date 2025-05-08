@@ -51,6 +51,9 @@ fun MainMenu(
                     Text("Analytics")
                 }
                 TextButton(onClick = { }) {
+                    Text("Templates")
+                }
+                TextButton(onClick = { }) {
                     Text("Settings")
                 }
                 Spacer(Modifier.weight(1f))
