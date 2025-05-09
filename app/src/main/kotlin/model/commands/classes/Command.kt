@@ -2,6 +2,8 @@ package model.commands.classes
 
 import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
+import model.result.CommandError
+import model.result.Result
 
 class Command private constructor(
     val type: CommandTypes,

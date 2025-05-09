@@ -8,9 +8,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
-import model.commands.classes.CommandError
 import model.commands.classes.Commands
-import model.commands.classes.Result
+import model.result.CommandError
+import model.result.Result
 import mu.KotlinLogging
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
