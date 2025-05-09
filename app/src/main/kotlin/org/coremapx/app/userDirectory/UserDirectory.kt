@@ -1,4 +1,4 @@
-package org.coremapx.app
+package org.coremapx.app.userDirectory
 
 import mu.KotlinLogging
 import java.io.File

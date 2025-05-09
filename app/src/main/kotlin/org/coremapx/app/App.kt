@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import mu.KotlinLogging
+import org.coremapx.app.userDirectory.UserDirectory
 import view.MainScreen
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension
