@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import mu.KotlinLogging
+import org.coremapx.app.userDirectory.ConfigRepository
 import org.coremapx.app.userDirectory.UserDirectory
 import view.MainScreen
 import viewmodel.MainScreenViewModel
@@ -17,6 +18,7 @@ private val logger = KotlinLogging.logger {}
 @Preview
 fun App() {
     UserDirectory.init()
+    ConfigRepository().load()
     logger.info("Rendering App composable")
     MaterialTheme {
         MainScreen(MainScreenViewModel<Int, Int>())
