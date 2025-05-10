@@ -1,0 +1,81 @@
+versionConfig=1.0
+
+! General settings
+
+#Supported languages: en, ru
+language=en
+
+
+! Main Screen
+
+# The initial height of the app. Min=1280 (px)
+mainScreenStartHeight=1280
+# The initial width of the app. Min=720 (px)
+mainScreenStartWidth=720
+
+
+! Main Menu
+
+# Width of the main menu. Min=200 (dp)
+mainMenuWidth=200
+# Background color of the main menu
+mainMenuColor=#F5F5F5
+# Text color in the main menu
+mainMenuTextColor=#000000
+# Color of buttons in the main menu
+mainMenuButtonColor=#2196F3
+# Text color of buttons in the main menu
+mainMenuButtonTextColor=#FFFFFF
+
+
+! Command Field
+
+# Height of the message output area. Min=150 (dp)
+messageOutputHeight=150
+# Maximum number of messages to keep in history. Min=1 Max=10000
+maxCountMessages=50
+# Height of the command input field. Min=56 (dp)
+commandFieldHeight=56
+# Width of the command input field. Min=400 (dp)
+commandFieldWidth=666
+# Background color of the command output area
+commandOutputBackgroundColor=#FFFFFF
+# Text color in the command output area
+commandOutputTextColor=#000000
+# Background color of the command input field
+commandInputBackgroundColor=#F5F5F5
+# Text color in the command input field
+commandInputTextColor=#000000
+
+
+! Work Area
+
+# Radius of vertices. Min=1 (dp)
+vertexRadius=20
+# Default color of vertices
+vertexMainColor=#808080
+# Color of vertex labels
+vertexLabelColor=#000000
+# Size of vertex labels. Min=1 (sp)
+vertexLabelSize=14
+# Default color of edges
+edgeMainColor=#000000
+# Color of edge labels
+edgeLabelColor=#000000
+# Size of edge labels. Min=1 (sp)
+edgeLabelSize=12
+# Width of edges. Min=1 (dp)
+edgeWidth=2
+# Ratio for canvas dragging. Min=0.001 Max=1 (float)
+canvasDragRatio=0.01
+# Size of the draggable canvas area. Min=10000 (px)
+canvasDragSize=10000
+# Maximum canvas size. Min=2000 (px)
+canvasLimit=2000
+# Background color of the work area
+canvasBackgroundColor=#FFFFFF
+
+! Performance
+
+# Duration of animations in milliseconds. Min=100 Max=700 (ms)
+animationDuration=300
