@@ -1,0 +1,175 @@
+package org.coremapx.app.userDirectory
+
+import model.result.showConfigErrorDialog
+import mu.KotlinLogging
+import java.io.File
+import java.util.Properties
+
+private val logger = KotlinLogging.logger {}
+
+class ConfigRepository {
+    private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
+    private val defaultConfigPath = "app/src/main/resources/DefaultConfig.gcfg"
+    private var config: Map<String, String> = emptyMap()
+    private var defaultConfig: Map<String, String> = emptyMap()
+
+    fun getStringValue(key: String): String? = config[key]
+
+    fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()
+
+    fun getDoubleValue(key: String): Double? = config[key]?.toDoubleOrNull()
+
+    fun setValue(
+        key: String,
+        value: String,
+    ) {
+        val configFile = File(mainConfigPath)
+        val properties = Properties()
+        if (configFile.exists()) {
+            configFile.inputStream().use { input ->
+                properties.load(input)
+            }
+        }
+        properties.setProperty(key, value)
+        configFile.outputStream().use { output ->
+            properties.store(output, "Updated Config")
+        }
+        config = config.toMutableMap().apply { this[key] = value }.toMap()
+        logger.info { "Updated config. For key: $key new value: $value" }
+    }
+
+    fun load() {
+        config = loadConfig(mainConfigPath)
+        validateConfig()
+    }
+
+    fun loadDefaultConfig() {
+        defaultConfig = loadConfig(defaultConfigPath)
+    }
+
+    private fun loadConfig(path: String): Map<String, String> {
+        val configFile = File(path)
+        val properties = Properties()
+        if (configFile.exists()) {
+            configFile.inputStream().use { inputStream ->
+                properties.load(inputStream)
+            }
+        }
+        val currentConfig = properties.map { it.key.toString() to it.value.toString() }.toMap()
+
+        return currentConfig
+    }
+
+    private fun comparisonWithDefaultConfig() {
+        loadDefaultConfig()
+        val missingParameters = mutableListOf<String>()
+        defaultConfig.forEach { param ->
+            if (!config.containsKey(param.key)) missingParameters.add(param.key)
+        }
+        if (missingParameters.isNotEmpty()) showConfigErrorDialog("Missing parameters in config: $missingParameters")
+    }
+
+    private fun validateConfig() {
+        try {
+            comparisonWithDefaultConfig()
+            checkGeneralSettings()
+            checkMainScreenSettings()
+            checkMainMenuSettings()
+            checkCommandFieldSettings()
+            checkWorkAreaSettings()
+            checkPerformanceSettings()
+            logger.info { "Config has been loaded successfully" }
+        } catch (ex: IllegalArgumentException) {
+            logger.error { "Config validation failed" }
+            showConfigErrorDialog(ex.message ?: "Unknown config error")
+        }
+    }
+
+    private fun validateColor(value: String): Boolean {
+        if (!value.startsWith("#")) {
+            return false
+        }
+        try {
+            java.awt.Color.decode(value)
+            return true
+        } catch (ex: NumberFormatException) {
+            return false
+        }
+    }
+
+    private fun checkGeneralSettings() {
+        require(getStringValue("language") in listOf("ru", "en")) { "Supported languages: en, ru" }
+    }
+
+    private fun checkMainScreenSettings() {
+        require((((getIntValue("mainScreenStartHeight") ?: 0) >= 1280))) { "mainScreenStartHeight must be >= 1280 px" }
+        require((((getIntValue("mainScreenStartWidth") ?: 0) >= 720))) { "mainScreenStartWidth must be >= 720 px" }
+    }
+
+    private fun checkMainMenuSettings() {
+        require((((getIntValue("mainMenuWidth") ?: 0) >= 200))) { "mainMenuWidth must be >= 200 dp" }
+        require(
+            validateColor(getStringValue("mainMenuColor") ?: ""),
+        ) { "mainMenuColor must be color in hex format. For example `...=#FFFFFF`" }
+        require(validateColor(getStringValue("mainMenuTextColor") ?: "")) {
+            "mainMenuTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("mainMenuButtonColor") ?: "")) {
+            "mainMenuButtonColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) {
+            "mainMenuButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+    }
+
+    private fun checkCommandFieldSettings() {
+        require((((getIntValue("messageOutputHeight") ?: 0) >= 150))) { "messageOutputHeight must be >= 150 dp" }
+        val maxCountMessages = getIntValue("maxCountMessages") ?: 0
+        require((1 <= maxCountMessages) && (maxCountMessages <= 10000)) { "maxCountMessages must be >= 1, but <= 10000" }
+        require((((getIntValue("commandFieldHeight") ?: 0) >= 56))) { "commandFieldHeight must be >= 56 dp" }
+        require((((getIntValue("commandFieldWidth") ?: 0) >= 666))) { "commandFieldWidth must be >= 666 dp" }
+        require(validateColor(getStringValue("commandOutputBackgroundColor") ?: "")) {
+            "commandOutputBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("commandOutputTextColor") ?: "")) {
+            "commandOutputTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("commandInputBackgroundColor") ?: "")) {
+            "commandInputBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("commandInputTextColor") ?: "")) {
+            "commandInputTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+    }
+
+    private fun checkWorkAreaSettings() {
+        require((((getIntValue("vertexRadius") ?: 0) >= 1))) { "vertexRadius must be >= 1 dp" }
+        require(
+            validateColor(getStringValue("vertexMainColor") ?: ""),
+        ) { "vertexMainColor must be color in hex format. For example `...=#FFFFFF`" }
+        require(validateColor(getStringValue("vertexLabelColor") ?: "")) {
+            "vertexLabelColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require((((getIntValue("vertexLabelSize") ?: 0) >= 1))) { "vertexLabelSize must be >= 1 sp" }
+        require(
+            validateColor(getStringValue("edgeMainColor") ?: ""),
+        ) { "edgeMainColor must be color in hex format. For example `...=#FFFFFF`" }
+        require(
+            validateColor(getStringValue("edgeLabelColor") ?: ""),
+        ) { "edgeLabelColor must be color in hex format. For example `...=#FFFFFF`" }
+        require((((getIntValue("edgeLabelSize") ?: 0) >= 1))) { "edgeLabelSize must be >= 1 sp" }
+        require((((getIntValue("edgeWidth") ?: 0) >= 1))) { "edgeWidth must be >= 1 dp" }
+        val canvasDragRatio = getDoubleValue("canvasDragRatio") ?: 0.0
+        require((0.01 <= canvasDragRatio) && (canvasDragRatio <= 1)) { "canvasDragRatio must be >= 0.01, but <= 1" }
+        require((((getIntValue("canvasDragSize") ?: 0) >= 10000))) { "canvasDragSize must be >= 10000 px" }
+        require((((getIntValue("canvasLimit") ?: 0) >= 2000))) { "canvasLimit must be >= 2000 px" }
+        require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) {
+            "canvasBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+    }
+
+    private fun checkPerformanceSettings() {
+        val animationDuration = getIntValue("animationDuration") ?: 0
+        require((300 <= animationDuration) && (animationDuration <= 700)) { "animationDuration must be >= 300, but <= 700 ms" }
+    }
+}
