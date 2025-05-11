@@ -16,6 +16,7 @@ import viewmodel.graph.EdgeViewModel
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.math.sqrt
 
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
@@ -30,15 +31,34 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
 
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = modifier.fillMaxSize()) {
-            val start =
+            val fromCenter =
                 Offset(
                     viewModel.from.x.toPx() + viewModel.from.radius.toPx(),
                     viewModel.from.y.toPx() + viewModel.from.radius.toPx(),
                 )
-            val end =
+            val toCenter =
                 Offset(
                     viewModel.to.x.toPx() + viewModel.to.radius.toPx(),
                     viewModel.to.y.toPx() + viewModel.to.radius.toPx(),
+                )
+
+            val dx = toCenter.x - fromCenter.x
+            val dy = toCenter.y - fromCenter.y
+            val dist = sqrt(dx * dx + dy * dy)
+            val fromRadius = viewModel.from.radius.toPx()
+            val toRadius = viewModel.to.radius.toPx()
+            val unitX = if (dist != 0f) dx / dist else 0f
+            val unitY = if (dist != 0f) dy / dist else 0f
+
+            val start =
+                Offset(
+                    fromCenter.x + unitX * fromRadius,
+                    fromCenter.y + unitY * fromRadius,
+                )
+            val end =
+                Offset(
+                    toCenter.x - unitX * toRadius,
+                    toCenter.y - unitY * toRadius,
                 )
 
             drawLine(
