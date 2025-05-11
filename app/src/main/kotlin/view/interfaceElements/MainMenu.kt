@@ -4,7 +4,7 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -26,7 +26,10 @@ fun MainMenu(
     val mainMenuButtonColor = config.getColor("mainMenuButtonColor")
     val mainMenuButtonTextColor = config.getColor("mainMenuButtonTextColor")
 
-    val buttonModifier = Modifier.background(mainMenuButtonColor)
+    val buttonColors = ButtonDefaults.buttonColors(backgroundColor = mainMenuButtonColor)
+    val buttonModifier = Modifier.fillMaxWidth()
+    val buttonFontSize = 16.sp
+    val logoFontSize = 24.sp
 
     Box(
         modifier = modifier,
@@ -44,28 +47,29 @@ fun MainMenu(
                         .background(mainMenuColor)
                         .padding(8.dp),
             ) {
-                Text(text = "CoreMapX", fontSize = 20.sp, modifier = Modifier.padding(bottom = 16.dp))
-                TextButton(modifier = buttonModifier, onClick = onNewGraphClick) {
-                    Text(text = "New Graph", color = mainMenuButtonTextColor)
+                Text(text = "CoreMapX", fontSize = logoFontSize, modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally))
+
+                TextButton(modifier = buttonModifier, onClick = onNewGraphClick, colors = buttonColors) {
+                    Text(text = "New Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }) {
-                    Text(text = "Save Graph", color = mainMenuButtonTextColor)
+                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                    Text(text = "Save Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }) {
-                    Text(text = "Open Graph", color = mainMenuButtonTextColor)
+                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                    Text(text = "Open Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }) {
-                    Text(text = "Analytics", color = mainMenuButtonTextColor)
+                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                    Text(text = "Analytics", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }) {
-                    Text(text = "Templates", color = mainMenuButtonTextColor)
+                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                    Text(text = "Templates", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }) {
-                    Text(text = "Settings", color = mainMenuButtonTextColor)
+                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                    Text(text = "Settings", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
                 Spacer(Modifier.weight(1f))
-                TextButton(modifier = buttonModifier, onClick = { onMenuVisibilityChange(false) }) {
-                    Text(text = "<", color = mainMenuButtonTextColor)
+                TextButton(modifier = buttonModifier, onClick = { onMenuVisibilityChange(false) }, colors = buttonColors) {
+                    Text(text = "Slide Menu", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
             }
         }
@@ -80,14 +84,11 @@ fun MainMenu(
                     Modifier
                         .fillMaxHeight()
                         .padding(8.dp),
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Button(
-                    modifier = buttonModifier,
-                    onClick = { onMenuVisibilityChange(true) },
-                ) {
-                    Text(text = ">", color = mainMenuButtonTextColor)
+                TextButton(onClick = { onMenuVisibilityChange(true) }, colors = buttonColors) {
+                    Text(text = "Open Menu", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
             }
         }
