@@ -1,5 +1,6 @@
 package view.interfaceElements
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -12,6 +13,7 @@ import model.commands.classes.Commands
 import model.result.CommandError
 import model.result.Result
 import mu.KotlinLogging
+import org.coremapx.app.config
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
@@ -28,6 +30,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val graph = viewModel.graph
     var commandCount by remember { mutableStateOf(0) }
 
+    val maxCountMessages = config.getIntValue("maxCountMessages") ?: 0
+    val commandFieldWidth = (config.getIntValue("commandFieldWidth") ?: 0).dp
+    val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
+
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
             viewModel.graphViewModel = graph?.let { GraphViewModel(it, viewModel.showVerticesLabels) }
@@ -40,7 +46,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun updateOutputMessages(newMessage: String) {
         outputMessages.value.add(newMessage)
-        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+        outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
     }
 
     fun errorMessage(errorResult: Result.Error): String {
@@ -75,7 +81,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         }
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize().background(canvasBackgroundColor)) {
         graphViewModel?.let { graphViewModel ->
             GraphView(
                 viewModel = graphViewModel,
@@ -111,7 +117,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             CommandLine(
                 modifier =
                     Modifier
-                        .width(666.dp)
+                        .width(commandFieldWidth)
                         .align(Alignment.CenterVertically),
                 outputMessages = outputMessages.value,
                 onCommand = { command -> handleCommand(command) },

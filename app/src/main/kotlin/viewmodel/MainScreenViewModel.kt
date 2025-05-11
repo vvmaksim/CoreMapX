@@ -2,8 +2,8 @@ package viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.graphics.Color
 import model.graphs.interfaces.Graph
+import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategies.RandomStrategy
 import viewmodel.visualizationStrategies.VisualizationStrategy
@@ -11,6 +11,10 @@ import viewmodel.visualizationStrategies.VisualizationStrategy
 class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     private val visualizationStrategy: VisualizationStrategy = RandomStrategy(),
 ) {
+    val canvasLimit = config.getFloatValue("canvasLimit") ?: 0f
+    val screenWidth = config.getDoubleValue("mainScreenStartWidth") ?: 0.0
+    val screenHeight = config.getDoubleValue("mainScreenStartHeight") ?: 0.0
+
     private var _showVerticesLabels = mutableStateOf(false)
     val showVerticesLabels: State<Boolean>
         get() = _showVerticesLabels
@@ -40,8 +44,8 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
         dx: Float,
         dy: Float,
     ) {
-        _offsetX.value = (_offsetX.value + dx).coerceIn(-2000f, 2000f)
-        _offsetY.value = (_offsetY.value + dy).coerceIn(-2000f, 2000f)
+        _offsetX.value = (_offsetX.value + dx).coerceIn(-canvasLimit, canvasLimit)
+        _offsetY.value = (_offsetY.value + dy).coerceIn(-canvasLimit, canvasLimit)
     }
 
     fun resetCanvas() {
@@ -51,14 +55,13 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     fun resetGraphView() {
         graphViewModel?.let {
-            visualizationStrategy.place(1280.0, 720.0, it.vertices)
-            it.vertices.forEach { vertex -> vertex.color = Color.Gray }
+            visualizationStrategy.place(screenWidth, screenHeight, it.vertices)
         }
     }
 
     fun updateGraph(newGraph: Graph<E, V>) {
         _graph = newGraph
         graphViewModel = GraphViewModel(newGraph, _showVerticesLabels)
-        visualizationStrategy.place(1280.0, 720.0, graphViewModel?.vertices)
+        visualizationStrategy.place(screenWidth, screenHeight, graphViewModel?.vertices)
     }
 }

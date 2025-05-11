@@ -8,9 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.sp
+import org.coremapx.app.config
 import viewmodel.graph.EdgeViewModel
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -21,6 +22,12 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
     viewModel: EdgeViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
+    val edgeMainColor = config.getColor("edgeMainColor")
+    val edgeWidth = config.getFloatValue("edgeWidth") ?: 0f
+    val edgeArrowSize = config.getFloatValue("edgeArrowSize") ?: 0f
+    val edgeLabelColor = config.getColor("edgeLabelColor")
+    val edgeLabelSize = (config.getIntValue("edgeLabelSize") ?: 0).sp
+
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = modifier.fillMaxSize()) {
             val start =
@@ -37,12 +44,12 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
             drawLine(
                 start = start,
                 end = end,
-                color = Color.Black,
-                strokeWidth = 2f,
+                color = edgeMainColor,
+                strokeWidth = edgeWidth,
             )
 
             if (viewModel.isDirected) {
-                val arrowSize = 10f
+                val arrowSize = edgeArrowSize
                 val angle = atan2(end.y - start.y, end.x - start.x)
 
                 val arrowPoint1 =
@@ -66,8 +73,8 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
 
                 drawPath(
                     path = path,
-                    color = Color.Black,
-                    style = Stroke(width = 2f),
+                    color = edgeMainColor,
+                    style = Stroke(width = edgeWidth),
                 )
             }
         }
@@ -78,7 +85,8 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
             Text(
                 text = weight.toString(),
                 modifier = Modifier.offset(midX, midY),
-                color = Color.Black,
+                color = edgeLabelColor,
+                fontSize = edgeLabelSize,
             )
         }
     }

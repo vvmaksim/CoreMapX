@@ -10,9 +10,9 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import org.coremapx.app.config
 
 @Composable
 fun MainMenu(
@@ -21,52 +21,59 @@ fun MainMenu(
     onNewGraphClick: () -> Unit,
     modifier: Modifier,
 ) {
+    val animationDuration = config.getIntValue("animationDuration") ?: 0
+    val mainMenuColor = config.getColor("mainMenuColor")
+    val mainMenuButtonColor = config.getColor("mainMenuButtonColor")
+    val mainMenuButtonTextColor = config.getColor("mainMenuButtonTextColor")
+
+    val buttonModifier = Modifier.background(mainMenuButtonColor)
+
     Box(
         modifier = modifier,
     ) {
         AnimatedVisibility(
             visible = isMenuVisible,
-            enter = fadeIn(animationSpec = tween(300)) + slideInHorizontally(animationSpec = tween(300)),
-            exit = fadeOut(animationSpec = tween(300)) + slideOutHorizontally(animationSpec = tween(300)),
+            enter = fadeIn(animationSpec = tween(animationDuration)) + slideInHorizontally(animationSpec = tween(animationDuration)),
+            exit = fadeOut(animationSpec = tween(animationDuration)) + slideOutHorizontally(animationSpec = tween(animationDuration)),
         ) {
             Column(
                 modifier =
                     Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
-                        .background(Color(0xFFE6E6FA))
+                        .background(mainMenuColor)
                         .padding(8.dp),
             ) {
-                Text("CoreMapX", fontSize = 20.sp, modifier = Modifier.padding(bottom = 16.dp))
-                TextButton(onClick = onNewGraphClick) {
-                    Text("New Graph")
+                Text(text = "CoreMapX", fontSize = 20.sp, modifier = Modifier.padding(bottom = 16.dp))
+                TextButton(modifier = buttonModifier, onClick = onNewGraphClick) {
+                    Text(text = "New Graph", color = mainMenuButtonTextColor)
                 }
-                TextButton(onClick = { }) {
-                    Text("Save Graph")
+                TextButton(modifier = buttonModifier, onClick = { }) {
+                    Text(text = "Save Graph", color = mainMenuButtonTextColor)
                 }
-                TextButton(onClick = { }) {
-                    Text("Open Graph")
+                TextButton(modifier = buttonModifier, onClick = { }) {
+                    Text(text = "Open Graph", color = mainMenuButtonTextColor)
                 }
-                TextButton(onClick = { }) {
-                    Text("Analytics")
+                TextButton(modifier=buttonModifier, onClick = { }) {
+                    Text(text = "Analytics", color = mainMenuButtonTextColor)
                 }
-                TextButton(onClick = { }) {
-                    Text("Templates")
+                TextButton(modifier=buttonModifier, onClick = { }) {
+                    Text(text = "Templates", color = mainMenuButtonTextColor)
                 }
-                TextButton(onClick = { }) {
-                    Text("Settings")
+                TextButton(modifier=buttonModifier, onClick = { }) {
+                    Text(text = "Settings", color = mainMenuButtonTextColor)
                 }
                 Spacer(Modifier.weight(1f))
-                TextButton(onClick = { onMenuVisibilityChange(false) }) {
-                    Text("<")
+                TextButton(modifier=buttonModifier, onClick = { onMenuVisibilityChange(false) }) {
+                    Text(text = "<", color = mainMenuButtonTextColor)
                 }
             }
         }
 
         AnimatedVisibility(
             visible = !isMenuVisible,
-            enter = fadeIn(animationSpec = tween(300)) + slideInHorizontally(animationSpec = tween(300)),
-            exit = fadeOut(animationSpec = tween(300)) + slideOutHorizontally(animationSpec = tween(300)),
+            enter = fadeIn(animationSpec = tween(animationDuration)) + slideInHorizontally(animationSpec = tween(animationDuration)),
+            exit = fadeOut(animationSpec = tween(animationDuration)) + slideOutHorizontally(animationSpec = tween(animationDuration)),
         ) {
             Column(
                 modifier =
@@ -77,9 +84,10 @@ fun MainMenu(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Button(
+                    modifier = buttonModifier,
                     onClick = { onMenuVisibilityChange(true) },
                 ) {
-                    Text(">")
+                    Text(text = ">", color = mainMenuButtonTextColor)
                 }
             }
         }

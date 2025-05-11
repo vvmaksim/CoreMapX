@@ -14,6 +14,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.config
 
 @Composable
 fun CommandLine(
@@ -24,8 +25,12 @@ fun CommandLine(
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     val scrollState = rememberScrollState()
 
+    val commandFieldScrollDelay = config.getLongValue("commandFieldScrollDelay") ?: 0L
+    val messageOutputHeight = (config.getIntValue("messageOutputHeight") ?: 0).dp
+    val commandFieldHeight = (config.getIntValue("commandFieldHeight") ?: 0).dp
+
     LaunchedEffect(outputMessages.size) {
-        kotlinx.coroutines.delay(50)
+        kotlinx.coroutines.delay(commandFieldScrollDelay)
         scrollState.animateScrollTo(scrollState.maxValue)
     }
 
@@ -39,7 +44,7 @@ fun CommandLine(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .heightIn(max = 150.dp)
+                    .heightIn(max = messageOutputHeight)
                     .padding(8.dp)
                     .verticalScroll(scrollState),
         ) {
@@ -89,7 +94,7 @@ fun CommandLine(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(commandFieldHeight),
             placeholder = { Text("Enter command") },
         )
     }
