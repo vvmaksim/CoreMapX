@@ -22,6 +22,8 @@ class ConfigRepository {
 
     fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()
 
+    fun getLongValue(key: String): Long? = config[key]?.toLongOrNull()
+
     fun getDoubleValue(key: String): Double? = config[key]?.toDoubleOrNull()
 
     fun getFloatValue(key: String): Float? = config[key]?.toFloatOrNull()
