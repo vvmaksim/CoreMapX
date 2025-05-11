@@ -13,11 +13,11 @@ import viewmodel.MainScreenViewModel
 import java.awt.Dimension
 
 private val logger = KotlinLogging.logger {}
+val userDirectory = UserDirectory.init()
 
 @Composable
 @Preview
 fun App() {
-    UserDirectory.init()
     ConfigRepository()
     logger.info("Rendering App composable")
     MaterialTheme {
