@@ -54,17 +54,17 @@ fun MainMenu(
                 TextButton(modifier = buttonModifier, onClick = { }) {
                     Text(text = "Open Graph", color = mainMenuButtonTextColor)
                 }
-                TextButton(modifier=buttonModifier, onClick = { }) {
+                TextButton(modifier = buttonModifier, onClick = { }) {
                     Text(text = "Analytics", color = mainMenuButtonTextColor)
                 }
-                TextButton(modifier=buttonModifier, onClick = { }) {
+                TextButton(modifier = buttonModifier, onClick = { }) {
                     Text(text = "Templates", color = mainMenuButtonTextColor)
                 }
-                TextButton(modifier=buttonModifier, onClick = { }) {
+                TextButton(modifier = buttonModifier, onClick = { }) {
                     Text(text = "Settings", color = mainMenuButtonTextColor)
                 }
                 Spacer(Modifier.weight(1f))
-                TextButton(modifier=buttonModifier, onClick = { onMenuVisibilityChange(false) }) {
+                TextButton(modifier = buttonModifier, onClick = { onMenuVisibilityChange(false) }) {
                     Text(text = "<", color = mainMenuButtonTextColor)
                 }
             }

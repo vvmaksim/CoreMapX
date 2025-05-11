@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
-
 class CommandsTests {
     lateinit var command: Command
     lateinit var graph: Graph<Int, Int>

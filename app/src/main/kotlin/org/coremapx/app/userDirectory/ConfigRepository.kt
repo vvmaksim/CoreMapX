@@ -195,6 +195,8 @@ class ConfigRepository {
         val animationDuration = getIntValue("animationDuration") ?: 0
         require((100 <= animationDuration) && (animationDuration <= 1500)) { "animationDuration must be >= 100, but <= 1500 ms" }
         val commandFieldScrollDelay = getIntValue("commandFieldScrollDelay") ?: 0
-        require((10 <= commandFieldScrollDelay) && (commandFieldScrollDelay <= 300)) { "commandFieldScrollDelay must be >= 10, but <= 300 ms" }
+        require(
+            (10 <= commandFieldScrollDelay) && (commandFieldScrollDelay <= 300),
+        ) { "commandFieldScrollDelay must be >= 10, but <= 300 ms" }
     }
 }

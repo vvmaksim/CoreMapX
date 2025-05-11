@@ -49,9 +49,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
     }
 
-    fun errorMessage(errorResult: Result.Error): String {
-        return "Error:${errorResult.error.type}.${errorResult.error.description}"
-    }
+    fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
 
     fun handleCommand(command: String) {
         if (graph == null) {
