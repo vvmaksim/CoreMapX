@@ -24,6 +24,8 @@ class ConfigRepository {
 
     fun getDoubleValue(key: String): Double? = config[key]?.toDoubleOrNull()
 
+    fun getFloatValue(key: String): Float? = config[key]?.toFloatOrNull()
+
     fun getColor(key: String): Color {
         val colorForException = Color(0x000000)
         val stringColor = config[key]
