@@ -160,7 +160,7 @@ class ConfigRepository {
         val maxCountMessages = getIntValue("maxCountMessages") ?: 0
         require((1 <= maxCountMessages) && (maxCountMessages <= 10000)) { "maxCountMessages must be >= 1, but <= 10000" }
         require((((getIntValue("commandFieldHeight") ?: 0) >= 56))) { "commandFieldHeight must be >= 56 dp" }
-        require((((getIntValue("commandFieldWidth") ?: 0) >= 666))) { "commandFieldWidth must be >= 666 dp" }
+        require((((getIntValue("commandFieldWidth") ?: 0) >= 400))) { "commandFieldWidth must be >= 400 dp" }
     }
 
     private fun checkWorkAreaSettings() {
@@ -193,8 +193,8 @@ class ConfigRepository {
 
     private fun checkPerformanceSettings() {
         val animationDuration = getIntValue("animationDuration") ?: 0
-        require((300 <= animationDuration) && (animationDuration <= 700)) { "animationDuration must be >= 300, but <= 700 ms" }
+        require((100 <= animationDuration) && (animationDuration <= 1500)) { "animationDuration must be >= 100, but <= 1500 ms" }
         val commandFieldScrollDelay = getIntValue("commandFieldScrollDelay") ?: 0
-        require((10 <= commandFieldScrollDelay) && (commandFieldScrollDelay <= 100)) { "commandFieldScrollDelay must be >= 10, but <= 100 ms" }
+        require((10 <= commandFieldScrollDelay) && (commandFieldScrollDelay <= 300)) { "commandFieldScrollDelay must be >= 10, but <= 300 ms" }
     }
 }
