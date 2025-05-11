@@ -1,5 +1,6 @@
 package org.coremapx.app.userDirectory
 
+import androidx.compose.ui.graphics.Color
 import model.result.showConfigErrorDialog
 import mu.KotlinLogging
 import java.io.File
@@ -22,6 +23,17 @@ class ConfigRepository {
     fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()
 
     fun getDoubleValue(key: String): Double? = config[key]?.toDoubleOrNull()
+
+    fun getColor(key: String): Color {
+        val colorForException = Color(0x000000)
+        val stringColor = config[key]
+        if (stringColor == null) return colorForException
+        return try {
+            tryConvertStringToColor(stringColor)
+        } catch (ex: IllegalArgumentException) {
+            colorForException
+        }
+    }
 
     fun setValue(
         key: String,
@@ -71,6 +83,19 @@ class ConfigRepository {
             if (!config.containsKey(param.key)) missingParameters.add(param.key)
         }
         if (missingParameters.isNotEmpty()) showConfigErrorDialog("Missing parameters in config: $missingParameters")
+    }
+
+    private fun tryConvertStringToColor(color: String): Color {
+        if (!color.startsWith("#")) {
+            throw IllegalArgumentException("Color cannot start without `#`")
+        }
+
+        return try {
+            val colorInt = "FF${color.removePrefix("#")}".toLong(16)
+            Color(colorInt)
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException("Invalid color format: $color")
+        }
     }
 
     private fun validateConfig() {
