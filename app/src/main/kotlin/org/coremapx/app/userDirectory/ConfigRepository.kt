@@ -13,6 +13,10 @@ class ConfigRepository {
     private var config: Map<String, String> = emptyMap()
     private var defaultConfig: Map<String, String> = emptyMap()
 
+    init {
+        load()
+    }
+
     fun getStringValue(key: String): String? = config[key]
 
     fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()

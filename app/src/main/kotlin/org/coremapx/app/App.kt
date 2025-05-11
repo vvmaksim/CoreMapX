@@ -18,7 +18,7 @@ private val logger = KotlinLogging.logger {}
 @Preview
 fun App() {
     UserDirectory.init()
-    ConfigRepository().load()
+    ConfigRepository()
     logger.info("Rendering App composable")
     MaterialTheme {
         MainScreen(MainScreenViewModel<Int, Int>())
