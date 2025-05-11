@@ -8,10 +8,10 @@ language=en
 
 ! Main Screen
 
-# The initial height of the app. Min=1280 (px)
-mainScreenStartHeight=1280
-# The initial width of the app. Min=720 (px)
-mainScreenStartWidth=720
+# The initial height of the app. Min=720 (px)
+mainScreenStartHeight=720
+# The initial width of the app. Min=1280 (px)
+mainScreenStartWidth=1280
 
 
 ! Main Menu
@@ -19,13 +19,13 @@ mainScreenStartWidth=720
 # Width of the main menu. Min=200 (dp)
 mainMenuWidth=200
 # Background color of the main menu
-mainMenuColor=#F5F5F5
+mainMenuColor=#E6E6FA
 # Text color in the main menu
 mainMenuTextColor=#000000
 # Color of buttons in the main menu
-mainMenuButtonColor=#2196F3
+mainMenuButtonColor=#E6E6FA
 # Text color of buttons in the main menu
-mainMenuButtonTextColor=#FFFFFF
+mainMenuButtonTextColor=#6200EE
 
 
 ! Command Field
@@ -38,14 +38,6 @@ maxCountMessages=50
 commandFieldHeight=56
 # Width of the command input field. Min=400 (dp)
 commandFieldWidth=666
-# Background color of the command output area
-commandOutputBackgroundColor=#FFFFFF
-# Text color in the command output area
-commandOutputTextColor=#000000
-# Background color of the command input field
-commandInputBackgroundColor=#F5F5F5
-# Text color in the command input field
-commandInputTextColor=#000000
 
 
 ! Work Area
@@ -64,6 +56,8 @@ edgeMainColor=#000000
 edgeLabelColor=#000000
 # Size of edge labels. Min=1 (sp)
 edgeLabelSize=12
+# Size of edge arrow. Min=1 Max=100(sp)
+edgeArrowSize=10
 # Width of edges. Min=1 (dp)
 edgeWidth=2
 # Ratio for canvas dragging. Min=0.001 Max=1 (float)
@@ -79,3 +73,5 @@ canvasBackgroundColor=#FFFFFF
 
 # Duration of animations in milliseconds. Min=100 Max=700 (ms)
 animationDuration=300
+# Delay in message appearance in milliseconds. Min=10 Max=100 (ms)
+commandFieldScrollDelay=50

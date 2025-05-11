@@ -106,8 +106,8 @@ class ConfigRepository {
     }
 
     private fun checkMainScreenSettings() {
-        require((((getIntValue("mainScreenStartHeight") ?: 0) >= 1280))) { "mainScreenStartHeight must be >= 1280 px" }
-        require((((getIntValue("mainScreenStartWidth") ?: 0) >= 720))) { "mainScreenStartWidth must be >= 720 px" }
+        require((((getIntValue("mainScreenStartHeight") ?: 0) >= 720))) { "mainScreenStartHeight must be >= 720 px" }
+        require((((getIntValue("mainScreenStartWidth") ?: 0) >= 1280))) { "mainScreenStartWidth must be >= 1280 px" }
     }
 
     private fun checkMainMenuSettings() {
@@ -132,18 +132,6 @@ class ConfigRepository {
         require((1 <= maxCountMessages) && (maxCountMessages <= 10000)) { "maxCountMessages must be >= 1, but <= 10000" }
         require((((getIntValue("commandFieldHeight") ?: 0) >= 56))) { "commandFieldHeight must be >= 56 dp" }
         require((((getIntValue("commandFieldWidth") ?: 0) >= 666))) { "commandFieldWidth must be >= 666 dp" }
-        require(validateColor(getStringValue("commandOutputBackgroundColor") ?: "")) {
-            "commandOutputBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("commandOutputTextColor") ?: "")) {
-            "commandOutputTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("commandInputBackgroundColor") ?: "")) {
-            "commandInputBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("commandInputTextColor") ?: "")) {
-            "commandInputTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
     }
 
     private fun checkWorkAreaSettings() {
@@ -162,6 +150,8 @@ class ConfigRepository {
             validateColor(getStringValue("edgeLabelColor") ?: ""),
         ) { "edgeLabelColor must be color in hex format. For example `...=#FFFFFF`" }
         require((((getIntValue("edgeLabelSize") ?: 0) >= 1))) { "edgeLabelSize must be >= 1 sp" }
+        val edgeArrowSize = getIntValue("edgeArrowSize") ?: 0
+        require((1 <= edgeArrowSize) && (edgeArrowSize <= 100)) { "edgeArrowSize must be >= 1, but <= 100" }
         require((((getIntValue("edgeWidth") ?: 0) >= 1))) { "edgeWidth must be >= 1 dp" }
         val canvasDragRatio = getDoubleValue("canvasDragRatio") ?: 0.0
         require((0.01 <= canvasDragRatio) && (canvasDragRatio <= 1)) { "canvasDragRatio must be >= 0.01, but <= 1" }
@@ -175,5 +165,7 @@ class ConfigRepository {
     private fun checkPerformanceSettings() {
         val animationDuration = getIntValue("animationDuration") ?: 0
         require((300 <= animationDuration) && (animationDuration <= 700)) { "animationDuration must be >= 300, but <= 700 ms" }
+        val commandFieldScrollDelay = getIntValue("commandFieldScrollDelay") ?: 0
+        require((10 <= commandFieldScrollDelay) && (commandFieldScrollDelay <= 100)) { "commandFieldScrollDelay must be >= 10, but <= 100 ms" }
     }
 }
