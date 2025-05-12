@@ -11,8 +11,8 @@ private val logger = KotlinLogging.logger {}
 class ConfigRepository {
     private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
     private val defaultConfigPath = "app/src/main/resources/DefaultConfig.gcfg"
-    private var userConfig: Map<String, String> = emptyMap()
-    private var defaultConfig: Map<String, String> = emptyMap()
+    private val userConfig: MutableMap<String, String> = mutableMapOf()
+    private val defaultConfig: MutableMap<String, String> = mutableMapOf()
 
     init {
         loadUserConfig()
@@ -54,20 +54,20 @@ class ConfigRepository {
         configFile.outputStream().use { output ->
             properties.store(output, "Updated Config")
         }
-        userConfig = userConfig.toMutableMap().apply { this[key] = value }.toMap()
+        userConfig[key] = value
         logger.info { "Updated config. For key: $key new value: $value" }
     }
 
     fun loadUserConfig() {
-        userConfig = loadConfig(mainConfigPath)
+        loadConfig(mainConfigPath, userConfig)
         validateUserConfig()
     }
 
     fun loadDefaultConfig() {
-        defaultConfig = loadConfig(defaultConfigPath)
+        loadConfig(defaultConfigPath, defaultConfig)
     }
 
-    private fun loadConfig(path: String): Map<String, String> {
+    private fun loadConfig(path: String, config: MutableMap<String, String>) {
         val configFile = File(path)
         val properties = Properties()
         if (configFile.exists()) {
@@ -75,9 +75,9 @@ class ConfigRepository {
                 properties.load(inputStream)
             }
         }
-        val currentConfig = properties.map { it.key.toString() to it.value.toString() }.toMap()
-
-        return currentConfig
+        properties.forEach { (key, value) ->
+            config[key.toString()] = value.toString()
+        }
     }
 
     private fun comparisonWithDefaultConfig() {
