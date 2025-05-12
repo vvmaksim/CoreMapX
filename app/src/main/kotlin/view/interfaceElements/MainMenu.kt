@@ -28,8 +28,8 @@ fun MainMenu(
 
     val buttonColors = ButtonDefaults.buttonColors(backgroundColor = mainMenuButtonColor)
     val buttonModifier = Modifier.fillMaxWidth()
-    val buttonFontSize = 16.sp
-    val logoFontSize = 24.sp
+    val buttonFontSize = (config.getIntValue("mainMenuButtonsFontSize") ?: 0).sp
+    val logoFontSize = (config.getIntValue("mainMenuLogoFontSize") ?: 0).sp
 
     Box(
         modifier = modifier,
