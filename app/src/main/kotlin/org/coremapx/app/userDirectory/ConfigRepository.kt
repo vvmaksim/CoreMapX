@@ -11,26 +11,32 @@ private val logger = KotlinLogging.logger {}
 class ConfigRepository {
     private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
     private val defaultConfigPath = "app/src/main/resources/DefaultConfig.gcfg"
+    private val privateConfigPath = "app/src/main/resources/PrivateConfig.gcfg"
+    private var config: Map<String, String> = emptyMap()
     private val userConfig: MutableMap<String, String> = mutableMapOf()
+    private val privateConfig: MutableMap<String, String> = mutableMapOf()
     private val defaultConfig: MutableMap<String, String> = mutableMapOf()
 
     init {
         loadUserConfig()
+        loadPrivateConfig()
+        config = joinTwoConfigs(userConfig, privateConfig)
+        validateUserConfig()
     }
 
-    fun getStringValue(key: String): String? = userConfig[key]
+    fun getStringValue(key: String): String? = config[key]
 
-    fun getIntValue(key: String): Int? = userConfig[key]?.toIntOrNull()
+    fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()
 
-    fun getLongValue(key: String): Long? = userConfig[key]?.toLongOrNull()
+    fun getLongValue(key: String): Long? = config[key]?.toLongOrNull()
 
-    fun getDoubleValue(key: String): Double? = userConfig[key]?.toDoubleOrNull()
+    fun getDoubleValue(key: String): Double? = config[key]?.toDoubleOrNull()
 
-    fun getFloatValue(key: String): Float? = userConfig[key]?.toFloatOrNull()
+    fun getFloatValue(key: String): Float? = config[key]?.toFloatOrNull()
 
     fun getColor(key: String): Color {
         val colorForException = Color(0x000000)
-        val stringColor = userConfig[key]
+        val stringColor = config[key]
         if (stringColor == null) return colorForException
         return try {
             tryConvertStringToColor(stringColor)
@@ -60,7 +66,10 @@ class ConfigRepository {
 
     fun loadUserConfig() {
         loadConfig(mainConfigPath, userConfig)
-        validateUserConfig()
+    }
+
+    fun loadPrivateConfig() {
+        loadConfig(privateConfigPath, privateConfig)
     }
 
     fun loadDefaultConfig() {
@@ -79,6 +88,11 @@ class ConfigRepository {
             config[key.toString()] = value.toString()
         }
     }
+
+    private fun joinTwoConfigs(
+        first: MutableMap<String, String>,
+        second: MutableMap<String, String>
+    ): Map<String, String> = HashMap(first).apply { putAll(second) }
 
     private fun comparisonWithDefaultConfig() {
         loadDefaultConfig()
