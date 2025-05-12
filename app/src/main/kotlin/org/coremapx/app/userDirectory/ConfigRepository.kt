@@ -10,8 +10,8 @@ private val logger = KotlinLogging.logger {}
 
 class ConfigRepository {
     private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
-    private val defaultConfigPath = "app/src/main/resources/DefaultConfig.gcfg"
-    private val privateConfigPath = "app/src/main/resources/PrivateConfig.gcfg"
+    private val defaultConfigPath = "app/src/main/resources/Configs/DefaultConfig.gcfg"
+    private val privateConfigPath = "app/src/main/resources/Configs/PrivateConfig.gcfg"
     private var config: Map<String, String> = emptyMap()
     private val userConfig: MutableMap<String, String> = mutableMapOf()
     private val privateConfig: MutableMap<String, String> = mutableMapOf()

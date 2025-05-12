@@ -37,7 +37,7 @@ maxCountMessages=100
 # Height of the command input field. Min=56 (dp)
 commandFieldHeight=56
 # Width of the command input field. Min=400 (dp)
-commandFieldWidth=400
+commandFieldWidth=666
 
 
 ! Work Area
