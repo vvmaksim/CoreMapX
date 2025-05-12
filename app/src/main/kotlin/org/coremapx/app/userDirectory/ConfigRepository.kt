@@ -64,15 +64,15 @@ class ConfigRepository {
         logger.info { "Updated config. For key: $key new value: $value" }
     }
 
-    fun loadUserConfig() {
+    private fun loadUserConfig() {
         loadConfig(mainConfigPath, userConfig)
     }
 
-    fun loadPrivateConfig() {
+    private fun loadPrivateConfig() {
         loadConfig(privateConfigPath, privateConfig)
     }
 
-    fun loadDefaultConfig() {
+    private fun loadDefaultConfig() {
         loadConfig(defaultConfigPath, defaultConfig)
     }
 
