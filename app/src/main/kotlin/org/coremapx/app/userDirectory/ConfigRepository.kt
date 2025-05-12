@@ -11,26 +11,26 @@ private val logger = KotlinLogging.logger {}
 class ConfigRepository {
     private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
     private val defaultConfigPath = "app/src/main/resources/DefaultConfig.gcfg"
-    private var config: Map<String, String> = emptyMap()
+    private var userConfig: Map<String, String> = emptyMap()
     private var defaultConfig: Map<String, String> = emptyMap()
 
     init {
-        load()
+        loadUserConfig()
     }
 
-    fun getStringValue(key: String): String? = config[key]
+    fun getStringValue(key: String): String? = userConfig[key]
 
-    fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()
+    fun getIntValue(key: String): Int? = userConfig[key]?.toIntOrNull()
 
-    fun getLongValue(key: String): Long? = config[key]?.toLongOrNull()
+    fun getLongValue(key: String): Long? = userConfig[key]?.toLongOrNull()
 
-    fun getDoubleValue(key: String): Double? = config[key]?.toDoubleOrNull()
+    fun getDoubleValue(key: String): Double? = userConfig[key]?.toDoubleOrNull()
 
-    fun getFloatValue(key: String): Float? = config[key]?.toFloatOrNull()
+    fun getFloatValue(key: String): Float? = userConfig[key]?.toFloatOrNull()
 
     fun getColor(key: String): Color {
         val colorForException = Color(0x000000)
-        val stringColor = config[key]
+        val stringColor = userConfig[key]
         if (stringColor == null) return colorForException
         return try {
             tryConvertStringToColor(stringColor)
@@ -54,13 +54,13 @@ class ConfigRepository {
         configFile.outputStream().use { output ->
             properties.store(output, "Updated Config")
         }
-        config = config.toMutableMap().apply { this[key] = value }.toMap()
+        userConfig = userConfig.toMutableMap().apply { this[key] = value }.toMap()
         logger.info { "Updated config. For key: $key new value: $value" }
     }
 
-    fun load() {
-        config = loadConfig(mainConfigPath)
-        validateConfig()
+    fun loadUserConfig() {
+        userConfig = loadConfig(mainConfigPath)
+        validateUserConfig()
     }
 
     fun loadDefaultConfig() {
@@ -84,7 +84,7 @@ class ConfigRepository {
         loadDefaultConfig()
         val missingParameters = mutableListOf<String>()
         defaultConfig.forEach { param ->
-            if (!config.containsKey(param.key)) missingParameters.add(param.key)
+            if (!userConfig.containsKey(param.key)) missingParameters.add(param.key)
         }
         if (missingParameters.isNotEmpty()) showConfigErrorDialog("Missing parameters in config: $missingParameters")
     }
@@ -102,7 +102,7 @@ class ConfigRepository {
         }
     }
 
-    private fun validateConfig() {
+    private fun validateUserConfig() {
         try {
             comparisonWithDefaultConfig()
             checkGeneralSettings()
