@@ -7,14 +7,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.graphs.dataClasses.Vertex
+import org.coremapx.app.config
 
 class VertexViewModel<V : Comparable<V>>(
     x: Dp = 0.dp,
     y: Dp = 0.dp,
-    color: Color,
+    color: Color = config.getColor("vertexMainColor"),
     private val vertex: Vertex<V>,
     private val _labelVisible: State<Boolean>,
-    val radius: Dp = 20.dp,
+    val radius: Dp = (config.getIntValue("vertexRadius") ?: 0).dp,
 ) {
     private var _x = mutableStateOf(x)
     var x: Dp

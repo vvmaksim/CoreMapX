@@ -1,4 +1,4 @@
-package model.commands.classes
+package model.result
 
 sealed class Result<out T> {
     data class Success<out T>(
@@ -6,6 +6,6 @@ sealed class Result<out T> {
     ) : Result<T>()
 
     data class Error(
-        val error: CommandError,
+        val error: model.result.Error,
     ) : Result<Nothing>()
 }

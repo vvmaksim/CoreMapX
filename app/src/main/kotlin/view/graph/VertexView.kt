@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import org.coremapx.app.config
 import viewmodel.graph.VertexViewModel
 
 @Composable
@@ -17,6 +19,9 @@ fun <V : Comparable<V>> VertexView(
     viewModel: VertexViewModel<V>,
     modifier: Modifier = Modifier,
 ) {
+    val vertexLabelColor = config.getColor("vertexLabelColor")
+    val vertexLabelSize = (config.getIntValue("vertexLabelSize") ?: 0).sp
+
     Box(
         modifier =
             modifier
@@ -39,6 +44,8 @@ fun <V : Comparable<V>> VertexView(
                         .align(Alignment.Center)
                         .offset(0.dp, -viewModel.radius - 10.dp),
                 text = viewModel.label,
+                color = vertexLabelColor,
+                fontSize = vertexLabelSize,
             )
         }
     }

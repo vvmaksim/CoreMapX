@@ -1,5 +1,6 @@
 package view.interfaceElements
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -8,12 +9,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
-import model.commands.classes.CommandError
 import model.commands.classes.Commands
-import model.commands.classes.Result
+import model.result.CommandError
+import model.result.Result
+import mu.KotlinLogging
+import org.coremapx.app.config
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
+
+private val logger = KotlinLogging.logger {}
 
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
@@ -24,6 +29,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val scrollState = rememberScrollState()
     val graph = viewModel.graph
     var commandCount by remember { mutableStateOf(0) }
+
+    val maxCountMessages = config.getIntValue("maxCountMessages") ?: 0
+    val commandFieldWidth = (config.getIntValue("commandFieldWidth") ?: 0).dp
+    val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -37,8 +46,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun updateOutputMessages(newMessage: String) {
         outputMessages.value.add(newMessage)
-        outputMessages.value = outputMessages.value.takeLast(50).toMutableList()
+        outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
     }
+
+    fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
 
     fun handleCommand(command: String) {
         if (graph == null) {
@@ -52,16 +63,23 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 when (executeResult) {
                     is Result.Success -> {
                         updateOutputMessages(executeResult.data)
+                        logger.info(executeResult.data)
                         commandCount++
                     }
-                    is Result.Error -> updateOutputMessages("Error:${executeResult.error.type}.${executeResult.error.description}")
+                    is Result.Error -> {
+                        updateOutputMessages(errorMessage(executeResult))
+                        logger.warn(errorMessage(executeResult))
+                    }
                 }
             }
-            is Result.Error -> updateOutputMessages("Error:${commandResult.error.type}.${commandResult.error.description}")
+            is Result.Error -> {
+                updateOutputMessages(errorMessage(commandResult))
+                logger.warn(errorMessage(commandResult))
+            }
         }
     }
 
-    Box(modifier = modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize().background(canvasBackgroundColor)) {
         graphViewModel?.let { graphViewModel ->
             GraphView(
                 viewModel = graphViewModel,
@@ -97,7 +115,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             CommandLine(
                 modifier =
                     Modifier
-                        .width(666.dp)
+                        .width(commandFieldWidth)
                         .align(Alignment.CenterVertically),
                 outputMessages = outputMessages.value,
                 onCommand = { command -> handleCommand(command) },

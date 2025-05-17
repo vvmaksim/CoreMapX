@@ -10,6 +10,7 @@ import model.graphs.classes.DirectedWeightedGraph
 import model.graphs.classes.UndirectedUnweightedGraph
 import model.graphs.classes.UndirectedWeightedGraph
 import model.graphs.interfaces.Graph
+import org.coremapx.app.config
 import view.interfaceElements.MainMenu
 import view.interfaceElements.WorkSpace
 import view.interfaceElements.dialogs.NewGraph
@@ -20,13 +21,15 @@ fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewM
     var isMenuVisible by remember { mutableStateOf(true) }
     var showNewGraphDialog by remember { mutableStateOf(false) }
 
+    val mainMenuWidth = (config.getIntValue("mainMenuWidth") ?: 0).dp
+
     Box(modifier = Modifier.fillMaxSize()) {
         WorkSpace(
             viewModel,
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .padding(start = 200.dp),
+                    .padding(start = mainMenuWidth),
         )
 
         MainMenu(
@@ -36,7 +39,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewM
             modifier =
                 Modifier
                     .fillMaxHeight()
-                    .width(200.dp)
+                    .width(mainMenuWidth)
                     .align(Alignment.CenterStart),
         )
     }

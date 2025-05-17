@@ -1,9 +1,9 @@
-package model.commands.classes
+package model.result
 
 sealed class CommandError(
-    val type: String,
-    val description: String? = null,
-) {
+    override val type: String,
+    override val description: String? = null,
+) : Error {
     data class EmptyCommand(
         val message: String = "Command cannot be empty",
     ) : CommandError(

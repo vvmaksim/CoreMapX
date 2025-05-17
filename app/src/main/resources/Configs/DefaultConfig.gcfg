@@ -1,0 +1,87 @@
+versionConfig=1.0
+
+! General settings
+
+#Supported languages: en, ru
+language=en
+
+
+! Main Screen
+
+# The initial height of the app. Min=720 (px)
+mainScreenStartHeight=720
+# The initial width of the app. Min=1280 (px)
+mainScreenStartWidth=1280
+
+
+! Main Menu
+
+# Width of the main menu. Min=200 (dp)
+mainMenuWidth=200
+# Background color of the main menu
+mainMenuColor=#E6E6FA
+# Text color in the main menu
+mainMenuTextColor=#000000
+# Color of buttons in the main menu
+mainMenuButtonColor=#E6E6FA
+# Text color of buttons in the main menu
+mainMenuButtonTextColor=#6200EE
+
+! Title Bar
+
+# Background color of the title bar
+titleBarColor=#E6E6FA
+# Icon tint color of the title bar
+titleBarIconTintColor=#000000
+# Height of the title bar. Min=30 (dp)
+titleBarHeight=32
+# Size of title bar icons. Min=16 (dp)
+titleBarIconSize=20
+
+! Command Field
+
+# Height of the message output area. Min=150 (dp)
+messageOutputHeight=200
+# Maximum number of messages to keep in history. Min=1 Max=10000
+maxCountMessages=100
+# Height of the command input field. Min=56 (dp)
+commandFieldHeight=56
+# Width of the command input field. Min=400 (dp)
+commandFieldWidth=666
+
+
+! Work Area
+
+# Radius of vertices. Min=1 (dp)
+vertexRadius=20
+# Default color of vertices
+vertexMainColor=#f15bb5
+# Color of vertex labels
+vertexLabelColor=#000000
+# Size of vertex labels. Min=1 (sp)
+vertexLabelSize=14
+# Default color of edges
+edgeMainColor=#000000
+# Color of edge labels
+edgeLabelColor=#000000
+# Size of edge labels. Min=1 (sp)
+edgeLabelSize=14
+# Size of edge arrow. Min=1 Max=100(sp)
+edgeArrowSize=10
+# Width of edges. Min=1 (dp)
+edgeWidth=1
+# Ratio for canvas dragging. Min=0.01 Max=1 (float)
+canvasDragRatio=0.01
+# Size of the draggable canvas area. Min=10000 (px)
+canvasDragSize=10000
+# Maximum canvas size. Min=2000 (px)
+canvasLimit=2000
+# Background color of the work area
+canvasBackgroundColor=#FFFFFF
+
+! Performance
+
+# Duration of animations in milliseconds. Min=100 Max=1500 (ms)
+animationDuration=300
+# Delay in message appearance in milliseconds. Min=10 Max=300 (ms)
+commandFieldScrollDelay=50

@@ -1,7 +1,6 @@
 import io.mockk.*
 import model.commands.classes.Command
 import model.commands.classes.Commands
-import model.commands.classes.Result
 import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
 import model.graphs.classes.DirectedUnweightedGraph
@@ -10,11 +9,11 @@ import model.graphs.classes.UndirectedUnweightedGraph
 import model.graphs.classes.UndirectedWeightedGraph
 import model.graphs.dataClasses.Vertex
 import model.graphs.interfaces.Graph
+import model.result.Result
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
-
 
 class CommandsTests {
     lateinit var command: Command

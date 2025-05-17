@@ -16,6 +16,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
 
 @Composable
@@ -29,8 +30,8 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
     val velocityTracker = VelocityTracker()
     val inertiaX = remember { Animatable(0f) }
     val inertiaY = remember { Animatable(0f) }
-    val dragSize = 10000.dp
-    val dragRatio = 0.01
+    val canvasDragSize = (config.getIntValue("canvasDragSize") ?: 0).dp
+    val canvasDragRatio = config.getDoubleValue("canvasDragRatio") ?: 0.0
     Box(
         modifier =
             Modifier
@@ -39,7 +40,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
         Box(
             modifier =
                 Modifier
-                    .size(dragSize, dragSize)
+                    .size(canvasDragSize, canvasDragSize)
                     .pointerInput(Unit) {
                         detectDragGestures(
                             onDragStart = { velocityTracker.resetTracking() },
@@ -56,10 +57,10 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
         Box(
             modifier =
                 Modifier
-                    .size(dragSize, dragSize)
+                    .size(canvasDragSize, canvasDragSize)
                     .offset(
-                        (offsetX + (dragOffset.x * dragRatio) + inertiaX.value).dp,
-                        (offsetY + (dragOffset.y * dragRatio) + inertiaY.value).dp,
+                        (offsetX + (dragOffset.x * canvasDragRatio) + inertiaX.value).dp,
+                        (offsetY + (dragOffset.y * canvasDragRatio) + inertiaY.value).dp,
                     ),
         ) {
             viewModel.vertices.forEach { v ->

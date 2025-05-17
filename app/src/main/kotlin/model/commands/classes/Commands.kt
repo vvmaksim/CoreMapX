@@ -8,6 +8,8 @@ import model.graphs.classes.UndirectedUnweightedGraph
 import model.graphs.classes.UndirectedWeightedGraph
 import model.graphs.dataClasses.Vertex
 import model.graphs.interfaces.Graph
+import model.result.CommandError
+import model.result.Result
 
 class Commands<E : Comparable<E>, V : Comparable<V>>(
     private val command: Command,

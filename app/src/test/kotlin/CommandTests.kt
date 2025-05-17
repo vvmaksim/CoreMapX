@@ -1,7 +1,7 @@
 import model.commands.classes.Command
-import model.commands.classes.Result
 import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
+import model.result.Result
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

@@ -1,7 +1,6 @@
 package viewmodel.graph
 
 import androidx.compose.runtime.State
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.graphs.interfaces.Graph
 
@@ -11,7 +10,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
 ) {
     private val _vertices: Map<V, VertexViewModel<V>> =
         graph.vertices.mapValues { (_, vertex) ->
-            VertexViewModel(0.dp, 0.dp, Color.Gray, vertex, showVerticesLabels)
+            VertexViewModel(x = 0.dp, y = 0.dp, vertex = vertex, _labelVisible = showVerticesLabels)
         }
 
     private val _edges: Map<E, EdgeViewModel<E, V>> =
