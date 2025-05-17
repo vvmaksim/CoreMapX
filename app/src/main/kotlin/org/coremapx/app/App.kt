@@ -16,6 +16,9 @@ private val logger = KotlinLogging.logger {}
 val userDirectory = UserDirectory.init()
 val config = ConfigRepository()
 
+val startScreenWidth = config.getIntValue("mainScreenStartWidth") ?: 0
+val startScreenHeight = config.getIntValue("mainScreenStartHeight") ?: 0
+
 @Composable
 @Preview
 fun App() {
@@ -35,7 +38,7 @@ fun main() =
             },
             title = "CoreMapX",
         ) {
-            window.minimumSize = Dimension(1280, 720)
+            window.minimumSize = Dimension(startScreenWidth, startScreenHeight)
             App()
         }
     }
