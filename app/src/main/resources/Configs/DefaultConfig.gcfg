@@ -27,6 +27,16 @@ mainMenuButtonColor=#E6E6FA
 # Text color of buttons in the main menu
 mainMenuButtonTextColor=#6200EE
 
+! Title Bar
+
+# Background color of the title bar
+titleBarColor=#E6E6FA
+# Icon tint color of the title bar
+titleBarIconTintColor=#000000
+# Height of the title bar. Min=30 (dp)
+titleBarHeight=32
+# Size of title bar icons. Min=16 (dp)
+titleBarIconSize=20
 
 ! Command Field
 

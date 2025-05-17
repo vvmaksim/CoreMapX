@@ -122,6 +122,7 @@ class ConfigRepository {
             checkGeneralSettings()
             checkMainScreenSettings()
             checkMainMenuSettings()
+            checkTitleBarSettings()
             checkCommandFieldSettings()
             checkWorkAreaSettings()
             checkPerformanceSettings()
@@ -167,6 +168,17 @@ class ConfigRepository {
         require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) {
             "mainMenuButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
         }
+    }
+
+    private fun checkTitleBarSettings() {
+        require(validateColor(getStringValue("titleBarColor") ?: "")) {
+            "titleBarColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("titleBarIconTintColor") ?: "")) {
+            "titleBarIconTintColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require((((getIntValue("titleBarHeight") ?: 0) >= 30))) { "titleBarHeight must be >= 30 dp" }
+        require((((getIntValue("titleBarIconSize") ?: 0) >= 16))) { "titleBarIconSize must be >= 16 dp" }
     }
 
     private fun checkCommandFieldSettings() {
