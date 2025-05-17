@@ -1,14 +1,27 @@
 package org.coremapx.app
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
+import androidx.compose.ui.window.rememberWindowState
 import mu.KotlinLogging
 import org.coremapx.app.userDirectory.ConfigRepository
 import org.coremapx.app.userDirectory.UserDirectory
 import view.MainScreen
+import view.interfaceElements.TitleBar
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension
 
@@ -31,14 +44,34 @@ fun App() {
 fun main() =
     application {
         logger.info("Started CoreMapX app")
+        val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
         Window(
             onCloseRequest = {
                 logger.info("Closed CoreMapX app")
                 exitApplication()
             },
             title = "CoreMapX",
+            undecorated = true,
+            state = windowState,
         ) {
+            var isMaximized by remember { mutableStateOf(windowState.placement == WindowPlacement.Maximized) }
             window.minimumSize = Dimension(startScreenWidth, startScreenHeight)
-            App()
+            
+            Column(modifier = Modifier.fillMaxSize()) {
+                WindowDraggableArea {
+                    TitleBar(
+                        onClose = { exitApplication() },
+                        onMinimize = { windowState.isMinimized = true },
+                        onMaximize = {
+                            isMaximized = !isMaximized
+                            windowState.placement = if (isMaximized) WindowPlacement.Maximized else WindowPlacement.Floating
+                        },
+                        isMaximized = isMaximized
+                    )
+                }
+                Box(modifier = Modifier.weight(1f)) {
+                    App()
+                }
+            }
         }
     }
