@@ -11,7 +11,7 @@ private val logger = KotlinLogging.logger {}
 
 object UserDirectory {
     private val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
-    private val defaultConfigPath = "app/src/main/resources/DefaultConfig.gcfg"
+    private val defaultConfigPath = "app/src/main/resources/Configs/DefaultConfig.gcfg"
     private val directories =
         listOf(
             "$baseUserDirPath/logs",
