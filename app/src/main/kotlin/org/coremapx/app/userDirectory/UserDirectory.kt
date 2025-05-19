@@ -18,6 +18,7 @@ object UserDirectory {
             "$baseUserDirPath/config",
             "$baseUserDirPath/data",
             "$baseUserDirPath/data/temp",
+            "$baseUserDirPath/data/graphs",
         )
 
     fun init() {
