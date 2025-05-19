@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.coremapx.app.config
+import org.coremapx.app.userDirectory.UserDirectory
 import view.interfaceElements.dialogs.OpenGraphErrors
 import viewmodel.MainScreenViewModel
 import java.awt.FileDialog
@@ -66,6 +67,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     modifier = buttonModifier,
                     onClick = {
                         val fileDialog = FileDialog(java.awt.Frame(), "Select graph file", FileDialog.LOAD)
+                        fileDialog.directory = UserDirectory.baseUserDirPath + "/data/graphs"
                         fileDialog.isVisible = true
                         val file = fileDialog.files.firstOrNull()
                         if (file != null) {
