@@ -2,11 +2,19 @@ package viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import model.commands.classes.Commands
+import model.fileHandler.Parser
+import model.graphs.classes.DirectedUnweightedGraph
+import model.graphs.classes.DirectedWeightedGraph
+import model.graphs.classes.UndirectedUnweightedGraph
+import model.graphs.classes.UndirectedWeightedGraph
 import model.graphs.interfaces.Graph
+import model.result.Result
 import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategies.RandomStrategy
 import viewmodel.visualizationStrategies.VisualizationStrategy
+import java.io.File
 
 class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     private val visualizationStrategy: VisualizationStrategy = RandomStrategy(),
@@ -24,10 +32,10 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     }
 
     val isGraphActive: Boolean
-        get() = _graph != null
+        get() = _graph.value != null
 
-    private var _graph: Graph<E, V>? = null
-    val graph: Graph<E, V>?
+    private var _graph = mutableStateOf<Graph<E, V>?>(null)
+    val graph: State<Graph<E, V>?>
         get() = _graph
 
     var graphViewModel: GraphViewModel<E, V>? = null
@@ -60,8 +68,29 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     }
 
     fun updateGraph(newGraph: Graph<E, V>) {
-        _graph = newGraph
+        _graph.value = newGraph
         graphViewModel = GraphViewModel(newGraph, _showVerticesLabels)
         visualizationStrategy.place(screenWidth, screenHeight, graphViewModel?.vertices)
+    }
+
+    fun loadGraphFromFile(file: File): List<String> {
+        val graphIR = Parser.parse(file)
+        val isDirected = graphIR.isDirected
+        val isWeighted = graphIR.isWeighted
+        val errors = graphIR.errors.toMutableList()
+        val commandResults = graphIR.commands
+        val newGraph: Graph<E, V> =
+            when {
+                isDirected && isWeighted -> DirectedWeightedGraph<V>()
+                isDirected && !isWeighted -> DirectedUnweightedGraph<V>()
+                !isDirected && isWeighted -> UndirectedWeightedGraph<V>()
+                else -> UndirectedUnweightedGraph<V>()
+            } as Graph<E, V>
+        commandResults.forEach { commandResult ->
+            val executeResult = Commands((commandResult as Result.Success).data, newGraph, mutableListOf()).execute()
+            if (executeResult is Result.Error) errors.add("Error: ${executeResult.error.type}.${executeResult.error.description}")
+        }
+        updateGraph(newGraph)
+        return errors
     }
 }

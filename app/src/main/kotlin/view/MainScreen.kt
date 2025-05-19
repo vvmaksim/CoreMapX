@@ -36,6 +36,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewM
             isMenuVisible = isMenuVisible,
             onMenuVisibilityChange = { isMenuVisible = it },
             onNewGraphClick = { showNewGraphDialog = true },
+            viewModel = viewModel,
             modifier =
                 Modifier
                     .fillMaxHeight()

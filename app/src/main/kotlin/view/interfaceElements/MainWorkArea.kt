@@ -27,7 +27,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 ) {
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
-    val graph = viewModel.graph
+    val graph = viewModel.graph.value
     var commandCount by remember { mutableStateOf(0) }
 
     val maxCountMessages = config.getIntValue("maxCountMessages") ?: 0

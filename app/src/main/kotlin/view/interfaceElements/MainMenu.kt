@@ -7,18 +7,22 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.coremapx.app.config
+import view.interfaceElements.dialogs.OpenGraphErrors
+import viewmodel.MainScreenViewModel
+import java.awt.FileDialog
 
 @Composable
-fun MainMenu(
+fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     isMenuVisible: Boolean,
     onMenuVisibilityChange: (Boolean) -> Unit,
     onNewGraphClick: () -> Unit,
+    viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier,
 ) {
     val animationDuration = config.getIntValue("animationDuration") ?: 0
@@ -30,6 +34,9 @@ fun MainMenu(
     val buttonModifier = Modifier.fillMaxWidth()
     val buttonFontSize = (config.getIntValue("mainMenuButtonsFontSize") ?: 0).sp
     val logoFontSize = (config.getIntValue("mainMenuLogoFontSize") ?: 0).sp
+
+    var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
+    var errors by remember { mutableStateOf<List<String>>(emptyList()) }
 
     Box(
         modifier = modifier,
@@ -55,7 +62,21 @@ fun MainMenu(
                 TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
                     Text(text = "Save Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                TextButton(
+                    modifier = buttonModifier,
+                    onClick = {
+                        val fileDialog = FileDialog(java.awt.Frame(), "Select graph file", FileDialog.LOAD)
+                        fileDialog.isVisible = true
+                        val file = fileDialog.files.firstOrNull()
+                        if (file != null) {
+                            errors = viewModel.loadGraphFromFile(file)
+                            if (errors.isNotEmpty()) {
+                                showOpenGraphErrorsDialog = true
+                            }
+                        }
+                    },
+                    colors = buttonColors
+                ) {
                     Text(text = "Open Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
                 TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
@@ -92,5 +113,12 @@ fun MainMenu(
                 }
             }
         }
+    }
+
+    if (showOpenGraphErrorsDialog) {
+        OpenGraphErrors(
+            onDismiss = { showOpenGraphErrorsDialog = false },
+            errors = errors
+        )
     }
 }
