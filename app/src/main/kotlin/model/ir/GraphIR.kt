@@ -8,6 +8,6 @@ data class GraphIR(
     val author: String = "None",
     val isDirected: Boolean = false,
     val isWeighted: Boolean = false,
-    val errors: List<String> = emptyList(),
+    val warnings: List<String> = emptyList(),
     val commands: List<Result<Command>>,
 )

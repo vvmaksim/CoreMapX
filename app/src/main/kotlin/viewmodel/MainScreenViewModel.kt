@@ -9,6 +9,7 @@ import model.graphs.classes.DirectedWeightedGraph
 import model.graphs.classes.UndirectedUnweightedGraph
 import model.graphs.classes.UndirectedWeightedGraph
 import model.graphs.interfaces.Graph
+import model.ir.GraphIR
 import model.result.Result
 import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
@@ -73,11 +74,16 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
         visualizationStrategy.place(screenWidth, screenHeight, graphViewModel?.vertices)
     }
 
-    fun loadGraphFromFile(file: File): List<String> {
-        val graphIR = Parser.parse(file)
+    fun loadGraphFromFile(file: File): Result<List<String>> {
+        val parseResult = Parser.parse(file)
+        val graphIR: GraphIR
+        when (parseResult) {
+            is Result.Error -> return parseResult
+            is Result.Success -> graphIR = parseResult.data
+        }
         val isDirected = graphIR.isDirected
         val isWeighted = graphIR.isWeighted
-        val errors = graphIR.errors.toMutableList()
+        val warnings = graphIR.warnings.toMutableList()
         val commandResults = graphIR.commands
         val newGraph: Graph<E, V> =
             when {
@@ -88,9 +94,9 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
             } as Graph<E, V>
         commandResults.forEach { commandResult ->
             val executeResult = Commands((commandResult as Result.Success).data, newGraph, mutableListOf()).execute()
-            if (executeResult is Result.Error) errors.add("Error: ${executeResult.error.type}.${executeResult.error.description}")
+            if (executeResult is Result.Error) return executeResult
         }
         updateGraph(newGraph)
-        return errors
+        return Result.Success(warnings)
     }
 }

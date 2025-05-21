@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
 import view.interfaceElements.dialogs.OpenGraphErrors
@@ -37,7 +38,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     val logoFontSize = (config.getIntValue("mainMenuLogoFontSize") ?: 0).sp
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
-    var errors by remember { mutableStateOf<List<String>>(emptyList()) }
+    var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
 
     Box(
         modifier = modifier,
@@ -71,8 +72,16 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         fileDialog.isVisible = true
                         val file = fileDialog.files.firstOrNull()
                         if (file != null) {
-                            errors = viewModel.loadGraphFromFile(file)
-                            if (errors.isNotEmpty()) {
+                            val loadResult = viewModel.loadGraphFromFile(file)
+                            warnings = when (loadResult) {
+                                is Result.Success -> {
+                                    loadResult.data
+                                }
+                                is Result.Error -> {
+                                    listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                                }
+                            }
+                            if (warnings.isNotEmpty()) {
                                 showOpenGraphErrorsDialog = true
                             }
                         }
@@ -120,7 +129,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     if (showOpenGraphErrorsDialog) {
         OpenGraphErrors(
             onDismiss = { showOpenGraphErrorsDialog = false },
-            errors = errors
+            warnings = warnings
         )
     }
 }

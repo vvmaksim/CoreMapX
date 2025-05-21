@@ -1,6 +1,5 @@
 package view.interfaceElements.dialogs
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +22,7 @@ import org.coremapx.app.config
 @Composable
 fun OpenGraphErrors(
     onDismiss: () -> Unit,
-    errors: List<String>,
+    warnings: List<String>,
 ) {
     val backgroundColor = config.getColor("mainMenuColor")
     val textColor = config.getColor("mainMenuButtonTextColor")
@@ -53,7 +52,7 @@ fun OpenGraphErrors(
                 Spacer(modifier = Modifier.height(16.dp))
                 
                 Text(
-                    text = "Errors when loading the graph",
+                    text = "Errors and warnings when loading the graph",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = textColor,
@@ -72,7 +71,7 @@ fun OpenGraphErrors(
                             .verticalScroll(rememberScrollState())
                             .padding(16.dp)
                     ) {
-                        errors.forEachIndexed { index, error ->
+                        warnings.forEachIndexed { index, error ->
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -92,7 +91,7 @@ fun OpenGraphErrors(
                                     fontSize = 14.sp
                                 )
                             }
-                            if (index < errors.size - 1) {
+                            if (index < warnings.size - 1) {
                                 Divider(
                                     modifier = Modifier.padding(vertical = 8.dp),
                                     color = Color.White.copy(alpha = 0.1f)
