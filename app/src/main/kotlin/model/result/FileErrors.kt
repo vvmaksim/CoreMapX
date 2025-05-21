@@ -60,13 +60,6 @@ sealed class FileErrors(
         description = "Missing value in the property $propertyName",
     )
 
-    data class MissingProperty(
-        val line: String,
-    ) : FileErrors(
-        type = "MissingProperty",
-        description = "Missing property in line: $line",
-    )
-
     data class IncorrectLine(
         val line: String,
     ) : FileErrors(
