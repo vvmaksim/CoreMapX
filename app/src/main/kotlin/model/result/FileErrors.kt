@@ -67,13 +67,6 @@ sealed class FileErrors(
         description = "Missing property in line: $line",
     )
 
-    data class LonelyEqualitySymbol(
-        val line: String,
-    ) : FileErrors(
-        type = "lonelyEqualitySymbol",
-        description = "Incorrect line: $line.The `=` symbol cannot be applied without the name of the property and the value",
-    )
-
     data class IncorrectLine(
         val line: String,
     ) : FileErrors(

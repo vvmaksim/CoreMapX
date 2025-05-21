@@ -49,9 +49,6 @@ class Validator {
                 if (splitLine.size > 2) {
                     return Result.Error(FileErrors.IncorrectInfoProperty(line))
                 }
-                if (splitLine[0] == "" && splitLine[1] == "") {
-                    return Result.Error(FileErrors.LonelyEqualitySymbol(line))
-                }
                 if (splitLine[0] == "") {
                     return Result.Error(FileErrors.MissingProperty(line))
                 }
