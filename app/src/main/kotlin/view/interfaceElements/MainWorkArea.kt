@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
 import model.commands.classes.Commands
-import model.result.CommandError
+import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
@@ -53,7 +53,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun handleCommand(command: String) {
         if (graph == null) {
-            updateOutputMessages("Error: ${CommandError.NoGraphSelected().type}.${CommandError.NoGraphSelected().description}")
+            updateOutputMessages("Error: ${CommandErrors.NoGraphSelected().type}.${CommandErrors.NoGraphSelected().description}")
             return
         }
         val commandResult = Command.create(command)
