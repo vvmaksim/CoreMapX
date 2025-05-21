@@ -4,11 +4,11 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.commands.classes.Commands
 import model.fileHandler.Parser
-import model.graphs.classes.DirectedUnweightedGraph
-import model.graphs.classes.DirectedWeightedGraph
-import model.graphs.classes.UndirectedUnweightedGraph
-import model.graphs.classes.UndirectedWeightedGraph
-import model.graphs.interfaces.Graph
+import model.graph.classes.DirectedUnweightedGraph
+import model.graph.classes.DirectedWeightedGraph
+import model.graph.classes.UndirectedUnweightedGraph
+import model.graph.classes.UndirectedWeightedGraph
+import model.graph.interfaces.Graph
 import model.ir.GraphIR
 import model.result.Result
 import org.coremapx.app.config

@@ -1,8 +1,8 @@
 package viewmodel.graph
 
-import model.graphs.classes.DirectedUnweightedGraph
-import model.graphs.classes.DirectedWeightedGraph
-import model.graphs.dataClasses.WeightedEdge
+import model.graph.classes.DirectedUnweightedGraph
+import model.graph.classes.DirectedWeightedGraph
+import model.graph.dataClasses.WeightedEdge
 
 class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     val from: VertexViewModel<V>,

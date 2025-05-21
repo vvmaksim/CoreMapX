@@ -1,8 +1,8 @@
-package model.graphs.abstractClasses
+package model.graph.abstractClasses
 
-import model.graphs.dataClasses.Vertex
-import model.graphs.interfaces.Edge
-import model.graphs.interfaces.Graph
+import model.graph.dataClasses.Vertex
+import model.graph.interfaces.Edge
+import model.graph.interfaces.Graph
 
 abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V> {
     protected var nextEdgeId = 0

@@ -5,11 +5,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.graphs.classes.DirectedUnweightedGraph
-import model.graphs.classes.DirectedWeightedGraph
-import model.graphs.classes.UndirectedUnweightedGraph
-import model.graphs.classes.UndirectedWeightedGraph
-import model.graphs.interfaces.Graph
+import model.graph.classes.DirectedUnweightedGraph
+import model.graph.classes.DirectedWeightedGraph
+import model.graph.classes.UndirectedUnweightedGraph
+import model.graph.classes.UndirectedWeightedGraph
+import model.graph.interfaces.Graph
 import org.coremapx.app.config
 import view.interfaceElements.MainMenu
 import view.interfaceElements.WorkSpace
