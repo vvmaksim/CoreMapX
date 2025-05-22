@@ -48,6 +48,12 @@ fun main() =
     application {
         logger.info("Started CoreMapX app")
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
+        val startWindowPlacement = config.getStringValue("startWindowPlacement") ?: ""
+        when (startWindowPlacement) {
+            "FullScreen" -> windowState.placement = WindowPlacement.Fullscreen
+            "Floating" -> windowState.placement = WindowPlacement.Floating
+            "Maximized" -> windowState.placement = WindowPlacement.Maximized
+        }
         Window(
             onCloseRequest = {
                 logger.info("Closed CoreMapX app")

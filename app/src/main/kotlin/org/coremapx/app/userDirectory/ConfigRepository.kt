@@ -155,6 +155,9 @@ class ConfigRepository {
     private fun checkMainScreenSettings() {
         require((((getIntValue("mainScreenStartHeight") ?: 0) >= 720))) { "mainScreenStartHeight must be >= 720 px" }
         require((((getIntValue("mainScreenStartWidth") ?: 0) >= 1280))) { "mainScreenStartWidth must be >= 1280 px" }
+        require(getStringValue("startWindowPlacement") in listOf("FullScreen", "Floating", "Maximized")) {
+            "Supported startWindowPlacement values: FullScreen, Floating, Maximized"
+        }
     }
 
     private fun checkMainMenuSettings() {

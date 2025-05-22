@@ -12,6 +12,8 @@ language=en
 mainScreenStartHeight=720
 # The initial width of the app. Min=1280 (px)
 mainScreenStartWidth=1280
+# The start window placement. Supported values: FullScreen, Floating, Maximized
+startWindowPlacement=Maximized
 
 
 ! Main Menu
