@@ -1,0 +1,410 @@
+import model.graph.classes.DirectedUnweightedGraph
+import model.graph.classes.DirectedWeightedGraph
+import model.graph.classes.UndirectedUnweightedGraph
+import model.graph.classes.UndirectedWeightedGraph
+import model.graph.dataClasses.UnweightedEdge
+import model.graph.dataClasses.Vertex
+import model.graph.dataClasses.WeightedEdge
+import org.junit.jupiter.api.Test
+import kotlin.test.assertEquals
+
+class GraphTests {
+    @Test
+    fun `undirected unweighted graph add vertex`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        graph.addVertex(Vertex(1, "1"))
+        assertEquals(1, graph.vertices[1]?.id)
+    }
+
+    @Test
+    fun `undirected unweighted graph get label`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        graph.addVertex(Vertex(1, "1"))
+        assertEquals("1", graph.vertices[1]?.label)
+    }
+
+    @Test
+    fun `undirected unweighted graph add edge`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        assertEquals(0, graph.addEdge(vertex1, vertex2))
+    }
+
+    @Test
+    fun `undirected weighted graph add edge`() {
+        val graph = UndirectedWeightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        assertEquals(0, graph.addEdge(vertex1, vertex2, 1))
+    }
+
+    @Test
+    fun `undirected weighted graph get weight`() {
+        val graph = UndirectedWeightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2, 1)
+        assertEquals(1, (graph.edges[0] as WeightedEdge).weight)
+    }
+
+    @Test
+    fun `directed weighted graph add edge`() {
+        val graph = DirectedWeightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        assertEquals(0, graph.addEdge(vertex1, vertex2, 1))
+    }
+
+    @Test
+    fun `directed weighted graph getNeighbors correct`() {
+        val graph = DirectedWeightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex1, vertex2, 1)
+        graph.addEdge(vertex1, vertex3, 1)
+        assertEquals(listOf(vertex2, vertex3), graph.getNeighbors(vertex1))
+    }
+
+    @Test
+    fun `directed weighted graph getNeighbors with unknown vertex`() {
+        val graph = DirectedWeightedGraph<Int>()
+        assertEquals(emptyList(), graph.getNeighbors(Vertex(1, "1")))
+    }
+
+    @Test
+    fun `directed weighted graph getNeighbors with edge direction is in wrong direction`() {
+        val graph = DirectedWeightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2, 1)
+        assertEquals(emptyList(), graph.getNeighbors(vertex2))
+    }
+
+    @Test
+    fun `directed unweighted graph add edge`() {
+        val graph = DirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        assertEquals(0, graph.addEdge(vertex1, vertex2))
+    }
+
+    @Test
+    fun `directed unweighted graph getNeighbors correct`() {
+        val graph = DirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex1, vertex2)
+        graph.addEdge(vertex1, vertex3)
+        assertEquals(listOf(vertex2, vertex3), graph.getNeighbors(vertex1))
+    }
+
+    @Test
+    fun `directed unweighted graph getNeighbors with unknown vertex`() {
+        val graph = DirectedUnweightedGraph<Int>()
+        assertEquals(emptyList(), graph.getNeighbors(Vertex(1, "1")))
+    }
+
+    @Test
+    fun `directed unweighted graph getNeighbors with edge direction is in wrong direction`() {
+        val graph = DirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(emptyList(), graph.getNeighbors(vertex2))
+    }
+
+    @Test
+    fun `undirected unweighted graph getVertex`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        graph.addVertex(vertex1)
+        assertEquals(vertex1, graph.getVertex(1))
+    }
+
+    @Test
+    fun `undirected unweighted graph getEdge`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(UnweightedEdge(0, vertex1, vertex2), graph.getEdge(0))
+    }
+
+    @Test
+    fun `undirected unweighted graph getAllVertex`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        assertEquals(listOf(vertex1, vertex2), graph.getAllVertices())
+    }
+
+    @Test
+    fun `undirected unweighted graph getAllEdge`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        val vertex4 = Vertex(4, "4")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addVertex(vertex4)
+        graph.addEdge(vertex1, vertex2)
+        graph.addEdge(vertex3, vertex4)
+        assertEquals(listOf(UnweightedEdge(0, vertex1, vertex2), UnweightedEdge(1, vertex3, vertex4)), graph.getAllEdges())
+    }
+
+    @Test
+    fun `undirected unweighted graph getNeighbors correct version 1`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex1, vertex2)
+        graph.addEdge(vertex1, vertex3)
+        assertEquals(listOf(vertex2, vertex3), graph.getNeighbors(vertex1))
+    }
+
+    @Test
+    fun `undirected unweighted graph getNeighbors correct version 2`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex2, vertex1)
+        graph.addEdge(vertex3, vertex1)
+        assertEquals(listOf(vertex2, vertex3), graph.getNeighbors(vertex1))
+    }
+
+    @Test
+    fun `undirected unweighted graph getNeighbors with unknown vertex`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        assertEquals(emptyList(), graph.getNeighbors(Vertex(1, "1")))
+    }
+
+    @Test
+    fun `undirected unweighted graph addEdge with unknown from vertex`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        assertEquals(null, graph.addEdge(vertex2, vertex1))
+    }
+
+    @Test
+    fun `undirected unweighted graph addEdge with unknown to vertex`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        assertEquals(null, graph.addEdge(vertex1, vertex2))
+    }
+
+    @Test
+    fun `undirected unweighted graph twice addEdge`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(null, graph.addEdge(UnweightedEdge(0, vertex1, vertex2)))
+    }
+
+    @Test
+    fun `undirected unweighted graph clear`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        assertEquals(true, graph.vertices.isEmpty())
+        graph.addVertex(vertex1)
+        assertEquals(false, graph.vertices.isEmpty())
+        graph.addVertex(vertex2)
+        assertEquals(true, graph.edges.isEmpty())
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(false, graph.edges.isEmpty())
+        graph.clear()
+        assertEquals(true, graph.vertices.isEmpty())
+        assertEquals(true, graph.edges.isEmpty())
+    }
+
+    @Test
+    fun `undirected unweighted graph removeVertex correct`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        graph.addVertex(vertex1)
+        assertEquals(1, graph.removeVertex(1))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeVertex with unknown id`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        graph.addVertex(vertex1)
+        assertEquals(null, graph.removeVertex(52))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeVertex with edges version 1`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(3, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex1, vertex2)
+        graph.addEdge(vertex3, vertex1)
+        assertEquals(1, graph.removeVertex(1))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeVertex with edges version 2`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(3, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex2, vertex1)
+        graph.addEdge(vertex1, vertex3)
+        assertEquals(1, graph.removeVertex(1))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeVertex with edges version 3`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex2, vertex3)
+        assertEquals(1, graph.removeVertex(1))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by id`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(0, graph.removeEdge(0))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by unknown id`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(null, graph.removeEdge(1))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by from and to`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(0, graph.removeEdge(vertex1.id, vertex2.id))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by from and to with wrong direction`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex2, vertex1)
+        assertEquals(null, graph.removeEdge(vertex1.id, vertex2.id))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by from and to with unknown from`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(null, graph.removeEdge(52, vertex2.id))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by from and to with unknown to`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(null, graph.removeEdge(vertex1.id, 52))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by unknown from and unknown to`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(vertex1, vertex2)
+        assertEquals(null, graph.removeEdge(52, 53))
+    }
+
+    @Test
+    fun `undirected unweighted graph removeEdge by from and to with wrong to`() {
+        val graph = UndirectedUnweightedGraph<Int>()
+        val vertex1 = Vertex(1, "1")
+        val vertex2 = Vertex(2, "2")
+        val vertex3 = Vertex(3, "3")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addVertex(vertex3)
+        graph.addEdge(vertex1, vertex3)
+        assertEquals(null, graph.removeEdge(vertex1.id, vertex2.id))
+    }
+}
