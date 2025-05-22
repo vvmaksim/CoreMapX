@@ -4,6 +4,7 @@ import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.window.WindowDraggableArea
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -17,6 +18,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import androidx.compose.ui.zIndex
 import mu.KotlinLogging
 import org.coremapx.app.userDirectory.ConfigRepository
 import org.coremapx.app.userDirectory.UserDirectory
@@ -31,6 +33,7 @@ val config = ConfigRepository()
 
 val startScreenWidth = config.getIntValue("mainScreenStartWidth") ?: 0
 val startScreenHeight = config.getIntValue("mainScreenStartHeight") ?: 0
+val titleBarHeight = (config.getIntValue("titleBarHeight") ?: 0).dp
 
 @Composable
 @Preview
@@ -57,8 +60,18 @@ fun main() =
             var isMaximized by remember { mutableStateOf(windowState.placement == WindowPlacement.Maximized) }
             window.minimumSize = Dimension(startScreenWidth, startScreenHeight)
 
-            Column(modifier = Modifier.fillMaxSize()) {
-                WindowDraggableArea {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = titleBarHeight)
+                ) {
+                    Box(modifier = Modifier.weight(1f)) {
+                        App()
+                    }
+                }
+
+                WindowDraggableArea(modifier = Modifier.zIndex(1f)) {
                     TitleBar(
                         onClose = { exitApplication() },
                         onMinimize = { windowState.isMinimized = true },
@@ -68,9 +81,6 @@ fun main() =
                         },
                         isMaximized = isMaximized,
                     )
-                }
-                Box(modifier = Modifier.weight(1f)) {
-                    App()
                 }
             }
         }
