@@ -3,8 +3,8 @@ package model.fileHandler
 import kotlinx.serialization.json.Json
 import model.commands.classes.Command
 import model.fileHandler.serializableDataClasses.GraphData
-import model.result.Result
 import model.result.FileErrors
+import model.result.Result
 import java.io.File
 
 class Validator {
@@ -13,13 +13,12 @@ class Validator {
         private val requiredProperties = listOf("isDirected", "isWeighted")
         private val allBooleanProperties = listOf("isDirected", "isWeighted")
 
-        fun validate(file: File): Result<String> {
-            return when (file.extension) {
+        fun validate(file: File): Result<String> =
+            when (file.extension) {
                 "graph" -> validateIR(file)
                 "json" -> validateJSON(file)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
-        }
 
         private fun validateIR(file: File): Result<String> {
             val lines: List<String>
@@ -65,7 +64,7 @@ class Validator {
                             line = command,
                             commandErrorType = commandResult.error.type,
                             commandErrorDescription = commandResult.error.description,
-                        )
+                        ),
                     )
                 }
             }

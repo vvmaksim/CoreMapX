@@ -56,7 +56,7 @@ fun main() =
         ) {
             var isMaximized by remember { mutableStateOf(windowState.placement == WindowPlacement.Maximized) }
             window.minimumSize = Dimension(startScreenWidth, startScreenHeight)
-            
+
             Column(modifier = Modifier.fillMaxSize()) {
                 WindowDraggableArea {
                     TitleBar(
@@ -66,7 +66,7 @@ fun main() =
                             isMaximized = !isMaximized
                             windowState.placement = if (isMaximized) WindowPlacement.Maximized else WindowPlacement.Floating
                         },
-                        isMaximized = isMaximized
+                        isMaximized = isMaximized,
                     )
                 }
                 Box(modifier = Modifier.weight(1f)) {

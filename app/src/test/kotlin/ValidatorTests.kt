@@ -54,7 +54,9 @@ class ValidatorTests {
             """
                 |Graph:
                 |Info:
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("BrokenOrderMarkers", (result as Result.Error).error.type)
@@ -68,7 +70,9 @@ class ValidatorTests {
                 |Info:
                 |incorrect string
                 |Graph:
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("IncorrectLine", (result as Result.Error).error.type)
@@ -82,7 +86,9 @@ class ValidatorTests {
                 |Info:
                 |unknownProperty=
                 |Graph:
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("UnknownProperty", (result as Result.Error).error.type)
@@ -96,7 +102,9 @@ class ValidatorTests {
                 |Info:
                 |name=nameWith`=`Symbol
                 |Graph:
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("IncorrectInfoProperty", (result as Result.Error).error.type)
@@ -110,7 +118,9 @@ class ValidatorTests {
                 |Info:
                 |name=
                 |Graph:
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("MissingValue", (result as Result.Error).error.type)
@@ -124,7 +134,9 @@ class ValidatorTests {
                 |Info:
                 |isDirected=Incorrect
                 |Graph:
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("IncorrectBooleanValue", (result as Result.Error).error.type)
@@ -140,7 +152,9 @@ class ValidatorTests {
                 |isWeighted=false
                 |Graph:
                 |add vertex id:incorrect label:label
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Error)
         assertEquals("IncorrectCommand", (result as Result.Error).error.type)
@@ -177,7 +191,9 @@ class ValidatorTests {
                 |isWeighted=false
                 |Graph:
                 |add vertex 1 1
-                |""".trimMargin())
+                |
+            """.trimMargin(),
+        )
         val result = Validator.validate(file)
         assertTrue(result is Result.Success)
         assertEquals("IR is correct", (result as Result.Success).data)
@@ -188,23 +204,23 @@ class ValidatorTests {
         val file = File(tempDir, "test.json")
         file.writeText(
             """
-                {
-                  "info": {
-                    "name": "Template",
-                    "author": "User",
-                    "isDirected": true,
-                    "isWeighted": true
-                  },
-                  "graph": {
-                    "vertices": [
-                      {"id": 1, "label": "1"}
-                    ],
-                    "edges": [
-                      {"from": 1, "to": 2, "weight": 52}
-                    ]
-                  }
-                }
-            """.trimIndent()
+            {
+              "info": {
+                "name": "Template",
+                "author": "User",
+                "isDirected": true,
+                "isWeighted": true
+              },
+              "graph": {
+                "vertices": [
+                  {"id": 1, "label": "1"}
+                ],
+                "edges": [
+                  {"from": 1, "to": 2, "weight": 52}
+                ]
+              }
+            }
+            """.trimIndent(),
         )
         val result = Validator.validate(file)
         assertTrue(result is Result.Success)

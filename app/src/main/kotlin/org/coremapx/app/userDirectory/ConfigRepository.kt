@@ -76,7 +76,10 @@ class ConfigRepository {
         loadConfig(defaultConfigPath, defaultConfig)
     }
 
-    private fun loadConfig(path: String, config: MutableMap<String, String>) {
+    private fun loadConfig(
+        path: String,
+        config: MutableMap<String, String>,
+    ) {
         val configFile = File(path)
         val properties = Properties()
         if (configFile.exists()) {
@@ -91,7 +94,7 @@ class ConfigRepository {
 
     private fun joinTwoConfigs(
         first: MutableMap<String, String>,
-        second: MutableMap<String, String>
+        second: MutableMap<String, String>,
     ): Map<String, String> = HashMap(first).apply { putAll(second) }
 
     private fun comparisonWithDefaultConfig() {

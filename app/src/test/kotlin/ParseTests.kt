@@ -23,7 +23,8 @@ class ParseTests {
     @Test
     fun `parse correct`() {
         val file = File(tempDir, "test.graph")
-        file.writeText("""
+        file.writeText(
+            """
             Info:
             name=Template
             author=User
@@ -31,7 +32,8 @@ class ParseTests {
             isWeighted=true
             Graph:
             add vertex 1 1
-        """.trimIndent())
+            """.trimIndent(),
+        )
         val result = Parser.parse(file)
         assertTrue(result is Result.Success)
         assertEquals("Template", result.data.name)
@@ -49,13 +51,15 @@ class ParseTests {
     @Test
     fun `parse without optional parameters`() {
         val file = File(tempDir, "test.graph")
-        file.writeText("""
+        file.writeText(
+            """
             Info:
             isDirected=true
             isWeighted=true
             Graph:
             add vertex 1 1
-        """.trimIndent())
+            """.trimIndent(),
+        )
         val result = Parser.parse(file)
         assertTrue(result is Result.Success)
         assertTrue(result.data.isDirected)

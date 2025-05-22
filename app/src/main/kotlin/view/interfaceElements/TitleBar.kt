@@ -45,12 +45,13 @@ fun TitleBar(
     var showFileMenu by remember { mutableStateOf(false) }
 
     Row(
-        modifier = Modifier
-            .background(titleBarColor)
-            .fillMaxWidth()
-            .height(titleBarHeight),
+        modifier =
+            Modifier
+                .background(titleBarColor)
+                .fillMaxWidth()
+                .height(titleBarHeight),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(
             modifier = Modifier.padding(start = 4.dp),
@@ -62,7 +63,7 @@ fun TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = titleBarIconTintColor,
-                        modifier = Modifier.size(titleBarIconSize)
+                        modifier = Modifier.size(titleBarIconSize),
                     )
                 }
 
@@ -98,7 +99,7 @@ fun TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = titleBarIconTintColor,
-                        modifier = Modifier.size(titleBarIconSize)
+                        modifier = Modifier.size(titleBarIconSize),
                     )
                 }
             }
@@ -109,7 +110,7 @@ fun TitleBar(
                     imageVector = Icons.Filled.Remove,
                     contentDescription = "Minimize",
                     tint = titleBarIconTintColor,
-                    modifier = Modifier.size(titleBarIconSize)
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onMaximize) {
@@ -117,7 +118,7 @@ fun TitleBar(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
                     contentDescription = if (isMaximized) "Recover" else "Maximize",
                     tint = titleBarIconTintColor,
-                    modifier = Modifier.size(titleBarIconSize)
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onClose) {
@@ -125,7 +126,7 @@ fun TitleBar(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Close",
                     tint = titleBarIconTintColor,
-                    modifier = Modifier.size(titleBarIconSize)
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
         }

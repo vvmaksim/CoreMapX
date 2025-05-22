@@ -2,8 +2,8 @@ package model.fileHandler
 
 import model.commands.classes.Command
 import model.ir.GraphIR
-import model.result.Result
 import model.result.FileErrors
+import model.result.Result
 import java.io.File
 
 class Parser {
@@ -40,11 +40,14 @@ class Parser {
                     isWeighted = graphInfo["isWeighted"]?.toBoolean() ?: false,
                     warnings = warnings,
                     commands = commands,
-                )
+                ),
             )
         }
 
-        private fun parseGraphInfo(lines: List<String>, warnings: MutableList<String>): Map<String, String> {
+        private fun parseGraphInfo(
+            lines: List<String>,
+            warnings: MutableList<String>,
+        ): Map<String, String> {
             val graphInfo = mutableMapOf<String, String>()
             for (line in lines) {
                 val splitLine = line.split("=").map { it.trim() }
@@ -54,7 +57,10 @@ class Parser {
             return graphInfo
         }
 
-        private fun checkOnWarnings(graphInfo: Map<String, String>, warnings: MutableList<String>) {
+        private fun checkOnWarnings(
+            graphInfo: Map<String, String>,
+            warnings: MutableList<String>,
+        ) {
             optionalProperties.forEach { property ->
                 if (graphInfo[property] == null) warnings.add("Optional field `$property` was missed")
             }

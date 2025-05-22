@@ -56,7 +56,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         .background(mainMenuColor)
                         .padding(8.dp),
             ) {
-                Text(text = "CoreMapX", fontSize = logoFontSize, modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally))
+                Text(
+                    text = "CoreMapX",
+                    fontSize = logoFontSize,
+                    modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally),
+                )
 
                 TextButton(modifier = buttonModifier, onClick = onNewGraphClick, colors = buttonColors) {
                     Text(text = "New Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
@@ -73,20 +77,21 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         val file = fileDialog.files.firstOrNull()
                         if (file != null) {
                             val loadResult = viewModel.loadGraphFromFile(file)
-                            warnings = when (loadResult) {
-                                is Result.Success -> {
-                                    loadResult.data
+                            warnings =
+                                when (loadResult) {
+                                    is Result.Success -> {
+                                        loadResult.data
+                                    }
+                                    is Result.Error -> {
+                                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                                    }
                                 }
-                                is Result.Error -> {
-                                    listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
-                                }
-                            }
                             if (warnings.isNotEmpty()) {
                                 showOpenGraphErrorsDialog = true
                             }
                         }
                     },
-                    colors = buttonColors
+                    colors = buttonColors,
                 ) {
                     Text(text = "Open Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
@@ -129,7 +134,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     if (showOpenGraphErrorsDialog) {
         OpenGraphErrors(
             onDismiss = { showOpenGraphErrorsDialog = false },
-            warnings = warnings
+            warnings = warnings,
         )
     }
 }

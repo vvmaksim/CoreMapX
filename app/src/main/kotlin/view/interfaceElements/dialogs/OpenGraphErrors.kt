@@ -30,77 +30,82 @@ fun OpenGraphErrors(
 
     Dialog(onDismissRequest = onDismiss) {
         Surface(
-            modifier = Modifier
-                .width(600.dp)
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .width(600.dp)
+                    .padding(16.dp),
             shape = RoundedCornerShape(16.dp),
             color = backgroundColor,
         ) {
             Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier =
+                    Modifier
+                        .padding(16.dp)
+                        .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Icon(
                     imageVector = Icons.Default.Warning,
                     contentDescription = "Warning",
                     modifier = Modifier.size(48.dp),
-                    tint = Color(0xFFFFA000)
+                    tint = Color(0xFFFFA000),
                 )
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 Text(
                     text = "Errors and warnings when loading the graph",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = textColor,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
-                
+
                 Spacer(modifier = Modifier.height(16.dp))
-                
+
                 Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .heightIn(max = 300.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .heightIn(max = 300.dp),
                 ) {
                     Column(
-                        modifier = Modifier
-                            .verticalScroll(rememberScrollState())
-                            .padding(16.dp)
+                        modifier =
+                            Modifier
+                                .verticalScroll(rememberScrollState())
+                                .padding(16.dp),
                     ) {
                         warnings.forEachIndexed { index, error ->
                             Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 4.dp),
-                                verticalAlignment = Alignment.CenterVertically
+                                modifier =
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Error,
                                     contentDescription = "Error",
                                     modifier = Modifier.size(16.dp),
-                                    tint = Color(0xFFE53935)
+                                    tint = Color(0xFFE53935),
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
                                 Text(
                                     text = error,
                                     color = textColor,
-                                    fontSize = 14.sp
+                                    fontSize = 14.sp,
                                 )
                             }
                             if (index < warnings.size - 1) {
                                 Divider(
                                     modifier = Modifier.padding(vertical = 8.dp),
-                                    color = Color.White.copy(alpha = 0.1f)
+                                    color = Color.White.copy(alpha = 0.1f),
                                 )
                             }
                         }
                     }
                 }
-                
+
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
@@ -108,24 +113,25 @@ fun OpenGraphErrors(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
                     color = textColor,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
-                
+
                 Button(
                     onClick = onDismiss,
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = buttonColor,
-                        contentColor = textColor
-                    ),
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            backgroundColor = buttonColor,
+                            contentColor = textColor,
+                        ),
                     shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.width(200.dp)
+                    modifier = Modifier.width(200.dp),
                 ) {
                     Text(
                         text = "OK",
                         fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
                     )
                 }
             }

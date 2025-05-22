@@ -14,14 +14,16 @@ class ConverterTests {
     @Test
     fun `convert graph to graph correct`() {
         val file = File(tempDir, "test.graph")
-        file.writeText("""
+        file.writeText(
+            """
             Info:
             isDirected=false
             isWeighted=false
             Graph:
             add vertex 1 1
             add vertex 2 2
-        """.trimIndent())
+            """.trimIndent(),
+        )
         val result = Converter.convert(file, FileExtensions.GRAPH)
         assertTrue(result is Result.Success)
         assertEquals(file, result.data)
@@ -39,7 +41,8 @@ class ConverterTests {
     @Test
     fun `convert json to is weighted graph correct`() {
         val file = File(tempDir, "test.json")
-        file.writeText("""
+        file.writeText(
+            """
             {
               "info": {
                 "name": "Template",
@@ -57,11 +60,13 @@ class ConverterTests {
                 ]
               }
             }
-        """.trimIndent())
+            """.trimIndent(),
+        )
         val result = Converter.convert(file, FileExtensions.GRAPH)
         assertTrue(result is Result.Success)
         val expectedFile = File(tempDir, "test.graph")
-        expectedFile.writeText("""
+        expectedFile.writeText(
+            """
             Info:
             name=Template
             author=User
@@ -71,7 +76,8 @@ class ConverterTests {
             add vertex 1 1
             add vertex 2 2
             add edge 1 2 52
-        """.trimIndent())
+            """.trimIndent(),
+        )
         assertEquals(expectedFile.name, result.data.name)
         assertEquals(expectedFile.readLines(), result.data.readLines())
     }
@@ -79,7 +85,8 @@ class ConverterTests {
     @Test
     fun `convert json to is not weighted graph correct`() {
         val file = File(tempDir, "test.json")
-        file.writeText("""
+        file.writeText(
+            """
             {
               "info": {
                 "name": "Template",
@@ -97,11 +104,13 @@ class ConverterTests {
                 ]
               }
             }
-        """.trimIndent())
+            """.trimIndent(),
+        )
         val result = Converter.convert(file, FileExtensions.GRAPH)
         assertTrue(result is Result.Success)
         val expectedFile = File(tempDir, "test.graph")
-        expectedFile.writeText("""
+        expectedFile.writeText(
+            """
             Info:
             name=Template
             author=User
@@ -111,7 +120,8 @@ class ConverterTests {
             add vertex 1 1
             add vertex 2 2
             add edge 1 2
-        """.trimIndent())
+            """.trimIndent(),
+        )
         assertEquals(expectedFile.name, result.data.name)
         assertEquals(expectedFile.readLines(), result.data.readLines())
     }

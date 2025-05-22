@@ -15,30 +15,33 @@ import model.result.Result
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import java.io.File
 
-
 class Converter {
     companion object {
-        fun convert(file: File, to: FileExtensions): Result<File> {
+        fun convert(
+            file: File,
+            to: FileExtensions,
+        ): Result<File> {
             val validateResult = Validator.validate(file)
             if (validateResult is Result.Error) return validateResult
             return when (to) {
-                FileExtensions.GRAPH -> { convertAnyToIR(file) }
-                FileExtensions.JSON -> { convertAnyToJSON(file) }
+                FileExtensions.GRAPH -> {
+                    convertAnyToIR(file)
+                }
+                FileExtensions.JSON -> {
+                    convertAnyToJSON(file)
+                }
             }
         }
 
-        private fun convertAnyToIR(file: File): Result<File> {
-            return when (file.extension) {
+        private fun convertAnyToIR(file: File): Result<File> =
+            when (file.extension) {
                 "graph" -> Result.Success(file)
                 "json" -> convertJSONToIR(file)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
-        }
 
         // TODO - Необходимо написать тело функции
-        private fun convertAnyToJSON(file: File): Result<File> {
-            return Result.Success(file)
-        }
+        private fun convertAnyToJSON(file: File): Result<File> = Result.Success(file)
 
         private fun convertJSONToIR(file: File): Result<File> {
             val json = Json { ignoreUnknownKeys = true }
@@ -49,14 +52,15 @@ class Converter {
                 return Result.Error(FileErrors.ConverterError(ex.toString()))
             }
 
-            val ir = StringBuilder().apply {
-                append("Info:\n")
-                append("name=${graphData.info.name}\n")
-                append("author=${graphData.info.author}\n")
-                append("isDirected=${graphData.info.isDirected}\n")
-                append("isWeighted=${graphData.info.isWeighted}\n")
-                append("Graph:\n")
-            }
+            val ir =
+                StringBuilder().apply {
+                    append("Info:\n")
+                    append("name=${graphData.info.name}\n")
+                    append("author=${graphData.info.author}\n")
+                    append("isDirected=${graphData.info.isDirected}\n")
+                    append("isWeighted=${graphData.info.isWeighted}\n")
+                    append("Graph:\n")
+                }
             graphData.graph.vertices.forEach { vertex ->
                 ir.append("add vertex ${vertex.id} ${vertex.label}\n")
             }
@@ -69,11 +73,12 @@ class Converter {
                     ir.append("add edge ${edge.from} ${edge.to}\n")
                 }
             }
-            val irFile = File("${baseUserDirPath}/data/temp/${file.nameWithoutExtension}.graph").apply {
-                writeText(ir.toString())
-                deleteOnExit()
-                // TODO - Сделать возможность менять в конфиге необходимость удаления после конвертирования
-            }
+            val irFile =
+                File("$baseUserDirPath/data/temp/${file.nameWithoutExtension}.graph").apply {
+                    writeText(ir.toString())
+                    deleteOnExit()
+                    // TODO - Сделать возможность менять в конфиге необходимость удаления после конвертирования
+                }
             return Result.Success(irFile)
         }
 
@@ -108,8 +113,8 @@ class Converter {
                             vertices.add(
                                 Vertex(
                                     id = commandResult.data.parameters["id"]?.toIntOrNull() ?: 0,
-                                    label = commandResult.data.parameters["label"].toString()
-                                )
+                                    label = commandResult.data.parameters["label"].toString(),
+                                ),
                             )
                         } else if (commandResult.data.entity == CommandEntities.EDGE) {
                             if (info["isWeight"] == "true") {
@@ -118,38 +123,40 @@ class Converter {
                                         from = commandResult.data.parameters["from"]?.toIntOrNull() ?: 0,
                                         to = commandResult.data.parameters["to"]?.toIntOrNull() ?: 0,
                                         weight = commandResult.data.parameters["weight"]?.toIntOrNull() ?: 0,
-                                    )
+                                    ),
                                 )
                             } else if (info["isWeight"] == "false") {
                                 edges.add(
                                     Edge(
                                         from = commandResult.data.parameters["from"]?.toIntOrNull() ?: 0,
                                         to = commandResult.data.parameters["to"]?.toIntOrNull() ?: 0,
-                                    )
+                                    ),
                                 )
                             }
                         }
                     }
                 }
             }
-            val graphData = GraphData(
-                GraphInfo(
-                    name = info["name"],
-                    author = info["author"],
-                    isDirected = info["isDirected"].toBoolean(),
-                    isWeighted = info["isWeighted"].toBoolean(),
-                ),
-                Graph(
-                    vertices = vertices,
-                    edges = edges,
+            val graphData =
+                GraphData(
+                    GraphInfo(
+                        name = info["name"],
+                        author = info["author"],
+                        isDirected = info["isDirected"].toBoolean(),
+                        isWeighted = info["isWeighted"].toBoolean(),
+                    ),
+                    Graph(
+                        vertices = vertices,
+                        edges = edges,
+                    ),
                 )
-            )
             val json = Json { prettyPrint = true }
-            val jsonFile = File("${baseUserDirPath}/data/temp/${file.nameWithoutExtension}.json").apply {
-                writeText(json.encodeToString(graphData))
-                deleteOnExit()
-                // TODO - Сделать возможность менять в конфиге необходимость удаления после конвертирования
-            }
+            val jsonFile =
+                File("$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json").apply {
+                    writeText(json.encodeToString(graphData))
+                    deleteOnExit()
+                    // TODO - Сделать возможность менять в конфиге необходимость удаления после конвертирования
+                }
             return Result.Success(jsonFile)
         }
     }
