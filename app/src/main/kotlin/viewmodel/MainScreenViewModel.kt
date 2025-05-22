@@ -49,17 +49,37 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     val offsetY: State<Float>
         get() = _offsetY
 
+    private var _scale = mutableStateOf(1f)
+    val scale: State<Float>
+        get() = _scale
+
     fun moveCanvas(
         dx: Float,
         dy: Float,
     ) {
-        _offsetX.value = (_offsetX.value + dx).coerceIn(-canvasLimit, canvasLimit)
-        _offsetY.value = (_offsetY.value + dy).coerceIn(-canvasLimit, canvasLimit)
+        val compensatedDx = dx * _scale.value
+        val compensatedDy = dy * _scale.value
+
+        _offsetX.value = (_offsetX.value + compensatedDx).coerceIn(-canvasLimit, canvasLimit)
+        _offsetY.value = (_offsetY.value + compensatedDy).coerceIn(-canvasLimit, canvasLimit)
+    }
+
+    fun zoomCanvas(delta: Float) {
+        val zoomFactor = 0.5f
+        val oldScale = _scale.value
+        val newScale = (oldScale * (1f + delta * zoomFactor)).coerceIn(0.5f, 5f)
+
+        val scaleRatio = newScale / oldScale
+        _offsetX.value = _offsetX.value * scaleRatio
+        _offsetY.value = _offsetY.value * scaleRatio
+
+        _scale.value = newScale
     }
 
     fun resetCanvas() {
         _offsetX.value = 0f
         _offsetY.value = 0f
+        _scale.value = 1f
     }
 
     fun resetGraphView() {

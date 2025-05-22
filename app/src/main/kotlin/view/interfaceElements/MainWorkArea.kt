@@ -85,7 +85,9 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 viewModel = graphViewModel,
                 offsetX = viewModel.offsetX.value,
                 offsetY = viewModel.offsetY.value,
+                scale = viewModel.scale.value,
                 onPan = { dx, dy -> viewModel.moveCanvas(dx, dy) },
+                onZoom = { delta -> viewModel.zoomCanvas(delta) },
             )
         }
 
