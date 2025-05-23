@@ -215,8 +215,7 @@ class ConfigRepository {
         require((1 <= edgeArrowSize) && (edgeArrowSize <= 100)) { "edgeArrowSize must be >= 1, but <= 100" }
         require((((getIntValue("edgeWidth") ?: 0) >= 1))) { "edgeWidth must be >= 1 dp" }
         val canvasDragRatio = getDoubleValue("canvasDragRatio") ?: 0.0
-        require((0.01 <= canvasDragRatio) && (canvasDragRatio <= 1)) { "canvasDragRatio must be >= 0.01, but <= 1" }
-        require((((getIntValue("canvasDragSize") ?: 0) >= 10000))) { "canvasDragSize must be >= 10000 px" }
+        require((0.1 <= canvasDragRatio) && (canvasDragRatio <= 10)) { "canvasDragRatio must be >= 0.1, but <= 10" }
         require((((getIntValue("canvasLimit") ?: 0) >= 2000))) { "canvasLimit must be >= 2000 px" }
         require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) {
             "canvasBackgroundColor must be color in hex format. For example `...=#FFFFFF`"

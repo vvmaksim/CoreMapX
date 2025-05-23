@@ -72,10 +72,8 @@ edgeLabelSize=14
 edgeArrowSize=10
 # Width of edges. Min=1 (dp)
 edgeWidth=1
-# Ratio for canvas dragging. Min=0.01 Max=1 (float)
-canvasDragRatio=0.01
-# Size of the draggable canvas area. Min=10000 (px)
-canvasDragSize=10000
+# Ratio for canvas dragging. Min=0.1 Max=10 (float)
+canvasDragRatio=1
 # Maximum canvas size. Min=2000 (px)
 canvasLimit=2000
 # Background color of the work area
