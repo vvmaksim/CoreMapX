@@ -36,6 +36,7 @@ class Validator {
 
             val infoLines: List<String> = lines.subList(infoMarkerIndex + 1, commandsMarkerIndex)
             val commandLines: List<String> = lines.subList(commandsMarkerIndex + 1, lines.size)
+            val info = mutableMapOf<String, String>()
 
             for (line in infoLines) {
                 val splitLine = line.split("=").map { it.trim() }
@@ -54,6 +55,10 @@ class Validator {
                 if (splitLine[0] in allBooleanProperties && splitLine[1].lowercase() !in listOf("true", "false")) {
                     return Result.Error(FileErrors.IncorrectBooleanValue(splitLine[0]))
                 }
+                if (info[splitLine[0]] != null) {
+                    return Result.Error(FileErrors.RecurringProperties(splitLine[0]))
+                }
+                info[splitLine[0]] = splitLine[1]
             }
 
             for (command in commandLines) {

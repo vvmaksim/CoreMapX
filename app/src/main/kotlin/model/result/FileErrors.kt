@@ -89,4 +89,11 @@ sealed class FileErrors(
             type = "IncorrectCommand",
             description = "Error in line: $line. $commandErrorType.$commandErrorDescription",
         )
+
+    data class RecurringProperties(
+        val propertyName: String,
+    ) : FileErrors(
+            type = "RecurringProperties",
+            description = "The property $propertyName must be defined only once",
+        )
 }
