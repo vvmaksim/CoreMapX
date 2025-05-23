@@ -21,8 +21,8 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     private val visualizationStrategy: VisualizationStrategy = RandomStrategy(),
 ) {
     val canvasLimit = config.getFloatValue("canvasLimit") ?: 0f
-    val screenWidth = config.getDoubleValue("mainScreenStartWidth") ?: 0.0
-    val screenHeight = config.getDoubleValue("mainScreenStartHeight") ?: 0.0
+    val graphLayoutHeight = config.getDoubleValue("graphLayoutHeight") ?: 0.0
+    val graphLayoutWidth = config.getDoubleValue("graphLayoutWidth") ?: 0.0
 
     private var _showVerticesLabels = mutableStateOf(false)
     val showVerticesLabels: State<Boolean>
@@ -84,14 +84,14 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     fun resetGraphView() {
         graphViewModel?.let {
-            visualizationStrategy.place(screenWidth, screenHeight, it.vertices)
+            visualizationStrategy.place(graphLayoutWidth, graphLayoutHeight, it.vertices)
         }
     }
 
     fun updateGraph(newGraph: Graph<E, V>) {
         _graph.value = newGraph
         graphViewModel = GraphViewModel(newGraph, _showVerticesLabels)
-        visualizationStrategy.place(screenWidth, screenHeight, graphViewModel?.vertices)
+        visualizationStrategy.place(graphLayoutWidth, graphLayoutHeight, graphViewModel?.vertices)
     }
 
     fun loadGraphFromFile(file: File): Result<List<String>> {

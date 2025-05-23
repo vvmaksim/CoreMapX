@@ -54,6 +54,10 @@ commandFieldWidth=666
 
 ! Work Area
 
+# The graph layout height. Min=2000 (px)
+graphLayoutHeight=2000
+# The graph layout width. Min=1000 (px)
+graphLayoutWidth=2000
 # Radius of vertices. Min=1 (dp)
 vertexRadius=20
 # Default color of vertices

@@ -196,6 +196,8 @@ class ConfigRepository {
     }
 
     private fun checkWorkAreaSettings() {
+        require((((getIntValue("graphLayoutHeight") ?: 0) >= 2000))) { "graphLayoutHeight must be >= 2000 dp" }
+        require((((getIntValue("graphLayoutWidth") ?: 0) >= 1000))) { "graphLayoutWidth must be >= 1000 dp" }
         require((((getIntValue("vertexRadius") ?: 0) >= 1))) { "vertexRadius must be >= 1 dp" }
         require(
             validateColor(getStringValue("vertexMainColor") ?: ""),
