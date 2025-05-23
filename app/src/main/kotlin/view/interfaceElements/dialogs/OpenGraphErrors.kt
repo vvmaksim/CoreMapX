@@ -108,16 +108,6 @@ fun OpenGraphErrors(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Text(
-                    text = "Incorrect lines were replaced with default values or were not taken into account at all",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor,
-                    textAlign = TextAlign.Center,
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
                 Button(
                     onClick = onDismiss,
                     colors =
