@@ -1,5 +1,6 @@
 package view.graph
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,10 +25,13 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
     onZoom: (Float) -> Unit,
 ) {
     val canvasDragRatio = (config.getIntValue("canvasDragRatio") ?: 0)
+    val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
+
     Box(
         modifier =
             Modifier
                 .fillMaxSize()
+                .background(canvasBackgroundColor)
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
                         while (true) {
