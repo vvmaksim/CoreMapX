@@ -40,8 +40,12 @@ class Converter {
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
 
-        // TODO - Необходимо написать тело функции
-        private fun convertAnyToJSON(file: File): Result<File> = Result.Success(file)
+        private fun convertAnyToJSON(file: File): Result<File> =
+            when (file.extension) {
+                "graph" -> convertIRToJSON(file)
+                "json" -> Result.Success(file)
+                else -> Result.Error(FileErrors.UnknownFileExtension())
+        }
 
         private fun convertJSONToIR(file: File): Result<File> {
             val json = Json { ignoreUnknownKeys = true }
