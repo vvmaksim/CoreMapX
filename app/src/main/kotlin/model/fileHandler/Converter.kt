@@ -20,34 +20,35 @@ class Converter {
         fun convert(
             file: File,
             to: FileExtensions,
+            convertMode: ConvertModes,
         ): Result<File> {
             val validateResult = Validator.validate(file)
             if (validateResult is Result.Error) return validateResult
             return when (to) {
                 FileExtensions.GRAPH -> {
-                    convertAnyToIR(file)
+                    convertAnyToIR(file, convertMode)
                 }
                 FileExtensions.JSON -> {
-                    convertAnyToJSON(file)
+                    convertAnyToJSON(file, convertMode)
                 }
             }
         }
 
-        private fun convertAnyToIR(file: File): Result<File> =
+        private fun convertAnyToIR(file: File, convertMode: ConvertModes): Result<File> =
             when (file.extension) {
                 "graph" -> Result.Success(file)
-                "json" -> convertJSONToIR(file)
+                "json" -> convertJSONToIR(file, convertMode)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
 
-        private fun convertAnyToJSON(file: File): Result<File> =
+        private fun convertAnyToJSON(file: File, convertMode: ConvertModes): Result<File> =
             when (file.extension) {
-                "graph" -> convertIRToJSON(file)
+                "graph" -> convertIRToJSON(file, convertMode)
                 "json" -> Result.Success(file)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
         }
 
-        private fun convertJSONToIR(file: File): Result<File> {
+        private fun convertJSONToIR(file: File, convertMode: ConvertModes): Result<File> {
             val json = Json { ignoreUnknownKeys = true }
             val graphData: GraphData
             try {
@@ -77,16 +78,18 @@ class Converter {
                     ir.append("add edge ${edge.from} ${edge.to}\n")
                 }
             }
-            val irFile =
-                File("$baseUserDirPath/data/temp/${file.nameWithoutExtension}.graph").apply {
-                    writeText(ir.toString())
-                    deleteOnExit()
-                    // TODO - Сделать возможность менять в конфиге необходимость удаления после конвертирования
+            val fileName =
+                when (convertMode) {
+                    ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.graph"
+                    ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.graph"
                 }
+            val irFile = File(fileName)
+            irFile.writeText(ir.toString())
+            if (convertMode == ConvertModes.LOAD) irFile.deleteOnExit()
             return Result.Success(irFile)
         }
 
-        private fun convertIRToJSON(file: File): Result<File> {
+        private fun convertIRToJSON(file: File, convertMode: ConvertModes): Result<File> {
             val lines: List<String>
             try {
                 lines = file.readLines().map { it.trim() }.filter { it.isNotEmpty() }
@@ -121,7 +124,7 @@ class Converter {
                                 ),
                             )
                         } else if (commandResult.data.entity == CommandEntities.EDGE) {
-                            if (info["isWeight"] == "true") {
+                            if (info["isWeighted"] == "true") {
                                 edges.add(
                                     Edge(
                                         from = commandResult.data.parameters["from"]?.toIntOrNull() ?: 0,
@@ -129,7 +132,7 @@ class Converter {
                                         weight = commandResult.data.parameters["weight"]?.toIntOrNull() ?: 0,
                                     ),
                                 )
-                            } else if (info["isWeight"] == "false") {
+                            } else if (info["isWeighted"] == "false") {
                                 edges.add(
                                     Edge(
                                         from = commandResult.data.parameters["from"]?.toIntOrNull() ?: 0,
@@ -155,12 +158,15 @@ class Converter {
                     ),
                 )
             val json = Json { prettyPrint = true }
-            val jsonFile =
-                File("$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json").apply {
-                    writeText(json.encodeToString(graphData))
-                    deleteOnExit()
-                    // TODO - Сделать возможность менять в конфиге необходимость удаления после конвертирования
+            val fileName =
+                when (convertMode) {
+                    ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.json"
+                    ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json"
                 }
+            file.deleteOnExit()
+            val jsonFile = File(fileName)
+            jsonFile.writeText(json.encodeToString(graphData))
+            if (convertMode == ConvertModes.LOAD) { jsonFile.deleteOnExit() }
             return Result.Success(jsonFile)
         }
     }
