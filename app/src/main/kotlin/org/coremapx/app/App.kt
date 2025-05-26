@@ -37,10 +37,10 @@ val titleBarHeight = (config.getIntValue("titleBarHeight") ?: 0).dp
 
 @Composable
 @Preview
-fun App() {
+fun <E: Comparable<E>, V: Comparable<V>> App(viewModel: MainScreenViewModel<E, V>) {
     logger.info("Rendering App composable")
     MaterialTheme {
-        MainScreen(MainScreenViewModel<Int, Int>())
+        MainScreen(viewModel)
     }
 }
 
@@ -49,6 +49,7 @@ fun main() =
         logger.info("Started CoreMapX app")
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
         val startWindowPlacement = config.getStringValue("startWindowPlacement") ?: ""
+        val viewModel = MainScreenViewModel<Int, Int>()
         when (startWindowPlacement) {
             "FullScreen" -> windowState.placement = WindowPlacement.Fullscreen
             "Floating" -> windowState.placement = WindowPlacement.Floating
@@ -73,7 +74,7 @@ fun main() =
                         .padding(top = titleBarHeight)
                 ) {
                     Box(modifier = Modifier.weight(1f)) {
-                        App()
+                        App(viewModel)
                     }
                 }
 
@@ -86,6 +87,7 @@ fun main() =
                             windowState.placement = if (isMaximized) WindowPlacement.Maximized else WindowPlacement.Floating
                         },
                         isMaximized = isMaximized,
+                        viewModel = viewModel
                     )
                 }
             }
