@@ -12,7 +12,7 @@ class Parser {
 
         fun parse(file: File): Result<GraphIR> {
             var fileIR: File
-            val converterResult = Converter.convert(file = file, to = FileExtensions.GRAPH)
+            val converterResult = Converter.convert(file = file, to = FileExtensions.GRAPH, ConvertModes.LOAD)
             when (converterResult) {
                 is Result.Error -> return converterResult
                 is Result.Success -> fileIR = converterResult.data
