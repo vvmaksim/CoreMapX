@@ -25,6 +25,14 @@ sealed class FileErrors(
         description = "Error saving the file. Ex: $exceptionMessage",
     )
 
+    data class InvalidParameter(
+        val parameter: String,
+        val errorDescription: String
+    ) : FileErrors(
+        type = "InvalidParameter",
+        description = "Invalid parameter $parameter. $errorDescription",
+    )
+
     data class NotFoundInfoMarker(
         val message: String = "The information marker `Info:` was not found",
     ) : FileErrors(
