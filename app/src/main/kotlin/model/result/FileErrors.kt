@@ -18,6 +18,13 @@ sealed class FileErrors(
             description = "Error reading the file. Ex: $exceptionMessage",
         )
 
+    data class ErrorSavingFile(
+        val exceptionMessage: String,
+    ) : FileErrors(
+        type = "ErrorSavingFile",
+        description = "Error saving the file. Ex: $exceptionMessage",
+    )
+
     data class NotFoundInfoMarker(
         val message: String = "The information marker `Info:` was not found",
     ) : FileErrors(
