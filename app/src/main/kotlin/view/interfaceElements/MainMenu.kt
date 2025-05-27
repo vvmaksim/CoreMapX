@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
+import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.OpenGraphErrors
 import view.interfaceElements.dialogs.SaveGraphAs
 import view.interfaceElements.dialogs.UserNotification
@@ -26,7 +27,6 @@ import java.awt.FileDialog
 fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     isMenuVisible: Boolean,
     onMenuVisibilityChange: (Boolean) -> Unit,
-    onNewGraphClick: () -> Unit,
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier,
 ) {
@@ -43,6 +43,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showSaveGraphAsDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
+    var showNewGraphDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var saveError by remember { mutableStateOf("") }
 
@@ -68,7 +69,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally),
                 )
 
-                TextButton(modifier = buttonModifier, onClick = onNewGraphClick, colors = buttonColors) {
+                TextButton(
+                    modifier = buttonModifier,
+                    onClick = { showNewGraphDialog = true },
+                    colors = buttonColors
+                ) {
                     Text(text = "New Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
                 TextButton(
@@ -187,6 +192,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             onDismiss = { showUserNotification = false },
             title = "Save Error",
             message = saveError,
+        )
+    }
+
+    if (showNewGraphDialog) {
+        NewGraph(
+            onDismiss = { showNewGraphDialog = false },
+            viewModel = viewModel,
         )
     }
 }
