@@ -26,37 +26,38 @@ import kotlin.text.ifEmpty
 fun SavePathButton(
     selectedPath: String = System.getProperty("user.home"),
     onPathSelected: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var currentPath by remember { mutableStateOf(selectedPath) }
     val mainColor = config.getColor("mainMenuColor")
     val additionalColor = config.getColor("mainMenuButtonTextColor")
 
     Box(
-        modifier = modifier
-            .border(
-                border = BorderStroke(1.dp, mainColor),
-                shape = RoundedCornerShape(8.dp)
-            )
-            .background(Color.White, shape = RoundedCornerShape(8.dp))
-            .clickable {
-                val dialog = FileDialog(null as Frame?, "Select Directory", FileDialog.LOAD)
-                dialog.directory = currentPath.ifEmpty { System.getProperty("user.home") }
-                dialog.isVisible = true
-                val dir = dialog.directory
-                if (dir != null) {
-                    currentPath = dir
-                    onPathSelected(dir)
-                }
-            }
+        modifier =
+            modifier
+                .border(
+                    border = BorderStroke(1.dp, mainColor),
+                    shape = RoundedCornerShape(8.dp),
+                ).background(Color.White, shape = RoundedCornerShape(8.dp))
+                .clickable {
+                    val dialog = FileDialog(null as Frame?, "Select Directory", FileDialog.LOAD)
+                    dialog.directory = currentPath.ifEmpty { System.getProperty("user.home") }
+                    dialog.isVisible = true
+                    val dir = dialog.directory
+                    if (dir != null) {
+                        currentPath = dir
+                        onPathSelected(dir)
+                    }
+                },
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .padding(horizontal = 16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(horizontal = 16.dp),
         ) {
             Text(
                 text = currentPath.ifEmpty { "Select directory" },
@@ -64,13 +65,13 @@ fun SavePathButton(
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f),
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
             )
             Icon(
                 imageVector = Icons.Filled.Folder,
                 contentDescription = "Open Directory Dialog",
                 modifier = Modifier.size(24.dp),
-                tint = additionalColor
+                tint = additionalColor,
             )
         }
     }

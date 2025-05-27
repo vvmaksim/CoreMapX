@@ -33,49 +33,51 @@ fun DropdownSelectButton(
     val borderColor = Color(0xFFE0E0E0)
 
     Box(
-        modifier = modifier
-            .wrapContentSize()
-            .border(
-                border = BorderStroke(1.dp, borderColor),
-                shape = RoundedCornerShape(8.dp)
-            )
-            .background(
-                Color.White,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .clickable { expanded = !expanded }
+        modifier =
+            modifier
+                .wrapContentSize()
+                .border(
+                    border = BorderStroke(1.dp, borderColor),
+                    shape = RoundedCornerShape(8.dp),
+                ).background(
+                    Color.White,
+                    shape = RoundedCornerShape(8.dp),
+                ).clickable { expanded = !expanded },
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-                .padding(horizontal = 16.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = selectedItem,
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Medium
+                fontWeight = FontWeight.Medium,
             )
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
                 contentDescription = "Dropdown Arrow",
-                modifier = Modifier
-                    .size(24.dp)
-                    .rotate(rotation),
-                tint = additionalColor
+                modifier =
+                    Modifier
+                        .size(24.dp)
+                        .rotate(rotation),
+                tint = additionalColor,
             )
         }
 
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier
-                .border(
-                    border = BorderStroke(1.dp, borderColor),
-                    shape = RoundedCornerShape(8.dp)
-                )
+            modifier =
+                Modifier
+                    .border(
+                        border = BorderStroke(1.dp, borderColor),
+                        shape = RoundedCornerShape(8.dp),
+                    ),
         ) {
             items.forEach { item ->
                 DropdownMenuItem(
@@ -87,7 +89,7 @@ fun DropdownSelectButton(
                     Text(
                         text = item,
                         fontSize = 16.sp,
-                        color = if (item == selectedItem) additionalColor else Color.Black
+                        color = if (item == selectedItem) additionalColor else Color.Black,
                     )
                 }
             }

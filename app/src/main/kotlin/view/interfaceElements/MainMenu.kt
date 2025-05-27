@@ -90,7 +90,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     Text(
                         text = "Save Graph",
                         color = if (viewModel.isGraphActive) mainMenuButtonTextColor else Color.Gray,
-                        fontSize = buttonFontSize
+                        fontSize = buttonFontSize,
                     )
                 }
                 TextButton(
@@ -102,7 +102,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     Text(
                         text = "Save Graph As",
                         color = if (viewModel.isGraphActive) mainMenuButtonTextColor else Color.Gray,
-                        fontSize = buttonFontSize
+                        fontSize = buttonFontSize,
                     )
                 }
                 TextButton(

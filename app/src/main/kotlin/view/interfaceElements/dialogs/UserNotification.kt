@@ -29,40 +29,43 @@ fun UserNotification(
 ) {
     Dialog(onDismissRequest = onDismiss) {
         Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .shadow(8.dp, RoundedCornerShape(16.dp)),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .shadow(8.dp, RoundedCornerShape(16.dp)),
             shape = RoundedCornerShape(16.dp),
-            color = Color(0xFFF5F5F5)
+            color = Color(0xFFF5F5F5),
         ) {
             Column(
-                modifier = Modifier
-                    .padding(24.dp)
-                    .fillMaxWidth(),
+                modifier =
+                    Modifier
+                        .padding(24.dp)
+                        .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(20.dp)
+                verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Text(
                     text = title,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color(0xFF333333)
+                    color = Color(0xFF333333),
                 )
 
                 Text(
                     text = message,
                     fontSize = 20.sp,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
 
                 Button(
                     onClick = onDismiss,
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = Color(0xFFE0E0E0),
-                        contentColor = Color(0xFF333333)
-                    ),
-                    shape = RoundedCornerShape(8.dp)
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            backgroundColor = Color(0xFFE0E0E0),
+                            contentColor = Color(0xFF333333),
+                        ),
+                    shape = RoundedCornerShape(8.dp),
                 ) {
                     Text("Ok", fontSize = 16.sp)
                 }

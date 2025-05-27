@@ -134,7 +134,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
         graphAuthor = graphIR.author
         graphPath = file.absolutePath
         graphFormat =
-            when(file.extension) {
+            when (file.extension) {
                 "graph" -> FileExtensions.GRAPH
                 "json" -> FileExtensions.JSON
                 else -> FileExtensions.GRAPH
@@ -146,7 +146,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     fun saveGraph(
         fileName: String = graphName,
         directoryPath: String? = graphPath,
-        fileFormat: FileExtensions? = graphFormat
+        fileFormat: FileExtensions? = graphFormat,
     ): Result<String> {
         try {
             if (directoryPath == null) return Result.Error(FileErrors.InvalidParameter("directoryPath", "This parameter cannot be null"))
@@ -169,26 +169,27 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                     else -> false
                 }
 
-            val ir = StringBuilder().apply {
-                append("Info:\n")
-                append("name=$graphName\n")
-                append("author=$graphAuthor\n")
-                append("isDirected=$isDirected\n")
-                append("isWeighted=$isWeighted\n")
-                append("\nGraph:\n")
-                graph.value?.vertices?.forEach { _, vertex ->
-                    append("add vertex ${vertex.id} ${vertex.label}\n")
-                }
-                if (isWeighted) {
-                    graph.value?.edges?.forEach { _, edge ->
-                        append("add edge ${edge.from.id} ${edge.to.id} ${(edge as WeightedEdge).weight}\n")
+            val ir =
+                StringBuilder().apply {
+                    append("Info:\n")
+                    append("name=$graphName\n")
+                    append("author=$graphAuthor\n")
+                    append("isDirected=$isDirected\n")
+                    append("isWeighted=$isWeighted\n")
+                    append("\nGraph:\n")
+                    graph.value?.vertices?.forEach { _, vertex ->
+                        append("add vertex ${vertex.id} ${vertex.label}\n")
                     }
-                } else {
-                    graph.value?.edges?.forEach { _, edge ->
-                        append("add edge ${edge.from.id} ${edge.to.id}\n")
+                    if (isWeighted) {
+                        graph.value?.edges?.forEach { _, edge ->
+                            append("add edge ${edge.from.id} ${edge.to.id} ${(edge as WeightedEdge).weight}\n")
+                        }
+                    } else {
+                        graph.value?.edges?.forEach { _, edge ->
+                            append("add edge ${edge.from.id} ${edge.to.id}\n")
+                        }
                     }
                 }
-            }
 
             when (fileFormat) {
                 FileExtensions.GRAPH -> {
@@ -206,7 +207,11 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                         is Result.Success -> {
                             val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.json"
                             val renameToResult = convertResult.data.renameTo(File(path))
-                            if (!renameToResult) return Result.Error(FileErrors.ConverterError("The file could not be moved from the temp directory"))
+                            if (!renameToResult) {
+                                return Result.Error(
+                                    FileErrors.ConverterError("The file could not be moved from the temp directory"),
+                                )
+                            }
                         }
                     }
                     return Result.Success("File was saved as JSON")

@@ -34,21 +34,30 @@ class Converter {
             }
         }
 
-        private fun convertAnyToIR(file: File, convertMode: ConvertModes): Result<File> =
+        private fun convertAnyToIR(
+            file: File,
+            convertMode: ConvertModes,
+        ): Result<File> =
             when (file.extension) {
                 "graph" -> Result.Success(file)
                 "json" -> convertJSONToIR(file, convertMode)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
 
-        private fun convertAnyToJSON(file: File, convertMode: ConvertModes): Result<File> =
+        private fun convertAnyToJSON(
+            file: File,
+            convertMode: ConvertModes,
+        ): Result<File> =
             when (file.extension) {
                 "graph" -> convertIRToJSON(file, convertMode)
                 "json" -> Result.Success(file)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
-        }
+            }
 
-        private fun convertJSONToIR(file: File, convertMode: ConvertModes): Result<File> {
+        private fun convertJSONToIR(
+            file: File,
+            convertMode: ConvertModes,
+        ): Result<File> {
             val json = Json { ignoreUnknownKeys = true }
             val graphData: GraphData
             try {
@@ -89,7 +98,10 @@ class Converter {
             return Result.Success(irFile)
         }
 
-        private fun convertIRToJSON(file: File, convertMode: ConvertModes): Result<File> {
+        private fun convertIRToJSON(
+            file: File,
+            convertMode: ConvertModes,
+        ): Result<File> {
             val lines: List<String>
             try {
                 lines = file.readLines().map { it.trim() }.filter { it.isNotEmpty() }
@@ -166,7 +178,9 @@ class Converter {
             file.deleteOnExit()
             val jsonFile = File(fileName)
             jsonFile.writeText(json.encodeToString(graphData))
-            if (convertMode == ConvertModes.LOAD) { jsonFile.deleteOnExit() }
+            if (convertMode == ConvertModes.LOAD) {
+                jsonFile.deleteOnExit()
+            }
             return Result.Success(jsonFile)
         }
     }

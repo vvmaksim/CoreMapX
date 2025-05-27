@@ -37,7 +37,7 @@ val titleBarHeight = (config.getIntValue("titleBarHeight") ?: 0).dp
 
 @Composable
 @Preview
-fun <E: Comparable<E>, V: Comparable<V>> App(viewModel: MainScreenViewModel<E, V>) {
+fun <E : Comparable<E>, V : Comparable<V>> App(viewModel: MainScreenViewModel<E, V>) {
     logger.info("Rendering App composable")
     MaterialTheme {
         MainScreen(viewModel)
@@ -69,9 +69,10 @@ fun main() =
 
             Box(modifier = Modifier.fillMaxSize()) {
                 Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = titleBarHeight)
+                    modifier =
+                        Modifier
+                            .fillMaxSize()
+                            .padding(top = titleBarHeight),
                 ) {
                     Box(modifier = Modifier.weight(1f)) {
                         App(viewModel)
@@ -87,7 +88,7 @@ fun main() =
                             windowState.placement = if (isMaximized) WindowPlacement.Maximized else WindowPlacement.Floating
                         },
                         isMaximized = isMaximized,
-                        viewModel = viewModel
+                        viewModel = viewModel,
                     )
                 }
             }

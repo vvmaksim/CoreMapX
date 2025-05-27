@@ -34,7 +34,7 @@ import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
 
 @Composable
-fun <E: Comparable<E>, V: Comparable<V>>TitleBar(
+fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     onClose: () -> Unit,
     onMinimize: () -> Unit,
     onMaximize: () -> Unit,
@@ -91,26 +91,28 @@ fun <E: Comparable<E>, V: Comparable<V>>TitleBar(
                     }
                     DropdownMenuItem(
                         onClick = {
-                        if (viewModel.graphPath == null) {
-                            showSaveAsDialog = true
-                        } else {
-                            val saveResult = viewModel.saveGraph()
-                            if (saveResult is Result.Error) {
-                                saveError = "Error: ${saveResult.error.type}.${saveResult.error.description}"
-                                showUserNotification = true
+                            if (viewModel.graphPath == null) {
+                                showSaveAsDialog = true
+                            } else {
+                                val saveResult = viewModel.saveGraph()
+                                if (saveResult is Result.Error) {
+                                    saveError = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                    showUserNotification = true
+                                }
                             }
-                        }
-                        showFileMenu = false
-                    },
-                        enabled = viewModel.isGraphActive
+                            showFileMenu = false
+                        },
+                        enabled = viewModel.isGraphActive,
                     ) {
                         Text("Save")
                     }
-                    DropdownMenuItem(onClick = { 
-                        showFileMenu = false
-                        showSaveAsDialog = true
-                    },
-                        enabled = viewModel.isGraphActive) {
+                    DropdownMenuItem(
+                        onClick = {
+                            showFileMenu = false
+                            showSaveAsDialog = true
+                        },
+                        enabled = viewModel.isGraphActive,
+                    ) {
                         Text("Save as..")
                     }
                 }

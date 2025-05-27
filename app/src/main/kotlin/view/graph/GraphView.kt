@@ -42,13 +42,12 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
                             }
                         }
                     }
-                }
-                .pointerInput(Unit) {
+                }.pointerInput(Unit) {
                     detectDragGestures(
                         onDrag = { change, dragAmount ->
                             change.consume()
                             onPan(dragAmount.x * canvasDragRatio, dragAmount.y * canvasDragRatio)
-                        }
+                        },
                     )
                 },
     ) {
@@ -56,12 +55,12 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .offset(offsetX.dp,offsetY.dp)
+                    .offset(offsetX.dp, offsetY.dp)
                     .graphicsLayer(
                         scaleX = scale,
                         scaleY = scale,
                         transformOrigin = TransformOrigin(0.5f, 0.5f),
-                    )
+                    ),
         ) {
             viewModel.vertices.forEach { v ->
                 VertexView(v, Modifier)
