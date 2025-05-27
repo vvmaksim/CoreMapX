@@ -3,16 +3,21 @@ package viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.commands.classes.Commands
+import model.fileHandler.ConvertModes
+import model.fileHandler.Converter
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph
 import model.graph.classes.UndirectedWeightedGraph
+import model.graph.dataClasses.WeightedEdge
 import model.graph.interfaces.Graph
 import model.ir.GraphIR
+import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.config
+import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategies.RandomStrategy
 import viewmodel.visualizationStrategies.VisualizationStrategy
@@ -136,5 +141,79 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
             }
         updateGraph(newGraph)
         return Result.Success(warnings)
+    }
+
+    fun saveGraph(
+        fileName: String = graphName,
+        directoryPath: String? = graphPath,
+        fileFormat: FileExtensions? = graphFormat
+    ): Result<String> {
+        try {
+            if (directoryPath == null) return Result.Error(FileErrors.InvalidParameter("directoryPath", "This parameter cannot be null"))
+            if (fileFormat == null) return Result.Error(FileErrors.InvalidParameter("fileFormat", "This parameter cannot be null"))
+
+            val isDirected =
+                when (graph.value) {
+                    is UndirectedWeightedGraph<V> -> false
+                    is UndirectedUnweightedGraph<V> -> false
+                    is DirectedWeightedGraph<V> -> true
+                    is DirectedUnweightedGraph<V> -> true
+                    else -> false
+                }
+            val isWeighted =
+                when (graph.value) {
+                    is UndirectedWeightedGraph<V> -> true
+                    is UndirectedUnweightedGraph<V> -> false
+                    is DirectedWeightedGraph<V> -> true
+                    is DirectedUnweightedGraph<V> -> false
+                    else -> false
+                }
+
+            val ir = StringBuilder().apply {
+                append("Info:\n")
+                append("name=$graphName\n")
+                append("author=$graphAuthor\n")
+                append("isDirected=$isDirected\n")
+                append("isWeighted=$isWeighted\n")
+                append("\nGraph:\n")
+                graph.value?.vertices?.forEach { _, vertex ->
+                    append("add vertex ${vertex.id} ${vertex.label}\n")
+                }
+                if (isWeighted) {
+                    graph.value?.edges?.forEach { _, edge ->
+                        append("add edge ${edge.from.id} ${edge.to.id} ${(edge as WeightedEdge).weight}\n")
+                    }
+                } else {
+                    graph.value?.edges?.forEach { _, edge ->
+                        append("add edge ${edge.from.id} ${edge.to.id}\n")
+                    }
+                }
+            }
+
+            when (fileFormat) {
+                FileExtensions.GRAPH -> {
+                    val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.graph"
+                    val fileIR = File(path)
+                    fileIR.writeText(ir.toString())
+                    return Result.Success("File was saved as GRAPH")
+                }
+                FileExtensions.JSON -> {
+                    val tempFileIR = File("$baseUserDirPath/data/temp/$fileName.graph")
+                    tempFileIR.writeText(ir.toString())
+                    val convertResult = Converter.convert(tempFileIR, FileExtensions.JSON, ConvertModes.SAVE)
+                    when (convertResult) {
+                        is Result.Error -> return convertResult
+                        is Result.Success -> {
+                            val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.json"
+                            val renameToResult = convertResult.data.renameTo(File(path))
+                            if (!renameToResult) return Result.Error(FileErrors.ConverterError("The file could not be moved from the temp directory"))
+                        }
+                    }
+                    return Result.Success("File was saved as JSON")
+                }
+            }
+        } catch (ex: Exception) {
+            return Result.Error(FileErrors.ErrorSavingFile(ex.toString()))
+        }
     }
 }
