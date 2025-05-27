@@ -16,6 +16,8 @@ import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
 import view.interfaceElements.dialogs.OpenGraphErrors
+import view.interfaceElements.dialogs.SaveGraphAs
+import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
 import java.awt.FileDialog
 
@@ -38,7 +40,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     val logoFontSize = (config.getIntValue("mainMenuLogoFontSize") ?: 0).sp
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
+    var showSaveGraphAsDialog by remember { mutableStateOf(false) }
+    var showUserNotification by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
+    var saveError by remember { mutableStateOf("") }
 
     Box(
         modifier = modifier,
@@ -65,8 +70,28 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 TextButton(modifier = buttonModifier, onClick = onNewGraphClick, colors = buttonColors) {
                     Text(text = "New Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
-                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
+                TextButton(
+                    modifier = buttonModifier,
+                    onClick = {
+                        if (viewModel.graphPath == null) {
+                            showSaveGraphAsDialog = true
+                        } else {
+                            val saveResult = viewModel.saveGraph()
+                            if (saveResult is Result.Error) {
+                                saveError = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                showUserNotification = true
+                            }
+                        }
+                    },
+                    colors = buttonColors) {
                     Text(text = "Save Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
+                }
+                TextButton(
+                    modifier = buttonModifier,
+                    onClick = { showSaveGraphAsDialog = true },
+                    colors = buttonColors
+                ) {
+                    Text(text = "Save Graph As", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
                 TextButton(
                     modifier = buttonModifier,
@@ -135,6 +160,21 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         OpenGraphErrors(
             onDismiss = { showOpenGraphErrorsDialog = false },
             warnings = warnings,
+        )
+    }
+
+    if (showSaveGraphAsDialog) {
+        SaveGraphAs(
+            onDismiss = { showSaveGraphAsDialog = false },
+            viewModel = viewModel,
+        )
+    }
+
+    if (showUserNotification) {
+        UserNotification(
+            onDismiss = { showUserNotification = false },
+            title = "Save Error",
+            message = saveError,
         )
     }
 }

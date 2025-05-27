@@ -27,14 +27,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import model.result.Result
 import org.coremapx.app.config
+import view.interfaceElements.dialogs.SaveGraphAs
+import view.interfaceElements.dialogs.UserNotification
+import viewmodel.MainScreenViewModel
 
 @Composable
-fun TitleBar(
+fun <E: Comparable<E>, V: Comparable<V>>TitleBar(
     onClose: () -> Unit,
     onMinimize: () -> Unit,
     onMaximize: () -> Unit,
     isMaximized: Boolean,
+    viewModel: MainScreenViewModel<E, V>,
 ) {
     val titleBarColor = config.getColor("titleBarColor")
     val titleBarIconTintColor = config.getColor("titleBarIconTintColor")
@@ -43,6 +48,10 @@ fun TitleBar(
 
     var showMenuButtons by remember { mutableStateOf(false) }
     var showFileMenu by remember { mutableStateOf(false) }
+    var showSaveAsDialog by remember { mutableStateOf(false) }
+
+    var showUserNotification by remember { mutableStateOf(false) }
+    var saveError by remember { mutableStateOf("") }
 
     Row(
         modifier =
@@ -80,10 +89,24 @@ fun TitleBar(
                     DropdownMenuItem(onClick = { showFileMenu = false }) {
                         Text("Open")
                     }
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(onClick = {
+                        if (viewModel.graphPath == null) {
+                            showSaveAsDialog = true
+                        } else {
+                            val saveResult = viewModel.saveGraph()
+                            if (saveResult is Result.Error) {
+                                saveError = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                showUserNotification = true
+                            }
+                        }
+                        showFileMenu = false
+                    }) {
                         Text("Save")
                     }
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(onClick = { 
+                        showFileMenu = false
+                        showSaveAsDialog = true
+                    }) {
                         Text("Save as..")
                     }
                 }
@@ -130,5 +153,20 @@ fun TitleBar(
                 )
             }
         }
+    }
+
+    if (showSaveAsDialog) {
+        SaveGraphAs(
+            onDismiss = { showSaveAsDialog = false },
+            viewModel = viewModel,
+        )
+    }
+
+    if (showUserNotification) {
+        UserNotification(
+            onDismiss = { showUserNotification = false },
+            title = "Save Error",
+            message = saveError,
+        )
     }
 }
