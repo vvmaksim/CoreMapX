@@ -89,7 +89,8 @@ fun <E: Comparable<E>, V: Comparable<V>>TitleBar(
                     DropdownMenuItem(onClick = { showFileMenu = false }) {
                         Text("Open")
                     }
-                    DropdownMenuItem(onClick = {
+                    DropdownMenuItem(
+                        onClick = {
                         if (viewModel.graphPath == null) {
                             showSaveAsDialog = true
                         } else {
@@ -100,13 +101,16 @@ fun <E: Comparable<E>, V: Comparable<V>>TitleBar(
                             }
                         }
                         showFileMenu = false
-                    }) {
+                    },
+                        enabled = viewModel.isGraphActive
+                    ) {
                         Text("Save")
                     }
                     DropdownMenuItem(onClick = { 
                         showFileMenu = false
                         showSaveAsDialog = true
-                    }) {
+                    },
+                        enabled = viewModel.isGraphActive) {
                         Text("Save as..")
                     }
                 }

@@ -10,6 +10,7 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.result.Result
@@ -83,15 +84,26 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                             }
                         }
                     },
-                    colors = buttonColors) {
-                    Text(text = "Save Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
+                    colors = buttonColors,
+                    enabled = viewModel.isGraphActive,
+                ) {
+                    Text(
+                        text = "Save Graph",
+                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else Color.Gray,
+                        fontSize = buttonFontSize
+                    )
                 }
                 TextButton(
                     modifier = buttonModifier,
                     onClick = { showSaveGraphAsDialog = true },
-                    colors = buttonColors
+                    colors = buttonColors,
+                    enabled = viewModel.isGraphActive,
                 ) {
-                    Text(text = "Save Graph As", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
+                    Text(
+                        text = "Save Graph As",
+                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else Color.Gray,
+                        fontSize = buttonFontSize
+                    )
                 }
                 TextButton(
                     modifier = buttonModifier,
