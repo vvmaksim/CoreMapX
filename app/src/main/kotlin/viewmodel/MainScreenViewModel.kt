@@ -3,6 +3,7 @@ package viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.commands.classes.Commands
+import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
@@ -40,6 +41,14 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
         get() = _graph
 
     var graphViewModel: GraphViewModel<E, V>? = null
+
+    var graphName: String = "None"
+
+    var graphAuthor: String = "None"
+
+    var graphPath: String? = null
+
+    var graphFormat: FileExtensions? = null
 
     private var _offsetX = mutableStateOf(0f)
     val offsetX: State<Float>
@@ -116,6 +125,15 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
             val executeResult = Commands((commandResult as Result.Success).data, newGraph, mutableListOf()).execute()
             if (executeResult is Result.Error) return executeResult
         }
+        graphName = graphIR.name
+        graphAuthor = graphIR.author
+        graphPath = file.absolutePath
+        graphFormat =
+            when(file.extension) {
+                "graph" -> FileExtensions.GRAPH
+                "json" -> FileExtensions.JSON
+                else -> FileExtensions.GRAPH
+            }
         updateGraph(newGraph)
         return Result.Success(warnings)
     }

@@ -48,7 +48,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewM
     if (showNewGraphDialog) {
         NewGraph(
             onDismiss = { showNewGraphDialog = false },
-            onCreate = { isDirected, isWeighted ->
+            onCreate = { isDirected, isWeighted, graphName ->
                 val newGraph: Graph<E, V> =
                     when {
                         isDirected && isWeighted -> DirectedWeightedGraph<V>()
@@ -56,6 +56,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewM
                         !isDirected && isWeighted -> UndirectedWeightedGraph<V>()
                         else -> UndirectedUnweightedGraph<V>()
                     } as Graph<E, V>
+                viewModel.graphName = graphName
+                viewModel.graphAuthor = "None"
+                viewModel.graphPath = null
+                viewModel.graphFormat = null
                 viewModel.updateGraph(newGraph)
                 showNewGraphDialog = false
             },

@@ -13,7 +13,7 @@ import androidx.compose.ui.window.Dialog
 @Composable
 fun NewGraph(
     onDismiss: () -> Unit,
-    onCreate: (isDirected: Boolean, isWeighted: Boolean) -> Unit,
+    onCreate: (isDirected: Boolean, isWeighted: Boolean, graphName: String) -> Unit,
 ) {
     var newGraphName by remember { mutableStateOf("") }
     var isWeightedGraph by remember { mutableStateOf(false) }
@@ -71,7 +71,7 @@ fun NewGraph(
                             .padding(top = 16.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
-                    Button(onClick = { onCreate(isDirectedGraph, isWeightedGraph) }) {
+                    Button(onClick = { onCreate(isDirectedGraph, isWeightedGraph, newGraphName) }) {
                         Text("Create")
                     }
                     Button(onClick = onDismiss) {
