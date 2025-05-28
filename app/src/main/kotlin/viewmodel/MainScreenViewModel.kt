@@ -4,9 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.commands.classes.Commands
 import model.fileHandler.ConvertModes
-import model.fileHandler.Converter
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
+import model.fileHandler.converters.Converter
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph

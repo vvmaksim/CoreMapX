@@ -1,5 +1,5 @@
-import model.fileHandler.Converter
 import model.fileHandler.FileExtensions
+import model.fileHandler.converters.Converter
 import model.result.Result
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
