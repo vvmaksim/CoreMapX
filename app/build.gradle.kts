@@ -9,6 +9,7 @@ dependencies {
     implementation(libs.logback.classic)
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.material.icons.extended)
+    implementation(libs.flatlaf)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation(project(":utilities"))
     testImplementation(kotlin("test"))
