@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import model.result.Result
 import org.coremapx.app.config
 import view.interfaceElements.dialogs.NewGraph
+import view.interfaceElements.dialogs.OpenGraphErrors
 import view.interfaceElements.dialogs.SaveGraphAs
 import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
@@ -47,11 +48,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     val titleBarHeight = (config.getIntValue("titleBarHeight") ?: 0).dp
     val titleBarIconSize = (config.getIntValue("titleBarIconSize") ?: 0).dp
 
+    var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showMenuButtons by remember { mutableStateOf(false) }
     var showFileMenu by remember { mutableStateOf(false) }
     var showSaveAsDialog by remember { mutableStateOf(false) }
     var showNewGraphDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
+    var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var saveError by remember { mutableStateOf("") }
 
     Row(
@@ -92,7 +95,17 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     ) {
                         Text("New")
                     }
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(
+                        onClick = {
+                            val loadResult = viewModel.openGraphFile()
+                            warnings = when (loadResult) {
+                                is Result.Success -> loadResult.data
+                                is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                            }
+                            if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+                            showFileMenu = false
+                        }
+                    ) {
                         Text("Open")
                     }
                     DropdownMenuItem(
@@ -165,6 +178,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 )
             }
         }
+    }
+    if (showOpenGraphErrorsDialog) {
+        OpenGraphErrors(
+            onDismiss = { showOpenGraphErrorsDialog = false },
+            warnings = warnings,
+        )
     }
 
     if (showSaveAsDialog) {
