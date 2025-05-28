@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.commands.classes.Commands
 import model.fileHandler.ConvertModes
+import model.fileHandler.FileDialogManager
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
 import model.fileHandler.converters.Converter
@@ -106,6 +107,12 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
         _graph.value = newGraph
         graphViewModel = GraphViewModel(newGraph, _showVerticesLabels)
         visualizationStrategy.place(graphLayoutWidth, graphLayoutHeight, graphViewModel?.vertices)
+    }
+
+    fun openGraphFile(): Result<List<String>> {
+        val file = FileDialogManager.showOpenFileDialog()
+            ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
+        return loadGraphFromFile(file)
     }
 
     fun loadGraphFromFile(file: File): Result<List<String>> {

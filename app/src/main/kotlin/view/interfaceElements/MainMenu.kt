@@ -15,13 +15,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.result.Result
 import org.coremapx.app.config
-import org.coremapx.app.userDirectory.UserDirectory
 import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.OpenGraphErrors
 import view.interfaceElements.dialogs.SaveGraphAs
 import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
-import java.awt.FileDialog
 
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
@@ -113,25 +111,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 TextButton(
                     modifier = buttonModifier,
                     onClick = {
-                        val fileDialog = FileDialog(java.awt.Frame(), "Select graph file", FileDialog.LOAD)
-                        fileDialog.directory = UserDirectory.baseUserDirPath + "/data/graphs"
-                        fileDialog.isVisible = true
-                        val file = fileDialog.files.firstOrNull()
-                        if (file != null) {
-                            val loadResult = viewModel.loadGraphFromFile(file)
-                            warnings =
-                                when (loadResult) {
-                                    is Result.Success -> {
-                                        loadResult.data
-                                    }
-                                    is Result.Error -> {
-                                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
-                                    }
-                                }
-                            if (warnings.isNotEmpty()) {
-                                showOpenGraphErrorsDialog = true
+                        val loadResult = viewModel.openGraphFile()
+                        warnings = when (loadResult) {
+                                is Result.Success -> loadResult.data
+                                is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
                             }
-                        }
+                        if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
                     },
                     colors = buttonColors,
                 ) {
