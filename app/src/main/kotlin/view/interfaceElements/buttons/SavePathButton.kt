@@ -17,9 +17,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import model.fileHandler.FileDialogManager
 import org.coremapx.app.config
-import java.awt.FileDialog
-import java.awt.Frame
 import kotlin.text.ifEmpty
 
 @Composable
@@ -40,14 +39,9 @@ fun SavePathButton(
                     shape = RoundedCornerShape(8.dp),
                 ).background(Color.White, shape = RoundedCornerShape(8.dp))
                 .clickable {
-                    val dialog = FileDialog(null as Frame?, "Select Directory", FileDialog.LOAD)
-                    dialog.directory = currentPath.ifEmpty { System.getProperty("user.home") }
-                    dialog.isVisible = true
-                    val dir = dialog.directory
-                    if (dir != null) {
-                        currentPath = dir
-                        onPathSelected(dir)
-                    }
+                    val dir = FileDialogManager.showSelectDirectoryDialog(directory = currentPath) ?: currentPath
+                    currentPath = dir
+                    onPathSelected(dir)
                 },
     ) {
         Row(
