@@ -74,9 +74,9 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     ) {
         val compensatedDx = dx * _scale.value
         val compensatedDy = dy * _scale.value
-
-        _offsetX.value = (_offsetX.value + compensatedDx).coerceIn(-canvasLimit, canvasLimit)
-        _offsetY.value = (_offsetY.value + compensatedDy).coerceIn(-canvasLimit, canvasLimit)
+        val scaledLimit = canvasLimit * _scale.value
+        _offsetX.value = (_offsetX.value + compensatedDx).coerceIn(-scaledLimit, scaledLimit)
+        _offsetY.value = (_offsetY.value + compensatedDy).coerceIn(-scaledLimit, scaledLimit)
     }
 
     fun zoomCanvas(delta: Float) {
