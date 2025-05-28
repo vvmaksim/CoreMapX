@@ -1,19 +1,45 @@
 package model.fileHandler
 
-import org.coremapx.app.userDirectory.UserDirectory
-import java.awt.FileDialog
+import com.formdev.flatlaf.FlatLightLaf
 import java.io.File
+import javax.swing.JFileChooser
+import javax.swing.UIManager
 
 class FileDialogManager {
     companion object {
         fun showOpenFileDialog(
             title: String = "Select graph file",
-            directory: String = UserDirectory.baseUserDirPath + "/data/graphs"
+            directory: String = System.getProperty("user.home"),
+            useDarkTheme: Boolean = false,
         ): File? {
-            val fileDialog = FileDialog(java.awt.Frame(), title, FileDialog.LOAD)
-            fileDialog.directory = directory
-            fileDialog.isVisible = true
-            return fileDialog.files.firstOrNull()
+            try {
+                if (useDarkTheme) {
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf")
+                } else {
+                    UIManager.setLookAndFeel(FlatLightLaf())
+                }
+            } catch (e: Exception) {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+            }
+
+            val fileChooser = JFileChooser().apply {
+                fileSelectionMode = JFileChooser.FILES_ONLY
+                isMultiSelectionEnabled = false
+                isFileHidingEnabled = false
+                dialogTitle = title
+                val initialDir = File(directory)
+                currentDirectory = if (initialDir.exists() && initialDir.isDirectory) {
+                    initialDir
+                } else {
+                    File(System.getProperty("user.home"))
+                }
+            }
+
+            return if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                fileChooser.selectedFile
+            } else {
+                null
+            }
         }
     }
 }
