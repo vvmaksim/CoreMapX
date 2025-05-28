@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.result.Result
 import org.coremapx.app.config
+import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.SaveGraphAs
 import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
@@ -49,7 +50,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     var showMenuButtons by remember { mutableStateOf(false) }
     var showFileMenu by remember { mutableStateOf(false) }
     var showSaveAsDialog by remember { mutableStateOf(false) }
-
+    var showNewGraphDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var saveError by remember { mutableStateOf("") }
 
@@ -83,7 +84,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     expanded = showFileMenu,
                     onDismissRequest = { showFileMenu = false },
                 ) {
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(
+                        onClick = {
+                            showFileMenu = false
+                            showNewGraphDialog = true
+                        }
+                    ) {
                         Text("New")
                     }
                     DropdownMenuItem(onClick = { showFileMenu = false }) {
@@ -173,6 +179,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
             onDismiss = { showUserNotification = false },
             title = "Save Error",
             message = saveError,
+        )
+    }
+
+    if (showNewGraphDialog) {
+        NewGraph(
+            onDismiss = { showNewGraphDialog = false },
+            viewModel = viewModel,
         )
     }
 }
