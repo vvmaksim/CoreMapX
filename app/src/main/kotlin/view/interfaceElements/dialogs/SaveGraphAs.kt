@@ -20,6 +20,7 @@ import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import view.interfaceElements.buttons.DropdownSelectButton
 import view.interfaceElements.buttons.SavePathButton
 import viewmodel.MainScreenViewModel
+import java.io.File
 
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
@@ -31,6 +32,7 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
     var selectedPath by remember { mutableStateOf("$baseUserDirPath/data/graphs") }
     var selectedFileName by remember { mutableStateOf(viewModel.graphName) }
     var showNotification by remember { mutableStateOf(false) }
+    var showError by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
     val additionalColor = config.getColor("mainMenuButtonTextColor")
     val secondAdditionalColor = Color(0xFFE0E0E0)
@@ -86,7 +88,10 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
 
                         OutlinedTextField(
                             value = selectedFileName,
-                            onValueChange = { selectedFileName = it },
+                            onValueChange = {
+                                selectedFileName = it
+                                showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
+                            },
                             modifier = Modifier.fillMaxWidth(),
                             colors =
                                 TextFieldDefaults.outlinedTextFieldColors(
@@ -107,7 +112,10 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
 
                         SavePathButton(
                             selectedPath = selectedPath,
-                            onPathSelected = { selectedPath = it },
+                            onPathSelected = {
+                                selectedPath = it
+                                showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
+                            },
                         )
 
                         Text(
@@ -118,7 +126,20 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                         DropdownSelectButton(
                             items = formats,
                             selectedItem = selectedFormat,
-                            onItemSelected = { selectedFormat = it },
+                            onItemSelected = {
+                                selectedFormat = it
+                                showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
+                            },
+                        )
+                    }
+
+                    if (showError) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "A file with this configuration already exists, and its contents will be replaced when saved",
+                            color = Color(0xFFD32F2F),
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(start = 4.dp),
                         )
                     }
 
