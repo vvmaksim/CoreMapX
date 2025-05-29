@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import model.result.Result
 import org.coremapx.app.config
 import view.interfaceElements.buttons.SlideMenuButton
+import view.interfaceElements.buttons.UserDirectoryButton
 import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.OpenGraphErrors
 import view.interfaceElements.dialogs.SaveGraphAs
@@ -141,6 +142,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     SlideMenuButton(onClick = { onMenuVisibilityChange(false) })
+                    UserDirectoryButton()
                 }
             }
         }
