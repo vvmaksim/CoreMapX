@@ -10,7 +10,6 @@ import androidx.compose.material.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.result.Result
@@ -35,10 +34,14 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     val mainMenuButtonColor = config.getColor("mainMenuButtonColor")
     val mainMenuButtonTextColor = config.getColor("mainMenuButtonTextColor")
 
-    val buttonColors = ButtonDefaults.buttonColors(backgroundColor = mainMenuButtonColor)
+    val buttonColors = ButtonDefaults.buttonColors(
+        backgroundColor = mainMenuButtonColor,
+        disabledBackgroundColor = mainMenuButtonColor
+    )
     val buttonModifier = Modifier.fillMaxWidth()
     val buttonFontSize = (config.getIntValue("mainMenuButtonsFontSize") ?: 0).sp
     val logoFontSize = (config.getIntValue("mainMenuLogoFontSize") ?: 0).sp
+    val mainMenuDisabledButtonTextColor = config.getColor("mainMenuDisabledButtonTextColor")
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showSaveGraphAsDialog by remember { mutableStateOf(false) }
@@ -94,7 +97,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 ) {
                     Text(
                         text = "Save Graph",
-                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else Color.Gray,
+                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else mainMenuDisabledButtonTextColor,
                         fontSize = buttonFontSize,
                     )
                 }
@@ -106,7 +109,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 ) {
                     Text(
                         text = "Save Graph As",
-                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else Color.Gray,
+                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else mainMenuDisabledButtonTextColor,
                         fontSize = buttonFontSize,
                     )
                 }
