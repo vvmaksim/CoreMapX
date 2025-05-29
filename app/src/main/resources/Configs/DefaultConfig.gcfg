@@ -29,6 +29,27 @@ mainMenuButtonColor=#E6E6FA
 # Text color of buttons in the main menu
 mainMenuButtonTextColor=#6200EE
 
+! Dialogs
+
+# Background color of the dialogs
+dialogBackgroundColor=#F5F5F5
+# Border color of the dialogs
+dialogBorderColor=#E0E0E0
+# Text color in the dialogs
+dialogTextColor=#000000
+# Text color for warnings in the dialogs
+dialogWarningTextColor=#D32F2F
+# Background color of the button 1 in dialogs
+backgroundColorButton1=#E0E0E0
+# Content color of the button 1 in dialogs
+contentColorButton1=#000000
+# Background color of the button 2 in dialogs
+backgroundColorButton2=#6200EE
+# Content color of the button 2 in dialogs
+contentColorButton2=#F5F5F5
+# Color of the unchecked checkbox in dialogs
+checkboxUncheckedColor=#666666
+
 ! Title Bar
 
 # Background color of the title bar

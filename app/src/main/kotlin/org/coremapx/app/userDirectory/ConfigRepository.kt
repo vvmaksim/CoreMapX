@@ -125,6 +125,7 @@ class ConfigRepository {
             checkGeneralSettings()
             checkMainScreenSettings()
             checkMainMenuSettings()
+            checkDialogSettings()
             checkTitleBarSettings()
             checkCommandFieldSettings()
             checkWorkAreaSettings()
@@ -173,6 +174,36 @@ class ConfigRepository {
         }
         require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) {
             "mainMenuButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+    }
+
+    private fun checkDialogSettings() {
+        require(validateColor(getStringValue("dialogBackgroundColor") ?: "")) {
+            "dialogBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("dialogBorderColor") ?: "")) {
+            "dialogBorderColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("dialogTextColor") ?: "")) {
+            "dialogTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("dialogWarningTextColor") ?: "")) {
+            "dialogWarningTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("backgroundColorButton1") ?: "")) {
+            "backgroundColorButton1 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("contentColorButton1") ?: "")) {
+            "contentColorButton1 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("backgroundColorButton2") ?: "")) {
+            "backgroundColorButton2 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("contentColorButton2") ?: "")) {
+            "contentColorButton2 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("checkboxUncheckedColor") ?: "")) {
+            "checkboxUncheckedColor must be color in hex format. For example `...=#FFFFFF`"
         }
     }
 
