@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.result.Result
 import org.coremapx.app.config
+import view.interfaceElements.buttons.SlideMenuButton
 import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.OpenGraphErrors
 import view.interfaceElements.dialogs.SaveGraphAs
@@ -132,8 +133,14 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     Text(text = "Settings", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
                 Spacer(Modifier.weight(1f))
-                TextButton(modifier = buttonModifier, onClick = { onMenuVisibilityChange(false) }, colors = buttonColors) {
-                    Text(text = "Slide Menu", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    SlideMenuButton(onClick = { onMenuVisibilityChange(false) })
                 }
             }
         }
@@ -147,13 +154,14 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 modifier =
                     Modifier
                         .fillMaxHeight()
-                        .padding(8.dp),
+                        .padding(16.dp),
                 verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                TextButton(onClick = { onMenuVisibilityChange(true) }, colors = buttonColors) {
-                    Text(text = "Open Menu", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
-                }
+                SlideMenuButton(
+                    onClick = { onMenuVisibilityChange(true) },
+                    isReversed = true,
+                )
             }
         }
     }
