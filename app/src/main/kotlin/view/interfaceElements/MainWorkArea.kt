@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
 import model.commands.classes.Commands
-import model.result.CommandError
+import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
@@ -27,7 +27,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 ) {
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
-    val graph = viewModel.graph
+    val graph = viewModel.graph.value
     var commandCount by remember { mutableStateOf(0) }
 
     val maxCountMessages = config.getIntValue("maxCountMessages") ?: 0
@@ -53,7 +53,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun handleCommand(command: String) {
         if (graph == null) {
-            updateOutputMessages("Error: ${CommandError.NoGraphSelected().type}.${CommandError.NoGraphSelected().description}")
+            updateOutputMessages("Error: ${CommandErrors.NoGraphSelected().type}.${CommandErrors.NoGraphSelected().description}")
             return
         }
         val commandResult = Command.create(command)
@@ -85,7 +85,9 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 viewModel = graphViewModel,
                 offsetX = viewModel.offsetX.value,
                 offsetY = viewModel.offsetY.value,
+                scale = viewModel.scale.value,
                 onPan = { dx, dy -> viewModel.moveCanvas(dx, dy) },
+                onZoom = { delta -> viewModel.zoomCanvas(delta) },
             )
         }
 

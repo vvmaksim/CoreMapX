@@ -76,7 +76,10 @@ class ConfigRepository {
         loadConfig(defaultConfigPath, defaultConfig)
     }
 
-    private fun loadConfig(path: String, config: MutableMap<String, String>) {
+    private fun loadConfig(
+        path: String,
+        config: MutableMap<String, String>,
+    ) {
         val configFile = File(path)
         val properties = Properties()
         if (configFile.exists()) {
@@ -91,7 +94,7 @@ class ConfigRepository {
 
     private fun joinTwoConfigs(
         first: MutableMap<String, String>,
-        second: MutableMap<String, String>
+        second: MutableMap<String, String>,
     ): Map<String, String> = HashMap(first).apply { putAll(second) }
 
     private fun comparisonWithDefaultConfig() {
@@ -122,6 +125,7 @@ class ConfigRepository {
             checkGeneralSettings()
             checkMainScreenSettings()
             checkMainMenuSettings()
+            checkDialogSettings()
             checkTitleBarSettings()
             checkCommandFieldSettings()
             checkWorkAreaSettings()
@@ -152,6 +156,9 @@ class ConfigRepository {
     private fun checkMainScreenSettings() {
         require((((getIntValue("mainScreenStartHeight") ?: 0) >= 720))) { "mainScreenStartHeight must be >= 720 px" }
         require((((getIntValue("mainScreenStartWidth") ?: 0) >= 1280))) { "mainScreenStartWidth must be >= 1280 px" }
+        require(getStringValue("startWindowPlacement") in listOf("FullScreen", "Floating", "Maximized")) {
+            "Supported startWindowPlacement values: FullScreen, Floating, Maximized"
+        }
     }
 
     private fun checkMainMenuSettings() {
@@ -167,6 +174,39 @@ class ConfigRepository {
         }
         require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) {
             "mainMenuButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("mainMenuDisabledButtonTextColor") ?: "")) {
+            "mainMenuDisabledButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+    }
+
+    private fun checkDialogSettings() {
+        require(validateColor(getStringValue("dialogBackgroundColor") ?: "")) {
+            "dialogBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("dialogBorderColor") ?: "")) {
+            "dialogBorderColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("dialogTextColor") ?: "")) {
+            "dialogTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("dialogWarningTextColor") ?: "")) {
+            "dialogWarningTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("backgroundColorButton1") ?: "")) {
+            "backgroundColorButton1 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("contentColorButton1") ?: "")) {
+            "contentColorButton1 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("backgroundColorButton2") ?: "")) {
+            "backgroundColorButton2 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("contentColorButton2") ?: "")) {
+            "contentColorButton2 must be color in hex format. For example `...=#FFFFFF`"
+        }
+        require(validateColor(getStringValue("checkboxUncheckedColor") ?: "")) {
+            "checkboxUncheckedColor must be color in hex format. For example `...=#FFFFFF`"
         }
     }
 
@@ -190,6 +230,8 @@ class ConfigRepository {
     }
 
     private fun checkWorkAreaSettings() {
+        require((((getIntValue("graphLayoutHeight") ?: 0) >= 2000))) { "graphLayoutHeight must be >= 2000 dp" }
+        require((((getIntValue("graphLayoutWidth") ?: 0) >= 1000))) { "graphLayoutWidth must be >= 1000 dp" }
         require((((getIntValue("vertexRadius") ?: 0) >= 1))) { "vertexRadius must be >= 1 dp" }
         require(
             validateColor(getStringValue("vertexMainColor") ?: ""),
@@ -209,8 +251,7 @@ class ConfigRepository {
         require((1 <= edgeArrowSize) && (edgeArrowSize <= 100)) { "edgeArrowSize must be >= 1, but <= 100" }
         require((((getIntValue("edgeWidth") ?: 0) >= 1))) { "edgeWidth must be >= 1 dp" }
         val canvasDragRatio = getDoubleValue("canvasDragRatio") ?: 0.0
-        require((0.01 <= canvasDragRatio) && (canvasDragRatio <= 1)) { "canvasDragRatio must be >= 0.01, but <= 1" }
-        require((((getIntValue("canvasDragSize") ?: 0) >= 10000))) { "canvasDragSize must be >= 10000 px" }
+        require((0.1 <= canvasDragRatio) && (canvasDragRatio <= 10)) { "canvasDragRatio must be >= 0.1, but <= 10" }
         require((((getIntValue("canvasLimit") ?: 0) >= 2000))) { "canvasLimit must be >= 2000 px" }
         require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) {
             "canvasBackgroundColor must be color in hex format. For example `...=#FFFFFF`"

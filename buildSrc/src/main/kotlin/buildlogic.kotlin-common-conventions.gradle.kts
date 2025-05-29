@@ -46,7 +46,7 @@ tasks.named<JacocoReport>("jacocoTestReport") {
         csv.required = false
         html.required = true
 
-        html.outputLocation = file("$buildDir/reports/jacoco/test/html")
+        html.outputLocation = file("${layout.buildDirectory}/reports/jacoco/test/html")
     }
 }
 

@@ -1,4 +1,4 @@
-package model.graphs.dataClasses
+package model.graph.dataClasses
 
 data class Vertex<V : Comparable<V>>(
     val id: V,

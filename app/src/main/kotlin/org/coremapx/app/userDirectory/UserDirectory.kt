@@ -10,7 +10,7 @@ import java.nio.file.StandardCopyOption
 private val logger = KotlinLogging.logger {}
 
 object UserDirectory {
-    private val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
+    val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
     private val defaultConfigPath = "app/src/main/resources/Configs/DefaultConfig.gcfg"
     private val directories =
         listOf(
@@ -18,6 +18,7 @@ object UserDirectory {
             "$baseUserDirPath/config",
             "$baseUserDirPath/data",
             "$baseUserDirPath/data/temp",
+            "$baseUserDirPath/data/graphs",
         )
 
     fun init() {

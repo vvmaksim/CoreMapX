@@ -50,3 +50,4 @@ Main.kt
 
 # Any directory
 logs/
+app/property 'buildDir'

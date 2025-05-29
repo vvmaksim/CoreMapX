@@ -12,6 +12,8 @@ language=en
 mainScreenStartHeight=720
 # The initial width of the app. Min=1280 (px)
 mainScreenStartWidth=1280
+# The start window placement. Supported values: FullScreen, Floating, Maximized
+startWindowPlacement=Maximized
 
 
 ! Main Menu
@@ -26,6 +28,29 @@ mainMenuTextColor=#000000
 mainMenuButtonColor=#E6E6FA
 # Text color of buttons in the main menu
 mainMenuButtonTextColor=#6200EE
+# Text color of disabled buttons in the main menu
+mainMenuDisabledButtonTextColor=#656565
+
+! Dialogs
+
+# Background color of the dialogs
+dialogBackgroundColor=#F5F5F5
+# Border color of the dialogs
+dialogBorderColor=#E0E0E0
+# Text color in the dialogs
+dialogTextColor=#000000
+# Text color for warnings in the dialogs
+dialogWarningTextColor=#D32F2F
+# Background color of the button 1 in dialogs
+backgroundColorButton1=#E0E0E0
+# Content color of the button 1 in dialogs
+contentColorButton1=#000000
+# Background color of the button 2 in dialogs
+backgroundColorButton2=#6200EE
+# Content color of the button 2 in dialogs
+contentColorButton2=#F5F5F5
+# Color of the unchecked checkbox in dialogs
+checkboxUncheckedColor=#666666
 
 ! Title Bar
 
@@ -52,6 +77,10 @@ commandFieldWidth=666
 
 ! Work Area
 
+# The graph layout height. Min=2000 (px)
+graphLayoutHeight=2000
+# The graph layout width. Min=1000 (px)
+graphLayoutWidth=2000
 # Radius of vertices. Min=1 (dp)
 vertexRadius=20
 # Default color of vertices
@@ -70,10 +99,8 @@ edgeLabelSize=14
 edgeArrowSize=10
 # Width of edges. Min=1 (dp)
 edgeWidth=1
-# Ratio for canvas dragging. Min=0.01 Max=1 (float)
-canvasDragRatio=0.01
-# Size of the draggable canvas area. Min=10000 (px)
-canvasDragSize=10000
+# Ratio for canvas dragging. Min=0.1 Max=10 (float)
+canvasDragRatio=1
 # Maximum canvas size. Min=2000 (px)
 canvasLimit=2000
 # Background color of the work area

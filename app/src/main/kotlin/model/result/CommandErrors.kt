@@ -1,40 +1,40 @@
 package model.result
 
-sealed class CommandError(
+sealed class CommandErrors(
     override val type: String,
     override val description: String? = null,
 ) : Error {
     data class EmptyCommand(
         val message: String = "Command cannot be empty",
-    ) : CommandError(
+    ) : CommandErrors(
             type = "EmptyCommand",
             description = message,
         )
 
     data class UnknownType(
         val commandType: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "UnknownType",
             description = "Unknown type for command: $commandType",
         )
 
     data class UnknownEntity(
         val entity: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "UnknownEntity",
             description = "Unknown entity for command: $entity",
         )
 
     data class InvalidParameterFormat(
         val param: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "InvalidParameterFormat",
             description = "Invalid parameter format: $param",
         )
 
     data class MissingParameters(
         val params: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "MissingParameters",
             description = "Missing required parameters: $params",
         )
@@ -42,21 +42,21 @@ sealed class CommandError(
     data class InvalidParameterType(
         val param: String,
         val expectedType: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "InvalidParameterType",
             description = "Parameter $param must be $expectedType",
         )
 
     data class NoGraphSelected(
         val message: String = "No graph selected, create a new graph first",
-    ) : CommandError(
+    ) : CommandErrors(
             type = "NoGraphSelected",
             description = message,
         )
 
     data class VertexNotFound(
         val id: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "VertexNotFound",
             description = "Vertex not found: id=$id",
         )
@@ -65,14 +65,14 @@ sealed class CommandError(
         val from: String,
         val to: String,
         val details: String = "",
-    ) : CommandError(
+    ) : CommandErrors(
             type = "EdgeAdditionFailed",
             description = "Failed to add edge: from=$from, to=$to $details",
         )
 
     data class UnknownGraphType(
         val graphType: String,
-    ) : CommandError(
+    ) : CommandErrors(
             type = "UnknownGraphType",
             description = "Unknown graph type: $graphType",
         )

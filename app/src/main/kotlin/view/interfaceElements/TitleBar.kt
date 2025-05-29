@@ -27,30 +27,44 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import model.result.Result
 import org.coremapx.app.config
+import view.interfaceElements.dialogs.NewGraph
+import view.interfaceElements.dialogs.OpenGraphErrors
+import view.interfaceElements.dialogs.SaveGraphAs
+import view.interfaceElements.dialogs.UserNotification
+import viewmodel.MainScreenViewModel
 
 @Composable
-fun TitleBar(
+fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     onClose: () -> Unit,
     onMinimize: () -> Unit,
     onMaximize: () -> Unit,
     isMaximized: Boolean,
+    viewModel: MainScreenViewModel<E, V>,
 ) {
     val titleBarColor = config.getColor("titleBarColor")
     val titleBarIconTintColor = config.getColor("titleBarIconTintColor")
     val titleBarHeight = (config.getIntValue("titleBarHeight") ?: 0).dp
     val titleBarIconSize = (config.getIntValue("titleBarIconSize") ?: 0).dp
 
+    var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showMenuButtons by remember { mutableStateOf(false) }
     var showFileMenu by remember { mutableStateOf(false) }
+    var showSaveAsDialog by remember { mutableStateOf(false) }
+    var showNewGraphDialog by remember { mutableStateOf(false) }
+    var showUserNotification by remember { mutableStateOf(false) }
+    var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
+    var saveError by remember { mutableStateOf("") }
 
     Row(
-        modifier = Modifier
-            .background(titleBarColor)
-            .fillMaxWidth()
-            .height(titleBarHeight),
+        modifier =
+            Modifier
+                .background(titleBarColor)
+                .fillMaxWidth()
+                .height(titleBarHeight),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(
             modifier = Modifier.padding(start = 4.dp),
@@ -62,7 +76,7 @@ fun TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = titleBarIconTintColor,
-                        modifier = Modifier.size(titleBarIconSize)
+                        modifier = Modifier.size(titleBarIconSize),
                     )
                 }
 
@@ -73,16 +87,51 @@ fun TitleBar(
                     expanded = showFileMenu,
                     onDismissRequest = { showFileMenu = false },
                 ) {
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(
+                        onClick = {
+                            showFileMenu = false
+                            showNewGraphDialog = true
+                        }
+                    ) {
                         Text("New")
                     }
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(
+                        onClick = {
+                            val loadResult = viewModel.openGraphFile()
+                            warnings = when (loadResult) {
+                                is Result.Success -> loadResult.data
+                                is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                            }
+                            if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+                            showFileMenu = false
+                        }
+                    ) {
                         Text("Open")
                     }
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(
+                        onClick = {
+                            if (viewModel.graphPath == null) {
+                                showSaveAsDialog = true
+                            } else {
+                                val saveResult = viewModel.saveGraph()
+                                if (saveResult is Result.Error) {
+                                    saveError = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                    showUserNotification = true
+                                }
+                            }
+                            showFileMenu = false
+                        },
+                        enabled = viewModel.isGraphActive,
+                    ) {
                         Text("Save")
                     }
-                    DropdownMenuItem(onClick = { showFileMenu = false }) {
+                    DropdownMenuItem(
+                        onClick = {
+                            showFileMenu = false
+                            showSaveAsDialog = true
+                        },
+                        enabled = viewModel.isGraphActive,
+                    ) {
                         Text("Save as..")
                     }
                 }
@@ -98,7 +147,7 @@ fun TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = titleBarIconTintColor,
-                        modifier = Modifier.size(titleBarIconSize)
+                        modifier = Modifier.size(titleBarIconSize),
                     )
                 }
             }
@@ -109,7 +158,7 @@ fun TitleBar(
                     imageVector = Icons.Filled.Remove,
                     contentDescription = "Minimize",
                     tint = titleBarIconTintColor,
-                    modifier = Modifier.size(titleBarIconSize)
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onMaximize) {
@@ -117,7 +166,7 @@ fun TitleBar(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
                     contentDescription = if (isMaximized) "Recover" else "Maximize",
                     tint = titleBarIconTintColor,
-                    modifier = Modifier.size(titleBarIconSize)
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onClose) {
@@ -125,9 +174,37 @@ fun TitleBar(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Close",
                     tint = titleBarIconTintColor,
-                    modifier = Modifier.size(titleBarIconSize)
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
         }
+    }
+    if (showOpenGraphErrorsDialog) {
+        OpenGraphErrors(
+            onDismiss = { showOpenGraphErrorsDialog = false },
+            warnings = warnings,
+        )
+    }
+
+    if (showSaveAsDialog) {
+        SaveGraphAs(
+            onDismiss = { showSaveAsDialog = false },
+            viewModel = viewModel,
+        )
+    }
+
+    if (showUserNotification) {
+        UserNotification(
+            onDismiss = { showUserNotification = false },
+            title = "Save Error",
+            message = saveError,
+        )
+    }
+
+    if (showNewGraphDialog) {
+        NewGraph(
+            onDismiss = { showNewGraphDialog = false },
+            viewModel = viewModel,
+        )
     }
 }

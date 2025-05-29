@@ -2,7 +2,7 @@ package model.commands.classes
 
 import model.commands.enums.CommandEntities
 import model.commands.enums.CommandTypes
-import model.result.CommandError
+import model.result.CommandErrors
 import model.result.Result
 
 class Command private constructor(
@@ -19,13 +19,13 @@ class Command private constructor(
 
         fun create(command: String): Result<Command> {
             if (command.isEmpty()) {
-                return Result.Error(CommandError.EmptyCommand())
+                return Result.Error(CommandErrors.EmptyCommand())
             }
             val elements: List<String> = command.trim().split("\\s+".toRegex())
             val commandType = elements.getOrNull(0) ?: ""
             val commandEntities = elements.getOrNull(1) ?: ""
-            val type = getType(elements) ?: return Result.Error(CommandError.UnknownType(commandType))
-            val entity = getEntity(elements) ?: return Result.Error(CommandError.UnknownEntity(commandEntities))
+            val type = getType(elements) ?: return Result.Error(CommandErrors.UnknownType(commandType))
+            val entity = getEntity(elements) ?: return Result.Error(CommandErrors.UnknownEntity(commandEntities))
             val parameters = getParameters(elements, type, entity)
             return validateParameters(type, entity, parameters)
         }
@@ -155,42 +155,42 @@ class Command private constructor(
             if (type == CommandTypes.ADD) {
                 if (entity == CommandEntities.VERTEX) {
                     if (!parameters.containsKey("id") || !parameters.containsKey("label")) {
-                        return Result.Error(CommandError.MissingParameters("Add vertex command must specify 'id' and 'label'"))
+                        return Result.Error(CommandErrors.MissingParameters("Add vertex command must specify 'id' and 'label'"))
                     }
-                    parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("id", "Int"))
+                    parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
                 } else if (entity == CommandEntities.EDGE) {
                     if (!parameters.containsKey("from") || !parameters.containsKey("to")) {
-                        return Result.Error(CommandError.MissingParameters("Add edge command must specify 'from' and 'to'"))
+                        return Result.Error(CommandErrors.MissingParameters("Add edge command must specify 'from' and 'to'"))
                     }
-                    parameters["from"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("from", "Int"))
-                    parameters["to"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("to", "Int"))
+                    parameters["from"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Int"))
+                    parameters["to"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Int"))
                     if (parameters.containsKey("weight")) {
-                        parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("weight", "Int"))
+                        parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Int"))
                     }
                 }
             } else if (type == CommandTypes.RM) {
                 if (entity == CommandEntities.VERTEX) {
                     if (!parameters.containsKey("id")) {
-                        return Result.Error(CommandError.MissingParameters("Remove vertex command must specify 'id'"))
+                        return Result.Error(CommandErrors.MissingParameters("Remove vertex command must specify 'id'"))
                     }
-                    parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("id", "Int"))
+                    parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
                 } else if (entity == CommandEntities.EDGE) {
                     val allTogether = parameters.containsKey("id") && parameters.containsKey("from") && parameters.containsKey("to")
                     if (!(parameters.containsKey("id") || (parameters.containsKey("from") && parameters.containsKey("to"))) &&
                         !allTogether
                     ) {
-                        return Result.Error(CommandError.MissingParameters("Remove edge command must specify 'from' and 'to' or 'id'"))
+                        return Result.Error(CommandErrors.MissingParameters("Remove edge command must specify 'from' and 'to' or 'id'"))
                     }
                     if (parameters.containsKey("id")) {
-                        parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("id", "Int"))
+                        parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
                     } else if (parameters.containsKey("from") && parameters.containsKey("to")) {
-                        parameters["from"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("from", "Int"))
-                        parameters["to"]?.toIntOrNull() ?: return Result.Error(CommandError.InvalidParameterType("to", "Int"))
+                        parameters["from"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Int"))
+                        parameters["to"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Int"))
                     }
                 }
             } else if (type in allTypesWithoutParameters) {
                 if (parameters.isNotEmpty()) {
-                    return Result.Error(CommandError.InvalidParameterFormat("This command should have no parameters"))
+                    return Result.Error(CommandErrors.InvalidParameterFormat("This command should have no parameters"))
                 }
             }
             return Result.Success(Command(type, entity, parameters))
