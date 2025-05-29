@@ -11,11 +11,15 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.*
+import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.coremapx.app.config
@@ -26,44 +30,53 @@ fun DropdownSelectButton(
     selectedItem: String,
     onItemSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
+    additionalColor: Color = config.getColor("mainMenuButtonTextColor"),
+    borderColor: Color = config.getColor("dialogBorderColor"),
+    borderWidth: Dp = 1.dp,
+    backgroundColor: Color = config.getColor("dialogBackgroundColor"),
+    textColor: Color = config.getColor("dialogTextColor"),
+    fontSize: TextUnit = 16.sp,
+    height: Dp = 56.dp,
+    iconSize: Dp = 24.dp,
+    roundedCornerShapeSize: Dp = 8.dp,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val rotation by animateFloatAsState(if (expanded) 180f else 0f)
-    val additionalColor = config.getColor("mainMenuButtonTextColor")
-    val borderColor = Color(0xFFE0E0E0)
 
     Box(
         modifier =
             modifier
                 .wrapContentSize()
+                .clip(shape = RoundedCornerShape(roundedCornerShapeSize))
                 .border(
-                    border = BorderStroke(1.dp, borderColor),
-                    shape = RoundedCornerShape(8.dp),
+                    border = BorderStroke(borderWidth, borderColor),
+                    shape = RoundedCornerShape(roundedCornerShapeSize),
                 ).background(
-                    Color.White,
-                    shape = RoundedCornerShape(8.dp),
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(roundedCornerShapeSize),
                 ).clickable { expanded = !expanded },
     ) {
         Row(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(56.dp)
+                    .height(height)
                     .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = selectedItem,
-                fontSize = 16.sp,
+                fontSize = fontSize,
                 fontWeight = FontWeight.Medium,
+                color = textColor,
             )
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
                 contentDescription = "Dropdown Arrow",
                 modifier =
                     Modifier
-                        .size(24.dp)
+                        .size(iconSize)
                         .rotate(rotation),
                 tint = additionalColor,
             )
@@ -72,12 +85,8 @@ fun DropdownSelectButton(
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier =
-                Modifier
-                    .border(
-                        border = BorderStroke(1.dp, borderColor),
-                        shape = RoundedCornerShape(8.dp),
-                    ),
+            modifier = Modifier
+                .background(backgroundColor)
         ) {
             items.forEach { item ->
                 DropdownMenuItem(
@@ -88,8 +97,8 @@ fun DropdownSelectButton(
                 ) {
                     Text(
                         text = item,
-                        fontSize = 16.sp,
-                        color = if (item == selectedItem) additionalColor else Color.Black,
+                        fontSize = fontSize,
+                        color = if (item == selectedItem) additionalColor else textColor,
                     )
                 }
             }
