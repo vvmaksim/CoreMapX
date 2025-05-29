@@ -12,9 +12,12 @@ import androidx.compose.material.icons.filled.Folder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import model.fileHandler.FileDialogManager
@@ -26,18 +29,29 @@ fun SavePathButton(
     selectedPath: String = System.getProperty("user.home"),
     onPathSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
+    additionalColor: Color = config.getColor("mainMenuButtonTextColor"),
+    borderColor: Color = config.getColor("dialogBorderColor"),
+    borderWidth: Dp = 1.dp,
+    backgroundColor: Color = config.getColor("dialogBackgroundColor"),
+    textColor: Color = config.getColor("dialogTextColor"),
+    fontSize: TextUnit = 16.sp,
+    height: Dp = 56.dp,
+    iconSize: Dp = 24.dp,
+    roundedCornerShapeSize: Dp = 8.dp,
 ) {
     var currentPath by remember { mutableStateOf(selectedPath) }
-    val mainColor = config.getColor("mainMenuColor")
-    val additionalColor = config.getColor("mainMenuButtonTextColor")
 
     Box(
         modifier =
             modifier
+                .clip(shape = RoundedCornerShape(roundedCornerShapeSize))
                 .border(
-                    border = BorderStroke(1.dp, mainColor),
-                    shape = RoundedCornerShape(8.dp),
-                ).background(Color.White, shape = RoundedCornerShape(8.dp))
+                    border = BorderStroke(borderWidth, borderColor),
+                    shape = RoundedCornerShape(roundedCornerShapeSize),
+                ).background(
+                    color = backgroundColor,
+                    shape = RoundedCornerShape(roundedCornerShapeSize)
+                )
                 .clickable {
                     val dir = FileDialogManager.showSelectDirectoryDialog(directory = currentPath) ?: currentPath
                     currentPath = dir
@@ -50,21 +64,22 @@ fun SavePathButton(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(56.dp)
+                    .height(height)
                     .padding(horizontal = 16.dp),
         ) {
             Text(
                 text = currentPath.ifEmpty { "Select directory" },
+                color = textColor,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f),
-                fontSize = 16.sp,
+                fontSize = fontSize,
                 fontWeight = FontWeight.Medium,
             )
             Icon(
                 imageVector = Icons.Filled.Folder,
                 contentDescription = "Open Directory Dialog",
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier.size(iconSize),
                 tint = additionalColor,
             )
         }
