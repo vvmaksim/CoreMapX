@@ -175,6 +175,9 @@ class ConfigRepository {
         require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) {
             "mainMenuButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
         }
+        require(validateColor(getStringValue("mainMenuDisabledButtonTextColor") ?: "")) {
+            "mainMenuDisabledButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
+        }
     }
 
     private fun checkDialogSettings() {

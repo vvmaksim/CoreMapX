@@ -28,6 +28,8 @@ mainMenuTextColor=#000000
 mainMenuButtonColor=#E6E6FA
 # Text color of buttons in the main menu
 mainMenuButtonTextColor=#6200EE
+# Text color of disabled buttons in the main menu
+mainMenuDisabledButtonTextColor=#656565
 
 ! Dialogs
 
