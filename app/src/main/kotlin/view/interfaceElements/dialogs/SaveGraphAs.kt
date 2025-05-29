@@ -3,11 +3,12 @@ package view.interfaceElements.dialogs
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -35,7 +36,17 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
     var showError by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
     val additionalColor = config.getColor("mainMenuButtonTextColor")
-    val secondAdditionalColor = Color(0xFFE0E0E0)
+    val dialogBackgroundColor = config.getColor("dialogBackgroundColor")
+    val dialogBorderColor = config.getColor("dialogBorderColor")
+    val dialogTextColor = config.getColor("dialogTextColor")
+    val dialogWarningTextColor = config.getColor("dialogWarningTextColor")
+    val backgroundColorButton1 = config.getColor("backgroundColorButton1")
+    val contentColorButton1 = config.getColor("contentColorButton1")
+    val contentColorButton2 = config.getColor("contentColorButton2")
+
+    val titleSize = 24.sp
+    val hintsSize = 14.sp
+    val buttonTextSize = 16.sp
 
     if (showNotification) {
         UserNotification(
@@ -55,7 +66,7 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                         .wrapContentHeight()
                         .shadow(8.dp, RoundedCornerShape(16.dp)),
                 shape = RoundedCornerShape(16.dp),
-                color = Color(0xFFF5F5F5),
+                color = dialogBackgroundColor,
             ) {
                 Column(
                     modifier =
@@ -65,16 +76,31 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
-                    Text(
-                        text = "Save graph",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                    )
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Text(
+                            text = "Save graph",
+                            fontSize = titleSize,
+                            fontWeight = FontWeight.Bold,
+                            color = dialogTextColor,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                        IconButton(
+                            onClick = onDismiss,
+                            modifier = Modifier.align(Alignment.CenterEnd)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Close,
+                                contentDescription = "Close",
+                                tint = contentColorButton1,
+                            )
+                        }
+                    }
 
                     Text(
                         text = "Select directory to save and file format",
-                        fontSize = 14.sp,
+                        fontSize = hintsSize,
                         textAlign = TextAlign.Center,
+                        color = dialogTextColor,
                     )
 
                     Column(
@@ -83,7 +109,8 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                     ) {
                         Text(
                             text = "File name:",
-                            fontSize = 14.sp,
+                            fontSize = hintsSize,
+                            color = dialogTextColor,
                         )
 
                         OutlinedTextField(
@@ -96,10 +123,11 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                             colors =
                                 TextFieldDefaults.outlinedTextFieldColors(
                                     focusedBorderColor = additionalColor,
-                                    unfocusedBorderColor = secondAdditionalColor,
+                                    unfocusedBorderColor = dialogBorderColor,
                                     cursorColor = additionalColor,
                                     focusedLabelColor = additionalColor,
-                                    unfocusedLabelColor = Color.Black,
+                                    unfocusedLabelColor = dialogTextColor,
+                                    textColor = dialogTextColor,
                                 ),
                             shape = RoundedCornerShape(8.dp),
                             singleLine = true,
@@ -107,7 +135,8 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
 
                         Text(
                             text = "Save directory:",
-                            fontSize = 14.sp,
+                            fontSize = hintsSize,
+                            color = dialogTextColor,
                         )
 
                         SavePathButton(
@@ -120,7 +149,8 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
 
                         Text(
                             text = "File format:",
-                            fontSize = 14.sp,
+                            fontSize = hintsSize,
+                            color = dialogTextColor,
                         )
 
                         DropdownSelectButton(
@@ -130,15 +160,18 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                                 selectedFormat = it
                                 showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
                             },
+                            additionalColor = additionalColor,
+                            borderColor = dialogBorderColor,
+                            backgroundColor = dialogBackgroundColor,
+                            textColor = dialogTextColor,
                         )
                     }
 
                     if (showError) {
-                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "A file with this configuration already exists, and its contents will be replaced when saved",
-                            color = Color(0xFFD32F2F),
-                            fontSize = 14.sp,
+                            color = dialogWarningTextColor,
+                            fontSize = hintsSize,
                             modifier = Modifier.padding(start = 4.dp),
                         )
                     }
@@ -152,12 +185,12 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                             modifier = Modifier.weight(1f),
                             colors =
                                 ButtonDefaults.buttonColors(
-                                    backgroundColor = secondAdditionalColor,
-                                    contentColor = Color.Black,
+                                    backgroundColor = backgroundColorButton1,
+                                    contentColor = contentColorButton1,
                                 ),
                             shape = RoundedCornerShape(8.dp),
                         ) {
-                            Text("Cancel", fontSize = 16.sp)
+                            Text(text = "Cancel", fontSize = buttonTextSize)
                         }
 
                         Button(
@@ -188,11 +221,11 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                             colors =
                                 ButtonDefaults.buttonColors(
                                     backgroundColor = additionalColor,
-                                    contentColor = secondAdditionalColor,
+                                    contentColor = contentColorButton2,
                                 ),
                             shape = RoundedCornerShape(8.dp),
                         ) {
-                            Text("Save", fontSize = 16.sp)
+                            Text(text = "Save", fontSize = buttonTextSize)
                         }
                     }
                 }
