@@ -73,6 +73,10 @@ maxCountMessages=100
 commandFieldHeight=56
 # Width of the command input field. Min=400 (dp)
 commandFieldWidth=666
+# Command line is transparent(true) or colored(false)
+isTransparentCommandLine=false
+# Background color of the command line. It will be applied if parameter isTransparentCommandLine=false
+commandLineBackgroundColor=#FFFFFF
 
 
 ! Work Area

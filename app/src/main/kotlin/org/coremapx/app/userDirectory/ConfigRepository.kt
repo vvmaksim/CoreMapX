@@ -229,6 +229,10 @@ class ConfigRepository {
         require((1 <= maxCountMessages) && (maxCountMessages <= 10000)) { "maxCountMessages must be >= 1, but <= 10000" }
         require((((getIntValue("commandFieldHeight") ?: 0) >= 56))) { "commandFieldHeight must be >= 56 dp" }
         require((((getIntValue("commandFieldWidth") ?: 0) >= 400))) { "commandFieldWidth must be >= 400 dp" }
+        require((getBooleanValue("isTransparentCommandLine")) != null) { "isTransparentCommandLine must be true or false" }
+        require(validateColor(getStringValue("commandLineBackgroundColor") ?: "")) {
+            "commandLineBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
+        }
     }
 
     private fun checkWorkAreaSettings() {
