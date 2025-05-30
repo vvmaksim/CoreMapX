@@ -9,6 +9,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
 import model.commands.classes.Commands
@@ -38,6 +39,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
     val zoomButtonsBackgroundColor = config.getColor("mainMenuColor")
     val zoomButtonsContentColor = config.getColor("mainMenuButtonTextColor")
+    val isTransparentCommandLine = config.getBooleanValue("isTransparentCommandLine") ?: false
+    val commandLineBackgroundColor = config.getColor("commandLineBackgroundColor")
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -125,6 +128,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         .width(commandFieldWidth)
                         .align(Alignment.Bottom),
                 outputMessages = outputMessages.value,
+                commandLineBackgroundColor = if (isTransparentCommandLine) Color.Transparent else commandLineBackgroundColor,
                 onCommand = { command -> handleCommand(command) },
             )
 

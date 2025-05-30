@@ -1,7 +1,11 @@
 package view.interfaceElements
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -13,6 +17,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 
@@ -20,6 +25,10 @@ import org.coremapx.app.config
 fun CommandLine(
     modifier: Modifier = Modifier,
     outputMessages: MutableList<String> = mutableListOf(),
+    commandLineBackgroundColor: Color = Color.Transparent,
+    borderWidth: Dp = 1.dp,
+    borderColor: Color = Color.Gray,
+    roundedCornerShapeSize: Dp = 8.dp,
     onCommand: (String) -> Unit = {},
 ) {
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
@@ -94,8 +103,11 @@ fun CommandLine(
             modifier =
                 Modifier
                     .fillMaxWidth()
-                    .height(commandFieldHeight),
+                    .height(commandFieldHeight)
+                    .background(commandLineBackgroundColor, RoundedCornerShape(roundedCornerShapeSize))
+                    .border(BorderStroke(width = borderWidth, color = borderColor), RoundedCornerShape(roundedCornerShapeSize)),
             placeholder = { Text("Enter command") },
+            shape = RoundedCornerShape(roundedCornerShapeSize),
         )
     }
 }
