@@ -4,9 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import model.commands.classes.Command
 import model.commands.classes.Commands
@@ -15,6 +17,7 @@ import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
 import view.graph.GraphView
+import view.interfaceElements.buttons.ZoomButtons
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
 
@@ -33,6 +36,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val maxCountMessages = config.getIntValue("maxCountMessages") ?: 0
     val commandFieldWidth = (config.getIntValue("commandFieldWidth") ?: 0).dp
     val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
+    val zoomButtonsBackgroundColor = config.getColor("mainMenuColor")
+    val zoomButtonsContentColor = config.getColor("mainMenuButtonTextColor")
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -118,12 +123,21 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 modifier =
                     Modifier
                         .width(commandFieldWidth)
-                        .align(Alignment.CenterVertically),
+                        .align(Alignment.Bottom),
                 outputMessages = outputMessages.value,
                 onCommand = { command -> handleCommand(command) },
             )
 
             Spacer(Modifier.weight(1f))
+
+            ZoomButtons(
+                modifier = Modifier
+                    .padding(34.dp)
+                    .clip(RoundedCornerShape(32.dp))
+                    .background(zoomButtonsBackgroundColor),
+                contentColor = zoomButtonsContentColor,
+                onZoom = { zoomDelta -> viewModel.zoomCanvas(zoomDelta) },
+            )
         }
     }
 }
