@@ -55,12 +55,12 @@ fun CommandLine(
                         .align(Alignment.BottomStart),
             ) {
                 outputMessages.forEach { message ->
-                    val parts = message.split("Command:", limit = 2)
+                    val parts = message.split("Error:", limit = 2)
                     val annotatedText =
                         buildAnnotatedString {
                             if (parts.size == 2) {
                                 withStyle(style = SpanStyle(color = Color.Red)) {
-                                    append("Command:")
+                                    append("Error:")
                                 }
                                 withStyle(style = SpanStyle(color = Color.Black)) {
                                     append(parts[1])
