@@ -108,6 +108,8 @@ class ConfigRepository {
         if (missingParameters.isNotEmpty()) showConfigErrorDialog("Missing parameters in config: $missingParameters")
     }
 
+    private fun getColorErrorMessage(propertyName: String): String = "$propertyName must be color in hex format. For example `...=#FFFFFF`"
+
     private fun tryConvertStringToColor(color: String): Color {
         if (!color.startsWith("#")) {
             throw IllegalArgumentException("Color cannot start without `#`")
@@ -165,60 +167,30 @@ class ConfigRepository {
 
     private fun checkMainMenuSettings() {
         require((((getIntValue("mainMenuWidth") ?: 0) >= 200))) { "mainMenuWidth must be >= 200 dp" }
+        require(validateColor(getStringValue("mainMenuColor") ?: "")) { getColorErrorMessage("mainMenuColor") }
+        require(validateColor(getStringValue("mainMenuTextColor") ?: "")) { getColorErrorMessage("mainMenuTextColor") }
+        require(validateColor(getStringValue("mainMenuButtonColor") ?: "")) { getColorErrorMessage("mainMenuButtonColor") }
+        require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) { getColorErrorMessage("mainMenuButtonTextColor") }
         require(
-            validateColor(getStringValue("mainMenuColor") ?: ""),
-        ) { "mainMenuColor must be color in hex format. For example `...=#FFFFFF`" }
-        require(validateColor(getStringValue("mainMenuTextColor") ?: "")) {
-            "mainMenuTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("mainMenuButtonColor") ?: "")) {
-            "mainMenuButtonColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) {
-            "mainMenuButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("mainMenuDisabledButtonTextColor") ?: "")) {
-            "mainMenuDisabledButtonTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
+            validateColor(getStringValue("mainMenuDisabledButtonTextColor") ?: ""),
+        ) { getColorErrorMessage("mainMenuDisabledButtonTextColor") }
     }
 
     private fun checkDialogSettings() {
-        require(validateColor(getStringValue("dialogBackgroundColor") ?: "")) {
-            "dialogBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("dialogBorderColor") ?: "")) {
-            "dialogBorderColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("dialogTextColor") ?: "")) {
-            "dialogTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("dialogWarningTextColor") ?: "")) {
-            "dialogWarningTextColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("backgroundColorButton1") ?: "")) {
-            "backgroundColorButton1 must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("contentColorButton1") ?: "")) {
-            "contentColorButton1 must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("backgroundColorButton2") ?: "")) {
-            "backgroundColorButton2 must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("contentColorButton2") ?: "")) {
-            "contentColorButton2 must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("checkboxUncheckedColor") ?: "")) {
-            "checkboxUncheckedColor must be color in hex format. For example `...=#FFFFFF`"
-        }
+        require(validateColor(getStringValue("dialogBackgroundColor") ?: "")) { getColorErrorMessage("dialogBackgroundColor") }
+        require(validateColor(getStringValue("dialogBorderColor") ?: "")) { getColorErrorMessage("dialogBorderColor") }
+        require(validateColor(getStringValue("dialogTextColor") ?: "")) { getColorErrorMessage("dialogTextColor") }
+        require(validateColor(getStringValue("dialogWarningTextColor") ?: "")) { getColorErrorMessage("dialogWarningTextColor") }
+        require(validateColor(getStringValue("backgroundColorButton1") ?: "")) { getColorErrorMessage("backgroundColorButton1") }
+        require(validateColor(getStringValue("contentColorButton1") ?: "")) { getColorErrorMessage("contentColorButton1") }
+        require(validateColor(getStringValue("backgroundColorButton2") ?: "")) { getColorErrorMessage("backgroundColorButton2") }
+        require(validateColor(getStringValue("contentColorButton2") ?: "")) { getColorErrorMessage("contentColorButton2") }
+        require(validateColor(getStringValue("checkboxUncheckedColor") ?: "")) { getColorErrorMessage("checkboxUncheckedColor") }
     }
 
     private fun checkTitleBarSettings() {
-        require(validateColor(getStringValue("titleBarColor") ?: "")) {
-            "titleBarColor must be color in hex format. For example `...=#FFFFFF`"
-        }
-        require(validateColor(getStringValue("titleBarIconTintColor") ?: "")) {
-            "titleBarIconTintColor must be color in hex format. For example `...=#FFFFFF`"
-        }
+        require(validateColor(getStringValue("titleBarColor") ?: "")) { getColorErrorMessage("titleBarColor") }
+        require(validateColor(getStringValue("titleBarIconTintColor") ?: "")) { getColorErrorMessage("titleBarIconTintColor") }
         require((((getIntValue("titleBarHeight") ?: 0) >= 30))) { "titleBarHeight must be >= 30 dp" }
         require((((getIntValue("titleBarIconSize") ?: 0) >= 16))) { "titleBarIconSize must be >= 16 dp" }
     }
@@ -230,28 +202,18 @@ class ConfigRepository {
         require((((getIntValue("commandFieldHeight") ?: 0) >= 56))) { "commandFieldHeight must be >= 56 dp" }
         require((((getIntValue("commandFieldWidth") ?: 0) >= 400))) { "commandFieldWidth must be >= 400 dp" }
         require((getBooleanValue("isTransparentCommandLine")) != null) { "isTransparentCommandLine must be true or false" }
-        require(validateColor(getStringValue("commandLineBackgroundColor") ?: "")) {
-            "commandLineBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
-        }
+        require(validateColor(getStringValue("commandLineBackgroundColor") ?: "")) { getColorErrorMessage("commandLineBackgroundColor") }
     }
 
     private fun checkWorkAreaSettings() {
         require((((getIntValue("graphLayoutHeight") ?: 0) >= 2000))) { "graphLayoutHeight must be >= 2000 dp" }
         require((((getIntValue("graphLayoutWidth") ?: 0) >= 1000))) { "graphLayoutWidth must be >= 1000 dp" }
         require((((getIntValue("vertexRadius") ?: 0) >= 1))) { "vertexRadius must be >= 1 dp" }
-        require(
-            validateColor(getStringValue("vertexMainColor") ?: ""),
-        ) { "vertexMainColor must be color in hex format. For example `...=#FFFFFF`" }
-        require(validateColor(getStringValue("vertexLabelColor") ?: "")) {
-            "vertexLabelColor must be color in hex format. For example `...=#FFFFFF`"
-        }
+        require(validateColor(getStringValue("vertexMainColor") ?: "")) { getColorErrorMessage("vertexMainColor") }
+        require(validateColor(getStringValue("vertexLabelColor") ?: "")) { getColorErrorMessage("vertexLabelColor") }
         require((((getIntValue("vertexLabelSize") ?: 0) >= 1))) { "vertexLabelSize must be >= 1 sp" }
-        require(
-            validateColor(getStringValue("edgeMainColor") ?: ""),
-        ) { "edgeMainColor must be color in hex format. For example `...=#FFFFFF`" }
-        require(
-            validateColor(getStringValue("edgeLabelColor") ?: ""),
-        ) { "edgeLabelColor must be color in hex format. For example `...=#FFFFFF`" }
+        require(validateColor(getStringValue("edgeMainColor") ?: "")) { getColorErrorMessage("edgeMainColor") }
+        require(validateColor(getStringValue("edgeLabelColor") ?: "")) { getColorErrorMessage("edgeLabelColor") }
         require((((getIntValue("edgeLabelSize") ?: 0) >= 1))) { "edgeLabelSize must be >= 1 sp" }
         val edgeArrowSize = getIntValue("edgeArrowSize") ?: 0
         require((1 <= edgeArrowSize) && (edgeArrowSize <= 100)) { "edgeArrowSize must be >= 1, but <= 100" }
@@ -259,9 +221,7 @@ class ConfigRepository {
         val canvasDragRatio = getDoubleValue("canvasDragRatio") ?: 0.0
         require((0.1 <= canvasDragRatio) && (canvasDragRatio <= 10)) { "canvasDragRatio must be >= 0.1, but <= 10" }
         require((((getIntValue("canvasLimit") ?: 0) >= 2000))) { "canvasLimit must be >= 2000 px" }
-        require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) {
-            "canvasBackgroundColor must be color in hex format. For example `...=#FFFFFF`"
-        }
+        require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) { getColorErrorMessage("canvasBackgroundColor") }
     }
 
     private fun checkPerformanceSettings() {
