@@ -26,7 +26,7 @@ class ConfigRepository {
 
     fun getStringValue(key: String): String? = config[key]
 
-    fun getBooleanValue(key: String): Boolean? = config[key]?.toBoolean()
+    fun getBooleanValue(key: String): Boolean? = config[key]?.toBooleanStrictOrNull()
 
     fun getIntValue(key: String): Int? = config[key]?.toIntOrNull()
 
