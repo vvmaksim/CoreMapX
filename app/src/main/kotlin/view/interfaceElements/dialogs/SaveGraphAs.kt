@@ -5,6 +5,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -120,6 +121,13 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                                 showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
                             },
                             modifier = Modifier.fillMaxWidth(),
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = Icons.Default.Edit,
+                                    contentDescription = "Name",
+                                    tint = additionalColor
+                                )
+                            },
                             colors =
                                 TextFieldDefaults.outlinedTextFieldColors(
                                     focusedBorderColor = additionalColor,
