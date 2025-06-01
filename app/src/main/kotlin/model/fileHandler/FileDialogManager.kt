@@ -12,34 +12,12 @@ class FileDialogManager {
             directory: String = System.getProperty("user.home"),
             useDarkTheme: Boolean = false,
         ): File? {
-            try {
-                if (useDarkTheme) {
-                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf")
-                } else {
-                    UIManager.setLookAndFeel(FlatLightLaf())
-                }
-            } catch (e: Exception) {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
-            }
-
-            val fileChooser = JFileChooser().apply {
-                fileSelectionMode = JFileChooser.FILES_ONLY
-                isMultiSelectionEnabled = false
-                isFileHidingEnabled = false
-                dialogTitle = title
-                val initialDir = File(directory)
-                currentDirectory = if (initialDir.exists() && initialDir.isDirectory) {
-                    initialDir
-                } else {
-                    File(System.getProperty("user.home"))
-                }
-            }
-
-            return if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                fileChooser.selectedFile
-            } else {
-                null
-            }
+            return dialogManager(
+                selectionMode = JFileChooser.FILES_ONLY,
+                title = title,
+                directory = directory,
+                useDarkTheme = useDarkTheme,
+            )?.selectedFile
         }
 
         fun showSelectDirectoryDialog(
@@ -47,6 +25,20 @@ class FileDialogManager {
             directory: String = System.getProperty("user.home"),
             useDarkTheme: Boolean = false,
         ): String? {
+            return dialogManager(
+                selectionMode = JFileChooser.DIRECTORIES_ONLY,
+                title = title,
+                directory = directory,
+                useDarkTheme = useDarkTheme,
+                )?.selectedFile?.absolutePath
+        }
+
+        fun dialogManager(
+            selectionMode: Int,
+            title: String,
+            directory: String = System.getProperty("user.home"),
+            useDarkTheme: Boolean = false,
+        ): JFileChooser? {
             try {
                 if (useDarkTheme) {
                     UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf")
@@ -58,7 +50,7 @@ class FileDialogManager {
             }
 
             val fileChooser = JFileChooser().apply {
-                fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
+                fileSelectionMode = selectionMode
                 isMultiSelectionEnabled = false
                 isFileHidingEnabled = false
                 dialogTitle = title
@@ -71,7 +63,7 @@ class FileDialogManager {
             }
 
             return if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                fileChooser.selectedFile.absolutePath
+                fileChooser
             } else {
                 null
             }
