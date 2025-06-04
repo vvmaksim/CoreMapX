@@ -3,6 +3,10 @@ package viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.commands.classes.Commands
+import model.databases.sqlite.createDatabase
+import model.databases.sqlite.repositories.EdgeRepository
+import model.databases.sqlite.repositories.GraphRepository
+import model.databases.sqlite.repositories.VertexRepository
 import model.fileHandler.ConvertModes
 import model.fileHandler.FileDialogManager
 import model.fileHandler.FileExtensions
@@ -19,6 +23,7 @@ import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
+import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategies.RandomStrategy
 import viewmodel.visualizationStrategies.VisualizationStrategy
@@ -117,8 +122,16 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
         return loadGraphFromFile(file)
     }
 
+    fun openGraphRepository(): Result<File> {
+        val repository = FileDialogManager.showOpenFileDialog(
+            directory = "${baseUserDirPath}/data/graphs",
+            title = "Select graph repository")
+            ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select repository"))
+        return Result.Success(repository)
+    }
+
     fun loadGraphFromFile(file: File): Result<List<String>> {
-        val parseResult = Parser.parse(file)
+        val parseResult = Parser.parse(file, graphId)
         val graphIR: GraphIR
         when (parseResult) {
             is Result.Error -> return parseResult
@@ -146,6 +159,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
             when (file.extension) {
                 "graph" -> FileExtensions.GRAPH
                 "json" -> FileExtensions.JSON
+                "db" -> FileExtensions.SQL
                 else -> FileExtensions.GRAPH
             }
         updateGraph(newGraph)
@@ -210,7 +224,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                 FileExtensions.JSON -> {
                     val tempFileIR = File("$baseUserDirPath/data/temp/$fileName.graph")
                     tempFileIR.writeText(ir.toString())
-                    val convertResult = Converter.convert(tempFileIR, FileExtensions.JSON, ConvertModes.SAVE)
+                    val convertResult = Converter.convert(tempFileIR, FileExtensions.JSON, ConvertModes.SAVE, graphId)
                     when (convertResult) {
                         is Result.Error -> return convertResult
                         is Result.Success -> {
@@ -224,6 +238,82 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                         }
                     }
                     return Result.Success("File was saved as JSON")
+                }
+                FileExtensions.SQL -> {
+                    var graphId = graphId
+                        ?: return Result.Error(FileErrors.ErrorSavingFile("graphId can not be null"))
+                    val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.db"
+                    val database = createDatabase(path)
+
+                    val graphRepository = GraphRepository(database)
+                    when (graphRepository.getAllGraphs()) {
+                        emptyList<Graphs>() -> graphId = graphRepository.insertGraph(
+                            name = graphName,
+                            author = graphAuthor,
+                            isDirected = isDirected,
+                            isWeighted = isWeighted,
+                        )
+                        else -> GraphRepository(database).updateGraphById(
+                            graphId = graphId,
+                            name = graphName,
+                            author = graphAuthor,
+                            isDirected = isDirected,
+                            isWeighted = isWeighted,
+                        )
+                    }
+
+                    val vertexRepository = VertexRepository(database)
+                    val edgeRepository = EdgeRepository(database)
+
+                    val oldVertices = vertexRepository.getVerticesByGraph(graphId)
+                    val oldVerticesMap = oldVertices.associateBy { it.id }
+                    val newVertices = graph.value?.vertices?.values?.toList() ?: emptyList()
+                    val newVerticesMap = newVertices.associateBy { it.id }
+
+                    newVertices.forEach {newVertex ->
+                        val old = oldVerticesMap[newVertex.id as Long]
+                        if (old == null) {
+                            vertexRepository.insertVertex(graphId, newVertex.id, newVertex.label)
+                        } else if (old.label != newVertex.label) {
+                            vertexRepository.updateVertexLabelByGraphAndId(graphId = graphId, vertexId = newVertex.id, newLabel = newVertex.label)
+                        }
+                    }
+
+                    oldVertices.forEach { oldVertex ->
+                        if (newVerticesMap[oldVertex.vertex_id as V] == null) {
+                            vertexRepository.deleteVertexByGraphAndId(graphId = graphId, vertexId = oldVertex.vertex_id)
+                        }
+                    }
+
+                    val oldEdges = edgeRepository.getEdgesByGraph(graphId)
+                    val oldEdgesMap = oldEdges.associateBy { Pair(it.from_vertex, it.to_vertex) }
+                    val newEdges = graph.value?.edges?.values?.toList() ?: emptyList()
+                    val newEdgesMap = newEdges.associateBy { Pair(it.from.id, it.to.id) }
+
+                    newEdges.forEach { newEdge ->
+                        val key = Pair(newEdge.from.id as Long, newEdge.to.id as Long)
+                        val old = oldEdgesMap[key]
+                        val isWeightedEdge = newEdge is WeightedEdge
+                        val newWeight = if (isWeightedEdge) (newEdge as WeightedEdge).weight else null
+                        val oldWeight = if (old != null && isWeightedEdge) old.weight else null
+                        if (old == null) {
+                            if (isWeightedEdge) {
+                                edgeRepository.insertEdge(graphId, newEdge.from.id as Long, newEdge.to.id as Long, newWeight)
+                            } else {
+                                edgeRepository.insertEdge(graphId, newEdge.from.id as Long, newEdge.to.id as Long, null)
+                            }
+                        } else if (isWeightedEdge && oldWeight != newWeight) {
+                            edgeRepository.updateEdgeByGraphAndVertices(graphId = graphId, newWeight = newWeight, fromVertex = newEdge.from.id as Long, toVertex = newEdge.to.id as Long)
+                        }
+                    }
+
+                    for (old in oldEdges) {
+                        val key = Pair(old.from_vertex as V, old.to_vertex as V)
+                        if (newEdgesMap[key] == null) {
+                            edgeRepository.deleteEdgeByGraphAndVertices(graphId = graphId, fromVertex = old.from_vertex, toVertex = old.to_vertex)
+                        }
+                    }
+                    return Result.Success("Graph updated in SQL repository")
                 }
             }
         } catch (ex: Exception) {
