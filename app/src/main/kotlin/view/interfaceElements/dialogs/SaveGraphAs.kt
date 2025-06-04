@@ -41,7 +41,6 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
     val dialogBorderColor = config.getColor("dialogBorderColor")
     val dialogTextColor = config.getColor("dialogTextColor")
     val dialogWarningTextColor = config.getColor("dialogWarningTextColor")
-    val backgroundColorButton1 = config.getColor("backgroundColorButton1")
     val contentColorButton1 = config.getColor("contentColorButton1")
     val contentColorButton2 = config.getColor("contentColorButton2")
 
@@ -184,58 +183,40 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                         )
                     }
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    ) {
-                        Button(
-                            onClick = onDismiss,
-                            modifier = Modifier.weight(1f),
-                            colors =
-                                ButtonDefaults.buttonColors(
-                                    backgroundColor = backgroundColorButton1,
-                                    contentColor = contentColorButton1,
-                                ),
-                            shape = RoundedCornerShape(8.dp),
-                        ) {
-                            Text(text = "Cancel", fontSize = buttonTextSize)
-                        }
-
-                        Button(
-                            onClick = {
-                                val saveResult =
-                                    viewModel.saveGraph(
-                                        fileName = selectedFileName,
-                                        directoryPath = selectedPath,
-                                        fileFormat =
-                                            when (selectedFormat) {
-                                                ".graph" -> FileExtensions.GRAPH
-                                                ".json" -> FileExtensions.JSON
-                                                ".db" -> FileExtensions.SQL
-                                                else -> FileExtensions.GRAPH
-                                            },
-                                    )
-                                errorMessage =
-                                    when (saveResult) {
-                                        is Result.Error -> {
-                                            "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
-                                        }
-                                        is Result.Success -> {
-                                            "Graph $selectedFileName has been successfully saved to the directory $selectedPath as $selectedFormat"
-                                        }
+                    Button(
+                        onClick = {
+                            val saveResult =
+                                viewModel.saveGraph(
+                                    fileName = selectedFileName,
+                                    directoryPath = selectedPath,
+                                    fileFormat =
+                                        when (selectedFormat) {
+                                            ".graph" -> FileExtensions.GRAPH
+                                            ".json" -> FileExtensions.JSON
+                                            ".db" -> FileExtensions.SQL
+                                            else -> FileExtensions.GRAPH
+                                        },
+                                )
+                            errorMessage =
+                                when (saveResult) {
+                                    is Result.Error -> {
+                                        "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
                                     }
-                                showNotification = true
-                            },
-                            modifier = Modifier.weight(1f),
-                            colors =
-                                ButtonDefaults.buttonColors(
-                                    backgroundColor = additionalColor,
-                                    contentColor = contentColorButton2,
-                                ),
-                            shape = RoundedCornerShape(8.dp),
-                        ) {
-                            Text(text = "Save", fontSize = buttonTextSize)
-                        }
+                                    is Result.Success -> {
+                                        "Graph $selectedFileName has been successfully saved to the directory $selectedPath as $selectedFormat"
+                                    }
+                                }
+                            showNotification = true
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        colors =
+                            ButtonDefaults.buttonColors(
+                                backgroundColor = additionalColor,
+                                contentColor = contentColorButton2,
+                            ),
+                        shape = RoundedCornerShape(8.dp),
+                    ) {
+                        Text(text = "Save", fontSize = buttonTextSize)
                     }
                 }
             }
