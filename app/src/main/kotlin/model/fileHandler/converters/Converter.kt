@@ -13,6 +13,7 @@ class Converter {
             file: File,
             to: FileExtensions,
             mode: ConvertModes,
+            graphId: Long?,
         ): Result<File> {
             val validateResult = Validator.Companion.validate(file)
             if (validateResult is Result.Error) return validateResult
@@ -21,13 +22,14 @@ class Converter {
                 when (file.extension) {
                     "graph" -> FileExtensions.GRAPH
                     "json" -> FileExtensions.JSON
+                    "db" -> FileExtensions.SQL
                     else -> {
                         return Result.Error(FileErrors.UnknownFileExtension())
                     }
                 }
             try {
                 val converter = FileConverter.createConverter(from, to)
-                return converter.convert(file, mode)
+                return converter.convert(file, mode, graphId)
             } catch (ex: IllegalArgumentException) {
                 return Result.Error(FileErrors.UnknownFileExtension())
             }

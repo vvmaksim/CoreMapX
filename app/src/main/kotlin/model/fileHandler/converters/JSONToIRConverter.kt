@@ -12,6 +12,7 @@ class JSONToIRConverter : FileConverter() {
     override fun convert(
         file: File,
         convertMode: ConvertModes,
+        graphId: Long?,
     ): Result<File> {
         val json = Json { ignoreUnknownKeys = true }
         val graphData: GraphData
