@@ -1,7 +1,12 @@
 package model.fileHandler
 
+import extensions.toBooleanOrNull
 import kotlinx.serialization.json.Json
 import model.commands.classes.Command
+import model.databases.sqlite.createDatabase
+import model.databases.sqlite.repositories.EdgeRepository
+import model.databases.sqlite.repositories.GraphRepository
+import model.databases.sqlite.repositories.VertexRepository
 import model.fileHandler.serializableDataClasses.GraphData
 import model.result.FileErrors
 import model.result.Result
@@ -17,6 +22,7 @@ class Validator {
             when (file.extension) {
                 "graph" -> validateIR(file)
                 "json" -> validateJSON(file)
+                "db" -> validateSQLDB(file)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
 
@@ -85,6 +91,63 @@ class Validator {
             } catch (ex: Exception) {
                 return Result.Error(FileErrors.ConverterError(ex.toString()))
             }
+        }
+
+        private fun validateSQLDB(file: File): Result<String> {
+            if (!file.exists() || file.length() == 0L) {
+                return Result.Error(FileErrors.ErrorReadingFile("Database file does not exist or is empty"))
+            }
+
+            val database = try {
+                createDatabase(file.absolutePath)
+            } catch (ex: Exception) {
+                return Result.Error(FileErrors.ErrorReadingFile("Cannot open database: ${ex.message}"))
+            }
+
+            try {
+                GraphRepository(database).getAllGraphs()
+                VertexRepository(database).getVerticesByGraph(0)
+                EdgeRepository(database).getEdgesByGraph(0)
+            } catch (ex: Exception) {
+                return Result.Error(FileErrors.ErrorReadingFile("One or more required tables are missing: ${ex.message}"))
+            }
+
+            val graphs = try {
+                GraphRepository(database).getAllGraphs()
+            } catch (ex: Exception) {
+                return Result.Error(FileErrors.ErrorReadingFile("Cannot read graphs: ${ex.message}"))
+            }
+
+            graphs.forEach { graph ->
+                val graphId = graph.graph_id
+                val vertexRepository = VertexRepository(database).getVerticesByGraph(graphId)
+                val edgeRepository = EdgeRepository(database).getEdgesByGraph(graphId)
+
+                val vertexIds = vertexRepository.map { it.id }
+                if (vertexIds.size != vertexIds.toSet().size) {
+                    return Result.Error(FileErrors.ErrorReadingFile("Duplicate vertex id in graph $graphId"))
+                }
+
+                val edgePairs = edgeRepository.map { Pair(it.from_vertex, it.to_vertex) }
+                if (edgePairs.size != edgePairs.toSet().size) {
+                    return Result.Error(FileErrors.ErrorReadingFile("Duplicate edge (from-to) in graph $graphId"))
+                }
+
+                val vertexIdSet = vertexIds.toSet()
+                for (edge in edgeRepository) {
+                    if (edge.from_vertex !in vertexIdSet || edge.to_vertex !in vertexIdSet) {
+                        return Result.Error(FileErrors.ErrorReadingFile("Edge (${edge.from_vertex}, ${edge.to_vertex}) in graph $graphId refers to non-existent vertex"))
+                    }
+                }
+
+                val booleanInfo = listOf(graph.isDirected, graph.isWeighted)
+                for (boolean in booleanInfo) {
+                    if (boolean.toBooleanOrNull() == null) {
+                    return Result.Error(FileErrors.ErrorReadingFile("Boolean field in graph $graphId is not valid: $boolean"))
+                    }
+                }
+            }
+            return Result.Success("DB is correct")
         }
     }
 }
