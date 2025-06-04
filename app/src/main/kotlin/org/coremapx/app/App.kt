@@ -49,7 +49,7 @@ fun main() =
         logger.info("Started CoreMapX app")
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
         val startWindowPlacement = config.getStringValue("startWindowPlacement") ?: ""
-        val viewModel = MainScreenViewModel<Int, Int>()
+        val viewModel = MainScreenViewModel<Long, Long>()
         when (startWindowPlacement) {
             "FullScreen" -> windowState.placement = WindowPlacement.Fullscreen
             "Floating" -> windowState.placement = WindowPlacement.Floating

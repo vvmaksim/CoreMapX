@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Edge(
-    val from: Int,
-    val to: Int,
-    val weight: Int? = null,
+    val from: Long,
+    val to: Long,
+    val weight: Long? = null,
 )

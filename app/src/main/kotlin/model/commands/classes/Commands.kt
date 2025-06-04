@@ -45,7 +45,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
     private fun addVertex(): Result<String> {
         val id = command.parameters["id"] ?: return Result.Error(CommandErrors.MissingParameters("id is required"))
         val label = command.parameters["label"] ?: return Result.Error(CommandErrors.MissingParameters("label is required"))
-        val idAsV = id.toIntOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
+        val idAsV = id.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
         graph.addVertex(Vertex(idAsV, label))
         return Result.Success("Vertex added: id:$idAsV, label:$label")
     }
@@ -54,8 +54,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
         val from = command.parameters["from"] ?: return Result.Error(CommandErrors.MissingParameters("from is required"))
         val to = command.parameters["to"] ?: return Result.Error(CommandErrors.MissingParameters("to is required"))
 
-        val fromAsV = from.toIntOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Int"))
-        val toAsV = to.toIntOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Int"))
+        val fromAsV = from.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Long"))
+        val toAsV = to.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
 
         val fromVertex = graph.getVertex(fromAsV) ?: return Result.Error(CommandErrors.VertexNotFound(from))
         val toVertex = graph.getVertex(toAsV) ?: return Result.Error(CommandErrors.VertexNotFound(to))
@@ -71,7 +71,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             }
             is UndirectedWeightedGraph -> {
                 val weight =
-                    command.parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Int"))
+                    command.parameters["weight"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
                 val edgeId = (graph as UndirectedWeightedGraph).addEdge(fromVertex, toVertex, weight)
                 if (edgeId != null) {
                     Result.Success("Edge added: from=$from, to=$to, weight=$weight")
@@ -89,7 +89,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             }
             is DirectedWeightedGraph -> {
                 val weight =
-                    command.parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Int"))
+                    command.parameters["weight"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
                 val edgeId = (graph as DirectedWeightedGraph).addEdge(fromVertex, toVertex, weight)
                 if (edgeId != null) {
                     Result.Success("Edge added: from=$from, to=$to, weight=$weight")
@@ -105,7 +105,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
 
     private fun removeVertex(): Result<String> {
         val id = command.parameters["id"] ?: return Result.Error(CommandErrors.MissingParameters("id is required"))
-        val idAsV = id.toIntOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
+        val idAsV = id.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
         graph.removeVertex(idAsV)
         return Result.Success("Vertex with id:$id removed")
     }
@@ -115,8 +115,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             val from = command.parameters["from"] ?: return Result.Error(CommandErrors.MissingParameters("from is required"))
             val to = command.parameters["to"] ?: return Result.Error(CommandErrors.MissingParameters("to is required"))
 
-            val fromAsV = from.toIntOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Int"))
-            val toAsV = to.toIntOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Int"))
+            val fromAsV = from.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Long"))
+            val toAsV = to.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
 
             graph.removeEdge(fromAsV, toAsV)
             if (graph is UndirectedUnweightedGraph || graph is UndirectedWeightedGraph) {
@@ -125,7 +125,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             return Result.Success("Edge with from:$from and to:$to removed")
         } else if (command.parameters.containsKey("id")) {
             val id = command.parameters["id"] ?: return Result.Error(CommandErrors.MissingParameters("id is required"))
-            val idAsV = id.toIntOrNull() as? E ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
+            val idAsV = id.toLongOrNull() as? E ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
             graph.removeEdge(idAsV)
             return Result.Success("Edge with id:$id removed")
         } else {

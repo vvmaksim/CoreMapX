@@ -157,15 +157,15 @@ class Command private constructor(
                     if (!parameters.containsKey("id") || !parameters.containsKey("label")) {
                         return Result.Error(CommandErrors.MissingParameters("Add vertex command must specify 'id' and 'label'"))
                     }
-                    parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
+                    parameters["id"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
                 } else if (entity == CommandEntities.EDGE) {
                     if (!parameters.containsKey("from") || !parameters.containsKey("to")) {
                         return Result.Error(CommandErrors.MissingParameters("Add edge command must specify 'from' and 'to'"))
                     }
-                    parameters["from"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Int"))
-                    parameters["to"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Int"))
+                    parameters["from"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Long"))
+                    parameters["to"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
                     if (parameters.containsKey("weight")) {
-                        parameters["weight"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Int"))
+                        parameters["weight"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
                     }
                 }
             } else if (type == CommandTypes.RM) {
@@ -173,7 +173,7 @@ class Command private constructor(
                     if (!parameters.containsKey("id")) {
                         return Result.Error(CommandErrors.MissingParameters("Remove vertex command must specify 'id'"))
                     }
-                    parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
+                    parameters["id"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
                 } else if (entity == CommandEntities.EDGE) {
                     val allTogether = parameters.containsKey("id") && parameters.containsKey("from") && parameters.containsKey("to")
                     if (!(parameters.containsKey("id") || (parameters.containsKey("from") && parameters.containsKey("to"))) &&
@@ -182,10 +182,10 @@ class Command private constructor(
                         return Result.Error(CommandErrors.MissingParameters("Remove edge command must specify 'from' and 'to' or 'id'"))
                     }
                     if (parameters.containsKey("id")) {
-                        parameters["id"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Int"))
+                        parameters["id"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
                     } else if (parameters.containsKey("from") && parameters.containsKey("to")) {
-                        parameters["from"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Int"))
-                        parameters["to"]?.toIntOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Int"))
+                        parameters["from"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Long"))
+                        parameters["to"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
                     }
                 }
             } else if (type in allTypesWithoutParameters) {

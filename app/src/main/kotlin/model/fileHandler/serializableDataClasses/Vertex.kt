@@ -3,6 +3,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Vertex(
-    val id: Int,
+    val id: Long,
     val label: String,
 )

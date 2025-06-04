@@ -11,5 +11,5 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     edge: Any,
 ) {
     val isDirected: Boolean = graph is DirectedUnweightedGraph<*> || graph is DirectedWeightedGraph<*>
-    val weight: Int? = if (edge is WeightedEdge<*, *>) edge.weight else null
+    val weight: Long? = if (edge is WeightedEdge<*, *>) edge.weight else null
 }
