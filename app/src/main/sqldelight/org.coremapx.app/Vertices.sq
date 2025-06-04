@@ -13,6 +13,9 @@ INSERT INTO vertices(graph_id, vertex_id, label) VALUES (?, ?, ?);
 selectAllVerticesByGraph:
 SELECT * FROM vertices WHERE graph_id = ?;
 
+selectVertexByGraphAndId:
+SELECT * FROM vertices WHERE graph_id = ? AND vertex_id = ?;
+
 updateVertexLabelByGraphAndId:
 UPDATE vertices SET label = ? WHERE graph_id = ? AND vertex_id = ?;
 
