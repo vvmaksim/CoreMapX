@@ -56,6 +56,8 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     var graphFormat: FileExtensions? = null
 
+    var graphId: Long? = null
+
     private var _offsetX = mutableStateOf(0f)
     val offsetX: State<Float>
         get() = _offsetX
