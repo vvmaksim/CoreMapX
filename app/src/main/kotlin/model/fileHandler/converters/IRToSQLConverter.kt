@@ -77,12 +77,12 @@ class IRToSQLConverter: FileConverter() {
             }
         }
 
-        val fileName =
+        val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.db"
                 ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.db"
             }
-        val database = createDatabase(fileName)
+        val database = createDatabase(filePath)
         val graphId = GraphRepository(database).insertGraph(
             name = info["name"]
                 ?: return Result.Error(FileErrors.ConverterError("`name` can not be null")),
@@ -113,6 +113,6 @@ class IRToSQLConverter: FileConverter() {
         }
 
         file.deleteOnExit()
-        return Result.Success(File(fileName))
+        return Result.Success(File(filePath))
     }
 }

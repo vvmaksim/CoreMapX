@@ -91,13 +91,13 @@ class IRToJSONConverter : FileConverter() {
                 ),
             )
         val json = Json { prettyPrint = true }
-        val fileName =
+        val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.json"
                 ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json"
             }
         file.deleteOnExit()
-        val jsonFile = File(fileName)
+        val jsonFile = File(filePath)
         jsonFile.writeText(json.encodeToString(graphData))
         if (convertMode == ConvertModes.LOAD) {
             jsonFile.deleteOnExit()

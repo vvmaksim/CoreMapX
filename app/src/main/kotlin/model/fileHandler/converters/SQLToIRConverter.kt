@@ -56,12 +56,12 @@ class SQLToIRConverter: FileConverter() {
             }
         }
         println(ir)
-        val fileName =
+        val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.graph"
                 ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.graph"
             }
-        val irFile = File(fileName)
+        val irFile = File(filePath)
         irFile.writeText(ir.toString())
         if (convertMode == ConvertModes.LOAD) irFile.deleteOnExit()
         return Result.Success(irFile)
