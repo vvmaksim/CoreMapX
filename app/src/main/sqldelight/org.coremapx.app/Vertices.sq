@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS vertices (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    graph_id INTEGER NOT NULL,
+    vertex_id INTEGER NOT NULL,
+    label TEXT NOT NULL,
+    FOREIGN KEY (graph_id) REFERENCES graphs(graph_id) ON DELETE CASCADE,
+    UNIQUE (graph_id, vertex_id)
+);
+
+insertVertex:
+INSERT INTO vertices(graph_id, vertex_id, label) VALUES (?, ?, ?);
+
+selectAllVerticesByGraph:
+SELECT * FROM vertices WHERE graph_id = ?;
+
+updateVertexLabelByGraphAndId:
+UPDATE vertices SET label = ? WHERE graph_id = ? AND vertex_id = ?;
+
+deleteVertexByGraphAndId:
+DELETE FROM vertices WHERE graph_id = ? AND vertex_id = ?;
