@@ -18,9 +18,11 @@ import view.interfaceElements.buttons.SlideMenuButton
 import view.interfaceElements.buttons.UserDirectoryButton
 import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.OpenGraphErrors
+import view.interfaceElements.dialogs.OpenRepository
 import view.interfaceElements.dialogs.SaveGraphAs
 import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
+import java.io.File
 
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
@@ -44,11 +46,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     val mainMenuDisabledButtonTextColor = config.getColor("mainMenuDisabledButtonTextColor")
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
+    var showOpenRepositoryDialog by remember { mutableStateOf(false) }
     var showSaveGraphAsDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var showNewGraphDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var saveError by remember { mutableStateOf("") }
+    var selectedRepositoryFile by remember { mutableStateOf(File("")) }
 
     Box(
         modifier = modifier,
@@ -127,6 +131,23 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 ) {
                     Text(text = "Open Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
+                TextButton(
+                    modifier = buttonModifier,
+                    onClick = {
+                        val openResult = viewModel.openGraphRepository()
+                        when (openResult) {
+                            is Result.Error -> warnings = listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+                            is Result.Success -> {
+                                selectedRepositoryFile = openResult.data
+                                showOpenRepositoryDialog = true
+                            }
+                        }
+                        if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+                    },
+                    colors = buttonColors
+                ) {
+                    Text(text = "Open Repository", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
+                }
                 TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
                     Text(text = "Analytics", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
                 }
@@ -175,6 +196,19 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         OpenGraphErrors(
             onDismiss = { showOpenGraphErrorsDialog = false },
             warnings = warnings,
+        )
+    }
+
+    if (showOpenRepositoryDialog) {
+        OpenRepository(
+            onDismiss = { showOpenRepositoryDialog = false },
+            file = selectedRepositoryFile,
+            onGraphSelected = { graphId ->
+                viewModel.graphId = graphId
+                val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
+                if (loadResult is Result.Error) warnings = listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+            }
         )
     }
 
