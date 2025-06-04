@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS edges (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    graph_id INTEGER NOT NULL,
+    from_vertex INTEGER NOT NULL,
+    to_vertex INTEGER NOT NULL,
+    weight INTEGER,
+    FOREIGN KEY (graph_id) REFERENCES graphs(graph_id) ON DELETE CASCADE,
+    FOREIGN KEY (from_vertex) REFERENCES vertices(vertex_id),
+    FOREIGN KEY (to_vertex) REFERENCES vertices(vertex_id)
+);
+
+CREATE INDEX edge_graph_from_to ON edges(graph_id, from_vertex, to_vertex);
+
+insertEdge:
+INSERT INTO edges (graph_id, from_vertex, to_vertex, weight) VALUES (?, ?, ?, ?);
+
+selectAllEdgesByGraph:
+SELECT * FROM edges WHERE graph_id = ?;
+
+updateEdgeByGraphAndVertices:
+UPDATE edges SET weight = ? WHERE graph_id = ? AND from_vertex = ? AND to_vertex = ?;
+
+deleteEdgeByGraphAndVertices:
+DELETE FROM edges WHERE graph_id = ? AND from_vertex = ? AND to_vertex = ?;
