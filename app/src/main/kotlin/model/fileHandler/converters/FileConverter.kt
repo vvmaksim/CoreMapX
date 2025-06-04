@@ -9,6 +9,7 @@ abstract class FileConverter {
     abstract fun convert(
         file: File,
         convertMode: ConvertModes,
+        graphId: Long?,
     ): Result<File>
 
     companion object {
@@ -18,7 +19,9 @@ abstract class FileConverter {
         ): FileConverter =
             when {
                 from == FileExtensions.GRAPH && to == FileExtensions.JSON -> IRToJSONConverter()
+                from == FileExtensions.GRAPH && to == FileExtensions.SQL -> IRToSQLConverter()
                 from == FileExtensions.JSON && to == FileExtensions.GRAPH -> JSONToIRConverter()
+                from == FileExtensions.SQL && to == FileExtensions.GRAPH -> SQLToIRConverter()
                 from == to -> SameFormatConverter()
                 else -> throw IllegalArgumentException("Unknown file extension")
             }
