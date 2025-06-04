@@ -29,7 +29,7 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
     onDismiss: () -> Unit,
     viewModel: MainScreenViewModel<E, V>,
 ) {
-    val formats = listOf(".graph", ".json")
+    val formats = listOf(".graph", ".json", ".db")
     var selectedFormat by remember { mutableStateOf(formats[0]) }
     var selectedPath by remember { mutableStateOf("$baseUserDirPath/data/graphs") }
     var selectedFileName by remember { mutableStateOf(viewModel.graphName) }
@@ -211,6 +211,7 @@ fun <E : Comparable<E>, V : Comparable<V>> SaveGraphAs(
                                             when (selectedFormat) {
                                                 ".graph" -> FileExtensions.GRAPH
                                                 ".json" -> FileExtensions.JSON
+                                                ".db" -> FileExtensions.SQL
                                                 else -> FileExtensions.GRAPH
                                             },
                                     )
