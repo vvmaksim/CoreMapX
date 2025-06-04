@@ -1,0 +1,19 @@
+CREATE TABLE IF NOT EXISTS graphs (
+    graph_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    author TEXT,
+    isDirected INTEGER NOT NULL,
+    isWeighted INTEGER NOT NULL
+);
+
+insertGraph:
+INSERT INTO graphs(name, author, isDirected, isWeighted) VALUES (?, ?, ?, ?);
+
+selectAllGraphs:
+SELECT * FROM graphs;
+
+selectGraphById:
+SELECT * FROM graphs WHERE graph_id = ?;
+
+updateGraphById:
+UPDATE graphs SET name = ?, author = ?, isDirected = ?, isWeighted = ? WHERE graph_id = ?;
