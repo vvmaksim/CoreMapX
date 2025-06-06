@@ -117,16 +117,19 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     }
 
     fun openGraphFile(): Result<List<String>> {
-        val file = FileDialogManager.showOpenFileDialog(directory = "${baseUserDirPath}/data/graphs")
-            ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
+        val file =
+            FileDialogManager.showOpenFileDialog(directory = "$baseUserDirPath/data/graphs")
+                ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
         return loadGraphFromFile(file)
     }
 
     fun openGraphRepository(): Result<File> {
-        val repository = FileDialogManager.showOpenFileDialog(
-            directory = "${baseUserDirPath}/data/graphs",
-            title = "Select graph repository")
-            ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select repository"))
+        val repository =
+            FileDialogManager.showOpenFileDialog(
+                directory = "$baseUserDirPath/data/graphs",
+                title = "Select graph repository",
+            )
+                ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select repository"))
         return Result.Success(repository)
     }
 
@@ -240,26 +243,30 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                     return Result.Success("File was saved as JSON")
                 }
                 FileExtensions.SQL -> {
-                    var graphId = graphId
-                        ?: return Result.Error(FileErrors.ErrorSavingFile("graphId can not be null"))
+                    var graphId =
+                        graphId
+                            ?: return Result.Error(FileErrors.ErrorSavingFile("graphId can not be null"))
                     val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.db"
                     val database = createDatabase(path)
 
                     val graphRepository = GraphRepository(database)
                     when (graphRepository.getAllGraphs()) {
-                        emptyList<Graphs>() -> graphId = graphRepository.insertGraph(
-                            name = graphName,
-                            author = graphAuthor,
-                            isDirected = isDirected,
-                            isWeighted = isWeighted,
-                        )
-                        else -> GraphRepository(database).updateGraphById(
-                            graphId = graphId,
-                            name = graphName,
-                            author = graphAuthor,
-                            isDirected = isDirected,
-                            isWeighted = isWeighted,
-                        )
+                        emptyList<Graphs>() ->
+                            graphId =
+                                graphRepository.insertGraph(
+                                    name = graphName,
+                                    author = graphAuthor,
+                                    isDirected = isDirected,
+                                    isWeighted = isWeighted,
+                                )
+                        else ->
+                            GraphRepository(database).updateGraphById(
+                                graphId = graphId,
+                                name = graphName,
+                                author = graphAuthor,
+                                isDirected = isDirected,
+                                isWeighted = isWeighted,
+                            )
                     }
 
                     val vertexRepository = VertexRepository(database)
@@ -267,15 +274,23 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
                     val oldVertices = vertexRepository.getVerticesByGraph(graphId)
                     val oldVerticesMap = oldVertices.associateBy { it.id }
-                    val newVertices = graph.value?.vertices?.values?.toList() ?: emptyList()
+                    val newVertices =
+                        graph.value
+                            ?.vertices
+                            ?.values
+                            ?.toList() ?: emptyList()
                     val newVerticesMap = newVertices.associateBy { it.id }
 
-                    newVertices.forEach {newVertex ->
+                    newVertices.forEach { newVertex ->
                         val old = oldVerticesMap[newVertex.id as Long]
                         if (old == null) {
                             vertexRepository.insertVertex(graphId, newVertex.id, newVertex.label)
                         } else if (old.label != newVertex.label) {
-                            vertexRepository.updateVertexLabelByGraphAndId(graphId = graphId, vertexId = newVertex.id, newLabel = newVertex.label)
+                            vertexRepository.updateVertexLabelByGraphAndId(
+                                graphId = graphId,
+                                vertexId = newVertex.id,
+                                newLabel = newVertex.label,
+                            )
                         }
                     }
 
@@ -287,7 +302,11 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
                     val oldEdges = edgeRepository.getEdgesByGraph(graphId)
                     val oldEdgesMap = oldEdges.associateBy { Pair(it.from_vertex, it.to_vertex) }
-                    val newEdges = graph.value?.edges?.values?.toList() ?: emptyList()
+                    val newEdges =
+                        graph.value
+                            ?.edges
+                            ?.values
+                            ?.toList() ?: emptyList()
                     val newEdgesMap = newEdges.associateBy { Pair(it.from.id, it.to.id) }
 
                     newEdges.forEach { newEdge ->
@@ -303,14 +322,23 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                                 edgeRepository.insertEdge(graphId, newEdge.from.id as Long, newEdge.to.id as Long, null)
                             }
                         } else if (isWeightedEdge && oldWeight != newWeight) {
-                            edgeRepository.updateEdgeByGraphAndVertices(graphId = graphId, newWeight = newWeight, fromVertex = newEdge.from.id as Long, toVertex = newEdge.to.id as Long)
+                            edgeRepository.updateEdgeByGraphAndVertices(
+                                graphId = graphId,
+                                newWeight = newWeight,
+                                fromVertex = newEdge.from.id as Long,
+                                toVertex = newEdge.to.id as Long,
+                            )
                         }
                     }
 
                     for (old in oldEdges) {
                         val key = Pair(old.from_vertex as V, old.to_vertex as V)
                         if (newEdgesMap[key] == null) {
-                            edgeRepository.deleteEdgeByGraphAndVertices(graphId = graphId, fromVertex = old.from_vertex, toVertex = old.to_vertex)
+                            edgeRepository.deleteEdgeByGraphAndVertices(
+                                graphId = graphId,
+                                fromVertex = old.from_vertex,
+                                toVertex = old.to_vertex,
+                            )
                         }
                     }
                     return Result.Success("Graph updated in SQL repository")

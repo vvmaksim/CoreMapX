@@ -71,7 +71,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             }
             is UndirectedWeightedGraph -> {
                 val weight =
-                    command.parameters["weight"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
+                    command.parameters["weight"]?.toLongOrNull()
+                        ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
                 val edgeId = (graph as UndirectedWeightedGraph).addEdge(fromVertex, toVertex, weight)
                 if (edgeId != null) {
                     Result.Success("Edge added: from=$from, to=$to, weight=$weight")
@@ -89,7 +90,8 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             }
             is DirectedWeightedGraph -> {
                 val weight =
-                    command.parameters["weight"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
+                    command.parameters["weight"]?.toLongOrNull()
+                        ?: return Result.Error(CommandErrors.InvalidParameterType("weight", "Long"))
                 val edgeId = (graph as DirectedWeightedGraph).addEdge(fromVertex, toVertex, weight)
                 if (edgeId != null) {
                     Result.Success("Edge added: from=$from, to=$to, weight=$weight")

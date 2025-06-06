@@ -8,12 +8,13 @@ import java.util.Properties
 
 object DriverFactory {
     fun createDriver(filePath: String): SqlDriver {
-        val driver: SqlDriver = JdbcSqliteDriver(
-            url = "jdbc:sqlite:$filePath",
-            properties = Properties()
-        )
+        val driver: SqlDriver =
+            JdbcSqliteDriver(
+                url = "jdbc:sqlite:$filePath",
+                properties = Properties(),
+            )
         if (!File(filePath).exists()) {
-        GraphDatabase.Schema.create(driver)
+            GraphDatabase.Schema.create(driver)
         }
         return driver
     }

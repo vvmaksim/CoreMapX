@@ -16,7 +16,7 @@ import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import java.io.File
 import java.io.IOException
 
-class IRToSQLConverter: FileConverter() {
+class IRToSQLConverter : FileConverter() {
     override fun convert(
         file: File,
         convertMode: ConvertModes,
@@ -83,16 +83,17 @@ class IRToSQLConverter: FileConverter() {
                 ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.db"
             }
         val database = createDatabase(filePath)
-        val graphId = GraphRepository(database).insertGraph(
-            name = info["name"]
-                ?: return Result.Error(FileErrors.ConverterError("`name` can not be null")),
-            author = info["author"]
-                ?: return Result.Error(FileErrors.ConverterError("`author` can not be null")),
-            isDirected = info["isDirected"]?.toBoolean()
-                ?: return Result.Error(FileErrors.ConverterError("`isDirected` can not be null")),
-            isWeighted = info["isWeighted"]?.toBoolean()
-                ?: return Result.Error(FileErrors.ConverterError("`isWeighted` can not be null")),
-        )
+        val graphId =
+            GraphRepository(database).insertGraph(
+                name =
+                    info["name"] ?: return Result.Error(FileErrors.ConverterError("`name` can not be null")),
+                author =
+                    info["author"] ?: return Result.Error(FileErrors.ConverterError("`author` can not be null")),
+                isDirected =
+                    info["isDirected"]?.toBoolean() ?: return Result.Error(FileErrors.ConverterError("`isDirected` can not be null")),
+                isWeighted =
+                    info["isWeighted"]?.toBoolean() ?: return Result.Error(FileErrors.ConverterError("`isWeighted` can not be null")),
+            )
 
         val vertexRepository = VertexRepository(database)
         vertices.forEach { vertex ->

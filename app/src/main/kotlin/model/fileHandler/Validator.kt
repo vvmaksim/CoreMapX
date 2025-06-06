@@ -86,7 +86,7 @@ class Validator {
         private fun validateJSON(file: File): Result<String> {
             try {
                 val json = Json { ignoreUnknownKeys = true }
-                val graphData = json.decodeFromString<GraphData>(file.readText())
+                json.decodeFromString<GraphData>(file.readText())
                 return Result.Success("JSON is correct")
             } catch (ex: Exception) {
                 return Result.Error(FileErrors.ConverterError(ex.toString()))
@@ -98,11 +98,12 @@ class Validator {
                 return Result.Error(FileErrors.ErrorReadingFile("Database file does not exist or is empty"))
             }
 
-            val database = try {
-                createDatabase(file.absolutePath)
-            } catch (ex: Exception) {
-                return Result.Error(FileErrors.ErrorReadingFile("Cannot open database: ${ex.message}"))
-            }
+            val database =
+                try {
+                    createDatabase(file.absolutePath)
+                } catch (ex: Exception) {
+                    return Result.Error(FileErrors.ErrorReadingFile("Cannot open database: ${ex.message}"))
+                }
 
             try {
                 GraphRepository(database).getAllGraphs()
@@ -112,11 +113,12 @@ class Validator {
                 return Result.Error(FileErrors.ErrorReadingFile("One or more required tables are missing: ${ex.message}"))
             }
 
-            val graphs = try {
-                GraphRepository(database).getAllGraphs()
-            } catch (ex: Exception) {
-                return Result.Error(FileErrors.ErrorReadingFile("Cannot read graphs: ${ex.message}"))
-            }
+            val graphs =
+                try {
+                    GraphRepository(database).getAllGraphs()
+                } catch (ex: Exception) {
+                    return Result.Error(FileErrors.ErrorReadingFile("Cannot read graphs: ${ex.message}"))
+                }
 
             graphs.forEach { graph ->
                 val graphId = graph.graph_id
@@ -136,14 +138,18 @@ class Validator {
                 val vertexIdSet = vertexIds.toSet()
                 for (edge in edgeRepository) {
                     if (edge.from_vertex !in vertexIdSet || edge.to_vertex !in vertexIdSet) {
-                        return Result.Error(FileErrors.ErrorReadingFile("Edge (${edge.from_vertex}, ${edge.to_vertex}) in graph $graphId refers to non-existent vertex"))
+                        return Result.Error(
+                            FileErrors.ErrorReadingFile(
+                                "Edge (${edge.from_vertex}, ${edge.to_vertex}) in graph $graphId refers to non-existent vertex",
+                            ),
+                        )
                     }
                 }
 
                 val booleanInfo = listOf(graph.isDirected, graph.isWeighted)
                 for (boolean in booleanInfo) {
                     if (boolean.toBooleanOrNull() == null) {
-                    return Result.Error(FileErrors.ErrorReadingFile("Boolean field in graph $graphId is not valid: $boolean"))
+                        return Result.Error(FileErrors.ErrorReadingFile("Boolean field in graph $graphId is not valid: $boolean"))
                     }
                 }
             }

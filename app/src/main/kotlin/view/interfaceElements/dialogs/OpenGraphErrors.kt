@@ -1,41 +1,48 @@
 package view.interfaceElements.dialogs
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import org.coremapx.app.config
+import extensions.warning
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun OpenGraphErrors(
     onDismiss: () -> Unit,
     warnings: List<String>,
 ) {
-    val backgroundColor = config.getColor("mainMenuColor")
-    val textColor = config.getColor("mainMenuButtonTextColor")
-    val buttonColor = config.getColor("mainMenuButtonColor")
-
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             modifier =
                 Modifier
-                    .width(600.dp)
+                    .width(550.dp)
                     .padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-            color = backgroundColor,
+            shape = MaterialTheme.shapes.large,
+            color = MaterialTheme.colors.background,
         ) {
             Column(
                 modifier =
@@ -48,21 +55,15 @@ fun OpenGraphErrors(
                     imageVector = Icons.Default.Warning,
                     contentDescription = "Warning",
                     modifier = Modifier.size(48.dp),
-                    tint = Color(0xFFFFA000),
+                    tint = MaterialTheme.colors.warning,
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Text(
                     text = "Errors and warnings when loading the graph",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = textColor,
+                    style = MaterialTheme.typography.h5,
                     textAlign = TextAlign.Center,
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Card(
                     modifier =
                         Modifier
@@ -80,48 +81,38 @@ fun OpenGraphErrors(
                                 modifier =
                                     Modifier
                                         .fillMaxWidth()
-                                        .padding(vertical = 4.dp),
+                                        .padding(vertical = 16.dp),
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Error,
                                     contentDescription = "Error",
-                                    modifier = Modifier.size(16.dp),
-                                    tint = Color(0xFFE53935),
+                                    modifier = Modifier.size(20.dp),
+                                    tint = MaterialTheme.colors.error,
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
+                                Spacer(modifier = Modifier.width(16.dp))
                                 Text(
                                     text = error,
-                                    color = textColor,
-                                    fontSize = 14.sp,
-                                )
-                            }
-                            if (index < warnings.size - 1) {
-                                Divider(
-                                    modifier = Modifier.padding(vertical = 8.dp),
-                                    color = Color.White.copy(alpha = 0.1f),
+                                    style = MaterialTheme.typography.body1,
                                 )
                             }
                         }
                     }
                 }
-
                 Spacer(modifier = Modifier.height(24.dp))
-
                 Button(
                     onClick = onDismiss,
                     colors =
                         ButtonDefaults.buttonColors(
-                            backgroundColor = buttonColor,
-                            contentColor = textColor,
+                            backgroundColor = MaterialTheme.colors.primary,
+                            contentColor = MaterialTheme.colors.background,
                         ),
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.width(200.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
                         text = "OK",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.button,
                     )
                 }
             }

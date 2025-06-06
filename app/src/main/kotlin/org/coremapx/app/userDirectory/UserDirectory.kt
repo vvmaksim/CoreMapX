@@ -11,7 +11,7 @@ private val logger = KotlinLogging.logger {}
 
 object UserDirectory {
     val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
-    private val defaultConfigPath = "app/src/main/resources/Configs/DefaultConfig.gcfg"
+    private const val DEFAULT_CONFIG_PATH = "app/src/main/resources/Configs/DefaultConfig.gcfg"
     private val directories =
         listOf(
             "$baseUserDirPath/logs",
@@ -40,7 +40,7 @@ object UserDirectory {
             logger.info { "Copying default config to $targetConfigPath" }
             try {
                 Files.copy(
-                    Paths.get(defaultConfigPath),
+                    Paths.get(DEFAULT_CONFIG_PATH),
                     Paths.get(targetConfigPath),
                     StandardCopyOption.REPLACE_EXISTING,
                 )

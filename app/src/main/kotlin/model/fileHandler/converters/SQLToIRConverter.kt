@@ -12,7 +12,7 @@ import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import org.coremapx.graph.GraphDatabase
 import java.io.File
 
-class SQLToIRConverter: FileConverter() {
+class SQLToIRConverter : FileConverter() {
     override fun convert(
         file: File,
         convertMode: ConvertModes,
@@ -22,13 +22,16 @@ class SQLToIRConverter: FileConverter() {
 
         val database: GraphDatabase = createDatabase(file.absolutePath)
 
-        val info = GraphRepository(database).getGraphById(graphId)
-            ?: return Result.Error(FileErrors.ConverterError("Graph info with graphId:$graphId not found"))
+        val info =
+            GraphRepository(database).getGraphById(graphId)
+                ?: return Result.Error(FileErrors.ConverterError("Graph info with graphId:$graphId not found"))
 
-        val isDirected = info.isDirected.toBooleanOrNull()
-            ?: return Result.Error(FileErrors.ConverterError("isDirected must be `1` or `0`"))
-        val isWeighted = info.isDirected.toBooleanOrNull()
-            ?: return Result.Error(FileErrors.ConverterError("isWeighted must be `1` or `0`"))
+        val isDirected =
+            info.isDirected.toBooleanOrNull()
+                ?: return Result.Error(FileErrors.ConverterError("isDirected must be `1` or `0`"))
+        val isWeighted =
+            info.isDirected.toBooleanOrNull()
+                ?: return Result.Error(FileErrors.ConverterError("isWeighted must be `1` or `0`"))
 
         val vertices = VertexRepository(database).getVerticesByGraph(graphId)
         val edges = EdgeRepository(database).getEdgesByGraph(graphId)

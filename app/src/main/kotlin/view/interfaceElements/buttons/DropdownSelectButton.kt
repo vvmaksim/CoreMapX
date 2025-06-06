@@ -2,43 +2,50 @@ package view.interfaceElements.buttons
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.runtime.*
-import androidx.compose.runtime.internal.composableLambda
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import org.coremapx.app.config
+import extensions.border
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun DropdownSelectButton(
     items: List<String>,
     selectedItem: String,
     onItemSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
-    additionalColor: Color = config.getColor("mainMenuButtonTextColor"),
-    borderColor: Color = config.getColor("dialogBorderColor"),
+    borderColor: Color = MaterialTheme.colors.border,
     borderWidth: Dp = 1.dp,
-    backgroundColor: Color = config.getColor("dialogBackgroundColor"),
-    textColor: Color = config.getColor("dialogTextColor"),
-    fontSize: TextUnit = 16.sp,
     height: Dp = 56.dp,
     iconSize: Dp = 24.dp,
-    roundedCornerShapeSize: Dp = 8.dp,
+    borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
 ) {
     var expanded by remember { mutableStateOf(false) }
     val rotation by animateFloatAsState(if (expanded) 180f else 0f)
@@ -47,13 +54,10 @@ fun DropdownSelectButton(
         modifier =
             modifier
                 .wrapContentSize()
-                .clip(shape = RoundedCornerShape(roundedCornerShapeSize))
+                .clip(shape = borderShape)
                 .border(
                     border = BorderStroke(borderWidth, borderColor),
-                    shape = RoundedCornerShape(roundedCornerShapeSize),
-                ).background(
-                    color = backgroundColor,
-                    shape = RoundedCornerShape(roundedCornerShapeSize),
+                    shape = borderShape,
                 ).clickable { expanded = !expanded },
     ) {
         Row(
@@ -67,9 +71,7 @@ fun DropdownSelectButton(
         ) {
             Text(
                 text = selectedItem,
-                fontSize = fontSize,
-                fontWeight = FontWeight.Medium,
-                color = textColor,
+                style = MaterialTheme.typography.body1,
             )
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
@@ -78,15 +80,13 @@ fun DropdownSelectButton(
                     Modifier
                         .size(iconSize)
                         .rotate(rotation),
-                tint = additionalColor,
+                tint = MaterialTheme.colors.primary,
             )
         }
 
         DropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false },
-            modifier = Modifier
-                .background(backgroundColor)
         ) {
             items.forEach { item ->
                 DropdownMenuItem(
@@ -97,8 +97,8 @@ fun DropdownSelectButton(
                 ) {
                     Text(
                         text = item,
-                        fontSize = fontSize,
-                        color = if (item == selectedItem) additionalColor else textColor,
+                        style = MaterialTheme.typography.body1,
+                        color = if (item == selectedItem) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface,
                     )
                 }
             }

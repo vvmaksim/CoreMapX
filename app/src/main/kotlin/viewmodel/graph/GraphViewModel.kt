@@ -10,7 +10,12 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
 ) {
     private val _vertices: Map<V, VertexViewModel<V>> =
         graph.vertices.mapValues { (_, vertex) ->
-            VertexViewModel(x = 0.dp, y = 0.dp, vertex = vertex, _labelVisible = showVerticesLabels)
+            VertexViewModel(
+                x = 0.dp,
+                y = 0.dp,
+                vertex = vertex,
+                _labelVisible = showVerticesLabels,
+            )
         }
 
     private val _edges: Map<E, EdgeViewModel<E, V>> =

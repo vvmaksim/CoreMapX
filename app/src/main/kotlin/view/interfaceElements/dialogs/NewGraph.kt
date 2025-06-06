@@ -1,27 +1,47 @@
 package view.interfaceElements.dialogs
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.Button
+import androidx.compose.material.Card
+import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import extensions.border
+import extensions.cancelIcon
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph
 import model.graph.classes.UndirectedWeightedGraph
 import model.graph.interfaces.Graph
-import org.coremapx.app.config
 import viewmodel.MainScreenViewModel
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
-fun <E: Comparable<E>, V: Comparable<V>>NewGraph(
+fun <E : Comparable<E>, V : Comparable<V>> NewGraph(
     onDismiss: () -> Unit,
     viewModel: MainScreenViewModel<E, V>,
 ) {
@@ -29,144 +49,121 @@ fun <E: Comparable<E>, V: Comparable<V>>NewGraph(
     var isWeighted by remember { mutableStateOf(false) }
     var isDirected by remember { mutableStateOf(false) }
     var showError by remember { mutableStateOf(false) }
-    val additionalColor = config.getColor("mainMenuButtonTextColor")
-    val dialogBackgroundColor = config.getColor("dialogBackgroundColor")
-    val dialogBorderColor = config.getColor("dialogBorderColor")
-    val dialogTextColor = config.getColor("dialogTextColor")
-    val dialogWarningTextColor = config.getColor("dialogWarningTextColor")
-    val contentColorButton1 = config.getColor("contentColorButton1")
-    val contentColorButton2 = config.getColor("contentColorButton2")
-    val checkboxUncheckedColor = config.getColor("checkboxUncheckedColor")
-
-    val titleSize = 24.sp
-    val textSize = 16.sp
-    val buttonHeight = 48.dp
-    val buttonTextSize = 16.sp
 
     Dialog(onDismissRequest = onDismiss) {
         Card(
-            modifier = Modifier
-                .width(400.dp)
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-            elevation = 8.dp,
-            backgroundColor = dialogBackgroundColor,
+            modifier =
+                Modifier
+                    .width(450.dp)
+                    .padding(16.dp),
+            shape = MaterialTheme.shapes.large,
+            backgroundColor = MaterialTheme.colors.background,
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+                Box(modifier = Modifier.fillMaxWidth()) {
                     Text(
                         text = "Create New Graph",
-                        fontSize = titleSize,
-                        fontWeight = FontWeight.Bold,
-                        color = dialogTextColor,
+                        style = MaterialTheme.typography.h5,
+                        modifier = Modifier.align(Alignment.Center),
                     )
-                    IconButton(onClick = onDismiss) {
+                    IconButton(
+                        onClick = onDismiss,
+                        modifier = Modifier.align(Alignment.CenterEnd),
+                    ) {
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Close",
-                            tint = contentColorButton1,
+                            tint = MaterialTheme.colors.cancelIcon,
                         )
                     }
                 }
-
                 Spacer(modifier = Modifier.height(24.dp))
-
                 OutlinedTextField(
                     value = graphName,
                     onValueChange = {
                         graphName = it
                         showError = false
                     },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(70.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(70.dp),
                     label = { Text("Graph Name") },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.Edit,
                             contentDescription = "Name",
-                            tint = additionalColor
+                            tint = MaterialTheme.colors.primary,
                         )
                     },
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = additionalColor,
-                        unfocusedBorderColor = dialogBorderColor,
-                        cursorColor = additionalColor,
-                        focusedLabelColor = additionalColor,
-                        unfocusedLabelColor = dialogTextColor,
-                        textColor = dialogTextColor,
-                    ),
-                    shape = RoundedCornerShape(8.dp),
-                    singleLine = true
+                    colors =
+                        TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = MaterialTheme.colors.primary,
+                            unfocusedBorderColor = MaterialTheme.colors.border,
+                            cursorColor = MaterialTheme.colors.primary,
+                            focusedLabelColor = MaterialTheme.colors.primary,
+                            unfocusedLabelColor = MaterialTheme.colors.onSurface,
+                        ),
+                    shape = MaterialTheme.shapes.medium,
+                    singleLine = true,
                 )
 
                 if (showError) {
-                    Spacer(modifier = Modifier.height(4.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "Field Graph Name cannot be empty",
-                        color = dialogWarningTextColor,
-                        fontSize = textSize,
-                        modifier = Modifier.padding(start = 4.dp)
+                        color = MaterialTheme.colors.error,
+                        style = MaterialTheme.typography.body1,
+                        modifier = Modifier.padding(start = 4.dp),
                     )
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                Column(
-                    modifier = Modifier.padding(16.dp)
-                ) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Column(modifier = Modifier.padding(16.dp)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Checkbox(
                             checked = isDirected,
                             onCheckedChange = { isDirected = it },
-                            colors = CheckboxDefaults.colors(
-                                checkedColor = additionalColor,
-                                uncheckedColor = checkboxUncheckedColor
-                            )
+                            colors =
+                                CheckboxDefaults.colors(
+                                    checkedColor = MaterialTheme.colors.primary,
+                                    uncheckedColor = MaterialTheme.colors.border,
+                                ),
                         )
                         Text(
-                            "Directed Graph",
-                            fontSize = textSize,
-                            color = dialogTextColor,
+                            text = "Directed Graph",
+                            style = MaterialTheme.typography.body1,
                         )
                     }
-
                     Spacer(modifier = Modifier.height(8.dp))
-
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Checkbox(
                             checked = isWeighted,
                             onCheckedChange = { isWeighted = it },
-                            colors = CheckboxDefaults.colors(
-                                checkedColor = additionalColor,
-                                uncheckedColor = checkboxUncheckedColor
-                            )
+                            colors =
+                                CheckboxDefaults.colors(
+                                    checkedColor = MaterialTheme.colors.primary,
+                                    uncheckedColor = MaterialTheme.colors.border,
+                                ),
                         )
                         Text(
-                            "Weighted Graph",
-                            fontSize = textSize,
-                            color = dialogTextColor,
+                            text = "Weighted Graph",
+                            style = MaterialTheme.typography.body1,
                         )
                     }
                 }
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Button(
                     onClick = {
                         if (graphName.isBlank()) {
@@ -187,17 +184,12 @@ fun <E: Comparable<E>, V: Comparable<V>>NewGraph(
                         viewModel.updateGraph(newGraph)
                         onDismiss()
                     },
-                    colors = ButtonDefaults.buttonColors(backgroundColor = additionalColor),
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(buttonHeight)
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        "Create",
-                        color = contentColorButton2,
-                        fontSize = buttonTextSize,
-                        fontWeight = FontWeight.Medium
+                        text = "Create",
+                        style = MaterialTheme.typography.button,
                     )
                 }
             }
