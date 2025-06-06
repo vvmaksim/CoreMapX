@@ -1,118 +1,116 @@
-versionConfig=1.0
+# This file was automatically generated
+# It's better to edit it with app closed
 
 ! General settings
 
-#Supported languages: en, ru
+versionConfig=1.0
+
+# Supported languages: en, ru
 language=en
 
+# Supported values: light, dark
+theme=light
+
+# Supported values: light, dark
+fileDialogTheme=light
+
+! Colors
+
+primary=#6200EE
+primaryVariant=#757575
+secondary=#FFC107
+secondaryVariant=#FFA000
+background=#E6E6FA
+surface=#F5F5F5
+error=#F44336
+onPrimary=#FFFFFF
+onSecondary=#000000
+onBackground=#000000
+onSurface=#000000
+onError=#FFFFFF
+
+borderColor=#C0C0C0
+cancelIconColor=#FFFFFF
+warningColor=#FFB300
+vertexMainColor=#f15bb5
+hoveredBorderColor=#6200EE
+edgeMainColor=#000000
+canvasBackgroundColor=#FFFFFF
+# It will be applied if parameter isTransparentCommandLine=false
+commandLineBackgroundColor=#FFFFFF
 
 ! Main Screen
 
-# The initial height of the app. Min=720 (px)
+# Min=720 (px)
 mainScreenStartHeight=720
-# The initial width of the app. Min=1280 (px)
-mainScreenStartWidth=1280
-# The start window placement. Supported values: FullScreen, Floating, Maximized
-startWindowPlacement=Maximized
 
+# Min=1280 (px)
+mainScreenStartWidth=1280
+
+# Supported values: FullScreen, Floating, Maximized
+startWindowPlacement=Maximized
 
 ! Main Menu
 
-# Width of the main menu. Min=200 (dp)
+# Min=200 (dp)
 mainMenuWidth=200
-# Background color of the main menu
-mainMenuColor=#E6E6FA
-# Text color in the main menu
-mainMenuTextColor=#000000
-# Color of buttons in the main menu
-mainMenuButtonColor=#E6E6FA
-# Text color of buttons in the main menu
-mainMenuButtonTextColor=#6200EE
-# Text color of disabled buttons in the main menu
-mainMenuDisabledButtonTextColor=#656565
-
-! Dialogs
-
-# Background color of the dialogs
-dialogBackgroundColor=#F5F5F5
-# Border color of the dialogs
-dialogBorderColor=#E0E0E0
-# Text color in the dialogs
-dialogTextColor=#000000
-# Text color for warnings in the dialogs
-dialogWarningTextColor=#D32F2F
-# Background color of the button 1 in dialogs
-backgroundColorButton1=#E0E0E0
-# Content color of the button 1 in dialogs
-contentColorButton1=#000000
-# Background color of the button 2 in dialogs
-backgroundColorButton2=#6200EE
-# Content color of the button 2 in dialogs
-contentColorButton2=#F5F5F5
-# Color of the unchecked checkbox in dialogs
-checkboxUncheckedColor=#666666
 
 ! Title Bar
 
-# Background color of the title bar
-titleBarColor=#E6E6FA
-# Icon tint color of the title bar
-titleBarIconTintColor=#000000
-# Height of the title bar. Min=30 (dp)
-titleBarHeight=32
-# Size of title bar icons. Min=16 (dp)
+# Min=35 (dp)
+titleBarHeight=40
+
+# Min=16 (dp)
 titleBarIconSize=20
 
 ! Command Field
 
-# Height of the message output area. Min=150 (dp)
+# Min=150 (dp)
 messageOutputHeight=200
-# Maximum number of messages to keep in history. Min=1 Max=10000
+
+# Min=1 Max=10000
 maxCountMessages=100
-# Height of the command input field. Min=56 (dp)
-commandFieldHeight=56
-# Width of the command input field. Min=400 (dp)
+
+# Min=400 (dp)
 commandFieldWidth=666
-# Command line is transparent(true) or colored(false)
+
+# true or false
 isTransparentCommandLine=false
-# Background color of the command line. It will be applied if parameter isTransparentCommandLine=false
-commandLineBackgroundColor=#FFFFFF
 
 
 ! Work Area
 
-# The graph layout height. Min=2000 (px)
-graphLayoutHeight=2000
-# The graph layout width. Min=1000 (px)
-graphLayoutWidth=2000
-# Radius of vertices. Min=1 (dp)
+# Min=2000 (px)
+graphLayoutHeight=3500
+
+# Min=1000 (px)
+graphLayoutWidth=3500
+
+# Min=1 (dp)
 vertexRadius=20
-# Default color of vertices
-vertexMainColor=#f15bb5
-# Color of vertex labels
-vertexLabelColor=#000000
-# Size of vertex labels. Min=1 (sp)
+
+# Min=1 (sp)
 vertexLabelSize=14
-# Default color of edges
-edgeMainColor=#000000
-# Color of edge labels
-edgeLabelColor=#000000
-# Size of edge labels. Min=1 (sp)
+
+# Min=1 (sp)
 edgeLabelSize=14
-# Size of edge arrow. Min=1 Max=100(sp)
+
+# Min=1 Max=100 (sp)
 edgeArrowSize=10
-# Width of edges. Min=1 (dp)
+
+# Min=1 (dp)
 edgeWidth=1
-# Ratio for canvas dragging. Min=0.1 Max=10 (float)
+
+# Min=0.1 Max=10 (float)
 canvasDragRatio=1
-# Maximum canvas size. Min=2000 (px)
+
+# Min=2000 (px)
 canvasLimit=2000
-# Background color of the work area
-canvasBackgroundColor=#FFFFFF
 
 ! Performance
 
-# Duration of animations in milliseconds. Min=100 Max=1500 (ms)
+# Min=100 Max=1500 (ms)
 animationDuration=300
-# Delay in message appearance in milliseconds. Min=10 Max=300 (ms)
+
+# Min=10 Max=300 (ms)
 commandFieldScrollDelay=50

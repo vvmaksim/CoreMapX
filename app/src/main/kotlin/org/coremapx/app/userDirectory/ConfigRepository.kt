@@ -118,7 +118,7 @@ class ConfigRepository {
         return try {
             val colorInt = "FF${color.removePrefix("#")}".toLong(16)
             Color(colorInt)
-        } catch (e: NumberFormatException) {
+        } catch (ex: NumberFormatException) {
             throw IllegalArgumentException("Invalid color format: $color")
         }
     }
@@ -127,9 +127,9 @@ class ConfigRepository {
         try {
             comparisonWithDefaultConfig()
             checkGeneralSettings()
+            checkColorsSettings()
             checkMainScreenSettings()
             checkMainMenuSettings()
-            checkDialogSettings()
             checkTitleBarSettings()
             checkCommandFieldSettings()
             checkWorkAreaSettings()
@@ -155,6 +155,32 @@ class ConfigRepository {
 
     private fun checkGeneralSettings() {
         require(getStringValue("language") in listOf("ru", "en")) { "Supported languages: en, ru" }
+        require(getStringValue("theme") in listOf("light", "dark")) { "Supported themes: light, dark" }
+        require(getStringValue("fileDialogTheme") in listOf("light", "dark")) { "Supported fileDialogTheme: light, dark" }
+    }
+
+    private fun checkColorsSettings() {
+        require(validateColor(getStringValue("primary") ?: "")) { getColorErrorMessage("primary") }
+        require(validateColor(getStringValue("primaryVariant") ?: "")) { getColorErrorMessage("primaryVariant") }
+        require(validateColor(getStringValue("secondary") ?: "")) { getColorErrorMessage("secondary") }
+        require(validateColor(getStringValue("secondaryVariant") ?: "")) { getColorErrorMessage("secondaryVariant") }
+        require(validateColor(getStringValue("background") ?: "")) { getColorErrorMessage("background") }
+        require(validateColor(getStringValue("surface") ?: "")) { getColorErrorMessage("surface") }
+        require(validateColor(getStringValue("error") ?: "")) { getColorErrorMessage("error") }
+        require(validateColor(getStringValue("onPrimary") ?: "")) { getColorErrorMessage("onPrimary") }
+        require(validateColor(getStringValue("onSecondary") ?: "")) { getColorErrorMessage("onSecondary") }
+        require(validateColor(getStringValue("onBackground") ?: "")) { getColorErrorMessage("onBackground") }
+        require(validateColor(getStringValue("onSurface") ?: "")) { getColorErrorMessage("onSurface") }
+        require(validateColor(getStringValue("onError") ?: "")) { getColorErrorMessage("onError") }
+
+        require(validateColor(getStringValue("borderColor") ?: "")) { getColorErrorMessage("borderColor") }
+        require(validateColor(getStringValue("cancelIconColor") ?: "")) { getColorErrorMessage("cancelIconColor") }
+        require(validateColor(getStringValue("warningColor") ?: "")) { getColorErrorMessage("warningColor") }
+        require(validateColor(getStringValue("vertexMainColor") ?: "")) { getColorErrorMessage("vertexMainColor") }
+        require(validateColor(getStringValue("hoveredBorderColor") ?: "")) { getColorErrorMessage("hoveredBorderColor") }
+        require(validateColor(getStringValue("edgeMainColor") ?: "")) { getColorErrorMessage("edgeMainColor") }
+        require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) { getColorErrorMessage("canvasBackgroundColor") }
+        require(validateColor(getStringValue("commandLineBackgroundColor") ?: "")) { getColorErrorMessage("commandLineBackgroundColor") }
     }
 
     private fun checkMainScreenSettings() {
@@ -167,31 +193,10 @@ class ConfigRepository {
 
     private fun checkMainMenuSettings() {
         require((((getIntValue("mainMenuWidth") ?: 0) >= 200))) { "mainMenuWidth must be >= 200 dp" }
-        require(validateColor(getStringValue("mainMenuColor") ?: "")) { getColorErrorMessage("mainMenuColor") }
-        require(validateColor(getStringValue("mainMenuTextColor") ?: "")) { getColorErrorMessage("mainMenuTextColor") }
-        require(validateColor(getStringValue("mainMenuButtonColor") ?: "")) { getColorErrorMessage("mainMenuButtonColor") }
-        require(validateColor(getStringValue("mainMenuButtonTextColor") ?: "")) { getColorErrorMessage("mainMenuButtonTextColor") }
-        require(
-            validateColor(getStringValue("mainMenuDisabledButtonTextColor") ?: ""),
-        ) { getColorErrorMessage("mainMenuDisabledButtonTextColor") }
-    }
-
-    private fun checkDialogSettings() {
-        require(validateColor(getStringValue("dialogBackgroundColor") ?: "")) { getColorErrorMessage("dialogBackgroundColor") }
-        require(validateColor(getStringValue("dialogBorderColor") ?: "")) { getColorErrorMessage("dialogBorderColor") }
-        require(validateColor(getStringValue("dialogTextColor") ?: "")) { getColorErrorMessage("dialogTextColor") }
-        require(validateColor(getStringValue("dialogWarningTextColor") ?: "")) { getColorErrorMessage("dialogWarningTextColor") }
-        require(validateColor(getStringValue("backgroundColorButton1") ?: "")) { getColorErrorMessage("backgroundColorButton1") }
-        require(validateColor(getStringValue("contentColorButton1") ?: "")) { getColorErrorMessage("contentColorButton1") }
-        require(validateColor(getStringValue("backgroundColorButton2") ?: "")) { getColorErrorMessage("backgroundColorButton2") }
-        require(validateColor(getStringValue("contentColorButton2") ?: "")) { getColorErrorMessage("contentColorButton2") }
-        require(validateColor(getStringValue("checkboxUncheckedColor") ?: "")) { getColorErrorMessage("checkboxUncheckedColor") }
     }
 
     private fun checkTitleBarSettings() {
-        require(validateColor(getStringValue("titleBarColor") ?: "")) { getColorErrorMessage("titleBarColor") }
-        require(validateColor(getStringValue("titleBarIconTintColor") ?: "")) { getColorErrorMessage("titleBarIconTintColor") }
-        require((((getIntValue("titleBarHeight") ?: 0) >= 30))) { "titleBarHeight must be >= 30 dp" }
+        require((((getIntValue("titleBarHeight") ?: 0) >= 35))) { "titleBarHeight must be >= 35 dp" }
         require((((getIntValue("titleBarIconSize") ?: 0) >= 16))) { "titleBarIconSize must be >= 16 dp" }
     }
 
@@ -199,21 +204,15 @@ class ConfigRepository {
         require((((getIntValue("messageOutputHeight") ?: 0) >= 150))) { "messageOutputHeight must be >= 150 dp" }
         val maxCountMessages = getIntValue("maxCountMessages") ?: 0
         require((1 <= maxCountMessages) && (maxCountMessages <= 10000)) { "maxCountMessages must be >= 1, but <= 10000" }
-        require((((getIntValue("commandFieldHeight") ?: 0) >= 56))) { "commandFieldHeight must be >= 56 dp" }
         require((((getIntValue("commandFieldWidth") ?: 0) >= 400))) { "commandFieldWidth must be >= 400 dp" }
         require((getBooleanValue("isTransparentCommandLine")) != null) { "isTransparentCommandLine must be true or false" }
-        require(validateColor(getStringValue("commandLineBackgroundColor") ?: "")) { getColorErrorMessage("commandLineBackgroundColor") }
     }
 
     private fun checkWorkAreaSettings() {
         require((((getIntValue("graphLayoutHeight") ?: 0) >= 2000))) { "graphLayoutHeight must be >= 2000 dp" }
         require((((getIntValue("graphLayoutWidth") ?: 0) >= 1000))) { "graphLayoutWidth must be >= 1000 dp" }
         require((((getIntValue("vertexRadius") ?: 0) >= 1))) { "vertexRadius must be >= 1 dp" }
-        require(validateColor(getStringValue("vertexMainColor") ?: "")) { getColorErrorMessage("vertexMainColor") }
-        require(validateColor(getStringValue("vertexLabelColor") ?: "")) { getColorErrorMessage("vertexLabelColor") }
         require((((getIntValue("vertexLabelSize") ?: 0) >= 1))) { "vertexLabelSize must be >= 1 sp" }
-        require(validateColor(getStringValue("edgeMainColor") ?: "")) { getColorErrorMessage("edgeMainColor") }
-        require(validateColor(getStringValue("edgeLabelColor") ?: "")) { getColorErrorMessage("edgeLabelColor") }
         require((((getIntValue("edgeLabelSize") ?: 0) >= 1))) { "edgeLabelSize must be >= 1 sp" }
         val edgeArrowSize = getIntValue("edgeArrowSize") ?: 0
         require((1 <= edgeArrowSize) && (edgeArrowSize <= 100)) { "edgeArrowSize must be >= 1, but <= 100" }
@@ -221,7 +220,6 @@ class ConfigRepository {
         val canvasDragRatio = getDoubleValue("canvasDragRatio") ?: 0.0
         require((0.1 <= canvasDragRatio) && (canvasDragRatio <= 10)) { "canvasDragRatio must be >= 0.1, but <= 10" }
         require((((getIntValue("canvasLimit") ?: 0) >= 2000))) { "canvasLimit must be >= 2000 px" }
-        require(validateColor(getStringValue("canvasBackgroundColor") ?: "")) { getColorErrorMessage("canvasBackgroundColor") }
     }
 
     private fun checkPerformanceSettings() {
