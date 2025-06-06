@@ -27,5 +27,5 @@ sqldelight {
 }
 
 application {
-    mainClass = "org.coremapx.app.AppKt"
+    mainClass = "org.coremapx.app.MainKt"
 }
