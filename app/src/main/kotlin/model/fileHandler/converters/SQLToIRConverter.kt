@@ -58,7 +58,6 @@ class SQLToIRConverter : FileConverter() {
                 ir.append("add edge ${edge.from_vertex} ${edge.to_vertex}\n")
             }
         }
-        println(ir)
         val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.graph"
