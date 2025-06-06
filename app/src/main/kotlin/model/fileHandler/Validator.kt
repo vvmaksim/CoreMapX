@@ -125,7 +125,7 @@ class Validator {
                 val vertexRepository = VertexRepository(database).getVerticesByGraph(graphId)
                 val edgeRepository = EdgeRepository(database).getEdgesByGraph(graphId)
 
-                val vertexIds = vertexRepository.map { it.id }
+                val vertexIds = vertexRepository.map { it.vertex_id }
                 if (vertexIds.size != vertexIds.toSet().size) {
                     return Result.Error(FileErrors.ErrorReadingFile("Duplicate vertex id in graph $graphId"))
                 }
