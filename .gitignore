@@ -46,7 +46,6 @@ bin/
 .DS_Store
 
 # Any files
-Main.kt
 
 # Any directory
 logs/
