@@ -1,0 +1,29 @@
+package extensions
+
+import androidx.compose.material.Colors
+import androidx.compose.ui.graphics.Color
+import org.coremapx.app.theme.Theme
+
+val Colors.border: Color
+    get() = Theme.borderColor
+
+val Colors.cancelIcon: Color
+    get() = Theme.cancelIconColor
+
+val Colors.warning: Color
+    get() = Theme.warningColor
+
+val Colors.vertexMain: Color
+    get() = Theme.vertexMainColor
+
+val Colors.hoveredBorder: Color
+    get() = Theme.hoveredBorderColor
+
+val Colors.edgeMain: Color
+    get() = Theme.edgeMainColor
+
+val Colors.canvasBackground: Color
+    get() = Theme.canvasBackgroundColor
+
+val Colors.commandLineBackground: Color
+    get() = Theme.commandLineBackgroundColor
