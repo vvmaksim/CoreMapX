@@ -161,6 +161,11 @@ fun OpenRepository(
                                                         style = MaterialTheme.typography.body1,
                                                         modifier = Modifier.align(Alignment.CenterHorizontally),
                                                     )
+                                                    Text(
+                                                        text = "graphId: ${graph.graph_id}",
+                                                        style = MaterialTheme.typography.body1,
+                                                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                                                    )
                                                     Spacer(modifier = Modifier.height(4.dp))
                                                     Row(
                                                         modifier = Modifier.align(Alignment.CenterHorizontally),
