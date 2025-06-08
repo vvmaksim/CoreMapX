@@ -51,19 +51,41 @@ class ConfigRepository {
         key: String,
         value: String,
     ) {
-        val configFile = File(mainConfigPath)
-        val properties = Properties()
-        if (configFile.exists()) {
-            configFile.inputStream().use { input ->
-                properties.load(input)
-            }
-        }
-        properties.setProperty(key, value)
-        configFile.outputStream().use { output ->
-            properties.store(output, "Updated Config")
-        }
+        updateConfigFile(key, value)
         userConfig[key] = value
         logger.info { "Updated config. For key: $key new value: $value" }
+    }
+
+    private fun updateConfigFile(
+        key: String,
+        value: String,
+    ) {
+        val configFile = File(mainConfigPath)
+        if (!configFile.exists()) {
+            logger.error { "There is nothing to update, the configuration file has not been found" }
+            return
+        }
+        val lines = configFile.readLines()
+        val updatedLines =
+            lines.map { line ->
+                if (line.trim().startsWith("$key=")) {
+                    "$key=$value"
+                } else {
+                    line
+                }
+            }
+        if (lines == updatedLines) {
+            logger.warn { "Key '$key' not found in config file" }
+            return
+        }
+        configFile.bufferedWriter().use { writer ->
+            updatedLines.forEachIndexed { index, line ->
+                writer.write(line)
+                if (index < updatedLines.size - 1) {
+                    writer.newLine()
+                }
+            }
+        }
     }
 
     private fun loadUserConfig() {
