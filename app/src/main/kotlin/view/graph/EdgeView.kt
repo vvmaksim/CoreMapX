@@ -27,9 +27,9 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
     modifier: Modifier = Modifier,
 ) {
     val edgeMainColor = MaterialTheme.colors.edgeMain
-    val edgeWidth = config.getFloatValue("edgeWidth") ?: 0f
-    val edgeArrowSize = config.getFloatValue("edgeArrowSize") ?: 0f
-    val edgeLabelSize = (config.getIntValue("edgeLabelSize") ?: 0).sp
+    val edgeWidth = config.getFloatValue("edgeWidth")
+    val edgeArrowSize = config.getFloatValue("edgeArrowSize")
+    val edgeLabelSize = config.getIntValue("edgeLabelSize").sp
 
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = modifier.fillMaxSize()) {

@@ -32,9 +32,9 @@ import java.io.File
 class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     private val visualizationStrategy: VisualizationStrategy = RandomStrategy(),
 ) {
-    val canvasLimit = config.getFloatValue("canvasLimit") ?: 0f
-    val graphLayoutHeight = config.getDoubleValue("graphLayoutHeight") ?: 0.0
-    val graphLayoutWidth = config.getDoubleValue("graphLayoutWidth") ?: 0.0
+    val canvasLimit = config.getFloatValue("canvasLimit")
+    val graphLayoutHeight = config.getDoubleValue("graphLayoutHeight")
+    val graphLayoutWidth = config.getDoubleValue("graphLayoutWidth")
 
     private var _showVerticesLabels = mutableStateOf(false)
     val showVerticesLabels: State<Boolean>

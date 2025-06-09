@@ -28,15 +28,14 @@ private val logger = KotlinLogging.logger {}
 val userDirectory = UserDirectory.init()
 val config = ConfigRepository()
 
-val startScreenWidth = config.getIntValue("mainScreenStartWidth") ?: 0
-val startScreenHeight = config.getIntValue("mainScreenStartHeight") ?: 0
-val titleBarHeight = (config.getIntValue("titleBarHeight") ?: 0).dp
+val startScreenWidth = config.getIntValue("mainScreenStartWidth")
+val startScreenHeight = config.getIntValue("mainScreenStartHeight")
 
 fun main() =
     application {
         logger.info("Started CoreMapX app")
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
-        val startWindowPlacement = config.getStringValue("startWindowPlacement") ?: ""
+        val startWindowPlacement = config.getStringValue("startWindowPlacement")
         val viewModel = MainScreenViewModel<Long, Long>()
         when (startWindowPlacement) {
             "FullScreen" -> windowState.placement = WindowPlacement.Fullscreen
@@ -52,6 +51,7 @@ fun main() =
             undecorated = true,
             state = windowState,
         ) {
+            val titleBarHeight = config.getIntValue("titleBarHeight").dp
             var isMaximized by remember { mutableStateOf(windowState.placement == WindowPlacement.Maximized) }
             window.minimumSize = Dimension(startScreenWidth, startScreenHeight)
 

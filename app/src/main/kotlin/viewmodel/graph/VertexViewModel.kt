@@ -15,7 +15,7 @@ class VertexViewModel<V : Comparable<V>>(
     color: Color = config.getColor("vertexMainColor"),
     private val vertex: Vertex<V>,
     private val _labelVisible: State<Boolean>,
-    val radius: Dp = (config.getIntValue("vertexRadius") ?: 0).dp,
+    val radius: Dp = config.getIntValue("vertexRadius").dp,
 ) {
     private var _x = mutableStateOf(x)
     var x: Dp

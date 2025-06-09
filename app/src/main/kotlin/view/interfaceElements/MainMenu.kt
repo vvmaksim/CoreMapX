@@ -54,7 +54,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier,
 ) {
-    val animationDuration = config.getIntValue("animationDuration") ?: 0
+    val animationDuration = config.getIntValue("animationDuration")
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showOpenRepositoryDialog by remember { mutableStateOf(false) }

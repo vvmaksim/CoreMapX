@@ -26,7 +26,7 @@ import viewmodel.MainScreenViewModel
 fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewModel<E, V>) {
     var isMenuVisible by remember { mutableStateOf(true) }
 
-    val mainMenuWidth = (config.getIntValue("mainMenuWidth") ?: 0).dp
+    val mainMenuWidth = config.getIntValue("mainMenuWidth").dp
 
     Box(modifier = Modifier.fillMaxSize()) {
         WorkSpace(

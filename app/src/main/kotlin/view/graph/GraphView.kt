@@ -27,7 +27,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
     onPan: (Float, Float) -> Unit,
     onZoom: (Float) -> Unit,
 ) {
-    val canvasDragRatio = (config.getIntValue("canvasDragRatio") ?: 0)
+    val canvasDragRatio = config.getIntValue("canvasDragRatio")
 
     Box(
         modifier =
