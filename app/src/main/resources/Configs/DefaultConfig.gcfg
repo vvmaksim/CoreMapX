@@ -3,8 +3,6 @@
 
 ! General settings
 
-versionConfig=1.0
-
 # Supported languages: en, ru
 language=en
 
@@ -89,17 +87,17 @@ graphLayoutWidth=3500
 # Min=1 (dp)
 vertexRadius=20
 
-# Min=1 (sp)
+# Min=6 (sp)
 vertexLabelSize=14
 
-# Min=1 (sp)
+# Min=6 (sp)
 edgeLabelSize=14
 
-# Min=1 Max=100 (sp)
-edgeArrowSize=10
+# Min=1 Max=100 (float)
+edgeArrowSize=10.0
 
-# Min=1 (dp)
-edgeWidth=1
+# Min=1 (float)
+edgeWidth=1.0
 
 # Min=0.1 Max=10 (float)
 canvasDragRatio=1
