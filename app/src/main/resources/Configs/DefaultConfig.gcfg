@@ -28,7 +28,6 @@ onSurface=#000000
 onError=#FFFFFF
 
 borderColor=#C0C0C0
-cancelIconColor=#FFFFFF
 warningColor=#FFB300
 vertexMainColor=#f15bb5
 hoveredBorderColor=#6200EE

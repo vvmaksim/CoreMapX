@@ -8,9 +8,6 @@ object Theme {
     val borderColor: Color
         get() = config.states.borderColor.value
 
-    val cancelIconColor: Color
-        get() = config.states.cancelIconColor.value
-
     val warningColor: Color
         get() = config.states.warningColor.value
 

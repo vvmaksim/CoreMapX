@@ -31,7 +31,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
-import extensions.cancelIcon
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph
@@ -79,7 +78,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraph(
                         Icon(
                             imageVector = Icons.Default.Close,
                             contentDescription = "Close",
-                            tint = MaterialTheme.colors.cancelIcon,
+                            tint = MaterialTheme.colors.onSurface,
                         )
                     }
                 }

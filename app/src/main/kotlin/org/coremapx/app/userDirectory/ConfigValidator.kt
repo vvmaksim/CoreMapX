@@ -19,8 +19,7 @@ class ConfigValidator {
                 // Colors
                 "primary", "primaryVariant", "secondary", "secondaryVariant",
                 "background", "surface", "error", "onPrimary", "onSecondary",
-                "onBackground", "onSurface", "onError", "borderColor",
-                "cancelIconColor", "warningColor", "vertexMainColor",
+                "onBackground", "onSurface", "onError", "borderColor", "warningColor", "vertexMainColor",
                 "hoveredBorderColor", "edgeMainColor", "canvasBackgroundColor",
                 "commandLineBackgroundColor",
                 -> colorValidator(key, value)

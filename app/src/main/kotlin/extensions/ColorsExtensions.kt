@@ -7,9 +7,6 @@ import org.coremapx.app.theme.Theme
 val Colors.border: Color
     get() = Theme.borderColor
 
-val Colors.cancelIcon: Color
-    get() = Theme.cancelIconColor
-
 val Colors.warning: Color
     get() = Theme.warningColor
 
