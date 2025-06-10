@@ -70,30 +70,33 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
 
-    fun handleCommand(command: String) {
+    fun handleCommand(commandLine: String) {
         if (graph == null) {
             updateOutputMessages("Error: ${CommandErrors.NoGraphSelected().type}.${CommandErrors.NoGraphSelected().description}")
             return
         }
-        val commandResult = Command.create(command)
-        when (commandResult) {
-            is Result.Success -> {
-                val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
-                when (executeResult) {
-                    is Result.Success -> {
-                        updateOutputMessages(executeResult.data)
-                        logger.info(executeResult.data)
-                        commandCount++
-                    }
-                    is Result.Error -> {
-                        updateOutputMessages(errorMessage(executeResult))
-                        logger.warn(errorMessage(executeResult))
+        val commands = commandLine.split(";")
+        commands.forEach { command ->
+            val commandResult = Command.create(command)
+            when (commandResult) {
+                is Result.Success -> {
+                    val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
+                    when (executeResult) {
+                        is Result.Success -> {
+                            updateOutputMessages(executeResult.data)
+                            logger.info(executeResult.data)
+                            commandCount++
+                        }
+                        is Result.Error -> {
+                            updateOutputMessages(errorMessage(executeResult))
+                            logger.warn(errorMessage(executeResult))
+                        }
                     }
                 }
-            }
-            is Result.Error -> {
-                updateOutputMessages(errorMessage(commandResult))
-                logger.warn(errorMessage(commandResult))
+                is Result.Error -> {
+                    updateOutputMessages(errorMessage(commandResult))
+                    logger.warn(errorMessage(commandResult))
+                }
             }
         }
     }
