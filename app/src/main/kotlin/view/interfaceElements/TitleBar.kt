@@ -55,8 +55,8 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     isMaximized: Boolean,
     viewModel: MainScreenViewModel<E, V>,
 ) {
-    val titleBarHeight = config.getIntValue("titleBarHeight").dp
-    val titleBarIconSize = config.getIntValue("titleBarIconSize").dp
+    val titleBarHeight = config.states.titleBarHeight.value.dp
+    val titleBarIconSize = config.states.titleBarIconSize.value.dp
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showMenuButtons by remember { mutableStateOf(false) }

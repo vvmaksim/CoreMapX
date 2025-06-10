@@ -35,7 +35,7 @@ fun <V : Comparable<V>> VertexView(
     modifier: Modifier = Modifier,
 ) {
     val hoveredBorderColor = MaterialTheme.colors.hoveredBorder
-    val vertexLabelSize = config.getIntValue("vertexLabelSize").sp
+    val vertexLabelSize = config.states.vertexLabelSize.value.sp
     var isHovered by remember { mutableStateOf(false) }
 
     Box(

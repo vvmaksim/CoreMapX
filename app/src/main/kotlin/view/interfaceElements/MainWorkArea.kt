@@ -47,9 +47,9 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val graph = viewModel.graph.value
     var commandCount by remember { mutableStateOf(0) }
 
-    val maxCountMessages = config.getIntValue("maxCountMessages")
-    val commandFieldWidth = config.getIntValue("commandFieldWidth").dp
-    val isTransparentCommandLine = config.getBooleanValue("isTransparentCommandLine")
+    val maxCountMessages = config.states.maxCountMessages.value
+    val commandFieldWidth = config.states.commandFieldWidth.value.dp
+    val isTransparentCommandLine = config.states.isTransparentCommandLine.value
     val canvasBackgroundColor = MaterialTheme.colors.canvasBackground
     val commandLineBackgroundColor = MaterialTheme.colors.commandLineBackground
 

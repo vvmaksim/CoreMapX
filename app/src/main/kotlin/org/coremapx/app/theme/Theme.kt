@@ -6,43 +6,43 @@ import org.coremapx.app.config
 
 object Theme {
     val borderColor: Color
-        get() = config.getColor("borderColor")
+        get() = config.states.borderColor.value
 
     val cancelIconColor: Color
-        get() = config.getColor("cancelIconColor")
+        get() = config.states.cancelIconColor.value
 
     val warningColor: Color
-        get() = config.getColor("warningColor")
+        get() = config.states.warningColor.value
 
     val vertexMainColor: Color
-        get() = config.getColor("vertexMainColor")
+        get() = config.states.vertexMainColor.value
 
     val hoveredBorderColor: Color
-        get() = config.getColor("hoveredBorderColor")
+        get() = config.states.hoveredBorderColor.value
 
     val edgeMainColor: Color
-        get() = config.getColor("edgeMainColor")
+        get() = config.states.edgeMainColor.value
 
     val canvasBackgroundColor: Color
-        get() = config.getColor("canvasBackgroundColor")
+        get() = config.states.canvasBackgroundColor.value
 
     val commandLineBackgroundColor: Color
-        get() = config.getColor("commandLineBackgroundColor")
+        get() = config.states.commandLineBackgroundColor.value
 
     val colors: Colors
         get() {
-            val primary = config.getColor("primary")
-            val primaryVariant = config.getColor("primaryVariant")
-            val secondary = config.getColor("secondary")
-            val secondaryVariant = config.getColor("secondaryVariant")
-            val background = config.getColor("background")
-            val surface = config.getColor("surface")
-            val error = config.getColor("error")
-            val onPrimary = config.getColor("onPrimary")
-            val onSecondary = config.getColor("onSecondary")
-            val onBackground = config.getColor("onBackground")
-            val onSurface = config.getColor("onSurface")
-            val onError = config.getColor("onError")
+            val primary = config.states.primary.value
+            val primaryVariant = config.states.primaryVariant.value
+            val secondary = config.states.secondary.value
+            val secondaryVariant = config.states.secondaryVariant.value
+            val background = config.states.background.value
+            val surface = config.states.surface.value
+            val error = config.states.error.value
+            val onPrimary = config.states.onPrimary.value
+            val onSecondary = config.states.onSecondary.value
+            val onBackground = config.states.onBackground.value
+            val onSurface = config.states.onSurface.value
+            val onError = config.states.onError.value
 
             return Colors(
                 primary = primary,

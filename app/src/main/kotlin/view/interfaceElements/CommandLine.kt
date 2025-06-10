@@ -43,8 +43,10 @@ fun CommandLine(
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     val scrollState = rememberScrollState()
 
-    val commandFieldScrollDelay = config.getLongValue("commandFieldScrollDelay")
-    val messageOutputHeight = config.getIntValue("messageOutputHeight").dp
+    val commandFieldScrollDelay =
+        config.states.commandFieldScrollDelay.value
+            .toLong()
+    val messageOutputHeight = config.states.messageOutputHeight.value.dp
 
     LaunchedEffect(outputMessages.size) {
         kotlinx.coroutines.delay(commandFieldScrollDelay)
