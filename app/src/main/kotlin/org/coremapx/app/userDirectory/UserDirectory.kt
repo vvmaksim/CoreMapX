@@ -11,11 +11,14 @@ private val logger = KotlinLogging.logger {}
 
 object UserDirectory {
     val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
+    val baseUserFontsDirPath = "$baseUserDirPath/config/fonts"
     private const val DEFAULT_CONFIG_PATH = "app/src/main/resources/Configs/DefaultConfig.gcfg"
+    private const val DEFAULT_FONTS_DIRECTORY_PATH = "app/src/main/resources/fonts"
     private val directories =
         listOf(
             "$baseUserDirPath/logs",
             "$baseUserDirPath/config",
+            "$baseUserDirPath/config/fonts",
             "$baseUserDirPath/data",
             "$baseUserDirPath/data/temp",
             "$baseUserDirPath/data/graphs",
@@ -27,6 +30,7 @@ object UserDirectory {
             createBaseUserDir()
             createUserDirs()
             copyDefaultConfig()
+            copyDefaultFonts()
         } catch (ex: Exception) {
             logger.error { "Failed to create directories. Ex: ${ex.message}" }
         }
@@ -48,6 +52,32 @@ object UserDirectory {
             } catch (ex: Exception) {
                 logger.error { "Failed to copy default config. Error: ${ex.message}" }
                 showConfigErrorDialog("Failed to copy default config. Error: ${ex.message}")
+            }
+        }
+    }
+
+    private fun copyDefaultFonts() {
+        tryCopyFont("$DEFAULT_FONTS_DIRECTORY_PATH/Rubik-Bold.ttf", "$baseUserFontsDirPath/Font-Bold.ttf")
+        tryCopyFont("$DEFAULT_FONTS_DIRECTORY_PATH/Rubik-Light.ttf", "$baseUserFontsDirPath/Font-Light.ttf")
+        tryCopyFont("$DEFAULT_FONTS_DIRECTORY_PATH/Rubik-Medium.ttf", "$baseUserFontsDirPath/Font-Medium.ttf")
+        tryCopyFont("$DEFAULT_FONTS_DIRECTORY_PATH/Rubik-Regular.ttf", "$baseUserFontsDirPath/Font-Regular.ttf")
+    }
+
+    private fun tryCopyFont(
+        sourcePath: String,
+        targetPath: String,
+    ) {
+        if (!File(targetPath).exists()) {
+            logger.info { "Copying default font $sourcePath to $baseUserFontsDirPath" }
+            try {
+                Files.copy(
+                    Paths.get(sourcePath),
+                    Paths.get(targetPath),
+                    StandardCopyOption.REPLACE_EXISTING,
+                )
+                logger.info { "Default font $targetPath copied successfully" }
+            } catch (ex: Exception) {
+                logger.error { "Failed to copy default font from $sourcePath to $targetPath. Error: ${ex.message}" }
             }
         }
     }
