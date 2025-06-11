@@ -64,8 +64,8 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
                         transformOrigin = TransformOrigin(0.5f, 0.5f),
                     ),
         ) {
-            viewModel.vertices.forEach { vertexViewModel -> VertexView(vertexViewModel) }
             viewModel.edges.forEach { edgeViewModel -> EdgeView(edgeViewModel) }
+            viewModel.vertices.forEach { vertexViewModel -> VertexView(vertexViewModel) }
         }
     }
 }
