@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import view.interfaceElements.dialogs.GenerateRandomGraph
 import viewmodel.MainScreenViewModel
 
 @Suppress("ktlint:standard:function-naming")
@@ -30,6 +31,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
     var actionsExpanded by remember { mutableStateOf(false) }
     var verticesExpanded by remember { mutableStateOf(false) }
     var edgesExpanded by remember { mutableStateOf(false) }
+    var showGenerateRandomGraphDialog by remember { mutableStateOf(false) }
 
     Row(
         modifier =
@@ -71,6 +73,17 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                         style = MaterialTheme.typography.button,
                     )
                 }
+                DropdownMenuItem(
+                    onClick = {
+                        showGenerateRandomGraphDialog = true
+                        actionsExpanded = false
+                    },
+                ) {
+                    Text(
+                        text = "Generate random graph",
+                        style = MaterialTheme.typography.button,
+                    )
+                }
             }
         }
         Spacer(Modifier.width(8.dp))
@@ -108,5 +121,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                 )
             }
         }
+    }
+    if (showGenerateRandomGraphDialog) {
+        GenerateRandomGraph(
+            onDismiss = { showGenerateRandomGraphDialog = false },
+            viewModel = viewModel,
+        )
     }
 }
