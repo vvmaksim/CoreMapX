@@ -25,7 +25,7 @@ class ConverterTests {
             add vertex 2 2
             """.trimIndent(),
         )
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Success)
         assertEquals(file, result.data)
     }
@@ -34,7 +34,7 @@ class ConverterTests {
     fun `convert graph to graph validate error`() {
         val file = File(tempDir, "test.graph")
         file.writeText("")
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Error)
         assertEquals("NotFoundInfoMarker", result.error.type)
     }
@@ -63,7 +63,7 @@ class ConverterTests {
             }
             """.trimIndent(),
         )
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Success)
         val expectedFile = File(tempDir, "test.graph")
         expectedFile.writeText(
@@ -107,7 +107,7 @@ class ConverterTests {
             }
             """.trimIndent(),
         )
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Success)
         val expectedFile = File(tempDir, "test.graph")
         expectedFile.writeText(
