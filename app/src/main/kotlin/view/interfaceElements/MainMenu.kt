@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -81,15 +82,24 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         .background(MaterialTheme.colors.background)
                         .padding(8.dp),
             ) {
-                Text(
-                    text = "CoreMapX",
-                    style = MaterialTheme.typography.h5,
-                    color = MaterialTheme.colors.onSurface,
-                    modifier =
-                        Modifier
-                            .padding(bottom = 16.dp)
-                            .align(Alignment.CenterHorizontally),
-                )
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Logo(
+                        backgroundColor = MaterialTheme.colors.background,
+                        contentColor = MaterialTheme.colors.onSurface,
+                        size = 52.dp,
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = "CoreMapX",
+                        style = MaterialTheme.typography.h5,
+                        color = MaterialTheme.colors.onSurface,
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                    )
+                }
 
                 MainMenuTextButton(
                     onClick = { showNewGraphDialog = true },
