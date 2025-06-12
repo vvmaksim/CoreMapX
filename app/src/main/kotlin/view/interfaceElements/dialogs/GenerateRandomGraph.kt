@@ -14,6 +14,7 @@ import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -21,6 +22,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.HourglassEmpty
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +33,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph
@@ -55,6 +60,10 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraph(
     var showEdgesCountError by remember { mutableStateOf(false) }
     var isDirected by remember { mutableStateOf(false) }
     var isWeighted by remember { mutableStateOf(false) }
+
+    var isGenerating by remember { mutableStateOf(false) }
+    var generationProgress by remember { mutableStateOf(0f) }
+    var isVisualizing by remember { mutableStateOf(false) }
 
     fun isIncorrectParameter(param: String): Boolean = param.isEmpty() || param.toLongOrNull() == null || param.toLong() <= 0L
 
@@ -211,6 +220,46 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraph(
                         )
                     }
                 }
+                if (isGenerating) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        LinearProgressIndicator(
+                            progress = generationProgress,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Generating graph: ${(generationProgress * 100).toInt()}%",
+                            style = MaterialTheme.typography.body2,
+                        )
+                    }
+                } else if (isVisualizing) {
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.HourglassEmpty,
+                            contentDescription = "Visualizing",
+                            tint = MaterialTheme.colors.primary,
+                            modifier = Modifier.width(48.dp),
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Visualizing graph...",
+                            style = MaterialTheme.typography.body2,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "This may take a few minutes",
+                            style = MaterialTheme.typography.body2,
+                        )
+                    }
+                }
                 Spacer(modifier = Modifier.height(16.dp))
                 Button(
                     onClick = {
@@ -229,38 +278,55 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraph(
                             val actualVerticesCount = verticesCount.toLong()
                             val actualEdgesCount = edgesCount.toLong()
 
-                            for (i in 0L until actualVerticesCount) {
-                                newGraph.addVertex(Vertex(i, i.toString()) as Vertex<V>)
-                            }
+                            isGenerating = true
+                            generationProgress = 0f
+                            isVisualizing = false
 
-                            for (i in 0L until actualEdgesCount) {
-                                val fromId = Random.nextInt(actualVerticesCount.toInt())
-                                val toId = Random.nextInt(actualVerticesCount.toInt())
-                                if (newGraph is UndirectedUnweightedGraph || newGraph is DirectedUnweightedGraph) {
-                                    newGraph.addEdge(
-                                        UnweightedEdge(
-                                            id = i,
-                                            from = Vertex(fromId.toLong(), fromId.toString()) as Vertex<V>,
-                                            to = Vertex(toId.toLong(), toId.toString()) as Vertex<V>,
-                                        ) as Edge<E, V>,
-                                    )
-                                } else {
-                                    newGraph.addEdge(
-                                        WeightedEdge(
-                                            id = i,
-                                            from = Vertex(fromId.toLong(), fromId.toString()) as Vertex<V>,
-                                            to = Vertex(toId.toLong(), toId.toString()) as Vertex<V>,
-                                            weight = Random.nextLong(1, 100),
-                                        ) as Edge<E, V>,
-                                    )
+                            CoroutineScope(Dispatchers.Default).launch {
+                                for (i in 0L until actualVerticesCount) {
+                                    newGraph.addVertex(Vertex(i, i.toString()) as Vertex<V>)
+                                    generationProgress = i.toFloat() / actualVerticesCount * 0.5f
+                                }
+
+                                for (i in 0L until actualEdgesCount) {
+                                    val fromId = Random.nextInt(actualVerticesCount.toInt())
+                                    val toId = Random.nextInt(actualVerticesCount.toInt())
+                                    if (newGraph is UndirectedUnweightedGraph || newGraph is DirectedUnweightedGraph) {
+                                        newGraph.addEdge(
+                                            UnweightedEdge(
+                                                id = i,
+                                                from = Vertex(fromId.toLong(), fromId.toString()) as Vertex<V>,
+                                                to = Vertex(toId.toLong(), toId.toString()) as Vertex<V>,
+                                            ) as Edge<E, V>,
+                                        )
+                                    } else {
+                                        newGraph.addEdge(
+                                            WeightedEdge(
+                                                id = i,
+                                                from = Vertex(fromId.toLong(), fromId.toString()) as Vertex<V>,
+                                                to = Vertex(toId.toLong(), toId.toString()) as Vertex<V>,
+                                                weight = Random.nextLong(1, 100),
+                                            ) as Edge<E, V>,
+                                        )
+                                    }
+                                    generationProgress = 0.5f + i.toFloat() / actualEdgesCount * 0.5f
+                                }
+
+                                isGenerating = false
+                                isVisualizing = true
+
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    kotlinx.coroutines.delay(1)
+                                    viewModel.updateGraph(newGraph)
+                                    isVisualizing = false
+                                    onDismiss()
                                 }
                             }
-                            viewModel.updateGraph(newGraph)
-                            onDismiss()
                         }
                     },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier.fillMaxWidth(),
+                    enabled = !isGenerating && !isVisualizing,
                 ) {
                     Text(
                         text = "Generate",
