@@ -1,6 +1,8 @@
 plugins {
     id("buildlogic.kotlin-application-conventions")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
+    id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
+    id("app.cash.sqldelight") version libs.versions.sqldelight
 }
 
 dependencies {
@@ -10,11 +12,20 @@ dependencies {
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.flatlaf)
+    implementation(libs.sqldelight.sqlite.driver)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation(project(":utilities"))
     testImplementation(kotlin("test"))
 }
 
+sqldelight {
+    databases {
+        create("GraphDatabase") {
+            packageName.set("org.coremapx.graph")
+        }
+    }
+}
+
 application {
-    mainClass = "org.coremapx.app.AppKt"
+    mainClass = "org.coremapx.app.MainKt"
 }

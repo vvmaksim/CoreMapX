@@ -2,12 +2,27 @@ package view.interfaceElements
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.runtime.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import extensions.canvasBackground
+import extensions.commandLineBackground
 import model.commands.classes.Command
 import model.commands.classes.Commands
 import model.result.CommandErrors
@@ -15,11 +30,13 @@ import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
 import view.graph.GraphView
+import view.interfaceElements.buttons.ZoomButtons
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
 
 private val logger = KotlinLogging.logger {}
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     viewModel: MainScreenViewModel<E, V>,
@@ -30,9 +47,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val graph = viewModel.graph.value
     var commandCount by remember { mutableStateOf(0) }
 
-    val maxCountMessages = config.getIntValue("maxCountMessages") ?: 0
-    val commandFieldWidth = (config.getIntValue("commandFieldWidth") ?: 0).dp
-    val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
+    val maxCountMessages = config.states.maxCountMessages.value
+    val commandFieldWidth = config.states.commandFieldWidth.value.dp
+    val isTransparentCommandLine = config.states.isTransparentCommandLine.value
+    val canvasBackgroundColor = MaterialTheme.colors.canvasBackground
+    val commandLineBackgroundColor = MaterialTheme.colors.commandLineBackground
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -51,35 +70,43 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
 
-    fun handleCommand(command: String) {
+    fun handleCommand(commandLine: String) {
         if (graph == null) {
             updateOutputMessages("Error: ${CommandErrors.NoGraphSelected().type}.${CommandErrors.NoGraphSelected().description}")
             return
         }
-        val commandResult = Command.create(command)
-        when (commandResult) {
-            is Result.Success -> {
-                val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
-                when (executeResult) {
-                    is Result.Success -> {
-                        updateOutputMessages(executeResult.data)
-                        logger.info(executeResult.data)
-                        commandCount++
-                    }
-                    is Result.Error -> {
-                        updateOutputMessages(errorMessage(executeResult))
-                        logger.warn(errorMessage(executeResult))
+        val commands = commandLine.split(";")
+        commands.forEach { command ->
+            val commandResult = Command.create(command)
+            when (commandResult) {
+                is Result.Success -> {
+                    val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
+                    when (executeResult) {
+                        is Result.Success -> {
+                            updateOutputMessages(executeResult.data)
+                            logger.info(executeResult.data)
+                            commandCount++
+                        }
+                        is Result.Error -> {
+                            updateOutputMessages(errorMessage(executeResult))
+                            logger.warn(errorMessage(executeResult))
+                        }
                     }
                 }
-            }
-            is Result.Error -> {
-                updateOutputMessages(errorMessage(commandResult))
-                logger.warn(errorMessage(commandResult))
+                is Result.Error -> {
+                    updateOutputMessages(errorMessage(commandResult))
+                    logger.warn(errorMessage(commandResult))
+                }
             }
         }
     }
 
-    Box(modifier = modifier.fillMaxSize().background(canvasBackgroundColor)) {
+    Box(
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(canvasBackgroundColor),
+    ) {
         graphViewModel?.let { graphViewModel ->
             GraphView(
                 viewModel = graphViewModel,
@@ -107,23 +134,23 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         ) {
             VertexAndEdgeCounters(
                 viewModel,
-                modifier =
-                    Modifier
-                        .align(Alignment.Bottom),
+                modifier = Modifier.align(Alignment.Bottom),
             )
-
             Spacer(Modifier.weight(1f))
-
             CommandLine(
                 modifier =
                     Modifier
                         .width(commandFieldWidth)
-                        .align(Alignment.CenterVertically),
+                        .align(Alignment.Bottom),
                 outputMessages = outputMessages.value,
+                commandLineBackgroundColor = if (isTransparentCommandLine) Color.Transparent else commandLineBackgroundColor,
                 onCommand = { command -> handleCommand(command) },
             )
-
             Spacer(Modifier.weight(1f))
+            ZoomButtons(
+                modifier = Modifier.padding(8.dp),
+                onZoom = { zoomDelta -> viewModel.zoomCanvas(zoomDelta) },
+            )
         }
     }
 }

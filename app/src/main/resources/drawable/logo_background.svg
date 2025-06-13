@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 434.25 434.25">
+  <defs>
+    <style>
+      .logo-bg { fill: #000; }
+    </style>
+  </defs>
+  <g id="background">
+    <rect class="logo-bg" width="434.25" height="434.25" rx="100.13" ry="100.13"/>
+  </g>
+</svg>

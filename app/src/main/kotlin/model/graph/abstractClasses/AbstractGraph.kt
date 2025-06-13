@@ -5,8 +5,12 @@ import model.graph.interfaces.Edge
 import model.graph.interfaces.Graph
 
 abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V> {
-    protected var nextEdgeId = 0
+    protected var nextEdgeId = 0L
+
+    @Suppress("ktlint:standard:backing-property-naming")
     protected val _vertices = HashMap<V, Vertex<V>>()
+
+    @Suppress("ktlint:standard:backing-property-naming")
     protected val _edges = HashMap<E, Edge<E, V>>()
 
     override val vertices: Map<V, Vertex<V>>
@@ -70,6 +74,6 @@ abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V>
     override fun clear() {
         _vertices.clear()
         _edges.clear()
-        nextEdgeId = 0
+        nextEdgeId = 0L
     }
 }

@@ -1,27 +1,53 @@
 package view.interfaceElements
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.ButtonDefaults
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Analytics
+import androidx.compose.material.icons.filled.FolderOpen
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.SaveAs
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Storage
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import model.result.Result
 import org.coremapx.app.config
+import view.interfaceElements.buttons.MainMenuTextButton
 import view.interfaceElements.buttons.SlideMenuButton
 import view.interfaceElements.buttons.UserDirectoryButton
 import view.interfaceElements.dialogs.NewGraph
 import view.interfaceElements.dialogs.OpenGraphErrors
+import view.interfaceElements.dialogs.OpenRepository
 import view.interfaceElements.dialogs.SaveGraphAs
 import view.interfaceElements.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
+import java.io.File
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     isMenuVisible: Boolean,
@@ -29,26 +55,16 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier,
 ) {
-    val animationDuration = config.getIntValue("animationDuration") ?: 0
-    val mainMenuColor = config.getColor("mainMenuColor")
-    val mainMenuButtonColor = config.getColor("mainMenuButtonColor")
-    val mainMenuButtonTextColor = config.getColor("mainMenuButtonTextColor")
-
-    val buttonColors = ButtonDefaults.buttonColors(
-        backgroundColor = mainMenuButtonColor,
-        disabledBackgroundColor = mainMenuButtonColor
-    )
-    val buttonModifier = Modifier.fillMaxWidth()
-    val buttonFontSize = (config.getIntValue("mainMenuButtonsFontSize") ?: 0).sp
-    val logoFontSize = (config.getIntValue("mainMenuLogoFontSize") ?: 0).sp
-    val mainMenuDisabledButtonTextColor = config.getColor("mainMenuDisabledButtonTextColor")
+    val animationDuration = config.states.animationDuration.value
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
+    var showOpenRepositoryDialog by remember { mutableStateOf(false) }
     var showSaveGraphAsDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var showNewGraphDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var saveError by remember { mutableStateOf("") }
+    var selectedRepositoryFile by remember { mutableStateOf(File("")) }
 
     Box(
         modifier = modifier,
@@ -63,24 +79,36 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
-                        .background(mainMenuColor)
+                        .background(MaterialTheme.colors.background)
                         .padding(8.dp),
             ) {
-                Text(
-                    text = "CoreMapX",
-                    fontSize = logoFontSize,
-                    modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally),
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Logo(
+                        backgroundColor = MaterialTheme.colors.background,
+                        contentColor = MaterialTheme.colors.onSurface,
+                        size = 52.dp,
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        text = "CoreMapX",
+                        style = MaterialTheme.typography.h5,
+                        color = MaterialTheme.colors.onSurface,
+                        modifier = Modifier.align(Alignment.CenterVertically),
+                    )
+                }
+
+                MainMenuTextButton(
+                    onClick = { showNewGraphDialog = true },
+                    iconVector = Icons.Filled.Add,
+                    iconContentDescription = "New Graph Icon",
+                    buttonText = "New Graph",
                 )
 
-                TextButton(
-                    modifier = buttonModifier,
-                    onClick = { showNewGraphDialog = true },
-                    colors = buttonColors
-                ) {
-                    Text(text = "New Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
-                }
-                TextButton(
-                    modifier = buttonModifier,
+                MainMenuTextButton(
                     onClick = {
                         if (viewModel.graphPath == null) {
                             showSaveGraphAsDialog = true
@@ -92,57 +120,77 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                             }
                         }
                     },
-                    colors = buttonColors,
-                    enabled = viewModel.isGraphActive,
-                ) {
-                    Text(
-                        text = "Save Graph",
-                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else mainMenuDisabledButtonTextColor,
-                        fontSize = buttonFontSize,
-                    )
-                }
-                TextButton(
-                    modifier = buttonModifier,
+                    iconVector = Icons.Filled.Save,
+                    iconContentDescription = "Save Graph Icon",
+                    buttonText = "Save Graph",
+                    isEnabled = viewModel.isGraphActive,
+                )
+
+                MainMenuTextButton(
                     onClick = { showSaveGraphAsDialog = true },
-                    colors = buttonColors,
-                    enabled = viewModel.isGraphActive,
-                ) {
-                    Text(
-                        text = "Save Graph As",
-                        color = if (viewModel.isGraphActive) mainMenuButtonTextColor else mainMenuDisabledButtonTextColor,
-                        fontSize = buttonFontSize,
-                    )
-                }
-                TextButton(
-                    modifier = buttonModifier,
+                    iconVector = Icons.Filled.SaveAs,
+                    iconContentDescription = "Save Graph As Icon",
+                    buttonText = "Save Graph As",
+                    isEnabled = viewModel.isGraphActive,
+                )
+
+                MainMenuTextButton(
                     onClick = {
                         val loadResult = viewModel.openGraphFile()
-                        warnings = when (loadResult) {
+                        warnings =
+                            when (loadResult) {
                                 is Result.Success -> loadResult.data
                                 is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
                             }
                         if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
                     },
-                    colors = buttonColors,
-                ) {
-                    Text(text = "Open Graph", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
-                }
-                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
-                    Text(text = "Analytics", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
-                }
-                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
-                    Text(text = "Templates", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
-                }
-                TextButton(modifier = buttonModifier, onClick = { }, colors = buttonColors) {
-                    Text(text = "Settings", color = mainMenuButtonTextColor, fontSize = buttonFontSize)
-                }
+                    iconVector = Icons.Filled.FolderOpen,
+                    iconContentDescription = "Open Graph Icon",
+                    buttonText = "Open Graph",
+                )
+
+                MainMenuTextButton(
+                    onClick = {
+                        val openResult = viewModel.openGraphRepository()
+                        when (openResult) {
+                            is Result.Error -> warnings = listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+                            is Result.Success -> {
+                                selectedRepositoryFile = openResult.data
+                                showOpenRepositoryDialog = true
+                            }
+                        }
+                        if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+                    },
+                    iconVector = Icons.Filled.Storage,
+                    iconContentDescription = "Open Repository Icon",
+                    buttonText = "Open Repository",
+                )
+
+                MainMenuTextButton(
+                    onClick = { },
+                    iconVector = Icons.Filled.Analytics,
+                    iconContentDescription = "Analytics Icon",
+                    buttonText = "Analytics",
+                )
+
+                MainMenuTextButton(
+                    onClick = { },
+                    iconVector = Icons.Filled.Settings,
+                    iconContentDescription = "Settings Icon",
+                    buttonText = "Settings",
+                )
+
                 Spacer(Modifier.weight(1f))
                 Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp, vertical = 4.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 8.dp,
+                                vertical = 4.dp,
+                            ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     SlideMenuButton(onClick = { onMenuVisibilityChange(false) })
                     UserDirectoryButton()
@@ -175,6 +223,19 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         OpenGraphErrors(
             onDismiss = { showOpenGraphErrorsDialog = false },
             warnings = warnings,
+        )
+    }
+
+    if (showOpenRepositoryDialog) {
+        OpenRepository(
+            onDismiss = { showOpenRepositoryDialog = false },
+            file = selectedRepositoryFile,
+            onGraphSelected = { graphId ->
+                viewModel.graphId = graphId
+                val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
+                if (loadResult is Result.Error) warnings = listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+            },
         )
     }
 

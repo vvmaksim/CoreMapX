@@ -17,9 +17,9 @@ import kotlin.test.assertIs
 
 class CommandsTests {
     lateinit var command: Command
-    lateinit var graph: Graph<Int, Int>
+    lateinit var graph: Graph<Long, Long>
     lateinit var outputMessages: MutableList<String>
-    lateinit var commands: Commands<Int, Int>
+    lateinit var commands: Commands<Long, Long>
 
     @BeforeEach
     fun setup() {
@@ -47,10 +47,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for undirected and unweighted graph`() {
-        graph = mockk<UndirectedUnweightedGraph<Int>>()
+        graph = mockk<UndirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedUnweightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
@@ -67,10 +67,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for undirected and weighted graph`() {
-        graph = mockk<UndirectedWeightedGraph<Int>>()
+        graph = mockk<UndirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedWeightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2", "weight" to "52")
@@ -87,10 +87,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for directed and unweighted graph`() {
-        graph = mockk<DirectedUnweightedGraph<Int>>()
+        graph = mockk<DirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as DirectedUnweightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
@@ -107,10 +107,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for directed and weighted graph`() {
-        graph = mockk<DirectedWeightedGraph<Int>>()
+        graph = mockk<DirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as DirectedWeightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2", "weight" to "52")
@@ -141,7 +141,7 @@ class CommandsTests {
 
     @Test
     fun `rm edge for undirected and unweighted graph by id`() {
-        graph = mockk<UndirectedUnweightedGraph<Int>>()
+        graph = mockk<UndirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedUnweightedGraph, outputMessages)
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
@@ -157,7 +157,7 @@ class CommandsTests {
 
     @Test
     fun `rm edge for undirected and unweighted graph by from and to`() {
-        graph = mockk<UndirectedUnweightedGraph<Int>>()
+        graph = mockk<UndirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedUnweightedGraph, outputMessages)
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
@@ -175,7 +175,7 @@ class CommandsTests {
 
     @Test
     fun `rm edge for undirected and weighted graph by from and to`() {
-        graph = mockk<UndirectedWeightedGraph<Int>>()
+        graph = mockk<UndirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedWeightedGraph, outputMessages)
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
@@ -193,7 +193,7 @@ class CommandsTests {
 
     @Test
     fun `rm edge for directed and unweighted graph by from and to`() {
-        graph = mockk<DirectedUnweightedGraph<Int>>()
+        graph = mockk<DirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as DirectedUnweightedGraph, outputMessages)
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
@@ -209,7 +209,7 @@ class CommandsTests {
 
     @Test
     fun `rm edge for directed and weighted graph by from and to`() {
-        graph = mockk<DirectedWeightedGraph<Int>>()
+        graph = mockk<DirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as DirectedWeightedGraph, outputMessages)
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
@@ -272,10 +272,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for undirected and unweighted graph with unknown edgeId`() {
-        graph = mockk<UndirectedUnweightedGraph<Int>>()
+        graph = mockk<UndirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedUnweightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
@@ -293,10 +293,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for undirected and weighted graph with unknown edgeId`() {
-        graph = mockk<UndirectedWeightedGraph<Int>>()
+        graph = mockk<UndirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedWeightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2", "weight" to "52")
@@ -314,10 +314,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for directed and unweighted graph with unknown edgeId`() {
-        graph = mockk<DirectedUnweightedGraph<Int>>()
+        graph = mockk<DirectedUnweightedGraph<Long>>()
         commands = Commands(command, graph as DirectedUnweightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
@@ -335,10 +335,10 @@ class CommandsTests {
 
     @Test
     fun `add edge for directed and weighted graph with unknown edgeId`() {
-        graph = mockk<DirectedWeightedGraph<Int>>()
+        graph = mockk<DirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as DirectedWeightedGraph, outputMessages)
-        val vertex1 = Vertex(1, "1")
-        val vertex2 = Vertex(2, "2")
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2", "weight" to "52")
@@ -371,7 +371,7 @@ class CommandsTests {
 
     @Test
     fun `add edge for undirected and weighted graph without weight`() {
-        graph = mockk<UndirectedWeightedGraph<Int>>()
+        graph = mockk<UndirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedWeightedGraph, outputMessages)
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
@@ -383,12 +383,12 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter weight must be Int", result.error.description)
+        assertEquals("Parameter weight must be Long", result.error.description)
     }
 
     @Test
     fun `add edge for undirected and weighted graph with incorrect weight`() {
-        graph = mockk<UndirectedWeightedGraph<Int>>()
+        graph = mockk<UndirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as UndirectedWeightedGraph, outputMessages)
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
@@ -400,12 +400,12 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter weight must be Int", result.error.description)
+        assertEquals("Parameter weight must be Long", result.error.description)
     }
 
     @Test
     fun `add edge for directed and weighted graph without weight`() {
-        graph = mockk<DirectedWeightedGraph<Int>>()
+        graph = mockk<DirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as DirectedWeightedGraph, outputMessages)
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
@@ -417,12 +417,12 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter weight must be Int", result.error.description)
+        assertEquals("Parameter weight must be Long", result.error.description)
     }
 
     @Test
     fun `add edge for directed and weighted graph with incorrect weight`() {
-        graph = mockk<DirectedWeightedGraph<Int>>()
+        graph = mockk<DirectedWeightedGraph<Long>>()
         commands = Commands(command, graph as DirectedWeightedGraph, outputMessages)
         every { command.type } returns CommandTypes.ADD
         every { command.entity } returns CommandEntities.EDGE
@@ -434,7 +434,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter weight must be Int", result.error.description)
+        assertEquals("Parameter weight must be Long", result.error.description)
     }
 
     @Test
@@ -473,7 +473,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter from must be Int", result.error.description)
+        assertEquals("Parameter from must be Long", result.error.description)
     }
 
     @Test
@@ -486,7 +486,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter to must be Int", result.error.description)
+        assertEquals("Parameter to must be Long", result.error.description)
     }
 
     @Test
@@ -554,7 +554,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter id must be Int", result.error.description)
+        assertEquals("Parameter id must be Long", result.error.description)
     }
 
     @Test
@@ -593,7 +593,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter id must be Int", result.error.description)
+        assertEquals("Parameter id must be Long", result.error.description)
     }
 
     @Test
@@ -606,7 +606,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter from must be Int", result.error.description)
+        assertEquals("Parameter from must be Long", result.error.description)
     }
 
     @Test
@@ -619,7 +619,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter to must be Int", result.error.description)
+        assertEquals("Parameter to must be Long", result.error.description)
     }
 
     @Test
@@ -645,7 +645,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter id must be Int", result.error.description)
+        assertEquals("Parameter id must be Long", result.error.description)
     }
 
     @Test

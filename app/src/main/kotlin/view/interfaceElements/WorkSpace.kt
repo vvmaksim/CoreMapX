@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import viewmodel.MainScreenViewModel
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> WorkSpace(
     viewModel: MainScreenViewModel<E, V>,

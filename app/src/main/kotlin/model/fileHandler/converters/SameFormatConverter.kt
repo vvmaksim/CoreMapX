@@ -8,5 +8,6 @@ class SameFormatConverter : FileConverter() {
     override fun convert(
         file: File,
         convertMode: ConvertModes,
+        graphId: Long?,
     ): Result<File> = Result.Success(file)
 }

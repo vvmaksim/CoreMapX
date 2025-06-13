@@ -15,7 +15,7 @@ class ParseTests {
     fun `parse with error not found info marker`() {
         val file = File(tempDir, "test.graph")
         file.writeText("")
-        val result = Parser.parse(file)
+        val result = Parser.parse(file, null)
         assertTrue(result is Result.Error)
         assertEquals("NotFoundInfoMarker", result.error.type)
     }
@@ -34,7 +34,7 @@ class ParseTests {
             add vertex 1 1
             """.trimIndent(),
         )
-        val result = Parser.parse(file)
+        val result = Parser.parse(file, null)
         assertTrue(result is Result.Success)
         assertEquals("Template", result.data.name)
         assertEquals("User", result.data.author)
@@ -60,7 +60,7 @@ class ParseTests {
             add vertex 1 1
             """.trimIndent(),
         )
-        val result = Parser.parse(file)
+        val result = Parser.parse(file, null)
         assertTrue(result is Result.Success)
         assertTrue(result.data.isDirected)
         assertTrue(result.data.isWeighted)

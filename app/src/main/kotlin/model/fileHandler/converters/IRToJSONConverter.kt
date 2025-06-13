@@ -16,12 +16,12 @@ import model.result.Result
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import java.io.File
 import java.io.IOException
-import kotlin.text.toIntOrNull
 
 class IRToJSONConverter : FileConverter() {
     override fun convert(
         file: File,
         convertMode: ConvertModes,
+        graphId: Long?,
     ): Result<File> {
         val lines: List<String>
         try {
@@ -52,7 +52,7 @@ class IRToJSONConverter : FileConverter() {
                     if (commandResult.data.entity == CommandEntities.VERTEX) {
                         vertices.add(
                             Vertex(
-                                id = commandResult.data.parameters["id"]?.toIntOrNull() ?: 0,
+                                id = commandResult.data.parameters["id"]?.toLongOrNull() ?: 0L,
                                 label = commandResult.data.parameters["label"].toString(),
                             ),
                         )
@@ -60,16 +60,16 @@ class IRToJSONConverter : FileConverter() {
                         if (info["isWeighted"] == "true") {
                             edges.add(
                                 Edge(
-                                    from = commandResult.data.parameters["from"]?.toIntOrNull() ?: 0,
-                                    to = commandResult.data.parameters["to"]?.toIntOrNull() ?: 0,
-                                    weight = commandResult.data.parameters["weight"]?.toIntOrNull() ?: 0,
+                                    from = commandResult.data.parameters["from"]?.toLongOrNull() ?: 0L,
+                                    to = commandResult.data.parameters["to"]?.toLongOrNull() ?: 0L,
+                                    weight = commandResult.data.parameters["weight"]?.toLongOrNull() ?: 0L,
                                 ),
                             )
                         } else if (info["isWeighted"] == "false") {
                             edges.add(
                                 Edge(
-                                    from = commandResult.data.parameters["from"]?.toIntOrNull() ?: 0,
-                                    to = commandResult.data.parameters["to"]?.toIntOrNull() ?: 0,
+                                    from = commandResult.data.parameters["from"]?.toLongOrNull() ?: 0L,
+                                    to = commandResult.data.parameters["to"]?.toLongOrNull() ?: 0L,
                                 ),
                             )
                         }
@@ -91,13 +91,13 @@ class IRToJSONConverter : FileConverter() {
                 ),
             )
         val json = Json { prettyPrint = true }
-        val fileName =
+        val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.json"
                 ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json"
             }
         file.deleteOnExit()
-        val jsonFile = File(fileName)
+        val jsonFile = File(filePath)
         jsonFile.writeText(json.encodeToString(graphData))
         if (convertMode == ConvertModes.LOAD) {
             jsonFile.deleteOnExit()

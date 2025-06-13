@@ -5,6 +5,7 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.TransformOrigin
@@ -12,9 +13,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.dp
+import extensions.canvasBackground
 import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> GraphView(
     viewModel: GraphViewModel<E, V>,
@@ -24,14 +27,13 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
     onPan: (Float, Float) -> Unit,
     onZoom: (Float) -> Unit,
 ) {
-    val canvasDragRatio = (config.getIntValue("canvasDragRatio") ?: 0)
-    val canvasBackgroundColor = config.getColor("canvasBackgroundColor")
+    val canvasDragRatio = config.states.canvasDragRatio.value
 
     Box(
         modifier =
             Modifier
                 .fillMaxSize()
-                .background(canvasBackgroundColor)
+                .background(color = MaterialTheme.colors.canvasBackground)
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
                         while (true) {
@@ -62,12 +64,8 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
                         transformOrigin = TransformOrigin(0.5f, 0.5f),
                     ),
         ) {
-            viewModel.vertices.forEach { v ->
-                VertexView(v, Modifier)
-            }
-            viewModel.edges.forEach { e ->
-                EdgeView(e, Modifier)
-            }
+            viewModel.edges.forEach { edgeViewModel -> EdgeView(edgeViewModel) }
+            viewModel.vertices.forEach { vertexViewModel -> VertexView(vertexViewModel) }
         }
     }
 }

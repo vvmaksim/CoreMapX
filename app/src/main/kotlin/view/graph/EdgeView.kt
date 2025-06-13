@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -11,6 +12,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.sp
+import extensions.edgeMain
 import org.coremapx.app.config
 import viewmodel.graph.EdgeViewModel
 import kotlin.math.atan2
@@ -18,16 +20,16 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
     viewModel: EdgeViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
-    val edgeMainColor = config.getColor("edgeMainColor")
-    val edgeWidth = config.getFloatValue("edgeWidth") ?: 0f
-    val edgeArrowSize = config.getFloatValue("edgeArrowSize") ?: 0f
-    val edgeLabelColor = config.getColor("edgeLabelColor")
-    val edgeLabelSize = (config.getIntValue("edgeLabelSize") ?: 0).sp
+    val edgeMainColor = MaterialTheme.colors.edgeMain
+    val edgeWidth = config.states.edgeWidth.value
+    val edgeArrowSize = config.states.edgeArrowSize.value
+    val edgeLabelSize = config.states.edgeLabelSize.value.sp
 
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = modifier.fillMaxSize()) {
@@ -105,7 +107,8 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
             Text(
                 text = weight.toString(),
                 modifier = Modifier.offset(midX, midY),
-                color = edgeLabelColor,
+                color = MaterialTheme.colors.onSurface,
+                style = MaterialTheme.typography.body2,
                 fontSize = edgeLabelSize,
             )
         }

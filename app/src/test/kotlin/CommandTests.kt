@@ -329,7 +329,7 @@ class CommandTests {
         val result = Command.create("add vertex id:invalid label:Bob")
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter id must be Int", result.error.description)
+        assertEquals("Parameter id must be Long", result.error.description)
     }
 
     @Test
@@ -353,7 +353,7 @@ class CommandTests {
         val result = Command.create("add edge from:invalid to:2")
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter from must be Int", result.error.description)
+        assertEquals("Parameter from must be Long", result.error.description)
     }
 
     @Test
@@ -361,7 +361,7 @@ class CommandTests {
         val result = Command.create("add edge from:2 to:invalid")
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter to must be Int", result.error.description)
+        assertEquals("Parameter to must be Long", result.error.description)
     }
 
     @Test
@@ -369,7 +369,7 @@ class CommandTests {
         val result = Command.create("add edge from:1 to:2 weight:invalid")
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter weight must be Int", result.error.description)
+        assertEquals("Parameter weight must be Long", result.error.description)
     }
 
     @Test
@@ -425,6 +425,6 @@ class CommandTests {
         val result = Command.create("add vertex id:invalid label:correct")
         assertIs<Result.Error>(result)
         assertEquals("InvalidParameterType", result.error.type)
-        assertEquals("Parameter id must be Int", result.error.description)
+        assertEquals("Parameter id must be Long", result.error.description)
     }
 }

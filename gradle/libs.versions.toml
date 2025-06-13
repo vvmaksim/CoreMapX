@@ -8,8 +8,9 @@ compose-material = "1.7.0"
 commons-text = "1.11.0"
 junit = "5.10.1"
 kotlin-logging = "3.0.5"
-logback = "1.5.6"
+logback = "1.5.13"
 flatlaf = "3.2.5"
+sqldelight = "2.1.0"
 
 [libraries]
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -22,3 +23,4 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 kotlin-logging = { module = "io.github.microutils:kotlin-logging", version.ref = "kotlin-logging" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 flatlaf = { group = "com.formdev", name = "flatlaf", version.ref = "flatlaf" }
+sqldelight-sqlite-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }

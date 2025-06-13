@@ -11,9 +11,18 @@ class Parser {
     companion object {
         private val optionalProperties = listOf("name", "author")
 
-        fun parse(file: File): Result<GraphIR> {
+        fun parse(
+            file: File,
+            graphId: Long?,
+        ): Result<GraphIR> {
             var fileIR: File
-            val converterResult = Converter.convert(file = file, to = FileExtensions.GRAPH, ConvertModes.LOAD)
+            val converterResult =
+                Converter.convert(
+                    file = file,
+                    to = FileExtensions.GRAPH,
+                    mode = ConvertModes.LOAD,
+                    graphId = graphId,
+                )
             when (converterResult) {
                 is Result.Error -> return converterResult
                 is Result.Success -> fileIR = converterResult.data

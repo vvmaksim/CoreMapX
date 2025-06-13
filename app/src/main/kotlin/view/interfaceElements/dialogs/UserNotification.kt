@@ -4,23 +4,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun UserNotification(
     onDismiss: () -> Unit,
@@ -31,11 +29,10 @@ fun UserNotification(
         Surface(
             modifier =
                 Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .shadow(8.dp, RoundedCornerShape(16.dp)),
-            shape = RoundedCornerShape(16.dp),
-            color = Color(0xFFF5F5F5),
+                    .width(550.dp)
+                    .wrapContentHeight(),
+            shape = MaterialTheme.shapes.large,
+            color = MaterialTheme.colors.background,
         ) {
             Column(
                 modifier =
@@ -47,14 +44,12 @@ fun UserNotification(
             ) {
                 Text(
                     text = title,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF333333),
+                    style = MaterialTheme.typography.h5,
                 )
 
                 Text(
                     text = message,
-                    fontSize = 20.sp,
+                    style = MaterialTheme.typography.body1,
                     textAlign = TextAlign.Center,
                 )
 
@@ -62,12 +57,16 @@ fun UserNotification(
                     onClick = onDismiss,
                     colors =
                         ButtonDefaults.buttonColors(
-                            backgroundColor = Color(0xFFE0E0E0),
-                            contentColor = Color(0xFF333333),
+                            backgroundColor = MaterialTheme.colors.primary,
+                            contentColor = MaterialTheme.colors.background,
                         ),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
-                    Text("Ok", fontSize = 16.sp)
+                    Text(
+                        text = "OK",
+                        style = MaterialTheme.typography.button,
+                    )
                 }
             }
         }

@@ -58,7 +58,8 @@ sealed class FileErrors(
         val line: String,
     ) : FileErrors(
             type = "IncorrectInfoProperty",
-            description = "Incorrect line: $line. Info property must be in format: `propertyName=value`. It is forbidden to use the `=` symbol in the value",
+            description = @Suppress("ktlint:standard:max-line-length")
+            "Incorrect line: $line. Info property must be in format: `propertyName=value`. It is forbidden to use the `=` symbol in the value",
         )
 
     data class IncorrectBooleanValue(

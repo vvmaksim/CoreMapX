@@ -2,13 +2,23 @@ import model.fileHandler.ConvertModes
 import model.fileHandler.FileExtensions
 import model.fileHandler.converters.Converter
 import model.result.Result
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
+import org.coremapx.app.userDirectory.UserDirectory
 import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ConverterTests {
+    companion object {
+        @JvmStatic
+        @BeforeAll
+        fun setup() {
+            UserDirectory.init()
+        }
+    }
+
     @TempDir
     lateinit var tempDir: File
 
@@ -25,7 +35,7 @@ class ConverterTests {
             add vertex 2 2
             """.trimIndent(),
         )
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Success)
         assertEquals(file, result.data)
     }
@@ -34,7 +44,7 @@ class ConverterTests {
     fun `convert graph to graph validate error`() {
         val file = File(tempDir, "test.graph")
         file.writeText("")
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Error)
         assertEquals("NotFoundInfoMarker", result.error.type)
     }
@@ -63,7 +73,7 @@ class ConverterTests {
             }
             """.trimIndent(),
         )
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Success)
         val expectedFile = File(tempDir, "test.graph")
         expectedFile.writeText(
@@ -107,7 +117,7 @@ class ConverterTests {
             }
             """.trimIndent(),
         )
-        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD)
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.LOAD, null)
         assertTrue(result is Result.Success)
         val expectedFile = File(tempDir, "test.graph")
         expectedFile.writeText(

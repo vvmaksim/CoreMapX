@@ -12,10 +12,10 @@ import org.coremapx.app.config
 class VertexViewModel<V : Comparable<V>>(
     x: Dp = 0.dp,
     y: Dp = 0.dp,
-    color: Color = config.getColor("vertexMainColor"),
+    color: Color = config.states.vertexMainColor.value,
     private val vertex: Vertex<V>,
     private val _labelVisible: State<Boolean>,
-    val radius: Dp = (config.getIntValue("vertexRadius") ?: 0).dp,
+    val radius: Dp = config.states.vertexRadius.value.dp,
 ) {
     private var _x = mutableStateOf(x)
     var x: Dp
