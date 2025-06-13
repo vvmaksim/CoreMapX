@@ -78,13 +78,13 @@ isTransparentCommandLine=false
 ! Work Area
 
 # Min=2000 (px)
-graphLayoutHeight=3500
+graphLayoutHeight=7000
 
 # Min=1000 (px)
-graphLayoutWidth=3500
+graphLayoutWidth=7000
 
 # Min=1 (dp)
-vertexRadius=20
+vertexRadius=15
 
 # Min=6 (sp)
 vertexLabelSize=14
@@ -102,7 +102,7 @@ edgeWidth=1.0
 canvasDragRatio=1
 
 # Min=2000 (px)
-canvasLimit=2000
+canvasLimit=8000
 
 ! Performance
 
