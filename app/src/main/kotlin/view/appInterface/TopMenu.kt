@@ -125,7 +125,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
     if (showGenerateRandomGraphDialog) {
         GenerateRandomGraph(
             onDismiss = { showGenerateRandomGraphDialog = false },
-            viewModel = viewModel,
+            onGraphUpdate = { newGraph ->
+                viewModel.updateGraph(newGraph)
+            },
         )
     }
 }
