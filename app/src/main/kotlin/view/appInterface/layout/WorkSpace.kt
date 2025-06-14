@@ -1,8 +1,9 @@
-package view.appInterface
+package view.appInterface.layout
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import view.appInterface.MainWorkArea
 import viewmodel.MainScreenViewModel
 
 @Suppress("ktlint:standard:function-naming")

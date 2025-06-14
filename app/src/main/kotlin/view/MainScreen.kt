@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
 import org.coremapx.app.config
 import view.appInterface.MainMenu
-import view.appInterface.WorkSpace
+import view.appInterface.layout.WorkSpace
 import viewmodel.MainScreenViewModel
 
 @Suppress("ktlint:standard:function-naming")
