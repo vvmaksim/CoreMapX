@@ -1,4 +1,4 @@
-package view.interfaceElements
+package view.appInterface
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -36,14 +36,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.result.Result
 import org.coremapx.app.config
-import view.interfaceElements.buttons.MainMenuTextButton
-import view.interfaceElements.buttons.SlideMenuButton
-import view.interfaceElements.buttons.UserDirectoryButton
-import view.interfaceElements.dialogs.NewGraph
-import view.interfaceElements.dialogs.OpenGraphErrors
-import view.interfaceElements.dialogs.OpenRepository
-import view.interfaceElements.dialogs.SaveGraphAs
-import view.interfaceElements.dialogs.UserNotification
+import view.appInterface.buttons.MainMenuTextButton
+import view.appInterface.buttons.SlideMenuButton
+import view.appInterface.buttons.UserDirectoryButton
+import view.appInterface.dialogs.NewGraph
+import view.appInterface.dialogs.OpenGraphErrors
+import view.appInterface.dialogs.OpenRepository
+import view.appInterface.dialogs.SaveGraphAs
+import view.appInterface.dialogs.UserNotification
 import viewmodel.MainScreenViewModel
 import java.io.File
 

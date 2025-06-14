@@ -20,7 +20,7 @@ import mu.KotlinLogging
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.ConfigRepository
 import org.coremapx.app.userDirectory.UserDirectory
-import view.interfaceElements.TitleBar
+import view.appInterface.TitleBar
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension
 

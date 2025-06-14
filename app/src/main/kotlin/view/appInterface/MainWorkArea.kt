@@ -1,4 +1,4 @@
-package view.interfaceElements
+package view.appInterface
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -30,7 +30,7 @@ import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
 import view.graph.GraphView
-import view.interfaceElements.buttons.ZoomButtons
+import view.appInterface.buttons.ZoomButtons
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
 

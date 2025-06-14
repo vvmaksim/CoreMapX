@@ -1,4 +1,4 @@
-package view.interfaceElements
+package view.appInterface
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package view.interfaceElements.dialogs
+package view.appInterface.dialogs
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,8 +32,8 @@ import extensions.border
 import model.fileHandler.FileExtensions
 import model.result.Result
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
-import view.interfaceElements.buttons.DropdownSelectButton
-import view.interfaceElements.buttons.SavePathButton
+import view.appInterface.buttons.DropdownSelectButton
+import view.appInterface.buttons.SavePathButton
 import viewmodel.MainScreenViewModel
 import java.io.File
 

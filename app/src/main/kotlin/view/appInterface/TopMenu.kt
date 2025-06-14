@@ -1,4 +1,4 @@
-package view.interfaceElements
+package view.appInterface
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -19,7 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import view.interfaceElements.dialogs.GenerateRandomGraph
+import view.appInterface.dialogs.GenerateRandomGraph
 import viewmodel.MainScreenViewModel
 
 @Suppress("ktlint:standard:function-naming")

@@ -1,4 +1,4 @@
-package view.interfaceElements
+package view.appInterface
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

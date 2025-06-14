@@ -1,5 +1,6 @@
-package view.interfaceElements.buttons
+package view.appInterface.buttons
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,12 +11,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CornerBasedShape
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,19 +28,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
-import model.fileHandler.FileDialogManager
-import kotlin.text.ifEmpty
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SavePathButton(
-    selectedPath: String = System.getProperty("user.home"),
-    onPathSelected: (String) -> Unit,
+fun DropdownSelectButton(
+    items: List<String>,
+    selectedItem: String,
+    onItemSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
     borderColor: Color = MaterialTheme.colors.border,
     borderWidth: Dp = 1.dp,
@@ -44,42 +47,61 @@ fun SavePathButton(
     iconSize: Dp = 24.dp,
     borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
 ) {
-    var currentPath by remember { mutableStateOf(selectedPath) }
+    var expanded by remember { mutableStateOf(false) }
+    val rotation by animateFloatAsState(if (expanded) 180f else 0f)
 
     Box(
         modifier =
             modifier
+                .wrapContentSize()
                 .clip(shape = borderShape)
                 .border(
                     border = BorderStroke(borderWidth, borderColor),
                     shape = borderShape,
-                ).clickable {
-                    val dir = FileDialogManager.showSelectDirectoryDialog(directory = currentPath) ?: currentPath
-                    currentPath = dir
-                    onPathSelected(dir)
-                },
+                ).clickable { expanded = !expanded },
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
             modifier =
                 Modifier
                     .fillMaxWidth()
                     .height(height)
                     .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = currentPath.ifEmpty { "Select directory" },
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
+                text = selectedItem,
                 style = MaterialTheme.typography.body1,
             )
             Icon(
-                imageVector = Icons.Filled.Folder,
-                contentDescription = "Open Directory Dialog",
-                modifier = Modifier.size(iconSize),
+                imageVector = Icons.Filled.ArrowDropDown,
+                contentDescription = "Dropdown Arrow",
+                modifier =
+                    Modifier
+                        .size(iconSize)
+                        .rotate(rotation),
                 tint = MaterialTheme.colors.primary,
             )
+        }
+
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+        ) {
+            items.forEach { item ->
+                DropdownMenuItem(
+                    onClick = {
+                        onItemSelected(item)
+                        expanded = false
+                    },
+                ) {
+                    Text(
+                        text = item,
+                        style = MaterialTheme.typography.body1,
+                        color = if (item == selectedItem) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface,
+                    )
+                }
+            }
         }
     }
 }
