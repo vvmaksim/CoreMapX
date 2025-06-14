@@ -257,7 +257,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     if (showNewGraphDialog) {
         NewGraph(
             onDismiss = { showNewGraphDialog = false },
-            viewModel = viewModel,
+            onCreate = { graph, graphName ->
+                viewModel.graphName = graphName
+                viewModel.graphAuthor = "None"
+                viewModel.graphPath = null
+                viewModel.graphFormat = null
+                viewModel.updateGraph(graph)
+            },
         )
     }
 }

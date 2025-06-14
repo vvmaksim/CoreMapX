@@ -1,5 +1,6 @@
 package view.appInterface.dialogs
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +29,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
@@ -36,162 +38,193 @@ import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph
 import model.graph.classes.UndirectedWeightedGraph
 import model.graph.interfaces.Graph
-import viewmodel.MainScreenViewModel
+import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> NewGraph(
     onDismiss: () -> Unit,
-    viewModel: MainScreenViewModel<E, V>,
+    onCreate: (
+        graph: Graph<E, V>,
+        graphName: String,
+    ) -> Unit,
+    dialogWidth: Dp = 450.dp,
+) {
+    Dialog(onDismissRequest = onDismiss) {
+        NewGraphContent(
+            onDismiss = onDismiss,
+            onCreate = onCreate,
+            dialogWidth = dialogWidth,
+        )
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
+    onDismiss: () -> Unit,
+    onCreate: (
+        graph: Graph<E, V>,
+        graphName: String,
+    ) -> Unit,
+    dialogWidth: Dp = 450.dp,
 ) {
     var graphName by remember { mutableStateOf("") }
     var isWeighted by remember { mutableStateOf(false) }
     var isDirected by remember { mutableStateOf(false) }
     var showError by remember { mutableStateOf(false) }
 
-    Dialog(onDismissRequest = onDismiss) {
-        Card(
+    Card(
+        modifier =
+            Modifier
+                .width(dialogWidth)
+                .padding(16.dp),
+        shape = MaterialTheme.shapes.large,
+        backgroundColor = MaterialTheme.colors.background,
+    ) {
+        Column(
             modifier =
                 Modifier
-                    .width(450.dp)
-                    .padding(16.dp),
-            shape = MaterialTheme.shapes.large,
-            backgroundColor = MaterialTheme.colors.background,
+                    .fillMaxWidth()
+                    .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Column(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Text(
-                        text = "Create New Graph",
-                        style = MaterialTheme.typography.h5,
-                        modifier = Modifier.align(Alignment.Center),
-                    )
-                    IconButton(
-                        onClick = onDismiss,
-                        modifier = Modifier.align(Alignment.CenterEnd),
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Close,
-                            contentDescription = "Close",
-                            tint = MaterialTheme.colors.onSurface,
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(24.dp))
-                OutlinedTextField(
-                    value = graphName,
-                    onValueChange = {
-                        graphName = it
-                        showError = false
-                    },
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .height(70.dp),
-                    label = { Text("Graph Name") },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Name",
-                            tint = MaterialTheme.colors.primary,
-                        )
-                    },
-                    colors =
-                        TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = MaterialTheme.colors.primary,
-                            unfocusedBorderColor = MaterialTheme.colors.border,
-                            cursorColor = MaterialTheme.colors.primary,
-                            focusedLabelColor = MaterialTheme.colors.primary,
-                            unfocusedLabelColor = MaterialTheme.colors.onSurface,
-                        ),
-                    shape = MaterialTheme.shapes.medium,
-                    singleLine = true,
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "Create New Graph",
+                    style = MaterialTheme.typography.h5,
+                    modifier = Modifier.align(Alignment.Center),
                 )
-
-                if (showError) {
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "Field Graph Name cannot be empty",
-                        color = MaterialTheme.colors.error,
-                        style = MaterialTheme.typography.body1,
-                        modifier = Modifier.padding(start = 4.dp),
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Checkbox(
-                            checked = isDirected,
-                            onCheckedChange = { isDirected = it },
-                            colors =
-                                CheckboxDefaults.colors(
-                                    checkedColor = MaterialTheme.colors.primary,
-                                    uncheckedColor = MaterialTheme.colors.border,
-                                ),
-                        )
-                        Text(
-                            text = "Directed Graph",
-                            style = MaterialTheme.typography.body1,
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Checkbox(
-                            checked = isWeighted,
-                            onCheckedChange = { isWeighted = it },
-                            colors =
-                                CheckboxDefaults.colors(
-                                    checkedColor = MaterialTheme.colors.primary,
-                                    uncheckedColor = MaterialTheme.colors.border,
-                                ),
-                        )
-                        Text(
-                            text = "Weighted Graph",
-                            style = MaterialTheme.typography.body1,
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(
-                    onClick = {
-                        if (graphName.isBlank()) {
-                            showError = true
-                            return@Button
-                        }
-                        val newGraph: Graph<E, V> =
-                            when {
-                                isDirected && isWeighted -> DirectedWeightedGraph<V>()
-                                isDirected && !isWeighted -> DirectedUnweightedGraph<V>()
-                                !isDirected && isWeighted -> UndirectedWeightedGraph<V>()
-                                else -> UndirectedUnweightedGraph<V>()
-                            } as Graph<E, V>
-                        viewModel.graphName = graphName
-                        viewModel.graphAuthor = "None"
-                        viewModel.graphPath = null
-                        viewModel.graphFormat = null
-                        viewModel.updateGraph(newGraph)
-                        onDismiss()
-                    },
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier.fillMaxWidth(),
+                IconButton(
+                    onClick = onDismiss,
+                    modifier = Modifier.align(Alignment.CenterEnd),
                 ) {
-                    Text(
-                        text = "Create",
-                        style = MaterialTheme.typography.button,
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Close",
+                        tint = MaterialTheme.colors.onSurface,
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(24.dp))
+            OutlinedTextField(
+                value = graphName,
+                onValueChange = {
+                    graphName = it
+                    showError = false
+                },
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .height(70.dp),
+                label = { Text("Graph Name") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Edit,
+                        contentDescription = "Name",
+                        tint = MaterialTheme.colors.primary,
+                    )
+                },
+                colors =
+                    TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = MaterialTheme.colors.primary,
+                        unfocusedBorderColor = MaterialTheme.colors.border,
+                        cursorColor = MaterialTheme.colors.primary,
+                        focusedLabelColor = MaterialTheme.colors.primary,
+                        unfocusedLabelColor = MaterialTheme.colors.onSurface,
+                    ),
+                shape = MaterialTheme.shapes.medium,
+                singleLine = true,
+            )
+
+            if (showError) {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Field Graph Name cannot be empty",
+                    color = MaterialTheme.colors.error,
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier.padding(start = 4.dp),
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(modifier = Modifier.padding(16.dp)) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Checkbox(
+                        checked = isDirected,
+                        onCheckedChange = { isDirected = it },
+                        colors =
+                            CheckboxDefaults.colors(
+                                checkedColor = MaterialTheme.colors.primary,
+                                uncheckedColor = MaterialTheme.colors.border,
+                            ),
+                    )
+                    Text(
+                        text = "Directed Graph",
+                        style = MaterialTheme.typography.body1,
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Checkbox(
+                        checked = isWeighted,
+                        onCheckedChange = { isWeighted = it },
+                        colors =
+                            CheckboxDefaults.colors(
+                                checkedColor = MaterialTheme.colors.primary,
+                                uncheckedColor = MaterialTheme.colors.border,
+                            ),
+                    )
+                    Text(
+                        text = "Weighted Graph",
+                        style = MaterialTheme.typography.body1,
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                onClick = {
+                    if (graphName.isBlank()) {
+                        showError = true
+                        return@Button
+                    }
+                    val newGraph: Graph<E, V> =
+                        when {
+                            isDirected && isWeighted -> DirectedWeightedGraph<V>()
+                            isDirected && !isWeighted -> DirectedUnweightedGraph<V>()
+                            !isDirected && isWeighted -> UndirectedWeightedGraph<V>()
+                            else -> UndirectedUnweightedGraph<V>()
+                        } as Graph<E, V>
+                    onCreate(newGraph, graphName)
+                    onDismiss()
+                },
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                Text(
+                    text = "Create",
+                    style = MaterialTheme.typography.button,
+                )
+            }
         }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+fun PreviewNewGraph() {
+    AppTheme {
+        NewGraphContent<Long, Long>(
+            dialogWidth = 450.dp,
+            onDismiss = {},
+            onCreate = { graph, graphName ->
+            },
+        )
     }
 }
