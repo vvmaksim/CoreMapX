@@ -29,8 +29,8 @@ import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
-import view.graph.GraphView
 import view.appInterface.buttons.ZoomButtons
+import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
 
@@ -133,7 +133,18 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             VertexAndEdgeCounters(
-                viewModel,
+                vertexCount =
+                    viewModel.graph.value
+                        ?.vertices
+                        ?.size
+                        ?.toLong() ?: 0L,
+                edgeCount =
+                    viewModel.graph.value
+                        ?.edges
+                        ?.size
+                        ?.toLong() ?: 0L,
+                vertexLabel = "vertices",
+                edgeLabel = "edges",
                 modifier = Modifier.align(Alignment.Bottom),
             )
             Spacer(Modifier.weight(1f))
