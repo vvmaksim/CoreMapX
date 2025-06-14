@@ -34,8 +34,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import model.databases.sqlite.createDatabase
+import model.databases.sqlite.repositories.EdgeRepository
+import model.databases.sqlite.repositories.GraphRepository
+import model.databases.sqlite.repositories.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
+import org.coremapx.graph.GraphDatabase
 import view.appInterface.buttons.MainMenuTextButton
 import view.appInterface.buttons.SlideMenuButton
 import view.appInterface.buttons.UserDirectoryButton
@@ -227,15 +232,19 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     }
 
     if (showOpenRepositoryDialog) {
+        val database: GraphDatabase = createDatabase(selectedRepositoryFile.absolutePath)
+        val graphs = GraphRepository(database).getAllGraphs()
         OpenRepository(
             onDismiss = { showOpenRepositoryDialog = false },
-            file = selectedRepositoryFile,
+            graphs = graphs,
             onGraphSelected = { graphId ->
                 viewModel.graphId = graphId
                 val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
                 if (loadResult is Result.Error) warnings = listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
             },
+            getCountVerticesByGraph = { graphId -> VertexRepository(database).getVerticesByGraph(graphId).size.toLong() },
+            getCountEdgesByGraph = { graphId -> EdgeRepository(database).getEdgesByGraph(graphId).size.toLong() },
         )
     }
 
