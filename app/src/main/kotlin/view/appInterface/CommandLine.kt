@@ -1,5 +1,6 @@
 package view.appInterface
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
@@ -23,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
@@ -38,6 +41,10 @@ fun CommandLine(
     outputMessages: MutableList<String> = mutableListOf(),
     commandLineBackgroundColor: Color = Color.Transparent,
     borderWidth: Dp = 1.dp,
+    borderColor: Color = MaterialTheme.colors.border,
+    borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
+    placeholderText: String = "Enter command",
+    placeholderTextStyle: TextStyle = MaterialTheme.typography.body1,
     onCommand: (String) -> Unit = {},
 ) {
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
@@ -115,22 +122,39 @@ fun CommandLine(
                     .fillMaxWidth()
                     .background(
                         color = commandLineBackgroundColor,
-                        shape = MaterialTheme.shapes.medium,
+                        shape = borderShape,
                     ).border(
                         border =
                             BorderStroke(
                                 width = borderWidth,
-                                color = MaterialTheme.colors.border,
+                                color = borderColor,
                             ),
-                        shape = MaterialTheme.shapes.medium,
+                        shape = borderShape,
                     ),
             placeholder = {
                 Text(
-                    text = "Enter command",
-                    style = MaterialTheme.typography.body1,
+                    text = placeholderText,
+                    style = placeholderTextStyle,
                 )
             },
-            shape = MaterialTheme.shapes.medium,
+            shape = borderShape,
+        )
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+fun PreviewCommandLine() {
+    MaterialTheme {
+        CommandLine(
+            outputMessages =
+                mutableListOf(
+                    "123",
+                    "52",
+                    "Some text",
+                ),
+            placeholderText = "Some placeholder text",
         )
     }
 }

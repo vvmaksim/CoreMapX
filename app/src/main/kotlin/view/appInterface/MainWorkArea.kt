@@ -155,6 +155,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         .align(Alignment.Bottom),
                 outputMessages = outputMessages.value,
                 commandLineBackgroundColor = if (isTransparentCommandLine) Color.Transparent else commandLineBackgroundColor,
+                placeholderText = "Enter command",
                 onCommand = { command -> handleCommand(command) },
             )
             Spacer(Modifier.weight(1f))
