@@ -132,7 +132,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            VertexAndEdgeCounters(
+            GraphElementCounters(
                 vertexCount =
                     viewModel.graph.value
                         ?.vertices

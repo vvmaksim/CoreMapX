@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun VertexAndEdgeCounters(
+fun GraphElementCounters(
     vertexCount: Long,
     edgeCount: Long,
     vertexLabel: String = "vertices",
@@ -49,7 +49,7 @@ fun VertexAndEdgeCounters(
 @Composable
 fun PreviewCountersWithSomeData() {
     MaterialTheme {
-        VertexAndEdgeCounters(
+        GraphElementCounters(
             vertexCount = 52,
             edgeCount = 66,
         )
