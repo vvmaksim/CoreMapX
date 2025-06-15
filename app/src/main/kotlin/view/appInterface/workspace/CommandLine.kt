@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.workspace
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
@@ -32,6 +32,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
+import kotlinx.coroutines.delay
 import org.coremapx.app.config
 
 @Suppress("ktlint:standard:function-naming")
@@ -56,7 +57,7 @@ fun CommandLine(
     val messageOutputHeight = config.states.messageOutputHeight.value.dp
 
     LaunchedEffect(outputMessages.size) {
-        kotlinx.coroutines.delay(commandFieldScrollDelay)
+        delay(commandFieldScrollDelay)
         scrollState.animateScrollTo(scrollState.maxValue)
     }
 
