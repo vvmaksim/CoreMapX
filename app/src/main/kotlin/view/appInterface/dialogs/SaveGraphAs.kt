@@ -32,8 +32,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
+import model.dto.SavedGraphDetails
 import model.fileHandler.FileExtensions
-import model.fileHandler.SavedGraphDetails
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import view.appInterface.buttons.DropdownSelectButton

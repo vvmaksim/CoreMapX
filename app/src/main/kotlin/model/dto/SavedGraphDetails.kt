@@ -1,4 +1,6 @@
-package model.fileHandler
+package model.dto
+
+import model.fileHandler.FileExtensions
 
 data class SavedGraphDetails(
     val fileName: String,
