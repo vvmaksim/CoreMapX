@@ -14,7 +14,7 @@ fun <E : Comparable<E>, V : Comparable<V>> WorkSpace(
 ) {
     if (viewModel.isGraphActive) {
         MainWorkArea(
-            viewModel,
+            viewModel = viewModel,
             modifier = modifier,
         )
     } else {
