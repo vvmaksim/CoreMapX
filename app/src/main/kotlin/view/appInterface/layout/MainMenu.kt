@@ -41,7 +41,6 @@ import model.databases.sqlite.repositories.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.graph.GraphDatabase
-import view.appInterface.Logo
 import view.appInterface.buttons.MainMenuTextButton
 import view.appInterface.buttons.SlideMenuButton
 import view.appInterface.buttons.UserDirectoryButton
@@ -50,6 +49,7 @@ import view.appInterface.dialogs.OpenGraphErrors
 import view.appInterface.dialogs.OpenRepository
 import view.appInterface.dialogs.SaveGraphAs
 import view.appInterface.dialogs.UserNotification
+import view.appInterface.icon.Logo
 import viewmodel.MainScreenViewModel
 import java.io.File
 

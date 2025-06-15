@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.icon
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
