@@ -88,6 +88,8 @@ fun OpenGraphErrorsContent(
                     Modifier
                         .fillMaxWidth()
                         .heightIn(max = 300.dp),
+                backgroundColor = MaterialTheme.colors.surface,
+                elevation = 0.dp,
             ) {
                 Column(
                     modifier =
