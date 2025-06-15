@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
+import model.dto.NewGraphData
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph
@@ -44,10 +45,7 @@ import org.coremapx.app.theme.AppTheme
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> NewGraph(
     onDismiss: () -> Unit,
-    onCreate: (
-        graph: Graph<E, V>,
-        graphName: String,
-    ) -> Unit,
+    onCreate: (NewGraphData<E, V>) -> Unit,
     dialogWidth: Dp = 450.dp,
 ) {
     Dialog(onDismissRequest = onDismiss) {
@@ -63,10 +61,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraph(
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
     onDismiss: () -> Unit,
-    onCreate: (
-        graph: Graph<E, V>,
-        graphName: String,
-    ) -> Unit,
+    onCreate: (NewGraphData<E, V>) -> Unit,
     dialogWidth: Dp = 450.dp,
 ) {
     var graphName by remember { mutableStateOf("") }
@@ -200,7 +195,12 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                             !isDirected && isWeighted -> UndirectedWeightedGraph<V>()
                             else -> UndirectedUnweightedGraph<V>()
                         } as Graph<E, V>
-                    onCreate(newGraph, graphName)
+                    onCreate(
+                        NewGraphData(
+                            graph = newGraph,
+                            graphName = graphName,
+                        ),
+                    )
                     onDismiss()
                 },
                 shape = MaterialTheme.shapes.medium,
@@ -223,8 +223,7 @@ fun PreviewNewGraph() {
         NewGraphContent<Long, Long>(
             dialogWidth = 450.dp,
             onDismiss = {},
-            onCreate = { graph, graphName ->
-            },
+            onCreate = {},
         )
     }
 }

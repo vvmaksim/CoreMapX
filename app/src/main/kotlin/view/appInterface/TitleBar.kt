@@ -407,12 +407,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     if (showNewGraphDialog) {
         NewGraph(
             onDismiss = { showNewGraphDialog = false },
-            onCreate = { graph, graphName ->
-                viewModel.graphName = graphName
+            onCreate = { newGraphData ->
+                viewModel.graphName = newGraphData.graphName
                 viewModel.graphAuthor = "None"
                 viewModel.graphPath = null
                 viewModel.graphFormat = null
-                viewModel.updateGraph(graph)
+                viewModel.updateGraph(newGraphData.graph)
             },
         )
     }
