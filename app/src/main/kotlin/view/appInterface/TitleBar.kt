@@ -71,7 +71,8 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     var showOpenRepositoryDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
-    var saveError by remember { mutableStateOf("") }
+    var userNotificationTitle by remember { mutableStateOf("") }
+    var userNotificationMessage by remember { mutableStateOf("") }
     var selectedRepositoryFile by remember { mutableStateOf(File("")) }
 
     var showOpenSubMenu by remember { mutableStateOf(false) }
@@ -217,7 +218,8 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             } else {
                                 val saveResult = viewModel.saveGraph()
                                 if (saveResult is Result.Error) {
-                                    saveError = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                    userNotificationMessage = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                    userNotificationTitle = "Save Error"
                                     showUserNotification = true
                                 }
                             }
@@ -369,16 +371,36 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
 
     if (showSaveAsDialog) {
         SaveGraphAs(
+            graphName = viewModel.graphName,
             onDismiss = { showSaveAsDialog = false },
-            viewModel = viewModel,
+            onSave = { savedGraphDetails ->
+                val saveResult =
+                    viewModel.saveGraph(
+                        fileName = savedGraphDetails.fileName,
+                        directoryPath = savedGraphDetails.directoryPath,
+                        fileFormat = savedGraphDetails.fileFormat,
+                    )
+                userNotificationMessage =
+                    when (saveResult) {
+                        is Result.Error -> {
+                            userNotificationTitle = "Save Error"
+                            "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
+                        }
+                        is Result.Success -> {
+                            userNotificationTitle = "Save Success"
+                            "Graph ${savedGraphDetails.fileName} has been successfully saved to the directory ${savedGraphDetails.directoryPath} as ${savedGraphDetails.fileFormat}"
+                        }
+                    }
+                showUserNotification = true
+            },
         )
     }
 
     if (showUserNotification) {
         UserNotification(
             onDismiss = { showUserNotification = false },
-            title = "Save Error",
-            message = saveError,
+            title = userNotificationTitle,
+            message = userNotificationMessage,
         )
     }
 
