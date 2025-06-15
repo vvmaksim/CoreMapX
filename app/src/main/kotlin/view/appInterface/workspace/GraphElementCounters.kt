@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.workspace
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ fun GraphElementCounters(
     edgeCount: Long,
     vertexLabel: String = "vertices",
     edgeLabel: String = "edges",
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.Companion,
     textStyle: TextStyle = MaterialTheme.typography.body1,
     textColor: Color = MaterialTheme.colors.onSurface,
 ) {
@@ -33,13 +33,13 @@ fun GraphElementCounters(
             text = "$vertexCount $vertexLabel",
             style = textStyle,
             color = textColor,
-            modifier = Modifier.padding(bottom = 4.dp),
+            modifier = Modifier.Companion.padding(bottom = 4.dp),
         )
         Text(
             text = "$edgeCount $edgeLabel",
             style = textStyle,
             color = textColor,
-            modifier = Modifier.padding(bottom = 4.dp),
+            modifier = Modifier.Companion.padding(bottom = 4.dp),
         )
     }
 }
