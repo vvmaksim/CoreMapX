@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -79,16 +79,16 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
 
     Row(
         modifier =
-            Modifier
+            Modifier.Companion
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colors.background)
                 .height(titleBarHeight),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Companion.CenterVertically,
     ) {
         Row(
-            modifier = Modifier.padding(start = 4.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.Companion.padding(start = 4.dp),
+            verticalAlignment = Alignment.Companion.CenterVertically,
         ) {
             if (showMenuButtons) {
                 IconButton(onClick = { showMenuButtons = false }) {
@@ -96,7 +96,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.size(titleBarIconSize),
+                        modifier = Modifier.Companion.size(titleBarIconSize),
                     )
                 }
 
@@ -110,7 +110,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 DropdownMenu(
                     expanded = showFileMenu,
                     onDismissRequest = { showFileMenu = false },
-                    modifier = Modifier.background(color = MaterialTheme.colors.background),
+                    modifier = Modifier.Companion.background(color = MaterialTheme.colors.background),
                 ) {
                     DropdownMenuItem(
                         onClick = {
@@ -118,13 +118,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             showNewGraphDialog = true
                         },
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Add,
                                 contentDescription = "New Icon",
                                 tint = MaterialTheme.colors.primary,
                             )
-                            Spacer(Modifier.width(8.dp))
+                            Spacer(Modifier.Companion.width(8.dp))
                             Text(
                                 text = "New",
                                 style = MaterialTheme.typography.button,
@@ -136,13 +136,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             showOpenSubMenu = true
                         },
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.FolderOpen,
                                 contentDescription = "Open Menu Icon",
                                 tint = MaterialTheme.colors.primary,
                             )
-                            Spacer(Modifier.width(8.dp))
+                            Spacer(Modifier.Companion.width(8.dp))
                             Text(
                                 text = "Open..",
                                 style = MaterialTheme.typography.button,
@@ -151,7 +151,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         DropdownMenu(
                             expanded = showOpenSubMenu,
                             onDismissRequest = { showOpenSubMenu = false },
-                            modifier = Modifier.background(color = MaterialTheme.colors.background),
+                            modifier = Modifier.Companion.background(color = MaterialTheme.colors.background),
                         ) {
                             DropdownMenuItem(
                                 onClick = {
@@ -166,13 +166,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     showFileMenu = false
                                 },
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                Row(verticalAlignment = Alignment.Companion.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Description,
                                         contentDescription = "Open File Icon",
                                         tint = MaterialTheme.colors.primary,
                                     )
-                                    Spacer(Modifier.width(8.dp))
+                                    Spacer(Modifier.Companion.width(8.dp))
                                     Text(
                                         text = "Open File",
                                         style = MaterialTheme.typography.button,
@@ -186,6 +186,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                         is Result.Error ->
                                             warnings =
                                                 listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+
                                         is Result.Success -> {
                                             selectedRepositoryFile = openResult.data
                                             showOpenRepositoryDialog = true
@@ -196,13 +197,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     showFileMenu = false
                                 },
                             ) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                Row(verticalAlignment = Alignment.Companion.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Storage,
                                         contentDescription = "Open Repository Icon",
                                         tint = MaterialTheme.colors.primary,
                                     )
-                                    Spacer(Modifier.width(8.dp))
+                                    Spacer(Modifier.Companion.width(8.dp))
                                     Text(
                                         text = "Open Repository",
                                         style = MaterialTheme.typography.button,
@@ -218,7 +219,8 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             } else {
                                 val saveResult = viewModel.saveGraph()
                                 if (saveResult is Result.Error) {
-                                    userNotificationMessage = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                    userNotificationMessage =
+                                        "Error: ${saveResult.error.type}.${saveResult.error.description}"
                                     userNotificationTitle = "Save Error"
                                     showUserNotification = true
                                 }
@@ -227,7 +229,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         },
                         enabled = viewModel.isGraphActive,
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Save,
                                 contentDescription = "Save Icon",
@@ -240,7 +242,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                         )
                                     },
                             )
-                            Spacer(Modifier.width(8.dp))
+                            Spacer(Modifier.Companion.width(8.dp))
                             Text(
                                 text = "Save",
                                 style = MaterialTheme.typography.button,
@@ -263,7 +265,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         },
                         enabled = viewModel.isGraphActive,
                     ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.SaveAs,
                                 contentDescription = "Save as Icon",
@@ -276,7 +278,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                         )
                                     },
                             )
-                            Spacer(Modifier.width(8.dp))
+                            Spacer(Modifier.Companion.width(8.dp))
                             Text(
                                 text = "Save as..",
                                 style = MaterialTheme.typography.button,
@@ -313,18 +315,18 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.size(titleBarIconSize),
+                        modifier = Modifier.Companion.size(titleBarIconSize),
                     )
                 }
             }
         }
-        Row(modifier = Modifier.padding(end = 4.dp)) {
+        Row(modifier = Modifier.Companion.padding(end = 4.dp)) {
             IconButton(onClick = onMinimize) {
                 Icon(
                     imageVector = Icons.Filled.Remove,
                     contentDescription = "Minimize",
                     tint = MaterialTheme.colors.onSurface,
-                    modifier = Modifier.size(titleBarIconSize),
+                    modifier = Modifier.Companion.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onMaximize) {
@@ -332,7 +334,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
                     contentDescription = if (isMaximized) "Recover" else "Maximize",
                     tint = MaterialTheme.colors.onSurface,
-                    modifier = Modifier.size(titleBarIconSize),
+                    modifier = Modifier.Companion.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onClose) {
@@ -340,7 +342,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Close",
                     tint = MaterialTheme.colors.onSurface,
-                    modifier = Modifier.size(titleBarIconSize),
+                    modifier = Modifier.Companion.size(titleBarIconSize),
                 )
             }
         }
@@ -361,7 +363,10 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
             onGraphSelected = { graphId ->
                 viewModel.graphId = graphId
                 val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
-                if (loadResult is Result.Error) warnings = listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                if (loadResult is Result.Error) {
+                    warnings =
+                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
             },
             getCountVerticesByGraph = { graphId -> VertexRepository(database).getVerticesByGraph(graphId).size.toLong() },
@@ -386,6 +391,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             userNotificationTitle = "Save Error"
                             "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
                         }
+
                         is Result.Success -> {
                             userNotificationTitle = "Save Success"
                             "Graph ${savedGraphDetails.fileName} has been successfully saved to the directory ${savedGraphDetails.directoryPath} as ${savedGraphDetails.fileFormat}"
