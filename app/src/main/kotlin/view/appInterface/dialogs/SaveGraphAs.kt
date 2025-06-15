@@ -32,7 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
-import model.dto.SavedGraphDetails
+import model.dto.SaveGraphData
 import model.fileHandler.FileExtensions
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
@@ -45,7 +45,7 @@ import java.io.File
 fun SaveGraphAs(
     graphName: String,
     onDismiss: () -> Unit,
-    onSave: (SavedGraphDetails) -> Unit,
+    onSave: (SaveGraphData) -> Unit,
     formats: List<String> = listOf(".graph", ".json", ".db"),
     dialogWidth: Dp = 550.dp,
 ) {
@@ -65,7 +65,7 @@ fun SaveGraphAs(
 fun SaveGraphAsContent(
     graphName: String,
     onDismiss: () -> Unit,
-    onSave: (SavedGraphDetails) -> Unit,
+    onSave: (SaveGraphData) -> Unit,
     formats: List<String> = listOf(".graph", ".json", ".db"),
     dialogWidth: Dp = 550.dp,
 ) {
@@ -189,7 +189,7 @@ fun SaveGraphAsContent(
             Button(
                 onClick = {
                     onSave(
-                        SavedGraphDetails(
+                        SaveGraphData(
                             fileName = selectedFileName,
                             directoryPath = selectedPath,
                             fileFormat =
