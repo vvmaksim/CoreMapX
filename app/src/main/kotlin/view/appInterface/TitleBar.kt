@@ -233,9 +233,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 contentDescription = "Save Icon",
                                 tint =
                                     if (viewModel.isGraphActive) {
-                                        MaterialTheme.colors.primary
+                                        MaterialTheme.colors.onSurface
                                     } else {
-                                        MaterialTheme.colors.primary.copy(
+                                        MaterialTheme.colors.onSurface.copy(
                                             alpha = 0.38f,
                                         )
                                     },
@@ -246,9 +246,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 style = MaterialTheme.typography.button,
                                 color =
                                     if (viewModel.isGraphActive) {
-                                        MaterialTheme.colors.primary
+                                        MaterialTheme.colors.onSurface
                                     } else {
-                                        MaterialTheme.colors.primary
+                                        MaterialTheme.colors.onSurface
                                             .copy(
                                                 alpha = 0.38f,
                                             )
@@ -269,9 +269,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 contentDescription = "Save as Icon",
                                 tint =
                                     if (viewModel.isGraphActive) {
-                                        MaterialTheme.colors.primary
+                                        MaterialTheme.colors.onSurface
                                     } else {
-                                        MaterialTheme.colors.primary.copy(
+                                        MaterialTheme.colors.onSurface.copy(
                                             alpha = 0.38f,
                                         )
                                     },
@@ -282,9 +282,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 style = MaterialTheme.typography.button,
                                 color =
                                     if (viewModel.isGraphActive) {
-                                        MaterialTheme.colors.primary
+                                        MaterialTheme.colors.onSurface
                                     } else {
-                                        MaterialTheme.colors.primary
+                                        MaterialTheme.colors.onSurface
                                             .copy(
                                                 alpha = 0.38f,
                                             )
