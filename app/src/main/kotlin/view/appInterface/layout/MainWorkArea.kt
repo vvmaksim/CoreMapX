@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -29,6 +29,9 @@ import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
+import view.appInterface.CommandLine
+import view.appInterface.GraphElementCounters
+import view.appInterface.TopMenu
 import view.appInterface.buttons.ZoomButtons
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
@@ -40,7 +43,7 @@ private val logger = KotlinLogging.logger {}
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     viewModel: MainScreenViewModel<E, V>,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.Companion,
 ) {
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
@@ -50,8 +53,6 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val maxCountMessages = config.states.maxCountMessages.value
     val commandFieldWidth = config.states.commandFieldWidth.value.dp
     val isTransparentCommandLine = config.states.isTransparentCommandLine.value
-    val canvasBackgroundColor = MaterialTheme.colors.canvasBackground
-    val commandLineBackgroundColor = MaterialTheme.colors.commandLineBackground
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -77,7 +78,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         }
         val commands = commandLine.split(";")
         commands.forEach { command ->
-            val commandResult = Command.create(command)
+            val commandResult = Command.Companion.create(command)
             when (commandResult) {
                 is Result.Success -> {
                     val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
@@ -105,7 +106,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         modifier =
             modifier
                 .fillMaxSize()
-                .background(canvasBackgroundColor),
+                .background(MaterialTheme.colors.canvasBackground),
     ) {
         graphViewModel?.let { graphViewModel ->
             GraphView(
@@ -119,18 +120,18 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         }
 
         TopMenu(
-            viewModel,
-            modifier = Modifier.align(Alignment.TopCenter),
+            viewModel = viewModel,
+            modifier = Modifier.Companion.align(Alignment.Companion.TopCenter),
         )
 
         Row(
             modifier =
-                Modifier
-                    .align(Alignment.BottomCenter)
+                Modifier.Companion
+                    .align(Alignment.Companion.BottomCenter)
                     .fillMaxWidth()
                     .horizontalScroll(scrollState)
                     .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Companion.CenterVertically,
         ) {
             GraphElementCounters(
                 vertexCount =
@@ -145,22 +146,27 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         ?.toLong() ?: 0L,
                 vertexLabel = "vertices",
                 edgeLabel = "edges",
-                modifier = Modifier.align(Alignment.Bottom),
+                modifier = Modifier.Companion.align(Alignment.Companion.Bottom),
             )
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.Companion.weight(1f))
             CommandLine(
                 modifier =
-                    Modifier
+                    Modifier.Companion
                         .width(commandFieldWidth)
-                        .align(Alignment.Bottom),
+                        .align(Alignment.Companion.Bottom),
                 outputMessages = outputMessages.value,
-                commandLineBackgroundColor = if (isTransparentCommandLine) Color.Transparent else commandLineBackgroundColor,
+                commandLineBackgroundColor =
+                    if (isTransparentCommandLine) {
+                        Color.Companion.Transparent
+                    } else {
+                        MaterialTheme.colors.commandLineBackground
+                    },
                 placeholderText = "Enter command",
                 onCommand = { command -> handleCommand(command) },
             )
-            Spacer(Modifier.weight(1f))
+            Spacer(Modifier.Companion.weight(1f))
             ZoomButtons(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.Companion.padding(8.dp),
                 onZoom = { zoomDelta -> viewModel.zoomCanvas(zoomDelta) },
             )
         }
