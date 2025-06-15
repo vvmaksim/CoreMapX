@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.layout
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -41,6 +41,7 @@ import model.databases.sqlite.repositories.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.graph.GraphDatabase
+import view.appInterface.Logo
 import view.appInterface.buttons.MainMenuTextButton
 import view.appInterface.buttons.SlideMenuButton
 import view.appInterface.buttons.UserDirectoryButton
@@ -77,12 +78,26 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     ) {
         AnimatedVisibility(
             visible = isMenuVisible,
-            enter = fadeIn(animationSpec = tween(animationDuration)) + slideInHorizontally(animationSpec = tween(animationDuration)),
-            exit = fadeOut(animationSpec = tween(animationDuration)) + slideOutHorizontally(animationSpec = tween(animationDuration)),
+            enter =
+                fadeIn(animationSpec = tween(animationDuration)) +
+                    slideInHorizontally(
+                        animationSpec =
+                            tween(
+                                animationDuration,
+                            ),
+                    ),
+            exit =
+                fadeOut(animationSpec = tween(animationDuration)) +
+                    slideOutHorizontally(
+                        animationSpec =
+                            tween(
+                                animationDuration,
+                            ),
+                    ),
         ) {
             Column(
                 modifier =
-                    Modifier
+                    Modifier.Companion
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .background(MaterialTheme.colors.background)
@@ -90,20 +105,20 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             ) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.Companion.CenterVertically,
+                    modifier = Modifier.Companion.fillMaxWidth(),
                 ) {
                     Logo(
                         backgroundColor = MaterialTheme.colors.background,
                         contentColor = MaterialTheme.colors.onSurface,
                         size = 52.dp,
                     )
-                    Spacer(Modifier.width(8.dp))
+                    Spacer(Modifier.Companion.width(8.dp))
                     Text(
                         text = "CoreMapX",
                         style = MaterialTheme.typography.h5,
                         color = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.align(Alignment.CenterVertically),
+                        modifier = Modifier.Companion.align(Alignment.Companion.CenterVertically),
                     )
                 }
 
@@ -121,7 +136,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         } else {
                             val saveResult = viewModel.saveGraph()
                             if (saveResult is Result.Error) {
-                                userNotificationMessage = "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                userNotificationMessage =
+                                    "Error: ${saveResult.error.type}.${saveResult.error.description}"
                                 userNotificationTitle = "Save Error"
                                 showUserNotification = true
                             }
@@ -160,7 +176,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     onClick = {
                         val openResult = viewModel.openGraphRepository()
                         when (openResult) {
-                            is Result.Error -> warnings = listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+                            is Result.Error ->
+                                warnings =
+                                    listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+
                             is Result.Success -> {
                                 selectedRepositoryFile = openResult.data
                                 showOpenRepositoryDialog = true
@@ -187,17 +206,17 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     buttonText = "Settings",
                 )
 
-                Spacer(Modifier.weight(1f))
+                Spacer(Modifier.Companion.weight(1f))
                 Row(
                     modifier =
-                        Modifier
+                        Modifier.Companion
                             .fillMaxWidth()
                             .padding(
                                 horizontal = 8.dp,
                                 vertical = 4.dp,
                             ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically,
+                    verticalAlignment = Alignment.Companion.CenterVertically,
                 ) {
                     SlideMenuButton(onClick = { onMenuVisibilityChange(false) })
                     UserDirectoryButton()
@@ -207,16 +226,30 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
 
         AnimatedVisibility(
             visible = !isMenuVisible,
-            enter = fadeIn(animationSpec = tween(animationDuration)) + slideInHorizontally(animationSpec = tween(animationDuration)),
-            exit = fadeOut(animationSpec = tween(animationDuration)) + slideOutHorizontally(animationSpec = tween(animationDuration)),
+            enter =
+                fadeIn(animationSpec = tween(animationDuration)) +
+                    slideInHorizontally(
+                        animationSpec =
+                            tween(
+                                animationDuration,
+                            ),
+                    ),
+            exit =
+                fadeOut(animationSpec = tween(animationDuration)) +
+                    slideOutHorizontally(
+                        animationSpec =
+                            tween(
+                                animationDuration,
+                            ),
+                    ),
         ) {
             Column(
                 modifier =
-                    Modifier
+                    Modifier.Companion
                         .fillMaxHeight()
                         .padding(16.dp),
                 verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.Companion.CenterHorizontally,
             ) {
                 SlideMenuButton(
                     onClick = { onMenuVisibilityChange(true) },
@@ -242,7 +275,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             onGraphSelected = { graphId ->
                 viewModel.graphId = graphId
                 val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
-                if (loadResult is Result.Error) warnings = listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                if (loadResult is Result.Error) {
+                    warnings =
+                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
             },
             getCountVerticesByGraph = { graphId -> VertexRepository(database).getVerticesByGraph(graphId).size.toLong() },
@@ -267,6 +303,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                             userNotificationTitle = "Save Error"
                             "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
                         }
+
                         is Result.Success -> {
                             userNotificationTitle = "Save Success"
                             "Graph ${savedGraphDetails.fileName} has been successfully saved to the directory ${savedGraphDetails.directoryPath} as ${savedGraphDetails.fileFormat}"

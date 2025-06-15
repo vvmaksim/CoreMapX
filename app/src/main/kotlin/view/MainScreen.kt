@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
 import org.coremapx.app.config
-import view.appInterface.MainMenu
+import view.appInterface.layout.MainMenu
 import view.appInterface.layout.WorkSpace
 import viewmodel.MainScreenViewModel
 
