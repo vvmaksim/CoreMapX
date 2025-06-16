@@ -34,10 +34,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.border
 import model.dto.NewGraphData
-import model.graph.implementation.DirectedUnweightedGraph
-import model.graph.implementation.DirectedWeightedGraph
-import model.graph.implementation.UndirectedUnweightedGraph
-import model.graph.implementation.UndirectedWeightedGraph
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
+import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.interfaces.Graph
 import org.coremapx.app.theme.AppTheme
 

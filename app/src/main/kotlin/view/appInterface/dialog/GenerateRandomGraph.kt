@@ -39,13 +39,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
+import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.dataClasses.UnweightedEdge
 import model.graph.dataClasses.Vertex
 import model.graph.dataClasses.WeightedEdge
-import model.graph.implementation.DirectedUnweightedGraph
-import model.graph.implementation.DirectedWeightedGraph
-import model.graph.implementation.UndirectedUnweightedGraph
-import model.graph.implementation.UndirectedWeightedGraph
 import model.graph.interfaces.Edge
 import model.graph.interfaces.Graph
 import org.coremapx.app.theme.AppTheme

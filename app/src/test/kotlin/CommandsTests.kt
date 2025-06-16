@@ -3,11 +3,11 @@ import model.command.`class`.Command
 import model.command.`class`.Commands
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
+import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.dataClasses.Vertex
-import model.graph.implementation.DirectedUnweightedGraph
-import model.graph.implementation.DirectedWeightedGraph
-import model.graph.implementation.UndirectedUnweightedGraph
-import model.graph.implementation.UndirectedWeightedGraph
 import model.graph.interfaces.Graph
 import model.result.Result
 import org.junit.jupiter.api.BeforeEach

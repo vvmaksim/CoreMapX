@@ -1,4 +1,4 @@
-package model.graph.implementation
+package model.graph.concrete
 
 import model.graph.base.AbstractGraph
 import model.graph.dataClasses.UnweightedEdge
