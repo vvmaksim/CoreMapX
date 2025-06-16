@@ -1,5 +1,6 @@
 package view.appInterface.button
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -13,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -47,6 +49,17 @@ fun SlideMenuButton(
                     .graphicsLayer {
                         rotationZ = if (isReversed) 180f else 0f
                     },
+        )
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+fun PreviewSlideMenuButton() {
+    AppTheme {
+        SlideMenuButton(
+            onClick = {},
         )
     }
 }
