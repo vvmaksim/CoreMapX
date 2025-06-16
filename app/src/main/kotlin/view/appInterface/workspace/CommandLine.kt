@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import kotlinx.coroutines.delay
 import org.coremapx.app.config
+import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -147,7 +148,7 @@ fun CommandLine(
 @Preview
 @Composable
 fun PreviewCommandLine() {
-    MaterialTheme {
+    AppTheme {
         CommandLine(
             outputMessages =
                 mutableListOf(
