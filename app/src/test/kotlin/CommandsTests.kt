@@ -1,8 +1,8 @@
 import io.mockk.*
-import model.commands.`class`.Command
-import model.commands.`class`.Commands
-import model.commands.enum.CommandEntities
-import model.commands.enum.CommandTypes
+import model.command.`class`.Command
+import model.command.`class`.Commands
+import model.command.enum.CommandEntities
+import model.command.enum.CommandTypes
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph

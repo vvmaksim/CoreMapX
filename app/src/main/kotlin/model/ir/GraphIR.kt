@@ -1,6 +1,6 @@
 package model.ir
 
-import model.commands.`class`.Command
+import model.command.`class`.Command
 import model.result.Result
 
 data class GraphIR(

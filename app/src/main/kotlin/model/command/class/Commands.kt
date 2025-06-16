@@ -1,7 +1,7 @@
-package model.commands.`class`
+package model.command.`class`
 
-import model.commands.enum.CommandEntities
-import model.commands.enum.CommandTypes
+import model.command.enum.CommandEntities
+import model.command.enum.CommandTypes
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph

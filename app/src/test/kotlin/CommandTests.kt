@@ -1,6 +1,6 @@
-import model.commands.`class`.Command
-import model.commands.enum.CommandEntities
-import model.commands.enum.CommandTypes
+import model.command.`class`.Command
+import model.command.enum.CommandEntities
+import model.command.enum.CommandTypes
 import model.result.Result
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
