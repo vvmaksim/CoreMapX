@@ -1,5 +1,6 @@
 package view.appInterface.button
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -30,6 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import model.fileHandler.FileDialogManager
+import org.coremapx.app.theme.AppTheme
 import kotlin.text.ifEmpty
 
 @Suppress("ktlint:standard:function-naming")
@@ -81,5 +84,17 @@ fun SavePathButton(
                 tint = MaterialTheme.colors.primary,
             )
         }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+fun PreviewSavePathButton() {
+    AppTheme {
+        SavePathButton(
+            onPathSelected = {},
+            modifier = Modifier.width(450.dp),
+        )
     }
 }
