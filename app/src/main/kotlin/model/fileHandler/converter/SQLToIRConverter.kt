@@ -1,4 +1,4 @@
-package model.fileHandler.converters
+package model.fileHandler.converter
 
 import extensions.toBooleanOrNull
 import model.database.sqlite.createDatabase

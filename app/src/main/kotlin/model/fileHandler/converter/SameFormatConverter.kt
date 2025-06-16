@@ -1,4 +1,4 @@
-package model.fileHandler.converters
+package model.fileHandler.converter
 
 import model.fileHandler.ConvertModes
 import model.result.Result

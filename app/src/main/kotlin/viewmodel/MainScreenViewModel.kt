@@ -11,7 +11,7 @@ import model.fileHandler.ConvertModes
 import model.fileHandler.FileDialogManager
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
-import model.fileHandler.converters.Converter
+import model.fileHandler.converter.Converter
 import model.graph.classes.DirectedUnweightedGraph
 import model.graph.classes.DirectedWeightedGraph
 import model.graph.classes.UndirectedUnweightedGraph

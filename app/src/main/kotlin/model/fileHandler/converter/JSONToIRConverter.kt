@@ -1,4 +1,4 @@
-package model.fileHandler.converters
+package model.fileHandler.converter
 
 import kotlinx.serialization.json.Json
 import model.fileHandler.ConvertModes

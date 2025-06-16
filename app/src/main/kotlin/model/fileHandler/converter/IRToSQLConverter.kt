@@ -1,15 +1,14 @@
-package model.fileHandler.converters
+package model.fileHandler.converter
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import model.command.`class`.Command
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
 import model.fileHandler.serializableDataClasses.Edge
-import model.fileHandler.serializableDataClasses.Graph
-import model.fileHandler.serializableDataClasses.GraphData
-import model.fileHandler.serializableDataClasses.GraphInfo
 import model.fileHandler.serializableDataClasses.Vertex
 import model.result.FileErrors
 import model.result.Result
@@ -17,7 +16,7 @@ import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import java.io.File
 import java.io.IOException
 
-class IRToJSONConverter : FileConverter() {
+class IRToSQLConverter : FileConverter() {
     override fun convert(
         file: File,
         convertMode: ConvertModes,
@@ -77,31 +76,44 @@ class IRToJSONConverter : FileConverter() {
                 }
             }
         }
-        val graphData =
-            GraphData(
-                GraphInfo(
-                    name = info["name"],
-                    author = info["author"],
-                    isDirected = info["isDirected"].toBoolean(),
-                    isWeighted = info["isWeighted"].toBoolean(),
-                ),
-                Graph(
-                    vertices = vertices,
-                    edges = edges,
-                ),
-            )
-        val json = Json { prettyPrint = true }
+
         val filePath =
             when (convertMode) {
-                ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.json"
-                ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json"
+                ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.db"
+                ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.db"
             }
-        file.deleteOnExit()
-        val jsonFile = File(filePath)
-        jsonFile.writeText(json.encodeToString(graphData))
-        if (convertMode == ConvertModes.LOAD) {
-            jsonFile.deleteOnExit()
+        val database = createDatabase(filePath)
+        val graphId =
+            GraphRepository(database).insertGraph(
+                name =
+                    info["name"] ?: return Result.Error(FileErrors.ConverterError("`name` can not be null")),
+                author =
+                    info["author"] ?: return Result.Error(FileErrors.ConverterError("`author` can not be null")),
+                isDirected =
+                    info["isDirected"]?.toBoolean() ?: return Result.Error(FileErrors.ConverterError("`isDirected` can not be null")),
+                isWeighted =
+                    info["isWeighted"]?.toBoolean() ?: return Result.Error(FileErrors.ConverterError("`isWeighted` can not be null")),
+            )
+
+        val vertexRepository = VertexRepository(database)
+        vertices.forEach { vertex ->
+            vertexRepository.insertVertex(
+                graphId = graphId,
+                vertexId = vertex.id,
+                label = vertex.label,
+            )
         }
-        return Result.Success(jsonFile)
+        val edgeRepository = EdgeRepository(database)
+        edges.forEach { edge ->
+            edgeRepository.insertEdge(
+                graphId = graphId,
+                fromVertex = edge.from,
+                toVertex = edge.to,
+                weight = edge.weight,
+            )
+        }
+
+        file.deleteOnExit()
+        return Result.Success(File(filePath))
     }
 }
