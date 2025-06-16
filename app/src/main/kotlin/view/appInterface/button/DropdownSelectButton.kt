@@ -1,6 +1,7 @@
 package view.appInterface.button
 
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.DropdownMenu
@@ -33,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
+import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -103,5 +106,20 @@ fun DropdownSelectButton(
                 }
             }
         }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+fun PreviewDropdownSelectButton() {
+    AppTheme {
+        val extensions = listOf(".json", ".graph", ".db", ".someExtension")
+        DropdownSelectButton(
+            items = extensions,
+            selectedItem = extensions[3],
+            onItemSelected = {},
+            modifier = Modifier.width(500.dp),
+        )
     }
 }
