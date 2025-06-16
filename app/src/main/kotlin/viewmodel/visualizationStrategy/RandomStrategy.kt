@@ -1,4 +1,4 @@
-package viewmodel.visualizationStrategies
+package viewmodel.visualizationStrategy
 
 import androidx.compose.ui.unit.dp
 import viewmodel.graph.VertexViewModel

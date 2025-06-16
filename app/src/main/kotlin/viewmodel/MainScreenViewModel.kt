@@ -25,8 +25,8 @@ import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
-import viewmodel.visualizationStrategies.RandomStrategy
-import viewmodel.visualizationStrategies.VisualizationStrategy
+import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 
 class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(

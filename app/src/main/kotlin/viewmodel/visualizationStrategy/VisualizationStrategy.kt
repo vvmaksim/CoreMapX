@@ -1,4 +1,4 @@
-package viewmodel.visualizationStrategies
+package viewmodel.visualizationStrategy
 
 import viewmodel.graph.VertexViewModel
 
