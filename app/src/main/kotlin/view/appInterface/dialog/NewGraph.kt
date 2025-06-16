@@ -15,13 +15,10 @@ import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -40,6 +38,7 @@ import model.graph.concrete.UndirectedUnweightedGraph
 import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.contracts.Graph
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.textField.CustomTextField
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -102,34 +101,15 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                 }
             }
             Spacer(modifier = Modifier.height(24.dp))
-            OutlinedTextField(
-                value = graphName,
+            CustomTextField(
+                value = TextFieldValue(graphName),
                 onValueChange = {
-                    graphName = it
+                    graphName = it.text
                     showError = false
                 },
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .height(70.dp),
-                label = { Text("Graph Name") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = "Name",
-                        tint = MaterialTheme.colors.primary,
-                    )
-                },
-                colors =
-                    TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colors.primary,
-                        unfocusedBorderColor = MaterialTheme.colors.border,
-                        cursorColor = MaterialTheme.colors.primary,
-                        focusedLabelColor = MaterialTheme.colors.primary,
-                        unfocusedLabelColor = MaterialTheme.colors.onSurface,
-                    ),
-                shape = MaterialTheme.shapes.medium,
-                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = { Text("Graph Name") },
+                isError = showError,
             )
 
             if (showError) {

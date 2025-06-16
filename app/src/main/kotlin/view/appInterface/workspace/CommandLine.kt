@@ -1,9 +1,7 @@
 package view.appInterface.workspace
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +11,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,12 +26,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import extensions.border
 import kotlinx.coroutines.delay
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.textField.CustomTextField
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -42,8 +38,6 @@ fun CommandLine(
     modifier: Modifier = Modifier,
     outputMessages: MutableList<String> = mutableListOf(),
     commandLineBackgroundColor: Color = Color.Transparent,
-    borderWidth: Dp = 1.dp,
-    borderColor: Color = MaterialTheme.colors.border,
     borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
     placeholderText: String = "Enter command",
     placeholderTextStyle: TextStyle = MaterialTheme.typography.body1,
@@ -106,8 +100,7 @@ fun CommandLine(
                 }
             }
         }
-
-        OutlinedTextField(
+        CustomTextField(
             value = commandText,
             onValueChange = { newValue ->
                 commandText = newValue
@@ -125,13 +118,6 @@ fun CommandLine(
                     .background(
                         color = commandLineBackgroundColor,
                         shape = borderShape,
-                    ).border(
-                        border =
-                            BorderStroke(
-                                width = borderWidth,
-                                color = borderColor,
-                            ),
-                        shape = borderShape,
                     ),
             placeholder = {
                 Text(
@@ -139,7 +125,8 @@ fun CommandLine(
                     style = placeholderTextStyle,
                 )
             },
-            shape = borderShape,
+            leadingIcon = null,
+            singleLine = false,
         )
     }
 }

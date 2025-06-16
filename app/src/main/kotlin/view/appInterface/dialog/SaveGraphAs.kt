@@ -13,13 +13,10 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,17 +24,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import extensions.border
 import model.dto.SaveGraphData
 import model.fileHandler.FileExtensions
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import view.appInterface.button.DropdownSelectButton
 import view.appInterface.button.SavePathButton
+import view.appInterface.textField.CustomTextField
 import java.io.File
 
 @Suppress("ktlint:standard:function-naming")
@@ -71,7 +69,7 @@ fun SaveGraphAsContent(
 ) {
     var selectedFormat by remember { mutableStateOf(formats[0]) }
     var selectedPath by remember { mutableStateOf("$baseUserDirPath/data/graphs") }
-    var selectedFileName by remember { mutableStateOf(graphName) }
+    var selectedFileName by remember { mutableStateOf(TextFieldValue(graphName)) }
     var showError by remember { mutableStateOf(false) }
 
     Surface(
@@ -122,31 +120,14 @@ fun SaveGraphAsContent(
                     text = "File name:",
                     style = MaterialTheme.typography.body2,
                 )
-
-                OutlinedTextField(
+                CustomTextField(
                     value = selectedFileName,
                     onValueChange = {
                         selectedFileName = it
-                        showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
+                        showError = File("$selectedPath/${selectedFileName.text}$selectedFormat").exists()
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Name",
-                            tint = MaterialTheme.colors.primary,
-                        )
-                    },
-                    colors =
-                        TextFieldDefaults.outlinedTextFieldColors(
-                            focusedBorderColor = MaterialTheme.colors.primary,
-                            unfocusedBorderColor = MaterialTheme.colors.border,
-                            cursorColor = MaterialTheme.colors.primary,
-                            focusedLabelColor = MaterialTheme.colors.primary,
-                            unfocusedLabelColor = MaterialTheme.colors.onSurface,
-                        ),
-                    shape = MaterialTheme.shapes.medium,
-                    singleLine = true,
+                    placeholder = { Text("Enter file name") },
                 )
 
                 Text(
@@ -158,7 +139,7 @@ fun SaveGraphAsContent(
                     selectedPath = selectedPath,
                     onPathSelected = {
                         selectedPath = it
-                        showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
+                        showError = File("$selectedPath/${selectedFileName.text}$selectedFormat").exists()
                     },
                 )
 
@@ -172,7 +153,7 @@ fun SaveGraphAsContent(
                     selectedItem = selectedFormat,
                     onItemSelected = {
                         selectedFormat = it
-                        showError = File("$selectedPath/$selectedFileName$selectedFormat").exists()
+                        showError = File("$selectedPath/${selectedFileName.text}$selectedFormat").exists()
                     },
                 )
             }
@@ -190,7 +171,7 @@ fun SaveGraphAsContent(
                 onClick = {
                     onSave(
                         SaveGraphData(
-                            fileName = selectedFileName,
+                            fileName = selectedFileName.text,
                             directoryPath = selectedPath,
                             fileFormat =
                                 when (selectedFormat) {
