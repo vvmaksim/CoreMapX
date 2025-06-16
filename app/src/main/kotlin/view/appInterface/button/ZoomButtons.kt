@@ -1,5 +1,6 @@
 package view.appInterface.button
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.huge
+import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -68,5 +70,16 @@ fun ZoomButtons(
                 )
             }
         }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+fun PreviewZoomButtons() {
+    AppTheme {
+        ZoomButtons(
+            onZoom = {},
+        )
     }
 }
