@@ -97,7 +97,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         ) {
             Column(
                 modifier =
-                    Modifier.Companion
+                    Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .background(MaterialTheme.colors.background)
@@ -105,20 +105,20 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             ) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.Companion.CenterVertically,
-                    modifier = Modifier.Companion.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth(),
                 ) {
                     Logo(
                         backgroundColor = MaterialTheme.colors.background,
                         contentColor = MaterialTheme.colors.onSurface,
                         size = 52.dp,
                     )
-                    Spacer(Modifier.Companion.width(8.dp))
+                    Spacer(Modifier.width(8.dp))
                     Text(
                         text = "CoreMapX",
                         style = MaterialTheme.typography.h5,
                         color = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.Companion.align(Alignment.Companion.CenterVertically),
+                        modifier = Modifier.align(Alignment.CenterVertically),
                     )
                 }
 
@@ -206,17 +206,17 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     buttonText = "Settings",
                 )
 
-                Spacer(Modifier.Companion.weight(1f))
+                Spacer(Modifier.weight(1f))
                 Row(
                     modifier =
-                        Modifier.Companion
+                        Modifier
                             .fillMaxWidth()
                             .padding(
                                 horizontal = 8.dp,
                                 vertical = 4.dp,
                             ),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.Companion.CenterVertically,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     SlideMenuButton(onClick = { onMenuVisibilityChange(false) })
                     UserDirectoryButton()
@@ -245,11 +245,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         ) {
             Column(
                 modifier =
-                    Modifier.Companion
+                    Modifier
                         .fillMaxHeight()
                         .padding(16.dp),
                 verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.Companion.CenterHorizontally,
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 SlideMenuButton(
                     onClick = { onMenuVisibilityChange(true) },

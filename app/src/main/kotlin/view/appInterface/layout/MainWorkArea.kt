@@ -43,7 +43,7 @@ private val logger = KotlinLogging.logger {}
 @Composable
 fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     viewModel: MainScreenViewModel<E, V>,
-    modifier: Modifier = Modifier.Companion,
+    modifier: Modifier = Modifier,
 ) {
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
@@ -78,7 +78,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         }
         val commands = commandLine.split(";")
         commands.forEach { command ->
-            val commandResult = Command.Companion.create(command)
+            val commandResult = Command.create(command)
             when (commandResult) {
                 is Result.Success -> {
                     val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
@@ -121,17 +121,17 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
         TopMenu(
             viewModel = viewModel,
-            modifier = Modifier.Companion.align(Alignment.Companion.TopCenter),
+            modifier = Modifier.align(Alignment.TopCenter),
         )
 
         Row(
             modifier =
-                Modifier.Companion
-                    .align(Alignment.Companion.BottomCenter)
+                Modifier
+                    .align(Alignment.BottomCenter)
                     .fillMaxWidth()
                     .horizontalScroll(scrollState)
                     .padding(8.dp),
-            verticalAlignment = Alignment.Companion.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             GraphElementCounters(
                 vertexCount =
@@ -146,27 +146,27 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         ?.toLong() ?: 0L,
                 vertexLabel = "vertices",
                 edgeLabel = "edges",
-                modifier = Modifier.Companion.align(Alignment.Companion.Bottom),
+                modifier = Modifier.align(Alignment.Bottom),
             )
-            Spacer(Modifier.Companion.weight(1f))
+            Spacer(Modifier.weight(1f))
             CommandLine(
                 modifier =
-                    Modifier.Companion
+                    Modifier
                         .width(commandFieldWidth)
-                        .align(Alignment.Companion.Bottom),
+                        .align(Alignment.Bottom),
                 outputMessages = outputMessages.value,
                 commandLineBackgroundColor =
                     if (isTransparentCommandLine) {
-                        Color.Companion.Transparent
+                        Color.Transparent
                     } else {
                         MaterialTheme.colors.commandLineBackground
                     },
                 placeholderText = "Enter command",
                 onCommand = { command -> handleCommand(command) },
             )
-            Spacer(Modifier.Companion.weight(1f))
+            Spacer(Modifier.weight(1f))
             ZoomButtons(
-                modifier = Modifier.Companion.padding(8.dp),
+                modifier = Modifier.padding(8.dp),
                 onZoom = { zoomDelta -> viewModel.zoomCanvas(zoomDelta) },
             )
         }

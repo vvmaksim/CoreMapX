@@ -79,16 +79,16 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
 
     Row(
         modifier =
-            Modifier.Companion
+            Modifier
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colors.background)
                 .height(titleBarHeight),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.Companion.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Row(
-            modifier = Modifier.Companion.padding(start = 4.dp),
-            verticalAlignment = Alignment.Companion.CenterVertically,
+            modifier = Modifier.padding(start = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             if (showMenuButtons) {
                 IconButton(onClick = { showMenuButtons = false }) {
@@ -96,7 +96,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.Companion.size(titleBarIconSize),
+                        modifier = Modifier.size(titleBarIconSize),
                     )
                 }
 
@@ -110,7 +110,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 DropdownMenu(
                     expanded = showFileMenu,
                     onDismissRequest = { showFileMenu = false },
-                    modifier = Modifier.Companion.background(color = MaterialTheme.colors.background),
+                    modifier = Modifier.background(color = MaterialTheme.colors.background),
                 ) {
                     DropdownMenuItem(
                         onClick = {
@@ -118,13 +118,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             showNewGraphDialog = true
                         },
                     ) {
-                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Add,
                                 contentDescription = "New Icon",
                                 tint = MaterialTheme.colors.primary,
                             )
-                            Spacer(Modifier.Companion.width(8.dp))
+                            Spacer(Modifier.width(8.dp))
                             Text(
                                 text = "New",
                                 style = MaterialTheme.typography.button,
@@ -136,13 +136,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             showOpenSubMenu = true
                         },
                     ) {
-                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.FolderOpen,
                                 contentDescription = "Open Menu Icon",
                                 tint = MaterialTheme.colors.primary,
                             )
-                            Spacer(Modifier.Companion.width(8.dp))
+                            Spacer(Modifier.width(8.dp))
                             Text(
                                 text = "Open..",
                                 style = MaterialTheme.typography.button,
@@ -151,7 +151,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         DropdownMenu(
                             expanded = showOpenSubMenu,
                             onDismissRequest = { showOpenSubMenu = false },
-                            modifier = Modifier.Companion.background(color = MaterialTheme.colors.background),
+                            modifier = Modifier.background(color = MaterialTheme.colors.background),
                         ) {
                             DropdownMenuItem(
                                 onClick = {
@@ -166,13 +166,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     showFileMenu = false
                                 },
                             ) {
-                                Row(verticalAlignment = Alignment.Companion.CenterVertically) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Description,
                                         contentDescription = "Open File Icon",
                                         tint = MaterialTheme.colors.primary,
                                     )
-                                    Spacer(Modifier.Companion.width(8.dp))
+                                    Spacer(Modifier.width(8.dp))
                                     Text(
                                         text = "Open File",
                                         style = MaterialTheme.typography.button,
@@ -197,13 +197,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     showFileMenu = false
                                 },
                             ) {
-                                Row(verticalAlignment = Alignment.Companion.CenterVertically) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Storage,
                                         contentDescription = "Open Repository Icon",
                                         tint = MaterialTheme.colors.primary,
                                     )
-                                    Spacer(Modifier.Companion.width(8.dp))
+                                    Spacer(Modifier.width(8.dp))
                                     Text(
                                         text = "Open Repository",
                                         style = MaterialTheme.typography.button,
@@ -229,7 +229,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         },
                         enabled = viewModel.isGraphActive,
                     ) {
-                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Save,
                                 contentDescription = "Save Icon",
@@ -242,7 +242,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                         )
                                     },
                             )
-                            Spacer(Modifier.Companion.width(8.dp))
+                            Spacer(Modifier.width(8.dp))
                             Text(
                                 text = "Save",
                                 style = MaterialTheme.typography.button,
@@ -265,7 +265,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         },
                         enabled = viewModel.isGraphActive,
                     ) {
-                        Row(verticalAlignment = Alignment.Companion.CenterVertically) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.SaveAs,
                                 contentDescription = "Save as Icon",
@@ -278,7 +278,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                         )
                                     },
                             )
-                            Spacer(Modifier.Companion.width(8.dp))
+                            Spacer(Modifier.width(8.dp))
                             Text(
                                 text = "Save as..",
                                 style = MaterialTheme.typography.button,
@@ -315,18 +315,18 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         imageVector = Icons.Default.Menu,
                         contentDescription = "Title Bar Menu",
                         tint = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.Companion.size(titleBarIconSize),
+                        modifier = Modifier.size(titleBarIconSize),
                     )
                 }
             }
         }
-        Row(modifier = Modifier.Companion.padding(end = 4.dp)) {
+        Row(modifier = Modifier.padding(end = 4.dp)) {
             IconButton(onClick = onMinimize) {
                 Icon(
                     imageVector = Icons.Filled.Remove,
                     contentDescription = "Minimize",
                     tint = MaterialTheme.colors.onSurface,
-                    modifier = Modifier.Companion.size(titleBarIconSize),
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onMaximize) {
@@ -334,7 +334,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
                     contentDescription = if (isMaximized) "Recover" else "Maximize",
                     tint = MaterialTheme.colors.onSurface,
-                    modifier = Modifier.Companion.size(titleBarIconSize),
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
             IconButton(onClick = onClose) {
@@ -342,7 +342,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     imageVector = Icons.Default.Close,
                     contentDescription = "Close",
                     tint = MaterialTheme.colors.onSurface,
-                    modifier = Modifier.Companion.size(titleBarIconSize),
+                    modifier = Modifier.size(titleBarIconSize),
                 )
             }
         }
