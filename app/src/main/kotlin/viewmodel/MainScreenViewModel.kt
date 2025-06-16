@@ -12,11 +12,11 @@ import model.fileHandler.FileDialogManager
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
 import model.fileHandler.converter.Converter
-import model.graph.classes.DirectedUnweightedGraph
-import model.graph.classes.DirectedWeightedGraph
-import model.graph.classes.UndirectedUnweightedGraph
-import model.graph.classes.UndirectedWeightedGraph
 import model.graph.dataClasses.WeightedEdge
+import model.graph.implementation.DirectedUnweightedGraph
+import model.graph.implementation.DirectedWeightedGraph
+import model.graph.implementation.UndirectedUnweightedGraph
+import model.graph.implementation.UndirectedWeightedGraph
 import model.graph.interfaces.Graph
 import model.ir.GraphIR
 import model.result.FileErrors

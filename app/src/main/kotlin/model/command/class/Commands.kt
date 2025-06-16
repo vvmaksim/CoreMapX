@@ -2,11 +2,11 @@ package model.command.`class`
 
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
-import model.graph.classes.DirectedUnweightedGraph
-import model.graph.classes.DirectedWeightedGraph
-import model.graph.classes.UndirectedUnweightedGraph
-import model.graph.classes.UndirectedWeightedGraph
 import model.graph.dataClasses.Vertex
+import model.graph.implementation.DirectedUnweightedGraph
+import model.graph.implementation.DirectedWeightedGraph
+import model.graph.implementation.UndirectedUnweightedGraph
+import model.graph.implementation.UndirectedWeightedGraph
 import model.graph.interfaces.Graph
 import model.result.CommandErrors
 import model.result.Result

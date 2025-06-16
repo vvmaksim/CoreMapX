@@ -1,10 +1,10 @@
-import model.graph.classes.DirectedUnweightedGraph
-import model.graph.classes.DirectedWeightedGraph
-import model.graph.classes.UndirectedUnweightedGraph
-import model.graph.classes.UndirectedWeightedGraph
 import model.graph.dataClasses.UnweightedEdge
 import model.graph.dataClasses.Vertex
 import model.graph.dataClasses.WeightedEdge
+import model.graph.implementation.DirectedUnweightedGraph
+import model.graph.implementation.DirectedWeightedGraph
+import model.graph.implementation.UndirectedUnweightedGraph
+import model.graph.implementation.UndirectedWeightedGraph
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
