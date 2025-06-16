@@ -1,7 +1,7 @@
 package model.commands.classes
 
-import model.commands.enums.CommandEntities
-import model.commands.enums.CommandTypes
+import model.commands.enum.CommandEntities
+import model.commands.enum.CommandTypes
 import model.result.CommandErrors
 import model.result.Result
 
