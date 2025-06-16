@@ -43,11 +43,11 @@ import model.databases.sqlite.repositories.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.graph.GraphDatabase
-import view.appInterface.dialogs.NewGraph
-import view.appInterface.dialogs.OpenGraphErrors
-import view.appInterface.dialogs.OpenRepository
-import view.appInterface.dialogs.SaveGraphAs
-import view.appInterface.dialogs.UserNotification
+import view.appInterface.dialog.NewGraph
+import view.appInterface.dialog.OpenGraphErrors
+import view.appInterface.dialog.OpenRepository
+import view.appInterface.dialog.SaveGraphAs
+import view.appInterface.dialog.UserNotification
 import viewmodel.MainScreenViewModel
 import java.io.File
 

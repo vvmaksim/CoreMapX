@@ -44,11 +44,11 @@ import org.coremapx.graph.GraphDatabase
 import view.appInterface.buttons.MainMenuTextButton
 import view.appInterface.buttons.SlideMenuButton
 import view.appInterface.buttons.UserDirectoryButton
-import view.appInterface.dialogs.NewGraph
-import view.appInterface.dialogs.OpenGraphErrors
-import view.appInterface.dialogs.OpenRepository
-import view.appInterface.dialogs.SaveGraphAs
-import view.appInterface.dialogs.UserNotification
+import view.appInterface.dialog.NewGraph
+import view.appInterface.dialog.OpenGraphErrors
+import view.appInterface.dialog.OpenRepository
+import view.appInterface.dialog.SaveGraphAs
+import view.appInterface.dialog.UserNotification
 import view.appInterface.icon.Logo
 import viewmodel.MainScreenViewModel
 import java.io.File

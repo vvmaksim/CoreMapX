@@ -19,7 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import view.appInterface.dialogs.GenerateRandomGraph
+import view.appInterface.dialog.GenerateRandomGraph
 import viewmodel.MainScreenViewModel
 
 @Suppress("ktlint:standard:function-naming")

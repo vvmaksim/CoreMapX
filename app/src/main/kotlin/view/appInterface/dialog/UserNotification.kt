@@ -1,4 +1,4 @@
-package view.appInterface.dialogs
+package view.appInterface.dialog
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

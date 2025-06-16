@@ -1,4 +1,4 @@
-package view.appInterface.dialogs
+package view.appInterface.dialog
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.VerticalScrollbar
