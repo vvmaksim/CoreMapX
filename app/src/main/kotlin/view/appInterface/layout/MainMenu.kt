@@ -34,10 +34,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repository.EdgeRepository
-import model.databases.sqlite.repository.GraphRepository
-import model.databases.sqlite.repository.VertexRepository
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.graph.GraphDatabase

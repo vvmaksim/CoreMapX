@@ -3,10 +3,10 @@ package viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.command.`class`.Commands
-import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repository.EdgeRepository
-import model.databases.sqlite.repository.GraphRepository
-import model.databases.sqlite.repository.VertexRepository
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
 import model.fileHandler.FileDialogManager
 import model.fileHandler.FileExtensions

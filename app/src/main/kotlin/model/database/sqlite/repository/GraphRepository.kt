@@ -1,4 +1,4 @@
-package model.databases.sqlite.repository
+package model.database.sqlite.repository
 
 import extensions.toLong
 import org.coremapx.graph.GraphDatabase

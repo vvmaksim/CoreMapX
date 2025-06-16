@@ -3,10 +3,10 @@ package model.fileHandler
 import extensions.toBooleanOrNull
 import kotlinx.serialization.json.Json
 import model.command.`class`.Command
-import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repository.EdgeRepository
-import model.databases.sqlite.repository.GraphRepository
-import model.databases.sqlite.repository.VertexRepository
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.serializableDataClasses.GraphData
 import model.result.FileErrors
 import model.result.Result

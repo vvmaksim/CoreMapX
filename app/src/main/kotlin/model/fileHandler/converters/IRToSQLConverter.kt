@@ -3,10 +3,10 @@ package model.fileHandler.converters
 import model.command.`class`.Command
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
-import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repository.EdgeRepository
-import model.databases.sqlite.repository.GraphRepository
-import model.databases.sqlite.repository.VertexRepository
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
 import model.fileHandler.serializableDataClasses.Edge
 import model.fileHandler.serializableDataClasses.Vertex

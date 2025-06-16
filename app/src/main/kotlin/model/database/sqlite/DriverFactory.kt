@@ -1,4 +1,4 @@
-package model.databases.sqlite
+package model.database.sqlite
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
