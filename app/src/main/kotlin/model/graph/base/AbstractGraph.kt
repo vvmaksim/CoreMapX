@@ -1,6 +1,6 @@
 package model.graph.base
 
-import model.graph.dataClasses.Vertex
+import model.graph.entities.Vertex
 import model.graph.interfaces.Edge
 import model.graph.interfaces.Graph
 

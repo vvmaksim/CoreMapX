@@ -2,7 +2,7 @@ package viewmodel.graph
 
 import model.graph.concrete.DirectedUnweightedGraph
 import model.graph.concrete.DirectedWeightedGraph
-import model.graph.dataClasses.WeightedEdge
+import model.graph.entities.WeightedEdge
 
 class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     val from: VertexViewModel<V>,

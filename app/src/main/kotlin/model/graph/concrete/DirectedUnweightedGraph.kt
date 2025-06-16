@@ -1,8 +1,8 @@
 package model.graph.concrete
 
 import model.graph.base.AbstractGraph
-import model.graph.dataClasses.UnweightedEdge
-import model.graph.dataClasses.Vertex
+import model.graph.entities.UnweightedEdge
+import model.graph.entities.Vertex
 
 class DirectedUnweightedGraph<V : Comparable<V>> : AbstractGraph<Long, V>() {
     fun addEdge(

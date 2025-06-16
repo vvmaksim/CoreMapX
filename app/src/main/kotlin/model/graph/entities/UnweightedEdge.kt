@@ -1,4 +1,4 @@
-package model.graph.dataClasses
+package model.graph.entities
 
 import model.graph.interfaces.Edge
 

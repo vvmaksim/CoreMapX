@@ -1,6 +1,6 @@
 package model.graph.interfaces
 
-import model.graph.dataClasses.Vertex
+import model.graph.entities.Vertex
 
 interface Edge<E : Comparable<E>, V : Comparable<V>> {
     val id: E

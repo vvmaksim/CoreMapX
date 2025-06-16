@@ -1,6 +1,6 @@
 package model.graph.interfaces
 
-import model.graph.dataClasses.Vertex
+import model.graph.entities.Vertex
 
 interface Graph<E : Comparable<E>, V : Comparable<V>> {
     val vertices: Map<V, Vertex<V>>
