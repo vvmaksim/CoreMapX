@@ -1,4 +1,4 @@
-package model.fileHandler.serializableDataClasses
+package model.fileHandler.serializableDataClass
 
 import kotlinx.serialization.Serializable
 

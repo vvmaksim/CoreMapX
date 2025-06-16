@@ -2,7 +2,7 @@ package model.fileHandler.converter
 
 import kotlinx.serialization.json.Json
 import model.fileHandler.ConvertModes
-import model.fileHandler.serializableDataClasses.GraphData
+import model.fileHandler.serializableDataClass.GraphData
 import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath

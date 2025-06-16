@@ -6,11 +6,11 @@ import model.command.`class`.Command
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
 import model.fileHandler.ConvertModes
-import model.fileHandler.serializableDataClasses.Edge
-import model.fileHandler.serializableDataClasses.Graph
-import model.fileHandler.serializableDataClasses.GraphData
-import model.fileHandler.serializableDataClasses.GraphInfo
-import model.fileHandler.serializableDataClasses.Vertex
+import model.fileHandler.serializableDataClass.Edge
+import model.fileHandler.serializableDataClass.Graph
+import model.fileHandler.serializableDataClass.GraphData
+import model.fileHandler.serializableDataClass.GraphInfo
+import model.fileHandler.serializableDataClass.Vertex
 import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
