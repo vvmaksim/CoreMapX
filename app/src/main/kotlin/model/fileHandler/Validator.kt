@@ -4,9 +4,9 @@ import extensions.toBooleanOrNull
 import kotlinx.serialization.json.Json
 import model.command.`class`.Command
 import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repositories.EdgeRepository
-import model.databases.sqlite.repositories.GraphRepository
-import model.databases.sqlite.repositories.VertexRepository
+import model.databases.sqlite.repository.EdgeRepository
+import model.databases.sqlite.repository.GraphRepository
+import model.databases.sqlite.repository.VertexRepository
 import model.fileHandler.serializableDataClasses.GraphData
 import model.result.FileErrors
 import model.result.Result

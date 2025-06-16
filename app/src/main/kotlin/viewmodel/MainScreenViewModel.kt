@@ -4,9 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import model.command.`class`.Commands
 import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repositories.EdgeRepository
-import model.databases.sqlite.repositories.GraphRepository
-import model.databases.sqlite.repositories.VertexRepository
+import model.databases.sqlite.repository.EdgeRepository
+import model.databases.sqlite.repository.GraphRepository
+import model.databases.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
 import model.fileHandler.FileDialogManager
 import model.fileHandler.FileExtensions

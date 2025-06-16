@@ -1,4 +1,4 @@
-package model.databases.sqlite.repositories
+package model.databases.sqlite.repository
 
 import org.coremapx.graph.GraphDatabase
 import orgcoremapxapp.Edges
