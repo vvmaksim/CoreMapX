@@ -48,7 +48,7 @@ fun GraphElementCounters(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewCountersWithSomeData() {
+private fun PreviewCountersWithSomeData() {
     AppTheme {
         GraphElementCounters(
             vertexCount = 52,

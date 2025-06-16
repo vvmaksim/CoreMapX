@@ -223,7 +223,7 @@ fun SaveGraphAsContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewSaveGraphAs() {
+private fun PreviewSaveGraphAs() {
     AppTheme {
         SaveGraphAsContent(
             graphName = "Some graph name",

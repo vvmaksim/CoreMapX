@@ -96,7 +96,7 @@ fun UserNotificationContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewUserNotificationContent() {
+private fun PreviewUserNotificationContent() {
     AppTheme {
         UserNotificationContent(
             onDismiss = {},

@@ -218,7 +218,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewNewGraph() {
+private fun PreviewNewGraph() {
     AppTheme {
         NewGraphContent<Long, Long>(
             dialogWidth = 450.dp,

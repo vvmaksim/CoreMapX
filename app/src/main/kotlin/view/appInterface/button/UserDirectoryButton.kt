@@ -58,7 +58,7 @@ fun UserDirectoryButton(size: Dp = 60.dp) {
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewUserDirectoryButton() {
+private fun PreviewUserDirectoryButton() {
     AppTheme {
         UserDirectoryButton()
     }

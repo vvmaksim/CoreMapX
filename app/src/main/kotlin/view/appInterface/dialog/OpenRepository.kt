@@ -269,7 +269,7 @@ fun OpenRepositoryContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewOpenRepositoryWithRandomData() {
+private fun PreviewOpenRepositoryWithRandomData() {
     val graphs = mutableListOf<Graphs>()
     for (i in 1..(Random.nextLong(1, 6))) {
         graphs.add(

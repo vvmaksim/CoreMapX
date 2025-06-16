@@ -147,7 +147,7 @@ fun CommandLine(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewCommandLine() {
+private fun PreviewCommandLine() {
     AppTheme {
         CommandLine(
             outputMessages =

@@ -57,7 +57,7 @@ fun Logo(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewLogo1() {
+private fun PreviewLogo1() {
     AppTheme {
         Logo(
             size = 500.dp,
@@ -70,7 +70,7 @@ fun PreviewLogo1() {
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewLogo2() {
+private fun PreviewLogo2() {
     AppTheme {
         Logo(
             size = 500.dp,

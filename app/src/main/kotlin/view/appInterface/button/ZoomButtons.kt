@@ -76,7 +76,7 @@ fun ZoomButtons(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewZoomButtons() {
+private fun PreviewZoomButtons() {
     AppTheme {
         ZoomButtons(
             onZoom = {},

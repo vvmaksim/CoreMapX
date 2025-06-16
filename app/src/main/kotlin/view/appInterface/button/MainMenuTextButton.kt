@@ -63,7 +63,7 @@ fun MainMenuTextButton(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewEnabledMainMenuTextButton() {
+private fun PreviewEnabledMainMenuTextButton() {
     AppTheme {
         MainMenuTextButton(
             onClick = {},
@@ -79,7 +79,7 @@ fun PreviewEnabledMainMenuTextButton() {
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewUnenabledMainMenuTextButton() {
+private fun PreviewUnenabledMainMenuTextButton() {
     AppTheme {
         MainMenuTextButton(
             onClick = {},

@@ -359,7 +359,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewGenerateRandomGraph() {
+private fun PreviewGenerateRandomGraph() {
     AppTheme {
         GenerateRandomGraphDialogContent<Long, Long>(
             dialogWidth = 450.dp,

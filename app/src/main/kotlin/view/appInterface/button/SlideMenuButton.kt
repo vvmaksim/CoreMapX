@@ -56,7 +56,7 @@ fun SlideMenuButton(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewSlideMenuButton() {
+private fun PreviewSlideMenuButton() {
     AppTheme {
         SlideMenuButton(
             onClick = {},

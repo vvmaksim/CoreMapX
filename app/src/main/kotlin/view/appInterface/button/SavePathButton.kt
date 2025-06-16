@@ -90,7 +90,7 @@ fun SavePathButton(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewSavePathButton() {
+private fun PreviewSavePathButton() {
     AppTheme {
         SavePathButton(
             onPathSelected = {},

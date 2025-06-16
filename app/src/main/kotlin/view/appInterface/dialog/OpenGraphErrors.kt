@@ -143,7 +143,7 @@ fun OpenGraphErrorsContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewOpenGraphErrorsWithTwoErrors() {
+private fun PreviewOpenGraphErrorsWithTwoErrors() {
     AppTheme {
         OpenGraphErrorsContent(
             onDismiss = {},
@@ -160,7 +160,7 @@ fun PreviewOpenGraphErrorsWithTwoErrors() {
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewOpenGraphErrorsWithMoreErrors() {
+private fun PreviewOpenGraphErrorsWithMoreErrors() {
     AppTheme {
         OpenGraphErrorsContent(
             onDismiss = {},

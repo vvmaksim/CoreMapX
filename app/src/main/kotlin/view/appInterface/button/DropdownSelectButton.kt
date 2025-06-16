@@ -112,7 +112,7 @@ fun DropdownSelectButton(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-fun PreviewDropdownSelectButton() {
+private fun PreviewDropdownSelectButton() {
     AppTheme {
         val extensions = listOf(".json", ".graph", ".db", ".someExtension")
         DropdownSelectButton(
