@@ -1,0 +1,24 @@
+package org.coremapx.app.theme
+
+data class ThemeConfig(
+    val primary: String,
+    val primaryVariant: String,
+    val secondary: String,
+    val secondaryVariant: String,
+    val background: String,
+    val surface: String,
+    val error: String,
+    val onPrimary: String,
+    val onSecondary: String,
+    val onBackground: String,
+    val onSurface: String,
+    val onError: String,
+    val isLight: Boolean,
+    val borderColor: String,
+    val warningColor: String,
+    val vertexMainColor: String,
+    val hoveredBorderColor: String,
+    val edgeMainColor: String,
+    val canvasBackgroundColor: String,
+    val commandLineBackgroundColor: String,
+)
