@@ -36,8 +36,8 @@ import model.dto.SaveGraphData
 import model.fileHandler.FileExtensions
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
-import view.appInterface.buttons.DropdownSelectButton
-import view.appInterface.buttons.SavePathButton
+import view.appInterface.button.DropdownSelectButton
+import view.appInterface.button.SavePathButton
 import java.io.File
 
 @Suppress("ktlint:standard:function-naming")

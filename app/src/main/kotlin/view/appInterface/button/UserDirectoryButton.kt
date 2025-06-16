@@ -1,4 +1,4 @@
-package view.appInterface.buttons
+package view.appInterface.button
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button

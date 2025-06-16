@@ -41,9 +41,9 @@ import model.databases.sqlite.repositories.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.graph.GraphDatabase
-import view.appInterface.buttons.MainMenuTextButton
-import view.appInterface.buttons.SlideMenuButton
-import view.appInterface.buttons.UserDirectoryButton
+import view.appInterface.button.MainMenuTextButton
+import view.appInterface.button.SlideMenuButton
+import view.appInterface.button.UserDirectoryButton
 import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
 import view.appInterface.dialog.OpenRepository
