@@ -29,10 +29,10 @@ import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
-import view.appInterface.TopMenu
 import view.appInterface.buttons.ZoomButtons
 import view.appInterface.workspace.CommandLine
 import view.appInterface.workspace.GraphElementCounters
+import view.appInterface.workspace.TopMenu
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel

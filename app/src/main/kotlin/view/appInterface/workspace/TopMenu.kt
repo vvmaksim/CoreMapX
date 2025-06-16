@@ -1,4 +1,4 @@
-package view.appInterface
+package view.appInterface.workspace
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
