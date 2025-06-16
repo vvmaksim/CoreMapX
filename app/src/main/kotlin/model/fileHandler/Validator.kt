@@ -7,7 +7,7 @@ import model.database.sqlite.createDatabase
 import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
-import model.fileHandler.serializableDataClass.GraphData
+import model.fileHandler.serializableEntities.GraphData
 import model.result.FileErrors
 import model.result.Result
 import java.io.File

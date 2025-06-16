@@ -8,8 +8,8 @@ import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
-import model.fileHandler.serializableDataClass.Edge
-import model.fileHandler.serializableDataClass.Vertex
+import model.fileHandler.serializableEntities.Edge
+import model.fileHandler.serializableEntities.Vertex
 import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
