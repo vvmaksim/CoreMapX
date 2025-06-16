@@ -1,4 +1,4 @@
-package model.graph.abstractClasses
+package model.graph.abstractClass
 
 import model.graph.dataClasses.Vertex
 import model.graph.interfaces.Edge

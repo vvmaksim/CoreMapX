@@ -1,6 +1,6 @@
 package model.graph.classes
 
-import model.graph.abstractClasses.AbstractGraph
+import model.graph.abstractClass.AbstractGraph
 import model.graph.dataClasses.UnweightedEdge
 import model.graph.dataClasses.Vertex
 
