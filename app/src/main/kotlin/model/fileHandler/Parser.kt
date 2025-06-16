@@ -1,6 +1,6 @@
 package model.fileHandler
 
-import model.commands.classes.Command
+import model.commands.`class`.Command
 import model.fileHandler.converters.Converter
 import model.ir.GraphIR
 import model.result.FileErrors

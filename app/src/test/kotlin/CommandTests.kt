@@ -1,4 +1,4 @@
-import model.commands.classes.Command
+import model.commands.`class`.Command
 import model.commands.enum.CommandEntities
 import model.commands.enum.CommandTypes
 import model.result.Result

@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
 import extensions.commandLineBackground
-import model.commands.classes.Command
-import model.commands.classes.Commands
+import model.commands.`class`.Command
+import model.commands.`class`.Commands
 import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging

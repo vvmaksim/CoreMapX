@@ -1,4 +1,4 @@
-package model.commands.classes
+package model.commands.`class`
 
 import model.commands.enum.CommandEntities
 import model.commands.enum.CommandTypes

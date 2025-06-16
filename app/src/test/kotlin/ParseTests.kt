@@ -1,4 +1,4 @@
-import model.commands.classes.Command
+import model.commands.`class`.Command
 import model.fileHandler.Parser
 import model.result.Result
 import org.junit.jupiter.api.Test
