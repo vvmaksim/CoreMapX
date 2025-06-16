@@ -7,6 +7,8 @@ import model.result.FileErrors
 import model.result.Result
 import model.result.showConfigErrorDialog
 import mu.KotlinLogging
+import org.coremapx.app.theme.DefaultThemes
+import org.coremapx.app.theme.ThemeConfig
 import java.io.File
 import java.util.Properties
 
@@ -29,6 +31,7 @@ class ConfigRepository {
         loadPrivateConfig()
         validateUserConfig()
         states = ConfigStates(this)
+        updateTheme()
     }
 
     fun getStringValue(key: String): String =
@@ -57,6 +60,42 @@ class ConfigRepository {
         states.updateValue(key, value)
         logger.info { "Updated config. For key: $key new value: $value" }
         return Result.Success(true)
+    }
+
+    fun updateTheme() {
+        val theme = states.theme.value
+        if (theme != "custom") {
+            when (theme) {
+                "light" -> setTheme(DefaultThemes.light)
+                "dark" -> setTheme(DefaultThemes.dark)
+                else -> showConfigErrorDialog("Unknown theme: $theme")
+            }
+        }
+    }
+
+    private fun setTheme(themeConfig: ThemeConfig) {
+        with(themeConfig) {
+            setValue("primary", primary)
+            setValue("primaryVariant", primaryVariant)
+            setValue("secondary", secondary)
+            setValue("secondaryVariant", secondaryVariant)
+            setValue("background", background)
+            setValue("surface", surface)
+            setValue("error", error)
+            setValue("onPrimary", onPrimary)
+            setValue("onSecondary", onSecondary)
+            setValue("onBackground", onBackground)
+            setValue("onSurface", onSurface)
+            setValue("onError", onError)
+            setValue("borderColor", borderColor)
+            setValue("warningColor", warningColor)
+            setValue("vertexMainColor", vertexMainColor)
+            setValue("hoveredBorderColor", hoveredBorderColor)
+            setValue("edgeMainColor", edgeMainColor)
+            setValue("canvasBackgroundColor", canvasBackgroundColor)
+            setValue("commandLineBackgroundColor", commandLineBackgroundColor)
+            setValue("fileDialogTheme", if (isLight) "light" else "dark")
+        }
     }
 
     private fun updateConfigFile(
