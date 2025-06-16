@@ -24,9 +24,10 @@ fun MainMenuTextButton(
     iconContentDescription: String,
     buttonText: String,
     isEnabled: Boolean = true,
+    modifier: Modifier = Modifier,
 ) {
     TextButton(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         onClick = onClick,
         enabled = isEnabled,
         colors =
