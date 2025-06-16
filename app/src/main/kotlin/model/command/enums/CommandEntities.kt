@@ -1,4 +1,4 @@
-package model.command.enum
+package model.command.enums
 
 enum class CommandEntities {
     VERTEX,

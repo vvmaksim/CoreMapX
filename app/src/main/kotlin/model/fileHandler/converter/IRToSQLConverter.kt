@@ -1,8 +1,8 @@
 package model.fileHandler.converter
 
 import model.command.concrete.Command
-import model.command.enum.CommandEntities
-import model.command.enum.CommandTypes
+import model.command.enums.CommandEntities
+import model.command.enums.CommandTypes
 import model.database.sqlite.createDatabase
 import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository

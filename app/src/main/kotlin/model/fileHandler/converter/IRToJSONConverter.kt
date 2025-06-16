@@ -3,8 +3,8 @@ package model.fileHandler.converter
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import model.command.concrete.Command
-import model.command.enum.CommandEntities
-import model.command.enum.CommandTypes
+import model.command.enums.CommandEntities
+import model.command.enums.CommandTypes
 import model.fileHandler.ConvertModes
 import model.fileHandler.serializableEntities.Edge
 import model.fileHandler.serializableEntities.Graph

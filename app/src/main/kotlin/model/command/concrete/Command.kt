@@ -1,7 +1,7 @@
 package model.command.concrete
 
-import model.command.enum.CommandEntities
-import model.command.enum.CommandTypes
+import model.command.enums.CommandEntities
+import model.command.enums.CommandTypes
 import model.result.CommandErrors
 import model.result.Result
 
