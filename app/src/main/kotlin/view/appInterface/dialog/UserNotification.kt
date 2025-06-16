@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,13 +47,13 @@ fun UserNotificationContent(
     message: String,
     dialogWidth: Dp = 550.dp,
 ) {
-    Card(
+    Surface(
         modifier =
             Modifier
                 .width(dialogWidth)
                 .wrapContentHeight(),
         shape = MaterialTheme.shapes.large,
-        backgroundColor = MaterialTheme.colors.background,
+        color = MaterialTheme.colors.background,
     ) {
         Column(
             modifier =

@@ -24,6 +24,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -78,13 +79,13 @@ fun OpenRepositoryContent(
     var selectedGraphId by remember { mutableStateOf<Long?>(null) }
     val listState = rememberLazyListState()
 
-    Card(
+    Surface(
         modifier =
             Modifier
                 .width(dialogWidth)
                 .padding(16.dp),
         shape = MaterialTheme.shapes.large,
-        backgroundColor = MaterialTheme.colors.background,
+        color = MaterialTheme.colors.background,
     ) {
         Column(
             modifier =

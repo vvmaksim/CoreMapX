@@ -10,13 +10,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
-import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
@@ -69,13 +69,13 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
     var isDirected by remember { mutableStateOf(false) }
     var showError by remember { mutableStateOf(false) }
 
-    Card(
+    Surface(
         modifier =
             Modifier
                 .width(dialogWidth)
                 .padding(16.dp),
         shape = MaterialTheme.shapes.large,
-        backgroundColor = MaterialTheme.colors.background,
+        color = MaterialTheme.colors.background,
     ) {
         Column(
             modifier =
