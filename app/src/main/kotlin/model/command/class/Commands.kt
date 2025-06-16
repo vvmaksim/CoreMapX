@@ -6,8 +6,8 @@ import model.graph.concrete.DirectedUnweightedGraph
 import model.graph.concrete.DirectedWeightedGraph
 import model.graph.concrete.UndirectedUnweightedGraph
 import model.graph.concrete.UndirectedWeightedGraph
+import model.graph.contracts.Graph
 import model.graph.entities.Vertex
-import model.graph.interfaces.Graph
 import model.result.CommandErrors
 import model.result.Result
 

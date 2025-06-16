@@ -38,7 +38,7 @@ import model.graph.concrete.DirectedUnweightedGraph
 import model.graph.concrete.DirectedWeightedGraph
 import model.graph.concrete.UndirectedUnweightedGraph
 import model.graph.concrete.UndirectedWeightedGraph
-import model.graph.interfaces.Graph
+import model.graph.contracts.Graph
 import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")

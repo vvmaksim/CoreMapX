@@ -1,6 +1,6 @@
 package model.graph.entities
 
-import model.graph.interfaces.Edge
+import model.graph.contracts.Edge
 
 data class WeightedEdge<E : Comparable<E>, V : Comparable<V>>(
     override val id: E,

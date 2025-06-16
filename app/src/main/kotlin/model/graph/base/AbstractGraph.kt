@@ -1,8 +1,8 @@
 package model.graph.base
 
+import model.graph.contracts.Edge
+import model.graph.contracts.Graph
 import model.graph.entities.Vertex
-import model.graph.interfaces.Edge
-import model.graph.interfaces.Graph
 
 abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V> {
     protected var nextEdgeId = 0L

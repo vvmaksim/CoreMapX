@@ -1,4 +1,4 @@
-package model.graph.interfaces
+package model.graph.contracts
 
 import model.graph.entities.Vertex
 

@@ -2,7 +2,7 @@ package viewmodel.graph
 
 import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
-import model.graph.interfaces.Graph
+import model.graph.contracts.Graph
 
 class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
     private val graph: Graph<E, V>,
