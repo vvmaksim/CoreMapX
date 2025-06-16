@@ -13,7 +13,7 @@ class ConfigValidator {
             when (key) {
                 // General
                 "language" -> enumStringValidator(key, value, listOf("ru", "en"))
-                "theme" -> enumStringValidator(key, value, listOf("light", "dark"))
+                "theme" -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
                 "fileDialogTheme" -> enumStringValidator(key, value, listOf("light", "dark"))
 
                 // Colors

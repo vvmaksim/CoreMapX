@@ -6,7 +6,7 @@
 # Supported languages: en, ru
 language=en
 
-# Supported values: light, dark
+# Supported values: light, dark, custom
 theme=light
 
 # Supported values: light, dark
