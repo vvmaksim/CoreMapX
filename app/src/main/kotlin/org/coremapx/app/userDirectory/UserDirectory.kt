@@ -12,7 +12,7 @@ private val logger = KotlinLogging.logger {}
 object UserDirectory {
     val baseUserDirPath = "${System.getProperty("user.home")}/.coremapx"
     val baseUserFontsDirPath = "$baseUserDirPath/config/fonts"
-    private const val DEFAULT_CONFIG_PATH = "app/src/main/resources/Configs/DefaultConfig.gcfg"
+    private const val DEFAULT_CONFIG_PATH = "app/src/main/resources/configs/DefaultConfig.gcfg"
     private const val DEFAULT_FONTS_DIRECTORY_PATH = "app/src/main/resources/fonts"
     private val directories =
         listOf(
