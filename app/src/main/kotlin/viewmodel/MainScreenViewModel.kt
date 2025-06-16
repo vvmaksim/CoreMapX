@@ -2,7 +2,7 @@ package viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import model.command.`class`.Commands
+import model.command.concrete.Commands
 import model.database.sqlite.createDatabase
 import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository

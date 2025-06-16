@@ -2,7 +2,7 @@ package model.fileHandler.converter
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import model.command.`class`.Command
+import model.command.concrete.Command
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
 import model.fileHandler.ConvertModes

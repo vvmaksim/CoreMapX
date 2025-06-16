@@ -2,7 +2,7 @@ package model.fileHandler
 
 import extensions.toBooleanOrNull
 import kotlinx.serialization.json.Json
-import model.command.`class`.Command
+import model.command.concrete.Command
 import model.database.sqlite.createDatabase
 import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository

@@ -1,6 +1,6 @@
 package model.fileHandler.converter
 
-import model.command.`class`.Command
+import model.command.concrete.Command
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
 import model.database.sqlite.createDatabase

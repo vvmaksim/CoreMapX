@@ -1,6 +1,6 @@
 import io.mockk.*
-import model.command.`class`.Command
-import model.command.`class`.Commands
+import model.command.concrete.Command
+import model.command.concrete.Commands
 import model.command.enum.CommandEntities
 import model.command.enum.CommandTypes
 import model.graph.concrete.DirectedUnweightedGraph
