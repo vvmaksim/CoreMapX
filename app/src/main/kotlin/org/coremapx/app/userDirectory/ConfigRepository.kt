@@ -73,6 +73,8 @@ class ConfigRepository {
         }
     }
 
+    fun setThemeOnCustom() = setValue("theme", "custom")
+
     private fun setTheme(themeConfig: ThemeConfig) {
         with(themeConfig) {
             setValue("primary", primary)
