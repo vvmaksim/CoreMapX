@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
-import org.coremapx.app.config
 import view.appInterface.layout.MainMenu
 import view.appInterface.layout.WorkSpace
 import viewmodel.MainScreenViewModel
@@ -26,7 +25,7 @@ import viewmodel.MainScreenViewModel
 fun <E : Comparable<E>, V : Comparable<V>> MainScreen(viewModel: MainScreenViewModel<E, V>) {
     var isMenuVisible by remember { mutableStateOf(true) }
 
-    val mainMenuWidth = config.states.mainMenuWidth.value.dp
+    val mainMenuWidth = 200.dp
 
     Box(modifier = Modifier.fillMaxSize()) {
         WorkSpace(

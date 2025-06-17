@@ -36,9 +36,6 @@ class ConfigStates(
     val mainScreenStartWidth = mutableStateOf(configRepository.getIntValue("mainScreenStartWidth"))
     val startWindowPlacement = mutableStateOf(configRepository.getStringValue("startWindowPlacement"))
 
-    // Main Menu
-    val mainMenuWidth = mutableStateOf(configRepository.getIntValue("mainMenuWidth"))
-
     // Title Bar
     val titleBarHeight = mutableStateOf(configRepository.getIntValue("titleBarHeight"))
     val titleBarIconSize = mutableStateOf(configRepository.getIntValue("titleBarIconSize"))
@@ -99,9 +96,6 @@ class ConfigStates(
             "mainScreenStartHeight" -> mainScreenStartHeight.value = configRepository.getIntValue("mainScreenStartHeight")
             "mainScreenStartWidth" -> mainScreenStartWidth.value = configRepository.getIntValue("mainScreenStartWidth")
             "startWindowPlacement" -> startWindowPlacement.value = value
-
-            // Main Menu
-            "mainMenuWidth" -> mainMenuWidth.value = configRepository.getIntValue("mainMenuWidth")
 
             // Title Bar
             "titleBarHeight" -> titleBarHeight.value = configRepository.getIntValue("titleBarHeight")

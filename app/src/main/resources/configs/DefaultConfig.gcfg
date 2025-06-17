@@ -47,11 +47,6 @@ mainScreenStartWidth=1280
 # Supported values: FullScreen, Floating, Maximized
 startWindowPlacement=Maximized
 
-! Main Menu
-
-# Min=200 (dp)
-mainMenuWidth=200
-
 ! Title Bar
 
 # Min=35 (dp)
