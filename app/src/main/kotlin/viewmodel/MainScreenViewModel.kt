@@ -8,7 +8,7 @@ import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
-import model.fileHandler.FileDialogManager
+import model.fileHandler.DialogManager
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
 import model.fileHandler.converter.Converter
@@ -122,14 +122,14 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     fun openGraphFile(): Result<List<String>> {
         val file =
-            FileDialogManager.showOpenFileDialog(directory = "$baseUserDirPath/data/graphs")
+            DialogManager.showOpenFileDialog(directory = "$baseUserDirPath/data/graphs")
                 ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
         return loadGraphFromFile(file)
     }
 
     fun openGraphRepository(): Result<File> {
         val repository =
-            FileDialogManager.showOpenFileDialog(
+            DialogManager.showOpenFileDialog(
                 directory = "$baseUserDirPath/data/graphs",
                 title = "Select graph repository",
             )

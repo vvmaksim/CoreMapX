@@ -6,14 +6,14 @@ import java.io.File
 import javax.swing.JFileChooser
 import javax.swing.UIManager
 
-class FileDialogManager {
+class DialogManager {
     companion object {
         fun showOpenFileDialog(
             title: String = "Select graph file",
             directory: String = System.getProperty("user.home"),
             useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
         ): File? =
-            dialogManager(
+            fileDialogManager(
                 selectionMode = JFileChooser.FILES_ONLY,
                 title = title,
                 directory = directory,
@@ -25,14 +25,14 @@ class FileDialogManager {
             directory: String = System.getProperty("user.home"),
             useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
         ): String? =
-            dialogManager(
+            fileDialogManager(
                 selectionMode = JFileChooser.DIRECTORIES_ONLY,
                 title = title,
                 directory = directory,
                 useDarkTheme = useDarkTheme,
             )?.selectedFile?.absolutePath
 
-        fun dialogManager(
+        fun fileDialogManager(
             selectionMode: Int,
             title: String,
             directory: String = System.getProperty("user.home"),

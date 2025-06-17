@@ -31,7 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
-import model.fileHandler.FileDialogManager
+import model.fileHandler.DialogManager
 import org.coremapx.app.theme.AppTheme
 import kotlin.text.ifEmpty
 
@@ -57,7 +57,7 @@ fun SavePathButton(
                     border = BorderStroke(borderWidth, borderColor),
                     shape = borderShape,
                 ).clickable {
-                    val dir = FileDialogManager.showSelectDirectoryDialog(directory = currentPath) ?: currentPath
+                    val dir = DialogManager.showSelectDirectoryDialog(directory = currentPath) ?: currentPath
                     currentPath = dir
                     onPathSelected(dir)
                 },
