@@ -48,6 +48,7 @@ import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
 import view.appInterface.dialog.OpenRepository
 import view.appInterface.dialog.SaveGraphAs
+import view.appInterface.dialog.Settings
 import view.appInterface.dialog.UserNotification
 import view.appInterface.icon.Logo
 import viewmodel.MainScreenViewModel
@@ -68,6 +69,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     var showSaveGraphAsDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var showNewGraphDialog by remember { mutableStateOf(false) }
+    var showSettingsDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var userNotificationTitle by remember { mutableStateOf("") }
     var userNotificationMessage by remember { mutableStateOf("") }
@@ -200,7 +202,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 )
 
                 MainMenuTextButton(
-                    onClick = { },
+                    onClick = { showSettingsDialog = true },
                     iconVector = Icons.Filled.Settings,
                     iconContentDescription = "Settings Icon",
                     buttonText = "Settings",
@@ -332,6 +334,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 viewModel.graphFormat = null
                 viewModel.updateGraph(newGraphData.graph)
             },
+        )
+    }
+
+    if (showSettingsDialog) {
+        Settings(
+            onDismiss = { showSettingsDialog = false },
         )
     }
 }
