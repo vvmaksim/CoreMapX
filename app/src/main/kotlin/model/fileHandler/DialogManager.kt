@@ -1,10 +1,14 @@
 package model.fileHandler
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import com.formdev.flatlaf.FlatLightLaf
 import org.coremapx.app.config
 import java.io.File
+import javax.swing.JColorChooser
 import javax.swing.JFileChooser
 import javax.swing.UIManager
+import java.awt.Color as AwtColor
 
 class DialogManager {
     companion object {
@@ -65,6 +69,44 @@ class DialogManager {
 
             return if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
                 fileChooser
+            } else {
+                null
+            }
+        }
+
+        fun showSelectColorDialog(
+            initialColor: Color,
+            useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
+        ): String? =
+            colorDialogManager(
+                initialColor = initialColor,
+                useDarkTheme = useDarkTheme,
+            )
+
+        private fun colorDialogManager(
+            initialColor: Color,
+            useDarkTheme: Boolean,
+        ): String? {
+            try {
+                if (useDarkTheme) {
+                    UIManager.setLookAndFeel("com.formdev.flatlaf.FlatDarkLaf")
+                } else {
+                    UIManager.setLookAndFeel(FlatLightLaf())
+                }
+            } catch (e: Exception) {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+            }
+
+            val color =
+                JColorChooser.showDialog(
+                    null,
+                    "Choose Color",
+                    AwtColor(initialColor.toArgb()),
+                )
+
+            return if (color != null) {
+                val opaqueColor = AwtColor(color.red, color.green, color.blue, 255)
+                String.format("#%06X", opaqueColor.rgb)
             } else {
                 null
             }
