@@ -1,0 +1,130 @@
+package view.appInterface.settingsElements.blocks
+
+import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
+import org.coremapx.app.config
+import org.coremapx.app.theme.AppTheme
+import view.appInterface.settingsElements.lines.NumberTextFieldLine
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun WorkAreaBlock() {
+    val graphLayoutHeight by remember { config.states.graphLayoutHeight }
+    val graphLayoutWidth by remember { config.states.graphLayoutWidth }
+    val vertexRadius by remember { config.states.vertexRadius }
+    val vertexLabelSize by remember { config.states.vertexLabelSize }
+    val edgeLabelSize by remember { config.states.edgeLabelSize }
+    val edgeArrowSize by remember { config.states.edgeArrowSize }
+    val edgeWidth by remember { config.states.edgeWidth }
+    val canvasDragRatio by remember { config.states.canvasDragRatio }
+    val canvasLimit by remember { config.states.canvasLimit }
+
+    Column {
+        NumberTextFieldLine(
+            title = "Graph layout height",
+            valueType = Int::class,
+            value = TextFieldValue("$graphLayoutHeight"),
+            onValueChange = {
+                config.setValue("graphLayoutHeight", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Graph layout width",
+            valueType = Int::class,
+            value = TextFieldValue("$graphLayoutWidth"),
+            onValueChange = {
+                config.setValue("graphLayoutWidth", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Vertex radius",
+            valueType = Int::class,
+            value = TextFieldValue("$vertexRadius"),
+            onValueChange = {
+                config.setValue("vertexRadius", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Vertex label size",
+            valueType = Int::class,
+            value = TextFieldValue("$vertexLabelSize"),
+            onValueChange = {
+                config.setValue("vertexLabelSize", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Edge label size",
+            valueType = Int::class,
+            value = TextFieldValue("$edgeLabelSize"),
+            onValueChange = {
+                config.setValue("edgeLabelSize", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Edge arrow size",
+            valueType = Float::class,
+            value = TextFieldValue("$edgeArrowSize"),
+            onValueChange = {
+                config.setValue("edgeArrowSize", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Edge width",
+            valueType = Float::class,
+            value = TextFieldValue("$edgeWidth"),
+            onValueChange = {
+                config.setValue("edgeWidth", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Canvas drag ratio",
+            valueType = Float::class,
+            value = TextFieldValue("$canvasDragRatio"),
+            onValueChange = {
+                config.setValue("canvasDragRatio", it.text)
+            },
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Canvas limit",
+            valueType = Int::class,
+            value = TextFieldValue("$canvasLimit"),
+            onValueChange = {
+                config.setValue("canvasLimit", it.text)
+            },
+        )
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+private fun PreviewWorkAreaBlock() {
+    AppTheme {
+        Surface(
+            shape = MaterialTheme.shapes.large,
+            modifier = Modifier.padding(8.dp),
+            color = MaterialTheme.colors.background,
+        ) {
+            WorkAreaBlock()
+        }
+    }
+}
