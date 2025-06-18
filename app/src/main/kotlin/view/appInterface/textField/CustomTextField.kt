@@ -64,6 +64,7 @@ fun CustomTextField(
     shape: Shape = MaterialTheme.shapes.medium,
     colors: TextFieldColors =
         TextFieldDefaults.outlinedTextFieldColors(
+            textColor = MaterialTheme.colors.onSurface,
             focusedBorderColor = MaterialTheme.colors.primary,
             unfocusedBorderColor = MaterialTheme.colors.border,
             cursorColor = MaterialTheme.colors.primary,
