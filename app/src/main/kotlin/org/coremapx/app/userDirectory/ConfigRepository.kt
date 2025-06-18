@@ -110,16 +110,17 @@ class ConfigRepository {
             logger.error { message }
             return Result.Error(FileErrors.ErrorReadingFile(message))
         }
-        val lines = configFile.readLines()
+        var keyFound = false
         val updatedLines =
-            lines.map { line ->
+            configFile.readLines().map { line ->
                 if (line.trim().startsWith("$key=")) {
+                    keyFound = true
                     "$key=$value"
                 } else {
                     line
                 }
             }
-        if (lines == updatedLines) {
+        if (!keyFound) {
             logger.warn { "Key '$key' not found in config file" }
             return Result.Error(ConfigErrors.UnknownProperty(key))
         }
