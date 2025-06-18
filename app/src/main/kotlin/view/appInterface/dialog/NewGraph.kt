@@ -63,7 +63,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
     onCreate: (NewGraphData<E, V>) -> Unit,
     dialogWidth: Dp = 450.dp,
 ) {
-    var graphName by remember { mutableStateOf("") }
+    var graphName by remember { mutableStateOf(TextFieldValue("")) }
     var isWeighted by remember { mutableStateOf(false) }
     var isDirected by remember { mutableStateOf(false) }
     var showError by remember { mutableStateOf(false) }
@@ -102,9 +102,9 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
             }
             Spacer(modifier = Modifier.height(24.dp))
             CustomTextField(
-                value = TextFieldValue(graphName),
+                value = graphName,
                 onValueChange = {
-                    graphName = it.text
+                    graphName = it
                     showError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
@@ -164,7 +164,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 onClick = {
-                    if (graphName.isBlank()) {
+                    if (graphName.text.isBlank()) {
                         showError = true
                         return@Button
                     }
@@ -178,7 +178,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                     onCreate(
                         NewGraphData(
                             graph = newGraph,
-                            graphName = graphName,
+                            graphName = graphName.text,
                         ),
                     )
                     onDismiss()
