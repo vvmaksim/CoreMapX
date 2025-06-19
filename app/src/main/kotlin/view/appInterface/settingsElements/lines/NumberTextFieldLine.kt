@@ -14,7 +14,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
@@ -39,6 +38,7 @@ import extensions.border
 import extensions.success
 import model.result.Result
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
 import view.appInterface.settingsElements.description.SettingsDescriptionText
 import view.appInterface.textField.CustomTextField
@@ -246,72 +246,70 @@ fun NumberTextFieldLine(
 @Composable
 private fun PreviewNumberTextFieldLine() {
     AppTheme {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.padding(8.dp),
-            color = MaterialTheme.colors.background,
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-            ) {
-                NumberTextFieldLine(
-                    title = "Some Title 1",
-                    valueType = Int::class,
-                    value = TextFieldValue("200"),
-                    onValueChange = { Result.Success(true) },
+        PreviewSurface(
+            content = {
+                Column(
                     modifier = Modifier.padding(8.dp),
-                    description = "",
-                )
-                NumberTextFieldLine(
-                    title = "Some Title 2",
-                    valueType = Float::class,
-                    value = TextFieldValue("Test Field"),
-                    onValueChange = { Result.Success(true) },
-                    enabled = false,
-                    modifier = Modifier.padding(8.dp),
-                    description = "",
-                )
-                NumberTextFieldLine(
-                    title = "Some Title 3",
-                    valueType = Double::class,
-                    value = TextFieldValue(""),
-                    onValueChange = { Result.Success(true) },
-                    placeholder = { Text("This is placeholder") },
-                    modifier = Modifier.padding(8.dp),
-                    description = "",
-                )
-                NumberTextFieldLine(
-                    title = "Some Title 4",
-                    valueType = Int::class,
-                    value = TextFieldValue("Test Field"),
-                    onValueChange = { Result.Success(true) },
-                    isError = true,
-                    errorText = "Custom error message",
-                    modifier = Modifier.padding(8.dp),
-                    isExpanded = true,
-                    description = "Some Description",
-                )
-                NumberTextFieldLine(
-                    title = "Some Title 5",
-                    valueType = Int::class,
-                    value = TextFieldValue("Test Field"),
-                    onValueChange = { Result.Success(true) },
-                    isError = true,
-                    errorText = null,
-                    modifier = Modifier.padding(8.dp),
-                    description = "",
-                )
-                NumberTextFieldLine(
-                    title = "Some Title 6",
-                    valueType = Float::class,
-                    value = TextFieldValue(""),
-                    onValueChange = { Result.Success(true) },
-                    placeholder = { Text("This is placeholder") },
-                    modifier = Modifier.padding(8.dp),
-                    leadingIcon = null,
-                    description = "",
-                )
-            }
-        }
+                ) {
+                    NumberTextFieldLine(
+                        title = "Some Title 1",
+                        valueType = Int::class,
+                        value = TextFieldValue("200"),
+                        onValueChange = { Result.Success(true) },
+                        modifier = Modifier.padding(8.dp),
+                        description = "",
+                    )
+                    NumberTextFieldLine(
+                        title = "Some Title 2",
+                        valueType = Float::class,
+                        value = TextFieldValue("Test Field"),
+                        onValueChange = { Result.Success(true) },
+                        enabled = false,
+                        modifier = Modifier.padding(8.dp),
+                        description = "",
+                    )
+                    NumberTextFieldLine(
+                        title = "Some Title 3",
+                        valueType = Double::class,
+                        value = TextFieldValue(""),
+                        onValueChange = { Result.Success(true) },
+                        placeholder = { Text("This is placeholder") },
+                        modifier = Modifier.padding(8.dp),
+                        description = "",
+                    )
+                    NumberTextFieldLine(
+                        title = "Some Title 4",
+                        valueType = Int::class,
+                        value = TextFieldValue("Test Field"),
+                        onValueChange = { Result.Success(true) },
+                        isError = true,
+                        errorText = "Custom error message",
+                        modifier = Modifier.padding(8.dp),
+                        isExpanded = true,
+                        description = "Some Description",
+                    )
+                    NumberTextFieldLine(
+                        title = "Some Title 5",
+                        valueType = Int::class,
+                        value = TextFieldValue("Test Field"),
+                        onValueChange = { Result.Success(true) },
+                        isError = true,
+                        errorText = null,
+                        modifier = Modifier.padding(8.dp),
+                        description = "",
+                    )
+                    NumberTextFieldLine(
+                        title = "Some Title 6",
+                        valueType = Float::class,
+                        value = TextFieldValue(""),
+                        onValueChange = { Result.Success(true) },
+                        placeholder = { Text("This is placeholder") },
+                        modifier = Modifier.padding(8.dp),
+                        leadingIcon = null,
+                        description = "",
+                    )
+                }
+            },
+        )
     }
 }
