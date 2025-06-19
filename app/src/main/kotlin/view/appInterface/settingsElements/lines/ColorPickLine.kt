@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.ColorPickerButton
+import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
 import view.appInterface.settingsElements.description.SettingsDescriptionText
 
@@ -87,47 +87,45 @@ fun ColorPickLine(
 @Composable
 private fun PreviewColorPickLine() {
     AppTheme {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            color = MaterialTheme.colors.background,
-            modifier = Modifier.padding(8.dp),
-        ) {
-            Column(
-                modifier = Modifier.padding(8.dp),
-            ) {
-                ColorPickLine(
-                    selectedColor = Color.Red,
-                    onColorSelected = {},
-                    modifier = Modifier.fillMaxWidth(),
-                    title = "Some Title 1",
-                    description = "",
-                )
-                Spacer(Modifier.height(8.dp))
-                ColorPickLine(
-                    selectedColor = Color.Magenta,
-                    onColorSelected = {},
-                    modifier = Modifier,
-                    title = "Some Title 2",
-                    description = "",
-                )
-                Spacer(Modifier.height(8.dp))
-                ColorPickLine(
-                    selectedColor = Color(0xFF5489ED),
-                    onColorSelected = {},
-                    modifier = Modifier,
-                    title = "Some Title 3",
-                    isExpanded = true,
-                    description = "Some color description",
-                )
-                Spacer(Modifier.height(8.dp))
-                ColorPickLine(
-                    selectedColor = Color.Black,
-                    onColorSelected = {},
-                    modifier = Modifier,
-                    title = "Some Title 4 with so looooooooooooooooooooooooooooooooong text",
-                    description = "",
-                )
-            }
-        }
+        PreviewSurface(
+            content = {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    ColorPickLine(
+                        selectedColor = Color.Red,
+                        onColorSelected = {},
+                        modifier = Modifier.fillMaxWidth(),
+                        title = "Some Title 1",
+                        description = "",
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ColorPickLine(
+                        selectedColor = Color.Magenta,
+                        onColorSelected = {},
+                        modifier = Modifier,
+                        title = "Some Title 2",
+                        description = "",
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ColorPickLine(
+                        selectedColor = Color(0xFF5489ED),
+                        onColorSelected = {},
+                        modifier = Modifier,
+                        title = "Some Title 3",
+                        isExpanded = true,
+                        description = "Some color description",
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ColorPickLine(
+                        selectedColor = Color.Black,
+                        onColorSelected = {},
+                        modifier = Modifier,
+                        title = "Some Title 4 with so looooooooooooooooooooooooooooooooong text",
+                        description = "",
+                    )
+                }
+            },
+        )
     }
 }
