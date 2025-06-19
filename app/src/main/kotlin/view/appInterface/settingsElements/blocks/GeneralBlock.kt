@@ -16,11 +16,12 @@ import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.settingsElements.lines.DropdownSelectLine
+import view.appInterface.settingsElements.lines.SwitchLine
 import java.util.Locale.getDefault
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun GeneralBlock() {
+fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val language by remember { config.states.language }
     val theme by remember { config.states.theme }
     val systemDialogTheme by remember { config.states.systemDialogTheme }
@@ -42,6 +43,7 @@ fun GeneralBlock() {
                 """
                 You can choose one of the suggested languages for the interface or use a custom localization file.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
@@ -57,6 +59,7 @@ fun GeneralBlock() {
                 """
                 You can change the interface colors in the color settings. Changing any of the colors will switch the theme to the `Custom` status.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
@@ -74,6 +77,20 @@ fun GeneralBlock() {
                 You can change the theme of this window to one that would better suit your theme.
                 When switching between ready-made themes, this parameter switches automatically.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        SwitchLine(
+            title = "Settings blocks and descriptions is expanded",
+            description =
+                """
+                If this option is active, the next time you open the settings menu, all settings blocks will be expanded and all descriptions in the settings will be shown.
+                
+                If the parameter is disabled, then the next time you open the settings menu, all settings blocks and all descriptions are hidden.
+                """.trimIndent(),
+            checked = isExpandedSettings,
+            onCheckedChange = { config.setValue("isExpandedSettings", it.toString()) },
+            isExpanded = isExpandedSettings,
         )
     }
 }

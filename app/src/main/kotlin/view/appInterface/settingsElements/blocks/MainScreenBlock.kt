@@ -22,7 +22,7 @@ import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun MainScreenBlock() {
+fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val mainScreenStartHeight by remember { config.states.mainScreenStartHeight }
     val mainScreenStartWidth by remember { config.states.mainScreenStartWidth }
     var startWindowPlacement by remember { config.states.startWindowPlacement }
@@ -44,6 +44,7 @@ fun MainScreenBlock() {
                 
                 It is used only when the `startWindowPlacement` is in the `Floating` state.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -57,6 +58,7 @@ fun MainScreenBlock() {
                 
                 It is used only when the `startWindowPlacement` is in the `Floating` state.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
@@ -74,6 +76,7 @@ fun MainScreenBlock() {
                 
                 FullScreen - The application is open to full screen and occupies its entire area. (Not recommended)
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
     }
 }

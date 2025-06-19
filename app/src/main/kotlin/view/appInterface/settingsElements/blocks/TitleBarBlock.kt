@@ -19,7 +19,7 @@ import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun TitleBarBlock() {
+fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val titleBarHeight by remember { config.states.titleBarHeight }
     val titleBarIconSize by remember { config.states.titleBarIconSize }
 
@@ -33,6 +33,7 @@ fun TitleBarBlock() {
                 """
                 Height of the title bar.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -44,6 +45,7 @@ fun TitleBarBlock() {
                 """
                 Size of the title bar icons.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
     }
 }

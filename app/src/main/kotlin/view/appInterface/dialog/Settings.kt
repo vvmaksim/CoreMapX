@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.settingsElements.blocks.ColorsBlock
 import view.appInterface.settingsElements.blocks.CommandFieldBlock
@@ -45,12 +46,14 @@ fun Settings(
     onDismiss: () -> Unit,
     dialogWidth: Dp = 800.dp,
     dialogHeight: Dp = 1000.dp,
+    isExpandedSettings: Boolean = config.states.isExpandedSettings.value,
 ) {
     Dialog(onDismissRequest = onDismiss) {
         SettingsContent(
             onDismiss = onDismiss,
             dialogWidth = dialogWidth,
             dialogHeight = dialogHeight,
+            isExpandedSettings = isExpandedSettings,
         )
     }
 }
@@ -61,14 +64,15 @@ fun SettingsContent(
     onDismiss: () -> Unit,
     dialogWidth: Dp = 800.dp,
     dialogHeight: Dp = 1000.dp,
+    isExpandedSettings: Boolean = config.states.isExpandedSettings.value,
 ) {
-    var isThemeExpanded by remember { mutableStateOf(false) }
-    var isColorsExpanded by remember { mutableStateOf(false) }
-    var isMainScreenExpanded by remember { mutableStateOf(false) }
-    var isTitleBarExpanded by remember { mutableStateOf(false) }
-    var isCommandFieldExpanded by remember { mutableStateOf(false) }
-    var isWorkAreaExpanded by remember { mutableStateOf(false) }
-    var isPerformanceExpanded by remember { mutableStateOf(false) }
+    var isThemeExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isColorsExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isMainScreenExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isTitleBarExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isCommandFieldExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isWorkAreaExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isPerformanceExpanded by remember { mutableStateOf(isExpandedSettings) }
 
     Surface(
         modifier =
@@ -118,49 +122,49 @@ fun SettingsContent(
             ) {
                 SettingsBlock(
                     title = "General",
-                    content = { GeneralBlock() },
+                    content = { GeneralBlock(isExpandedSettings) },
                     isExpanded = isThemeExpanded,
                     onClick = { isThemeExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
                     title = "Colors",
-                    content = { ColorsBlock() },
+                    content = { ColorsBlock(isExpandedSettings) },
                     isExpanded = isColorsExpanded,
                     onClick = { isColorsExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
                     title = "Main Screen",
-                    content = { MainScreenBlock() },
+                    content = { MainScreenBlock(isExpandedSettings) },
                     isExpanded = isMainScreenExpanded,
                     onClick = { isMainScreenExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
                     title = "Title Bar",
-                    content = { TitleBarBlock() },
+                    content = { TitleBarBlock(isExpandedSettings) },
                     isExpanded = isTitleBarExpanded,
                     onClick = { isTitleBarExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
                     title = "Command Field",
-                    content = { CommandFieldBlock() },
+                    content = { CommandFieldBlock(isExpandedSettings) },
                     isExpanded = isCommandFieldExpanded,
                     onClick = { isCommandFieldExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
                     title = "Work Area",
-                    content = { WorkAreaBlock() },
+                    content = { WorkAreaBlock(isExpandedSettings) },
                     isExpanded = isWorkAreaExpanded,
                     onClick = { isWorkAreaExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
                     title = "Performance",
-                    content = { PerformanceBlock() },
+                    content = { PerformanceBlock(isExpandedSettings) },
                     isExpanded = isPerformanceExpanded,
                     onClick = { isPerformanceExpanded = it },
                 )

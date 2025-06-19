@@ -19,7 +19,7 @@ import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun WorkAreaBlock() {
+fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val graphLayoutHeight by remember { config.states.graphLayoutHeight }
     val graphLayoutWidth by remember { config.states.graphLayoutWidth }
     val vertexRadius by remember { config.states.vertexRadius }
@@ -40,6 +40,7 @@ fun WorkAreaBlock() {
                 """
                 The graph is drawn on a certain plane, you can change the height of this plane.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -51,6 +52,7 @@ fun WorkAreaBlock() {
                 """
                 The graph is drawn on a certain plane, you can change the width of this plane.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -62,6 +64,7 @@ fun WorkAreaBlock() {
                 """
                 The standard radius for a vertex.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -73,6 +76,7 @@ fun WorkAreaBlock() {
                 """
                 Vertex label size.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -84,6 +88,7 @@ fun WorkAreaBlock() {
                 """
                 Edge label size.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -95,6 +100,7 @@ fun WorkAreaBlock() {
                 """
                 Edge arrow size.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -106,6 +112,7 @@ fun WorkAreaBlock() {
                 """
                 Width for an edge.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -117,6 +124,7 @@ fun WorkAreaBlock() {
                 """
                 The graph movement speed is calculated using a certain `canvasDragRatio` multiplier.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -128,6 +136,7 @@ fun WorkAreaBlock() {
                 """
                 The area where the graph is drawn is finite. To limit movement on this plane, you can change this parameter.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
     }
 }

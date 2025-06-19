@@ -9,6 +9,7 @@ class ConfigStates(
     val language = mutableStateOf(configRepository.getStringValue("language"))
     val theme = mutableStateOf(configRepository.getStringValue("theme"))
     val systemDialogTheme = mutableStateOf(configRepository.getStringValue("systemDialogTheme"))
+    val isExpandedSettings = mutableStateOf(configRepository.getBooleanValue("isExpandedSettings"))
 
     // Colors
     val primary = mutableStateOf(configRepository.getColor("primary"))
@@ -71,6 +72,7 @@ class ConfigStates(
             "language" -> language.value = value
             "theme" -> theme.value = value
             "systemDialogTheme" -> systemDialogTheme.value = value
+            "isExpandedSettings" -> isExpandedSettings.value = configRepository.getBooleanValue("isExpandedSettings")
 
             // Colors
             "primary" -> primary.value = configRepository.getColor("primary")

@@ -20,7 +20,7 @@ import view.appInterface.settingsElements.lines.SwitchLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun CommandFieldBlock() {
+fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val messageOutputHeight by remember { config.states.messageOutputHeight }
     val maxCountMessages by remember { config.states.maxCountMessages }
     val commandFieldWidth by remember { config.states.commandFieldWidth }
@@ -36,6 +36,7 @@ fun CommandFieldBlock() {
                 """
                 Maximum lifting height for command line output messages.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -49,6 +50,7 @@ fun CommandFieldBlock() {
                 """
                 The maximum number of output messages that are remembered.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -60,6 +62,7 @@ fun CommandFieldBlock() {
                 """
                 The height of the command line.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
@@ -73,6 +76,7 @@ fun CommandFieldBlock() {
                 """.trimIndent(),
             checked = isTransparentCommandLine,
             onCheckedChange = { config.setValue("isTransparentCommandLine", it.toString()) },
+            isExpanded = isExpandedSettings,
         )
     }
 }

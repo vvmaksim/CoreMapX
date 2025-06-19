@@ -12,6 +12,9 @@ theme=light
 # Supported values: light, dark
 systemDialogTheme=light
 
+# true or false
+isExpandedSettings=true
+
 ! Colors
 
 primary=#6200EE

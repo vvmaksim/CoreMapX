@@ -19,7 +19,7 @@ import view.appInterface.settingsElements.lines.ColorPickLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun ColorsBlock() {
+fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val primary by remember { config.states.primary }
     val primaryVariant by remember { config.states.primaryVariant }
     val secondary by remember { config.states.secondary }
@@ -55,6 +55,7 @@ fun ColorsBlock() {
                 The main color of the interface.
                 It is used for key controls, buttons, highlighting active elements, etc.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -70,6 +71,7 @@ fun ColorsBlock() {
                 A variant of the main color, usually slightly darker or lighter.
                 It is used for shades, shadows, highlights, or minor accents related to the main color.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -85,6 +87,7 @@ fun ColorsBlock() {
                 The secondary color of the interface.
                 It is used to highlight less important elements, minor buttons, icons, links, etc.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -99,6 +102,7 @@ fun ColorsBlock() {
                 """
                 A secondary color option, similar to primaryVariant, for shades, shadows, and additional accents associated with secondary.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -113,6 +117,7 @@ fun ColorsBlock() {
                 """
                 The background color of the entire application or large areas.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -127,6 +132,7 @@ fun ColorsBlock() {
                 """
                 Surface color: cards, panels, pop-ups, dialogs, and other elements that "lie" on the background.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -141,6 +147,7 @@ fun ColorsBlock() {
                 """
                 The color for displaying errors: error text, frames, icons, indicators, etc.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -155,6 +162,7 @@ fun ColorsBlock() {
                 """
                 The color of the content (text, icons) that is placed on top of the primary. Usually contrasting.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -169,6 +177,7 @@ fun ColorsBlock() {
                 """
                 The color of the content that is placed on top of secondary.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -183,6 +192,7 @@ fun ColorsBlock() {
                 """
                 The color of the content that is placed on top of background.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -197,6 +207,7 @@ fun ColorsBlock() {
                 """
                 The color of the content that is placed on top of surface.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -211,6 +222,7 @@ fun ColorsBlock() {
                 """
                 The color of the content that is placed on top of error.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -225,6 +237,7 @@ fun ColorsBlock() {
                 """
                 The color of the frames for various interface elements: text fields, buttons, cards, etc.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -239,6 +252,7 @@ fun ColorsBlock() {
                 """
                 A color to indicate successful actions: confirmations, successful notifications, etc.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -253,6 +267,7 @@ fun ColorsBlock() {
                 """
                 Color for warnings: yellow icons, frames, notifications of potential problems.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -267,6 +282,7 @@ fun ColorsBlock() {
                 """
                 The primary color for displaying vertices.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -281,6 +297,7 @@ fun ColorsBlock() {
                 """
                 The color of the border when hovering over the element.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -295,6 +312,7 @@ fun ColorsBlock() {
                 """
                 The primary color for displaying edges between vertices on the graph.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -309,6 +327,7 @@ fun ColorsBlock() {
                 """
                 The background color for graph visualization.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -325,6 +344,7 @@ fun ColorsBlock() {
 
                 This color is applied if the `isTransparentCommandLine` parameter is disabled.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
     }
 }

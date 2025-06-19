@@ -19,7 +19,7 @@ import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun PerformanceBlock() {
+fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val animationDuration by remember { config.states.animationDuration }
     val commandFieldScrollDelay by remember { config.states.commandFieldScrollDelay }
 
@@ -33,6 +33,7 @@ fun PerformanceBlock() {
                 """
                 This parameter is used to specify the speed of animations, for example, the speed of minimizing the side menu, etc.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -44,6 +45,7 @@ fun PerformanceBlock() {
                 """
                 A certain amount of time passes when sending a command on the command line.
                 """.trimIndent(),
+            isExpanded = isExpandedSettings,
         )
     }
 }
