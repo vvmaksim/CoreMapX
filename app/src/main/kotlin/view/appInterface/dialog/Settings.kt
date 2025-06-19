@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -102,6 +103,12 @@ fun SettingsContent(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Press Enter to save the parameter in the text field",
+                style = MaterialTheme.typography.body2,
+                textAlign = TextAlign.Center,
+            )
             Spacer(modifier = Modifier.height(24.dp))
             Column(
                 modifier =
