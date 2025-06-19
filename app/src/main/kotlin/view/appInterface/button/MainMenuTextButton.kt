@@ -2,9 +2,12 @@ package view.appInterface.button
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -19,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -63,31 +67,32 @@ fun MainMenuTextButton(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewEnabledMainMenuTextButton() {
+private fun PreviewMainMenuTextButton() {
     AppTheme {
-        MainMenuTextButton(
-            onClick = {},
-            iconVector = Icons.Filled.Add,
-            iconContentDescription = "Test",
-            buttonText = "Test Button",
-            isEnabled = true,
-            modifier = Modifier.width(250.dp),
-        )
-    }
-}
-
-@Suppress("ktlint:standard:function-naming")
-@Preview
-@Composable
-private fun PreviewUnenabledMainMenuTextButton() {
-    AppTheme {
-        MainMenuTextButton(
-            onClick = {},
-            iconVector = Icons.Filled.Add,
-            iconContentDescription = "Test",
-            buttonText = "Test Button",
-            isEnabled = false,
-            modifier = Modifier.width(250.dp),
+        PreviewSurface(
+            content = {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    MainMenuTextButton(
+                        onClick = {},
+                        iconVector = Icons.Filled.Add,
+                        iconContentDescription = "Test",
+                        buttonText = "Test Button",
+                        isEnabled = true,
+                        modifier = Modifier.width(250.dp),
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    MainMenuTextButton(
+                        onClick = {},
+                        iconVector = Icons.Filled.Add,
+                        iconContentDescription = "Test",
+                        buttonText = "Test Button",
+                        isEnabled = false,
+                        modifier = Modifier.width(250.dp),
+                    )
+                }
+            },
         )
     }
 }
