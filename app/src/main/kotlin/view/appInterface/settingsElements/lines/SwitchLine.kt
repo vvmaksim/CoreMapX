@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.settingsElements.description.SettingsDescriptionText
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -69,12 +70,7 @@ fun SwitchLine(
         }
         if (expanded) {
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = description,
-                style = MaterialTheme.typography.body2,
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f),
-                modifier = Modifier.padding(horizontal = 16.dp),
-            )
+            SettingsDescriptionText(description = description)
         }
     }
 }
