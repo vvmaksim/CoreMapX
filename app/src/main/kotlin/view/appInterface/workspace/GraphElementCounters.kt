@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -50,9 +51,13 @@ fun GraphElementCounters(
 @Composable
 private fun PreviewCountersWithSomeData() {
     AppTheme {
-        GraphElementCounters(
-            vertexCount = 52,
-            edgeCount = 66,
+        PreviewSurface(
+            content = {
+                GraphElementCounters(
+                    vertexCount = 52,
+                    edgeCount = 66,
+                )
+            },
         )
     }
 }
