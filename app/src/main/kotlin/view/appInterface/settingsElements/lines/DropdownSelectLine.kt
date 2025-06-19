@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
+import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
 import view.appInterface.settingsElements.description.SettingsDescriptionText
 
@@ -89,32 +89,30 @@ fun DropdownSelectLine(
 private fun PreviewDropdownSelectLine() {
     AppTheme {
         val items = listOf("Item 1", "Item 2")
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.padding(8.dp),
-            color = MaterialTheme.colors.background,
-        ) {
-            Column(
-                modifier = Modifier.padding(8.dp),
-            ) {
-                DropdownSelectLine(
-                    title = "Some Title 1",
-                    items = items,
-                    selectedItem = items[0],
-                    onItemSelected = {},
-                    description = "",
-                )
-                Spacer(Modifier.height(8.dp))
-                DropdownSelectLine(
-                    title = "Some Title 2",
-                    items = items,
-                    selectedItem = items[1],
-                    onItemSelected = {},
-                    buttonWidth = 250.dp,
-                    description = "Some Description",
-                    isExpanded = true,
-                )
-            }
-        }
+        PreviewSurface(
+            content = {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    DropdownSelectLine(
+                        title = "Some Title 1",
+                        items = items,
+                        selectedItem = items[0],
+                        onItemSelected = {},
+                        description = "",
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    DropdownSelectLine(
+                        title = "Some Title 2",
+                        items = items,
+                        selectedItem = items[1],
+                        onItemSelected = {},
+                        buttonWidth = 250.dp,
+                        description = "Some Description",
+                        isExpanded = true,
+                    )
+                }
+            },
+        )
     }
 }
