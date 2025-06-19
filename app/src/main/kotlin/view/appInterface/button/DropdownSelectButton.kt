@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -115,11 +116,15 @@ fun DropdownSelectButton(
 private fun PreviewDropdownSelectButton() {
     AppTheme {
         val extensions = listOf(".json", ".graph", ".db", ".someExtension")
-        DropdownSelectButton(
-            items = extensions,
-            selectedItem = extensions[3],
-            onItemSelected = {},
-            modifier = Modifier.width(500.dp),
+        PreviewSurface(
+            content = {
+                DropdownSelectButton(
+                    items = extensions,
+                    selectedItem = extensions[3],
+                    onItemSelected = {},
+                    modifier = Modifier.width(500.dp),
+                )
+            },
         )
     }
 }
