@@ -143,39 +143,36 @@ fun OpenGraphErrorsContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewOpenGraphErrorsWithTwoErrors() {
+private fun PreviewOpenGraphErrors() {
     AppTheme {
-        OpenGraphErrorsContent(
-            onDismiss = {},
-            warnings =
-                listOf(
-                    "Some error",
-                    "Second error",
-                ),
-            dialogWidth = 550.dp,
-        )
-    }
-}
-
-@Suppress("ktlint:standard:function-naming")
-@Preview
-@Composable
-private fun PreviewOpenGraphErrorsWithMoreErrors() {
-    AppTheme {
-        OpenGraphErrorsContent(
-            onDismiss = {},
-            warnings =
-                listOf(
-                    "Some error 1",
-                    "Some error 2",
-                    "Some error 3",
-                    "Some error 4",
-                    "Some error 5",
-                    "Some error 6",
-                    "Some error 7",
-                    "Some error 8",
-                ),
-            dialogWidth = 550.dp,
-        )
+        Column(
+            modifier = Modifier.padding(8.dp),
+        ) {
+            OpenGraphErrorsContent(
+                onDismiss = {},
+                warnings =
+                    listOf(
+                        "Some error",
+                        "Second error",
+                    ),
+                dialogWidth = 550.dp,
+            )
+            Spacer(Modifier.height(8.dp))
+            OpenGraphErrorsContent(
+                onDismiss = {},
+                warnings =
+                    listOf(
+                        "Some error 1",
+                        "Some error 2",
+                        "Some error 3",
+                        "Some error 4",
+                        "Some error 5",
+                        "Some error 6",
+                        "Some error 7",
+                        "Some error 8",
+                    ),
+                dialogWidth = 550.dp,
+            )
+        }
     }
 }
