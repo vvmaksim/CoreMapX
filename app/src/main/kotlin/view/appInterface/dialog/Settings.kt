@@ -43,7 +43,7 @@ import view.appInterface.settingsElements.blocks.WorkAreaBlock
 @Composable
 fun Settings(
     onDismiss: () -> Unit,
-    dialogWidth: Dp = 700.dp,
+    dialogWidth: Dp = 800.dp,
     dialogHeight: Dp = 1000.dp,
 ) {
     Dialog(onDismissRequest = onDismiss) {
@@ -59,7 +59,7 @@ fun Settings(
 @Composable
 fun SettingsContent(
     onDismiss: () -> Unit,
-    dialogWidth: Dp = 700.dp,
+    dialogWidth: Dp = 800.dp,
     dialogHeight: Dp = 1000.dp,
 ) {
     var isThemeExpanded by remember { mutableStateOf(false) }
@@ -176,7 +176,7 @@ private fun PreviewSettings() {
     AppTheme {
         SettingsContent(
             onDismiss = {},
-            dialogWidth = 700.dp,
+            dialogWidth = 800.dp,
             dialogHeight = 1000.dp,
         )
     }
