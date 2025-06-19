@@ -8,7 +8,7 @@ class ConfigStates(
     // General
     val language = mutableStateOf(configRepository.getStringValue("language"))
     val theme = mutableStateOf(configRepository.getStringValue("theme"))
-    val fileDialogTheme = mutableStateOf(configRepository.getStringValue("fileDialogTheme"))
+    val systemDialogTheme = mutableStateOf(configRepository.getStringValue("systemDialogTheme"))
 
     // Colors
     val primary = mutableStateOf(configRepository.getColor("primary"))
@@ -69,7 +69,7 @@ class ConfigStates(
             // General
             "language" -> language.value = value
             "theme" -> theme.value = value
-            "fileDialogTheme" -> fileDialogTheme.value = value
+            "systemDialogTheme" -> systemDialogTheme.value = value
 
             // Colors
             "primary" -> primary.value = configRepository.getColor("primary")

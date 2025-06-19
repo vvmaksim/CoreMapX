@@ -14,7 +14,7 @@ class ConfigValidator {
                 // General
                 "language" -> enumStringValidator(key, value, listOf("ru", "en"))
                 "theme" -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
-                "fileDialogTheme" -> enumStringValidator(key, value, listOf("light", "dark"))
+                "systemDialogTheme" -> enumStringValidator(key, value, listOf("light", "dark"))
 
                 // Colors
                 "primary", "primaryVariant", "secondary", "secondaryVariant",

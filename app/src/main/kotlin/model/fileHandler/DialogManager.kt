@@ -15,7 +15,7 @@ class DialogManager {
         fun showOpenFileDialog(
             title: String = "Select graph file",
             directory: String = System.getProperty("user.home"),
-            useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
+            useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): File? =
             fileDialogManager(
                 selectionMode = JFileChooser.FILES_ONLY,
@@ -27,7 +27,7 @@ class DialogManager {
         fun showSelectDirectoryDialog(
             title: String = "Select Directory",
             directory: String = System.getProperty("user.home"),
-            useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
+            useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): String? =
             fileDialogManager(
                 selectionMode = JFileChooser.DIRECTORIES_ONLY,
@@ -40,7 +40,7 @@ class DialogManager {
             selectionMode: Int,
             title: String,
             directory: String = System.getProperty("user.home"),
-            useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
+            useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): JFileChooser? {
             try {
                 if (useDarkTheme) {
@@ -76,7 +76,7 @@ class DialogManager {
 
         fun showSelectColorDialog(
             initialColor: Color,
-            useDarkTheme: Boolean = config.states.fileDialogTheme.value == "dark",
+            useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): String? =
             colorDialogManager(
                 initialColor = initialColor,

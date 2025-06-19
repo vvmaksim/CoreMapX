@@ -23,7 +23,7 @@ import java.util.Locale.getDefault
 fun GeneralBlock() {
     val language by remember { config.states.language }
     val theme by remember { config.states.theme }
-    val fileDialogTheme by remember { config.states.fileDialogTheme }
+    val systemDialogTheme by remember { config.states.systemDialogTheme }
 
     val dropdownSelectButtonModifier =
         Modifier
@@ -54,9 +54,9 @@ fun GeneralBlock() {
         DropdownSelectLine(
             title = "System dialog theme",
             items = listOf("Light", "Dark"),
-            selectedItem = fileDialogTheme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
+            selectedItem = systemDialogTheme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
-                config.setValue("fileDialogTheme", it.lowercase())
+                config.setValue("systemDialogTheme", it.lowercase())
                 config.setThemeOnCustom()
             },
             modifier = dropdownSelectButtonModifier,

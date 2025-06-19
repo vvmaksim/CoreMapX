@@ -96,7 +96,7 @@ class ConfigRepository {
             setValue("edgeMainColor", edgeMainColor)
             setValue("canvasBackgroundColor", canvasBackgroundColor)
             setValue("commandLineBackgroundColor", commandLineBackgroundColor)
-            setValue("fileDialogTheme", if (isLight) "light" else "dark")
+            setValue("systemDialogTheme", if (isLight) "light" else "dark")
         }
     }
 

@@ -10,7 +10,7 @@ language=en
 theme=light
 
 # Supported values: light, dark
-fileDialogTheme=light
+systemDialogTheme=light
 
 ! Colors
 
