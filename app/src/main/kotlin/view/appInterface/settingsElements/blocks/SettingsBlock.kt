@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
@@ -28,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.ColorPickLine
 
 @Suppress("ktlint:standard:function-naming")
@@ -86,26 +86,24 @@ private fun PreviewSettingsBlock() {
                 description = "",
             )
         }
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            color = MaterialTheme.colors.background,
-            modifier = Modifier.padding(8.dp),
-        ) {
-            Column(
-                modifier = Modifier.padding(8.dp),
-            ) {
-                SettingsBlock(
-                    title = "Some settings block 1",
-                    content = content,
-                    isExpanded = false,
-                )
-                Spacer(Modifier.height(8.dp))
-                SettingsBlock(
-                    title = "Some settings block 2",
-                    content = content,
-                    isExpanded = true,
-                )
-            }
-        }
+        PreviewSurface(
+            content = {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    SettingsBlock(
+                        title = "Some settings block 1",
+                        content = content,
+                        isExpanded = false,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    SettingsBlock(
+                        title = "Some settings block 2",
+                        content = content,
+                        isExpanded = true,
+                    )
+                }
+            },
+        )
     }
 }
