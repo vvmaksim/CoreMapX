@@ -7,16 +7,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandLess
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
 import view.appInterface.settingsElements.description.SettingsDescriptionText
 
 @Suppress("ktlint:standard:function-naming")
@@ -60,13 +56,10 @@ fun SwitchLine(
                 onCheckedChange = onCheckedChange,
                 colors = SwitchDefaults.colors(checkedThumbColor = MaterialTheme.colors.primary),
             )
-            IconButton(onClick = { expanded = !expanded }) {
-                Icon(
-                    imageVector = if (expanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                    contentDescription = if (expanded) "Hide description" else "Show description",
-                    tint = MaterialTheme.colors.primary,
-                )
-            }
+            SettingsDescriptionIconButton(
+                onClick = { expanded = !expanded },
+                isExpanded = expanded,
+            )
         }
         if (expanded) {
             Spacer(modifier = Modifier.height(8.dp))
