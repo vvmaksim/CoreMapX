@@ -14,9 +14,6 @@ object Theme {
     val warningColor: Color
         get() = config.states.warningColor.value
 
-    val vertexMainColor: Color
-        get() = config.states.vertexMainColor.value
-
     val hoveredBorderColor: Color
         get() = config.states.hoveredBorderColor.value
 

@@ -13,9 +13,6 @@ val Colors.success: Color
 val Colors.warning: Color
     get() = Theme.warningColor
 
-val Colors.vertexMain: Color
-    get() = Theme.vertexMainColor
-
 val Colors.hoveredBorder: Color
     get() = Theme.hoveredBorderColor
 
