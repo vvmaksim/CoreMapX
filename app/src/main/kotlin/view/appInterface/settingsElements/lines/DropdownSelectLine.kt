@@ -14,6 +14,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,11 +26,14 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
+import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
+import view.appInterface.settingsElements.description.SettingsDescriptionText
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun DropdownSelectLine(
     title: String,
+    description: String,
     items: List<String>,
     selectedItem: String,
     onItemSelected: (String) -> Unit,
@@ -37,7 +44,10 @@ fun DropdownSelectLine(
     iconSize: Dp = 24.dp,
     borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
     buttonWidth: Dp = 190.dp,
+    isExpanded: Boolean = false,
 ) {
+    var expanded by remember { mutableStateOf(isExpanded) }
+
     Row(
         modifier =
             modifier
@@ -62,6 +72,14 @@ fun DropdownSelectLine(
             iconSize = iconSize,
             borderShape = borderShape,
         )
+        SettingsDescriptionIconButton(
+            onClick = { expanded = !expanded },
+            isExpanded = expanded,
+        )
+    }
+    if (expanded) {
+        Spacer(modifier = Modifier.height(8.dp))
+        SettingsDescriptionText(description = description)
     }
 }
 
@@ -84,6 +102,7 @@ private fun PreviewDropdownSelectLine() {
                     items = items,
                     selectedItem = items[0],
                     onItemSelected = {},
+                    description = "",
                 )
                 Spacer(Modifier.height(8.dp))
                 DropdownSelectLine(
@@ -92,6 +111,8 @@ private fun PreviewDropdownSelectLine() {
                     selectedItem = items[1],
                     onItemSelected = {},
                     buttonWidth = 250.dp,
+                    description = "Some Description",
+                    isExpanded = true,
                 )
             }
         }

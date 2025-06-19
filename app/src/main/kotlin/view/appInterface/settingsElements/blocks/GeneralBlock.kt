@@ -38,6 +38,10 @@ fun GeneralBlock() {
                 config.setValue("language", if (it == "English") "en" else "ru")
             },
             modifier = dropdownSelectButtonModifier,
+            description =
+                """
+                You can choose one of the suggested languages for the interface or use a custom localization file.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
@@ -49,6 +53,10 @@ fun GeneralBlock() {
                 config.updateTheme()
             },
             modifier = dropdownSelectButtonModifier,
+            description =
+                """
+                You can change the interface colors in the color settings. Changing any of the colors will switch the theme to the `Custom` status.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
@@ -60,6 +68,12 @@ fun GeneralBlock() {
                 config.setThemeOnCustom()
             },
             modifier = dropdownSelectButtonModifier,
+            description =
+                """
+                To select a graph file to open, a window with the appropriate interface appears.
+                You can change the theme of this window to one that would better suit your theme.
+                When switching between ready-made themes, this parameter switches automatically.
+                """.trimIndent(),
         )
     }
 }

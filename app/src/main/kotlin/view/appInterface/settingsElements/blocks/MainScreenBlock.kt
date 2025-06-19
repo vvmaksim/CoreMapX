@@ -53,6 +53,15 @@ fun MainScreenBlock() {
             selectedItem = startWindowPlacement,
             onItemSelected = { config.setValue("startWindowPlacement", it) },
             modifier = dropdownSelectButtonModifier,
+            description =
+                """
+                Maximized - The application is open to the full window, but not to the full screen. (Recommended)
+                
+                Floating - The application is open in the window. The minimum window size is 1280x720.
+                You can set the initial dimensions with the `mainScreenStartWidth` and `mainScreenStartHeight` parameters, but their values cannot be less than the minimum.
+                
+                FullScreen - The application is open to full screen and occupies its entire area. (Not recommended)
+                """.trimIndent(),
         )
     }
 }
