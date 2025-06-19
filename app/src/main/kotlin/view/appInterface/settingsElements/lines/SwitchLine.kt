@@ -71,7 +71,7 @@ fun SwitchLine(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewSettingsSwitch() {
+private fun PreviewSwitchLine() {
     AppTheme {
         Surface(
             shape = MaterialTheme.shapes.large,
