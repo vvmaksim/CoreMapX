@@ -83,6 +83,7 @@ private fun PreviewSettingsBlock() {
                 selectedColor = Color.Black,
                 onColorSelected = {},
                 title = "Some Color",
+                description = "",
             )
         }
         Surface(

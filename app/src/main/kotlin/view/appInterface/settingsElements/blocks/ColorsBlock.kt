@@ -50,6 +50,11 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Primary",
+            description =
+                """
+                The main color of the interface.
+                It is used for key controls, buttons, highlighting active elements, etc.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -60,6 +65,11 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Primary Variant",
+            description =
+                """
+                A variant of the main color, usually slightly darker or lighter.
+                It is used for shades, shadows, highlights, or minor accents related to the main color.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -70,6 +80,11 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Secondary",
+            description =
+                """
+                The secondary color of the interface.
+                It is used to highlight less important elements, minor buttons, icons, links, etc.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -80,6 +95,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Secondary Variant",
+            description =
+                """
+                A secondary color option, similar to primaryVariant, for shades, shadows, and additional accents associated with secondary.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -90,6 +109,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Background",
+            description =
+                """
+                The background color of the entire application or large areas.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -100,6 +123,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Surface",
+            description =
+                """
+                Surface color: cards, panels, pop-ups, dialogs, and other elements that "lie" on the background.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -110,6 +137,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Error",
+            description =
+                """
+                The color for displaying errors: error text, frames, icons, indicators, etc.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -120,6 +151,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Primary",
+            description =
+                """
+                The color of the content (text, icons) that is placed on top of the primary. Usually contrasting.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -130,6 +165,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Secondary",
+            description =
+                """
+                The color of the content that is placed on top of secondary.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -140,6 +179,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Background",
+            description =
+                """
+                The color of the content that is placed on top of background.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -150,6 +193,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Surface",
+            description =
+                """
+                The color of the content that is placed on top of surface.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -160,6 +207,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Error",
+            description =
+                """
+                The color of the content that is placed on top of error.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -170,6 +221,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Border Color",
+            description =
+                """
+                The color of the frames for various interface elements: text fields, buttons, cards, etc.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -180,6 +235,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Success Color",
+            description =
+                """
+                A color to indicate successful actions: confirmations, successful notifications, etc.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -190,6 +249,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Warning Color",
+            description =
+                """
+                Color for warnings: yellow icons, frames, notifications of potential problems.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -200,6 +263,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Vertex Main Color",
+            description =
+                """
+                The primary color for displaying vertices.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -210,6 +277,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Hovered Border Color",
+            description =
+                """
+                The color of the border when hovering over the element.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -220,6 +291,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Edge Main Color",
+            description =
+                """
+                The primary color for displaying edges between vertices on the graph.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -230,6 +305,10 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Canvas Background Color",
+            description =
+                """
+                The background color for graph visualization.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
@@ -240,6 +319,12 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Command Line Background Color",
+            description =
+                """
+                The background color for the command line.
+
+                This color is applied if the `isTransparentCommandLine` parameter is disabled.
+                """.trimIndent(),
         )
     }
 }
