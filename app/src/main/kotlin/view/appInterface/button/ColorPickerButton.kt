@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ColorLens
@@ -32,6 +31,7 @@ import extensions.border
 import extensions.toHexString
 import model.fileHandler.DialogManager
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -106,38 +106,36 @@ fun ColorPickerButton(
 @Composable
 private fun PreviewColorPickerButton() {
     AppTheme {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            color = MaterialTheme.colors.background,
-            modifier = Modifier.padding(8.dp),
-        ) {
-            Column(
-                modifier = Modifier.padding(8.dp),
-            ) {
-                ColorPickerButton(
-                    selectedColor = Color.Red,
-                    onColorSelected = {},
-                    modifier = Modifier,
-                )
-                Spacer(Modifier.height(8.dp))
-                ColorPickerButton(
-                    selectedColor = Color.Magenta,
-                    onColorSelected = {},
-                    modifier = Modifier,
-                )
-                Spacer(Modifier.height(8.dp))
-                ColorPickerButton(
-                    selectedColor = Color(0xFF5489ED),
-                    onColorSelected = {},
-                    modifier = Modifier,
-                )
-                Spacer(Modifier.height(8.dp))
-                ColorPickerButton(
-                    selectedColor = Color.Black,
-                    onColorSelected = {},
-                    modifier = Modifier,
-                )
-            }
-        }
+        PreviewSurface(
+            content = {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    ColorPickerButton(
+                        selectedColor = Color.Red,
+                        onColorSelected = {},
+                        modifier = Modifier,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ColorPickerButton(
+                        selectedColor = Color.Magenta,
+                        onColorSelected = {},
+                        modifier = Modifier,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ColorPickerButton(
+                        selectedColor = Color(0xFF5489ED),
+                        onColorSelected = {},
+                        modifier = Modifier,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    ColorPickerButton(
+                        selectedColor = Color.Black,
+                        onColorSelected = {},
+                        modifier = Modifier,
+                    )
+                }
+            },
+        )
     }
 }
