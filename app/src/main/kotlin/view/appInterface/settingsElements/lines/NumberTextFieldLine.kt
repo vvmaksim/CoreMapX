@@ -36,6 +36,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
+import extensions.success
 import model.result.Result
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.textField.CustomTextField
@@ -103,14 +104,35 @@ fun NumberTextFieldLine(
             unfocusedLabelColor = MaterialTheme.colors.onSurface,
         ),
 ) {
+    val showSuccessTime = 2000L
     var showError by remember { mutableStateOf(false) }
     var currentValue by remember { mutableStateOf(value) }
     var localErrorText by remember { mutableStateOf<String?>(null) }
+    var showSuccess by remember { mutableStateOf(false) }
 
     LaunchedEffect(isError) {
         showError = isError
         if (!isError) localErrorText = null
     }
+
+    LaunchedEffect(showSuccess) {
+        if (showSuccess) {
+            kotlinx.coroutines.delay(showSuccessTime)
+            showSuccess = false
+        }
+    }
+    val customColors =
+        if (showSuccess) {
+            TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = MaterialTheme.colors.success,
+                unfocusedBorderColor = MaterialTheme.colors.success,
+                cursorColor = MaterialTheme.colors.primary,
+                focusedLabelColor = MaterialTheme.colors.primary,
+                unfocusedLabelColor = MaterialTheme.colors.onSurface,
+            )
+        } else {
+            colors
+        }
 
     Row(
         modifier =
@@ -162,9 +184,11 @@ fun NumberTextFieldLine(
                                 if (result is Result.Error) {
                                     showError = true
                                     localErrorText = result.error.description ?: "Save value error"
+                                    showSuccess = false
                                 } else {
                                     showError = false
                                     localErrorText = null
+                                    showSuccess = true
                                 }
                             },
                         ),
@@ -173,8 +197,19 @@ fun NumberTextFieldLine(
                 minLines = minLines,
                 interactionSource = interactionSource,
                 shape = shape,
-                colors = colors,
+                colors = customColors,
             )
+
+            if (showSuccess) {
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text = "Success",
+                    style = MaterialTheme.typography.body2,
+                    color = MaterialTheme.colors.success,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    softWrap = true,
+                )
+            }
 
             if (showError) {
                 Spacer(Modifier.height(8.dp))
