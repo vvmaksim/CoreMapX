@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -17,6 +15,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.DropdownSelectLine
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
@@ -86,12 +85,6 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
 @Composable
 private fun PreviewMainScreenBlock() {
     AppTheme {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.padding(8.dp),
-            color = MaterialTheme.colors.background,
-        ) {
-            MainScreenBlock()
-        }
+        PreviewSurface(content = { MainScreenBlock() })
     }
 }
