@@ -15,6 +15,7 @@ data class ThemeConfig(
     val onError: String,
     val isLight: Boolean,
     val borderColor: String,
+    val successColor: String,
     val warningColor: String,
     val vertexMainColor: String,
     val hoveredBorderColor: String,

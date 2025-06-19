@@ -8,6 +8,9 @@ object Theme {
     val borderColor: Color
         get() = config.states.borderColor.value
 
+    val successColor: Color
+        get() = config.states.successColor.value
+
     val warningColor: Color
         get() = config.states.warningColor.value
 

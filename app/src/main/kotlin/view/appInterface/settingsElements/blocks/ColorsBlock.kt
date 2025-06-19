@@ -33,6 +33,7 @@ fun ColorsBlock() {
     val onSurface by remember { config.states.onSurface }
     val onError by remember { config.states.onError }
     val borderColor by remember { config.states.borderColor }
+    val successColor by remember { config.states.successColor }
     val warningColor by remember { config.states.warningColor }
     val vertexMainColor by remember { config.states.vertexMainColor }
     val hoveredBorderColor by remember { config.states.hoveredBorderColor }
@@ -169,6 +170,16 @@ fun ColorsBlock() {
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Border Color",
+        )
+        Spacer(Modifier.height(8.dp))
+        ColorPickLine(
+            selectedColor = successColor,
+            onColorSelected = {
+                config.setValue("successColor", it)
+                config.setThemeOnCustom()
+            },
+            modifier = Modifier.fillMaxWidth(),
+            title = "Success Color",
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(

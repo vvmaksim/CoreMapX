@@ -90,6 +90,7 @@ class ConfigRepository {
             setValue("onSurface", onSurface)
             setValue("onError", onError)
             setValue("borderColor", borderColor)
+            setValue("successColor", successColor)
             setValue("warningColor", warningColor)
             setValue("vertexMainColor", vertexMainColor)
             setValue("hoveredBorderColor", hoveredBorderColor)
