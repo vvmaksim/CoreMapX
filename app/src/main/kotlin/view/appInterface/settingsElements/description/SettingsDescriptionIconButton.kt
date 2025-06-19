@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
@@ -17,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -41,24 +41,22 @@ fun SettingsDescriptionIconButton(
 @Composable
 private fun PreviewSettingsDescriptionIconButton() {
     AppTheme {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            color = MaterialTheme.colors.background,
-            modifier = Modifier.padding(8.dp),
-        ) {
-            Column(
-                modifier = Modifier.padding(8.dp),
-            ) {
-                SettingsDescriptionIconButton(
-                    onClick = {},
-                    isExpanded = true,
-                )
-                Spacer(Modifier.height(8.dp))
-                SettingsDescriptionIconButton(
-                    onClick = {},
-                    isExpanded = false,
-                )
-            }
-        }
+        PreviewSurface(
+            content = {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                ) {
+                    SettingsDescriptionIconButton(
+                        onClick = {},
+                        isExpanded = true,
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    SettingsDescriptionIconButton(
+                        onClick = {},
+                        isExpanded = false,
+                    )
+                }
+            },
+        )
     }
 }
