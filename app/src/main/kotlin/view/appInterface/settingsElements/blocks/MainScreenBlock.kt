@@ -38,6 +38,12 @@ fun MainScreenBlock() {
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartHeight"),
             onValueChange = { config.setValue("mainScreenStartHeight", it.text) },
+            description =
+                """
+                The starting height of the application window.
+                
+                It is used only when the `startWindowPlacement` is in the `Floating` state.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -45,6 +51,12 @@ fun MainScreenBlock() {
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartWidth"),
             onValueChange = { config.setValue("mainScreenStartWidth", it.text) },
+            description =
+                """
+                The starting width of the application window.
+                
+                It is used only when the `startWindowPlacement` is in the `Floating` state.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(

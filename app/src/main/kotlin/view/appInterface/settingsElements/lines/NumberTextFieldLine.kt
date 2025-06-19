@@ -39,6 +39,8 @@ import extensions.border
 import extensions.success
 import model.result.Result
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
+import view.appInterface.settingsElements.description.SettingsDescriptionText
 import view.appInterface.textField.CustomTextField
 import kotlin.reflect.KClass
 
@@ -58,6 +60,7 @@ private fun validateStringAsNumberTypes(
 @Composable
 fun NumberTextFieldLine(
     title: String,
+    description: String,
     valueType: KClass<*>,
     value: TextFieldValue,
     onValueChange: (TextFieldValue) -> Result<Boolean>?,
@@ -103,7 +106,10 @@ fun NumberTextFieldLine(
             focusedLabelColor = MaterialTheme.colors.primary,
             unfocusedLabelColor = MaterialTheme.colors.onSurface,
         ),
+    isExpanded: Boolean = false,
 ) {
+    var expanded by remember { mutableStateOf(isExpanded) }
+
     val showSuccessTime = 2000L
     var showError by remember { mutableStateOf(false) }
     var currentValue by remember { mutableStateOf(value) }
@@ -133,94 +139,104 @@ fun NumberTextFieldLine(
         } else {
             colors
         }
-
-    Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier.weight(1f),
-        )
-        Spacer(Modifier.width(8.dp))
-        Column {
-            CustomTextField(
-                value = currentValue,
-                onValueChange = { newValue ->
-                    currentValue = newValue
-                    showError = false
-                    localErrorText = null
-                },
-                modifier = Modifier.width(numberTextFieldWidth),
-                enabled = enabled,
-                readOnly = readOnly,
-                textStyle = textStyle,
-                label = label,
-                placeholder = placeholder,
-                singleLine = singleLine,
-                trailingIcon = trailingIcon,
-                isError = showError,
-                visualTransformation = visualTransformation,
-                keyboardOptions =
-                    keyboardOptions.copy(
-                        imeAction = ImeAction.Done,
-                    ),
-                keyboardActions =
-                    keyboardActions
-                        ?: KeyboardActions(
-                            onDone = {
-                                val trimmedText = currentValue.text.trim()
-                                if (!validateStringAsNumberTypes(trimmedText, valueType)) {
-                                    showError = true
-                                    localErrorText = "Value must be ${valueType.simpleName} type"
-                                    return@KeyboardActions
-                                }
-                                val result = onValueChange(currentValue.copy(text = trimmedText))
-                                if (result is Result.Error) {
-                                    showError = true
-                                    localErrorText = result.error.description ?: "Save value error"
-                                    showSuccess = false
-                                } else {
-                                    showError = false
-                                    localErrorText = null
-                                    showSuccess = true
-                                }
-                            },
-                        ),
-                leadingIcon = leadingIcon,
-                maxLines = maxLines,
-                minLines = minLines,
-                interactionSource = interactionSource,
-                shape = shape,
-                colors = customColors,
+    Column {
+        Row(
+            modifier =
+                modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.weight(1f),
             )
-
-            if (showSuccess) {
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    text = "Success",
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.success,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    softWrap = true,
-                )
+            Spacer(Modifier.width(8.dp))
+            Column {
+                Row {
+                    CustomTextField(
+                        value = currentValue,
+                        onValueChange = { newValue ->
+                            currentValue = newValue
+                            showError = false
+                            localErrorText = null
+                        },
+                        modifier = Modifier.width(numberTextFieldWidth),
+                        enabled = enabled,
+                        readOnly = readOnly,
+                        textStyle = textStyle,
+                        label = label,
+                        placeholder = placeholder,
+                        singleLine = singleLine,
+                        trailingIcon = trailingIcon,
+                        isError = showError,
+                        visualTransformation = visualTransformation,
+                        keyboardOptions =
+                            keyboardOptions.copy(
+                                imeAction = ImeAction.Done,
+                            ),
+                        keyboardActions =
+                            keyboardActions
+                                ?: KeyboardActions(
+                                    onDone = {
+                                        val trimmedText = currentValue.text.trim()
+                                        if (!validateStringAsNumberTypes(trimmedText, valueType)) {
+                                            showError = true
+                                            localErrorText = "Value must be ${valueType.simpleName} type"
+                                            return@KeyboardActions
+                                        }
+                                        val result = onValueChange(currentValue.copy(text = trimmedText))
+                                        if (result is Result.Error) {
+                                            showError = true
+                                            localErrorText = result.error.description ?: "Save value error"
+                                            showSuccess = false
+                                        } else {
+                                            showError = false
+                                            localErrorText = null
+                                            showSuccess = true
+                                        }
+                                    },
+                                ),
+                        leadingIcon = leadingIcon,
+                        maxLines = maxLines,
+                        minLines = minLines,
+                        interactionSource = interactionSource,
+                        shape = shape,
+                        colors = customColors,
+                    )
+                    SettingsDescriptionIconButton(
+                        onClick = { expanded = !expanded },
+                        isExpanded = expanded,
+                    )
+                }
             }
+        }
+        if (showSuccess) {
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = "Success",
+                style = MaterialTheme.typography.body2,
+                color = MaterialTheme.colors.success,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                softWrap = true,
+            )
+        }
 
-            if (showError) {
-                Spacer(Modifier.height(8.dp))
-                Text(
-                    text = localErrorText ?: errorText ?: "Value is not valid. This field must be ${valueType.simpleName} type.",
-                    style = MaterialTheme.typography.body2,
-                    color = MaterialTheme.colors.error,
-                    modifier = Modifier.width(numberTextFieldWidth),
-                    softWrap = true,
-                )
-            }
+        if (showError) {
+            Spacer(Modifier.height(8.dp))
+            Text(
+                text = localErrorText ?: errorText ?: "Value is not valid. This field must be ${valueType.simpleName} type.",
+                style = MaterialTheme.typography.body2,
+                color = MaterialTheme.colors.error,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                softWrap = true,
+            )
+        }
+        if (expanded) {
+            Spacer(modifier = Modifier.height(8.dp))
+            SettingsDescriptionText(description = description)
         }
     }
 }
@@ -244,6 +260,7 @@ private fun PreviewNumberTextFieldLine() {
                     value = TextFieldValue("200"),
                     onValueChange = { Result.Success(true) },
                     modifier = Modifier.padding(8.dp),
+                    description = "",
                 )
                 NumberTextFieldLine(
                     title = "Some Title 2",
@@ -252,6 +269,7 @@ private fun PreviewNumberTextFieldLine() {
                     onValueChange = { Result.Success(true) },
                     enabled = false,
                     modifier = Modifier.padding(8.dp),
+                    description = "",
                 )
                 NumberTextFieldLine(
                     title = "Some Title 3",
@@ -260,6 +278,7 @@ private fun PreviewNumberTextFieldLine() {
                     onValueChange = { Result.Success(true) },
                     placeholder = { Text("This is placeholder") },
                     modifier = Modifier.padding(8.dp),
+                    description = "",
                 )
                 NumberTextFieldLine(
                     title = "Some Title 4",
@@ -269,6 +288,8 @@ private fun PreviewNumberTextFieldLine() {
                     isError = true,
                     errorText = "Custom error message",
                     modifier = Modifier.padding(8.dp),
+                    isExpanded = true,
+                    description = "Some Description",
                 )
                 NumberTextFieldLine(
                     title = "Some Title 5",
@@ -278,6 +299,7 @@ private fun PreviewNumberTextFieldLine() {
                     isError = true,
                     errorText = null,
                     modifier = Modifier.padding(8.dp),
+                    description = "",
                 )
                 NumberTextFieldLine(
                     title = "Some Title 6",
@@ -287,6 +309,7 @@ private fun PreviewNumberTextFieldLine() {
                     placeholder = { Text("This is placeholder") },
                     modifier = Modifier.padding(8.dp),
                     leadingIcon = null,
+                    description = "",
                 )
             }
         }

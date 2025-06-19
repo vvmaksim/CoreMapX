@@ -28,18 +28,22 @@ fun TitleBarBlock() {
             title = "Title bar height",
             valueType = Int::class,
             value = TextFieldValue("$titleBarHeight"),
-            onValueChange = {
-                config.setValue("titleBarHeight", it.text)
-            },
+            onValueChange = { config.setValue("titleBarHeight", it.text) },
+            description =
+                """
+                Height of the title bar.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
             title = "Title bar icon size",
             valueType = Int::class,
             value = TextFieldValue("$titleBarIconSize"),
-            onValueChange = {
-                config.setValue("titleBarIconSize", it.text)
-            },
+            onValueChange = { config.setValue("titleBarIconSize", it.text) },
+            description =
+                """
+                Size of the title bar icons.
+                """.trimIndent(),
         )
     }
 }

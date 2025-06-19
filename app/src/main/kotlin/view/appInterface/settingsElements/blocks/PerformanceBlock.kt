@@ -28,18 +28,22 @@ fun PerformanceBlock() {
             title = "Animation duration",
             valueType = Int::class,
             value = TextFieldValue("$animationDuration"),
-            onValueChange = {
-                config.setValue("animationDuration", it.text)
-            },
+            onValueChange = { config.setValue("animationDuration", it.text) },
+            description =
+                """
+                This parameter is used to specify the speed of animations, for example, the speed of minimizing the side menu, etc.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
             title = "Command field scroll delay",
             valueType = Int::class,
             value = TextFieldValue("$commandFieldScrollDelay"),
-            onValueChange = {
-                config.setValue("commandFieldScrollDelay", it.text)
-            },
+            onValueChange = { config.setValue("commandFieldScrollDelay", it.text) },
+            description =
+                """
+                A certain amount of time passes when sending a command on the command line.
+                """.trimIndent(),
         )
     }
 }

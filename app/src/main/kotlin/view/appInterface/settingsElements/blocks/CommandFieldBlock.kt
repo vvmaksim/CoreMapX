@@ -31,9 +31,11 @@ fun CommandFieldBlock() {
             title = "Message output height",
             valueType = Int::class,
             value = TextFieldValue("$messageOutputHeight"),
-            onValueChange = {
-                config.setValue("messageOutputHeight", it.text)
-            },
+            onValueChange = { config.setValue("messageOutputHeight", it.text) },
+            description =
+                """
+                Maximum lifting height for command line output messages.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
@@ -43,15 +45,21 @@ fun CommandFieldBlock() {
             onValueChange = {
                 config.setValue("maxCountMessages", it.text)
             },
+            description =
+                """
+                The maximum number of output messages that are remembered.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
             title = "Command field width",
             valueType = Int::class,
             value = TextFieldValue("$commandFieldWidth"),
-            onValueChange = {
-                config.setValue("commandFieldWidth", it.text)
-            },
+            onValueChange = { config.setValue("commandFieldWidth", it.text) },
+            description =
+                """
+                The height of the command line.
+                """.trimIndent(),
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
