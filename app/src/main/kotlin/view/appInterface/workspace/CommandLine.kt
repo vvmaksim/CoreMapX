@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 import view.appInterface.textField.CustomTextField
 
 @Suppress("ktlint:standard:function-naming")
@@ -136,14 +137,18 @@ fun CommandLine(
 @Composable
 private fun PreviewCommandLine() {
     AppTheme {
-        CommandLine(
-            outputMessages =
-                mutableListOf(
-                    "123",
-                    "52",
-                    "Some text",
-                ),
-            placeholderText = "Some placeholder text",
+        PreviewSurface(
+            content = {
+                CommandLine(
+                    outputMessages =
+                        mutableListOf(
+                            "123",
+                            "52",
+                            "Some text",
+                        ),
+                    placeholderText = "Some placeholder text",
+                )
+            },
         )
     }
 }
