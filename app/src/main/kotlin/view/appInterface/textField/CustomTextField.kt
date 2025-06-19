@@ -9,7 +9,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
@@ -25,6 +24,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import extensions.border
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -102,45 +102,43 @@ fun CustomTextField(
 @Composable
 private fun PreviewCustomTextFields() {
     AppTheme {
-        Surface(
-            shape = MaterialTheme.shapes.large,
-            modifier = Modifier.padding(8.dp),
-            color = MaterialTheme.colors.background,
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-            ) {
-                CustomTextField(
-                    value = TextFieldValue("Test Field"),
-                    onValueChange = {},
+        PreviewSurface(
+            content = {
+                Column(
                     modifier = Modifier.padding(8.dp),
-                )
-                CustomTextField(
-                    value = TextFieldValue("Test Field"),
-                    onValueChange = {},
-                    enabled = false,
-                    modifier = Modifier.padding(8.dp),
-                )
-                CustomTextField(
-                    value = TextFieldValue(""),
-                    onValueChange = {},
-                    placeholder = { Text("This is placeholder") },
-                    modifier = Modifier.padding(8.dp),
-                )
-                CustomTextField(
-                    value = TextFieldValue("Test Field"),
-                    onValueChange = {},
-                    isError = true,
-                    modifier = Modifier.padding(8.dp),
-                )
-                CustomTextField(
-                    value = TextFieldValue(""),
-                    onValueChange = {},
-                    placeholder = { Text("This is placeholder") },
-                    modifier = Modifier.padding(8.dp),
-                    leadingIcon = null,
-                )
-            }
-        }
+                ) {
+                    CustomTextField(
+                        value = TextFieldValue("Test Field"),
+                        onValueChange = {},
+                        modifier = Modifier.padding(8.dp),
+                    )
+                    CustomTextField(
+                        value = TextFieldValue("Test Field"),
+                        onValueChange = {},
+                        enabled = false,
+                        modifier = Modifier.padding(8.dp),
+                    )
+                    CustomTextField(
+                        value = TextFieldValue(""),
+                        onValueChange = {},
+                        placeholder = { Text("This is placeholder") },
+                        modifier = Modifier.padding(8.dp),
+                    )
+                    CustomTextField(
+                        value = TextFieldValue("Test Field"),
+                        onValueChange = {},
+                        isError = true,
+                        modifier = Modifier.padding(8.dp),
+                    )
+                    CustomTextField(
+                        value = TextFieldValue(""),
+                        onValueChange = {},
+                        placeholder = { Text("This is placeholder") },
+                        modifier = Modifier.padding(8.dp),
+                        leadingIcon = null,
+                    )
+                }
+            },
+        )
     }
 }
