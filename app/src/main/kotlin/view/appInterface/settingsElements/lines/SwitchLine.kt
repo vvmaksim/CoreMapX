@@ -29,7 +29,7 @@ import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SettingsSwitch(
+fun SwitchLine(
     title: String,
     description: String,
     checked: Boolean,
@@ -92,7 +92,7 @@ private fun PreviewSettingsSwitch() {
             Column(
                 modifier = Modifier.padding(8.dp),
             ) {
-                SettingsSwitch(
+                SwitchLine(
                     title = "Setting 1",
                     description = "Some description",
                     checked = true,
@@ -101,7 +101,7 @@ private fun PreviewSettingsSwitch() {
                     isExpanded = true,
                 )
                 Spacer(Modifier.height(8.dp))
-                SettingsSwitch(
+                SwitchLine(
                     title = "Setting 2",
                     description = "Some description",
                     checked = false,
