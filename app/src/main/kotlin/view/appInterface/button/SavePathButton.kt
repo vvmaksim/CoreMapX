@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import model.fileHandler.DialogManager
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 import kotlin.text.ifEmpty
 
 @Suppress("ktlint:standard:function-naming")
@@ -92,9 +93,13 @@ fun SavePathButton(
 @Composable
 private fun PreviewSavePathButton() {
     AppTheme {
-        SavePathButton(
-            onPathSelected = {},
-            modifier = Modifier.width(450.dp),
+        PreviewSurface(
+            content = {
+                SavePathButton(
+                    onPathSelected = {},
+                    modifier = Modifier.width(450.dp),
+                )
+            },
         )
     }
 }
