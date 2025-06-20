@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -43,6 +44,7 @@ fun MainMenuTextButton(
                 backgroundColor = MaterialTheme.colors.background,
                 contentColor = MaterialTheme.colors.primary,
                 disabledBackgroundColor = MaterialTheme.colors.background,
+                disabledContentColor = MaterialTheme.colors.primary.copy(alpha = PrivateConfig.View.DISABLED_ALPHA),
             ),
     ) {
         Row(
