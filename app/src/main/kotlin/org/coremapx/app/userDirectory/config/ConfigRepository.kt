@@ -10,7 +10,6 @@ import mu.KotlinLogging
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
-import org.coremapx.app.userDirectory.ConfigValidator
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
@@ -34,6 +33,7 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.THEME
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
 import org.coremapx.app.userDirectory.config.ConfigStates
+import org.coremapx.app.userDirectory.config.ConfigValidator
 import java.io.File
 import java.util.Properties
 
