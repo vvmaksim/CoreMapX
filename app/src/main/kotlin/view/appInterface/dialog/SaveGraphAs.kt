@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import model.dto.SaveGraphData
 import model.fileHandler.FileExtensions
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import view.appInterface.button.DropdownSelectButton
 import view.appInterface.button.SavePathButton
 import view.appInterface.textField.CustomTextField
@@ -62,7 +62,7 @@ fun SaveGraphAsContent(
     dialogWidth: Dp = 550.dp,
 ) {
     var selectedFormat by remember { mutableStateOf(formats[0]) }
-    var selectedPath by remember { mutableStateOf("$baseUserDirPath/data/graphs") }
+    var selectedPath by remember { mutableStateOf(PrivateConfig.UserDirectory.GRAPHS_DIR_PATH) }
     var selectedFileName by remember { mutableStateOf(TextFieldValue(graphName)) }
     var showError by remember { mutableStateOf(false) }
 

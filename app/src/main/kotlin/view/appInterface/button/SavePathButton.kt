@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import model.fileHandler.DialogManager
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import kotlin.text.ifEmpty
@@ -39,7 +40,7 @@ import kotlin.text.ifEmpty
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun SavePathButton(
-    selectedPath: String = System.getProperty("user.home"),
+    selectedPath: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
     onPathSelected: (String) -> Unit,
     modifier: Modifier = Modifier,
     borderColor: Color = MaterialTheme.colors.border,

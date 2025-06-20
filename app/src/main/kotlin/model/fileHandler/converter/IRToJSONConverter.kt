@@ -13,7 +13,7 @@ import model.fileHandler.serializableEntities.GraphInfo
 import model.fileHandler.serializableEntities.Vertex
 import model.result.FileErrors
 import model.result.Result
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
+import org.coremapx.app.config.PrivateConfig
 import java.io.File
 import java.io.IOException
 
@@ -94,7 +94,7 @@ class IRToJSONConverter : FileConverter() {
         val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.json"
-                ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.json"
+                ConvertModes.LOAD -> "${PrivateConfig.UserDirectory.TEMP_DIR_PATH}/${file.nameWithoutExtension}.json"
             }
         file.deleteOnExit()
         val jsonFile = File(filePath)

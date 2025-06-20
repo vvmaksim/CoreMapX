@@ -22,7 +22,7 @@ import model.ir.GraphIR
 import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.config
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
+import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategy.RandomStrategy
@@ -122,7 +122,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     fun openGraphFile(): Result<List<String>> {
         val file =
-            DialogManager.showOpenFileDialog(directory = "$baseUserDirPath/data/graphs")
+            DialogManager.showOpenFileDialog(directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH)
                 ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
         return loadGraphFromFile(file)
     }
@@ -130,7 +130,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
     fun openGraphRepository(): Result<File> {
         val repository =
             DialogManager.showOpenFileDialog(
-                directory = "$baseUserDirPath/data/graphs",
+                directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH,
                 title = "Select graph repository",
             )
                 ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select repository"))
@@ -229,7 +229,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                     return Result.Success("File was saved as GRAPH")
                 }
                 FileExtensions.JSON -> {
-                    val tempFileIR = File("$baseUserDirPath/data/temp/$fileName.graph")
+                    val tempFileIR = File("${PrivateConfig.UserDirectory.TEMP_DIR_PATH}/$fileName.graph")
                     tempFileIR.writeText(ir.toString())
                     val convertResult = Converter.convert(tempFileIR, FileExtensions.JSON, ConvertModes.SAVE, graphId)
                     when (convertResult) {

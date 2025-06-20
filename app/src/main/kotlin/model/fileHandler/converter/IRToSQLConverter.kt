@@ -12,7 +12,7 @@ import model.fileHandler.serializableEntities.Edge
 import model.fileHandler.serializableEntities.Vertex
 import model.result.FileErrors
 import model.result.Result
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
+import org.coremapx.app.config.PrivateConfig
 import java.io.File
 import java.io.IOException
 
@@ -80,7 +80,7 @@ class IRToSQLConverter : FileConverter() {
         val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.db"
-                ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.db"
+                ConvertModes.LOAD -> "${PrivateConfig.UserDirectory.TEMP_DIR_PATH}/${file.nameWithoutExtension}.db"
             }
         val database = createDatabase(filePath)
         val graphId =

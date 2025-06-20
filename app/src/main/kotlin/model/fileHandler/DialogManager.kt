@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.formdev.flatlaf.FlatLightLaf
 import org.coremapx.app.config
+import org.coremapx.app.config.PrivateConfig
 import java.io.File
 import javax.swing.JColorChooser
 import javax.swing.JFileChooser
@@ -14,7 +15,7 @@ class DialogManager {
     companion object {
         fun showOpenFileDialog(
             title: String = "Select graph file",
-            directory: String = System.getProperty("user.home"),
+            directory: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
             useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): File? =
             fileDialogManager(
@@ -26,7 +27,7 @@ class DialogManager {
 
         fun showSelectDirectoryDialog(
             title: String = "Select Directory",
-            directory: String = System.getProperty("user.home"),
+            directory: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
             useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): String? =
             fileDialogManager(
@@ -39,7 +40,7 @@ class DialogManager {
         fun fileDialogManager(
             selectionMode: Int,
             title: String,
-            directory: String = System.getProperty("user.home"),
+            directory: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
             useDarkTheme: Boolean = config.states.systemDialogTheme.value == "dark",
         ): JFileChooser? {
             try {
@@ -63,7 +64,7 @@ class DialogManager {
                         if (initialDir.exists() && initialDir.isDirectory) {
                             initialDir
                         } else {
-                            File(System.getProperty("user.home"))
+                            File(PrivateConfig.UserDirectory.HOME_DIR_PATH)
                         }
                 }
 

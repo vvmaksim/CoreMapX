@@ -14,8 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mu.KotlinLogging
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
 import java.awt.Desktop
 import java.io.File
 
@@ -27,7 +27,7 @@ fun UserDirectoryButton(size: Dp = 60.dp) {
     Button(
         onClick = {
             try {
-                Desktop.getDesktop().open(File(baseUserDirPath))
+                Desktop.getDesktop().open(File(PrivateConfig.UserDirectory.DIR_PATH))
             } catch (ex: Exception) {
                 logger.error("The user directory cannot be opened. Error: $ex")
             }

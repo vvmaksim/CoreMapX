@@ -8,7 +8,7 @@ import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
 import model.result.FileErrors
 import model.result.Result
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.graph.GraphDatabase
 import java.io.File
 
@@ -61,7 +61,7 @@ class SQLToIRConverter : FileConverter() {
         val filePath =
             when (convertMode) {
                 ConvertModes.SAVE -> "${file.parent}/${file.nameWithoutExtension}.graph"
-                ConvertModes.LOAD -> "$baseUserDirPath/data/temp/${file.nameWithoutExtension}.graph"
+                ConvertModes.LOAD -> "${PrivateConfig.UserDirectory.TEMP_DIR_PATH}/${file.nameWithoutExtension}.graph"
             }
         val irFile = File(filePath)
         irFile.writeText(ir.toString())

@@ -40,6 +40,7 @@ import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.graph.GraphDatabase
 import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.SlideMenuButton
@@ -113,7 +114,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     Logo(
                         backgroundColor = MaterialTheme.colors.background,
                         contentColor = MaterialTheme.colors.onSurface,
-                        size = 52.dp,
+                        size = PrivateConfig.MainMenu.LOGO_SIZE.dp,
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(

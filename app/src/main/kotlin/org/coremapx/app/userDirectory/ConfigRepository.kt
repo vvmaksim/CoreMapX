@@ -7,6 +7,7 @@ import model.result.FileErrors
 import model.result.Result
 import model.result.showConfigErrorDialog
 import mu.KotlinLogging
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
 import java.io.File
@@ -15,8 +16,8 @@ import java.util.Properties
 private val logger = KotlinLogging.logger {}
 
 class ConfigRepository {
-    private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
-    private val defaultConfigPath = "app/src/main/resources/Configs/DefaultConfig.gcfg"
+    private val configPath = PrivateConfig.UserDirectory.CONFIG_FILE_PATH
+    private val defaultConfigPath = PrivateConfig.AppResources.DEFAULT_CONFIG_PATH
 
     private val userConfig: MutableMap<String, String> = mutableMapOf()
     private val defaultConfig: MutableMap<String, String> = mutableMapOf()
@@ -101,7 +102,7 @@ class ConfigRepository {
         key: String,
         value: String,
     ): Result<Boolean> {
-        val configFile = File(mainConfigPath)
+        val configFile = File(configPath)
         if (!configFile.exists()) {
             val message = "There is nothing to update, the configuration file has not been found"
             logger.error { message }
@@ -133,7 +134,7 @@ class ConfigRepository {
     }
 
     private fun loadUserConfig() {
-        loadConfig(mainConfigPath, userConfig)
+        loadConfig(configPath, userConfig)
     }
 
     private fun loadDefaultConfig() {

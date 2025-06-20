@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -20,7 +21,7 @@ import view.appInterface.preview.PreviewSurface
 fun SettingsDescriptionText(
     description: String,
     textStyle: TextStyle = MaterialTheme.typography.body2,
-    textColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f),
+    textColor: Color = MaterialTheme.colors.onSurface.copy(alpha = PrivateConfig.View.DESCRIPTION_ALPHA),
     modifier: Modifier = Modifier.padding(horizontal = 16.dp),
 ) {
     Text(
