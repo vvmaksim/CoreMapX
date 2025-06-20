@@ -239,7 +239,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                         MaterialTheme.colors.primary
                                     } else {
                                         MaterialTheme.colors.onSurface.copy(
-                                            alpha = 0.38f,
+                                            alpha = PrivateConfig.View.DISABLED_ALPHA,
                                         )
                                     },
                             )
@@ -253,7 +253,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     } else {
                                         MaterialTheme.colors.onSurface
                                             .copy(
-                                                alpha = 0.38f,
+                                                alpha = PrivateConfig.View.DISABLED_ALPHA,
                                             )
                                     },
                             )
