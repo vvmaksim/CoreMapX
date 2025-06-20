@@ -23,7 +23,7 @@ object PrivateConfig {
                 TEMP_DIR_PATH,
                 GRAPHS_DIR_PATH,
             )
-        val CONFIG_FILE_PATH = "$DIR_PATH/config/Config.cfg"
+        val CONFIG_FILE_PATH = "$DIR_PATH/config/config.cfg"
     }
 
     object AppResources {
