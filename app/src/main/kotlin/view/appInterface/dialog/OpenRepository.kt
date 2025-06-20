@@ -21,13 +21,9 @@ import androidx.compose.foundation.rememberScrollbarAdapter
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -94,28 +90,10 @@ fun OpenRepositoryContent(
                     .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Box(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .height(40.dp),
-            ) {
-                Text(
-                    text = "Available Graphs",
-                    style = MaterialTheme.typography.h5,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-                IconButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Close",
-                        tint = MaterialTheme.colors.onSurface,
-                    )
-                }
-            }
+            DialogHeader(
+                title = "Available Graphs",
+                onButtonClick = onDismiss,
+            )
             Spacer(modifier = Modifier.height(24.dp))
             if (graphs.isEmpty()) {
                 Text(
