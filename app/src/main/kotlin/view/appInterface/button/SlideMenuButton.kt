@@ -31,6 +31,7 @@ fun SlideMenuButton(
                 defaultElevation = 0.dp,
                 pressedElevation = 0.dp,
                 disabledElevation = 0.dp,
+                hoveredElevation = 0.dp,
             ),
         colors =
             ButtonDefaults.buttonColors(
