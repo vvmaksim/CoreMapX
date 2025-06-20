@@ -13,6 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.ConfigKeys.IS_EXPANDED_SETTINGS
+import org.coremapx.app.userDirectory.ConfigKeys.LANGUAGE
+import org.coremapx.app.userDirectory.ConfigKeys.SYSTEM_DIALOG_THEME
+import org.coremapx.app.userDirectory.ConfigKeys.THEME
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.DropdownSelectLine
 import view.appInterface.settingsElements.lines.SwitchLine
@@ -35,7 +39,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             items = listOf("English", "Русский"),
             selectedItem = if (language == "en") "English" else "Русский",
             onItemSelected = {
-                config.setValue("language", if (it == "English") "en" else "ru")
+                config.setValue(LANGUAGE, if (it == "English") "en" else "ru")
             },
             modifier = dropdownSelectButtonModifier,
             description =
@@ -50,7 +54,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             items = listOf("Light", "Dark", "Custom"),
             selectedItem = theme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
-                config.setValue("theme", it.lowercase())
+                config.setValue(THEME, it.lowercase())
                 config.updateTheme()
             },
             modifier = dropdownSelectButtonModifier,
@@ -66,7 +70,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             items = listOf("Light", "Dark"),
             selectedItem = systemDialogTheme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
-                config.setValue("systemDialogTheme", it.lowercase())
+                config.setValue(SYSTEM_DIALOG_THEME, it.lowercase())
                 config.setThemeOnCustom()
             },
             modifier = dropdownSelectButtonModifier,
@@ -88,7 +92,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                 If the parameter is disabled, then the next time you open the settings menu, all settings blocks and all descriptions are hidden.
                 """.trimIndent(),
             checked = isExpandedSettings,
-            onCheckedChange = { config.setValue("isExpandedSettings", it.toString()) },
+            onCheckedChange = { config.setValue(IS_EXPANDED_SETTINGS, it.toString()) },
             isExpanded = isExpandedSettings,
         )
     }

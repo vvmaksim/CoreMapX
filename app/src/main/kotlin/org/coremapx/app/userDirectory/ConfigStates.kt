@@ -1,67 +1,111 @@
 package org.coremapx.app.userDirectory
 
 import androidx.compose.runtime.mutableStateOf
+import org.coremapx.app.userDirectory.ConfigKeys.ANIMATION_DURATION
+import org.coremapx.app.userDirectory.ConfigKeys.BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_DRAG_RATIO
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_LIMIT
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_ARROW_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_LABEL_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.GRAPH_LAYOUT_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.GRAPH_LAYOUT_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.HOVERED_BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.IS_EXPANDED_SETTINGS
+import org.coremapx.app.userDirectory.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
+import org.coremapx.app.userDirectory.ConfigKeys.LANGUAGE
+import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.MAX_COUNT_MESSAGES
+import org.coremapx.app.userDirectory.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.ON_BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.ON_ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.ON_PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.START_WINDOW_PLACEMENT
+import org.coremapx.app.userDirectory.ConfigKeys.SUCCESS_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.SYSTEM_DIALOG_THEME
+import org.coremapx.app.userDirectory.ConfigKeys.THEME
+import org.coremapx.app.userDirectory.ConfigKeys.TITLE_BAR_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.TITLE_BAR_ICON_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_LABEL_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_RADIUS
+import org.coremapx.app.userDirectory.ConfigKeys.WARNING_COLOR
 
 class ConfigStates(
     private val configRepository: ConfigRepository,
 ) {
     // General
-    val language = mutableStateOf(configRepository.getStringValue("language"))
-    val theme = mutableStateOf(configRepository.getStringValue("theme"))
-    val systemDialogTheme = mutableStateOf(configRepository.getStringValue("systemDialogTheme"))
-    val isExpandedSettings = mutableStateOf(configRepository.getBooleanValue("isExpandedSettings"))
+    val language = mutableStateOf(configRepository.getStringValue(LANGUAGE))
+    val theme = mutableStateOf(configRepository.getStringValue(THEME))
+    val systemDialogTheme = mutableStateOf(configRepository.getStringValue(SYSTEM_DIALOG_THEME))
+    val isExpandedSettings = mutableStateOf(configRepository.getBooleanValue(IS_EXPANDED_SETTINGS))
 
     // Colors
-    val primary = mutableStateOf(configRepository.getColor("primary"))
-    val primaryVariant = mutableStateOf(configRepository.getColor("primaryVariant"))
-    val secondary = mutableStateOf(configRepository.getColor("secondary"))
-    val secondaryVariant = mutableStateOf(configRepository.getColor("secondaryVariant"))
-    val background = mutableStateOf(configRepository.getColor("background"))
-    val surface = mutableStateOf(configRepository.getColor("surface"))
-    val error = mutableStateOf(configRepository.getColor("error"))
-    val onPrimary = mutableStateOf(configRepository.getColor("onPrimary"))
-    val onSecondary = mutableStateOf(configRepository.getColor("onSecondary"))
-    val onBackground = mutableStateOf(configRepository.getColor("onBackground"))
-    val onSurface = mutableStateOf(configRepository.getColor("onSurface"))
-    val onError = mutableStateOf(configRepository.getColor("onError"))
-    val borderColor = mutableStateOf(configRepository.getColor("borderColor"))
-    val successColor = mutableStateOf(configRepository.getColor("successColor"))
-    val warningColor = mutableStateOf(configRepository.getColor("warningColor"))
-    val vertexMainColor = mutableStateOf(configRepository.getColor("vertexMainColor"))
-    val hoveredBorderColor = mutableStateOf(configRepository.getColor("hoveredBorderColor"))
-    val edgeMainColor = mutableStateOf(configRepository.getColor("edgeMainColor"))
-    val canvasBackgroundColor = mutableStateOf(configRepository.getColor("canvasBackgroundColor"))
-    val commandLineBackgroundColor = mutableStateOf(configRepository.getColor("commandLineBackgroundColor"))
+    val primary = mutableStateOf(configRepository.getColor(PRIMARY))
+    val primaryVariant = mutableStateOf(configRepository.getColor(PRIMARY_VARIANT))
+    val secondary = mutableStateOf(configRepository.getColor(SECONDARY))
+    val secondaryVariant = mutableStateOf(configRepository.getColor(SECONDARY_VARIANT))
+    val background = mutableStateOf(configRepository.getColor(BACKGROUND))
+    val surface = mutableStateOf(configRepository.getColor(SURFACE))
+    val error = mutableStateOf(configRepository.getColor(ERROR))
+    val onPrimary = mutableStateOf(configRepository.getColor(ON_PRIMARY))
+    val onSecondary = mutableStateOf(configRepository.getColor(ON_SECONDARY))
+    val onBackground = mutableStateOf(configRepository.getColor(ON_BACKGROUND))
+    val onSurface = mutableStateOf(configRepository.getColor(ON_SURFACE))
+    val onError = mutableStateOf(configRepository.getColor(ON_ERROR))
+    val borderColor = mutableStateOf(configRepository.getColor(BORDER_COLOR))
+    val successColor = mutableStateOf(configRepository.getColor(SUCCESS_COLOR))
+    val warningColor = mutableStateOf(configRepository.getColor(WARNING_COLOR))
+    val vertexMainColor = mutableStateOf(configRepository.getColor(VERTEX_MAIN_COLOR))
+    val hoveredBorderColor = mutableStateOf(configRepository.getColor(HOVERED_BORDER_COLOR))
+    val edgeMainColor = mutableStateOf(configRepository.getColor(EDGE_MAIN_COLOR))
+    val canvasBackgroundColor = mutableStateOf(configRepository.getColor(CANVAS_BACKGROUND_COLOR))
+    val commandLineBackgroundColor = mutableStateOf(configRepository.getColor(COMMAND_LINE_BACKGROUND_COLOR))
 
     // Main Screen
-    val mainScreenStartHeight = mutableStateOf(configRepository.getIntValue("mainScreenStartHeight"))
-    val mainScreenStartWidth = mutableStateOf(configRepository.getIntValue("mainScreenStartWidth"))
-    val startWindowPlacement = mutableStateOf(configRepository.getStringValue("startWindowPlacement"))
+    val mainScreenStartHeight = mutableStateOf(configRepository.getIntValue(MAIN_SCREEN_START_HEIGHT))
+    val mainScreenStartWidth = mutableStateOf(configRepository.getIntValue(MAIN_SCREEN_START_WIDTH))
+    val startWindowPlacement = mutableStateOf(configRepository.getStringValue(START_WINDOW_PLACEMENT))
 
     // Title Bar
-    val titleBarHeight = mutableStateOf(configRepository.getIntValue("titleBarHeight"))
-    val titleBarIconSize = mutableStateOf(configRepository.getIntValue("titleBarIconSize"))
+    val titleBarHeight = mutableStateOf(configRepository.getIntValue(TITLE_BAR_HEIGHT))
+    val titleBarIconSize = mutableStateOf(configRepository.getIntValue(TITLE_BAR_ICON_SIZE))
 
     // Command Field
-    val messageOutputHeight = mutableStateOf(configRepository.getIntValue("messageOutputHeight"))
-    val maxCountMessages = mutableStateOf(configRepository.getIntValue("maxCountMessages"))
-    val commandFieldWidth = mutableStateOf(configRepository.getIntValue("commandFieldWidth"))
-    val isTransparentCommandLine = mutableStateOf(configRepository.getBooleanValue("isTransparentCommandLine"))
+    val messageOutputHeight = mutableStateOf(configRepository.getIntValue(MESSAGE_OUTPUT_HEIGHT))
+    val maxCountMessages = mutableStateOf(configRepository.getIntValue(MAX_COUNT_MESSAGES))
+    val commandFieldWidth = mutableStateOf(configRepository.getIntValue(COMMAND_FIELD_WIDTH))
+    val isTransparentCommandLine = mutableStateOf(configRepository.getBooleanValue(IS_TRANSPARENT_COMMAND_LINE))
 
     // Work Area
-    val graphLayoutHeight = mutableStateOf(configRepository.getIntValue("graphLayoutHeight"))
-    val graphLayoutWidth = mutableStateOf(configRepository.getIntValue("graphLayoutWidth"))
-    val vertexRadius = mutableStateOf(configRepository.getIntValue("vertexRadius"))
-    val vertexLabelSize = mutableStateOf(configRepository.getIntValue("vertexLabelSize"))
-    val edgeLabelSize = mutableStateOf(configRepository.getIntValue("edgeLabelSize"))
-    val edgeArrowSize = mutableStateOf(configRepository.getFloatValue("edgeArrowSize"))
-    val edgeWidth = mutableStateOf(configRepository.getFloatValue("edgeWidth"))
-    val canvasDragRatio = mutableStateOf(configRepository.getFloatValue("canvasDragRatio"))
-    val canvasLimit = mutableStateOf(configRepository.getIntValue("canvasLimit"))
+    val graphLayoutHeight = mutableStateOf(configRepository.getIntValue(GRAPH_LAYOUT_HEIGHT))
+    val graphLayoutWidth = mutableStateOf(configRepository.getIntValue(GRAPH_LAYOUT_WIDTH))
+    val vertexRadius = mutableStateOf(configRepository.getIntValue(VERTEX_RADIUS))
+    val vertexLabelSize = mutableStateOf(configRepository.getIntValue(VERTEX_LABEL_SIZE))
+    val edgeLabelSize = mutableStateOf(configRepository.getIntValue(EDGE_LABEL_SIZE))
+    val edgeArrowSize = mutableStateOf(configRepository.getFloatValue(EDGE_ARROW_SIZE))
+    val edgeWidth = mutableStateOf(configRepository.getFloatValue(EDGE_WIDTH))
+    val canvasDragRatio = mutableStateOf(configRepository.getFloatValue(CANVAS_DRAG_RATIO))
+    val canvasLimit = mutableStateOf(configRepository.getIntValue(CANVAS_LIMIT))
 
     // Performance
-    val animationDuration = mutableStateOf(configRepository.getIntValue("animationDuration"))
-    val commandFieldScrollDelay = mutableStateOf(configRepository.getIntValue("commandFieldScrollDelay"))
+    val animationDuration = mutableStateOf(configRepository.getIntValue(ANIMATION_DURATION))
+    val commandFieldScrollDelay = mutableStateOf(configRepository.getIntValue(COMMAND_FIELD_SCROLL_DELAY))
 
     fun updateValue(
         key: String,
@@ -69,62 +113,62 @@ class ConfigStates(
     ) {
         when (key) {
             // General
-            "language" -> language.value = value
-            "theme" -> theme.value = value
-            "systemDialogTheme" -> systemDialogTheme.value = value
-            "isExpandedSettings" -> isExpandedSettings.value = configRepository.getBooleanValue("isExpandedSettings")
+            LANGUAGE -> language.value = value
+            THEME -> theme.value = value
+            SYSTEM_DIALOG_THEME -> systemDialogTheme.value = value
+            IS_EXPANDED_SETTINGS -> isExpandedSettings.value = configRepository.getBooleanValue(IS_EXPANDED_SETTINGS)
 
             // Colors
-            "primary" -> primary.value = configRepository.getColor("primary")
-            "primaryVariant" -> primaryVariant.value = configRepository.getColor("primaryVariant")
-            "secondary" -> secondary.value = configRepository.getColor("secondary")
-            "secondaryVariant" -> secondaryVariant.value = configRepository.getColor("secondaryVariant")
-            "background" -> background.value = configRepository.getColor("background")
-            "surface" -> surface.value = configRepository.getColor("surface")
-            "error" -> error.value = configRepository.getColor("error")
-            "onPrimary" -> onPrimary.value = configRepository.getColor("onPrimary")
-            "onSecondary" -> onSecondary.value = configRepository.getColor("onSecondary")
-            "onBackground" -> onBackground.value = configRepository.getColor("onBackground")
-            "onSurface" -> onSurface.value = configRepository.getColor("onSurface")
-            "onError" -> onError.value = configRepository.getColor("onError")
-            "borderColor" -> borderColor.value = configRepository.getColor("borderColor")
-            "successColor" -> successColor.value = configRepository.getColor("successColor")
-            "warningColor" -> warningColor.value = configRepository.getColor("warningColor")
-            "vertexMainColor" -> vertexMainColor.value = configRepository.getColor("vertexMainColor")
-            "hoveredBorderColor" -> hoveredBorderColor.value = configRepository.getColor("hoveredBorderColor")
-            "edgeMainColor" -> edgeMainColor.value = configRepository.getColor("edgeMainColor")
-            "canvasBackgroundColor" -> canvasBackgroundColor.value = configRepository.getColor("canvasBackgroundColor")
-            "commandLineBackgroundColor" -> commandLineBackgroundColor.value = configRepository.getColor("commandLineBackgroundColor")
+            PRIMARY -> primary.value = configRepository.getColor(PRIMARY)
+            PRIMARY_VARIANT -> primaryVariant.value = configRepository.getColor(PRIMARY_VARIANT)
+            SECONDARY -> secondary.value = configRepository.getColor(SECONDARY)
+            SECONDARY_VARIANT -> secondaryVariant.value = configRepository.getColor(SECONDARY_VARIANT)
+            BACKGROUND -> background.value = configRepository.getColor(BACKGROUND)
+            SURFACE -> surface.value = configRepository.getColor(SURFACE)
+            ERROR -> error.value = configRepository.getColor(ERROR)
+            ON_PRIMARY -> onPrimary.value = configRepository.getColor(ON_PRIMARY)
+            ON_SECONDARY -> onSecondary.value = configRepository.getColor(ON_SECONDARY)
+            ON_BACKGROUND -> onBackground.value = configRepository.getColor(ON_BACKGROUND)
+            ON_SURFACE -> onSurface.value = configRepository.getColor(ON_SURFACE)
+            ON_ERROR -> onError.value = configRepository.getColor(ON_ERROR)
+            BORDER_COLOR -> borderColor.value = configRepository.getColor(BORDER_COLOR)
+            SUCCESS_COLOR -> successColor.value = configRepository.getColor(SUCCESS_COLOR)
+            WARNING_COLOR -> warningColor.value = configRepository.getColor(WARNING_COLOR)
+            VERTEX_MAIN_COLOR -> vertexMainColor.value = configRepository.getColor(VERTEX_MAIN_COLOR)
+            HOVERED_BORDER_COLOR -> hoveredBorderColor.value = configRepository.getColor(HOVERED_BORDER_COLOR)
+            EDGE_MAIN_COLOR -> edgeMainColor.value = configRepository.getColor(EDGE_MAIN_COLOR)
+            CANVAS_BACKGROUND_COLOR -> canvasBackgroundColor.value = configRepository.getColor(CANVAS_BACKGROUND_COLOR)
+            COMMAND_LINE_BACKGROUND_COLOR -> commandLineBackgroundColor.value = configRepository.getColor(COMMAND_LINE_BACKGROUND_COLOR)
 
             // Main Screen
-            "mainScreenStartHeight" -> mainScreenStartHeight.value = configRepository.getIntValue("mainScreenStartHeight")
-            "mainScreenStartWidth" -> mainScreenStartWidth.value = configRepository.getIntValue("mainScreenStartWidth")
-            "startWindowPlacement" -> startWindowPlacement.value = value
+            MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = configRepository.getIntValue(MAIN_SCREEN_START_HEIGHT)
+            MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = configRepository.getIntValue(MAIN_SCREEN_START_WIDTH)
+            START_WINDOW_PLACEMENT -> startWindowPlacement.value = value
 
             // Title Bar
-            "titleBarHeight" -> titleBarHeight.value = configRepository.getIntValue("titleBarHeight")
-            "titleBarIconSize" -> titleBarIconSize.value = configRepository.getIntValue("titleBarIconSize")
+            TITLE_BAR_HEIGHT -> titleBarHeight.value = configRepository.getIntValue(TITLE_BAR_HEIGHT)
+            TITLE_BAR_ICON_SIZE -> titleBarIconSize.value = configRepository.getIntValue(TITLE_BAR_ICON_SIZE)
 
             // Command Field
-            "messageOutputHeight" -> messageOutputHeight.value = configRepository.getIntValue("messageOutputHeight")
-            "maxCountMessages" -> maxCountMessages.value = configRepository.getIntValue("maxCountMessages")
-            "commandFieldWidth" -> commandFieldWidth.value = configRepository.getIntValue("commandFieldWidth")
-            "isTransparentCommandLine" -> isTransparentCommandLine.value = configRepository.getBooleanValue("isTransparentCommandLine")
+            MESSAGE_OUTPUT_HEIGHT -> messageOutputHeight.value = configRepository.getIntValue(MESSAGE_OUTPUT_HEIGHT)
+            MAX_COUNT_MESSAGES -> maxCountMessages.value = configRepository.getIntValue(MAX_COUNT_MESSAGES)
+            COMMAND_FIELD_WIDTH -> commandFieldWidth.value = configRepository.getIntValue(COMMAND_FIELD_WIDTH)
+            IS_TRANSPARENT_COMMAND_LINE -> isTransparentCommandLine.value = configRepository.getBooleanValue(IS_TRANSPARENT_COMMAND_LINE)
 
             // Work Area
-            "graphLayoutHeight" -> graphLayoutHeight.value = configRepository.getIntValue("graphLayoutHeight")
-            "graphLayoutWidth" -> graphLayoutWidth.value = configRepository.getIntValue("graphLayoutWidth")
-            "vertexRadius" -> vertexRadius.value = configRepository.getIntValue("vertexRadius")
-            "vertexLabelSize" -> vertexLabelSize.value = configRepository.getIntValue("vertexLabelSize")
-            "edgeLabelSize" -> edgeLabelSize.value = configRepository.getIntValue("edgeLabelSize")
-            "edgeArrowSize" -> edgeArrowSize.value = configRepository.getFloatValue("edgeArrowSize")
-            "edgeWidth" -> edgeWidth.value = configRepository.getFloatValue("edgeWidth")
-            "canvasDragRatio" -> canvasDragRatio.value = configRepository.getFloatValue("canvasDragRatio")
-            "canvasLimit" -> canvasLimit.value = configRepository.getIntValue("canvasLimit")
+            GRAPH_LAYOUT_HEIGHT -> graphLayoutHeight.value = configRepository.getIntValue(GRAPH_LAYOUT_HEIGHT)
+            GRAPH_LAYOUT_WIDTH -> graphLayoutWidth.value = configRepository.getIntValue(GRAPH_LAYOUT_WIDTH)
+            VERTEX_RADIUS -> vertexRadius.value = configRepository.getIntValue(VERTEX_RADIUS)
+            VERTEX_LABEL_SIZE -> vertexLabelSize.value = configRepository.getIntValue(VERTEX_LABEL_SIZE)
+            EDGE_LABEL_SIZE -> edgeLabelSize.value = configRepository.getIntValue(EDGE_LABEL_SIZE)
+            EDGE_ARROW_SIZE -> edgeArrowSize.value = configRepository.getFloatValue(EDGE_ARROW_SIZE)
+            EDGE_WIDTH -> edgeWidth.value = configRepository.getFloatValue(EDGE_WIDTH)
+            CANVAS_DRAG_RATIO -> canvasDragRatio.value = configRepository.getFloatValue(CANVAS_DRAG_RATIO)
+            CANVAS_LIMIT -> canvasLimit.value = configRepository.getIntValue(CANVAS_LIMIT)
 
             // Performance
-            "animationDuration" -> animationDuration.value = configRepository.getIntValue("animationDuration")
-            "commandFieldScrollDelay" -> commandFieldScrollDelay.value = configRepository.getIntValue("commandFieldScrollDelay")
+            ANIMATION_DURATION -> animationDuration.value = configRepository.getIntValue(ANIMATION_DURATION)
+            COMMAND_FIELD_SCROLL_DELAY -> commandFieldScrollDelay.value = configRepository.getIntValue(COMMAND_FIELD_SCROLL_DELAY)
         }
     }
 }

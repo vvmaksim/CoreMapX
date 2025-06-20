@@ -15,6 +15,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.START_WINDOW_PLACEMENT
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.DropdownSelectLine
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
@@ -36,7 +39,7 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             title = "Main screen start height",
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartHeight"),
-            onValueChange = { config.setValue("mainScreenStartHeight", it.text) },
+            onValueChange = { config.setValue(MAIN_SCREEN_START_HEIGHT, it.text) },
             description =
                 """
                 The starting height of the application window.
@@ -50,7 +53,7 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             title = "Main screen start width",
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartWidth"),
-            onValueChange = { config.setValue("mainScreenStartWidth", it.text) },
+            onValueChange = { config.setValue(MAIN_SCREEN_START_WIDTH, it.text) },
             description =
                 """
                 The starting width of the application window.
@@ -64,7 +67,7 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             title = "Start window placement",
             items = listOf("Maximized", "Floating", "FullScreen"),
             selectedItem = startWindowPlacement,
-            onItemSelected = { config.setValue("startWindowPlacement", it) },
+            onItemSelected = { config.setValue(START_WINDOW_PLACEMENT, it) },
             modifier = dropdownSelectButtonModifier,
             description =
                 """

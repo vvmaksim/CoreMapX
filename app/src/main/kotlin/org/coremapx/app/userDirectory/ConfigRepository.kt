@@ -10,6 +10,28 @@ import mu.KotlinLogging
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
+import org.coremapx.app.userDirectory.ConfigKeys.BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.HOVERED_BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.ON_BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.ON_ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.ON_PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.SUCCESS_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.SYSTEM_DIALOG_THEME
+import org.coremapx.app.userDirectory.ConfigKeys.THEME
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.WARNING_COLOR
 import java.io.File
 import java.util.Properties
 
@@ -70,31 +92,31 @@ class ConfigRepository {
         }
     }
 
-    fun setThemeOnCustom() = setValue("theme", "custom")
+    fun setThemeOnCustom() = setValue(THEME, "custom")
 
     private fun setTheme(themeConfig: ThemeConfig) {
         with(themeConfig) {
-            setValue("primary", primary)
-            setValue("primaryVariant", primaryVariant)
-            setValue("secondary", secondary)
-            setValue("secondaryVariant", secondaryVariant)
-            setValue("background", background)
-            setValue("surface", surface)
-            setValue("error", error)
-            setValue("onPrimary", onPrimary)
-            setValue("onSecondary", onSecondary)
-            setValue("onBackground", onBackground)
-            setValue("onSurface", onSurface)
-            setValue("onError", onError)
-            setValue("borderColor", borderColor)
-            setValue("successColor", successColor)
-            setValue("warningColor", warningColor)
-            setValue("vertexMainColor", vertexMainColor)
-            setValue("hoveredBorderColor", hoveredBorderColor)
-            setValue("edgeMainColor", edgeMainColor)
-            setValue("canvasBackgroundColor", canvasBackgroundColor)
-            setValue("commandLineBackgroundColor", commandLineBackgroundColor)
-            setValue("systemDialogTheme", if (isLight) "light" else "dark")
+            setValue(PRIMARY, primary)
+            setValue(PRIMARY_VARIANT, primaryVariant)
+            setValue(SECONDARY, secondary)
+            setValue(SECONDARY_VARIANT, secondaryVariant)
+            setValue(BACKGROUND, background)
+            setValue(SURFACE, surface)
+            setValue(ERROR, error)
+            setValue(ON_PRIMARY, onPrimary)
+            setValue(ON_SECONDARY, onSecondary)
+            setValue(ON_BACKGROUND, onBackground)
+            setValue(ON_SURFACE, onSurface)
+            setValue(ON_ERROR, onError)
+            setValue(BORDER_COLOR, borderColor)
+            setValue(SUCCESS_COLOR, successColor)
+            setValue(WARNING_COLOR, warningColor)
+            setValue(VERTEX_MAIN_COLOR, vertexMainColor)
+            setValue(HOVERED_BORDER_COLOR, hoveredBorderColor)
+            setValue(EDGE_MAIN_COLOR, edgeMainColor)
+            setValue(CANVAS_BACKGROUND_COLOR, canvasBackgroundColor)
+            setValue(COMMAND_LINE_BACKGROUND_COLOR, commandLineBackgroundColor)
+            setValue(SYSTEM_DIALOG_THEME, if (isLight) "light" else "dark")
         }
     }
 

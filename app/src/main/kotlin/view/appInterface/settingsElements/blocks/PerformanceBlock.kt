@@ -12,6 +12,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.ConfigKeys.ANIMATION_DURATION
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
@@ -26,7 +28,7 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
             title = "Animation duration",
             valueType = Int::class,
             value = TextFieldValue("$animationDuration"),
-            onValueChange = { config.setValue("animationDuration", it.text) },
+            onValueChange = { config.setValue(ANIMATION_DURATION, it.text) },
             description =
                 """
                 This parameter is used to specify the speed of animations, for example, the speed of minimizing the side menu, etc.
@@ -38,7 +40,7 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
             title = "Command field scroll delay",
             valueType = Int::class,
             value = TextFieldValue("$commandFieldScrollDelay"),
-            onValueChange = { config.setValue("commandFieldScrollDelay", it.text) },
+            onValueChange = { config.setValue(COMMAND_FIELD_SCROLL_DELAY, it.text) },
             description =
                 """
                 A certain amount of time passes when sending a command on the command line.

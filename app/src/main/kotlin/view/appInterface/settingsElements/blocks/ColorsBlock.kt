@@ -12,6 +12,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.ConfigKeys.BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.HOVERED_BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.ON_BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.ON_ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.ON_PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.SUCCESS_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.WARNING_COLOR
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.ColorPickLine
 
@@ -43,7 +63,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = primary,
             onColorSelected = {
-                config.setValue("primary", it)
+                config.setValue(PRIMARY, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -59,7 +79,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = primaryVariant,
             onColorSelected = {
-                config.setValue("primaryVariant", it)
+                config.setValue(PRIMARY_VARIANT, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -75,7 +95,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = secondary,
             onColorSelected = {
-                config.setValue("secondary", it)
+                config.setValue(SECONDARY, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -91,7 +111,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = secondaryVariant,
             onColorSelected = {
-                config.setValue("secondaryVariant", it)
+                config.setValue(SECONDARY_VARIANT, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -106,7 +126,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = background,
             onColorSelected = {
-                config.setValue("background", it)
+                config.setValue(BACKGROUND, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -121,7 +141,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = surface,
             onColorSelected = {
-                config.setValue("surface", it)
+                config.setValue(SURFACE, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -136,7 +156,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = error,
             onColorSelected = {
-                config.setValue("error", it)
+                config.setValue(ERROR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -151,7 +171,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onPrimary,
             onColorSelected = {
-                config.setValue("onPrimary", it)
+                config.setValue(ON_PRIMARY, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -166,7 +186,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onSecondary,
             onColorSelected = {
-                config.setValue("onSecondary", it)
+                config.setValue(ON_SECONDARY, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -181,7 +201,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onBackground,
             onColorSelected = {
-                config.setValue("onBackground", it)
+                config.setValue(ON_BACKGROUND, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -196,7 +216,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onSurface,
             onColorSelected = {
-                config.setValue("onSurface", it)
+                config.setValue(ON_SURFACE, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -211,7 +231,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onError,
             onColorSelected = {
-                config.setValue("onError", it)
+                config.setValue(ON_ERROR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -226,7 +246,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = borderColor,
             onColorSelected = {
-                config.setValue("borderColor", it)
+                config.setValue(BORDER_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -241,7 +261,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = successColor,
             onColorSelected = {
-                config.setValue("successColor", it)
+                config.setValue(SUCCESS_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -256,7 +276,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = warningColor,
             onColorSelected = {
-                config.setValue("warningColor", it)
+                config.setValue(WARNING_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -271,7 +291,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = vertexMainColor,
             onColorSelected = {
-                config.setValue("vertexMainColor", it)
+                config.setValue(VERTEX_MAIN_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -286,7 +306,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = hoveredBorderColor,
             onColorSelected = {
-                config.setValue("hoveredBorderColor", it)
+                config.setValue(HOVERED_BORDER_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -301,7 +321,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = edgeMainColor,
             onColorSelected = {
-                config.setValue("edgeMainColor", it)
+                config.setValue(EDGE_MAIN_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -316,7 +336,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = canvasBackgroundColor,
             onColorSelected = {
-                config.setValue("canvasBackgroundColor", it)
+                config.setValue(CANVAS_BACKGROUND_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
@@ -331,7 +351,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = commandLineBackgroundColor,
             onColorSelected = {
-                config.setValue("commandLineBackgroundColor", it)
+                config.setValue(COMMAND_LINE_BACKGROUND_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),

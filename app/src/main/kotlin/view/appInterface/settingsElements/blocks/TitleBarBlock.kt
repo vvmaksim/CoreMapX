@@ -12,6 +12,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.ConfigKeys.TITLE_BAR_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.TITLE_BAR_ICON_SIZE
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
 
@@ -26,7 +28,7 @@ fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             title = "Title bar height",
             valueType = Int::class,
             value = TextFieldValue("$titleBarHeight"),
-            onValueChange = { config.setValue("titleBarHeight", it.text) },
+            onValueChange = { config.setValue(TITLE_BAR_HEIGHT, it.text) },
             description =
                 """
                 Height of the title bar.
@@ -38,7 +40,7 @@ fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             title = "Title bar icon size",
             valueType = Int::class,
             value = TextFieldValue("$titleBarIconSize"),
-            onValueChange = { config.setValue("titleBarIconSize", it.text) },
+            onValueChange = { config.setValue(TITLE_BAR_ICON_SIZE, it.text) },
             description =
                 """
                 Size of the title bar icons.

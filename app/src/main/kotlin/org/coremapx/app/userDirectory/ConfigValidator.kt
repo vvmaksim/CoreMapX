@@ -3,6 +3,50 @@ package org.coremapx.app.userDirectory
 import extensions.toColorOrNull
 import model.result.ConfigErrors
 import model.result.Result
+import org.coremapx.app.userDirectory.ConfigKeys.ANIMATION_DURATION
+import org.coremapx.app.userDirectory.ConfigKeys.BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_DRAG_RATIO
+import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_LIMIT
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_ARROW_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_LABEL_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.EDGE_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.GRAPH_LAYOUT_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.GRAPH_LAYOUT_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.HOVERED_BORDER_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.IS_EXPANDED_SETTINGS
+import org.coremapx.app.userDirectory.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
+import org.coremapx.app.userDirectory.ConfigKeys.LANGUAGE
+import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_WIDTH
+import org.coremapx.app.userDirectory.ConfigKeys.MAX_COUNT_MESSAGES
+import org.coremapx.app.userDirectory.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.ON_BACKGROUND
+import org.coremapx.app.userDirectory.ConfigKeys.ON_ERROR
+import org.coremapx.app.userDirectory.ConfigKeys.ON_PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY
+import org.coremapx.app.userDirectory.ConfigKeys.PRIMARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY
+import org.coremapx.app.userDirectory.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.ConfigKeys.START_WINDOW_PLACEMENT
+import org.coremapx.app.userDirectory.ConfigKeys.SUCCESS_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.SURFACE
+import org.coremapx.app.userDirectory.ConfigKeys.SYSTEM_DIALOG_THEME
+import org.coremapx.app.userDirectory.ConfigKeys.THEME
+import org.coremapx.app.userDirectory.ConfigKeys.TITLE_BAR_HEIGHT
+import org.coremapx.app.userDirectory.ConfigKeys.TITLE_BAR_ICON_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_LABEL_SIZE
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_MAIN_COLOR
+import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_RADIUS
+import org.coremapx.app.userDirectory.ConfigKeys.WARNING_COLOR
 
 class ConfigValidator {
     companion object {
@@ -12,48 +56,48 @@ class ConfigValidator {
         ): Result<Boolean> =
             when (key) {
                 // General
-                "language" -> enumStringValidator(key, value, listOf("ru", "en"))
-                "theme" -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
-                "systemDialogTheme" -> enumStringValidator(key, value, listOf("light", "dark"))
-                "isExpandedSettings" -> booleanValidator(key, value)
+                LANGUAGE -> enumStringValidator(key, value, listOf("ru", "en"))
+                THEME -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
+                SYSTEM_DIALOG_THEME -> enumStringValidator(key, value, listOf("light", "dark"))
+                IS_EXPANDED_SETTINGS -> booleanValidator(key, value)
 
                 // Colors
-                "primary", "primaryVariant", "secondary", "secondaryVariant",
-                "background", "surface", "error", "onPrimary", "onSecondary",
-                "onBackground", "onSurface", "onError", "borderColor", "successColor", "warningColor", "vertexMainColor",
-                "hoveredBorderColor", "edgeMainColor", "canvasBackgroundColor",
-                "commandLineBackgroundColor",
+                PRIMARY, PRIMARY_VARIANT, SECONDARY, SECONDARY_VARIANT,
+                BACKGROUND, SURFACE, ERROR, ON_PRIMARY, ON_SECONDARY,
+                ON_BACKGROUND, ON_SURFACE, ON_ERROR, BORDER_COLOR, SUCCESS_COLOR, WARNING_COLOR, VERTEX_MAIN_COLOR,
+                HOVERED_BORDER_COLOR, EDGE_MAIN_COLOR, CANVAS_BACKGROUND_COLOR,
+                COMMAND_LINE_BACKGROUND_COLOR,
                 -> colorValidator(key, value)
 
                 // Main Screen
-                "mainScreenStartHeight" -> intValidator(key, value, minValue = 720)
-                "mainScreenStartWidth" -> intValidator(key, value, minValue = 1280)
-                "startWindowPlacement" -> enumStringValidator(key, value, listOf("FullScreen", "Floating", "Maximized"))
+                MAIN_SCREEN_START_HEIGHT -> intValidator(key, value, minValue = 720)
+                MAIN_SCREEN_START_WIDTH -> intValidator(key, value, minValue = 1280)
+                START_WINDOW_PLACEMENT -> enumStringValidator(key, value, listOf("FullScreen", "Floating", "Maximized"))
 
                 // Title Bar
-                "titleBarHeight" -> intValidator(key, value, minValue = 35)
-                "titleBarIconSize" -> intValidator(key, value, minValue = 16)
+                TITLE_BAR_HEIGHT -> intValidator(key, value, minValue = 35)
+                TITLE_BAR_ICON_SIZE -> intValidator(key, value, minValue = 16)
 
                 // Command Field
-                "messageOutputHeight" -> intValidator(key, value, minValue = 150)
-                "maxCountMessages" -> intValidator(key, value, minValue = 1, maxValue = 10000)
-                "commandFieldWidth" -> intValidator(key, value, minValue = 400)
-                "isTransparentCommandLine" -> booleanValidator(key, value)
+                MESSAGE_OUTPUT_HEIGHT -> intValidator(key, value, minValue = 150)
+                MAX_COUNT_MESSAGES -> intValidator(key, value, minValue = 1, maxValue = 10000)
+                COMMAND_FIELD_WIDTH -> intValidator(key, value, minValue = 400)
+                IS_TRANSPARENT_COMMAND_LINE -> booleanValidator(key, value)
 
                 // Work Area
-                "graphLayoutHeight" -> intValidator(key, value, minValue = 2000)
-                "graphLayoutWidth" -> intValidator(key, value, minValue = 1000)
-                "vertexRadius" -> intValidator(key, value, minValue = 1)
-                "vertexLabelSize" -> intValidator(key, value, minValue = 6)
-                "edgeLabelSize" -> intValidator(key, value, minValue = 6)
-                "edgeArrowSize" -> floatValidator(key, value, minValue = 1f, maxValue = 100f)
-                "edgeWidth" -> floatValidator(key, value, minValue = 1f)
-                "canvasDragRatio" -> floatValidator(key, value, minValue = 0.1f, maxValue = 10.0f)
-                "canvasLimit" -> intValidator(key, value, minValue = 2000)
+                GRAPH_LAYOUT_HEIGHT -> intValidator(key, value, minValue = 2000)
+                GRAPH_LAYOUT_WIDTH -> intValidator(key, value, minValue = 1000)
+                VERTEX_RADIUS -> intValidator(key, value, minValue = 1)
+                VERTEX_LABEL_SIZE -> intValidator(key, value, minValue = 6)
+                EDGE_LABEL_SIZE -> intValidator(key, value, minValue = 6)
+                EDGE_ARROW_SIZE -> floatValidator(key, value, minValue = 1f, maxValue = 100f)
+                EDGE_WIDTH -> floatValidator(key, value, minValue = 1f)
+                CANVAS_DRAG_RATIO -> floatValidator(key, value, minValue = 0.1f, maxValue = 10.0f)
+                CANVAS_LIMIT -> intValidator(key, value, minValue = 2000)
 
                 // Performance
-                "animationDuration" -> intValidator(key, value, minValue = 100, maxValue = 1500)
-                "commandFieldScrollDelay" -> intValidator(key, value, minValue = 10, maxValue = 300)
+                ANIMATION_DURATION -> intValidator(key, value, minValue = 100, maxValue = 1500)
+                COMMAND_FIELD_SCROLL_DELAY -> intValidator(key, value, minValue = 10, maxValue = 300)
 
                 else -> Result.Error(ConfigErrors.UnknownProperty(key))
             }
