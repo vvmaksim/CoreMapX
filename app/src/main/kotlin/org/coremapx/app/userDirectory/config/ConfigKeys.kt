@@ -1,4 +1,4 @@
-package org.coremapx.app.userDirectory
+package org.coremapx.app.userDirectory.config
 
 object ConfigKeys {
     // General

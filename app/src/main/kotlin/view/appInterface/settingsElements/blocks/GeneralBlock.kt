@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.ConfigKeys.IS_EXPANDED_SETTINGS
-import org.coremapx.app.userDirectory.ConfigKeys.LANGUAGE
-import org.coremapx.app.userDirectory.ConfigKeys.SYSTEM_DIALOG_THEME
-import org.coremapx.app.userDirectory.ConfigKeys.THEME
+import org.coremapx.app.userDirectory.config.ConfigKeys.IS_EXPANDED_SETTINGS
+import org.coremapx.app.userDirectory.config.ConfigKeys.LANGUAGE
+import org.coremapx.app.userDirectory.config.ConfigKeys.SYSTEM_DIALOG_THEME
+import org.coremapx.app.userDirectory.config.ConfigKeys.THEME
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.DropdownSelectLine
 import view.appInterface.settingsElements.lines.SwitchLine

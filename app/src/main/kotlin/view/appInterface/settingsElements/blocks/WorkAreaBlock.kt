@@ -12,15 +12,15 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_DRAG_RATIO
-import org.coremapx.app.userDirectory.ConfigKeys.CANVAS_LIMIT
-import org.coremapx.app.userDirectory.ConfigKeys.EDGE_ARROW_SIZE
-import org.coremapx.app.userDirectory.ConfigKeys.EDGE_LABEL_SIZE
-import org.coremapx.app.userDirectory.ConfigKeys.EDGE_WIDTH
-import org.coremapx.app.userDirectory.ConfigKeys.GRAPH_LAYOUT_HEIGHT
-import org.coremapx.app.userDirectory.ConfigKeys.GRAPH_LAYOUT_WIDTH
-import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_LABEL_SIZE
-import org.coremapx.app.userDirectory.ConfigKeys.VERTEX_RADIUS
+import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_DRAG_RATIO
+import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_LIMIT
+import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_ARROW_SIZE
+import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_LABEL_SIZE
+import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_WIDTH
+import org.coremapx.app.userDirectory.config.ConfigKeys.GRAPH_LAYOUT_HEIGHT
+import org.coremapx.app.userDirectory.config.ConfigKeys.GRAPH_LAYOUT_WIDTH
+import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_LABEL_SIZE
+import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_RADIUS
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
 

@@ -12,10 +12,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_WIDTH
-import org.coremapx.app.userDirectory.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
-import org.coremapx.app.userDirectory.ConfigKeys.MAX_COUNT_MESSAGES
-import org.coremapx.app.userDirectory.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
+import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_WIDTH
+import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
+import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
+import org.coremapx.app.userDirectory.config.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
 import view.appInterface.settingsElements.lines.SwitchLine

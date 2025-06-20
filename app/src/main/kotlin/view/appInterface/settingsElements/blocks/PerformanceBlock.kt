@@ -12,8 +12,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.ConfigKeys.ANIMATION_DURATION
-import org.coremapx.app.userDirectory.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
+import org.coremapx.app.userDirectory.config.ConfigKeys.ANIMATION_DURATION
+import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
 

@@ -15,9 +15,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_HEIGHT
-import org.coremapx.app.userDirectory.ConfigKeys.MAIN_SCREEN_START_WIDTH
-import org.coremapx.app.userDirectory.ConfigKeys.START_WINDOW_PLACEMENT
+import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_HEIGHT
+import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_WIDTH
+import org.coremapx.app.userDirectory.config.ConfigKeys.START_WINDOW_PLACEMENT
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.DropdownSelectLine
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
