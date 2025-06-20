@@ -45,6 +45,7 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_LABEL_SIZE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_RADIUS
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
+import org.coremapx.app.userDirectory.config.ConfigRepository
 
 class ConfigStates(
     private val configRepository: ConfigRepository,

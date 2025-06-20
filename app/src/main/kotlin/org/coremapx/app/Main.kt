@@ -18,8 +18,8 @@ import androidx.compose.ui.window.rememberWindowState
 import androidx.compose.ui.zIndex
 import mu.KotlinLogging
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.ConfigRepository
 import org.coremapx.app.userDirectory.UserDirectory
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.layout.TitleBar
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension

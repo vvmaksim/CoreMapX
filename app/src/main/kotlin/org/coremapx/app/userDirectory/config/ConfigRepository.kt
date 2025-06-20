@@ -1,4 +1,4 @@
-package org.coremapx.app.userDirectory
+package org.coremapx.app.userDirectory.config
 
 import androidx.compose.ui.graphics.Color
 import extensions.toColorOrNull
@@ -10,6 +10,8 @@ import mu.KotlinLogging
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
+import org.coremapx.app.userDirectory.ConfigStates
+import org.coremapx.app.userDirectory.ConfigValidator
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
@@ -71,7 +73,7 @@ class ConfigRepository {
         key: String,
         value: String,
     ): Result<Boolean> {
-        val validateResult = ConfigValidator.validate(key, value)
+        val validateResult = ConfigValidator.Companion.validate(key, value)
         if (validateResult is Result.Error) return validateResult
         val updateConfigFileResult = updateConfigFile(key, value)
         if (updateConfigFileResult is Result.Error) return updateConfigFileResult
@@ -203,7 +205,7 @@ class ConfigRepository {
 
     private fun validateUserConfigValues() {
         userConfig.forEach { (key, value) ->
-            val validateResult = ConfigValidator.validate(key, value)
+            val validateResult = ConfigValidator.Companion.validate(key, value)
             if (validateResult is Result.Error) {
                 throw IllegalArgumentException("ERROR: ${validateResult.error.type}.${validateResult.error.description}")
             }
