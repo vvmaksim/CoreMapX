@@ -23,11 +23,11 @@ object PrivateConfig {
                 TEMP_DIR_PATH,
                 GRAPHS_DIR_PATH,
             )
-        val CONFIG_FILE_PATH = "$DIR_PATH/config/Config.gcfg"
+        val CONFIG_FILE_PATH = "$DIR_PATH/config/Config.cfg"
     }
 
     object AppResources {
-        const val DEFAULT_CONFIG_PATH = "app/src/main/resources/config/DefaultConfig.gcfg"
+        const val DEFAULT_CONFIG_PATH = "app/src/main/resources/config/DefaultConfig.cfg"
         const val DEFAULT_FONTS_DIRECTORY_PATH = "app/src/main/resources/fonts"
     }
 
