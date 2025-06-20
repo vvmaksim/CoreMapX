@@ -1,7 +1,6 @@
 package view.appInterface.dialog
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,13 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -90,28 +83,10 @@ fun SettingsContent(
                     .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = "Settings",
-                    style = MaterialTheme.typography.h5,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-                IconButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Close",
-                        tint = MaterialTheme.colors.onSurface,
-                    )
-                }
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Press Enter to save the parameter in the text field",
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Center,
+            DialogHeader(
+                title = "Settings",
+                onButtonClick = onDismiss,
+                subtitle = "Press Enter to save the parameter in the text field",
             )
             Spacer(modifier = Modifier.height(24.dp))
             Column(
