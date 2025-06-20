@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.IS_EXPANDED_SETTINGS
 import org.coremapx.app.userDirectory.config.ConfigKeys.LANGUAGE
 import org.coremapx.app.userDirectory.config.ConfigKeys.SYSTEM_DIALOG_THEME
@@ -42,10 +43,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                 config.setValue(LANGUAGE, if (it == "English") "en" else "ru")
             },
             modifier = dropdownSelectButtonModifier,
-            description =
-                """
-                You can choose one of the suggested languages for the interface or use a custom localization file.
-                """.trimIndent(),
+            description = ConfigDescriptions.LANGUAGE,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -58,10 +56,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                 config.updateTheme()
             },
             modifier = dropdownSelectButtonModifier,
-            description =
-                """
-                You can change the interface colors in the color settings. Changing any of the colors will switch the theme to the `Custom` status.
-                """.trimIndent(),
+            description = ConfigDescriptions.THEME,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -74,23 +69,13 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                 config.setThemeOnCustom()
             },
             modifier = dropdownSelectButtonModifier,
-            description =
-                """
-                To select a graph file to open, a window with the appropriate interface appears.
-                You can change the theme of this window to one that would better suit your theme.
-                When switching between ready-made themes, this parameter switches automatically.
-                """.trimIndent(),
+            description = ConfigDescriptions.SYSTEM_DIALOG_THEME,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
             title = "Settings blocks and descriptions is expanded",
-            description =
-                """
-                If this option is active, the next time you open the settings menu, all settings blocks will be expanded and all descriptions in the settings will be shown.
-                
-                If the parameter is disabled, then the next time you open the settings menu, all settings blocks and all descriptions are hidden.
-                """.trimIndent(),
+            description = ConfigDescriptions.IS_EXPANDED_SETTINGS,
             checked = isExpandedSettings,
             onCheckedChange = { config.setValue(IS_EXPANDED_SETTINGS, it.toString()) },
             isExpanded = isExpandedSettings,

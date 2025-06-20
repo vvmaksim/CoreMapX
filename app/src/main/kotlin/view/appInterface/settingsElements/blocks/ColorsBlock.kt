@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
@@ -68,11 +69,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Primary",
-            description =
-                """
-                The main color of the interface.
-                It is used for key controls, buttons, highlighting active elements, etc.
-                """.trimIndent(),
+            description = ConfigDescriptions.PRIMARY,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -84,11 +81,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Primary Variant",
-            description =
-                """
-                A variant of the main color, usually slightly darker or lighter.
-                It is used for shades, shadows, highlights, or minor accents related to the main color.
-                """.trimIndent(),
+            description = ConfigDescriptions.PRIMARY_VARIANT,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -100,11 +93,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Secondary",
-            description =
-                """
-                The secondary color of the interface.
-                It is used to highlight less important elements, minor buttons, icons, links, etc.
-                """.trimIndent(),
+            description = ConfigDescriptions.SECONDARY,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -116,10 +105,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Secondary Variant",
-            description =
-                """
-                A secondary color option, similar to primaryVariant, for shades, shadows, and additional accents associated with secondary.
-                """.trimIndent(),
+            description = ConfigDescriptions.SECONDARY_VARIANT,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -131,10 +117,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Background",
-            description =
-                """
-                The background color of the entire application or large areas.
-                """.trimIndent(),
+            description = ConfigDescriptions.BACKGROUND,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -146,10 +129,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Surface",
-            description =
-                """
-                Surface color: cards, panels, pop-ups, dialogs, and other elements that "lie" on the background.
-                """.trimIndent(),
+            description = ConfigDescriptions.SURFACE,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -161,10 +141,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Error",
-            description =
-                """
-                The color for displaying errors: error text, frames, icons, indicators, etc.
-                """.trimIndent(),
+            description = ConfigDescriptions.ERROR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -176,10 +153,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Primary",
-            description =
-                """
-                The color of the content (text, icons) that is placed on top of the primary. Usually contrasting.
-                """.trimIndent(),
+            description = ConfigDescriptions.ON_PRIMARY,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -191,10 +165,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Secondary",
-            description =
-                """
-                The color of the content that is placed on top of secondary.
-                """.trimIndent(),
+            description = ConfigDescriptions.ON_SECONDARY,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -206,10 +177,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Background",
-            description =
-                """
-                The color of the content that is placed on top of background.
-                """.trimIndent(),
+            description = ConfigDescriptions.ON_BACKGROUND,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -221,10 +189,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Surface",
-            description =
-                """
-                The color of the content that is placed on top of surface.
-                """.trimIndent(),
+            description = ConfigDescriptions.ON_SURFACE,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -236,10 +201,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "On Error",
-            description =
-                """
-                The color of the content that is placed on top of error.
-                """.trimIndent(),
+            description = ConfigDescriptions.ON_ERROR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -251,10 +213,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Border Color",
-            description =
-                """
-                The color of the frames for various interface elements: text fields, buttons, cards, etc.
-                """.trimIndent(),
+            description = ConfigDescriptions.BORDER_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -266,10 +225,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Success Color",
-            description =
-                """
-                A color to indicate successful actions: confirmations, successful notifications, etc.
-                """.trimIndent(),
+            description = ConfigDescriptions.SUCCESS_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -281,10 +237,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Warning Color",
-            description =
-                """
-                Color for warnings: yellow icons, frames, notifications of potential problems.
-                """.trimIndent(),
+            description = ConfigDescriptions.WARNING_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -296,10 +249,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Vertex Main Color",
-            description =
-                """
-                The primary color for displaying vertices.
-                """.trimIndent(),
+            description = ConfigDescriptions.VERTEX_MAIN_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -311,10 +261,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Hovered Border Color",
-            description =
-                """
-                The color of the border when hovering over the element.
-                """.trimIndent(),
+            description = ConfigDescriptions.HOVERED_BORDER_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -326,10 +273,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Edge Main Color",
-            description =
-                """
-                The primary color for displaying edges between vertices on the graph.
-                """.trimIndent(),
+            description = ConfigDescriptions.EDGE_MAIN_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -341,10 +285,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Canvas Background Color",
-            description =
-                """
-                The background color for graph visualization.
-                """.trimIndent(),
+            description = ConfigDescriptions.CANVAS_BACKGROUND_COLOR,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -356,12 +297,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = "Command Line Background Color",
-            description =
-                """
-                The background color for the command line.
-
-                This color is applied if the `isTransparentCommandLine` parameter is disabled.
-                """.trimIndent(),
+            description = ConfigDescriptions.COMMAND_LINE_BACKGROUND_COLOR,
             isExpanded = isExpandedSettings,
         )
     }

@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_DRAG_RATIO
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_LIMIT
 import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_ARROW_SIZE
@@ -43,10 +44,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$graphLayoutHeight"),
             onValueChange = { config.setValue(GRAPH_LAYOUT_HEIGHT, it.text) },
-            description =
-                """
-                The graph is drawn on a certain plane, you can change the height of this plane.
-                """.trimIndent(),
+            description = ConfigDescriptions.GRAPH_LAYOUT_HEIGHT,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -55,10 +53,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$graphLayoutWidth"),
             onValueChange = { config.setValue(GRAPH_LAYOUT_WIDTH, it.text) },
-            description =
-                """
-                The graph is drawn on a certain plane, you can change the width of this plane.
-                """.trimIndent(),
+            description = ConfigDescriptions.GRAPH_LAYOUT_WIDTH,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -67,10 +62,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$vertexRadius"),
             onValueChange = { config.setValue(VERTEX_RADIUS, it.text) },
-            description =
-                """
-                The standard radius for a vertex.
-                """.trimIndent(),
+            description = ConfigDescriptions.VERTEX_RADIUS,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -79,10 +71,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$vertexLabelSize"),
             onValueChange = { config.setValue(VERTEX_LABEL_SIZE, it.text) },
-            description =
-                """
-                Vertex label size.
-                """.trimIndent(),
+            description = ConfigDescriptions.VERTEX_LABEL_SIZE,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -91,10 +80,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$edgeLabelSize"),
             onValueChange = { config.setValue(EDGE_LABEL_SIZE, it.text) },
-            description =
-                """
-                Edge label size.
-                """.trimIndent(),
+            description = ConfigDescriptions.EDGE_LABEL_SIZE,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -103,10 +89,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Float::class,
             value = TextFieldValue("$edgeArrowSize"),
             onValueChange = { config.setValue(EDGE_ARROW_SIZE, it.text) },
-            description =
-                """
-                Edge arrow size.
-                """.trimIndent(),
+            description = ConfigDescriptions.EDGE_ARROW_SIZE,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -115,10 +98,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Float::class,
             value = TextFieldValue("$edgeWidth"),
             onValueChange = { config.setValue(EDGE_WIDTH, it.text) },
-            description =
-                """
-                Width for an edge.
-                """.trimIndent(),
+            description = ConfigDescriptions.EDGE_WIDTH,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -127,10 +107,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Float::class,
             value = TextFieldValue("$canvasDragRatio"),
             onValueChange = { config.setValue(CANVAS_DRAG_RATIO, it.text) },
-            description =
-                """
-                The graph movement speed is calculated using a certain `canvasDragRatio` multiplier.
-                """.trimIndent(),
+            description = ConfigDescriptions.CANVAS_DRAG_RATIO,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -139,10 +116,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$canvasLimit"),
             onValueChange = { config.setValue(CANVAS_LIMIT, it.text) },
-            description =
-                """
-                The area where the graph is drawn is finite. To limit movement on this plane, you can change this parameter.
-                """.trimIndent(),
+            description = ConfigDescriptions.CANVAS_LIMIT,
             isExpanded = isExpandedSettings,
         )
     }

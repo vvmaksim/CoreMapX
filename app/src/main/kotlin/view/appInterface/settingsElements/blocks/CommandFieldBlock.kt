@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_WIDTH
 import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
@@ -34,10 +35,7 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             valueType = Int::class,
             value = TextFieldValue("$messageOutputHeight"),
             onValueChange = { config.setValue(MESSAGE_OUTPUT_HEIGHT, it.text) },
-            description =
-                """
-                Maximum lifting height for command line output messages.
-                """.trimIndent(),
+            description = ConfigDescriptions.MESSAGE_OUTPUT_HEIGHT,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -48,10 +46,7 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             onValueChange = {
                 config.setValue(MAX_COUNT_MESSAGES, it.text)
             },
-            description =
-                """
-                The maximum number of output messages that are remembered.
-                """.trimIndent(),
+            description = ConfigDescriptions.MAX_COUNT_MESSAGES,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -60,22 +55,13 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             valueType = Int::class,
             value = TextFieldValue("$commandFieldWidth"),
             onValueChange = { config.setValue(COMMAND_FIELD_WIDTH, it.text) },
-            description =
-                """
-                The height of the command line.
-                """.trimIndent(),
+            description = ConfigDescriptions.COMMAND_FIELD_WIDTH,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
             title = "Command line is transparent",
-            description =
-                """
-                This parameter is responsible for the transparency of the command line background.
-
-                If it is enabled, the background of the text field will be transparent.
-                If it is turned off, the background of the text field will take on the color specified in the corresponding parameter in the color settings.
-                """.trimIndent(),
+            description = ConfigDescriptions.IS_TRANSPARENT_COMMAND_LINE,
             checked = isTransparentCommandLine,
             onCheckedChange = { config.setValue(IS_TRANSPARENT_COMMAND_LINE, it.toString()) },
             isExpanded = isExpandedSettings,
