@@ -17,10 +17,8 @@ private val logger = KotlinLogging.logger {}
 class ConfigRepository {
     private val mainConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
     private val defaultConfigPath = "app/src/main/resources/Configs/DefaultConfig.gcfg"
-    private val privateConfigPath = "app/src/main/resources/Configs/PrivateConfig.gcfg"
 
     private val userConfig: MutableMap<String, String> = mutableMapOf()
-    private val privateConfig: MutableMap<String, String> = mutableMapOf()
     private val defaultConfig: MutableMap<String, String> = mutableMapOf()
 
     var states: ConfigStates
@@ -28,14 +26,12 @@ class ConfigRepository {
 
     init {
         loadUserConfig()
-        loadPrivateConfig()
         validateUserConfig()
         states = ConfigStates(this)
         updateTheme()
     }
 
-    fun getStringValue(key: String): String =
-        userConfig[key] ?: privateConfig[key] ?: throw IllegalArgumentException("Unknown key:$key in config")
+    fun getStringValue(key: String): String = userConfig[key] ?: throw IllegalArgumentException("Unknown key:$key in config")
 
     fun getBooleanValue(key: String): Boolean =
         getStringValue(key).toBooleanStrictOrNull() ?: throw IllegalArgumentException("Invalid key:$key. Value must be `true` or `false`")
@@ -138,10 +134,6 @@ class ConfigRepository {
 
     private fun loadUserConfig() {
         loadConfig(mainConfigPath, userConfig)
-    }
-
-    private fun loadPrivateConfig() {
-        loadConfig(privateConfigPath, privateConfig)
     }
 
     private fun loadDefaultConfig() {
