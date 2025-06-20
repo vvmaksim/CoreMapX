@@ -1,7 +1,6 @@
 package view.appInterface.dialog
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +12,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
@@ -21,7 +19,6 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.HourglassEmpty
 import androidx.compose.runtime.Composable
@@ -102,23 +99,10 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                     .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = "Random Graph",
-                    style = MaterialTheme.typography.h5,
-                    modifier = Modifier.align(Alignment.Center),
-                )
-                IconButton(
-                    onClick = onDismiss,
-                    modifier = Modifier.align(Alignment.CenterEnd),
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "Close",
-                        tint = MaterialTheme.colors.onSurface,
-                    )
-                }
-            }
+            DialogHeader(
+                title = "Random Graph",
+                onButtonClick = onDismiss,
+            )
             Spacer(modifier = Modifier.height(24.dp))
             OutlinedTextField(
                 value = verticesCount,
