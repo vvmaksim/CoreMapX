@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.ColorPickLine
@@ -39,6 +40,8 @@ fun SettingsBlock(
     isExpanded: Boolean = true,
     onClick: (Boolean) -> Unit = {},
 ) {
+    val animationDuration = config.states.animationDuration.value
+
     Column(modifier = modifier) {
         Row(
             modifier =
@@ -62,8 +65,8 @@ fun SettingsBlock(
         }
         AnimatedVisibility(
             visible = isExpanded,
-            enter = fadeIn(animationSpec = tween(300)) + expandVertically(animationSpec = tween(300)),
-            exit = fadeOut(animationSpec = tween(300)) + shrinkVertically(animationSpec = tween(300)),
+            enter = fadeIn(animationSpec = tween(animationDuration)) + expandVertically(animationSpec = tween(animationDuration)),
+            exit = fadeOut(animationSpec = tween(animationDuration)) + shrinkVertically(animationSpec = tween(animationDuration)),
         ) {
             Column {
                 Spacer(modifier = Modifier.height(8.dp))
