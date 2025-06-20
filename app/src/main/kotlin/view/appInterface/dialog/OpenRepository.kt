@@ -284,13 +284,24 @@ private fun PreviewOpenRepositoryWithRandomData() {
     }
 
     AppTheme {
-        OpenRepositoryContent(
-            onDismiss = {},
-            graphs = graphs,
-            onGraphSelected = {},
-            getCountVerticesByGraph = { Random.nextLong(0, 1000000) },
-            getCountEdgesByGraph = { Random.nextLong(0, 1000000) },
-            dialogWidth = 550.dp,
-        )
+        Column {
+            OpenRepositoryContent(
+                onDismiss = {},
+                graphs = graphs,
+                onGraphSelected = {},
+                getCountVerticesByGraph = { Random.nextLong(0, 1000000) },
+                getCountEdgesByGraph = { Random.nextLong(0, 1000000) },
+                dialogWidth = 550.dp,
+            )
+            Spacer(Modifier.height(8.dp))
+            OpenRepositoryContent(
+                onDismiss = {},
+                graphs = mutableListOf<Graphs>(),
+                onGraphSelected = {},
+                getCountVerticesByGraph = { Random.nextLong(0, 1000000) },
+                getCountEdgesByGraph = { Random.nextLong(0, 1000000) },
+                dialogWidth = 550.dp,
+            )
+        }
     }
 }
