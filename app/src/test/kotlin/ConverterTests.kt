@@ -1,11 +1,11 @@
 import model.fileHandler.ConvertModes
 import model.fileHandler.FileExtensions
-import model.fileHandler.converters.Converter
+import model.fileHandler.converter.Converter
 import model.result.Result
+import org.coremapx.app.userDirectory.UserDirectory
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
-import org.coremapx.app.userDirectory.UserDirectory
 import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

@@ -8,11 +8,11 @@ object Theme {
     val borderColor: Color
         get() = config.states.borderColor.value
 
+    val successColor: Color
+        get() = config.states.successColor.value
+
     val warningColor: Color
         get() = config.states.warningColor.value
-
-    val vertexMainColor: Color
-        get() = config.states.vertexMainColor.value
 
     val hoveredBorderColor: Color
         get() = config.states.hoveredBorderColor.value

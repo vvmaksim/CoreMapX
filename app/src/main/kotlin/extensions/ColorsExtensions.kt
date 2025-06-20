@@ -7,11 +7,11 @@ import org.coremapx.app.theme.Theme
 val Colors.border: Color
     get() = Theme.borderColor
 
+val Colors.success: Color
+    get() = Theme.successColor
+
 val Colors.warning: Color
     get() = Theme.warningColor
-
-val Colors.vertexMain: Color
-    get() = Theme.vertexMainColor
 
 val Colors.hoveredBorder: Color
     get() = Theme.hoveredBorderColor

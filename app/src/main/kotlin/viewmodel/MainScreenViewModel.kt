@@ -2,31 +2,31 @@ package viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import model.commands.classes.Commands
-import model.databases.sqlite.createDatabase
-import model.databases.sqlite.repositories.EdgeRepository
-import model.databases.sqlite.repositories.GraphRepository
-import model.databases.sqlite.repositories.VertexRepository
+import model.command.concrete.Commands
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
-import model.fileHandler.FileDialogManager
+import model.fileHandler.DialogManager
 import model.fileHandler.FileExtensions
 import model.fileHandler.Parser
-import model.fileHandler.converters.Converter
-import model.graph.classes.DirectedUnweightedGraph
-import model.graph.classes.DirectedWeightedGraph
-import model.graph.classes.UndirectedUnweightedGraph
-import model.graph.classes.UndirectedWeightedGraph
-import model.graph.dataClasses.WeightedEdge
-import model.graph.interfaces.Graph
+import model.fileHandler.converter.Converter
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
+import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
+import model.graph.contracts.Graph
+import model.graph.entities.WeightedEdge
 import model.ir.GraphIR
 import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.config
-import org.coremapx.app.userDirectory.UserDirectory.baseUserDirPath
+import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
-import viewmodel.visualizationStrategies.RandomStrategy
-import viewmodel.visualizationStrategies.VisualizationStrategy
+import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 
 class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
@@ -122,15 +122,15 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     fun openGraphFile(): Result<List<String>> {
         val file =
-            FileDialogManager.showOpenFileDialog(directory = "$baseUserDirPath/data/graphs")
+            DialogManager.showOpenFileDialog(directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH)
                 ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
         return loadGraphFromFile(file)
     }
 
     fun openGraphRepository(): Result<File> {
         val repository =
-            FileDialogManager.showOpenFileDialog(
-                directory = "$baseUserDirPath/data/graphs",
+            DialogManager.showOpenFileDialog(
+                directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH,
                 title = "Select graph repository",
             )
                 ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select repository"))
@@ -229,7 +229,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
                     return Result.Success("File was saved as GRAPH")
                 }
                 FileExtensions.JSON -> {
-                    val tempFileIR = File("$baseUserDirPath/data/temp/$fileName.graph")
+                    val tempFileIR = File("${PrivateConfig.UserDirectory.TEMP_DIR_PATH}/$fileName.graph")
                     tempFileIR.writeText(ir.toString())
                     val convertResult = Converter.convert(tempFileIR, FileExtensions.JSON, ConvertModes.SAVE, graphId)
                     when (convertResult) {

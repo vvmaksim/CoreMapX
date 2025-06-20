@@ -1,0 +1,426 @@
+package view.appInterface.layout
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.FolderOpen
+import androidx.compose.material.icons.filled.Fullscreen
+import androidx.compose.material.icons.filled.FullscreenExit
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.SaveAs
+import androidx.compose.material.icons.filled.Storage
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import model.database.sqlite.createDatabase
+import model.database.sqlite.repository.EdgeRepository
+import model.database.sqlite.repository.GraphRepository
+import model.database.sqlite.repository.VertexRepository
+import model.result.Result
+import org.coremapx.app.config
+import org.coremapx.app.config.PrivateConfig
+import org.coremapx.graph.GraphDatabase
+import view.appInterface.dialog.NewGraph
+import view.appInterface.dialog.OpenGraphErrors
+import view.appInterface.dialog.OpenRepository
+import view.appInterface.dialog.SaveGraphAs
+import view.appInterface.dialog.UserNotification
+import viewmodel.MainScreenViewModel
+import java.io.File
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
+    onClose: () -> Unit,
+    onMinimize: () -> Unit,
+    onMaximize: () -> Unit,
+    isMaximized: Boolean,
+    viewModel: MainScreenViewModel<E, V>,
+) {
+    val titleBarHeight = config.states.titleBarHeight.value.dp
+    val titleBarIconSize = config.states.titleBarIconSize.value.dp
+
+    var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
+    var showMenuButtons by remember { mutableStateOf(false) }
+    var showFileMenu by remember { mutableStateOf(false) }
+    var showSaveAsDialog by remember { mutableStateOf(false) }
+    var showNewGraphDialog by remember { mutableStateOf(false) }
+    var showOpenRepositoryDialog by remember { mutableStateOf(false) }
+    var showUserNotification by remember { mutableStateOf(false) }
+    var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
+    var userNotificationTitle by remember { mutableStateOf("") }
+    var userNotificationMessage by remember { mutableStateOf("") }
+    var selectedRepositoryFile by remember { mutableStateOf(File("")) }
+
+    var showOpenSubMenu by remember { mutableStateOf(false) }
+
+    Row(
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colors.background)
+                .height(titleBarHeight),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Row(
+            modifier = Modifier.padding(start = 4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (showMenuButtons) {
+                IconButton(onClick = { showMenuButtons = false }) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Title Bar Menu",
+                        tint = MaterialTheme.colors.onSurface,
+                        modifier = Modifier.size(titleBarIconSize),
+                    )
+                }
+
+                TextButton(onClick = { showFileMenu = true }) {
+                    Text(
+                        text = "File",
+                        style = MaterialTheme.typography.button,
+                        color = MaterialTheme.colors.onSurface,
+                    )
+                }
+                DropdownMenu(
+                    expanded = showFileMenu,
+                    onDismissRequest = { showFileMenu = false },
+                    modifier = Modifier.background(color = MaterialTheme.colors.background),
+                ) {
+                    DropdownMenuItem(
+                        onClick = {
+                            showFileMenu = false
+                            showNewGraphDialog = true
+                        },
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.Add,
+                                contentDescription = "New Icon",
+                                tint = MaterialTheme.colors.primary,
+                            )
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                text = "New",
+                                style = MaterialTheme.typography.button,
+                            )
+                        }
+                    }
+                    DropdownMenuItem(
+                        onClick = {
+                            showOpenSubMenu = true
+                        },
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.FolderOpen,
+                                contentDescription = "Open Menu Icon",
+                                tint = MaterialTheme.colors.primary,
+                            )
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                text = "Open..",
+                                style = MaterialTheme.typography.button,
+                            )
+                        }
+                        DropdownMenu(
+                            expanded = showOpenSubMenu,
+                            onDismissRequest = { showOpenSubMenu = false },
+                            modifier = Modifier.background(color = MaterialTheme.colors.background),
+                        ) {
+                            DropdownMenuItem(
+                                onClick = {
+                                    val loadResult = viewModel.openGraphFile()
+                                    warnings =
+                                        when (loadResult) {
+                                            is Result.Success -> loadResult.data
+                                            is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                                        }
+                                    if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+                                    showOpenSubMenu = false
+                                    showFileMenu = false
+                                },
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Description,
+                                        contentDescription = "Open File Icon",
+                                        tint = MaterialTheme.colors.primary,
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(
+                                        text = "Open File",
+                                        style = MaterialTheme.typography.button,
+                                    )
+                                }
+                            }
+                            DropdownMenuItem(
+                                onClick = {
+                                    val openResult = viewModel.openGraphRepository()
+                                    when (openResult) {
+                                        is Result.Error ->
+                                            warnings =
+                                                listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+
+                                        is Result.Success -> {
+                                            selectedRepositoryFile = openResult.data
+                                            showOpenRepositoryDialog = true
+                                        }
+                                    }
+                                    if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+                                    showOpenSubMenu = false
+                                    showFileMenu = false
+                                },
+                            ) {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(
+                                        imageVector = Icons.Filled.Storage,
+                                        contentDescription = "Open Repository Icon",
+                                        tint = MaterialTheme.colors.primary,
+                                    )
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(
+                                        text = "Open Repository",
+                                        style = MaterialTheme.typography.button,
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    DropdownMenuItem(
+                        onClick = {
+                            if (viewModel.graphPath == null) {
+                                showSaveAsDialog = true
+                            } else {
+                                val saveResult = viewModel.saveGraph()
+                                if (saveResult is Result.Error) {
+                                    userNotificationMessage =
+                                        "Error: ${saveResult.error.type}.${saveResult.error.description}"
+                                    userNotificationTitle = "Save Error"
+                                    showUserNotification = true
+                                }
+                            }
+                            showFileMenu = false
+                        },
+                        enabled = viewModel.isGraphActive,
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.Save,
+                                contentDescription = "Save Icon",
+                                tint =
+                                    if (viewModel.isGraphActive) {
+                                        MaterialTheme.colors.primary
+                                    } else {
+                                        MaterialTheme.colors.onSurface.copy(
+                                            alpha = PrivateConfig.View.DISABLED_ALPHA,
+                                        )
+                                    },
+                            )
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                text = "Save",
+                                style = MaterialTheme.typography.button,
+                                color =
+                                    if (viewModel.isGraphActive) {
+                                        MaterialTheme.colors.onSurface
+                                    } else {
+                                        MaterialTheme.colors.onSurface
+                                            .copy(
+                                                alpha = PrivateConfig.View.DISABLED_ALPHA,
+                                            )
+                                    },
+                            )
+                        }
+                    }
+                    DropdownMenuItem(
+                        onClick = {
+                            showFileMenu = false
+                            showSaveAsDialog = true
+                        },
+                        enabled = viewModel.isGraphActive,
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Filled.SaveAs,
+                                contentDescription = "Save as Icon",
+                                tint =
+                                    if (viewModel.isGraphActive) {
+                                        MaterialTheme.colors.primary
+                                    } else {
+                                        MaterialTheme.colors.onSurface.copy(
+                                            alpha = PrivateConfig.View.DISABLED_ALPHA,
+                                        )
+                                    },
+                            )
+                            Spacer(Modifier.width(8.dp))
+                            Text(
+                                text = "Save as..",
+                                style = MaterialTheme.typography.button,
+                                color =
+                                    if (viewModel.isGraphActive) {
+                                        MaterialTheme.colors.onSurface
+                                    } else {
+                                        MaterialTheme.colors.onSurface
+                                            .copy(
+                                                alpha = PrivateConfig.View.DISABLED_ALPHA,
+                                            )
+                                    },
+                            )
+                        }
+                    }
+                }
+                TextButton(onClick = { }) {
+                    Text(
+                        text = "Settings",
+                        style = MaterialTheme.typography.button,
+                        color = MaterialTheme.colors.onSurface,
+                    )
+                }
+                TextButton(onClick = { }) {
+                    Text(
+                        text = "Help",
+                        style = MaterialTheme.typography.button,
+                        color = MaterialTheme.colors.onSurface,
+                    )
+                }
+            } else {
+                IconButton(onClick = { showMenuButtons = true }) {
+                    Icon(
+                        imageVector = Icons.Default.Menu,
+                        contentDescription = "Title Bar Menu",
+                        tint = MaterialTheme.colors.onSurface,
+                        modifier = Modifier.size(titleBarIconSize),
+                    )
+                }
+            }
+        }
+        Row(modifier = Modifier.padding(end = 4.dp)) {
+            IconButton(onClick = onMinimize) {
+                Icon(
+                    imageVector = Icons.Filled.Remove,
+                    contentDescription = "Minimize",
+                    tint = MaterialTheme.colors.onSurface,
+                    modifier = Modifier.size(titleBarIconSize),
+                )
+            }
+            IconButton(onClick = onMaximize) {
+                Icon(
+                    imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
+                    contentDescription = if (isMaximized) "Recover" else "Maximize",
+                    tint = MaterialTheme.colors.onSurface,
+                    modifier = Modifier.size(titleBarIconSize),
+                )
+            }
+            IconButton(onClick = onClose) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Close",
+                    tint = MaterialTheme.colors.onSurface,
+                    modifier = Modifier.size(titleBarIconSize),
+                )
+            }
+        }
+    }
+    if (showOpenGraphErrorsDialog) {
+        OpenGraphErrors(
+            onDismiss = { showOpenGraphErrorsDialog = false },
+            warnings = warnings,
+        )
+    }
+
+    if (showOpenRepositoryDialog) {
+        val database: GraphDatabase = createDatabase(selectedRepositoryFile.absolutePath)
+        val graphs = GraphRepository(database).getAllGraphs()
+        OpenRepository(
+            onDismiss = { showOpenRepositoryDialog = false },
+            graphs = graphs,
+            onGraphSelected = { graphId ->
+                viewModel.graphId = graphId
+                val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
+                if (loadResult is Result.Error) {
+                    warnings =
+                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                }
+                if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
+            },
+            getCountVerticesByGraph = { graphId -> VertexRepository(database).getVerticesByGraph(graphId).size.toLong() },
+            getCountEdgesByGraph = { graphId -> EdgeRepository(database).getEdgesByGraph(graphId).size.toLong() },
+        )
+    }
+
+    if (showSaveAsDialog) {
+        SaveGraphAs(
+            graphName = viewModel.graphName,
+            onDismiss = { showSaveAsDialog = false },
+            onSave = { savedGraphDetails ->
+                val saveResult =
+                    viewModel.saveGraph(
+                        fileName = savedGraphDetails.fileName,
+                        directoryPath = savedGraphDetails.directoryPath,
+                        fileFormat = savedGraphDetails.fileFormat,
+                    )
+                userNotificationMessage =
+                    when (saveResult) {
+                        is Result.Error -> {
+                            userNotificationTitle = "Save Error"
+                            "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
+                        }
+
+                        is Result.Success -> {
+                            userNotificationTitle = "Save Success"
+                            "Graph ${savedGraphDetails.fileName} has been successfully saved to the directory ${savedGraphDetails.directoryPath} as ${savedGraphDetails.fileFormat}"
+                        }
+                    }
+                showUserNotification = true
+            },
+        )
+    }
+
+    if (showUserNotification) {
+        UserNotification(
+            onDismiss = { showUserNotification = false },
+            title = userNotificationTitle,
+            message = userNotificationMessage,
+        )
+    }
+
+    if (showNewGraphDialog) {
+        NewGraph(
+            onDismiss = { showNewGraphDialog = false },
+            onCreate = { newGraphData ->
+                viewModel.graphName = newGraphData.graphName
+                viewModel.graphAuthor = "None"
+                viewModel.graphPath = null
+                viewModel.graphFormat = null
+                viewModel.updateGraph(newGraphData.graph)
+            },
+        )
+    }
+}

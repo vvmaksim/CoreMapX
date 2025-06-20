@@ -6,7 +6,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import model.graph.dataClasses.Vertex
+import model.graph.entities.Vertex
 import org.coremapx.app.config
 
 class VertexViewModel<V : Comparable<V>>(
