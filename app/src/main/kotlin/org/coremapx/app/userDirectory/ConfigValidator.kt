@@ -30,9 +30,6 @@ class ConfigValidator {
                 "mainScreenStartWidth" -> intValidator(key, value, minValue = 1280)
                 "startWindowPlacement" -> enumStringValidator(key, value, listOf("FullScreen", "Floating", "Maximized"))
 
-                // Main Menu
-                "mainMenuWidth" -> intValidator(key, value, minValue = 200)
-
                 // Title Bar
                 "titleBarHeight" -> intValidator(key, value, minValue = 35)
                 "titleBarIconSize" -> intValidator(key, value, minValue = 16)
