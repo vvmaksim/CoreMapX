@@ -45,6 +45,7 @@ import org.coremapx.graph.GraphDatabase
 import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.SlideMenuButton
 import view.appInterface.button.UserDirectoryButton
+import view.appInterface.dialog.Analytics
 import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
 import view.appInterface.dialog.OpenRepository
@@ -53,6 +54,9 @@ import view.appInterface.dialog.Settings
 import view.appInterface.dialog.UserNotification
 import view.appInterface.icon.Logo
 import viewmodel.MainScreenViewModel
+import viewmodel.visualizationStrategy.CircularStrategy
+import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 
 @Suppress("ktlint:standard:function-naming")
@@ -70,6 +74,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     var showSaveGraphAsDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var showNewGraphDialog by remember { mutableStateOf(false) }
+    var showAnalyticsDialog by remember { mutableStateOf(false) }
     var showSettingsDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var userNotificationTitle by remember { mutableStateOf("") }
@@ -196,7 +201,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 )
 
                 MainMenuTextButton(
-                    onClick = { },
+                    onClick = { showAnalyticsDialog = true },
                     iconVector = Icons.Filled.Analytics,
                     iconContentDescription = "Analytics Icon",
                     buttonText = "Analytics",
@@ -341,6 +346,21 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     if (showSettingsDialog) {
         Settings(
             onDismiss = { showSettingsDialog = false },
+        )
+    }
+
+    if (showAnalyticsDialog) {
+        Analytics(
+            onDismiss = { showAnalyticsDialog = false },
+            onStrategyUpdate = { newStrategy: VisualizationStrategy ->
+                viewModel.updateLayoutStrategy(newStrategy)
+                },
+            selectedLayoutStrategy =
+                when (viewModel.layoutStrategy.value) {
+                    is RandomStrategy -> "Random"
+                    is CircularStrategy -> "Circular"
+                    else -> "Random"
+                },
         )
     }
 }
