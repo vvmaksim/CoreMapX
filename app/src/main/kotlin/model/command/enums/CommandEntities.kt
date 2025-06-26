@@ -6,4 +6,5 @@ enum class CommandEntities {
     GRAPH,
     COMMAND_OUTPUT,
     APP,
+    LAYOUT_STRATEGY,
 }
