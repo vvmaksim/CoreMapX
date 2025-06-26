@@ -12,6 +12,7 @@ import model.graph.entities.Vertex
 import model.result.Result
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import viewmodel.MainScreenViewModel
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
@@ -20,13 +21,15 @@ class CommandsTests {
     lateinit var graph: Graph<Long, Long>
     lateinit var outputMessages: MutableList<String>
     lateinit var commands: Commands<Long, Long>
+    lateinit var viewmodel: MainScreenViewModel<Long, Long>
 
     @BeforeEach
     fun setup() {
         command = mockk()
         graph = mockk()
         outputMessages = mutableListOf()
-        commands = Commands(command, graph, outputMessages)
+        viewmodel = MainScreenViewModel()
+        commands = Commands(command, graph, outputMessages, viewmodel)
     }
 
     // Correct commands
@@ -258,7 +261,63 @@ class CommandsTests {
         assertEquals("Help information", result.data)
     }
 
+    @Test
+    fun `set strategy on random`() {
+        every { command.type } returns CommandTypes.SET
+        every { command.entity } returns CommandEntities.LAYOUT_STRATEGY
+        every { command.parameters } returns mapOf("strategy" to "random")
+
+        val result = commands.execute()
+
+        assertIs<Result.Success<String>>(result)
+        assertEquals("Layout strategy updated. New strategy: random", result.data)
+    }
+
     // Incorrect commands
+
+    @Test
+    fun `unknown entity in set command`() {
+        every { command.type } returns CommandTypes.SET
+        every { command.entity } returns CommandEntities.GRAPH
+        val result = commands.execute()
+        assertIs<Result.Error>(result)
+        assertEquals("UnknownEntity", result.error.type)
+        assertEquals("Unknown entity for command: Unsupported entity for set command", result.error.description)
+    }
+
+    @Test
+    fun `set strategy without strategy`() {
+        every { command.type } returns CommandTypes.SET
+        every { command.entity } returns CommandEntities.LAYOUT_STRATEGY
+        every { command.parameters } returns mapOf("unknown_key" to "random")
+        val result = commands.execute()
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Strategy is required", result.error.description)
+    }
+
+    @Test
+    fun `set strategy without viewmodel`() {
+        commands = Commands(command, graph, outputMessages, null)
+        every { command.type } returns CommandTypes.SET
+        every { command.entity } returns CommandEntities.LAYOUT_STRATEGY
+        every { command.parameters } returns mapOf("strategy" to "random")
+        val result = commands.execute()
+        assertIs<Result.Error>(result)
+        assertEquals("ViewmodelNotFounded", result.error.type)
+        assertEquals("Viewmodel not founded", result.error.description)
+    }
+
+    @Test
+    fun `set strategy with unknown layout strategy`() {
+        every { command.type } returns CommandTypes.SET
+        every { command.entity } returns CommandEntities.LAYOUT_STRATEGY
+        every { command.parameters } returns mapOf("strategy" to "unknown_strategy")
+        val result = commands.execute()
+        assertIs<Result.Error>(result)
+        assertEquals("UnknownLayoutStrategy", result.error.type)
+        assertEquals("Unknown layout strategy: unknown_strategy", result.error.description)
+    }
 
     @Test
     fun `unknown entity in add command`() {
