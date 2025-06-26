@@ -25,6 +25,7 @@ import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
+import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
@@ -113,6 +114,14 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
     fun resetGraphView() {
         graphViewModel?.let {
             layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, it.vertices)
+        }
+    }
+
+    fun getLayoutStrategyByString(strategy: String): VisualizationStrategy? {
+        return when (strategy.lowercase()) {
+            "random" -> RandomStrategy()
+            "circular" -> CircularStrategy()
+            else -> null
         }
     }
 
