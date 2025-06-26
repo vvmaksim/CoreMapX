@@ -10,11 +10,13 @@ import model.graph.contracts.Graph
 import model.graph.entities.Vertex
 import model.result.CommandErrors
 import model.result.Result
+import viewmodel.MainScreenViewModel
 
 class Commands<E : Comparable<E>, V : Comparable<V>>(
     private val command: Command,
     private val graph: Graph<E, V>,
     private val outputMessages: MutableList<String>,
+    private val viewModel: MainScreenViewModel<E, V>? = null,
 ) {
     fun execute(): Result<String> =
         when (command.type) {
@@ -30,6 +32,12 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
                     CommandEntities.VERTEX -> removeVertex()
                     CommandEntities.EDGE -> removeEdge()
                     else -> Result.Error(CommandErrors.UnknownEntity("Unsupported entity for rm/remove command"))
+                }
+            }
+            CommandTypes.SET -> {
+                when (command.entity) {
+                    CommandEntities.LAYOUT_STRATEGY -> setStrategy()
+                    else -> Result.Error(CommandErrors.UnknownEntity("Unsupported entity for set command"))
                 }
             }
             CommandTypes.CLEAR -> {
@@ -102,6 +110,17 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             else -> {
                 Result.Error(CommandErrors.UnknownGraphType(graph::class.simpleName ?: "UnknownGraphType"))
             }
+        }
+    }
+
+    private fun setStrategy(): Result<String> {
+        val strategyAsString = command.parameters["strategy"] ?: return Result.Error(CommandErrors.MissingParameters("Strategy is required"))
+        if (viewModel != null) {
+            val strategy = viewModel.getLayoutStrategyByString(strategyAsString) ?: return Result.Error(CommandErrors.UnknownLayoutStrategy(strategyAsString))
+            viewModel.updateLayoutStrategy(strategy)
+            return Result.Success("Layout strategy updated. New strategy: $strategyAsString")
+        } else {
+            return Result.Error(CommandErrors.ViewmodelNotFounded())
         }
     }
 
