@@ -11,12 +11,28 @@ import model.graph.contracts.Graph
 import model.graph.entities.Vertex
 import model.result.Result
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import viewmodel.MainScreenViewModel
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class CommandsTests {
+    companion object {
+        @JvmStatic
+        @BeforeAll
+        fun setupConfig() {
+            mockkStatic("org.coremapx.app.MainKt")
+            every { org.coremapx.app.config } returns mockk {
+                every { states } returns mockk {
+                    every { canvasLimit } returns mockk { every { value } returns 8000 }
+                    every { graphLayoutHeight } returns mockk { every { value } returns 7000 }
+                    every { graphLayoutWidth } returns mockk { every { value } returns 7000 }
+                }
+            }
+        }
+    }
+
     lateinit var command: Command
     lateinit var graph: Graph<Long, Long>
     lateinit var outputMessages: MutableList<String>
@@ -425,7 +441,7 @@ class CommandsTests {
 
         assertIs<Result.Error>(result)
         assertEquals("UnknownGraphType", result.error.type)
-        assertEquals("Unknown graph type: Graph\$Subclass0", result.error.description)
+        assertEquals("Unknown graph type: Graph\$Subclass1", result.error.description)
     }
 
     @Test
