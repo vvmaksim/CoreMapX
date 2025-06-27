@@ -48,7 +48,7 @@ class ConfigValidator {
                 ConfigKeys.VERTEX_LABEL_SIZE -> intValidator(key, value, minValue = 6)
                 ConfigKeys.EDGE_LABEL_SIZE -> intValidator(key, value, minValue = 6)
                 ConfigKeys.EDGE_ARROW_SIZE -> floatValidator(key, value, minValue = 1f, maxValue = 100f)
-                ConfigKeys.EDGE_WIDTH -> floatValidator(key, value, minValue = 1f)
+                ConfigKeys.EDGE_WIDTH -> floatValidator(key, value, minValue = 1f, maxValue = 15f)
                 ConfigKeys.CANVAS_DRAG_RATIO -> floatValidator(key, value, minValue = 0.1f, maxValue = 10.0f)
                 ConfigKeys.CANVAS_LIMIT -> intValidator(key, value, minValue = 2000)
 

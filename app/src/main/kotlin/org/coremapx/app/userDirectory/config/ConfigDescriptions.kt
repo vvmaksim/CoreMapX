@@ -243,6 +243,7 @@ object ConfigDescriptions {
         
         Min=1
         Recommended=1
+        Max=15
         """.trimIndent()
     val CANVAS_DRAG_RATIO =
         """
