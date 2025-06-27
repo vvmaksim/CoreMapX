@@ -183,7 +183,7 @@ object ConfigDescriptions {
         The height of the command line.
         
         Min=400
-        Recommended=666
+        Recommended=700
         Max=900
         """.trimIndent()
     val IS_TRANSPARENT_COMMAND_LINE =
