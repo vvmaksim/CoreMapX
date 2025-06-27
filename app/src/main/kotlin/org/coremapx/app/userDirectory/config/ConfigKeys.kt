@@ -42,6 +42,7 @@ object ConfigKeys {
     // Command Field
     const val MESSAGE_OUTPUT_HEIGHT = "messageOutputHeight"
     const val MAX_COUNT_MESSAGES = "maxCountMessages"
+    const val MAX_COUNT_USER_COMMANDS = "maxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
     const val IS_TRANSPARENT_COMMAND_LINE = "isTransparentCommandLine"
 

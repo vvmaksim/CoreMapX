@@ -37,6 +37,7 @@ class ConfigValidator {
                 // Command Field
                 ConfigKeys.MESSAGE_OUTPUT_HEIGHT -> intValidator(key, value, minValue = 150)
                 ConfigKeys.MAX_COUNT_MESSAGES -> intValidator(key, value, minValue = 1, maxValue = 10000)
+                ConfigKeys.MAX_COUNT_USER_COMMANDS -> intValidator(key, value, minValue = 1, maxValue = 1000)
                 ConfigKeys.COMMAND_FIELD_WIDTH -> intValidator(key, value, minValue = 400)
                 ConfigKeys.IS_TRANSPARENT_COMMAND_LINE -> booleanValidator(key, value)
 

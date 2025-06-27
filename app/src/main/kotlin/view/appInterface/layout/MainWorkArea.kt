@@ -55,7 +55,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     var commandHistoryIndex by remember { mutableStateOf(-1) }
 
     val maxCountMessages = config.states.maxCountMessages.value
-    val maxUserCommands = 200
+    val maxUserCommands = config.states.maxCountUserCommands.value
     val commandFieldWidth = config.states.commandFieldWidth.value.dp
     val isTransparentCommandLine = config.states.isTransparentCommandLine.value
 

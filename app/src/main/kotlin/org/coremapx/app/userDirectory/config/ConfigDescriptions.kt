@@ -153,6 +153,10 @@ object ConfigDescriptions {
         """
         The maximum number of output messages that are remembered.
         """.trimIndent()
+    val MAX_COUNT_USER_COMMANDS =
+        """
+        The maximum number of history user commands that are remembered.
+        """.trimIndent()
     val COMMAND_FIELD_WIDTH =
         """
         The height of the command line.

@@ -16,6 +16,7 @@ import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_WIDTH
 import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
+import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_USER_COMMANDS
 import org.coremapx.app.userDirectory.config.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.NumberTextFieldLine
@@ -26,6 +27,7 @@ import view.appInterface.settingsElements.lines.SwitchLine
 fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val messageOutputHeight by remember { config.states.messageOutputHeight }
     val maxCountMessages by remember { config.states.maxCountMessages }
+    val maxCountUserCommands by remember { config.states.maxCountUserCommands }
     val commandFieldWidth by remember { config.states.commandFieldWidth }
     val isTransparentCommandLine by remember { config.states.isTransparentCommandLine }
 
@@ -47,6 +49,17 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
                 config.setValue(MAX_COUNT_MESSAGES, it.text)
             },
             description = ConfigDescriptions.MAX_COUNT_MESSAGES,
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = "Max count user commands",
+            valueType = Int::class,
+            value = TextFieldValue("$maxCountUserCommands"),
+            onValueChange = {
+                config.setValue(MAX_COUNT_USER_COMMANDS, it.text)
+            },
+            description = ConfigDescriptions.MAX_COUNT_USER_COMMANDS,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
