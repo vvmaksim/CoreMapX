@@ -184,6 +184,7 @@ object ConfigDescriptions {
         
         Min=400
         Recommended=666
+        Max=900
         """.trimIndent()
     val IS_TRANSPARENT_COMMAND_LINE =
         """
