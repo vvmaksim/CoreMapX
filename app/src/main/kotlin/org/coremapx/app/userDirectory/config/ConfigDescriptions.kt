@@ -117,12 +117,16 @@ object ConfigDescriptions {
         The starting height of the application window.
         
         It is used only when the `startWindowPlacement` is in the `Floating` state.
+        
+        Min=720
         """.trimIndent()
     val MAIN_SCREEN_START_WIDTH =
         """
         The starting width of the application window.
         
         It is used only when the `startWindowPlacement` is in the `Floating` state.
+        
+        Min=1280
         """.trimIndent()
     val START_WINDOW_PLACEMENT =
         """
@@ -138,28 +142,48 @@ object ConfigDescriptions {
     val TITLE_BAR_HEIGHT =
         """
         Height of the title bar.
+        
+        Min=35
+        Recommended=40 
         """.trimIndent()
     val TITLE_BAR_ICON_SIZE =
         """
         Size of the title bar icons.
+        
+        Min=16
+        Recommended=20
         """.trimIndent()
 
     // Command Field
     val MESSAGE_OUTPUT_HEIGHT =
         """
         Maximum lifting height for command line output messages.
+        
+        Min=150
+        Recommended=200
         """.trimIndent()
     val MAX_COUNT_MESSAGES =
         """
         The maximum number of output messages that are remembered.
+        
+        Min=1
+        Recommended=100
+        Max=10000
         """.trimIndent()
     val MAX_COUNT_USER_COMMANDS =
         """
         The maximum number of history user commands that are remembered.
+        
+        Min=1
+        Recommended=200
+        Max=1000
         """.trimIndent()
     val COMMAND_FIELD_WIDTH =
         """
         The height of the command line.
+        
+        Min=400
+        Recommended=666
         """.trimIndent()
     val IS_TRANSPARENT_COMMAND_LINE =
         """
@@ -173,47 +197,84 @@ object ConfigDescriptions {
     val GRAPH_LAYOUT_HEIGHT =
         """
         The graph is drawn on a certain plane, you can change the height of this plane.
+        
+        Min=2000
+        Recommended=7000
         """.trimIndent()
     val GRAPH_LAYOUT_WIDTH =
         """
         The graph is drawn on a certain plane, you can change the width of this plane.
+        
+        Min=1000
+        Recommended=7000
         """.trimIndent()
     val VERTEX_RADIUS =
         """
         The standard radius for a vertex.
+        
+        Min=1
+        Recommended=15
         """.trimIndent()
     val VERTEX_LABEL_SIZE =
         """
         Vertex label size.
+        
+        Min=6
+        Recommended=14
         """.trimIndent()
     val EDGE_LABEL_SIZE =
         """
         Edge label size.
+        
+        Min=6
+        Recommended=14
         """.trimIndent()
     val EDGE_ARROW_SIZE =
         """
         Edge arrow size.
+        
+        Min=1
+        Recommended=10
+        Max=100
         """.trimIndent()
     val EDGE_WIDTH =
         """
         Width for an edge.
+        
+        Min=1
+        Recommended=1
         """.trimIndent()
     val CANVAS_DRAG_RATIO =
         """
         The graph movement speed is calculated using a certain `canvasDragRatio` multiplier.
+        
+        Min=0.1
+        Recommended=1
+        Max=10
         """.trimIndent()
     val CANVAS_LIMIT =
         """
         The area where the graph is drawn is finite. To limit movement on this plane, you can change this parameter.
+        
+        Min=2000
+        Recommended=8000
         """.trimIndent()
 
     // Performance
     val ANIMATION_DURATION =
         """
         This parameter is used to specify the speed of animations, for example, the speed of minimizing the side menu, etc.
+        
+        Min=100
+        Recommended=300
+        Max=1500
         """.trimIndent()
     val COMMAND_FIELD_SCROLL_DELAY =
         """
         A certain amount of time passes when sending a command on the command line.
+        
+        Min=10
+        Recommended=50
+        Max=300
         """.trimIndent()
 }
