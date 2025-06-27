@@ -243,7 +243,7 @@ object ConfigDescriptions {
         Width for an edge.
         
         Min=1
-        Recommended=1
+        Recommended=2
         Max=15
         """.trimIndent()
     val CANVAS_DRAG_RATIO =
