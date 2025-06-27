@@ -32,6 +32,13 @@ import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.textField.CustomTextField
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.text.TextRange
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -43,18 +50,62 @@ fun CommandLine(
     placeholderText: String = "Enter command",
     placeholderTextStyle: TextStyle = MaterialTheme.typography.body1,
     onCommand: (String) -> Unit = {},
+    commandText: TextFieldValue,
+    onCommandTextChange: (TextFieldValue) -> Unit,
+    userCommands: MutableList<String>,
+    commandHistoryIndex: Int,
+    onCommandHistoryIndexChange: (Int) -> Unit,
 ) {
-    var commandText by remember { mutableStateOf(TextFieldValue("")) }
     val scrollState = rememberScrollState()
-
-    val commandFieldScrollDelay =
-        config.states.commandFieldScrollDelay.value
-            .toLong()
+    val commandFieldScrollDelay = config.states.commandFieldScrollDelay.value.toLong()
     val messageOutputHeight = config.states.messageOutputHeight.value.dp
 
     LaunchedEffect(outputMessages.size) {
         delay(commandFieldScrollDelay)
         scrollState.animateScrollTo(scrollState.maxValue)
+    }
+
+    val onPreviewKeyEvent: (KeyEvent) -> Boolean = { event ->
+        if (event.type == KeyEventType.KeyDown) {
+            when (event.key) {
+                Key.Enter -> {
+                    val command = commandText.text.trim()
+                    if (command.isNotEmpty()) {
+                        onCommand(command)
+                        onCommandTextChange(TextFieldValue(""))
+                        onCommandHistoryIndexChange(-1)
+                    }
+                    true
+                }
+                Key.DirectionUp -> {
+                    if (userCommands.isNotEmpty()) {
+                        val newIndex =
+                            if (commandHistoryIndex < userCommands.size - 1) commandHistoryIndex + 1 else userCommands.size - 1
+                        onCommandHistoryIndexChange(newIndex)
+                        val cmd = userCommands[userCommands.size - 1 - newIndex]
+                        onCommandTextChange(TextFieldValue(cmd, selection = TextRange(cmd.length)))
+                    }
+                    true
+                }
+                Key.DirectionDown -> {
+                    if (userCommands.isNotEmpty()) {
+                        val newIndex =
+                            if (commandHistoryIndex > 0) commandHistoryIndex - 1 else -1
+                        onCommandHistoryIndexChange(newIndex)
+                        if (newIndex == -1) {
+                            onCommandTextChange(TextFieldValue(""))
+                        } else {
+                            val cmd = userCommands[userCommands.size - 1 - newIndex]
+                            onCommandTextChange(TextFieldValue(cmd, selection = TextRange(cmd.length)))
+                        }
+                    }
+                    true
+                }
+                else -> false
+            }
+        } else {
+            false
+        }
     }
 
     Column(
@@ -103,15 +154,9 @@ fun CommandLine(
         }
         CustomTextField(
             value = commandText,
-            onValueChange = { newValue ->
-                commandText = newValue
-                if (newValue.text.endsWith("\n")) {
-                    val command = newValue.text.trim()
-                    if (command.isNotEmpty()) {
-                        onCommand(command)
-                    }
-                    commandText = TextFieldValue("")
-                }
+            onValueChange = {
+                onCommandTextChange(it)
+                onCommandHistoryIndexChange(-1)
             },
             modifier =
                 Modifier
@@ -119,7 +164,8 @@ fun CommandLine(
                     .background(
                         color = commandLineBackgroundColor,
                         shape = borderShape,
-                    ),
+                    )
+                    .onPreviewKeyEvent(onPreviewKeyEvent),
             placeholder = {
                 Text(
                     text = placeholderText,
@@ -136,6 +182,7 @@ fun CommandLine(
 @Preview
 @Composable
 private fun PreviewCommandLine() {
+    var commandText by remember { mutableStateOf(TextFieldValue("")) }
     AppTheme {
         PreviewSurface(
             content = {
@@ -147,6 +194,12 @@ private fun PreviewCommandLine() {
                             "Some text",
                         ),
                     placeholderText = "Some placeholder text",
+                    onCommand = {},
+                    commandText = commandText,
+                    onCommandTextChange = {},
+                    userCommands = mutableListOf(),
+                    commandHistoryIndex = -1,
+                    onCommandHistoryIndexChange = {},
                 )
             },
         )

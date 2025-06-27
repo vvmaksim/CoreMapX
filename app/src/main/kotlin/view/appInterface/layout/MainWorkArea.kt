@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
 import extensions.commandLineBackground
@@ -46,11 +47,15 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     modifier: Modifier = Modifier,
 ) {
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
+    val userCommands = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
     val graph = viewModel.graph.value
     var commandCount by remember { mutableStateOf(0) }
+    var commandText by remember { mutableStateOf(TextFieldValue("")) }
+    var commandHistoryIndex by remember { mutableStateOf(-1) }
 
     val maxCountMessages = config.states.maxCountMessages.value
+    val maxUserCommands = 200
     val commandFieldWidth = config.states.commandFieldWidth.value.dp
     val isTransparentCommandLine = config.states.isTransparentCommandLine.value
 
@@ -69,6 +74,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
     }
 
+    fun updateUserCommands(newCommand: String) {
+        userCommands.value.add(newCommand)
+        userCommands.value = userCommands.value.takeLast(maxUserCommands).toMutableList()
+    }
+
     fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
 
     fun handleCommand(commandLine: String) {
@@ -78,6 +88,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         }
         val commands = commandLine.split(";")
         commands.forEach { command ->
+            updateUserCommands(command)
             val commandResult = Command.create(command)
             when (commandResult) {
                 is Result.Success -> {
@@ -163,6 +174,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     },
                 placeholderText = "Enter command",
                 onCommand = { command -> handleCommand(command) },
+                commandText = commandText,
+                onCommandTextChange = { commandText = it },
+                userCommands = userCommands.value,
+                commandHistoryIndex = commandHistoryIndex,
+                onCommandHistoryIndexChange = { commandHistoryIndex = it },
             )
             Spacer(Modifier.weight(1f))
             ZoomButtons(
