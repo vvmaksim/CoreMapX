@@ -25,13 +25,12 @@ import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
+import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 
-class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
-    private val visualizationStrategy: VisualizationStrategy = RandomStrategy(),
-) {
+class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
     val canvasLimit = config.states.canvasLimit.value
     val graphLayoutHeight =
         config.states.graphLayoutHeight.value
@@ -50,6 +49,10 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     val isGraphActive: Boolean
         get() = _graph.value != null
+
+    private val _layoutStrategy = mutableStateOf<VisualizationStrategy>(RandomStrategy())
+    val layoutStrategy: State<VisualizationStrategy>
+        get() = _layoutStrategy
 
     private var _graph = mutableStateOf<Graph<E, V>?>(null)
     val graph: State<Graph<E, V>?>
@@ -110,14 +113,26 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     fun resetGraphView() {
         graphViewModel?.let {
-            visualizationStrategy.place(graphLayoutWidth, graphLayoutHeight, it.vertices)
+            layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, it.vertices)
         }
+    }
+
+    fun getLayoutStrategyByString(strategy: String): VisualizationStrategy? {
+        return when (strategy.lowercase()) {
+            "random" -> RandomStrategy()
+            "circular" -> CircularStrategy()
+            else -> null
+        }
+    }
+
+    fun updateLayoutStrategy(newStrategy: VisualizationStrategy) {
+        _layoutStrategy.value = newStrategy
     }
 
     fun updateGraph(newGraph: Graph<E, V>) {
         _graph.value = newGraph
         graphViewModel = GraphViewModel(newGraph, _showVerticesLabels)
-        visualizationStrategy.place(graphLayoutWidth, graphLayoutHeight, graphViewModel?.vertices)
+        layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, graphViewModel?.vertices)
     }
 
     fun openGraphFile(): Result<List<String>> {

@@ -298,7 +298,49 @@ class CommandTests {
         assertEquals(CommandEntities.EDGE, command.entity)
     }
 
+    @Test
+    fun `set strategy on random with explicit method`() {
+        val result = Command.create("set strategy strategy:Random")
+        assertIs<Result.Success<Command>>(result)
+        val command = result.data
+        assertEquals(CommandTypes.SET, command.type)
+        assertEquals(CommandEntities.LAYOUT_STRATEGY, command.entity)
+    }
+
+    @Test
+    fun `set strategy on circular with implicit method`() {
+        val result = Command.create("set strategy Circular")
+        assertIs<Result.Success<Command>>(result)
+        val command = result.data
+        assertEquals(CommandTypes.SET, command.type)
+        assertEquals(CommandEntities.LAYOUT_STRATEGY, command.entity)
+    }
+
     // Incorrect commands
+
+    @Test
+    fun `set strategy with bad strategy name in explicit method`() {
+        val result = Command.create("set strategy strategy:Ran:dom")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Set layout strategy command must specify 'strategy'", result.error.description)
+    }
+
+    @Test
+    fun `set strategy with unknown key name in explicit method`() {
+        val result = Command.create("set strategy unknown_key:Random")
+        assertIs<Result.Error>(result)
+        assertEquals("MissingParameters", result.error.type)
+        assertEquals("Missing required parameters: Set layout strategy command must specify 'strategy'", result.error.description)
+    }
+
+    @Test
+    fun `set unknown entity in explicit method`() {
+        val result = Command.create("set unknown_entity some_key:Random")
+        assertIs<Result.Error>(result)
+        assertEquals("UnknownEntity", result.error.type)
+        assertEquals("Unknown entity for command: unknown_entity", result.error.description)
+    }
 
     @Test
     fun `empty command`() {

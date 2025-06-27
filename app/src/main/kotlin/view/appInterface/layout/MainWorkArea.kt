@@ -81,7 +81,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             val commandResult = Command.create(command)
             when (commandResult) {
                 is Result.Success -> {
-                    val executeResult = Commands(commandResult.data, graph, outputMessages.value).execute()
+                    val executeResult = Commands(commandResult.data, graph, outputMessages.value, viewModel).execute()
                     when (executeResult) {
                         is Result.Success -> {
                             updateOutputMessages(executeResult.data)

@@ -14,6 +14,7 @@ class Command private constructor(
         private val keysForAddVertex = listOf("id", "label")
         private val keysForAddEdge = listOf("from", "to", "weight")
         private val keyForRmVertex = listOf("id")
+        private val keyForSetStrategy = listOf("strategy")
         private val keysForRmEdge = listOf("from", "to")
         private val allTypesWithoutParameters = listOf(CommandTypes.HELP, CommandTypes.CLEAR)
 
@@ -36,6 +37,7 @@ class Command private constructor(
                 "rm", "remove" -> CommandTypes.RM
                 "graph_clear", "clear" -> CommandTypes.CLEAR
                 "help" -> CommandTypes.HELP
+                "set" -> CommandTypes.SET
                 else -> null
             }
 
@@ -49,6 +51,7 @@ class Command private constructor(
             return when (elements[1].lowercase()) {
                 "vertex" -> CommandEntities.VERTEX
                 "edge" -> CommandEntities.EDGE
+                "strategy" -> CommandEntities.LAYOUT_STRATEGY
                 else -> null
             }
         }
@@ -65,12 +68,41 @@ class Command private constructor(
             val paramElements = elements.drop(2)
             val isCommandWithExplicitParameters = paramElements.any { it.contains(":") }
 
-            if (type == CommandTypes.ADD) {
-                getParametersForAddType(isCommandWithExplicitParameters, paramElements, params, entity)
-            } else if (type == CommandTypes.RM) {
-                getParametersForRmType(isCommandWithExplicitParameters, paramElements, params, entity)
+            when (type) {
+                CommandTypes.ADD -> { getParametersForAddType(isCommandWithExplicitParameters, paramElements, params, entity) }
+                CommandTypes.RM -> { getParametersForRmType(isCommandWithExplicitParameters, paramElements, params, entity) }
+                CommandTypes.SET -> { getParametersForSetType(isCommandWithExplicitParameters, paramElements, params, entity) }
+                //No parameters
+                CommandTypes.CLEAR -> {}
+                CommandTypes.HELP -> {}
             }
             return params
+        }
+
+        private fun getParametersForSetType(
+            isCommandWithExplicitParameters: Boolean,
+            paramElements: List<String>,
+            params: MutableMap<String, String>,
+            entity: CommandEntities,
+        ) {
+            if (isCommandWithExplicitParameters) {
+                paramElements.forEach { param ->
+                    val subitems = param.split(":")
+                    if (subitems.size != 2) {
+                        return
+                    }
+                    val key = subitems[0].lowercase()
+                    if (key in keyForSetStrategy) {
+                        params[key] = subitems[1]
+                    }
+                }
+            } else {
+                if (entity == CommandEntities.LAYOUT_STRATEGY) {
+                    if (paramElements.size == 1) {
+                        params["strategy"] = paramElements[0]
+                    }
+                }
+            }
         }
 
         private fun getParametersForRmType(
@@ -186,6 +218,12 @@ class Command private constructor(
                     } else if (parameters.containsKey("from") && parameters.containsKey("to")) {
                         parameters["from"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Long"))
                         parameters["to"]?.toLongOrNull() ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
+                    }
+                }
+            } else if (type == CommandTypes.SET) {
+                if (entity == CommandEntities.LAYOUT_STRATEGY) {
+                    if (!parameters.containsKey("strategy")) {
+                        return Result.Error(CommandErrors.MissingParameters("Set layout strategy command must specify 'strategy'"))
                     }
                 }
             } else if (type in allTypesWithoutParameters) {

@@ -76,4 +76,18 @@ sealed class CommandErrors(
             type = "UnknownGraphType",
             description = "Unknown graph type: $graphType",
         )
+
+    data class UnknownLayoutStrategy(
+        val strategyAsString: String,
+    ) : CommandErrors(
+        type = "UnknownLayoutStrategy",
+        description = "Unknown layout strategy: $strategyAsString",
+    )
+
+    data class ViewmodelNotFounded(
+        val message: String = "Viewmodel not founded",
+    ) : CommandErrors(
+        type = "ViewmodelNotFounded",
+        description = message,
+    )
 }
