@@ -29,6 +29,8 @@ object PrivateConfig {
     object AppResources {
         const val DEFAULT_CONFIG_PATH = "app/src/main/resources/config/DefaultConfig.cfg"
         const val DEFAULT_FONTS_DIRECTORY_PATH = "app/src/main/resources/fonts"
+        const val EN_LANGUAGE_PATH = "app/src/main/resources/languages/en.lang"
+        const val RU_LANGUAGE_PATH = "app/src/main/resources/languages/ru.lang"
     }
 
     object View {
