@@ -46,4 +46,7 @@ object DialogsKeys {
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
     const val MAIN_SCREEN_START_WIDTH = "mainScreenStartWidth"
     const val MAIN_SCREEN_PLACEMENT = "mainScreenPlacement"
+    //// Title Bar Block
+    const val TITLE_BAR_HEIGHT = "titleBarHeight"
+    const val TITLE_BAR_ICON_SIZE = "titleBarIconSize"
 }

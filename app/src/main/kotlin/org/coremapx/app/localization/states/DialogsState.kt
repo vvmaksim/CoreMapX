@@ -49,6 +49,9 @@ class DialogsState: LocalizationState {
     val mainScreenStartHeight = mutableStateOf("")
     val mainScreenStartWidth = mutableStateOf("")
     val mainScreenPlacement = mutableStateOf("")
+    //// Title Bar Block
+    val titleBarHeight = mutableStateOf("")
+    val titleBarIconSize = mutableStateOf("")
 
 
     override fun updateValue(key: String, value: String) {
@@ -98,6 +101,9 @@ class DialogsState: LocalizationState {
             DialogsKeys.MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = value
             DialogsKeys.MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = value
             DialogsKeys.MAIN_SCREEN_PLACEMENT -> mainScreenPlacement.value = value
+            //// Title Bar Block
+            DialogsKeys.TITLE_BAR_HEIGHT -> titleBarHeight.value = value
+            DialogsKeys.TITLE_BAR_ICON_SIZE -> titleBarIconSize.value = value
         }
     }
 }

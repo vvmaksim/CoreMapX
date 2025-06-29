@@ -62,6 +62,9 @@ colorsCommandLineBackgroundColor=Цвет фона командной строк
 mainScreenStartHeight=Начальная высота основного экрана
 mainScreenStartWidth=Начальная ширина основного экрана
 mainScreenPlacement=Начальное размещение основного экрана
+# Title Bar Block
+titleBarHeight=Высота заголовочной панели
+titleBarIconSize=Размер иконок на заголовочной панели
 
  ! Error Strings
 

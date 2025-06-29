@@ -62,6 +62,9 @@ colorsCommandLineBackgroundColor=Command Line Background Color
 mainScreenStartHeight=Main screen start height
 mainScreenStartWidth=Main screen start width
 mainScreenPlacement=Start window placement
+# Title Bar Block
+titleBarHeight=Title bar height
+titleBarIconSize=Title bar icon size
 
  ! Error Strings
 
