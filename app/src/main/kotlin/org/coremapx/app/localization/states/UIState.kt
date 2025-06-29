@@ -20,11 +20,6 @@ class UIState(): LocalizationState {
     val mainMenuButtonSettings = mutableStateOf("")
     val mainMenuSettingsIconDescription = mutableStateOf("")
 
-    // User Notification
-    val userNotificationSaveError = mutableStateOf("")
-    val userNotificationSaveSuccess = mutableStateOf("")
-    val userNotificationSaveSuccessMessage = mutableStateOf("")
-
     // Error Strings
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
@@ -46,11 +41,6 @@ class UIState(): LocalizationState {
             UIKeys.MAIN_MENU_ANALYTICS_ICON_DESCRIPTION -> mainMenuAnalyticsIconDescription.value = value
             UIKeys.MAIN_MENU_BUTTON_SETTINGS -> mainMenuButtonSettings.value = value
             UIKeys.MAIN_MENU_SETTINGS_ICON_DESCRIPTION -> mainMenuSettingsIconDescription.value = value
-
-            // User Notification
-            UIKeys.USER_NOTIFICATION_SAVE_ERROR -> userNotificationSaveError.value = value
-            UIKeys.USER_NOTIFICATION_SAVE_SUCCESS -> userNotificationSaveSuccess.value = value
-            UIKeys.USER_NOTIFICATION_SAVE_SUCCESS_MESSAGE -> userNotificationSaveSuccessMessage.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value

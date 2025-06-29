@@ -17,11 +17,6 @@ object UIKeys {
     const val MAIN_MENU_BUTTON_SETTINGS = "mainMenuButtonSettings"
     const val MAIN_MENU_SETTINGS_ICON_DESCRIPTION = "mainMenuSettingsIconDescription"
 
-    // User Notification
-    const val USER_NOTIFICATION_SAVE_ERROR = "userNotificationSaveError"
-    const val USER_NOTIFICATION_SAVE_SUCCESS = "userNotificationSaveSuccess"
-    const val USER_NOTIFICATION_SAVE_SUCCESS_MESSAGE = "userNotificationSaveSuccessMessage"
-
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"
     const val ERROR_NO_DESCRIPTION_MESSAGE = "errorNoDescriptionMessage"

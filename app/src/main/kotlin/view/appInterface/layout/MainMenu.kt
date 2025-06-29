@@ -153,7 +153,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                                         errorDescription = saveResult.error.description,
                                     )
 
-                                userNotificationTitle = LocalizationManager.states.ui.userNotificationSaveError.value
+                                userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveError.value
                                 showUserNotification = true
                             }
                         }
@@ -334,7 +334,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 userNotificationMessage =
                     when (saveResult) {
                         is Result.Error -> {
-                            userNotificationTitle = LocalizationManager.states.ui.userNotificationSaveError.value
+                            userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveError.value
                             LocalizationFormatter.getErrorMessage(
                                 startString = LocalizationManager.states.ui.errorBasicString.value,
                                 errorType = saveResult.error.type,
@@ -344,9 +344,9 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         }
 
                         is Result.Success -> {
-                            userNotificationTitle = LocalizationManager.states.ui.userNotificationSaveSuccess.value
+                            userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveSuccess.value
                             LocalizationFormatter.getSaveGraphSuccessMessage(
-                                startString = LocalizationManager.states.ui.userNotificationSaveSuccessMessage.value,
+                                startString = LocalizationManager.states.dialogs.userNotificationSaveSuccessMessage.value,
                                 fileName = savedGraphDetails.fileName,
                                 directoryPath = savedGraphDetails.directoryPath,
                                 fileFormat = savedGraphDetails.fileFormat.name,
