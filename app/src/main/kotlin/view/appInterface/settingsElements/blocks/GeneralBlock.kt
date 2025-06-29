@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.IS_EXPANDED_SETTINGS
@@ -36,7 +37,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             .padding(8.dp)
     Column {
         DropdownSelectLine(
-            title = "Language",
+            title = LocalizationManager.states.dialogs.generalLanguage.value,
             items = listOf("English", "Русский"),
             selectedItem = if (language == "en") "English" else "Русский",
             onItemSelected = {
@@ -48,7 +49,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
-            title = "Theme",
+            title = LocalizationManager.states.dialogs.generalTheme.value,
             items = listOf("Light", "Dark", "Custom"),
             selectedItem = theme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
@@ -61,7 +62,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
-            title = "System dialog theme",
+            title = LocalizationManager.states.dialogs.generalSystemDialogTheme.value,
             items = listOf("Light", "Dark"),
             selectedItem = systemDialogTheme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
@@ -74,7 +75,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
-            title = "Settings blocks and descriptions is expanded",
+            title = LocalizationManager.states.dialogs.generalExpanded.value,
             description = ConfigDescriptions.IS_EXPANDED_SETTINGS,
             checked = isExpandedSettings,
             onCheckedChange = { config.setValue(IS_EXPANDED_SETTINGS, it.toString()) },

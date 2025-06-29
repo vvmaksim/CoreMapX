@@ -32,6 +32,11 @@ settingsTitleBarBlockName=Заголовочная панель
 settingsCommandFieldBlockName=Командная строка
 settingsWorkAreaBlockName=Рабочая область
 settingsPerformanceBlockName=Анимации
+# General Block
+generalLanguage=Язык
+generalTheme=Тема
+generalSystemDialogTheme=Тема системных диалогов
+generalExpanded=Все блоки настроек и описания параметров раскрыты
 
  ! Error Strings
 

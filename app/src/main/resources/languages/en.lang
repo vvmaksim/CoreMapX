@@ -32,6 +32,11 @@ settingsTitleBarBlockName=Title Bar
 settingsCommandFieldBlockName=Command Field
 settingsWorkAreaBlockName=Work Area
 settingsPerformanceBlockName=Performance
+# General Block
+generalLanguage=Language
+generalTheme=Theme
+generalSystemDialogTheme=System dialog theme
+generalExpanded=All settings blocks and descriptions is expanded
 
  ! Error Strings
 

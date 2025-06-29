@@ -19,6 +19,12 @@ class DialogsState: LocalizationState {
     val settingsCommandFieldBlockName = mutableStateOf("")
     val settingsWorkAreaBlockName = mutableStateOf("")
     val settingsPerformanceBlockName = mutableStateOf("")
+    //// General Block
+    val generalLanguage = mutableStateOf("")
+    val generalTheme = mutableStateOf("")
+    val generalSystemDialogTheme = mutableStateOf("")
+    val generalExpanded = mutableStateOf("")
+
 
     override fun updateValue(key: String, value: String) {
         when(key) {
@@ -37,6 +43,11 @@ class DialogsState: LocalizationState {
             DialogsKeys.SETTINGS_COMMAND_FIELD_BLOCK_NAME -> settingsCommandFieldBlockName.value = value
             DialogsKeys.SETTINGS_WORK_AREA_BLOCK_NAME -> settingsWorkAreaBlockName.value = value
             DialogsKeys.SETTINGS_PERFORMANCE_BLOCK_NAME -> settingsPerformanceBlockName.value = value
+            //// General Block
+            DialogsKeys.GENERAL_LANGUAGE -> generalLanguage.value = value
+            DialogsKeys.GENERAL_THEME -> generalTheme.value = value
+            DialogsKeys.GENERAL_SYSTEM_DIALOG_THEME -> generalSystemDialogTheme.value = value
+            DialogsKeys.GENERAL_EXPANDED -> generalExpanded.value = value
         }
     }
 }

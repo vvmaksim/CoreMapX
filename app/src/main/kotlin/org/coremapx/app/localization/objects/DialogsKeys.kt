@@ -16,4 +16,9 @@ object DialogsKeys {
     const val SETTINGS_COMMAND_FIELD_BLOCK_NAME = "settingsCommandFieldBlockName"
     const val SETTINGS_WORK_AREA_BLOCK_NAME = "settingsWorkAreaBlockName"
     const val SETTINGS_PERFORMANCE_BLOCK_NAME = "settingsPerformanceBlockName"
+    //// General Block
+    const val GENERAL_LANGUAGE = "generalLanguage"
+    const val GENERAL_THEME = "generalTheme"
+    const val GENERAL_SYSTEM_DIALOG_THEME = "generalSystemDialogTheme"
+    const val GENERAL_EXPANDED = "generalExpanded"
 }
