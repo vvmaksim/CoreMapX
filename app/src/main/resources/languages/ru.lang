@@ -1,0 +1,27 @@
+ ! Main Menu
+
+mainMenuButtonNewGraph=Новый граф
+mainMenuNewGraphIconDescription=Иконка создания нового графа
+mainMenuButtonSave=Сохранить
+mainMenuSaveIconDescription=Иконка сохранения
+mainMenuButtonSaveAs=Сохранить как
+mainMenuSaveAsIconDescription=Иконка сохранения как
+mainMenuButtonOpenGraph=Открыть граф
+mainMenuOpenGraphIconDescription=Иконка открытия графа
+mainMenuButtonOpenRepository=Открыть репозиторий
+mainMenuOpenRepositoryIconDescription=Иконка открытия репозитория
+mainMenuButtonAnalytics=Аналитика
+mainMenuAnalyticsIconDescription=Иконка аналитики
+mainMenuButtonSettings=Настройки
+mainMenuSettingsIconDescription=Иконка настроек
+
+ ! User Notification
+
+userNotificationSaveError=Ошибка сохранения
+userNotificationSaveSuccess=Сохранение успешно
+userNotificationSaveSuccessMessage=Граф {fileName} был успешно сохранён по пути {directoryPath} в формате {fileFormat}
+
+ ! Error Strings
+
+errorBasicString=Ошибка: {errorType}.{errorDescription}
+errorNoDescriptionMessage=Описание отсутствует
