@@ -58,6 +58,10 @@ colorsHoveredBorderColor=Цвет границ при наведении
 colorsEdgeMainColor=Основной цвет ребра
 colorsCanvasBackgroundColor=Цвет фона холста
 colorsCommandLineBackgroundColor=Цвет фона командной строки
+# Main Screen Block
+mainScreenStartHeight=Начальная высота основного экрана
+mainScreenStartWidth=Начальная ширина основного экрана
+mainScreenPlacement=Начальное размещение основного экрана
 
  ! Error Strings
 

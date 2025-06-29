@@ -42,4 +42,8 @@ object DialogsKeys {
     const val COLORS_EDGE_MAIN_COLOR = "colorsEdgeMainColor"
     const val COLORS_CANVAS_BACKGROUND_COLOR = "colorsCanvasBackgroundColor"
     const val COLORS_COMMAND_LINE_BACKGROUND_COLOR = "colorsCommandLineBackgroundColor"
+    //// Main Screen Block
+    const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
+    const val MAIN_SCREEN_START_WIDTH = "mainScreenStartWidth"
+    const val MAIN_SCREEN_PLACEMENT = "mainScreenPlacement"
 }

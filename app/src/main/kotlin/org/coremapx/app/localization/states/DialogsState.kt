@@ -45,6 +45,10 @@ class DialogsState: LocalizationState {
     val colorsEdgeMainColor = mutableStateOf("")
     val colorsCanvasBackgroundColor = mutableStateOf("")
     val colorsCommandLineBackgroundColor = mutableStateOf("")
+    //// Main Screen Block
+    val mainScreenStartHeight = mutableStateOf("")
+    val mainScreenStartWidth = mutableStateOf("")
+    val mainScreenPlacement = mutableStateOf("")
 
 
     override fun updateValue(key: String, value: String) {
@@ -90,6 +94,10 @@ class DialogsState: LocalizationState {
             DialogsKeys.COLORS_EDGE_MAIN_COLOR -> colorsEdgeMainColor.value = value
             DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
             DialogsKeys.COLORS_COMMAND_LINE_BACKGROUND_COLOR -> colorsCommandLineBackgroundColor.value = value
+            //// Main Screen Block
+            DialogsKeys.MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = value
+            DialogsKeys.MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = value
+            DialogsKeys.MAIN_SCREEN_PLACEMENT -> mainScreenPlacement.value = value
         }
     }
 }

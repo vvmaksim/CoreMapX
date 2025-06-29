@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_HEIGHT
@@ -37,7 +38,7 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
 
     Column {
         NumberTextFieldLine(
-            title = "Main screen start height",
+            title = LocalizationManager.states.dialogs.mainScreenStartHeight.value,
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartHeight"),
             onValueChange = { config.setValue(MAIN_SCREEN_START_HEIGHT, it.text) },
@@ -46,7 +47,7 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Main screen start width",
+            title = LocalizationManager.states.dialogs.mainScreenStartWidth.value,
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartWidth"),
             onValueChange = { config.setValue(MAIN_SCREEN_START_WIDTH, it.text) },
@@ -55,7 +56,7 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
         )
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
-            title = "Start window placement",
+            title = LocalizationManager.states.dialogs.mainScreenPlacement.value,
             items = listOf("Maximized", "Floating", "FullScreen"),
             selectedItem = startWindowPlacement,
             onItemSelected = { config.setValue(START_WINDOW_PLACEMENT, it) },
