@@ -1,0 +1,27 @@
+ ! Main Menu
+
+mainMenuButtonNewGraph=New Graph
+mainMenuNewGraphIconDescription=New Graph Icon
+mainMenuButtonSave=Save
+mainMenuSaveIconDescription=Save Icon
+mainMenuButtonSaveAs=Save As
+mainMenuSaveAsIconDescription=Save As Icon
+mainMenuButtonOpenGraph=Open Graph
+mainMenuOpenGraphIconDescription=Open Graph Icon
+mainMenuButtonOpenRepository=Open Repository
+mainMenuOpenRepositoryIconDescription=Open Repository Icon
+mainMenuButtonAnalytics=Analytics
+mainMenuAnalyticsIconDescription=Analytics Icon
+mainMenuButtonSettings=Settings
+mainMenuSettingsIconDescription=Settings Icon
+
+ ! User Notification
+
+userNotificationSaveError=Save Error
+userNotificationSaveSuccess=Save Success
+userNotificationSaveSuccessMessage=Graph {fileName} has been successfully saved to the directory {directoryPath} as {fileFormat}
+
+ ! Error Strings
+
+errorBasicString=Error: {errorType}.{errorDescription}
+errorNoDescriptionMessage=No description
