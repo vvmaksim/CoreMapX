@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.settingsElements.blocks.ColorsBlock
 import view.appInterface.settingsElements.blocks.CommandFieldBlock
@@ -84,9 +85,9 @@ fun SettingsContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Settings",
+                title = LocalizationManager.states.dialogs.settingsTitle.value,
                 onButtonClick = onDismiss,
-                subtitle = "Press Enter to save the parameter in the text field",
+                subtitle = LocalizationManager.states.dialogs.settingsSubTitle.value,
             )
             Spacer(modifier = Modifier.height(24.dp))
             Column(
@@ -96,49 +97,49 @@ fun SettingsContent(
                         .verticalScroll(rememberScrollState()),
             ) {
                 SettingsBlock(
-                    title = "General",
+                    title = LocalizationManager.states.dialogs.settingsGeneralBlockName.value,
                     content = { GeneralBlock(isExpandedSettings) },
                     isExpanded = isThemeExpanded,
                     onClick = { isThemeExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
-                    title = "Colors",
+                    title = LocalizationManager.states.dialogs.settingsColorsBlockName.value,
                     content = { ColorsBlock(isExpandedSettings) },
                     isExpanded = isColorsExpanded,
                     onClick = { isColorsExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
-                    title = "Main Screen",
+                    title = LocalizationManager.states.dialogs.settingsMainScreenBlockName.value,
                     content = { MainScreenBlock(isExpandedSettings) },
                     isExpanded = isMainScreenExpanded,
                     onClick = { isMainScreenExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
-                    title = "Title Bar",
+                    title = LocalizationManager.states.dialogs.settingsTitleBarBlockName.value,
                     content = { TitleBarBlock(isExpandedSettings) },
                     isExpanded = isTitleBarExpanded,
                     onClick = { isTitleBarExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
-                    title = "Command Field",
+                    title = LocalizationManager.states.dialogs.settingsCommandFieldBlockName.value,
                     content = { CommandFieldBlock(isExpandedSettings) },
                     isExpanded = isCommandFieldExpanded,
                     onClick = { isCommandFieldExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
-                    title = "Work Area",
+                    title = LocalizationManager.states.dialogs.settingsWorkAreaBlockName.value,
                     content = { WorkAreaBlock(isExpandedSettings) },
                     isExpanded = isWorkAreaExpanded,
                     onClick = { isWorkAreaExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 SettingsBlock(
-                    title = "Performance",
+                    title = LocalizationManager.states.dialogs.settingsPerformanceBlockName.value,
                     content = { PerformanceBlock(isExpandedSettings) },
                     isExpanded = isPerformanceExpanded,
                     onClick = { isPerformanceExpanded = it },

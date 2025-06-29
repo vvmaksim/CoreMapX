@@ -21,6 +21,18 @@ userNotificationSaveError=Ошибка сохранения
 userNotificationSaveSuccess=Сохранение успешно
 userNotificationSaveSuccessMessage=Граф {fileName} был успешно сохранён по пути {directoryPath} в формате {fileFormat}
 
+ ! Settings
+
+settingsTitle=Настройки
+settingsSubTitle=Нажми клавишу Enter в текстовом поле для сохранения значения
+settingsGeneralBlockName=Основные
+settingsColorsBlockName=Цвета
+settingsMainScreenBlockName=Основной экран
+settingsTitleBarBlockName=Заголовочная панель
+settingsCommandFieldBlockName=Командная строка
+settingsWorkAreaBlockName=Рабочая область
+settingsPerformanceBlockName=Анимации
+
  ! Error Strings
 
 errorBasicString=Ошибка: {errorType}.{errorDescription}

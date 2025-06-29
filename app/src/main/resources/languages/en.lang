@@ -21,6 +21,18 @@ userNotificationSaveError=Save Error
 userNotificationSaveSuccess=Save Success
 userNotificationSaveSuccessMessage=Graph {fileName} has been successfully saved to the directory {directoryPath} as {fileFormat}
 
+ ! Settings
+
+settingsTitle=Settings
+settingsSubTitle=Press Enter to save the parameter in the text field
+settingsGeneralBlockName=General
+settingsColorsBlockName=Colors
+settingsMainScreenBlockName=Main Screen
+settingsTitleBarBlockName=Title Bar
+settingsCommandFieldBlockName=Command Field
+settingsWorkAreaBlockName=Work Area
+settingsPerformanceBlockName=Performance
+
  ! Error Strings
 
 errorBasicString=Error: {errorType}.{errorDescription}
