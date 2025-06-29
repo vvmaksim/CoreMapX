@@ -14,6 +14,7 @@ dependencies {
     implementation(libs.flatlaf)
     implementation(libs.sqldelight.sqlite.driver)
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.22")
     implementation(project(":utilities"))
     testImplementation(kotlin("test"))
 }
