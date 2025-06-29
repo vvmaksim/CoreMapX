@@ -37,6 +37,27 @@ generalLanguage=Язык
 generalTheme=Тема
 generalSystemDialogTheme=Тема системных диалогов
 generalExpanded=Все блоки настроек и описания параметров раскрыты
+# Colors Block
+colorsPrimary=Основной
+colorsPrimaryVariant=Основной вариант
+colorsSecondary=Дополнительный
+colorsSecondaryVariant=Дополнительный вариант
+colorsBackground=Фон
+colorsSurface=Поверхность
+colorsError=Ошибка
+colorsOnPrimary=На основном
+colorsOnSecondary=На дополнительном
+colorsOnBackground=На фоне
+colorsOnSurface=На поверхности
+colorsOnError=На ошибке
+colorsBorderColor=Цвет границе
+colorsSuccessColor=Цвет успеха
+colorsWarningColor=Цвет предупреждения
+colorsVertexMainColor=Основной цвет вершин
+colorsHoveredBorderColor=Цвет границ при наведении
+colorsEdgeMainColor=Основной цвет ребра
+colorsCanvasBackgroundColor=Цвет фона холста
+colorsCommandLineBackgroundColor=Цвет фона командной строки
 
  ! Error Strings
 

@@ -24,6 +24,27 @@ class DialogsState: LocalizationState {
     val generalTheme = mutableStateOf("")
     val generalSystemDialogTheme = mutableStateOf("")
     val generalExpanded = mutableStateOf("")
+    //// Colors Block
+    val colorsPrimary = mutableStateOf("")
+    val colorsPrimaryVariant = mutableStateOf("")
+    val colorsSecondary = mutableStateOf("")
+    val colorsSecondaryVariant = mutableStateOf("")
+    val colorsBackground = mutableStateOf("")
+    val colorsSurface = mutableStateOf("")
+    val colorsError = mutableStateOf("")
+    val colorsOnPrimary = mutableStateOf("")
+    val colorsOnSecondary = mutableStateOf("")
+    val colorsOnBackground = mutableStateOf("")
+    val colorsOnSurface = mutableStateOf("")
+    val colorsOnError = mutableStateOf("")
+    val colorsBorderColor = mutableStateOf("")
+    val colorsSuccessColor = mutableStateOf("")
+    val colorsWarningColor = mutableStateOf("")
+    val colorsVertexMainColor = mutableStateOf("")
+    val colorsHoveredBorderColor = mutableStateOf("")
+    val colorsEdgeMainColor = mutableStateOf("")
+    val colorsCanvasBackgroundColor = mutableStateOf("")
+    val colorsCommandLineBackgroundColor = mutableStateOf("")
 
 
     override fun updateValue(key: String, value: String) {
@@ -48,6 +69,27 @@ class DialogsState: LocalizationState {
             DialogsKeys.GENERAL_THEME -> generalTheme.value = value
             DialogsKeys.GENERAL_SYSTEM_DIALOG_THEME -> generalSystemDialogTheme.value = value
             DialogsKeys.GENERAL_EXPANDED -> generalExpanded.value = value
+            //// Colors Block
+            DialogsKeys.COLORS_PRIMARY -> colorsPrimary.value = value
+            DialogsKeys.COLORS_PRIMARY_VARIANT -> colorsPrimaryVariant.value = value
+            DialogsKeys.COLORS_SECONDARY -> colorsSecondary.value = value
+            DialogsKeys.COLORS_SECONDARY_VARIANT -> colorsSecondaryVariant.value = value
+            DialogsKeys.COLORS_BACKGROUND -> colorsBackground.value = value
+            DialogsKeys.COLORS_SURFACE -> colorsSurface.value = value
+            DialogsKeys.COLORS_ERROR -> colorsError.value = value
+            DialogsKeys.COLORS_ON_PRIMARY -> colorsOnPrimary.value = value
+            DialogsKeys.COLORS_ON_SECONDARY -> colorsOnSecondary.value = value
+            DialogsKeys.COLORS_ON_BACKGROUND -> colorsOnBackground.value = value
+            DialogsKeys.COLORS_ON_SURFACE -> colorsOnSurface.value = value
+            DialogsKeys.COLORS_ON_ERROR -> colorsOnError.value = value
+            DialogsKeys.COLORS_BORDER_COLOR -> colorsBorderColor.value = value
+            DialogsKeys.COLORS_SUCCESS_COLOR -> colorsSuccessColor.value = value
+            DialogsKeys.COLORS_WARNING_COLOR -> colorsWarningColor.value = value
+            DialogsKeys.COLORS_VERTEX_MAIN_COLOR -> colorsVertexMainColor.value = value
+            DialogsKeys.COLORS_HOVERED_BORDER_COLOR -> colorsHoveredBorderColor.value = value
+            DialogsKeys.COLORS_EDGE_MAIN_COLOR -> colorsEdgeMainColor.value = value
+            DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
+            DialogsKeys.COLORS_COMMAND_LINE_BACKGROUND_COLOR -> colorsCommandLineBackgroundColor.value = value
         }
     }
 }

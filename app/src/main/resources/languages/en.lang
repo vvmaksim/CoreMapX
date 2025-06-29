@@ -37,6 +37,27 @@ generalLanguage=Language
 generalTheme=Theme
 generalSystemDialogTheme=System dialog theme
 generalExpanded=All settings blocks and descriptions is expanded
+# Colors Block
+colorsPrimary=Primary
+colorsPrimaryVariant=Primary Variant
+colorsSecondary=Secondary
+colorsSecondaryVariant=Secondary Variant
+colorsBackground=Background
+colorsSurface=Surface
+colorsError=Error
+colorsOnPrimary=On Primary
+colorsOnSecondary=On Secondary
+colorsOnBackground=On Background
+colorsOnSurface=On Surface
+colorsOnError=On Error
+colorsBorderColor=Border Color
+colorsSuccessColor=Success Color
+colorsWarningColor=Warning Color
+colorsVertexMainColor=Vertex Main Color
+colorsHoveredBorderColor=Hovered Border Color
+colorsEdgeMainColor=Edge Main Color
+colorsCanvasBackgroundColor=Canvas Background Color
+colorsCommandLineBackgroundColor=Command Line Background Color
 
  ! Error Strings
 
