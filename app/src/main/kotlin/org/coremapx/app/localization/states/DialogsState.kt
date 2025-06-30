@@ -68,6 +68,9 @@ class DialogsState: LocalizationState {
     val workAreaEdgeWidth = mutableStateOf("")
     val workAreaCanvasDragRatio = mutableStateOf("")
     val workAreaCanvasLimit = mutableStateOf("")
+    //// Performance Block
+    val performanceAnimationDuration = mutableStateOf("")
+    val performanceCommandFieldScrollDelay = mutableStateOf("")
 
 
     override fun updateValue(key: String, value: String) {
@@ -136,6 +139,9 @@ class DialogsState: LocalizationState {
             DialogsKeys.WORK_AREA_EDGE_WIDTH -> workAreaEdgeWidth.value = value
             DialogsKeys.WORK_AREA_CANVAS_DRAG_RATIO -> workAreaCanvasDragRatio.value = value
             DialogsKeys.WORK_AREA_CANVAS_LIMIT -> workAreaCanvasLimit.value = value
+            //// Title Bar Block
+            DialogsKeys.PERFORMANCE_ANIMATION_DURATION -> performanceAnimationDuration.value = value
+            DialogsKeys.PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY -> performanceCommandFieldScrollDelay.value = value
         }
     }
 }

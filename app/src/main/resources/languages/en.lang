@@ -81,6 +81,9 @@ workAreaEdgeArrowSize=Edge arrow size
 workAreaEdgeWidth=Edge width
 workAreaCanvasDragRatio=Canvas drag ratio
 workAreaCanvasLimit=Canvas limit
+# Performance Block
+performanceAnimationDuration=Animation duration
+performanceCommandFieldScrollDelay=Command field scroll delay
 
  ! Error Strings
 

@@ -81,6 +81,9 @@ workAreaEdgeArrowSize=Длина хвостов у стрелки направл
 workAreaEdgeWidth=Ширина ребра
 workAreaCanvasDragRatio=Коэффициент перемещения холста
 workAreaCanvasLimit=Ограничитель холста
+# Performance Block
+performanceAnimationDuration=Продолжительность анимаций
+performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
  ! Error Strings
 

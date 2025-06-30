@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.ANIMATION_DURATION
@@ -26,7 +27,7 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
 
     Column {
         NumberTextFieldLine(
-            title = "Animation duration",
+            title = LocalizationManager.states.dialogs.performanceAnimationDuration.value,
             valueType = Int::class,
             value = TextFieldValue("$animationDuration"),
             onValueChange = { config.setValue(ANIMATION_DURATION, it.text) },
@@ -35,7 +36,7 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Command field scroll delay",
+            title = LocalizationManager.states.dialogs.performanceCommandFieldScrollDelay.value,
             valueType = Int::class,
             value = TextFieldValue("$commandFieldScrollDelay"),
             onValueChange = { config.setValue(COMMAND_FIELD_SCROLL_DELAY, it.text) },

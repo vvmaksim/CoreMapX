@@ -65,4 +65,7 @@ object DialogsKeys {
     const val WORK_AREA_EDGE_WIDTH = "workAreaEdgeWidth"
     const val WORK_AREA_CANVAS_DRAG_RATIO = "workAreaCanvasDragRatio"
     const val WORK_AREA_CANVAS_LIMIT = "workAreaCanvasLimit"
+    //// Performance Block
+    const val PERFORMANCE_ANIMATION_DURATION = "performanceAnimationDuration"
+    const val PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY = "performanceCommandFieldScrollDelay"
 }
