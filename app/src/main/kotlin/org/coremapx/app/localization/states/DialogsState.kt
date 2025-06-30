@@ -52,6 +52,12 @@ class DialogsState: LocalizationState {
     //// Title Bar Block
     val titleBarHeight = mutableStateOf("")
     val titleBarIconSize = mutableStateOf("")
+    //// Command Field Block
+    val commandFieldMessageOutputHeight = mutableStateOf("")
+    val commandFieldMaxCountMessages = mutableStateOf("")
+    val commandFieldMaxCountUserCommands = mutableStateOf("")
+    val commandFieldWidth = mutableStateOf("")
+    val commandFieldIsTransparent = mutableStateOf("")
 
 
     override fun updateValue(key: String, value: String) {
@@ -104,6 +110,12 @@ class DialogsState: LocalizationState {
             //// Title Bar Block
             DialogsKeys.TITLE_BAR_HEIGHT -> titleBarHeight.value = value
             DialogsKeys.TITLE_BAR_ICON_SIZE -> titleBarIconSize.value = value
+            //// Command Field Block
+            DialogsKeys.COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT -> commandFieldMessageOutputHeight.value = value
+            DialogsKeys.COMMAND_FIELD_MAX_COUNT_MESSAGES -> commandFieldMaxCountMessages.value = value
+            DialogsKeys.COMMAND_FIELD_MAX_COUNT_USER_COMMANDS -> commandFieldMaxCountUserCommands.value = value
+            DialogsKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = value
+            DialogsKeys.COMMAND_FIELD_IS_TRANSPARENT -> commandFieldIsTransparent.value = value
         }
     }
 }

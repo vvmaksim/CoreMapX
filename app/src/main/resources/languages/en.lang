@@ -65,6 +65,12 @@ mainScreenPlacement=Start window placement
 # Title Bar Block
 titleBarHeight=Title bar height
 titleBarIconSize=Title bar icon size
+# Command Field Block
+commandFieldMessageOutputHeight=Message output height
+commandFieldMaxCountMessages=Max count messages
+commandFieldMaxCountUserCommands=Max count user commands
+commandFieldWidth=Command field width
+commandFieldIsTransparent=Command field is transparent
 
  ! Error Strings
 

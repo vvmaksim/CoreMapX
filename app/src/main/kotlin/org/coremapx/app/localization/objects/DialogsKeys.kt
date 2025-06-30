@@ -49,4 +49,10 @@ object DialogsKeys {
     //// Title Bar Block
     const val TITLE_BAR_HEIGHT = "titleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "titleBarIconSize"
+    //// Command Field Block
+    const val COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT = "commandFieldMessageOutputHeight"
+    const val COMMAND_FIELD_MAX_COUNT_MESSAGES = "commandFieldMaxCountMessages"
+    const val COMMAND_FIELD_MAX_COUNT_USER_COMMANDS = "commandFieldMaxCountUserCommands"
+    const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
+    const val COMMAND_FIELD_IS_TRANSPARENT = "commandFieldIsTransparent"
 }
