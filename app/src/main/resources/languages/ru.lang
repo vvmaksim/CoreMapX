@@ -71,6 +71,16 @@ commandFieldMaxCountMessages=Максимальное количество со�
 commandFieldMaxCountUserCommands=Максимальное количество пользовательских команд
 commandFieldWidth=Ширина командной строки
 commandFieldIsTransparent=Командная строка является прозрачной
+# Work Area Block
+workAreaGraphLayoutHeight=Высота раскладки графа
+workAreaGraphLayoutWidth=Ширина раскладки графа
+workAreaVertexRadius=Радиус вершины
+workAreaVertexLabelSize=Размер текста для пометки вершины
+workAreaEdgeLabelSize=Размер текста для пометки ребра
+workAreaEdgeArrowSize=Длина хвостов у стрелки направленного ребра
+workAreaEdgeWidth=Ширина ребра
+workAreaCanvasDragRatio=Коэффициент перемещения холста
+workAreaCanvasLimit=Ограничитель холста
 
  ! Error Strings
 

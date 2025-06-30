@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_DRAG_RATIO
@@ -40,7 +41,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
 
     Column {
         NumberTextFieldLine(
-            title = "Graph layout height",
+            title = LocalizationManager.states.dialogs.workAreaGraphLayoutHeight.value,
             valueType = Int::class,
             value = TextFieldValue("$graphLayoutHeight"),
             onValueChange = { config.setValue(GRAPH_LAYOUT_HEIGHT, it.text) },
@@ -49,7 +50,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Graph layout width",
+            title = LocalizationManager.states.dialogs.workAreaGraphLayoutWidth.value,
             valueType = Int::class,
             value = TextFieldValue("$graphLayoutWidth"),
             onValueChange = { config.setValue(GRAPH_LAYOUT_WIDTH, it.text) },
@@ -58,7 +59,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Vertex radius",
+            title = LocalizationManager.states.dialogs.workAreaVertexRadius.value,
             valueType = Int::class,
             value = TextFieldValue("$vertexRadius"),
             onValueChange = { config.setValue(VERTEX_RADIUS, it.text) },
@@ -67,7 +68,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Vertex label size",
+            title = LocalizationManager.states.dialogs.workAreaVertexLabelSize.value,
             valueType = Int::class,
             value = TextFieldValue("$vertexLabelSize"),
             onValueChange = { config.setValue(VERTEX_LABEL_SIZE, it.text) },
@@ -76,7 +77,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Edge label size",
+            title = LocalizationManager.states.dialogs.workAreaEdgeLabelSize.value,
             valueType = Int::class,
             value = TextFieldValue("$edgeLabelSize"),
             onValueChange = { config.setValue(EDGE_LABEL_SIZE, it.text) },
@@ -85,7 +86,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Edge arrow size",
+            title = LocalizationManager.states.dialogs.workAreaEdgeArrowSize.value,
             valueType = Float::class,
             value = TextFieldValue("$edgeArrowSize"),
             onValueChange = { config.setValue(EDGE_ARROW_SIZE, it.text) },
@@ -94,7 +95,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Edge width",
+            title = LocalizationManager.states.dialogs.workAreaEdgeWidth.value,
             valueType = Float::class,
             value = TextFieldValue("$edgeWidth"),
             onValueChange = { config.setValue(EDGE_WIDTH, it.text) },
@@ -103,7 +104,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Canvas drag ratio",
+            title = LocalizationManager.states.dialogs.workAreaCanvasDragRatio.value,
             valueType = Float::class,
             value = TextFieldValue("$canvasDragRatio"),
             onValueChange = { config.setValue(CANVAS_DRAG_RATIO, it.text) },
@@ -112,7 +113,7 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = "Canvas limit",
+            title = LocalizationManager.states.dialogs.workAreaCanvasLimit.value,
             valueType = Int::class,
             value = TextFieldValue("$canvasLimit"),
             onValueChange = { config.setValue(CANVAS_LIMIT, it.text) },

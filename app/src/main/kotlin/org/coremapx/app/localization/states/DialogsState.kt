@@ -58,6 +58,16 @@ class DialogsState: LocalizationState {
     val commandFieldMaxCountUserCommands = mutableStateOf("")
     val commandFieldWidth = mutableStateOf("")
     val commandFieldIsTransparent = mutableStateOf("")
+    //// Work Area Block
+    val workAreaGraphLayoutHeight = mutableStateOf("")
+    val workAreaGraphLayoutWidth = mutableStateOf("")
+    val workAreaVertexRadius = mutableStateOf("")
+    val workAreaVertexLabelSize = mutableStateOf("")
+    val workAreaEdgeLabelSize = mutableStateOf("")
+    val workAreaEdgeArrowSize = mutableStateOf("")
+    val workAreaEdgeWidth = mutableStateOf("")
+    val workAreaCanvasDragRatio = mutableStateOf("")
+    val workAreaCanvasLimit = mutableStateOf("")
 
 
     override fun updateValue(key: String, value: String) {
@@ -116,6 +126,16 @@ class DialogsState: LocalizationState {
             DialogsKeys.COMMAND_FIELD_MAX_COUNT_USER_COMMANDS -> commandFieldMaxCountUserCommands.value = value
             DialogsKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = value
             DialogsKeys.COMMAND_FIELD_IS_TRANSPARENT -> commandFieldIsTransparent.value = value
+            //// Command Field Block
+            DialogsKeys.WORK_AREA_GRAPH_LAYOUT_HEIGHT -> workAreaGraphLayoutHeight.value = value
+            DialogsKeys.WORK_AREA_GRAPH_LAYOUT_WIDTH -> workAreaGraphLayoutWidth.value = value
+            DialogsKeys.WORK_AREA_VERTEX_RADIUS -> workAreaVertexRadius.value = value
+            DialogsKeys.WORK_AREA_VERTEX_LABEL_SIZE -> workAreaVertexLabelSize.value = value
+            DialogsKeys.WORK_AREA_EDGE_LABEL_SIZE -> workAreaEdgeLabelSize.value = value
+            DialogsKeys.WORK_AREA_EDGE_ARROW_SIZE -> workAreaEdgeArrowSize.value = value
+            DialogsKeys.WORK_AREA_EDGE_WIDTH -> workAreaEdgeWidth.value = value
+            DialogsKeys.WORK_AREA_CANVAS_DRAG_RATIO -> workAreaCanvasDragRatio.value = value
+            DialogsKeys.WORK_AREA_CANVAS_LIMIT -> workAreaCanvasLimit.value = value
         }
     }
 }

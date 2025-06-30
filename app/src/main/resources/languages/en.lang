@@ -71,6 +71,16 @@ commandFieldMaxCountMessages=Max count messages
 commandFieldMaxCountUserCommands=Max count user commands
 commandFieldWidth=Command field width
 commandFieldIsTransparent=Command field is transparent
+# Work Area Block
+workAreaGraphLayoutHeight=Graph layout height
+workAreaGraphLayoutWidth=Graph layout width
+workAreaVertexRadius=Vertex radius
+workAreaVertexLabelSize=Vertex label size
+workAreaEdgeLabelSize=Edge label size
+workAreaEdgeArrowSize=Edge arrow size
+workAreaEdgeWidth=Edge width
+workAreaCanvasDragRatio=Canvas drag ratio
+workAreaCanvasLimit=Canvas limit
 
  ! Error Strings
 

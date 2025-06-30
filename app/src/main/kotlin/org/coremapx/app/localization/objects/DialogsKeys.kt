@@ -55,4 +55,14 @@ object DialogsKeys {
     const val COMMAND_FIELD_MAX_COUNT_USER_COMMANDS = "commandFieldMaxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
     const val COMMAND_FIELD_IS_TRANSPARENT = "commandFieldIsTransparent"
+    //// Work Area Block
+    const val WORK_AREA_GRAPH_LAYOUT_HEIGHT = "workAreaGraphLayoutHeight"
+    const val WORK_AREA_GRAPH_LAYOUT_WIDTH = "workAreaGraphLayoutWidth"
+    const val WORK_AREA_VERTEX_RADIUS = "workAreaVertexRadius"
+    const val WORK_AREA_VERTEX_LABEL_SIZE = "workAreaVertexLabelSize"
+    const val WORK_AREA_EDGE_LABEL_SIZE = "workAreaEdgeLabelSize"
+    const val WORK_AREA_EDGE_ARROW_SIZE = "workAreaEdgeArrowSize"
+    const val WORK_AREA_EDGE_WIDTH = "workAreaEdgeWidth"
+    const val WORK_AREA_CANVAS_DRAG_RATIO = "workAreaCanvasDragRatio"
+    const val WORK_AREA_CANVAS_LIMIT = "workAreaCanvasLimit"
 }
