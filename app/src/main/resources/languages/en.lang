@@ -15,6 +15,15 @@ mainMenuAnalyticsIconDescription=Analytics Icon
 mainMenuButtonSettings=Settings
 mainMenuSettingsIconDescription=Settings Icon
 
+ ! New Graph
+
+newGraphTitle=Create New Graph
+newGraphTextFieldPlaceholder=Graph Name
+newGraphTextFieldError=Field Graph Name cannot be empty
+newGraphIsDirected=Directed Graph
+newGraphIsWeighted=Weighted Graph
+newGraphCreateButton=Create
+
  ! User Notification
 
 userNotificationSaveError=Save Error

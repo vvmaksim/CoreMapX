@@ -1,6 +1,14 @@
 package org.coremapx.app.localization.objects
 
 object DialogsKeys {
+    // New Graph
+    const val NEW_GRAPH_TITLE = "newGraphTitle"
+    const val NEW_GRAPH_TEXT_FIELD_PLACEHOLDER = "newGraphTextFieldPlaceholder"
+    const val NEW_GRAPH_TEXT_FIELD_ERROR = "newGraphTextFieldError"
+    const val NEW_GRAPH_IS_DIRECTED = "newGraphIsDirected"
+    const val NEW_GRAPH_IS_WEIGHTED = "newGraphIsWeighted"
+    const val NEW_GRAPH_CREATE_BUTTON = "newGraphCreateButton"
+
     // User Notification
     const val USER_NOTIFICATION_SAVE_ERROR = "userNotificationSaveError"
     const val USER_NOTIFICATION_SAVE_SUCCESS = "userNotificationSaveSuccess"

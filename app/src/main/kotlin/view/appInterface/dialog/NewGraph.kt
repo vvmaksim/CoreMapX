@@ -32,6 +32,7 @@ import model.graph.concrete.DirectedWeightedGraph
 import model.graph.concrete.UndirectedUnweightedGraph
 import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.contracts.Graph
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.textField.CustomTextField
 
@@ -79,7 +80,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Create New Graph",
+                title = LocalizationManager.states.dialogs.newGraphTitle.value,
                 onButtonClick = onDismiss,
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -90,14 +91,14 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                     showError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Graph Name") },
+                placeholder = { Text(LocalizationManager.states.dialogs.newGraphTextFieldPlaceholder.value) },
                 isError = showError,
             )
 
             if (showError) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Field Graph Name cannot be empty",
+                    text = LocalizationManager.states.dialogs.newGraphTextFieldError.value,
                     color = MaterialTheme.colors.error,
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(start = 4.dp),
@@ -119,7 +120,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                             ),
                     )
                     Text(
-                        text = "Directed Graph",
+                        text = LocalizationManager.states.dialogs.newGraphIsDirected.value,
                         style = MaterialTheme.typography.body1,
                     )
                 }
@@ -138,7 +139,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                             ),
                     )
                     Text(
-                        text = "Weighted Graph",
+                        text = LocalizationManager.states.dialogs.newGraphIsWeighted.value,
                         style = MaterialTheme.typography.body1,
                     )
                 }
@@ -169,7 +170,7 @@ fun <E : Comparable<E>, V : Comparable<V>> NewGraphContent(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "Create",
+                    text = LocalizationManager.states.dialogs.newGraphCreateButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

@@ -15,6 +15,15 @@ mainMenuAnalyticsIconDescription=Иконка аналитики
 mainMenuButtonSettings=Настройки
 mainMenuSettingsIconDescription=Иконка настроек
 
+ ! New Graph
+
+newGraphTitle=Создание нового графа
+newGraphTextFieldPlaceholder=Имя графа
+newGraphTextFieldError=Ошибка, имя графа не может быть пустым
+newGraphIsDirected=Направленный граф
+newGraphIsWeighted=Взвешенный граф
+newGraphCreateButton=Создать
+
  ! User Notification
 
 userNotificationSaveError=Ошибка сохранения

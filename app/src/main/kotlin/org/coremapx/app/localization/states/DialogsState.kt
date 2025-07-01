@@ -4,6 +4,14 @@ import androidx.compose.runtime.mutableStateOf
 import org.coremapx.app.localization.objects.DialogsKeys
 
 class DialogsState: LocalizationState {
+    // New Graph
+    val newGraphTitle = mutableStateOf("")
+    val newGraphTextFieldPlaceholder = mutableStateOf("")
+    val newGraphTextFieldError = mutableStateOf("")
+    val newGraphIsDirected = mutableStateOf("")
+    val newGraphIsWeighted = mutableStateOf("")
+    val newGraphCreateButton = mutableStateOf("")
+
     // User Notification
     val userNotificationSaveError = mutableStateOf("")
     val userNotificationSaveSuccess = mutableStateOf("")
@@ -75,6 +83,14 @@ class DialogsState: LocalizationState {
 
     override fun updateValue(key: String, value: String) {
         when(key) {
+            // New Graph
+            DialogsKeys.NEW_GRAPH_TITLE -> newGraphTitle.value = value
+            DialogsKeys.NEW_GRAPH_TEXT_FIELD_PLACEHOLDER -> newGraphTextFieldPlaceholder.value = value
+            DialogsKeys.NEW_GRAPH_TEXT_FIELD_ERROR -> newGraphTextFieldError.value = value
+            DialogsKeys.NEW_GRAPH_IS_DIRECTED -> newGraphIsDirected.value = value
+            DialogsKeys.NEW_GRAPH_IS_WEIGHTED -> newGraphIsWeighted.value = value
+            DialogsKeys.NEW_GRAPH_CREATE_BUTTON -> newGraphCreateButton.value = value
+
             // User Notification
             DialogsKeys.USER_NOTIFICATION_SAVE_ERROR -> userNotificationSaveError.value = value
             DialogsKeys.USER_NOTIFICATION_SAVE_SUCCESS -> userNotificationSaveSuccess.value = value
