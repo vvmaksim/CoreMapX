@@ -85,6 +85,147 @@ workAreaCanvasLimit=Ограничитель холста
 performanceAnimationDuration=Продолжительность анимаций
 performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
+ ! Descriptions
+# Settings
+## General Block
+descriptionLanguage=Вы можете выбрать один из языков или использовать кастомный файл локализации.
+descriptionTheme=Вы можете самостоятельно изменить цвета интерфейса в настройках цветов. Изменение любого цвета приведёт к смене темы на `Custom`
+descriptionSystemDialogTheme=При открытии графа через файл появляется окно с соответствующим интерфейсом.{nextLine}\
+    {nextLine}\
+    Вы можете изменить тему этого окна на ту, которая лучше соответствует вашей теме.{nextLine}\
+    {nextLine}\
+    При переключении между готовыми темами приложения этот параметр переключается автоматически.
+descriptionIsExpandedSettings=Если эта опция активна, то при следующем открытии меню настроек все блоки настроек будут развернуты и будут показаны все описания.{nextLine}\
+    {nextLine}\
+    Если параметр отключен, то при следующем открытии меню настроек все блоки настроек и все описания будут скрыты.
+## Colors Block
+descriptionPrimary=Основной цвет интерфейса.{nextLine}\
+    Используется для клавиш управления, кнопок, выделения активных элементов и т.д.
+descriptionPrimaryVariant=Вариант основного цвета, обычно немного темнее или светлее.{nextLine}\
+    Используется для теней, бликов или незначительных акцентов, связанных с основным цветом.
+descriptionSecondary=Вторичный цвет интерфейса.{nextLine}\
+    Используется для выделения менее важных элементов, второстепенных кнопок, значков, ссылок и т.д.
+descriptionSecondaryVariant=Вторичный вариант цвета, аналогичный primaryVariant, для оттенков, теней и дополнительных акцентов, связанных со вторичным.
+descriptionBackground=Цвет фона всего приложения или больших областей.
+descriptionSurface=Цвет поверхности: карточки, панели, всплывающие окна, диалоги и другие элементы, которые «лежат» на фоне.
+descriptionError=Цвет отображения ошибок: текст ошибки, рамки, значки, индикаторы и т.д.
+descriptionOnPrimary=Цвет контента (текста, иконок), который размещается поверх основного. Обычно контрастный.
+descriptionOnSecondary=Цвет контента, который размещается поверх вторичного.
+descriptionOnBackground=Цвет содержимого, размещаемого поверх фона.
+descriptionOnSurface=Цвет содержимого, размещаемого поверх поверхности.
+descriptionOnError=Цвет содержимого, которое размещается поверх ошибки.
+descriptionBorderColor=Цвет рамок различных элементов интерфейса: текстовых полей, кнопок, карточек и т.д.
+descriptionSuccessColor=Цвет для обозначения успешных действий: подтверждений, успешных уведомлений и т.д.
+descriptionWarningColor=Цвет предупреждений: желтые значки, рамки, уведомления о потенциальных проблемах.
+descriptionVertexMainColor=Основной цвет для отображения вершин.
+descriptionHoveredBorderColor=Цвет границы при наведении курсора на вершину графа.
+descriptionEdgeMainColor=Основной цвет для отображения рёбер между вершинами на графе.
+descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
+descriptionCommandLineBackgroundColor=Цвет фона для командной строки. {nextLine}\
+    {nextLine}\
+    Этот цвет применяется, если параметр `isTransparentCommandLine` отключен.
+## Main Screen Block
+descriptionMainScreenStartHeight=Начальная высота окна приложения.{nextLine}\
+    {nextLine}\
+    Используется только когда `startWindowPlacement` находится в состоянии `Floating`.{nextLine}\
+    {nextLine}\
+    Минимально=720
+descriptionMainScreenStartWidth=Начальная ширина окна приложения.{nextLine}\
+    {nextLine}\
+    Используется только когда `startWindowPlacement` находится в состоянии `Floating`.{nextLine}\
+    {nextLine}\
+    Минимально=1280
+descriptionStartWindowPlacement=Maximized — приложение развёрнуто, но не во весь экран. (Рекомендуется){nextLine}\
+    {nextLine}\
+    Floating — приложение открыто в окне. Минимальный размер окна — 1280x720.{nextLine}\
+    Начальные размеры можно задать с помощью параметров `mainScreenStartWidth` и `mainScreenStartHeight`, но их значения не могут быть меньше минимальных.{nextLine}\
+    {nextLine}\
+    FullScreen — приложение открыто на весь экран и занимает всю его область. (Не рекомендуется)
+## Title Bar Block
+descriptionTitleBarHeight=Высота заголовочной панели.{nextLine}\
+    {nextLine}\
+    Минимально=35{nextLine}\
+    Рекомендовано=40
+descriptionTitleBarIconSize=Размер иконок в заголовочной панели.{nextLine}\
+    {nextLine}\
+    Минимально=16{nextLine}\
+    Рекомендовано=20
+## Command Field Block
+descriptionMessageOutputHeight=Максимальная высота подъёма для выходных сообщений командной строки.{nextLine}\
+    {nextLine}\
+    Минимально=150{nextLine}\
+    Рекомендовано=200
+descriptionMaxCountMessages=Максимальное количество выводимых сообщений, которые запоминаются.{nextLine}\
+    {nextLine}\
+    Минимально=1{nextLine}\
+    Рекомендовано=100{nextLine}\
+    Максимально=10000
+descriptionMaxCountUserCommands=Максимальное количество запоминаемых пользовательских команд в истории.{nextLine}\
+    {nextLine}\
+    Минимально=1{nextLine}\
+    Рекомендовано=200{nextLine}\
+    Максимально=1000
+descriptionCommandFieldWidth=Ширина командной строки.{nextLine}\
+    {nextLine}\
+    Минимально=400{nextLine}\
+    Рекомендовано=700{nextLine}\
+    Максимально=900
+descriptionIsTransparentCommandLine=Этот параметр отвечает за прозрачность фона командной строки.{nextLine}\
+    {nextLine}\
+    Если он включен, фон текстового поля будет прозрачным.{nextLine}\
+    Если он выключен, фон текстового поля примет цвет, указанный в соответствующем параметре в настройках цвета.
+## Work Area Block
+descriptionGraphLayoutHeight=Граф рисуется на определенной плоскости, вы можете изменить высоту этой плоскости.{nextLine}\
+    {nextLine}\
+    Минимально=2000{nextLine}\
+    Рекомендовано=7000
+descriptionGraphLayoutWidth=Граф рисуется на определенной плоскости, вы можете изменить ширину этой плоскости.{nextLine}\
+    {nextLine}\
+    Минимально=1000{nextLine}\
+    Рекомендовано=7000
+descriptionVertexRadius=Стандартный радиус для вершины.{nextLine}\
+    {nextLine}\
+    Минимально=1{nextLine}\
+    Рекомендовано=15
+descriptionVertexLabelSize=Размер метки вершины.{nextLine}\
+    {nextLine}\
+    Минимально=6{nextLine}\
+    Рекомендовано=14
+descriptionEdgeLabelSize=Размер метки ребра.{nextLine}\
+    {nextLine}\
+    Минимально=6{nextLine}\
+    Рекомендовано=14
+descriptionEdgeArrowSize=Размер стрелки ребра.{nextLine}\
+    {nextLine}\
+    Минимально=1{nextLine}\
+    Рекомендовано=10{nextLine}\
+    Максимально=100
+descriptionEdgeWidth=Ширина ребра.{nextLine}\
+    {nextLine}\
+    Минимально=1{nextLine}\
+    Рекомендовано=2{nextLine}\
+    Максимально=15
+descriptionCanvasDragRatio=Скорость перемещения графа рассчитывается с использованием определенного множителя `canvasDragRatio`.{nextLine}\
+    {nextLine}\
+    Минимально=0.1{nextLine}\
+    Рекомендовано=1{nextLine}\
+    Максимально=10
+descriptionCanvasLimit=Область, где рисуется граф, конечна. Чтобы ограничить движение на этой плоскости, можно изменить этот параметр.{nextLine}\
+    {nextLine}\
+    Минимально=2000{nextLine}\
+    Рекомендовано=8000
+## Performance Block
+descriptionAnimationDuration=Этот параметр используется для указания скорости анимации, например, скорости сворачивания бокового меню и т.д.{nextLine}\
+    {nextLine}\
+    Минимально=100{nextLine}\
+    Рекомендовано=300{nextLine}\
+    Максимально=1500
+descriptionCommandFieldScrollDelay=При отправке команды в командной строке проходит определенное количество времени.{nextLine}\
+    {nextLine}\
+    Минимально=10{nextLine}\
+    Рекомендовано=50{nextLine}\
+    Максимально=300
+
  ! Error Strings
 
 errorBasicString=Ошибка: {errorType}.{errorDescription}

@@ -12,8 +12,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_WIDTH
 import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
@@ -38,7 +38,9 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             valueType = Int::class,
             value = TextFieldValue("$messageOutputHeight"),
             onValueChange = { config.setValue(MESSAGE_OUTPUT_HEIGHT, it.text) },
-            description = ConfigDescriptions.MESSAGE_OUTPUT_HEIGHT,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionMessageOutputHeight.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -49,7 +51,9 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             onValueChange = {
                 config.setValue(MAX_COUNT_MESSAGES, it.text)
             },
-            description = ConfigDescriptions.MAX_COUNT_MESSAGES,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionMaxCountMessages.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -60,7 +64,9 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             onValueChange = {
                 config.setValue(MAX_COUNT_USER_COMMANDS, it.text)
             },
-            description = ConfigDescriptions.MAX_COUNT_USER_COMMANDS,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionMaxCountUserCommands.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -69,13 +75,17 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             valueType = Int::class,
             value = TextFieldValue("$commandFieldWidth"),
             onValueChange = { config.setValue(COMMAND_FIELD_WIDTH, it.text) },
-            description = ConfigDescriptions.COMMAND_FIELD_WIDTH,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionCommandFieldWidth.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
             title = LocalizationManager.states.dialogs.commandFieldIsTransparent.value,
-            description = ConfigDescriptions.IS_TRANSPARENT_COMMAND_LINE,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionIsTransparentCommandLine.value,
+            ),
             checked = isTransparentCommandLine,
             onCheckedChange = { config.setValue(IS_TRANSPARENT_COMMAND_LINE, it.toString()) },
             isExpanded = isExpandedSettings,

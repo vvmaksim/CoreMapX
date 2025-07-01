@@ -15,8 +15,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_HEIGHT
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_WIDTH
 import org.coremapx.app.userDirectory.config.ConfigKeys.START_WINDOW_PLACEMENT
@@ -42,7 +42,9 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartHeight"),
             onValueChange = { config.setValue(MAIN_SCREEN_START_HEIGHT, it.text) },
-            description = ConfigDescriptions.MAIN_SCREEN_START_HEIGHT,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionMainScreenStartHeight.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -51,7 +53,9 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartWidth"),
             onValueChange = { config.setValue(MAIN_SCREEN_START_WIDTH, it.text) },
-            description = ConfigDescriptions.MAIN_SCREEN_START_WIDTH,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionMainScreenStartWidth.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -61,7 +65,9 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             selectedItem = startWindowPlacement,
             onItemSelected = { config.setValue(START_WINDOW_PLACEMENT, it) },
             modifier = dropdownSelectButtonModifier,
-            description = ConfigDescriptions.START_WINDOW_PLACEMENT,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionStartWindowPlacement.value,
+            ),
             isExpanded = isExpandedSettings,
         )
     }

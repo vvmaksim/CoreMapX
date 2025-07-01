@@ -85,6 +85,147 @@ workAreaCanvasLimit=Canvas limit
 performanceAnimationDuration=Animation duration
 performanceCommandFieldScrollDelay=Command field scroll delay
 
+ ! Descriptions
+# Settings
+## General Block
+descriptionLanguage=You can choose one of the suggested languages for the interface or use a custom localization file.
+descriptionTheme=You can change the interface colors in the color settings. Changing any of the colors will switch the theme to the `Custom` status.
+descriptionSystemDialogTheme=To select a graph file to open, a window with the appropriate interface appears.{nextLine}\
+    {nextLine}\
+    You can change the theme of this window to one that would better suit your theme.{nextLine}\
+    {nextLine}\
+    When switching between ready-made themes, this parameter switches automatically.
+descriptionIsExpandedSettings=If this option is active, the next time you open the settings menu, all settings blocks will be expanded and all descriptions in the settings will be shown.{nextLine}\
+    {nextLine}\
+    If the parameter is disabled, then the next time you open the settings menu, all settings blocks and all descriptions are hidden.
+## Colors Block
+descriptionPrimary=The main color of the interface.{nextLine}\
+    It is used for key controls, buttons, highlighting active elements, etc.
+descriptionPrimaryVariant=A variant of the main color, usually slightly darker or lighter.{nextLine}\
+    It is used for shades, shadows, highlights, or minor accents related to the main color.
+descriptionSecondary=The secondary color of the interface.{nextLine}\
+    It is used to highlight less important elements, minor buttons, icons, links, etc.
+descriptionSecondaryVariant=A secondary color option, similar to primaryVariant, for shades, shadows, and additional accents associated with secondary.
+descriptionBackground=The background color of the entire application or large areas.
+descriptionSurface=Surface color: cards, panels, pop-ups, dialogs, and other elements that "lie" on the background.
+descriptionError=The color for displaying errors: error text, frames, icons, indicators, etc.
+descriptionOnPrimary=The color of the content (text, icons) that is placed on top of the primary. Usually contrasting.
+descriptionOnSecondary=The color of the content that is placed on top of secondary.
+descriptionOnBackground=The color of the content that is placed on top of background.
+descriptionOnSurface=The color of the content that is placed on top of surface.
+descriptionOnError=The color of the content that is placed on top of error.
+descriptionBorderColor=The color of the frames for various interface elements: text fields, buttons, cards, etc.
+descriptionSuccessColor=A color to indicate successful actions: confirmations, successful notifications, etc.
+descriptionWarningColor=Color for warnings: yellow icons, frames, notifications of potential problems.
+descriptionVertexMainColor=The primary color for displaying vertices.
+descriptionHoveredBorderColor=The color of the border when hovering over the element.
+descriptionEdgeMainColor=The primary color for displaying edges between vertices on the graph.
+descriptionCanvasBackgroundColor=The background color for graph visualization.
+descriptionCommandLineBackgroundColor=The background color for the command line.{nextLine}\
+    {nextLine}\
+    This color is applied if the `isTransparentCommandLine` parameter is disabled.
+## Main Screen Block
+descriptionMainScreenStartHeight=The starting height of the application window.{nextLine}\
+    {nextLine}\
+    It is used only when the `startWindowPlacement` is in the `Floating` state.{nextLine}\
+    {nextLine}\
+    Min=720
+descriptionMainScreenStartWidth=The starting width of the application window.{nextLine}\
+    {nextLine}\
+    It is used only when the `startWindowPlacement` is in the `Floating` state.{nextLine}\
+    {nextLine}\
+    Min=1280
+descriptionStartWindowPlacement=Maximized - The application is open to the full window, but not to the full screen. (Recommended){nextLine}\
+    {nextLine}\
+    Floating - The application is open in the window. The minimum window size is 1280x720.{nextLine}\
+    You can set the initial dimensions with the `mainScreenStartWidth` and `mainScreenStartHeight` parameters, but their values cannot be less than the minimum.{nextLine}\
+    {nextLine}\
+    FullScreen - The application is open to full screen and occupies its entire area. (Not recommended)
+## Title Bar Block
+descriptionTitleBarHeight=Height of the title bar.{nextLine}\
+    {nextLine}\
+    Min=35{nextLine}\
+    Recommended=40
+descriptionTitleBarIconSize=Size of the title bar icons.{nextLine}\
+    {nextLine}\
+    Min=16{nextLine}\
+    Recommended=20
+## Command Field Block
+descriptionMessageOutputHeight=Maximum lifting height for command line output messages.{nextLine}\
+    {nextLine}\
+    Min=150{nextLine}\
+    Recommended=200
+descriptionMaxCountMessages=The maximum number of output messages that are remembered.{nextLine}\
+    {nextLine}\
+    Min=1{nextLine}\
+    Recommended=100{nextLine}\
+    Max=10000
+descriptionMaxCountUserCommands=The maximum number of history user commands that are remembered.{nextLine}\
+    {nextLine}\
+    Min=1{nextLine}\
+    Recommended=200{nextLine}\
+    Max=1000
+descriptionCommandFieldWidth=The width of the command line.{nextLine}\
+    {nextLine}\
+    Min=400{nextLine}\
+    Recommended=700{nextLine}\
+    Max=900
+descriptionIsTransparentCommandLine=This parameter is responsible for the transparency of the command line background.{nextLine}\
+    {nextLine}\
+    If it is enabled, the background of the text field will be transparent.{nextLine}\
+    If it is turned off, the background of the text field will take on the color specified in the corresponding parameter in the color settings.
+## Work Area Block
+descriptionGraphLayoutHeight=The graph is drawn on a certain plane, you can change the height of this plane.{nextLine}\
+    {nextLine}\
+    Min=2000{nextLine}\
+    Recommended=7000
+descriptionGraphLayoutWidth=The graph is drawn on a certain plane, you can change the width of this plane.{nextLine}\
+    {nextLine}\
+    Min=1000{nextLine}\
+    Recommended=7000
+descriptionVertexRadius=The standard radius for a vertex.{nextLine}\
+    {nextLine}\
+    Min=1{nextLine}\
+    Recommended=15
+descriptionVertexLabelSize=Vertex label size.{nextLine}\
+    {nextLine}\
+    Min=6{nextLine}\
+    Recommended=14
+descriptionEdgeLabelSize=Edge label size.{nextLine}\
+    {nextLine}\
+    Min=6{nextLine}\
+    Recommended=14
+descriptionEdgeArrowSize=Edge arrow size.{nextLine}\
+    {nextLine}\
+    Min=1{nextLine}\
+    Recommended=10{nextLine}\
+    Max=100
+descriptionEdgeWidth=Width for an edge.{nextLine}\
+    {nextLine}\
+    Min=1{nextLine}\
+    Recommended=2{nextLine}\
+    Max=15
+descriptionCanvasDragRatio=The graph movement speed is calculated using a certain `canvasDragRatio` multiplier.{nextLine}\
+    {nextLine}\
+    Min=0.1{nextLine}\
+    Recommended=1{nextLine}\
+    Max=10
+descriptionCanvasLimit=The area where the graph is drawn is finite. To limit movement on this plane, you can change this parameter.{nextLine}\
+    {nextLine}\
+    Min=2000{nextLine}\
+    Recommended=8000
+## Performance Block
+descriptionAnimationDuration=This parameter is used to specify the speed of animations, for example, the speed of minimizing the side menu, etc.{nextLine}\
+    {nextLine}\
+    Min=100{nextLine}\
+    Recommended=300{nextLine}\
+    Max=1500
+descriptionCommandFieldScrollDelay=A certain amount of time passes when sending a command on the command line.{nextLine}\
+    {nextLine}\
+    Min=10{nextLine}\
+    Recommended=50{nextLine}\
+    Max=300
+
  ! Error Strings
 
 errorBasicString=Error: {errorType}.{errorDescription}

@@ -12,8 +12,8 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.config.ConfigDescriptions
 import org.coremapx.app.userDirectory.config.ConfigKeys.ANIMATION_DURATION
 import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
 import view.appInterface.preview.PreviewSurface
@@ -31,7 +31,9 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
             valueType = Int::class,
             value = TextFieldValue("$animationDuration"),
             onValueChange = { config.setValue(ANIMATION_DURATION, it.text) },
-            description = ConfigDescriptions.ANIMATION_DURATION,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionAnimationDuration.value,
+            ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -40,7 +42,9 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
             valueType = Int::class,
             value = TextFieldValue("$commandFieldScrollDelay"),
             onValueChange = { config.setValue(COMMAND_FIELD_SCROLL_DELAY, it.text) },
-            description = ConfigDescriptions.COMMAND_FIELD_SCROLL_DELAY,
+            description = LocalizationFormatter.getStringWithLineBreak(
+                startString = LocalizationManager.states.descriptions.descriptionCommandFieldScrollDelay.value,
+            ),
             isExpanded = isExpandedSettings,
         )
     }
