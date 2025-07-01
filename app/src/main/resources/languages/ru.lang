@@ -24,6 +24,17 @@ newGraphIsDirected=Направленный граф
 newGraphIsWeighted=Взвешенный граф
 newGraphCreateButton=Создать
 
+ ! Save Graph
+
+saveGraphAsTitle=Сохранение графа
+saveGraphAsSubtitle=Выберите формат файла и директорию для сохранения
+saveGraphAsFileNameHint=Имя файла
+saveGraphAsFileNamePlaceholder=Введите имя файла
+saveGraphAsSaveDirectoryHint=Директория для сохранения
+saveGraphAsFileFormatHint=Формат файла
+saveGraphAsFileExistsWarning=Файл с такой конфигурацией уже существует, при сохранении контент будет заменён на актуальный
+saveGraphAsSaveButton=Сохранить
+
  ! User Notification
 
 userNotificationSaveError=Ошибка сохранения

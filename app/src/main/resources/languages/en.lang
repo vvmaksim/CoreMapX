@@ -24,6 +24,17 @@ newGraphIsDirected=Directed Graph
 newGraphIsWeighted=Weighted Graph
 newGraphCreateButton=Create
 
+ ! Save Graph
+
+saveGraphAsTitle=Save graph
+saveGraphAsSubtitle=Select directory to save and file format
+saveGraphAsFileNameHint=File name:
+saveGraphAsFileNamePlaceholder=Enter file name
+saveGraphAsSaveDirectoryHint=Save directory:
+saveGraphAsFileFormatHint=File format:
+saveGraphAsFileExistsWarning=A file with this configuration already exists, and its contents will be replaced when saved
+saveGraphAsSaveButton=Save
+
  ! User Notification
 
 userNotificationSaveError=Save Error

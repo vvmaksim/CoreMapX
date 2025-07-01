@@ -12,6 +12,16 @@ class DialogsState: LocalizationState {
     val newGraphIsWeighted = mutableStateOf("")
     val newGraphCreateButton = mutableStateOf("")
 
+    // Save Graph
+    val saveGraphAsTitle = mutableStateOf("")
+    val saveGraphAsSubtitle = mutableStateOf("")
+    val saveGraphAsFileNameHint = mutableStateOf("")
+    val saveGraphAsFileNamePlaceholder = mutableStateOf("")
+    val saveGraphAsSaveDirectoryHint = mutableStateOf("")
+    val saveGraphAsFileFormatHint = mutableStateOf("")
+    val saveGraphAsFileExistsWarning = mutableStateOf("")
+    val saveGraphAsSaveButton = mutableStateOf("")
+
     // User Notification
     val userNotificationSaveError = mutableStateOf("")
     val userNotificationSaveSuccess = mutableStateOf("")
@@ -90,6 +100,16 @@ class DialogsState: LocalizationState {
             DialogsKeys.NEW_GRAPH_IS_DIRECTED -> newGraphIsDirected.value = value
             DialogsKeys.NEW_GRAPH_IS_WEIGHTED -> newGraphIsWeighted.value = value
             DialogsKeys.NEW_GRAPH_CREATE_BUTTON -> newGraphCreateButton.value = value
+
+            // Save Graph
+            DialogsKeys.SAVE_GRAPH_AS_TITLE -> saveGraphAsTitle.value = value
+            DialogsKeys.SAVE_GRAPH_AS_SUBTITLE -> saveGraphAsSubtitle.value = value
+            DialogsKeys.SAVE_GRAPH_AS_FILE_NAME_HINT -> saveGraphAsFileNameHint.value = value
+            DialogsKeys.SAVE_GRAPH_AS_FILE_NAME_PLACEHOLDER -> saveGraphAsFileNamePlaceholder.value = value
+            DialogsKeys.SAVE_GRAPH_AS_SAVE_DIRECTORY_HINT -> saveGraphAsSaveDirectoryHint.value = value
+            DialogsKeys.SAVE_GRAPH_AS_FILE_FORMAT_HINT -> saveGraphAsFileFormatHint.value = value
+            DialogsKeys.SAVE_GRAPH_AS_FILE_EXISTS_WARNING -> saveGraphAsFileExistsWarning.value = value
+            DialogsKeys.SAVE_GRAPH_AS_SAVE_BUTTON -> saveGraphAsSaveButton.value = value
 
             // User Notification
             DialogsKeys.USER_NOTIFICATION_SAVE_ERROR -> userNotificationSaveError.value = value

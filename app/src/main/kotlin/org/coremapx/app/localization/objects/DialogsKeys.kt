@@ -9,6 +9,16 @@ object DialogsKeys {
     const val NEW_GRAPH_IS_WEIGHTED = "newGraphIsWeighted"
     const val NEW_GRAPH_CREATE_BUTTON = "newGraphCreateButton"
 
+    // Save Graph As
+    const val SAVE_GRAPH_AS_TITLE = "saveGraphAsTitle"
+    const val SAVE_GRAPH_AS_SUBTITLE = "saveGraphAsSubtitle"
+    const val SAVE_GRAPH_AS_FILE_NAME_HINT = "saveGraphAsFileNameHint"
+    const val SAVE_GRAPH_AS_FILE_NAME_PLACEHOLDER = "saveGraphAsFileNamePlaceholder"
+    const val SAVE_GRAPH_AS_SAVE_DIRECTORY_HINT = "saveGraphAsSaveDirectoryHint"
+    const val SAVE_GRAPH_AS_FILE_FORMAT_HINT = "saveGraphAsFileFormatHint"
+    const val SAVE_GRAPH_AS_FILE_EXISTS_WARNING = "saveGraphAsFileExistsWarning"
+    const val SAVE_GRAPH_AS_SAVE_BUTTON = "saveGraphAsSaveButton"
+
     // User Notification
     const val USER_NOTIFICATION_SAVE_ERROR = "userNotificationSaveError"
     const val USER_NOTIFICATION_SAVE_SUCCESS = "userNotificationSaveSuccess"
