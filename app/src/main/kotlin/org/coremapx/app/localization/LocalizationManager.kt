@@ -23,6 +23,7 @@ object LocalizationManager {
             when (language) {
                 "en" -> loadLanguage(PrivateConfig.AppResources.EN_LANGUAGE_PATH)
                 "ru" -> loadLanguage(PrivateConfig.AppResources.RU_LANGUAGE_PATH)
+                "custom" -> loadLanguage(PrivateConfig.AppResources.CUSTOM_LANGUAGE_PATH)
                 else -> Result.Error(LocalizationErrors.UnknownLanguage(language))
             }
         if (loadLanguageResult is Result.Error) return loadLanguageResult

@@ -12,7 +12,7 @@ class ConfigValidator {
         ): Result<Boolean> =
             when (key) {
                 // General
-                ConfigKeys.LANGUAGE -> enumStringValidator(key, value, listOf("ru", "en"))
+                ConfigKeys.LANGUAGE -> enumStringValidator(key, value, listOf("ru", "en", "custom"))
                 ConfigKeys.THEME -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
                 ConfigKeys.SYSTEM_DIALOG_THEME -> enumStringValidator(key, value, listOf("light", "dark"))
                 ConfigKeys.IS_EXPANDED_SETTINGS -> booleanValidator(key, value)

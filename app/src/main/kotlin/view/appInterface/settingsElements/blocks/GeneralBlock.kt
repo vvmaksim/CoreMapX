@@ -38,10 +38,25 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
     Column {
         DropdownSelectLine(
             title = LocalizationManager.states.dialogs.generalLanguage.value,
-            items = listOf("English", "Русский"),
-            selectedItem = if (language == "en") "English" else "Русский",
-            onItemSelected = {
-                config.setValue(LANGUAGE, if (it == "English") "en" else "ru")
+            items = listOf("English", "Русский", "Custom"),
+            selectedItem =
+                when(language) {
+                    "en" -> "English"
+                    "ru" -> "Русский"
+                    "custom" -> "Custom"
+                    else -> "English"
+                },
+            onItemSelected = { selectedLanguage: String ->
+                config.setValue(
+                    key = LANGUAGE,
+                    value =
+                        when(selectedLanguage) {
+                            "English" -> "en"
+                            "Русский" -> "ru"
+                            "Custom" -> "custom"
+                            else -> "English"
+                        },
+                )
             },
             modifier = dropdownSelectButtonModifier,
             description = LocalizationManager.states.descriptions.descriptionLanguage.value,
