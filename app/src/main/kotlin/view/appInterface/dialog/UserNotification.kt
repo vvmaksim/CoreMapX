@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
@@ -85,7 +86,7 @@ fun UserNotificationContent(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "OK",
+                    text = LocalizationManager.states.dialogs.userNotificationOkButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

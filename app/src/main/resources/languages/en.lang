@@ -40,6 +40,7 @@ saveGraphAsSaveButton=Save
 userNotificationSaveError=Save Error
 userNotificationSaveSuccess=Save Success
 userNotificationSaveSuccessMessage=Graph {fileName} has been successfully saved to the directory {directoryPath} as {fileFormat}
+userNotificationOkButton=OK
 
  ! Settings
 

@@ -26,6 +26,7 @@ class DialogsState: LocalizationState {
     val userNotificationSaveError = mutableStateOf("")
     val userNotificationSaveSuccess = mutableStateOf("")
     val userNotificationSaveSuccessMessage = mutableStateOf("")
+    val userNotificationOkButton = mutableStateOf("")
 
     // Settings
     val settingsTitle = mutableStateOf("")
@@ -115,6 +116,7 @@ class DialogsState: LocalizationState {
             DialogsKeys.USER_NOTIFICATION_SAVE_ERROR -> userNotificationSaveError.value = value
             DialogsKeys.USER_NOTIFICATION_SAVE_SUCCESS -> userNotificationSaveSuccess.value = value
             DialogsKeys.USER_NOTIFICATION_SAVE_SUCCESS_MESSAGE -> userNotificationSaveSuccessMessage.value = value
+            DialogsKeys.USER_NOTIFICATION_OK_BUTTON -> userNotificationOkButton.value = value
 
             // Settings
             DialogsKeys.SETTINGS_TITLE -> settingsTitle.value = value

@@ -40,6 +40,7 @@ saveGraphAsSaveButton=Сохранить
 userNotificationSaveError=Ошибка сохранения
 userNotificationSaveSuccess=Сохранение успешно
 userNotificationSaveSuccessMessage=Граф {fileName} был успешно сохранён по пути {directoryPath} в формате {fileFormat}
+userNotificationOkButton=ОК
 
  ! Settings
 

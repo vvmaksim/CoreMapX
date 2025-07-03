@@ -23,6 +23,7 @@ object DialogsKeys {
     const val USER_NOTIFICATION_SAVE_ERROR = "userNotificationSaveError"
     const val USER_NOTIFICATION_SAVE_SUCCESS = "userNotificationSaveSuccess"
     const val USER_NOTIFICATION_SAVE_SUCCESS_MESSAGE = "userNotificationSaveSuccessMessage"
+    const val USER_NOTIFICATION_OK_BUTTON = "userNotificationOkButton"
 
     // Settings
     const val SETTINGS_TITLE = "settingsTitle"
