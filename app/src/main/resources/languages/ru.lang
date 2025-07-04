@@ -106,6 +106,10 @@ workAreaCanvasLimit=Ограничитель холста
 performanceAnimationDuration=Продолжительность анимаций
 performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
+ ! Analytics
+analyticsTitle=Аналитика
+analyticsLayoutStrategyHint=Стратегия расположения:
+
  ! Descriptions
 # Settings
 ## General Block

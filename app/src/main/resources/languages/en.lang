@@ -106,6 +106,10 @@ workAreaCanvasLimit=Canvas limit
 performanceAnimationDuration=Animation duration
 performanceCommandFieldScrollDelay=Command field scroll delay
 
+ ! Analytics
+analyticsTitle=Analytics
+analyticsLayoutStrategyHint=Layout strategy:
+
  ! Descriptions
 # Settings
 ## General Block

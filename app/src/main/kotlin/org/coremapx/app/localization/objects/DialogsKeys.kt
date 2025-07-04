@@ -87,4 +87,8 @@ object DialogsKeys {
     //// Performance Block
     const val PERFORMANCE_ANIMATION_DURATION = "performanceAnimationDuration"
     const val PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY = "performanceCommandFieldScrollDelay"
+
+    // Analytics
+    const val ANALYTICS_TITLE = "analyticsTitle"
+    const val ANALYTICS_LAYOUT_STRATEGY_HINT = "analyticsLayoutStrategyHint"
 }

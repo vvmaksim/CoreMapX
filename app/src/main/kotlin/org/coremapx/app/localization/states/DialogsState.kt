@@ -91,6 +91,10 @@ class DialogsState: LocalizationState {
     val performanceAnimationDuration = mutableStateOf("")
     val performanceCommandFieldScrollDelay = mutableStateOf("")
 
+    // Analytics
+    val analyticsTitle = mutableStateOf("")
+    val analyticsLayoutStrategyHint = mutableStateOf("")
+
 
     override fun updateValue(key: String, value: String) {
         when(key) {
@@ -180,6 +184,10 @@ class DialogsState: LocalizationState {
             //// Title Bar Block
             DialogsKeys.PERFORMANCE_ANIMATION_DURATION -> performanceAnimationDuration.value = value
             DialogsKeys.PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY -> performanceCommandFieldScrollDelay.value = value
+
+            // Analytics
+            DialogsKeys.ANALYTICS_TITLE -> analyticsTitle.value = value
+            DialogsKeys.ANALYTICS_LAYOUT_STRATEGY_HINT -> analyticsLayoutStrategyHint.value = value
         }
     }
 }

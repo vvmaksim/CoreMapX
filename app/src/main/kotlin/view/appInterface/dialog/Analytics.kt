@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
 import viewmodel.visualizationStrategy.CircularStrategy
@@ -66,7 +67,7 @@ fun AnalyticsContent(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             DialogHeader(
-                title = "Analytics",
+                title = LocalizationManager.states.dialogs.analyticsTitle.value,
                 onButtonClick = onDismiss,
             )
             Column(
@@ -74,7 +75,7 @@ fun AnalyticsContent(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
-                    text = "Layout strategy:",
+                    text = LocalizationManager.states.dialogs.analyticsLayoutStrategyHint.value,
                     style = MaterialTheme.typography.body2,
                 )
                 DropdownSelectButton(
