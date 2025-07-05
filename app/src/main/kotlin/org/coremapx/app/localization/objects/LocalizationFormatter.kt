@@ -7,6 +7,7 @@ import org.coremapx.app.localization.objects.TemplateKeys.ERROR_TYPE
 import org.coremapx.app.localization.objects.TemplateKeys.FILE_FORMAT
 import org.coremapx.app.localization.objects.TemplateKeys.FILE_NAME
 import org.coremapx.app.localization.objects.TemplateKeys.NEXT_LINE
+import org.coremapx.app.localization.objects.TemplateKeys.NUMBER
 
 object LocalizationFormatter {
     fun getErrorMessage(startString: String, errorType: String, errorDescription: String?): String {
@@ -25,5 +26,10 @@ object LocalizationFormatter {
     fun getStringWithLineBreak(startString: String): String {
         return startString
             .replace(NEXT_LINE, "\n")
+    }
+
+    fun getStringWithOneNumber(startString: String, number: Int): String {
+        return startString
+            .replace(NUMBER, number.toString())
     }
 }

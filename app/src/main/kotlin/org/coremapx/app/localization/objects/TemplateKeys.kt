@@ -7,4 +7,5 @@ object TemplateKeys {
     const val DIRECTORY_PATH = "{directoryPath}"
     const val FILE_FORMAT = "{fileFormat}"
     const val NEXT_LINE = "{nextLine}"
+    const val NUMBER = "{number}"
 }
