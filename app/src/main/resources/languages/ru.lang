@@ -110,6 +110,22 @@ performanceCommandFieldScrollDelay=Задержка отправки выход�
 analyticsTitle=Аналитика
 analyticsLayoutStrategyHint=Стратегия расположения:
 
+ ! Generate Random Graph
+generateRandomGraphTitle=Случайный граф
+generateRandomGraphVertexCountHint=Количество вершин
+generateRandomGraphVertexCountIconDescription=Количество вершин
+generateRandomGraphVertexCountErrorMessage=Поле количества вершин должно быть целым положительным числом
+generateRandomGraphEdgeCountHint=Количество рёбер
+generateRandomGraphEdgeCountIconDescription=Количество рёбер
+generateRandomGraphEdgeCountErrorMessage=Поле количества рёбер должно быть целым положительным числом
+generateRandomGraphIsDirectedGraph=Направленный граф
+generateRandomGraphIsWeightedGraph=Взвешенный граф
+generateRandomGraphGeneratingProgress=Процесс генерации: {number}%
+generateRandomGraphVisualizingIconDescription=Визуализация
+generateRandomGraphVisualizingMessage=Визуализация графа...
+generateRandomGraphNotification=Это может занять несколько минут
+generateRandomGraphGenerateButton=Сгенерировать
+
  ! Descriptions
 # Settings
 ## General Block

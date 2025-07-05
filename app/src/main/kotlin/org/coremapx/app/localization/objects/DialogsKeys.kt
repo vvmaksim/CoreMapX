@@ -91,4 +91,20 @@ object DialogsKeys {
     // Analytics
     const val ANALYTICS_TITLE = "analyticsTitle"
     const val ANALYTICS_LAYOUT_STRATEGY_HINT = "analyticsLayoutStrategyHint"
+
+    // Generate Random Graph
+    const val GENERATE_RANDOM_GRAPH_TITLE = "generateRandomGraphTitle"
+    const val GENERATE_RANDOM_GRAPH_VERTEX_COUNT_HINT = "generateRandomGraphVertexCountHint"
+    const val GENERATE_RANDOM_GRAPH_VERTEX_COUNT_ICON_DESCRIPTION = "generateRandomGraphVertexCountIconDescription"
+    const val GENERATE_RANDOM_GRAPH_VERTEX_COUNT_ERROR_MESSAGE = "generateRandomGraphVertexCountErrorMessage"
+    const val GENERATE_RANDOM_GRAPH_EDGE_COUNT_HINT = "generateRandomGraphEdgeCountHint"
+    const val GENERATE_RANDOM_GRAPH_EDGE_COUNT_ICON_DESCRIPTION = "generateRandomGraphEdgeCountIconDescription"
+    const val GENERATE_RANDOM_GRAPH_EDGE_COUNT_ERROR_MESSAGE = "generateRandomGraphEdgeCountErrorMessage"
+    const val GENERATE_RANDOM_GRAPH_IS_DIRECTED_GRAPH = "generateRandomGraphIsDirectedGraph"
+    const val GENERATE_RANDOM_GRAPH_IS_WEIGHTED_GRAPH = "generateRandomGraphIsWeightedGraph"
+    const val GENERATE_RANDOM_GRAPH_GENERATING_PROGRESS = "generateRandomGraphGeneratingProgress"
+    const val GENERATE_RANDOM_GRAPH_VISUALIZING_ICON_DESCRIPTION = "generateRandomGraphVisualizingIconDescription"
+    const val GENERATE_RANDOM_GRAPH_VISUALIZING_MESSAGE = "generateRandomGraphVisualizingMessage"
+    const val GENERATE_RANDOM_GRAPH_VISUALIZING_NOTIFICATION = "generateRandomGraphNotification"
+    const val GENERATE_RANDOM_GRAPH_GENERATE_BUTTON = "generateRandomGraphGenerateButton"
 }

@@ -110,6 +110,22 @@ performanceCommandFieldScrollDelay=Command field scroll delay
 analyticsTitle=Analytics
 analyticsLayoutStrategyHint=Layout strategy:
 
+ ! Generate Random Graph
+generateRandomGraphTitle=Random Graph
+generateRandomGraphVertexCountHint=Vertices Count
+generateRandomGraphVertexCountIconDescription=Vertices Count
+generateRandomGraphVertexCountErrorMessage=Vertices Count must be a positive integer
+generateRandomGraphEdgeCountHint=Edges Count
+generateRandomGraphEdgeCountIconDescription=Edges Count
+generateRandomGraphEdgeCountErrorMessage=Edges Count must be a positive integer
+generateRandomGraphIsDirectedGraph=Directed Graph
+generateRandomGraphIsWeightedGraph=Weighted Graph
+generateRandomGraphGeneratingProgress=Generating graph: {number}%
+generateRandomGraphVisualizingIconDescription=Visualizing
+generateRandomGraphVisualizingMessage=Visualizing graph...
+generateRandomGraphNotification=This may take a few minutes
+generateRandomGraphGenerateButton=Generate
+
  ! Descriptions
 # Settings
 ## General Block

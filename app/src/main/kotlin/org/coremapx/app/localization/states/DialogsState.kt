@@ -95,6 +95,21 @@ class DialogsState: LocalizationState {
     val analyticsTitle = mutableStateOf("")
     val analyticsLayoutStrategyHint = mutableStateOf("")
 
+    // Generate Random Graph
+    val generateRandomGraphTitle = mutableStateOf("")
+    val generateRandomGraphVertexCountHint = mutableStateOf("")
+    val generateRandomGraphVertexCountIconDescription = mutableStateOf("")
+    val generateRandomGraphVertexCountErrorMessage = mutableStateOf("")
+    val generateRandomGraphEdgeCountHint = mutableStateOf("")
+    val generateRandomGraphEdgeCountIconDescription = mutableStateOf("")
+    val generateRandomGraphEdgeCountErrorMessage = mutableStateOf("")
+    val generateRandomGraphIsDirectedGraph = mutableStateOf("")
+    val generateRandomGraphIsWeightedGraph = mutableStateOf("")
+    val generateRandomGraphGeneratingProgress = mutableStateOf("")
+    val generateRandomGraphVisualizingIconDescription = mutableStateOf("")
+    val generateRandomGraphVisualizingMessage = mutableStateOf("")
+    val generateRandomGraphNotification = mutableStateOf("")
+    val generateRandomGraphGenerateButton = mutableStateOf("")
 
     override fun updateValue(key: String, value: String) {
         when(key) {
@@ -188,6 +203,22 @@ class DialogsState: LocalizationState {
             // Analytics
             DialogsKeys.ANALYTICS_TITLE -> analyticsTitle.value = value
             DialogsKeys.ANALYTICS_LAYOUT_STRATEGY_HINT -> analyticsLayoutStrategyHint.value = value
+
+            // Generate Random Graph
+            DialogsKeys.GENERATE_RANDOM_GRAPH_TITLE -> generateRandomGraphTitle.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_VERTEX_COUNT_HINT -> generateRandomGraphVertexCountHint.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_VERTEX_COUNT_ICON_DESCRIPTION -> generateRandomGraphVertexCountIconDescription.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_VERTEX_COUNT_ERROR_MESSAGE -> generateRandomGraphVertexCountErrorMessage.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_EDGE_COUNT_HINT -> generateRandomGraphEdgeCountHint.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_EDGE_COUNT_ICON_DESCRIPTION -> generateRandomGraphEdgeCountIconDescription.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_EDGE_COUNT_ERROR_MESSAGE -> generateRandomGraphEdgeCountErrorMessage.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_IS_DIRECTED_GRAPH -> generateRandomGraphIsDirectedGraph.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_IS_WEIGHTED_GRAPH -> generateRandomGraphIsWeightedGraph.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_GENERATING_PROGRESS -> generateRandomGraphGeneratingProgress.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_VISUALIZING_ICON_DESCRIPTION -> generateRandomGraphVisualizingIconDescription.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_VISUALIZING_MESSAGE -> generateRandomGraphVisualizingMessage.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_VISUALIZING_NOTIFICATION -> generateRandomGraphNotification.value = value
+            DialogsKeys.GENERATE_RANDOM_GRAPH_GENERATE_BUTTON -> generateRandomGraphGenerateButton.value = value
         }
     }
 }
