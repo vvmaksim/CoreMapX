@@ -126,6 +126,9 @@ generateRandomGraphVisualizingMessage=Visualizing graph...
 generateRandomGraphNotification=This may take a few minutes
 generateRandomGraphGenerateButton=Generate
 
+ ! Dialog Header
+dialogHeaderCloseIconDescription=Close
+
  ! Descriptions
 # Settings
 ## General Block

@@ -111,6 +111,9 @@ class DialogsState: LocalizationState {
     val generateRandomGraphNotification = mutableStateOf("")
     val generateRandomGraphGenerateButton = mutableStateOf("")
 
+    // Dialog Header
+    val dialogHeaderCloseIconDescription = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // New Graph
@@ -219,6 +222,9 @@ class DialogsState: LocalizationState {
             DialogsKeys.GENERATE_RANDOM_GRAPH_VISUALIZING_MESSAGE -> generateRandomGraphVisualizingMessage.value = value
             DialogsKeys.GENERATE_RANDOM_GRAPH_VISUALIZING_NOTIFICATION -> generateRandomGraphNotification.value = value
             DialogsKeys.GENERATE_RANDOM_GRAPH_GENERATE_BUTTON -> generateRandomGraphGenerateButton.value = value
+
+            // Dialog Header
+            DialogsKeys.DIALOG_HEADER_CLOSE_ICON_DESCRIPTION -> dialogHeaderCloseIconDescription.value = value
         }
     }
 }

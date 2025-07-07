@@ -107,4 +107,7 @@ object DialogsKeys {
     const val GENERATE_RANDOM_GRAPH_VISUALIZING_MESSAGE = "generateRandomGraphVisualizingMessage"
     const val GENERATE_RANDOM_GRAPH_VISUALIZING_NOTIFICATION = "generateRandomGraphNotification"
     const val GENERATE_RANDOM_GRAPH_GENERATE_BUTTON = "generateRandomGraphGenerateButton"
+
+    // Dialog Header
+    const val DIALOG_HEADER_CLOSE_ICON_DESCRIPTION = "dialogHeaderCloseIconDescription"
 }
