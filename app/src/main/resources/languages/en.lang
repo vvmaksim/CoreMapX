@@ -129,6 +129,12 @@ generateRandomGraphGenerateButton=Generate
  ! Dialog Header
 dialogHeaderCloseIconDescription=Close
 
+ ! Open Graph Errors
+openGraphErrorsWarningIconDescription=Warning
+openGraphErrorsNotification=Errors and warnings when loading the graph
+openGraphErrorsErrorIconDescription=Error
+openGraphErrorsOkButton=OK
+
  ! Descriptions
 # Settings
 ## General Block

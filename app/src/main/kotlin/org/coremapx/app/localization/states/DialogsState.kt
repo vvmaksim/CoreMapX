@@ -114,6 +114,12 @@ class DialogsState: LocalizationState {
     // Dialog Header
     val dialogHeaderCloseIconDescription = mutableStateOf("")
 
+    // OpenGraphErrors
+    val openGraphErrorsWarningIconDescription = mutableStateOf("")
+    val openGraphErrorsNotification = mutableStateOf("")
+    val openGraphErrorsErrorIconDescription = mutableStateOf("")
+    val openGraphErrorsOkButton = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // New Graph
@@ -225,6 +231,12 @@ class DialogsState: LocalizationState {
 
             // Dialog Header
             DialogsKeys.DIALOG_HEADER_CLOSE_ICON_DESCRIPTION -> dialogHeaderCloseIconDescription.value = value
+
+            // OpenGraphErrors
+            DialogsKeys.OPEN_GRAPH_ERRORS_WARNING_ICON_DESCRIPTION -> openGraphErrorsWarningIconDescription.value = value
+            DialogsKeys.OPEN_GRAPH_ERRORS_NOTIFICATION -> openGraphErrorsNotification.value = value
+            DialogsKeys.OPEN_GRAPH_ERRORS_ERROR_ICON_DESCRIPTION -> openGraphErrorsErrorIconDescription.value = value
+            DialogsKeys.OPEN_GRAPH_ERRORS_OK_BUTTON -> openGraphErrorsOkButton.value = value
         }
     }
 }

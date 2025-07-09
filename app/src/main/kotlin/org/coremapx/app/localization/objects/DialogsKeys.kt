@@ -110,4 +110,10 @@ object DialogsKeys {
 
     // Dialog Header
     const val DIALOG_HEADER_CLOSE_ICON_DESCRIPTION = "dialogHeaderCloseIconDescription"
+
+    // Open Graph Errors
+    const val OPEN_GRAPH_ERRORS_WARNING_ICON_DESCRIPTION = "openGraphErrorsWarningIconDescription"
+    const val OPEN_GRAPH_ERRORS_NOTIFICATION = "openGraphErrorsNotification"
+    const val OPEN_GRAPH_ERRORS_ERROR_ICON_DESCRIPTION = "openGraphErrorsErrorIconDescription"
+    const val OPEN_GRAPH_ERRORS_OK_BUTTON = "openGraphErrorsOkButton"
 }

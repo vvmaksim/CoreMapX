@@ -129,6 +129,12 @@ generateRandomGraphGenerateButton=Сгенерировать
  ! Dialog Header
 dialogHeaderCloseIconDescription=Закрыть
 
+ ! Open Graph Errors
+openGraphErrorsWarningIconDescription=Предупреждение
+openGraphErrorsNotification=Ошибки и предупреждения при загрузке графа
+openGraphErrorsErrorIconDescription=Ошибка
+openGraphErrorsOkButton=ОК
+
  ! Descriptions
 # Settings
 ## General Block
