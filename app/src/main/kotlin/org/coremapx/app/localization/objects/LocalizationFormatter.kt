@@ -28,7 +28,7 @@ object LocalizationFormatter {
             .replace(NEXT_LINE, "\n")
     }
 
-    fun getStringWithOneNumber(startString: String, number: Int): String {
+    fun getStringWithOneNumber(startString: String, number: Long): String {
         return startString
             .replace(NUMBER, number.toString())
     }

@@ -240,7 +240,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                         text =
                             LocalizationFormatter.getStringWithOneNumber(
                                 startString = LocalizationManager.states.dialogs.generateRandomGraphGeneratingProgress.value,
-                                number = (generationProgress * 100).toInt()
+                                number = (generationProgress * 100).toLong(),
                         ),
                         style = MaterialTheme.typography.body2,
                     )
