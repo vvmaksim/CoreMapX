@@ -135,6 +135,17 @@ openGraphErrorsNotification=Errors and warnings when loading the graph
 openGraphErrorsErrorIconDescription=Error
 openGraphErrorsOkButton=OK
 
+ ! Open Repository
+openRepositoryTitle=Available Graphs
+openRepositoryErrorMessage=No graphs found in repository
+openRepositoryIsDirected=Directed
+openRepositoryIsUndirected=Undirected
+openRepositoryIsWeighted=Weighted
+openRepositoryIsUnweighted=Unweighted
+openRepositoryVerticesCount=Vertices: {number}
+openRepositoryEdgesCount=Edges: {number}
+openRepositoryOpenButton=Open
+
  ! Descriptions
 # Settings
 ## General Block

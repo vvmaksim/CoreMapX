@@ -135,6 +135,17 @@ openGraphErrorsNotification=Ошибки и предупреждения при 
 openGraphErrorsErrorIconDescription=Ошибка
 openGraphErrorsOkButton=ОК
 
+ ! Open Repository
+openRepositoryTitle=Доступные графы
+openRepositoryErrorMessage=Не найдено графов в репозитории
+openRepositoryIsDirected=Направленный
+openRepositoryIsUndirected=Ненаправленный
+openRepositoryIsWeighted=Взвешенный
+openRepositoryIsUnweighted=Невзвешенный
+openRepositoryVerticesCount=Всего вершин: {number}
+openRepositoryEdgesCount=Всего рёбер: {number}
+openRepositoryOpenButton=Открыть
+
  ! Descriptions
 # Settings
 ## General Block

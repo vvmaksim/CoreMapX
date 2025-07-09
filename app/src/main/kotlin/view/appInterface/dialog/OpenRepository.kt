@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.toBooleanOrNull
 import extensions.toLong
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import orgcoremapxapp.Graphs
 import kotlin.random.Random
@@ -91,13 +93,13 @@ fun OpenRepositoryContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Available Graphs",
+                title = LocalizationManager.states.dialogs.openRepositoryTitle.value,
                 onButtonClick = onDismiss,
             )
             Spacer(modifier = Modifier.height(24.dp))
             if (graphs.isEmpty()) {
                 Text(
-                    text = "No graphs found in repository",
+                    text = LocalizationManager.states.dialogs.openRepositoryErrorMessage.value,
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                 )
@@ -172,13 +174,21 @@ fun OpenRepositoryContent(
                                                     val isDirected = graph.isDirected.toBooleanOrNull() ?: false
                                                     val isWeighted = graph.isWeighted.toBooleanOrNull() ?: false
                                                     Text(
-                                                        text = if (isDirected) "Directed" else "Undirected",
+                                                        text =
+                                                            if (isDirected)
+                                                                LocalizationManager.states.dialogs.openRepositoryIsDirected.value
+                                                            else
+                                                                LocalizationManager.states.dialogs.openRepositoryIsUndirected.value,
                                                         style = MaterialTheme.typography.body2,
                                                         modifier = Modifier.align(Alignment.CenterVertically),
                                                     )
                                                     Spacer(modifier = Modifier.width(8.dp))
                                                     Text(
-                                                        text = if (isWeighted) "Weighted" else "Unweighted",
+                                                        text =
+                                                            if (isWeighted)
+                                                                LocalizationManager.states.dialogs.openRepositoryIsWeighted.value
+                                                            else
+                                                                LocalizationManager.states.dialogs.openRepositoryIsUnweighted.value,
                                                         style = MaterialTheme.typography.body2,
                                                         modifier = Modifier.align(Alignment.CenterVertically),
                                                     )
@@ -191,13 +201,21 @@ fun OpenRepositoryContent(
                                                     val vertexCount = getCountVerticesByGraph(graph.graph_id)
                                                     val edgeCount = getCountEdgesByGraph(graph.graph_id)
                                                     Text(
-                                                        text = "Vertices: $vertexCount",
+                                                        text =
+                                                            LocalizationFormatter.getStringWithOneNumber(
+                                                                startString = LocalizationManager.states.dialogs.openRepositoryVerticesCount.value,
+                                                                number = vertexCount,
+                                                            ),
                                                         style = MaterialTheme.typography.body2,
                                                         modifier = Modifier.align(Alignment.CenterVertically),
                                                     )
                                                     Spacer(modifier = Modifier.width(8.dp))
                                                     Text(
-                                                        text = "Edges: $edgeCount",
+                                                        text =
+                                                            LocalizationFormatter.getStringWithOneNumber(
+                                                                startString = LocalizationManager.states.dialogs.openRepositoryEdgesCount.value,
+                                                                number = edgeCount,
+                                                            ),
                                                         style = MaterialTheme.typography.body2,
                                                         modifier = Modifier.align(Alignment.CenterVertically),
                                                     )
@@ -236,7 +254,7 @@ fun OpenRepositoryContent(
                 enabled = selectedGraphId != null,
             ) {
                 Text(
-                    text = "Open",
+                    text = LocalizationManager.states.dialogs.openRepositoryOpenButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

@@ -120,6 +120,17 @@ class DialogsState: LocalizationState {
     val openGraphErrorsErrorIconDescription = mutableStateOf("")
     val openGraphErrorsOkButton = mutableStateOf("")
 
+    // Open Repository
+    val openRepositoryTitle = mutableStateOf("")
+    val openRepositoryErrorMessage = mutableStateOf("")
+    val openRepositoryIsDirected = mutableStateOf("")
+    val openRepositoryIsUndirected = mutableStateOf("")
+    val openRepositoryIsWeighted = mutableStateOf("")
+    val openRepositoryIsUnweighted = mutableStateOf("")
+    val openRepositoryVerticesCount = mutableStateOf("")
+    val openRepositoryEdgesCount = mutableStateOf("")
+    val openRepositoryOpenButton = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // New Graph
@@ -237,6 +248,17 @@ class DialogsState: LocalizationState {
             DialogsKeys.OPEN_GRAPH_ERRORS_NOTIFICATION -> openGraphErrorsNotification.value = value
             DialogsKeys.OPEN_GRAPH_ERRORS_ERROR_ICON_DESCRIPTION -> openGraphErrorsErrorIconDescription.value = value
             DialogsKeys.OPEN_GRAPH_ERRORS_OK_BUTTON -> openGraphErrorsOkButton.value = value
+
+            // Open Repository
+            DialogsKeys.OPEN_REPOSITORY_TITLE -> openRepositoryTitle.value = value
+            DialogsKeys.OPEN_REPOSITORY_ERROR_MESSAGE -> openRepositoryErrorMessage.value = value
+            DialogsKeys.OPEN_REPOSITORY_IS_DIRECTED -> openRepositoryIsDirected.value = value
+            DialogsKeys.OPEN_REPOSITORY_IS_UNDIRECTED -> openRepositoryIsUndirected.value = value
+            DialogsKeys.OPEN_REPOSITORY_IS_WEIGHTED -> openRepositoryIsWeighted.value = value
+            DialogsKeys.OPEN_REPOSITORY_IS_UNWEIGHTED -> openRepositoryIsUnweighted.value = value
+            DialogsKeys.OPEN_REPOSITORY_VERTICES_COUNT -> openRepositoryVerticesCount.value = value
+            DialogsKeys.OPEN_REPOSITORY_EDGES_COUNT -> openRepositoryEdgesCount.value = value
+            DialogsKeys.OPEN_REPOSITORY_OPEN_BUTTON -> openRepositoryOpenButton.value = value
         }
     }
 }

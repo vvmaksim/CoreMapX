@@ -116,4 +116,15 @@ object DialogsKeys {
     const val OPEN_GRAPH_ERRORS_NOTIFICATION = "openGraphErrorsNotification"
     const val OPEN_GRAPH_ERRORS_ERROR_ICON_DESCRIPTION = "openGraphErrorsErrorIconDescription"
     const val OPEN_GRAPH_ERRORS_OK_BUTTON = "openGraphErrorsOkButton"
+
+    // Open Repository
+    const val OPEN_REPOSITORY_TITLE = "openRepositoryTitle"
+    const val OPEN_REPOSITORY_ERROR_MESSAGE = "openRepositoryErrorMessage"
+    const val OPEN_REPOSITORY_IS_DIRECTED = "openRepositoryIsDirected"
+    const val OPEN_REPOSITORY_IS_UNDIRECTED = "openRepositoryIsUndirected"
+    const val OPEN_REPOSITORY_IS_WEIGHTED = "openRepositoryIsWeighted"
+    const val OPEN_REPOSITORY_IS_UNWEIGHTED = "openRepositoryIsUnweighted"
+    const val OPEN_REPOSITORY_VERTICES_COUNT = "openRepositoryVerticesCount"
+    const val OPEN_REPOSITORY_EDGES_COUNT = "openRepositoryEdgesCount"
+    const val OPEN_REPOSITORY_OPEN_BUTTON = "openRepositoryOpenButton"
 }
