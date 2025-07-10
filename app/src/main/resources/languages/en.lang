@@ -333,3 +333,8 @@ userDirectoryOpen=Open user directory
 # Zoom
 zoomIncrease=Increase
 zoomReduce=Reduce
+# Any Words
+vertices=vertices
+edges=edges
+# Main Work Area
+mainWorkAreaEnterCommand=Enter command

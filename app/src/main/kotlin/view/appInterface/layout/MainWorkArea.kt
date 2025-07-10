@@ -30,6 +30,8 @@ import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import view.appInterface.button.ZoomButtons
 import view.appInterface.workspace.CommandLine
 import view.appInterface.workspace.GraphElementCounters
@@ -79,11 +81,22 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         userCommands.value = userCommands.value.takeLast(maxUserCommands).toMutableList()
     }
 
-    fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
+    fun errorMessage(errorResult: Result.Error): String =
+        LocalizationFormatter.getErrorMessage(
+            startString = LocalizationManager.states.ui.errorBasicString.value,
+            errorType = errorResult.error.type,
+            errorDescription = errorResult.error.description,
+        )
 
     fun handleCommand(commandLine: String) {
         if (graph == null) {
-            updateOutputMessages("Error: ${CommandErrors.NoGraphSelected().type}.${CommandErrors.NoGraphSelected().description}")
+            updateOutputMessages(
+                LocalizationFormatter.getErrorMessage(
+                    startString = LocalizationManager.states.ui.errorBasicString.value,
+                    errorType = CommandErrors.NoGraphSelected().type,
+                    errorDescription = CommandErrors.NoGraphSelected().description,
+                )
+            )
             return
         }
         val commands = commandLine.split(";")
@@ -155,8 +168,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         ?.edges
                         ?.size
                         ?.toLong() ?: 0L,
-                vertexLabel = "vertices",
-                edgeLabel = "edges",
+                vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
+                edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
                 modifier = Modifier.align(Alignment.Bottom),
             )
             Spacer(Modifier.weight(1f))
@@ -172,7 +185,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     } else {
                         MaterialTheme.colors.commandLineBackground
                     },
-                placeholderText = "Enter command",
+                placeholderText = LocalizationManager.states.anyTextStates.mainWorkAreaEnterCommand.value,
                 onCommand = { command -> handleCommand(command) },
                 commandText = commandText,
                 onCommandTextChange = { commandText = it },

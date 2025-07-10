@@ -333,3 +333,8 @@ userDirectoryOpen=Открыть директорию пользователя
 # Zoom
 zoomIncrease=Увеличить
 zoomReduce=Уменьшить
+# Any Words
+vertices=вершин
+edges=рёбер
+# Main Work Area
+mainWorkAreaEnterCommand=Введите команду
