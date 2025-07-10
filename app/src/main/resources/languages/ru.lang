@@ -341,3 +341,5 @@ mainWorkAreaEnterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть
 settingsExpand=Раскрыть
+settingsHideDescription=Спрятать описание
+settingsShowDescription=Показать описание

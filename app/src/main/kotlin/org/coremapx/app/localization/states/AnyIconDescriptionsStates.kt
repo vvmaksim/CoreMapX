@@ -30,6 +30,8 @@ class AnyIconDescriptionsStates: LocalizationState {
     // Settings
     val settingsCollapse = mutableStateOf("")
     val settingsExpand = mutableStateOf("")
+    val settingsHideDescription = mutableStateOf("")
+    val settingsShowDescription = mutableStateOf("")
 
     override fun updateValue(key: String, value: String) {
         when(key) {
@@ -59,6 +61,8 @@ class AnyIconDescriptionsStates: LocalizationState {
             // Settings
             AnyIconDescriptionsKeys.SETTINGS_COLLAPSE -> settingsCollapse.value = value
             AnyIconDescriptionsKeys.SETTINGS_EXPAND -> settingsExpand.value = value
+            AnyIconDescriptionsKeys.SETTINGS_HIDE_DESCRIPTION -> settingsHideDescription.value = value
+            AnyIconDescriptionsKeys.SETTINGS_SHOW_DESCRIPTION -> settingsShowDescription.value = value
         }
     }
 }

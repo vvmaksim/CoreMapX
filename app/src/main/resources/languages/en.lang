@@ -341,3 +341,5 @@ mainWorkAreaEnterCommand=Enter command
 # Settings
 settingsCollapse=Collapse
 settingsExpand=Expand
+settingsHideDescription=Hide description
+settingsShowDescription=Show description
