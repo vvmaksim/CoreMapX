@@ -14,6 +14,9 @@ class AnyIconDescriptionsStates: LocalizationState {
     // Dropdown Select
     val dropdownSelectArrow = mutableStateOf("")
 
+    // Save Path
+    val savePathOpenDirectoryDialog = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -25,6 +28,9 @@ class AnyIconDescriptionsStates: LocalizationState {
 
             // Dropdown Select
             AnyIconDescriptionsKeys.DROPDOWN_SELECT_ARROW -> dropdownSelectArrow.value = value
+
+            // Save Path
+            AnyIconDescriptionsKeys.SAVE_PATH_OPEN_DIRECTORY_DIALOG -> savePathOpenDirectoryDialog.value = value
         }
     }
 }

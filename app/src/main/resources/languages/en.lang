@@ -323,3 +323,6 @@ logoIcon=Logo Icon
 colorPickerChooseColor=Choose Color
 # Dropdown Select
 dropdownSelectArrow=Dropdown Arrow
+# Save Path
+savePathSelectDirectory=Select directory
+savePathOpenDirectoryDialog=Open Directory Dialog

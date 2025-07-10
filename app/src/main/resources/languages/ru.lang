@@ -323,3 +323,6 @@ logoIcon=Иконка логотипа
 colorPickerChooseColor=Выберите цвет
 # Dropdown Select
 dropdownSelectArrow=Выпадающая стрелка
+# Save Path
+savePathSelectDirectory=Выберите директорию
+savePathOpenDirectoryDialog=Диалог открытия директории

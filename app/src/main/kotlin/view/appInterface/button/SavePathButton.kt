@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import model.fileHandler.DialogManager
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import kotlin.text.ifEmpty
@@ -74,14 +75,14 @@ fun SavePathButton(
                     .padding(horizontal = 16.dp),
         ) {
             Text(
-                text = currentPath.ifEmpty { "Select directory" },
+                text = currentPath.ifEmpty { LocalizationManager.states.anyTextStates.savePathSelectDirectory.value },
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.body1,
             )
             Icon(
                 imageVector = Icons.Filled.Folder,
-                contentDescription = "Open Directory Dialog",
+                contentDescription = LocalizationManager.states.anyIconDescriptionsStates.savePathOpenDirectoryDialog.value,
                 modifier = Modifier.size(iconSize),
                 tint = MaterialTheme.colors.primary,
             )

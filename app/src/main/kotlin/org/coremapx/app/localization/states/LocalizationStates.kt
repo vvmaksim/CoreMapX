@@ -5,4 +5,5 @@ class LocalizationStates {
     val dialogs = DialogsState()
     val descriptions = DescriptionsStates()
     val anyIconDescriptionsStates = AnyIconDescriptionsStates()
+    val anyTextStates = AnyTextStates()
 }

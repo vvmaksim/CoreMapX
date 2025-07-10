@@ -10,4 +10,7 @@ object AnyIconDescriptionsKeys {
 
     // Dropdown Select
     const val DROPDOWN_SELECT_ARROW = "dropdownSelectArrow"
+
+    // Save Path
+    const val SAVE_PATH_OPEN_DIRECTORY_DIALOG = "savePathOpenDirectoryDialog"
 }

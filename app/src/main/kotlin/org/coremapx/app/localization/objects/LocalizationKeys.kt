@@ -5,4 +5,5 @@ object LocalizationKeys {
     val dialogs = DialogsKeys
     val descriptions = DescriptionsKeys
     val anyIconDescriptions = AnyIconDescriptionsKeys
+    val anyText = AnyTextKeys
 }
