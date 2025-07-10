@@ -185,7 +185,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     } else {
                         MaterialTheme.colors.commandLineBackground
                     },
-                placeholderText = LocalizationManager.states.anyTextStates.mainWorkAreaEnterCommand.value,
+                placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
                 onCommand = { command -> handleCommand(command) },
                 commandText = commandText,
                 onCommandTextChange = { commandText = it },

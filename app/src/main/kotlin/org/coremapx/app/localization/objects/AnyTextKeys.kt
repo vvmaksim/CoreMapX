@@ -4,10 +4,8 @@ object AnyTextKeys {
     // Any words
     const val VERTICES = "vertices"
     const val EDGES = "edges"
+    const val ENTER_COMMAND = "enterCommand"
 
     // Save Path
     const val SAVE_PATH_SELECT_DIRECTORY = "savePathSelectDirectory"
-
-    // Main Work Area
-    const val MAIN_WORK_AREA_ENTER_COMMAND = "mainWorkAreaEnterCommand"
 }

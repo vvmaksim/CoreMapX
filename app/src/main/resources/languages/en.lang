@@ -336,8 +336,7 @@ zoomReduce=Reduce
 # Any Words
 vertices=vertices
 edges=edges
-# Main Work Area
-mainWorkAreaEnterCommand=Enter command
+enterCommand=Enter command
 # Settings
 settingsCollapse=Collapse
 settingsExpand=Expand

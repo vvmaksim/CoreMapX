@@ -336,8 +336,7 @@ zoomReduce=Уменьшить
 # Any Words
 vertices=вершин
 edges=рёбер
-# Main Work Area
-mainWorkAreaEnterCommand=Введите команду
+enterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть
 settingsExpand=Раскрыть

@@ -7,12 +7,10 @@ class AnyTextStates: LocalizationState {
     // Any words
     val vertices = mutableStateOf("")
     val edges = mutableStateOf("")
+    val enterCommand = mutableStateOf("")
 
     // Save Path
     val savePathSelectDirectory = mutableStateOf("")
-
-    // Main Work Area
-    val mainWorkAreaEnterCommand = mutableStateOf("")
 
     override fun updateValue(key: String, value: String) {
         when(key) {
@@ -24,7 +22,7 @@ class AnyTextStates: LocalizationState {
             AnyTextKeys.SAVE_PATH_SELECT_DIRECTORY -> savePathSelectDirectory.value = value
 
             // Save Path
-            AnyTextKeys.MAIN_WORK_AREA_ENTER_COMMAND -> mainWorkAreaEnterCommand.value = value
+            AnyTextKeys.ENTER_COMMAND -> enterCommand.value = value
         }
     }
 }
