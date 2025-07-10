@@ -319,3 +319,5 @@ errorNoDescriptionMessage=Описание отсутствует
 # Logo
 logoBackground=Задний фон логотипа
 logoIcon=Иконка логотипа
+# Color Picker
+colorPickerChooseColor=Выберите цвет

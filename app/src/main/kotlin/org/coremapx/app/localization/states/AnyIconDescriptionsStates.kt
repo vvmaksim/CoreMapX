@@ -8,11 +8,17 @@ class AnyIconDescriptionsStates: LocalizationState {
     val logoBackground = mutableStateOf("")
     val logoIcon = mutableStateOf("")
 
+    // Color Picker
+    val colorPickerChooseColor = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
             AnyIconDescriptionsKeys.LOGO_BACKGROUND -> logoBackground.value = value
             AnyIconDescriptionsKeys.LOGO_ICON -> logoIcon.value = value
+
+            // Color Picker
+            AnyIconDescriptionsKeys.COLOR_PICKER_CHOOSE_COLOR -> colorPickerChooseColor.value = value
         }
     }
 }

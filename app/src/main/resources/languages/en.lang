@@ -319,3 +319,5 @@ errorNoDescriptionMessage=No description
 # Logo
 logoBackground=Logo Background
 logoIcon=Logo Icon
+# Color Picker
+colorPickerChooseColor=Choose Color
