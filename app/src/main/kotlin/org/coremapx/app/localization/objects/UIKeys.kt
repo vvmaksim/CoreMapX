@@ -17,6 +17,28 @@ object UIKeys {
     const val MAIN_MENU_BUTTON_SETTINGS = "mainMenuButtonSettings"
     const val MAIN_MENU_SETTINGS_ICON_DESCRIPTION = "mainMenuSettingsIconDescription"
 
+    // Title Bar
+    const val TITLE_BAR_MENU_ICON_DESCRIPTION = "titleBarMenuIconDescription"
+    const val TITLE_BAR_FILE_BUTTON = "titleBarFileButton"
+    const val TITLE_BAR_FILE_NEW_ICON_DESCRIPTION = "titleBarFileNewIconDescription"
+    const val TITLE_BAR_FILE_NEW_BUTTON = "titleBarFileNewButton"
+    const val TITLE_BAR_FILE_OPEN_ICON_DESCRIPTION = "titleBarFileOpenIconDescription"
+    const val TITLE_BAR_FILE_OPEN_BUTTON = "titleBarFileOpenButton"
+    const val TITLE_BAR_FILE_OPEN_FILE_ICON_DESCRIPTION = "titleBarFileOpenFileIconDescription"
+    const val TITLE_BAR_FILE_OPEN_FILE_BUTTON = "titleBarFileOpenFileButton"
+    const val TITLE_BAR_FILE_OPEN_REPOSITORY_ICON_DESCRIPTION = "titleBarFileOpenRepositoryIconDescription"
+    const val TITLE_BAR_FILE_OPEN_REPOSITORY_BUTTON = "titleBarFileOpenRepositoryButton"
+    const val TITLE_BAR_FILE_SAVE_ICON_DESCRIPTION = "titleBarFileSaveIconDescription"
+    const val TITLE_BAR_FILE_SAVE_BUTTON = "titleBarFileSaveButton"
+    const val TITLE_BAR_FILE_SAVE_AS_ICON_DESCRIPTION = "titleBarFileSaveAsIconDescription"
+    const val TITLE_BAR_FILE_SAVE_AS_BUTTON = "titleBarFileSaveAsButton"
+    const val TITLE_BAR_SETTINGS_BUTTON = "titleBarSettingsButton"
+    const val TITLE_BAR_HELP_BUTTON = "titleBarHelpButton"
+    const val TITLE_BAR_MINIMIZE_ICON_DESCRIPTION = "titleBarMinimizeIconDescription"
+    const val TITLE_BAR_RECOVER_ICON_DESCRIPTION = "titleBarRecoverIconDescription"
+    const val TITLE_BAR_MAXIMIZE_ICON_DESCRIPTION = "titleBarMaximizeIconDescription"
+    const val TITLE_BAR_CLOSE_ICON_DESCRIPTION = "titleBarCloseIconDescription"
+
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"
     const val ERROR_NO_DESCRIPTION_MESSAGE = "errorNoDescriptionMessage"

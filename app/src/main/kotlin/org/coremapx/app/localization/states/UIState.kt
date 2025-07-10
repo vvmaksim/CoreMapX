@@ -20,6 +20,28 @@ class UIState(): LocalizationState {
     val mainMenuButtonSettings = mutableStateOf("")
     val mainMenuSettingsIconDescription = mutableStateOf("")
 
+    // Title Bar
+    var titleBarMenuIconDescription = mutableStateOf("")
+    var titleBarFileButton = mutableStateOf("")
+    var titleBarFileNewIconDescription = mutableStateOf("")
+    var titleBarFileNewButton = mutableStateOf("")
+    var titleBarFileOpenIconDescription = mutableStateOf("")
+    var titleBarFileOpenButton = mutableStateOf("")
+    var titleBarFileOpenFileIconDescription = mutableStateOf("")
+    var titleBarFileOpenFileButton = mutableStateOf("")
+    var titleBarFileOpenRepositoryIconDescription = mutableStateOf("")
+    var titleBarFileOpenRepositoryButton = mutableStateOf("")
+    var titleBarFileSaveIconDescription = mutableStateOf("")
+    var titleBarFileSaveButton = mutableStateOf("")
+    var titleBarFileSaveAsIconDescription = mutableStateOf("")
+    var titleBarFileSaveAsButton = mutableStateOf("")
+    var titleBarSettingsButton = mutableStateOf("")
+    var titleBarHelpButton = mutableStateOf("")
+    var titleBarMinimizeIconDescription = mutableStateOf("")
+    var titleBarRecoverIconDescription = mutableStateOf("")
+    var titleBarMaximizeIconDescription = mutableStateOf("")
+    var titleBarCloseIconDescription = mutableStateOf("")
+
     // Error Strings
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
@@ -41,6 +63,28 @@ class UIState(): LocalizationState {
             UIKeys.MAIN_MENU_ANALYTICS_ICON_DESCRIPTION -> mainMenuAnalyticsIconDescription.value = value
             UIKeys.MAIN_MENU_BUTTON_SETTINGS -> mainMenuButtonSettings.value = value
             UIKeys.MAIN_MENU_SETTINGS_ICON_DESCRIPTION -> mainMenuSettingsIconDescription.value = value
+
+            // Title Bar
+            UIKeys.TITLE_BAR_MENU_ICON_DESCRIPTION -> titleBarMenuIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_BUTTON -> titleBarFileButton.value = value
+            UIKeys.TITLE_BAR_FILE_NEW_ICON_DESCRIPTION -> titleBarFileNewIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_NEW_BUTTON -> titleBarFileNewButton.value = value
+            UIKeys.TITLE_BAR_FILE_OPEN_ICON_DESCRIPTION -> titleBarFileOpenIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_OPEN_BUTTON -> titleBarFileOpenButton.value = value
+            UIKeys.TITLE_BAR_FILE_OPEN_FILE_ICON_DESCRIPTION -> titleBarFileOpenFileIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_OPEN_FILE_BUTTON -> titleBarFileOpenFileButton.value = value
+            UIKeys.TITLE_BAR_FILE_OPEN_REPOSITORY_ICON_DESCRIPTION -> titleBarFileOpenRepositoryIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_OPEN_REPOSITORY_BUTTON -> titleBarFileOpenRepositoryButton.value = value
+            UIKeys.TITLE_BAR_FILE_SAVE_ICON_DESCRIPTION -> titleBarFileSaveIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_SAVE_BUTTON -> titleBarFileSaveButton.value = value
+            UIKeys.TITLE_BAR_FILE_SAVE_AS_ICON_DESCRIPTION -> titleBarFileSaveAsIconDescription.value = value
+            UIKeys.TITLE_BAR_FILE_SAVE_AS_BUTTON -> titleBarFileSaveAsButton.value = value
+            UIKeys.TITLE_BAR_SETTINGS_BUTTON -> titleBarSettingsButton.value = value
+            UIKeys.TITLE_BAR_HELP_BUTTON -> titleBarHelpButton.value = value
+            UIKeys.TITLE_BAR_MINIMIZE_ICON_DESCRIPTION -> titleBarMinimizeIconDescription.value = value
+            UIKeys.TITLE_BAR_RECOVER_ICON_DESCRIPTION -> titleBarRecoverIconDescription.value = value
+            UIKeys.TITLE_BAR_MAXIMIZE_ICON_DESCRIPTION -> titleBarMaximizeIconDescription.value = value
+            UIKeys.TITLE_BAR_CLOSE_ICON_DESCRIPTION -> titleBarCloseIconDescription.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value

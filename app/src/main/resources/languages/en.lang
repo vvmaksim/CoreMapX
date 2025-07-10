@@ -15,6 +15,29 @@ mainMenuAnalyticsIconDescription=Analytics Icon
 mainMenuButtonSettings=Settings
 mainMenuSettingsIconDescription=Settings Icon
 
+ ! Title Bar
+
+titleBarMenuIconDescription=Title Bar Menu
+titleBarFileButton=File
+titleBarFileNewIconDescription=New Icon
+titleBarFileNewButton=New
+titleBarFileOpenIconDescription=Open Menu Icon
+titleBarFileOpenButton=Open..
+titleBarFileOpenFileIconDescription=Open File Icon
+titleBarFileOpenFileButton=Open File
+titleBarFileOpenRepositoryIconDescription=Open Repository Icon
+titleBarFileOpenRepositoryButton=Open Repository
+titleBarFileSaveIconDescription=Save Icon
+titleBarFileSaveButton=Save
+titleBarFileSaveAsIconDescription=Save as Icon
+titleBarFileSaveAsButton=Save as..
+titleBarSettingsButton=Settings
+titleBarHelpButton=Help
+titleBarMinimizeIconDescription=Minimize
+titleBarRecoverIconDescription=Recover
+titleBarMaximizeIconDescription=Maximize
+titleBarCloseIconDescription=Close
+
  ! New Graph
 
 newGraphTitle=Create New Graph

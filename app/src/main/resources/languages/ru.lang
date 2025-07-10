@@ -15,6 +15,29 @@ mainMenuAnalyticsIconDescription=Иконка аналитики
 mainMenuButtonSettings=Настройки
 mainMenuSettingsIconDescription=Иконка настроек
 
+ ! Title Bar
+
+titleBarMenuIconDescription=Заголовочное меню
+titleBarFileButton=Файл
+titleBarFileNewIconDescription=Иконка нового файла
+titleBarFileNewButton=Новый
+titleBarFileOpenIconDescription=Иконка открывающего меню
+titleBarFileOpenButton=Открыть..
+titleBarFileOpenFileIconDescription=Иконка открытия файла
+titleBarFileOpenFileButton=Открыть файл
+titleBarFileOpenRepositoryIconDescription=Иконка открытия репозитория
+titleBarFileOpenRepositoryButton=Открыть репозиторий
+titleBarFileSaveIconDescription=Иконка сохранения
+titleBarFileSaveButton=Сохранить
+titleBarFileSaveAsIconDescription=Иконка сохранения как
+titleBarFileSaveAsButton=Сохранить как..
+titleBarSettingsButton=Настройки
+titleBarHelpButton=Помощь
+titleBarMinimizeIconDescription=Свернуть
+titleBarRecoverIconDescription=Восстановить
+titleBarMaximizeIconDescription=Развернуть
+titleBarCloseIconDescription=Закрыть
+
  ! New Graph
 
 newGraphTitle=Создание нового графа
