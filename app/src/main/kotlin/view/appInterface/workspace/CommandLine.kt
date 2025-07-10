@@ -39,6 +39,7 @@ import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.text.TextRange
+import org.coremapx.app.localization.LocalizationManager
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -47,7 +48,7 @@ fun CommandLine(
     outputMessages: MutableList<String> = mutableListOf(),
     commandLineBackgroundColor: Color = Color.Transparent,
     borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
-    placeholderText: String = "Enter command",
+    placeholderText: String = LocalizationManager.states.anyTextStates.enterCommand.value,
     placeholderTextStyle: TextStyle = MaterialTheme.typography.body1,
     onCommand: (String) -> Unit = {},
     commandText: TextFieldValue,
