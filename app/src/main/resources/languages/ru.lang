@@ -314,3 +314,8 @@ descriptionCommandFieldScrollDelay=При отправке команды в к�
 
 errorBasicString=Ошибка: {errorType}.{errorDescription}
 errorNoDescriptionMessage=Описание отсутствует
+
+ ! Any Icon Descriptions
+# Logo
+logoBackground=Задний фон логотипа
+logoIcon=Иконка логотипа

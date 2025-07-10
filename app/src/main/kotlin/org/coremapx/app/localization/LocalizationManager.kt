@@ -36,6 +36,7 @@ object LocalizationManager {
         updateStateGroup(states.ui, LocalizationKeys.ui)
         updateStateGroup(states.dialogs, LocalizationKeys.dialogs)
         updateStateGroup(states.descriptions, LocalizationKeys.descriptions)
+        updateStateGroup(states.anyIconDescriptionsStates, LocalizationKeys.anyIconDescriptions)
     }
 
     private fun getFallBackText(key: String): String = "Localization error for $key"
