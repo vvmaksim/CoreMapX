@@ -23,4 +23,8 @@ object AnyIconDescriptionsKeys {
     // Zoom
     const val ZOOM_INCREASE = "zoomIncrease"
     const val ZOOM_REDUCE = "zoomReduce"
+
+    // Settings
+    const val SETTINGS_COLLAPSE = "settingsCollapse"
+    const val SETTINGS_EXPAND = "settingsExpand"
 }

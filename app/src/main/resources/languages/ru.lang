@@ -338,3 +338,6 @@ vertices=вершин
 edges=рёбер
 # Main Work Area
 mainWorkAreaEnterCommand=Введите команду
+# Settings
+settingsCollapse=Сокрыть
+settingsExpand=Раскрыть

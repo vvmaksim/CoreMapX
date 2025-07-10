@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.lines.ColorPickLine
@@ -59,7 +60,11 @@ fun SettingsBlock(
             )
             Icon(
                 imageVector = if (isExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
-                contentDescription = if (isExpanded) "Collapse" else "Expand",
+                contentDescription =
+                    if (isExpanded)
+                        LocalizationManager.states.anyIconDescriptionsStates.settingsCollapse.value
+                    else
+                        LocalizationManager.states.anyIconDescriptionsStates.settingsExpand.value,
                 tint = MaterialTheme.colors.primary,
             )
         }

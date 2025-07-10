@@ -338,3 +338,6 @@ vertices=vertices
 edges=edges
 # Main Work Area
 mainWorkAreaEnterCommand=Enter command
+# Settings
+settingsCollapse=Collapse
+settingsExpand=Expand

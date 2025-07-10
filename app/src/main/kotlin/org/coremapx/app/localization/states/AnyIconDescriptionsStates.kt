@@ -27,6 +27,10 @@ class AnyIconDescriptionsStates: LocalizationState {
     val zoomIncrease = mutableStateOf("")
     val zoomReduce = mutableStateOf("")
 
+    // Settings
+    val settingsCollapse = mutableStateOf("")
+    val settingsExpand = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -51,6 +55,10 @@ class AnyIconDescriptionsStates: LocalizationState {
             // Zoom
             AnyIconDescriptionsKeys.ZOOM_INCREASE -> zoomIncrease.value = value
             AnyIconDescriptionsKeys.ZOOM_REDUCE -> zoomReduce.value = value
+
+            // Settings
+            AnyIconDescriptionsKeys.SETTINGS_COLLAPSE -> settingsCollapse.value = value
+            AnyIconDescriptionsKeys.SETTINGS_EXPAND -> settingsExpand.value = value
         }
     }
 }
