@@ -39,6 +39,16 @@ object UIKeys {
     const val TITLE_BAR_MAXIMIZE_ICON_DESCRIPTION = "titleBarMaximizeIconDescription"
     const val TITLE_BAR_CLOSE_ICON_DESCRIPTION = "titleBarCloseIconDescription"
 
+    // Top Menu
+    const val TOP_MENU_ACTIONS = "topMenuActions"
+    const val TOP_MENU_DRAW_GRAPH_AGAIN = "topMenuDrawGraphAgain"
+    const val TOP_MENU_RESET_DEFAULT_CANVAS_STATE = "topMenuResetDefaultCanvasState"
+    const val TOP_MENU_GENERATE_RANDOM_GRAPH = "topMenuGenerateRandomGraph"
+    const val TOP_MENU_VERTICES = "topMenuVertices"
+    const val TOP_MENU_EDGES = "topMenuEdges"
+    const val TOP_MENU_HIDE_VERTICES_LABELS = "topMenuHideVerticesLabels"
+    const val TOP_MENU_SHOW_VERTICES_LABELS = "topMenuShowVerticesLabels"
+
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"
     const val ERROR_NO_DESCRIPTION_MESSAGE = "errorNoDescriptionMessage"

@@ -129,6 +129,16 @@ workAreaCanvasLimit=Ограничитель холста
 performanceAnimationDuration=Продолжительность анимаций
 performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
+ ! Top Menu
+topMenuActions=Действия
+topMenuDrawGraphAgain=Отрисовать граф снова
+topMenuResetDefaultCanvasState=Выставить позицию холста по умолчанию
+topMenuGenerateRandomGraph=Сгенерировать случайный граф
+topMenuVertices=Вершины
+topMenuEdges=Рёбра
+topMenuHideVerticesLabels=Спрятать метки вершин
+topMenuShowVerticesLabels=Показать метки вершин
+
  ! Analytics
 analyticsTitle=Аналитика
 analyticsLayoutStrategyHint=Стратегия расположения:

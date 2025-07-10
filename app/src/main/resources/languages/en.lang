@@ -133,6 +133,16 @@ performanceCommandFieldScrollDelay=Command field scroll delay
 analyticsTitle=Analytics
 analyticsLayoutStrategyHint=Layout strategy:
 
+ ! Top Menu
+topMenuActions=Actions
+topMenuDrawGraphAgain=Draw the graph again
+topMenuResetDefaultCanvasState=Reset default canvas state
+topMenuGenerateRandomGraph=Generate random graph
+topMenuVertices=Vertices
+topMenuEdges=Edges
+topMenuHideVerticesLabels=Hide vertices labels
+topMenuShowVerticesLabels=Show vertices labels
+
  ! Generate Random Graph
 generateRandomGraphTitle=Random Graph
 generateRandomGraphVertexCountHint=Vertices Count

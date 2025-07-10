@@ -42,6 +42,16 @@ class UIState(): LocalizationState {
     var titleBarMaximizeIconDescription = mutableStateOf("")
     var titleBarCloseIconDescription = mutableStateOf("")
 
+    // Top Menu
+    var topMenuActions = mutableStateOf("")
+    var topMenuDrawGraphAgain = mutableStateOf("")
+    var topMenuResetDefaultCanvasState = mutableStateOf("")
+    var topMenuGenerateRandomGraph = mutableStateOf("")
+    var topMenuHideVerticesLabels = mutableStateOf("")
+    var topMenuVertices = mutableStateOf("")
+    var topMenuEdges = mutableStateOf("")
+    var topMenuShowVerticesLabels = mutableStateOf("")
+
     // Error Strings
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
@@ -85,6 +95,16 @@ class UIState(): LocalizationState {
             UIKeys.TITLE_BAR_RECOVER_ICON_DESCRIPTION -> titleBarRecoverIconDescription.value = value
             UIKeys.TITLE_BAR_MAXIMIZE_ICON_DESCRIPTION -> titleBarMaximizeIconDescription.value = value
             UIKeys.TITLE_BAR_CLOSE_ICON_DESCRIPTION -> titleBarCloseIconDescription.value = value
+
+            // Top Menu
+            UIKeys.TOP_MENU_ACTIONS -> topMenuActions.value = value
+            UIKeys.TOP_MENU_DRAW_GRAPH_AGAIN -> topMenuDrawGraphAgain.value = value
+            UIKeys.TOP_MENU_RESET_DEFAULT_CANVAS_STATE -> topMenuResetDefaultCanvasState.value = value
+            UIKeys.TOP_MENU_GENERATE_RANDOM_GRAPH -> topMenuGenerateRandomGraph.value = value
+            UIKeys.TOP_MENU_VERTICES -> topMenuVertices.value = value
+            UIKeys.TOP_MENU_EDGES -> topMenuEdges.value = value
+            UIKeys.TOP_MENU_HIDE_VERTICES_LABELS -> topMenuHideVerticesLabels.value = value
+            UIKeys.TOP_MENU_SHOW_VERTICES_LABELS -> topMenuShowVerticesLabels.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value
