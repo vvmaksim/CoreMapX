@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.success
 import model.result.Result
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
@@ -81,7 +82,7 @@ fun NumberTextFieldLine(
     leadingIcon: @Composable (() -> Unit)? = {
         Icon(
             imageVector = Icons.Default.Edit,
-            contentDescription = "Text Field",
+            contentDescription = LocalizationManager.states.anyIconDescriptionsStates.textField.value,
             tint =
                 if (enabled) {
                     if (isError) {
@@ -216,7 +217,7 @@ fun NumberTextFieldLine(
         if (showSuccess) {
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Success",
+                text = LocalizationManager.states.dialogs.userNotificationSaveSuccess.value,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.success,
                 modifier = Modifier.align(Alignment.CenterHorizontally),

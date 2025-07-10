@@ -29,4 +29,7 @@ object AnyIconDescriptionsKeys {
     const val SETTINGS_EXPAND = "settingsExpand"
     const val SETTINGS_HIDE_DESCRIPTION = "settingsHideDescription"
     const val SETTINGS_SHOW_DESCRIPTION = "settingsShowDescription"
+
+    // Text Field
+    const val TEXT_FIELD = "textField"
 }

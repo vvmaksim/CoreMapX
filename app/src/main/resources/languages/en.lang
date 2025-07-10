@@ -343,3 +343,5 @@ settingsCollapse=Collapse
 settingsExpand=Expand
 settingsHideDescription=Hide description
 settingsShowDescription=Show description
+# Text Field
+textField=Text field

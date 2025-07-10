@@ -33,6 +33,9 @@ class AnyIconDescriptionsStates: LocalizationState {
     val settingsHideDescription = mutableStateOf("")
     val settingsShowDescription = mutableStateOf("")
 
+    // Text Field
+    val textField = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -63,6 +66,9 @@ class AnyIconDescriptionsStates: LocalizationState {
             AnyIconDescriptionsKeys.SETTINGS_EXPAND -> settingsExpand.value = value
             AnyIconDescriptionsKeys.SETTINGS_HIDE_DESCRIPTION -> settingsHideDescription.value = value
             AnyIconDescriptionsKeys.SETTINGS_SHOW_DESCRIPTION -> settingsShowDescription.value = value
+
+            // Text Field
+            AnyIconDescriptionsKeys.TEXT_FIELD -> textField.value = value
         }
     }
 }

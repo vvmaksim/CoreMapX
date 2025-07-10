@@ -343,3 +343,5 @@ settingsCollapse=Сокрыть
 settingsExpand=Раскрыть
 settingsHideDescription=Спрятать описание
 settingsShowDescription=Показать описание
+# Text Field
+textField=Текстовое поле
