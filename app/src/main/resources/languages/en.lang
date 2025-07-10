@@ -315,7 +315,7 @@ descriptionCommandFieldScrollDelay=A certain amount of time passes when sending 
 errorBasicString=Error: {errorType}.{errorDescription}
 errorNoDescriptionMessage=No description
 
- ! Any Icon Descriptions
+ ! Any Icon Descriptions And Text
 # Logo
 logoBackground=Logo Background
 logoIcon=Logo Icon
