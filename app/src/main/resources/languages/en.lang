@@ -321,3 +321,5 @@ logoBackground=Logo Background
 logoIcon=Logo Icon
 # Color Picker
 colorPickerChooseColor=Choose Color
+# Dropdown Select
+dropdownSelectArrow=Dropdown Arrow

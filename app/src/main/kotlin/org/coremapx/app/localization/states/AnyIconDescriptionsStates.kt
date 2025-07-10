@@ -11,6 +11,9 @@ class AnyIconDescriptionsStates: LocalizationState {
     // Color Picker
     val colorPickerChooseColor = mutableStateOf("")
 
+    // Dropdown Select
+    val dropdownSelectArrow = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -19,6 +22,9 @@ class AnyIconDescriptionsStates: LocalizationState {
 
             // Color Picker
             AnyIconDescriptionsKeys.COLOR_PICKER_CHOOSE_COLOR -> colorPickerChooseColor.value = value
+
+            // Dropdown Select
+            AnyIconDescriptionsKeys.DROPDOWN_SELECT_ARROW -> dropdownSelectArrow.value = value
         }
     }
 }

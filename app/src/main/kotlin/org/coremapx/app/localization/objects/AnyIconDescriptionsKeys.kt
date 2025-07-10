@@ -7,4 +7,7 @@ object AnyIconDescriptionsKeys {
 
     // Color Picker
     const val COLOR_PICKER_CHOOSE_COLOR = "colorPickerChooseColor"
+
+    // Dropdown Select
+    const val DROPDOWN_SELECT_ARROW = "dropdownSelectArrow"
 }

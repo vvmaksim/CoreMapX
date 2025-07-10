@@ -321,3 +321,5 @@ logoBackground=Задний фон логотипа
 logoIcon=Иконка логотипа
 # Color Picker
 colorPickerChooseColor=Выберите цвет
+# Dropdown Select
+dropdownSelectArrow=Выпадающая стрелка
