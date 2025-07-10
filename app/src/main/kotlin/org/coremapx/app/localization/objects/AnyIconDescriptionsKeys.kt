@@ -13,4 +13,7 @@ object AnyIconDescriptionsKeys {
 
     // Save Path
     const val SAVE_PATH_OPEN_DIRECTORY_DIALOG = "savePathOpenDirectoryDialog"
+
+    // Slide Menu
+    const val SLIDE_MENU = "slideMenu"
 }

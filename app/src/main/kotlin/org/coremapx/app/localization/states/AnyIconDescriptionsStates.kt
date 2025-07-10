@@ -17,6 +17,9 @@ class AnyIconDescriptionsStates: LocalizationState {
     // Save Path
     val savePathOpenDirectoryDialog = mutableStateOf("")
 
+    // Slide Menu
+    val slideMenu = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -31,6 +34,9 @@ class AnyIconDescriptionsStates: LocalizationState {
 
             // Save Path
             AnyIconDescriptionsKeys.SAVE_PATH_OPEN_DIRECTORY_DIALOG -> savePathOpenDirectoryDialog.value = value
+
+            // Slide Menu
+            AnyIconDescriptionsKeys.SLIDE_MENU -> slideMenu.value = value
         }
     }
 }

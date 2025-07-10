@@ -326,3 +326,5 @@ dropdownSelectArrow=Выпадающая стрелка
 # Save Path
 savePathSelectDirectory=Выберите директорию
 savePathOpenDirectoryDialog=Диалог открытия директории
+# Slide Menu
+slideMenu=Свернуть меню
