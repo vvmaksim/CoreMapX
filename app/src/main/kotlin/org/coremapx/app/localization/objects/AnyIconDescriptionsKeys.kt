@@ -19,4 +19,8 @@ object AnyIconDescriptionsKeys {
 
     // User Directory
     const val USER_DIRECTORY_OPEN = "userDirectoryOpen"
+
+    // Zoom
+    const val ZOOM_INCREASE = "zoomIncrease"
+    const val ZOOM_REDUCE = "zoomReduce"
 }

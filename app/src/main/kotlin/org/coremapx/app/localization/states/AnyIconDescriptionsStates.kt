@@ -23,6 +23,10 @@ class AnyIconDescriptionsStates: LocalizationState {
     // User Directory
     val userDirectoryOpen = mutableStateOf("")
 
+    // Zoom
+    val zoomIncrease = mutableStateOf("")
+    val zoomReduce = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -43,6 +47,10 @@ class AnyIconDescriptionsStates: LocalizationState {
 
             // User Directory
             AnyIconDescriptionsKeys.USER_DIRECTORY_OPEN -> userDirectoryOpen.value = value
+
+            // Zoom
+            AnyIconDescriptionsKeys.ZOOM_INCREASE -> zoomIncrease.value = value
+            AnyIconDescriptionsKeys.ZOOM_REDUCE -> zoomReduce.value = value
         }
     }
 }

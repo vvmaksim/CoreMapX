@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.huge
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
@@ -54,7 +55,7 @@ fun ZoomButtons(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Increase",
+                    contentDescription = LocalizationManager.states.anyIconDescriptionsStates.zoomIncrease.value,
                     tint = MaterialTheme.colors.primary,
                 )
             }
@@ -65,7 +66,7 @@ fun ZoomButtons(
             ) {
                 Icon(
                     imageVector = Icons.Default.Remove,
-                    contentDescription = "Reduce",
+                    contentDescription = LocalizationManager.states.anyIconDescriptionsStates.zoomReduce.value,
                     tint = MaterialTheme.colors.primary,
                 )
             }

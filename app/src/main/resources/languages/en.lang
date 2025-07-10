@@ -330,3 +330,6 @@ savePathOpenDirectoryDialog=Open Directory Dialog
 slideMenu=Slide menu
 # User Directory
 userDirectoryOpen=Open user directory
+# Zoom
+zoomIncrease=Increase
+zoomReduce=Reduce

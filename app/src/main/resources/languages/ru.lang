@@ -330,3 +330,6 @@ savePathOpenDirectoryDialog=Диалог открытия директории
 slideMenu=Свернуть меню
 # User Directory
 userDirectoryOpen=Открыть директорию пользователя
+# Zoom
+zoomIncrease=Увеличить
+zoomReduce=Уменьшить
