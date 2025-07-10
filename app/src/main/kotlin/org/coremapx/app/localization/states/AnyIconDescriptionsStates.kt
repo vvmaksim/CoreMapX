@@ -20,6 +20,9 @@ class AnyIconDescriptionsStates: LocalizationState {
     // Slide Menu
     val slideMenu = mutableStateOf("")
 
+    // User Directory
+    val userDirectoryOpen = mutableStateOf("")
+
     override fun updateValue(key: String, value: String) {
         when(key) {
             // Logo
@@ -37,6 +40,9 @@ class AnyIconDescriptionsStates: LocalizationState {
 
             // Slide Menu
             AnyIconDescriptionsKeys.SLIDE_MENU -> slideMenu.value = value
+
+            // User Directory
+            AnyIconDescriptionsKeys.USER_DIRECTORY_OPEN -> userDirectoryOpen.value = value
         }
     }
 }

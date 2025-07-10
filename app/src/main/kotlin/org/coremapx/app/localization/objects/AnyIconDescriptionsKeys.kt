@@ -16,4 +16,7 @@ object AnyIconDescriptionsKeys {
 
     // Slide Menu
     const val SLIDE_MENU = "slideMenu"
+
+    // User Directory
+    const val USER_DIRECTORY_OPEN = "userDirectoryOpen"
 }

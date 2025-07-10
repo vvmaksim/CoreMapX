@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mu.KotlinLogging
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import java.awt.Desktop
 import java.io.File
@@ -50,7 +51,7 @@ fun UserDirectoryButton(size: Dp = 60.dp) {
     ) {
         Icon(
             imageVector = Icons.Default.Folder,
-            contentDescription = "Open User Directory",
+            contentDescription = LocalizationManager.states.anyIconDescriptionsStates.userDirectoryOpen.value,
             tint = MaterialTheme.colors.primary,
             modifier = Modifier.size(size),
         )
