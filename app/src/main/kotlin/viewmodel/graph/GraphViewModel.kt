@@ -26,7 +26,12 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
             val to =
                 _vertices[edge.to.id]
                     ?: throw IllegalStateException("VertexView for ${edge.to.id} not found")
-            EdgeViewModel(from, to, graph, edge)
+            EdgeViewModel(
+                from = from,
+                to = to,
+                graph = graph,
+                edge = edge,
+                )
         }
 
     val vertices: Collection<VertexViewModel<V>>

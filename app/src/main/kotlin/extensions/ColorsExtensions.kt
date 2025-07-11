@@ -16,9 +16,6 @@ val Colors.warning: Color
 val Colors.hoveredBorder: Color
     get() = Theme.hoveredBorderColor
 
-val Colors.edgeMain: Color
-    get() = Theme.edgeMainColor
-
 val Colors.canvasBackground: Color
     get() = Theme.canvasBackgroundColor
 
