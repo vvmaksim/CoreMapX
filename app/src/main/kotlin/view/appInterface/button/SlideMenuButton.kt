@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
@@ -42,7 +43,7 @@ fun SlideMenuButton(
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Slide Menu",
+            contentDescription = LocalizationManager.states.anyIconDescriptionsStates.slideMenu.value,
             tint = MaterialTheme.colors.primary,
             modifier =
                 Modifier

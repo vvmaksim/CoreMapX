@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import extensions.border
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -46,7 +47,7 @@ fun CustomTextField(
     leadingIcon: @Composable (() -> Unit)? = {
         Icon(
             imageVector = Icons.Default.Edit,
-            contentDescription = "Text Field",
+            contentDescription = LocalizationManager.states.anyIconDescriptionsStates.textField.value,
             tint =
                 if (enabled) {
                     if (isError) {

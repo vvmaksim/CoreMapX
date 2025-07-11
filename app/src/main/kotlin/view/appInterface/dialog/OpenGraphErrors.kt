@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import extensions.warning
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 
 @Suppress("ktlint:standard:function-naming")
@@ -72,13 +73,13 @@ fun OpenGraphErrorsContent(
         ) {
             Icon(
                 imageVector = Icons.Default.Warning,
-                contentDescription = "Warning",
+                contentDescription = LocalizationManager.states.dialogs.openGraphErrorsWarningIconDescription.value,
                 modifier = Modifier.size(48.dp),
                 tint = MaterialTheme.colors.warning,
             )
             Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Errors and warnings when loading the graph",
+                text = LocalizationManager.states.dialogs.openGraphErrorsNotification.value,
                 style = MaterialTheme.typography.h5,
                 textAlign = TextAlign.Center,
             )
@@ -107,7 +108,7 @@ fun OpenGraphErrorsContent(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Error,
-                                contentDescription = "Error",
+                                contentDescription = LocalizationManager.states.dialogs.openGraphErrorsErrorIconDescription.value,
                                 modifier = Modifier.size(20.dp),
                                 tint = MaterialTheme.colors.error,
                             )
@@ -132,7 +133,7 @@ fun OpenGraphErrorsContent(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "OK",
+                    text = LocalizationManager.states.dialogs.openGraphErrorsOkButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

@@ -26,6 +26,7 @@ import androidx.compose.ui.window.Dialog
 import model.dto.SaveGraphData
 import model.fileHandler.FileExtensions
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
 import view.appInterface.button.SavePathButton
@@ -83,16 +84,16 @@ fun SaveGraphAsContent(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             DialogHeader(
-                title = "Save graph",
+                title = LocalizationManager.states.dialogs.saveGraphAsTitle.value,
                 onButtonClick = onDismiss,
-                subtitle = "Select directory to save and file format",
+                subtitle = LocalizationManager.states.dialogs.saveGraphAsSubtitle.value,
             )
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
-                    text = "File name:",
+                    text = LocalizationManager.states.dialogs.saveGraphAsFileNameHint.value,
                     style = MaterialTheme.typography.body2,
                 )
                 CustomTextField(
@@ -102,11 +103,11 @@ fun SaveGraphAsContent(
                         showError = File("$selectedPath/${selectedFileName.text}$selectedFormat").exists()
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Enter file name") },
+                    placeholder = { Text(LocalizationManager.states.dialogs.saveGraphAsFileNamePlaceholder.value) },
                 )
 
                 Text(
-                    text = "Save directory:",
+                    text = LocalizationManager.states.dialogs.saveGraphAsSaveDirectoryHint.value,
                     style = MaterialTheme.typography.body2,
                 )
 
@@ -119,7 +120,7 @@ fun SaveGraphAsContent(
                 )
 
                 Text(
-                    text = "File format:",
+                    text = LocalizationManager.states.dialogs.saveGraphAsFileFormatHint.value,
                     style = MaterialTheme.typography.body2,
                 )
 
@@ -135,7 +136,7 @@ fun SaveGraphAsContent(
 
             if (showError) {
                 Text(
-                    text = "A file with this configuration already exists, and its contents will be replaced when saved",
+                    text = LocalizationManager.states.dialogs.saveGraphAsFileExistsWarning.value,
                     color = MaterialTheme.colors.error,
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(start = 4.dp),
@@ -168,7 +169,7 @@ fun SaveGraphAsContent(
                 shape = MaterialTheme.shapes.medium,
             ) {
                 Text(
-                    text = "Save",
+                    text = LocalizationManager.states.dialogs.saveGraphAsSaveButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.localization.LocalizationManager
 import view.appInterface.dialog.GenerateRandomGraph
 import viewmodel.MainScreenViewModel
 
@@ -42,7 +43,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
         Box {
             Button(onClick = { actionsExpanded = true }) {
                 Text(
-                    text = "Actions",
+                    text = LocalizationManager.states.ui.topMenuActions.value,
                     style = MaterialTheme.typography.button,
                 )
             }
@@ -58,7 +59,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     },
                 ) {
                     Text(
-                        text = "Reset default settings",
+                        text = LocalizationManager.states.ui.topMenuDrawGraphAgain.value,
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -69,7 +70,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     },
                 ) {
                     Text(
-                        text = "Reset default canvas state",
+                        text = LocalizationManager.states.ui.topMenuResetDefaultCanvasState.value,
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -80,7 +81,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     },
                 ) {
                     Text(
-                        text = "Generate random graph",
+                        text = LocalizationManager.states.ui.topMenuGenerateRandomGraph.value,
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -90,7 +91,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
         Box {
             Button(onClick = { verticesExpanded = true }) {
                 Text(
-                    text = "Vertices",
+                    text = LocalizationManager.states.ui.topMenuVertices.value,
                     style = MaterialTheme.typography.button,
                 )
             }
@@ -106,7 +107,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     },
                 ) {
                     Text(
-                        text = if (viewModel.showVerticesLabels.value) "Hide vertices labels" else "Show vertices labels",
+                        text =
+                            if (viewModel.showVerticesLabels.value)
+                                LocalizationManager.states.ui.topMenuHideVerticesLabels.value
+                            else
+                                LocalizationManager.states.ui.topMenuShowVerticesLabels.value,
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -116,7 +121,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
         Box {
             Button(onClick = { edgesExpanded = true }) {
                 Text(
-                    text = "Edges",
+                    text = LocalizationManager.states.ui.topMenuEdges.value,
                     style = MaterialTheme.typography.button,
                 )
             }

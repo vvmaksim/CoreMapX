@@ -43,6 +43,8 @@ import model.database.sqlite.repository.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.graph.GraphDatabase
 import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
@@ -95,7 +97,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 IconButton(onClick = { showMenuButtons = false }) {
                     Icon(
                         imageVector = Icons.Default.Menu,
-                        contentDescription = "Title Bar Menu",
+                        contentDescription = LocalizationManager.states.ui.titleBarMenuIconDescription.value,
                         tint = MaterialTheme.colors.onSurface,
                         modifier = Modifier.size(titleBarIconSize),
                     )
@@ -103,7 +105,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
 
                 TextButton(onClick = { showFileMenu = true }) {
                     Text(
-                        text = "File",
+                        text = LocalizationManager.states.ui.titleBarFileButton.value,
                         style = MaterialTheme.typography.button,
                         color = MaterialTheme.colors.onSurface,
                     )
@@ -122,12 +124,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Add,
-                                contentDescription = "New Icon",
+                                contentDescription = LocalizationManager.states.ui.titleBarFileNewIconDescription.value,
                                 tint = MaterialTheme.colors.primary,
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
-                                text = "New",
+                                text = LocalizationManager.states.ui.titleBarFileNewButton.value,
                                 style = MaterialTheme.typography.button,
                             )
                         }
@@ -140,12 +142,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.FolderOpen,
-                                contentDescription = "Open Menu Icon",
+                                contentDescription = LocalizationManager.states.ui.titleBarFileOpenIconDescription.value,
                                 tint = MaterialTheme.colors.primary,
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
-                                text = "Open..",
+                                text = LocalizationManager.states.ui.titleBarFileOpenButton.value,
                                 style = MaterialTheme.typography.button,
                             )
                         }
@@ -160,7 +162,14 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     warnings =
                                         when (loadResult) {
                                             is Result.Success -> loadResult.data
-                                            is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                                            is Result.Error ->
+                                                listOf(
+                                                    LocalizationFormatter.getErrorMessage(
+                                                        startString = LocalizationManager.states.ui.errorBasicString.value,
+                                                        errorType = loadResult.error.type,
+                                                        errorDescription = loadResult.error.description,
+                                                    )
+                                                )
                                         }
                                     if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
                                     showOpenSubMenu = false
@@ -170,12 +179,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Description,
-                                        contentDescription = "Open File Icon",
+                                        contentDescription = LocalizationManager.states.ui.titleBarFileOpenFileIconDescription.value,
                                         tint = MaterialTheme.colors.primary,
                                     )
                                     Spacer(Modifier.width(8.dp))
                                     Text(
-                                        text = "Open File",
+                                        text = LocalizationManager.states.ui.titleBarFileOpenFileButton.value,
                                         style = MaterialTheme.typography.button,
                                     )
                                 }
@@ -186,7 +195,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                     when (openResult) {
                                         is Result.Error ->
                                             warnings =
-                                                listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+                                                listOf(
+                                                    LocalizationFormatter.getErrorMessage(
+                                                        startString = LocalizationManager.states.ui.errorBasicString.value,
+                                                        errorType = openResult.error.type,
+                                                        errorDescription = openResult.error.description,
+                                                    )
+                                                )
 
                                         is Result.Success -> {
                                             selectedRepositoryFile = openResult.data
@@ -201,12 +216,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 Row(verticalAlignment = Alignment.CenterVertically) {
                                     Icon(
                                         imageVector = Icons.Filled.Storage,
-                                        contentDescription = "Open Repository Icon",
+                                        contentDescription = LocalizationManager.states.ui.titleBarFileOpenRepositoryIconDescription.value,
                                         tint = MaterialTheme.colors.primary,
                                     )
                                     Spacer(Modifier.width(8.dp))
                                     Text(
-                                        text = "Open Repository",
+                                        text = LocalizationManager.states.ui.titleBarFileOpenRepositoryButton.value,
                                         style = MaterialTheme.typography.button,
                                     )
                                 }
@@ -221,8 +236,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 val saveResult = viewModel.saveGraph()
                                 if (saveResult is Result.Error) {
                                     userNotificationMessage =
-                                        "Error: ${saveResult.error.type}.${saveResult.error.description}"
-                                    userNotificationTitle = "Save Error"
+                                        LocalizationFormatter.getErrorMessage(
+                                            startString = LocalizationManager.states.ui.errorBasicString.value,
+                                            errorType = saveResult.error.type,
+                                            errorDescription = saveResult.error.description,
+                                        )
+                                    userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveError.value
                                     showUserNotification = true
                                 }
                             }
@@ -233,7 +252,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Save,
-                                contentDescription = "Save Icon",
+                                contentDescription = LocalizationManager.states.ui.titleBarFileSaveIconDescription.value,
                                 tint =
                                     if (viewModel.isGraphActive) {
                                         MaterialTheme.colors.primary
@@ -245,7 +264,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
-                                text = "Save",
+                                text = LocalizationManager.states.ui.titleBarFileSaveButton.value,
                                 style = MaterialTheme.typography.button,
                                 color =
                                     if (viewModel.isGraphActive) {
@@ -269,7 +288,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.SaveAs,
-                                contentDescription = "Save as Icon",
+                                contentDescription = LocalizationManager.states.ui.titleBarFileSaveAsIconDescription.value,
                                 tint =
                                     if (viewModel.isGraphActive) {
                                         MaterialTheme.colors.primary
@@ -281,7 +300,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             )
                             Spacer(Modifier.width(8.dp))
                             Text(
-                                text = "Save as..",
+                                text = LocalizationManager.states.ui.titleBarFileSaveAsButton.value,
                                 style = MaterialTheme.typography.button,
                                 color =
                                     if (viewModel.isGraphActive) {
@@ -298,14 +317,14 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 }
                 TextButton(onClick = { }) {
                     Text(
-                        text = "Settings",
+                        text = LocalizationManager.states.ui.titleBarSettingsButton.value,
                         style = MaterialTheme.typography.button,
                         color = MaterialTheme.colors.onSurface,
                     )
                 }
                 TextButton(onClick = { }) {
                     Text(
-                        text = "Help",
+                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
                         style = MaterialTheme.typography.button,
                         color = MaterialTheme.colors.onSurface,
                     )
@@ -314,7 +333,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 IconButton(onClick = { showMenuButtons = true }) {
                     Icon(
                         imageVector = Icons.Default.Menu,
-                        contentDescription = "Title Bar Menu",
+                        contentDescription = LocalizationManager.states.ui.titleBarMenuIconDescription.value,
                         tint = MaterialTheme.colors.onSurface,
                         modifier = Modifier.size(titleBarIconSize),
                     )
@@ -325,7 +344,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
             IconButton(onClick = onMinimize) {
                 Icon(
                     imageVector = Icons.Filled.Remove,
-                    contentDescription = "Minimize",
+                    contentDescription = LocalizationManager.states.ui.titleBarMinimizeIconDescription.value,
                     tint = MaterialTheme.colors.onSurface,
                     modifier = Modifier.size(titleBarIconSize),
                 )
@@ -333,7 +352,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
             IconButton(onClick = onMaximize) {
                 Icon(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
-                    contentDescription = if (isMaximized) "Recover" else "Maximize",
+                    contentDescription =
+                        if (isMaximized)
+                            LocalizationManager.states.ui.titleBarRecoverIconDescription.value
+                        else
+                            LocalizationManager.states.ui.titleBarMaximizeIconDescription.value,
                     tint = MaterialTheme.colors.onSurface,
                     modifier = Modifier.size(titleBarIconSize),
                 )
@@ -341,7 +364,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
             IconButton(onClick = onClose) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
+                    contentDescription = LocalizationManager.states.ui.titleBarCloseIconDescription.value,
                     tint = MaterialTheme.colors.onSurface,
                     modifier = Modifier.size(titleBarIconSize),
                 )
@@ -366,7 +389,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
                 if (loadResult is Result.Error) {
                     warnings =
-                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                        listOf(
+                            LocalizationFormatter.getErrorMessage(
+                                startString = LocalizationManager.states.ui.errorBasicString.value,
+                                errorType = loadResult.error.type,
+                                errorDescription = loadResult.error.description,
+                            )
+                        )
                 }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
             },
@@ -389,13 +418,22 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 userNotificationMessage =
                     when (saveResult) {
                         is Result.Error -> {
-                            userNotificationTitle = "Save Error"
-                            "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
+                            userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveError.value
+                            LocalizationFormatter.getErrorMessage(
+                                startString = LocalizationManager.states.ui.errorBasicString.value,
+                                errorType = saveResult.error.type,
+                                errorDescription = saveResult.error.description,
+                            )
                         }
 
                         is Result.Success -> {
-                            userNotificationTitle = "Save Success"
-                            "Graph ${savedGraphDetails.fileName} has been successfully saved to the directory ${savedGraphDetails.directoryPath} as ${savedGraphDetails.fileFormat}"
+                            userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveSuccess.value
+                            LocalizationFormatter.getSaveGraphSuccessMessage(
+                                startString = LocalizationManager.states.dialogs.userNotificationSaveSuccessMessage.value,
+                                fileName = savedGraphDetails.fileName,
+                                directoryPath = savedGraphDetails.directoryPath,
+                                fileFormat = savedGraphDetails.fileFormat.name,
+                            )
                         }
                     }
                 showUserNotification = true

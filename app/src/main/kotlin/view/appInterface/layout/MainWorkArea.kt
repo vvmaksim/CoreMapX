@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
 import extensions.commandLineBackground
@@ -29,6 +30,8 @@ import model.result.CommandErrors
 import model.result.Result
 import mu.KotlinLogging
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import view.appInterface.button.ZoomButtons
 import view.appInterface.workspace.CommandLine
 import view.appInterface.workspace.GraphElementCounters
@@ -46,11 +49,15 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     modifier: Modifier = Modifier,
 ) {
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
+    val userCommands = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
     val graph = viewModel.graph.value
     var commandCount by remember { mutableStateOf(0) }
+    var commandText by remember { mutableStateOf(TextFieldValue("")) }
+    var commandHistoryIndex by remember { mutableStateOf(-1) }
 
     val maxCountMessages = config.states.maxCountMessages.value
+    val maxUserCommands = config.states.maxCountUserCommands.value
     val commandFieldWidth = config.states.commandFieldWidth.value.dp
     val isTransparentCommandLine = config.states.isTransparentCommandLine.value
 
@@ -69,15 +76,32 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
     }
 
-    fun errorMessage(errorResult: Result.Error): String = "Error:${errorResult.error.type}.${errorResult.error.description}"
+    fun updateUserCommands(newCommand: String) {
+        userCommands.value.add(newCommand)
+        userCommands.value = userCommands.value.takeLast(maxUserCommands).toMutableList()
+    }
+
+    fun errorMessage(errorResult: Result.Error): String =
+        LocalizationFormatter.getErrorMessage(
+            startString = LocalizationManager.states.ui.errorBasicString.value,
+            errorType = errorResult.error.type,
+            errorDescription = errorResult.error.description,
+        )
 
     fun handleCommand(commandLine: String) {
         if (graph == null) {
-            updateOutputMessages("Error: ${CommandErrors.NoGraphSelected().type}.${CommandErrors.NoGraphSelected().description}")
+            updateOutputMessages(
+                LocalizationFormatter.getErrorMessage(
+                    startString = LocalizationManager.states.ui.errorBasicString.value,
+                    errorType = CommandErrors.NoGraphSelected().type,
+                    errorDescription = CommandErrors.NoGraphSelected().description,
+                )
+            )
             return
         }
         val commands = commandLine.split(";")
         commands.forEach { command ->
+            updateUserCommands(command)
             val commandResult = Command.create(command)
             when (commandResult) {
                 is Result.Success -> {
@@ -144,8 +168,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         ?.edges
                         ?.size
                         ?.toLong() ?: 0L,
-                vertexLabel = "vertices",
-                edgeLabel = "edges",
+                vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
+                edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
                 modifier = Modifier.align(Alignment.Bottom),
             )
             Spacer(Modifier.weight(1f))
@@ -161,8 +185,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     } else {
                         MaterialTheme.colors.commandLineBackground
                     },
-                placeholderText = "Enter command",
+                placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
                 onCommand = { command -> handleCommand(command) },
+                commandText = commandText,
+                onCommandTextChange = { commandText = it },
+                userCommands = userCommands.value,
+                commandHistoryIndex = commandHistoryIndex,
+                onCommandHistoryIndexChange = { commandHistoryIndex = it },
             )
             Spacer(Modifier.weight(1f))
             ZoomButtons(

@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -79,7 +80,7 @@ fun DropdownSelectButton(
             )
             Icon(
                 imageVector = Icons.Filled.ArrowDropDown,
-                contentDescription = "Dropdown Arrow",
+                contentDescription = LocalizationManager.states.anyIconDescriptionsStates.dropdownSelectArrow.value,
                 modifier =
                     Modifier
                         .size(iconSize)

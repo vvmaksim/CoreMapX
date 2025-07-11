@@ -12,7 +12,7 @@ class ConfigValidator {
         ): Result<Boolean> =
             when (key) {
                 // General
-                ConfigKeys.LANGUAGE -> enumStringValidator(key, value, listOf("ru", "en"))
+                ConfigKeys.LANGUAGE -> enumStringValidator(key, value, listOf("ru", "en", "custom"))
                 ConfigKeys.THEME -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
                 ConfigKeys.SYSTEM_DIALOG_THEME -> enumStringValidator(key, value, listOf("light", "dark"))
                 ConfigKeys.IS_EXPANDED_SETTINGS -> booleanValidator(key, value)
@@ -37,7 +37,8 @@ class ConfigValidator {
                 // Command Field
                 ConfigKeys.MESSAGE_OUTPUT_HEIGHT -> intValidator(key, value, minValue = 150)
                 ConfigKeys.MAX_COUNT_MESSAGES -> intValidator(key, value, minValue = 1, maxValue = 10000)
-                ConfigKeys.COMMAND_FIELD_WIDTH -> intValidator(key, value, minValue = 400)
+                ConfigKeys.MAX_COUNT_USER_COMMANDS -> intValidator(key, value, minValue = 1, maxValue = 1000)
+                ConfigKeys.COMMAND_FIELD_WIDTH -> intValidator(key, value, minValue = 400, maxValue = 900)
                 ConfigKeys.IS_TRANSPARENT_COMMAND_LINE -> booleanValidator(key, value)
 
                 // Work Area
@@ -47,7 +48,7 @@ class ConfigValidator {
                 ConfigKeys.VERTEX_LABEL_SIZE -> intValidator(key, value, minValue = 6)
                 ConfigKeys.EDGE_LABEL_SIZE -> intValidator(key, value, minValue = 6)
                 ConfigKeys.EDGE_ARROW_SIZE -> floatValidator(key, value, minValue = 1f, maxValue = 100f)
-                ConfigKeys.EDGE_WIDTH -> floatValidator(key, value, minValue = 1f)
+                ConfigKeys.EDGE_WIDTH -> floatValidator(key, value, minValue = 1f, maxValue = 15f)
                 ConfigKeys.CANVAS_DRAG_RATIO -> floatValidator(key, value, minValue = 0.1f, maxValue = 10.0f)
                 ConfigKeys.CANVAS_LIMIT -> intValidator(key, value, minValue = 2000)
 

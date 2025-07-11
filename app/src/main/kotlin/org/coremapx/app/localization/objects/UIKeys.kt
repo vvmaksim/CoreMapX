@@ -1,0 +1,55 @@
+package org.coremapx.app.localization.objects
+
+object UIKeys {
+    // Main Menu
+    const val MAIN_MENU_BUTTON_NEW_GRAPH = "mainMenuButtonNewGraph"
+    const val MAIN_MENU_NEW_GRAPH_ICON_DESCRIPTION = "mainMenuNewGraphIconDescription"
+    const val MAIN_MENU_BUTTON_SAVE = "mainMenuButtonSave"
+    const val MAIN_MENU_SAVE_ICON_DESCRIPTION = "mainMenuSaveIconDescription"
+    const val MAIN_MENU_BUTTON_SAVE_AS = "mainMenuButtonSaveAs"
+    const val MAIN_MENU_SAVE_AS_ICON_DESCRIPTION = "mainMenuSaveAsIconDescription"
+    const val MAIN_MENU_BUTTON_OPEN_GRAPH = "mainMenuButtonOpenGraph"
+    const val MAIN_MENU_OPEN_GRAPH_ICON_DESCRIPTION = "mainMenuOpenGraphIconDescription"
+    const val MAIN_MENU_BUTTON_OPEN_REPOSITORY = "mainMenuButtonOpenRepository"
+    const val MAIN_MENU_OPEN_REPOSITORY_ICON_DESCRIPTION = "mainMenuOpenRepositoryIconDescription"
+    const val MAIN_MENU_BUTTON_ANALYTICS = "mainMenuButtonAnalytics"
+    const val MAIN_MENU_ANALYTICS_ICON_DESCRIPTION = "mainMenuAnalyticsIconDescription"
+    const val MAIN_MENU_BUTTON_SETTINGS = "mainMenuButtonSettings"
+    const val MAIN_MENU_SETTINGS_ICON_DESCRIPTION = "mainMenuSettingsIconDescription"
+
+    // Title Bar
+    const val TITLE_BAR_MENU_ICON_DESCRIPTION = "titleBarMenuIconDescription"
+    const val TITLE_BAR_FILE_BUTTON = "titleBarFileButton"
+    const val TITLE_BAR_FILE_NEW_ICON_DESCRIPTION = "titleBarFileNewIconDescription"
+    const val TITLE_BAR_FILE_NEW_BUTTON = "titleBarFileNewButton"
+    const val TITLE_BAR_FILE_OPEN_ICON_DESCRIPTION = "titleBarFileOpenIconDescription"
+    const val TITLE_BAR_FILE_OPEN_BUTTON = "titleBarFileOpenButton"
+    const val TITLE_BAR_FILE_OPEN_FILE_ICON_DESCRIPTION = "titleBarFileOpenFileIconDescription"
+    const val TITLE_BAR_FILE_OPEN_FILE_BUTTON = "titleBarFileOpenFileButton"
+    const val TITLE_BAR_FILE_OPEN_REPOSITORY_ICON_DESCRIPTION = "titleBarFileOpenRepositoryIconDescription"
+    const val TITLE_BAR_FILE_OPEN_REPOSITORY_BUTTON = "titleBarFileOpenRepositoryButton"
+    const val TITLE_BAR_FILE_SAVE_ICON_DESCRIPTION = "titleBarFileSaveIconDescription"
+    const val TITLE_BAR_FILE_SAVE_BUTTON = "titleBarFileSaveButton"
+    const val TITLE_BAR_FILE_SAVE_AS_ICON_DESCRIPTION = "titleBarFileSaveAsIconDescription"
+    const val TITLE_BAR_FILE_SAVE_AS_BUTTON = "titleBarFileSaveAsButton"
+    const val TITLE_BAR_SETTINGS_BUTTON = "titleBarSettingsButton"
+    const val TITLE_BAR_HELP_BUTTON = "titleBarHelpButton"
+    const val TITLE_BAR_MINIMIZE_ICON_DESCRIPTION = "titleBarMinimizeIconDescription"
+    const val TITLE_BAR_RECOVER_ICON_DESCRIPTION = "titleBarRecoverIconDescription"
+    const val TITLE_BAR_MAXIMIZE_ICON_DESCRIPTION = "titleBarMaximizeIconDescription"
+    const val TITLE_BAR_CLOSE_ICON_DESCRIPTION = "titleBarCloseIconDescription"
+
+    // Top Menu
+    const val TOP_MENU_ACTIONS = "topMenuActions"
+    const val TOP_MENU_DRAW_GRAPH_AGAIN = "topMenuDrawGraphAgain"
+    const val TOP_MENU_RESET_DEFAULT_CANVAS_STATE = "topMenuResetDefaultCanvasState"
+    const val TOP_MENU_GENERATE_RANDOM_GRAPH = "topMenuGenerateRandomGraph"
+    const val TOP_MENU_VERTICES = "topMenuVertices"
+    const val TOP_MENU_EDGES = "topMenuEdges"
+    const val TOP_MENU_HIDE_VERTICES_LABELS = "topMenuHideVerticesLabels"
+    const val TOP_MENU_SHOW_VERTICES_LABELS = "topMenuShowVerticesLabels"
+
+    // Error Strings
+    const val ERROR_BASIC_STRING = "errorBasicString"
+    const val ERROR_NO_DESCRIPTION_MESSAGE = "errorNoDescriptionMessage"
+}

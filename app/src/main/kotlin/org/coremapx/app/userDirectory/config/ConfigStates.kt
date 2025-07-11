@@ -45,6 +45,7 @@ class ConfigStates(
     // Command Field
     val messageOutputHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT))
     val maxCountMessages = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAX_COUNT_MESSAGES))
+    val maxCountUserCommands = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS))
     val commandFieldWidth = mutableStateOf(configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH))
     val isTransparentCommandLine =
         mutableStateOf(configRepository.getBooleanValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE))
@@ -119,6 +120,7 @@ class ConfigStates(
             // Command Field
             ConfigKeys.MESSAGE_OUTPUT_HEIGHT -> messageOutputHeight.value = configRepository.getIntValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT)
             ConfigKeys.MAX_COUNT_MESSAGES -> maxCountMessages.value = configRepository.getIntValue(ConfigKeys.MAX_COUNT_MESSAGES)
+            ConfigKeys.MAX_COUNT_USER_COMMANDS -> maxCountUserCommands.value = configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS)
             ConfigKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH)
             ConfigKeys.IS_TRANSPARENT_COMMAND_LINE ->
                 isTransparentCommandLine.value =

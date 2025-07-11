@@ -22,6 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -38,7 +39,7 @@ fun DialogHeader(
     titleAlignment: Alignment = Alignment.Center,
     iconAlignment: Alignment = Alignment.CenterEnd,
     iconImageVector: ImageVector = Icons.Default.Close,
-    iconContentDescription: String = "Close",
+    iconContentDescription: String = LocalizationManager.states.dialogs.dialogHeaderCloseIconDescription.value,
     iconTintColor: Color = MaterialTheme.colors.onSurface,
     modifier: Modifier = Modifier,
 ) {

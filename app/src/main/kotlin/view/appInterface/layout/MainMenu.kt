@@ -41,6 +41,8 @@ import model.database.sqlite.repository.VertexRepository
 import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.graph.GraphDatabase
 import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.SlideMenuButton
@@ -133,8 +135,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 MainMenuTextButton(
                     onClick = { showNewGraphDialog = true },
                     iconVector = Icons.Filled.Add,
-                    iconContentDescription = "New Graph Icon",
-                    buttonText = "New Graph",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuNewGraphIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonNewGraph.value,
                 )
 
                 MainMenuTextButton(
@@ -144,24 +146,29 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         } else {
                             val saveResult = viewModel.saveGraph()
                             if (saveResult is Result.Error) {
-                                userNotificationMessage =
-                                    "Error: ${saveResult.error.type}.${saveResult.error.description}"
-                                userNotificationTitle = "Save Error"
+                                userNotificationMessage=
+                                    LocalizationFormatter.getErrorMessage(
+                                        startString = LocalizationManager.states.ui.errorBasicString.value,
+                                        errorType = saveResult.error.type,
+                                        errorDescription = saveResult.error.description,
+                                    )
+
+                                userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveError.value
                                 showUserNotification = true
                             }
                         }
                     },
                     iconVector = Icons.Filled.Save,
-                    iconContentDescription = "Save Graph Icon",
-                    buttonText = "Save Graph",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuSaveIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonSave.value,
                     isEnabled = viewModel.isGraphActive,
                 )
 
                 MainMenuTextButton(
                     onClick = { showSaveGraphAsDialog = true },
                     iconVector = Icons.Filled.SaveAs,
-                    iconContentDescription = "Save Graph As Icon",
-                    buttonText = "Save Graph As",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuSaveAsIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonSaveAs.value,
                     isEnabled = viewModel.isGraphActive,
                 )
 
@@ -171,13 +178,20 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         warnings =
                             when (loadResult) {
                                 is Result.Success -> loadResult.data
-                                is Result.Error -> listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                                is Result.Error ->
+                                    listOf(
+                                        LocalizationFormatter.getErrorMessage(
+                                            startString = LocalizationManager.states.ui.errorBasicString.value,
+                                            errorType = loadResult.error.type,
+                                            errorDescription = loadResult.error.description,
+                                        )
+                                    )
                             }
                         if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
                     },
                     iconVector = Icons.Filled.FolderOpen,
-                    iconContentDescription = "Open Graph Icon",
-                    buttonText = "Open Graph",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuOpenGraphIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonOpenGraph.value,
                 )
 
                 MainMenuTextButton(
@@ -186,7 +200,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         when (openResult) {
                             is Result.Error ->
                                 warnings =
-                                    listOf("Error: ${openResult.error.type}.${openResult.error.description}")
+                                    listOf(
+                                        LocalizationFormatter.getErrorMessage(
+                                            startString = LocalizationManager.states.ui.errorBasicString.value,
+                                            errorType = openResult.error.type,
+                                            errorDescription = openResult.error.description,
+                                        )
+                                    )
 
                             is Result.Success -> {
                                 selectedRepositoryFile = openResult.data
@@ -196,22 +216,22 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
                     },
                     iconVector = Icons.Filled.Storage,
-                    iconContentDescription = "Open Repository Icon",
-                    buttonText = "Open Repository",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuOpenRepositoryIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonOpenRepository.value,
                 )
 
                 MainMenuTextButton(
                     onClick = { showAnalyticsDialog = true },
                     iconVector = Icons.Filled.Analytics,
-                    iconContentDescription = "Analytics Icon",
-                    buttonText = "Analytics",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuAnalyticsIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonAnalytics.value,
                 )
 
                 MainMenuTextButton(
                     onClick = { showSettingsDialog = true },
                     iconVector = Icons.Filled.Settings,
-                    iconContentDescription = "Settings Icon",
-                    buttonText = "Settings",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuSettingsIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonSettings.value,
                 )
 
                 Spacer(Modifier.weight(1f))
@@ -285,7 +305,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
                 if (loadResult is Result.Error) {
                     warnings =
-                        listOf("Error: ${loadResult.error.type}.${loadResult.error.description}")
+                        listOf(
+                            LocalizationFormatter.getErrorMessage(
+                                startString = LocalizationManager.states.ui.errorBasicString.value,
+                                errorType = loadResult.error.type,
+                                errorDescription = loadResult.error.description,
+                            )
+                        )
                 }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
             },
@@ -308,13 +334,23 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 userNotificationMessage =
                     when (saveResult) {
                         is Result.Error -> {
-                            userNotificationTitle = "Save Error"
-                            "ERROR: ${saveResult.error.type}.${saveResult.error.description}"
+                            userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveError.value
+                            LocalizationFormatter.getErrorMessage(
+                                startString = LocalizationManager.states.ui.errorBasicString.value,
+                                errorType = saveResult.error.type,
+                                errorDescription = saveResult.error.description,
+                            )
+
                         }
 
                         is Result.Success -> {
-                            userNotificationTitle = "Save Success"
-                            "Graph ${savedGraphDetails.fileName} has been successfully saved to the directory ${savedGraphDetails.directoryPath} as ${savedGraphDetails.fileFormat}"
+                            userNotificationTitle = LocalizationManager.states.dialogs.userNotificationSaveSuccess.value
+                            LocalizationFormatter.getSaveGraphSuccessMessage(
+                                startString = LocalizationManager.states.dialogs.userNotificationSaveSuccessMessage.value,
+                                fileName = savedGraphDetails.fileName,
+                                directoryPath = savedGraphDetails.directoryPath,
+                                fileFormat = savedGraphDetails.fileFormat.name,
+                            )
                         }
                     }
                 showUserNotification = true

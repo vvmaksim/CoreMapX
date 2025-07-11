@@ -1,5 +1,7 @@
 package org.coremapx.app.config
 
+import org.coremapx.app.config.PrivateConfig.UserDirectory.DIR_PATH
+
 object PrivateConfig {
     object MainMenu {
         const val LOGO_SIZE = 52
@@ -29,6 +31,9 @@ object PrivateConfig {
     object AppResources {
         const val DEFAULT_CONFIG_PATH = "app/src/main/resources/config/DefaultConfig.cfg"
         const val DEFAULT_FONTS_DIRECTORY_PATH = "app/src/main/resources/fonts"
+        const val EN_LANGUAGE_PATH = "app/src/main/resources/languages/en.lang"
+        const val RU_LANGUAGE_PATH = "app/src/main/resources/languages/ru.lang"
+        val CUSTOM_LANGUAGE_PATH = "$DIR_PATH/config/custom_language.lang"
     }
 
     object View {

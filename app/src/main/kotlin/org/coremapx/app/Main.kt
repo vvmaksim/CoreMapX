@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.window.WindowDraggableArea
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,6 +18,7 @@ import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import androidx.compose.ui.zIndex
 import mu.KotlinLogging
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.UserDirectory
 import org.coremapx.app.userDirectory.config.ConfigRepository
@@ -41,6 +43,10 @@ fun main() =
             "FullScreen" -> windowState.placement = WindowPlacement.Fullscreen
             "Floating" -> windowState.placement = WindowPlacement.Floating
             "Maximized" -> windowState.placement = WindowPlacement.Maximized
+        }
+        val language by config.states.language
+        LaunchedEffect(language) {
+            LocalizationManager.updateLanguage(language)
         }
         Window(
             onCloseRequest = {

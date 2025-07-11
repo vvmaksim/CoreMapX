@@ -45,6 +45,8 @@ import model.graph.contracts.Graph
 import model.graph.entities.UnweightedEdge
 import model.graph.entities.Vertex
 import model.graph.entities.WeightedEdge
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import kotlin.random.Random
 
@@ -100,7 +102,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Random Graph",
+                title = LocalizationManager.states.dialogs.generateRandomGraphTitle.value,
                 onButtonClick = onDismiss,
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -114,11 +116,11 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                     Modifier
                         .fillMaxWidth()
                         .height(70.dp),
-                label = { Text("Vertices Count") },
+                label = { Text(LocalizationManager.states.dialogs.generateRandomGraphVertexCountHint.value) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Edit,
-                        contentDescription = "Vertices Count",
+                        contentDescription = LocalizationManager.states.dialogs.generateRandomGraphVertexCountIconDescription.value,
                         tint = MaterialTheme.colors.primary,
                     )
                 },
@@ -137,7 +139,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
             if (showVerticesCountError) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Vertices Count must be a positive integer",
+                    text = LocalizationManager.states.dialogs.generateRandomGraphVertexCountErrorMessage.value,
                     color = MaterialTheme.colors.error,
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(start = 4.dp),
@@ -154,11 +156,11 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                     Modifier
                         .fillMaxWidth()
                         .height(70.dp),
-                label = { Text("Edges Count") },
+                label = { Text(LocalizationManager.states.dialogs.generateRandomGraphEdgeCountHint.value) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Edit,
-                        contentDescription = "Edges Count",
+                        contentDescription = LocalizationManager.states.dialogs.generateRandomGraphEdgeCountIconDescription.value,
                         tint = MaterialTheme.colors.primary,
                     )
                 },
@@ -177,7 +179,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
             if (showEdgesCountError) {
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Edges Count must be a positive integer",
+                    text = LocalizationManager.states.dialogs.generateRandomGraphEdgeCountErrorMessage.value,
                     color = MaterialTheme.colors.error,
                     style = MaterialTheme.typography.body1,
                     modifier = Modifier.padding(start = 4.dp),
@@ -199,7 +201,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                             ),
                     )
                     Text(
-                        text = "Directed Graph",
+                        text = LocalizationManager.states.dialogs.generateRandomGraphIsWeightedGraph.value,
                         style = MaterialTheme.typography.body1,
                     )
                 }
@@ -218,7 +220,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                             ),
                     )
                     Text(
-                        text = "Weighted Graph",
+                        text = LocalizationManager.states.dialogs.generateRandomGraphIsWeightedGraph.value,
                         style = MaterialTheme.typography.body1,
                     )
                 }
@@ -235,7 +237,11 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Generating graph: ${(generationProgress * 100).toInt()}%",
+                        text =
+                            LocalizationFormatter.getStringWithOneNumber(
+                                startString = LocalizationManager.states.dialogs.generateRandomGraphGeneratingProgress.value,
+                                number = (generationProgress * 100).toLong(),
+                        ),
                         style = MaterialTheme.typography.body2,
                     )
                 }
@@ -247,18 +253,18 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                 ) {
                     Icon(
                         imageVector = Icons.Default.HourglassEmpty,
-                        contentDescription = "Visualizing",
+                        contentDescription = LocalizationManager.states.dialogs.generateRandomGraphVisualizingIconDescription.value,
                         tint = MaterialTheme.colors.primary,
                         modifier = Modifier.width(48.dp),
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Visualizing graph...",
+                        text = LocalizationManager.states.dialogs.generateRandomGraphVisualizingMessage.value,
                         style = MaterialTheme.typography.body2,
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "This may take a few minutes",
+                        text = LocalizationManager.states.dialogs.generateRandomGraphNotification.value,
                         style = MaterialTheme.typography.body2,
                     )
                 }
@@ -332,7 +338,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                 enabled = !isGenerating && !isVisualizing,
             ) {
                 Text(
-                    text = "Generate",
+                    text = LocalizationManager.states.dialogs.generateRandomGraphGenerateButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -29,7 +30,11 @@ fun SettingsDescriptionIconButton(
     IconButton(onClick = onClick) {
         Icon(
             imageVector = if (isExpanded) Icons.Filled.ArrowDropUp else Icons.Filled.ArrowDropDown,
-            contentDescription = if (isExpanded) "Hide description" else "Show description",
+            contentDescription =
+                if (isExpanded)
+                    LocalizationManager.states.anyIconDescriptionsStates.settingsHideDescription.value
+                else
+                    LocalizationManager.states.anyIconDescriptionsStates.settingsShowDescription.value,
             tint = iconTintColor,
             modifier = modifier,
         )

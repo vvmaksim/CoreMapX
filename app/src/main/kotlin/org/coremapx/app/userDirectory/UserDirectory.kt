@@ -23,6 +23,7 @@ object UserDirectory {
             createUserDirs()
             copyDefaultConfig()
             copyDefaultFonts()
+            copyCustomLanguageTemplate()
         } catch (ex: Exception) {
             logger.error { "Failed to create directories. Ex: ${ex.message}" }
         }
@@ -44,6 +45,25 @@ object UserDirectory {
             } catch (ex: Exception) {
                 logger.error { "Failed to copy default config. Error: ${ex.message}" }
                 showConfigErrorDialog("Failed to copy default config. Error: ${ex.message}")
+            }
+        }
+    }
+
+    fun copyCustomLanguageTemplate() {
+        val targetCustomLanguagePath = PrivateConfig.AppResources.CUSTOM_LANGUAGE_PATH
+        val targetCustomLanguageFile = File(targetCustomLanguagePath)
+        if (!targetCustomLanguageFile.exists()) {
+            logger.info { "Copying custom language template to $targetCustomLanguagePath" }
+            try {
+                Files.copy(
+                    Paths.get(PrivateConfig.AppResources.EN_LANGUAGE_PATH),
+                    Paths.get(targetCustomLanguagePath),
+                    StandardCopyOption.REPLACE_EXISTING,
+                )
+                logger.info { "Custom language template copied successfully" }
+            } catch (ex: Exception) {
+                logger.error { "Failed to copy custom language template. Error: ${ex.message}" }
+                showConfigErrorDialog("Failed to copy custom language template. Error: ${ex.message}")
             }
         }
     }

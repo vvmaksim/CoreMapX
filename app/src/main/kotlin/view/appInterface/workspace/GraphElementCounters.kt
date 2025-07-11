@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -19,8 +20,8 @@ import view.appInterface.preview.PreviewSurface
 fun GraphElementCounters(
     vertexCount: Long,
     edgeCount: Long,
-    vertexLabel: String = "vertices",
-    edgeLabel: String = "edges",
+    vertexLabel: String = LocalizationManager.states.anyTextStates.vertices.value,
+    edgeLabel: String = LocalizationManager.states.anyTextStates.edges.value,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = MaterialTheme.typography.body1,
     textColor: Color = MaterialTheme.colors.onSurface,
