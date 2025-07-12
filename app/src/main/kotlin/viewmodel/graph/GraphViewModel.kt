@@ -19,7 +19,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
         }
 
     private val _edges: Map<E, EdgeViewModel<E, V>> =
-        graph.edges.mapValues { (_, edge) ->
+        graph.edges.mapValues { (edgeId, edge) ->
             val from =
                 _vertices[edge.from.id]
                     ?: throw IllegalStateException("VertexView for ${edge.from.id} not found")
@@ -27,6 +27,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
                 _vertices[edge.to.id]
                     ?: throw IllegalStateException("VertexView for ${edge.to.id} not found")
             EdgeViewModel(
+                edgeId = edgeId,
                 from = from,
                 to = to,
                 graph = graph,

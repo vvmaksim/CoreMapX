@@ -8,6 +8,7 @@ import model.graph.entities.WeightedEdge
 import org.coremapx.app.config
 
 class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
+    val edgeId: E,
     val from: VertexViewModel<V>,
     val to: VertexViewModel<V>,
     color: Color = config.states.edgeMainColor.value,
