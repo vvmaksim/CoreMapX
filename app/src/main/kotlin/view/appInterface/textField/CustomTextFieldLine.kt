@@ -82,7 +82,7 @@ fun CustomTextFieldLine(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewCustomTextFields() {
+private fun PreviewCustomTextFieldLines() {
     AppTheme {
         PreviewSurface(
             content = {
