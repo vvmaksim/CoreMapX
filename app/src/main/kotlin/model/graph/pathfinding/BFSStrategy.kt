@@ -13,21 +13,11 @@ class BFSStrategy <E: Comparable<E>, V: Comparable<V>>: PathfindingStrategy<E, V
         end: V,
         maxPaths: Int,
     ): Result<List<List<E>>> {
-        if (graph == null) {
-            return Result.Error(PathfindingErrors.EmptyGraph())
-        }
-        if (graph.vertices.isEmpty() || graph.edges.isEmpty()) {
-            return Result.Error(PathfindingErrors.EmptyGraph())
-        }
-        if (!graph.vertices.containsKey(start)) {
-            return Result.Error(PathfindingErrors.VertexNotFound(start as Long))
-        }
-        if (!graph.vertices.containsKey(end)) {
-            return Result.Error(PathfindingErrors.VertexNotFound(end as Long))
-        }
-        if (start == end) {
-            return Result.Success(listOf(emptyList()))
-        }
+        val validateResult = PathfindingValidator.validate(graph, start, end)
+        if (validateResult is Result.Error) return validateResult
+        if (graph == null) return Result.Error(PathfindingErrors.EmptyGraph()) // This is checked in the validator, but here it is necessary for the Kotlin analyzer
+        if (start == end) return Result.Success(listOf(emptyList()))
+
         val result = mutableListOf<List<E>>()
         val queue = ArrayDeque<Pair<V, List<E>>>()
         val visited = mutableSetOf<V>()
