@@ -24,4 +24,11 @@ sealed class PathfindingErrors(
         type = "NoPathFound",
         description = message,
     )
+
+    data class NegativeCycle(
+        val message: String = "Negative cycle found",
+    ) : PathfindingErrors(
+            type = "NegativeCycle",
+            description = message,
+        )
 }
