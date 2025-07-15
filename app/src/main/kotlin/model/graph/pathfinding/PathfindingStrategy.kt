@@ -3,7 +3,7 @@ package model.graph.pathfinding
 import model.graph.contracts.Graph
 import model.result.Result
 
-interface PathfindingStrategy <E: Comparable<E>, V: Comparable<V>> {
+interface PathfindingStrategy<E : Comparable<E>, V : Comparable<V>> {
     fun findPath(
         graph: Graph<E, V>?,
         start: V,

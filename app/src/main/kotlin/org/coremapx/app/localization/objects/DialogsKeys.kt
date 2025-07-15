@@ -35,12 +35,14 @@ object DialogsKeys {
     const val SETTINGS_COMMAND_FIELD_BLOCK_NAME = "settingsCommandFieldBlockName"
     const val SETTINGS_WORK_AREA_BLOCK_NAME = "settingsWorkAreaBlockName"
     const val SETTINGS_PERFORMANCE_BLOCK_NAME = "settingsPerformanceBlockName"
-    //// General Block
+
+    // // General Block
     const val GENERAL_LANGUAGE = "generalLanguage"
     const val GENERAL_THEME = "generalTheme"
     const val GENERAL_SYSTEM_DIALOG_THEME = "generalSystemDialogTheme"
     const val GENERAL_EXPANDED = "generalExpanded"
-    //// Colors Block
+
+    // // Colors Block
     const val COLORS_PRIMARY = "colorsPrimary"
     const val COLORS_PRIMARY_VARIANT = "colorsPrimaryVariant"
     const val COLORS_SECONDARY = "colorsSecondary"
@@ -61,20 +63,24 @@ object DialogsKeys {
     const val COLORS_EDGE_MAIN_COLOR = "colorsEdgeMainColor"
     const val COLORS_CANVAS_BACKGROUND_COLOR = "colorsCanvasBackgroundColor"
     const val COLORS_COMMAND_LINE_BACKGROUND_COLOR = "colorsCommandLineBackgroundColor"
-    //// Main Screen Block
+
+    // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
     const val MAIN_SCREEN_START_WIDTH = "mainScreenStartWidth"
     const val MAIN_SCREEN_PLACEMENT = "mainScreenPlacement"
-    //// Title Bar Block
+
+    // // Title Bar Block
     const val TITLE_BAR_HEIGHT = "titleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "titleBarIconSize"
-    //// Command Field Block
+
+    // // Command Field Block
     const val COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT = "commandFieldMessageOutputHeight"
     const val COMMAND_FIELD_MAX_COUNT_MESSAGES = "commandFieldMaxCountMessages"
     const val COMMAND_FIELD_MAX_COUNT_USER_COMMANDS = "commandFieldMaxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
     const val COMMAND_FIELD_IS_TRANSPARENT = "commandFieldIsTransparent"
-    //// Work Area Block
+
+    // // Work Area Block
     const val WORK_AREA_GRAPH_LAYOUT_HEIGHT = "workAreaGraphLayoutHeight"
     const val WORK_AREA_GRAPH_LAYOUT_WIDTH = "workAreaGraphLayoutWidth"
     const val WORK_AREA_VERTEX_RADIUS = "workAreaVertexRadius"
@@ -84,7 +90,8 @@ object DialogsKeys {
     const val WORK_AREA_EDGE_WIDTH = "workAreaEdgeWidth"
     const val WORK_AREA_CANVAS_DRAG_RATIO = "workAreaCanvasDragRatio"
     const val WORK_AREA_CANVAS_LIMIT = "workAreaCanvasLimit"
-    //// Performance Block
+
+    // // Performance Block
     const val PERFORMANCE_ANIMATION_DURATION = "performanceAnimationDuration"
     const val PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY = "performanceCommandFieldScrollDelay"
 

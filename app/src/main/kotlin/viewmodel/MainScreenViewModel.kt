@@ -31,7 +31,7 @@ import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 
-class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
+class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>> {
     val canvasLimit = config.states.canvasLimit.value
     val graphLayoutHeight =
         config.states.graphLayoutHeight.value
@@ -122,13 +122,12 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
         }
     }
 
-    fun getLayoutStrategyByString(strategy: String): VisualizationStrategy? {
-        return when (strategy.lowercase()) {
+    fun getLayoutStrategyByString(strategy: String): VisualizationStrategy? =
+        when (strategy.lowercase()) {
             "random" -> RandomStrategy()
             "circular" -> CircularStrategy()
             else -> null
         }
-    }
 
     fun updateLayoutStrategy(newStrategy: VisualizationStrategy) {
         _layoutStrategy.value = newStrategy

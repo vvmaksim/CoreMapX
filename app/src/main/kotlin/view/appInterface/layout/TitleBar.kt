@@ -168,7 +168,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                                         startString = LocalizationManager.states.ui.errorBasicString.value,
                                                         errorType = loadResult.error.type,
                                                         errorDescription = loadResult.error.description,
-                                                    )
+                                                    ),
                                                 )
                                         }
                                     if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
@@ -200,7 +200,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                                         startString = LocalizationManager.states.ui.errorBasicString.value,
                                                         errorType = openResult.error.type,
                                                         errorDescription = openResult.error.description,
-                                                    )
+                                                    ),
                                                 )
 
                                         is Result.Success -> {
@@ -353,10 +353,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 Icon(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
                     contentDescription =
-                        if (isMaximized)
+                        if (isMaximized) {
                             LocalizationManager.states.ui.titleBarRecoverIconDescription.value
-                        else
-                            LocalizationManager.states.ui.titleBarMaximizeIconDescription.value,
+                        } else {
+                            LocalizationManager.states.ui.titleBarMaximizeIconDescription.value
+                        },
                     tint = MaterialTheme.colors.onSurface,
                     modifier = Modifier.size(titleBarIconSize),
                 )
@@ -394,7 +395,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 startString = LocalizationManager.states.ui.errorBasicString.value,
                                 errorType = loadResult.error.type,
                                 errorDescription = loadResult.error.description,
-                            )
+                            ),
                         )
                 }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true

@@ -114,9 +114,12 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
     }
 
     private fun setStrategy(): Result<String> {
-        val strategyAsString = command.parameters["strategy"] ?: return Result.Error(CommandErrors.MissingParameters("Strategy is required"))
+        val strategyAsString =
+            command.parameters["strategy"] ?: return Result.Error(CommandErrors.MissingParameters("Strategy is required"))
         if (viewModel != null) {
-            val strategy = viewModel.getLayoutStrategyByString(strategyAsString) ?: return Result.Error(CommandErrors.UnknownLayoutStrategy(strategyAsString))
+            val strategy =
+                viewModel.getLayoutStrategyByString(strategyAsString)
+                    ?: return Result.Error(CommandErrors.UnknownLayoutStrategy(strategyAsString))
             viewModel.updateLayoutStrategy(strategy)
             return Result.Success("Layout strategy updated. New strategy: $strategyAsString")
         } else {

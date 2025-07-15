@@ -6,7 +6,7 @@ import model.graph.contracts.Graph
 import model.result.PathfindingErrors
 import model.result.Result
 
-class BFSStrategy <E: Comparable<E>, V: Comparable<V>>: PathfindingStrategy<E, V> {
+class BFSStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStrategy<E, V> {
     override fun findPath(
         graph: Graph<E, V>?,
         start: V,
@@ -24,7 +24,7 @@ class BFSStrategy <E: Comparable<E>, V: Comparable<V>>: PathfindingStrategy<E, V
         val visited = mutableSetOf<V>()
         queue.add(start to emptyList())
 
-        while(queue.isNotEmpty() && result.size < maxPaths) {
+        while (queue.isNotEmpty() && result.size < maxPaths) {
             val (current, path) = queue.removeFirst()
             if (current == end) {
                 result.add(path)

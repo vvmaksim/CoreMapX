@@ -31,9 +31,10 @@ fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$titleBarHeight"),
             onValueChange = { config.setValue(TITLE_BAR_HEIGHT, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionTitleBarHeight.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionTitleBarHeight.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -42,9 +43,10 @@ fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$titleBarIconSize"),
             onValueChange = { config.setValue(TITLE_BAR_ICON_SIZE, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionTitleBarIconSize.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionTitleBarIconSize.value,
+                ),
             isExpanded = isExpandedSettings,
         )
     }

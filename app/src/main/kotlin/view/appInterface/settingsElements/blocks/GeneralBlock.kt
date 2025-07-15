@@ -40,7 +40,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             title = LocalizationManager.states.dialogs.generalLanguage.value,
             items = listOf("English", "Русский", "Custom"),
             selectedItem =
-                when(language) {
+                when (language) {
                     "en" -> "English"
                     "ru" -> "Русский"
                     "custom" -> "Custom"
@@ -50,7 +50,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                 config.setValue(
                     key = LANGUAGE,
                     value =
-                        when(selectedLanguage) {
+                        when (selectedLanguage) {
                             "English" -> "en"
                             "Русский" -> "ru"
                             "Custom" -> "custom"
@@ -85,17 +85,19 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                 config.setThemeOnCustom()
             },
             modifier = dropdownSelectButtonModifier,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionSystemDialogTheme.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionSystemDialogTheme.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         SwitchLine(
             title = LocalizationManager.states.dialogs.generalExpanded.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionIsExpandedSettings.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionIsExpandedSettings.value,
+                ),
             checked = isExpandedSettings,
             onCheckedChange = { config.setValue(IS_EXPANDED_SETTINGS, it.toString()) },
             isExpanded = isExpandedSettings,

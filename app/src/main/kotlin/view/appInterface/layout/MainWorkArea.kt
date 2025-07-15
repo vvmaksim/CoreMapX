@@ -95,7 +95,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     startString = LocalizationManager.states.ui.errorBasicString.value,
                     errorType = CommandErrors.NoGraphSelected().type,
                     errorDescription = CommandErrors.NoGraphSelected().description,
-                )
+                ),
             )
             return
         }

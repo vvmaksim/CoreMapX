@@ -31,10 +31,11 @@ fun SettingsDescriptionIconButton(
         Icon(
             imageVector = if (isExpanded) Icons.Filled.ArrowDropUp else Icons.Filled.ArrowDropDown,
             contentDescription =
-                if (isExpanded)
+                if (isExpanded) {
                     LocalizationManager.states.anyIconDescriptionsStates.settingsHideDescription.value
-                else
-                    LocalizationManager.states.anyIconDescriptionsStates.settingsShowDescription.value,
+                } else {
+                    LocalizationManager.states.anyIconDescriptionsStates.settingsShowDescription.value
+                },
             tint = iconTintColor,
             modifier = modifier,
         )

@@ -32,7 +32,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
                 to = to,
                 graph = graph,
                 edge = edge,
-                )
+            )
         }
 
     val vertices: Collection<VertexViewModel<V>>

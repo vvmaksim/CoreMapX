@@ -2,17 +2,17 @@ package viewmodel.visualizationStrategy
 
 import androidx.compose.ui.unit.dp
 import viewmodel.graph.VertexViewModel
+import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
-import kotlin.math.PI
 
 class CircularStrategy(
-    private val radius: Double = 2000.0
+    private val radius: Double = 2000.0,
 ) : VisualizationStrategy {
     override fun <V : Comparable<V>> place(
         width: Double,
         height: Double,
-        vertices: Collection<VertexViewModel<V>>?
+        vertices: Collection<VertexViewModel<V>>?,
     ) {
         val n = vertices?.size ?: return
         if (n == 0) return

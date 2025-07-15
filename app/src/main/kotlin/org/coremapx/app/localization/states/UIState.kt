@@ -3,7 +3,7 @@ package org.coremapx.app.localization.states
 import androidx.compose.runtime.mutableStateOf
 import org.coremapx.app.localization.objects.UIKeys
 
-class UIState(): LocalizationState {
+class UIState : LocalizationState {
     // Main Menu Buttons
     val mainMenuButtonNewGraph = mutableStateOf("")
     val mainMenuNewGraphIconDescription = mutableStateOf("")
@@ -56,8 +56,11 @@ class UIState(): LocalizationState {
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
 
-    override fun updateValue(key: String, value: String) {
-        when(key) {
+    override fun updateValue(
+        key: String,
+        value: String,
+    ) {
+        when (key) {
             // Main Menu Buttons
             UIKeys.MAIN_MENU_BUTTON_NEW_GRAPH -> mainMenuButtonNewGraph.value = value
             UIKeys.MAIN_MENU_NEW_GRAPH_ICON_DESCRIPTION -> mainMenuNewGraphIconDescription.value = value

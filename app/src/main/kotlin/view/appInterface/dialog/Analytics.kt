@@ -24,7 +24,6 @@ import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 
-
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun Analytics(
@@ -43,6 +42,7 @@ fun Analytics(
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
 fun AnalyticsContent(
     onDismiss: () -> Unit,
@@ -83,8 +83,12 @@ fun AnalyticsContent(
                     selectedItem = selectedLayoutStrategy,
                     onItemSelected = { newStrategy: String ->
                         when (newStrategy) {
-                            "Random" -> { onStrategyUpdate(RandomStrategy()) }
-                            "Circular" -> { onStrategyUpdate(CircularStrategy()) }
+                            "Random" -> {
+                                onStrategyUpdate(RandomStrategy())
+                            }
+                            "Circular" -> {
+                                onStrategyUpdate(CircularStrategy())
+                            }
                         }
                     },
                 )

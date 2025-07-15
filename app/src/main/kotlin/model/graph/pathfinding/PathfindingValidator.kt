@@ -4,7 +4,7 @@ import model.graph.contracts.Graph
 import model.result.PathfindingErrors
 import model.result.Result
 
-class PathfindingValidator <E: Comparable<E>, V: Comparable<V>> {
+class PathfindingValidator<E : Comparable<E>, V : Comparable<V>> {
     companion object {
         fun <E : Comparable<E>, V : Comparable<V>> validateParametersWithGraph(
             graph: Graph<E, V>?,

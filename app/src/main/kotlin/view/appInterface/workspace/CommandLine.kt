@@ -21,7 +21,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEvent
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
@@ -29,17 +36,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 import view.appInterface.textField.CustomTextField
-import androidx.compose.ui.input.key.Key
-import androidx.compose.ui.input.key.KeyEvent
-import androidx.compose.ui.input.key.KeyEventType
-import androidx.compose.ui.input.key.key
-import androidx.compose.ui.input.key.onPreviewKeyEvent
-import androidx.compose.ui.input.key.type
-import androidx.compose.ui.text.TextRange
-import org.coremapx.app.localization.LocalizationManager
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -58,7 +58,9 @@ fun CommandLine(
     onCommandHistoryIndexChange: (Int) -> Unit,
 ) {
     val scrollState = rememberScrollState()
-    val commandFieldScrollDelay = config.states.commandFieldScrollDelay.value.toLong()
+    val commandFieldScrollDelay =
+        config.states.commandFieldScrollDelay.value
+            .toLong()
     val messageOutputHeight = config.states.messageOutputHeight.value.dp
 
     LaunchedEffect(outputMessages.size) {
@@ -165,8 +167,7 @@ fun CommandLine(
                     .background(
                         color = commandLineBackgroundColor,
                         shape = borderShape,
-                    )
-                    .onPreviewKeyEvent(onPreviewKeyEvent),
+                    ).onPreviewKeyEvent(onPreviewKeyEvent),
             placeholder = {
                 Text(
                     text = placeholderText,

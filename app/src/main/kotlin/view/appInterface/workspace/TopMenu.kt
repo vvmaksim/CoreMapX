@@ -121,10 +121,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                 ) {
                     Text(
                         text =
-                            if (viewModel.showVerticesLabels.value)
+                            if (viewModel.showVerticesLabels.value) {
                                 LocalizationManager.states.ui.topMenuHideVerticesLabels.value
-                            else
-                                LocalizationManager.states.ui.topMenuShowVerticesLabels.value,
+                            } else {
+                                LocalizationManager.states.ui.topMenuShowVerticesLabels.value
+                            },
                         style = MaterialTheme.typography.button,
                     )
                 }

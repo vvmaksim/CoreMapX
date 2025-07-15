@@ -146,7 +146,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                         } else {
                             val saveResult = viewModel.saveGraph()
                             if (saveResult is Result.Error) {
-                                userNotificationMessage=
+                                userNotificationMessage =
                                     LocalizationFormatter.getErrorMessage(
                                         startString = LocalizationManager.states.ui.errorBasicString.value,
                                         errorType = saveResult.error.type,
@@ -184,7 +184,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                                             startString = LocalizationManager.states.ui.errorBasicString.value,
                                             errorType = loadResult.error.type,
                                             errorDescription = loadResult.error.description,
-                                        )
+                                        ),
                                     )
                             }
                         if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
@@ -205,7 +205,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                                             startString = LocalizationManager.states.ui.errorBasicString.value,
                                             errorType = openResult.error.type,
                                             errorDescription = openResult.error.description,
-                                        )
+                                        ),
                                     )
 
                             is Result.Success -> {
@@ -310,7 +310,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                                 startString = LocalizationManager.states.ui.errorBasicString.value,
                                 errorType = loadResult.error.type,
                                 errorDescription = loadResult.error.description,
-                            )
+                            ),
                         )
                 }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
@@ -340,7 +340,6 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                                 errorType = saveResult.error.type,
                                 errorDescription = saveResult.error.description,
                             )
-
                         }
 
                         is Result.Success -> {
@@ -390,7 +389,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             onDismiss = { showAnalyticsDialog = false },
             onStrategyUpdate = { newStrategy: VisualizationStrategy ->
                 viewModel.updateLayoutStrategy(newStrategy)
-                },
+            },
             selectedLayoutStrategy =
                 when (viewModel.layoutStrategy.value) {
                     is RandomStrategy -> "Random"

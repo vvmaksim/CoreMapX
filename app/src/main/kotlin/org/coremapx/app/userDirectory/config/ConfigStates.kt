@@ -120,7 +120,9 @@ class ConfigStates(
             // Command Field
             ConfigKeys.MESSAGE_OUTPUT_HEIGHT -> messageOutputHeight.value = configRepository.getIntValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT)
             ConfigKeys.MAX_COUNT_MESSAGES -> maxCountMessages.value = configRepository.getIntValue(ConfigKeys.MAX_COUNT_MESSAGES)
-            ConfigKeys.MAX_COUNT_USER_COMMANDS -> maxCountUserCommands.value = configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS)
+            ConfigKeys.MAX_COUNT_USER_COMMANDS ->
+                maxCountUserCommands.value =
+                    configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS)
             ConfigKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH)
             ConfigKeys.IS_TRANSPARENT_COMMAND_LINE ->
                 isTransparentCommandLine.value =

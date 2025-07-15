@@ -80,14 +80,14 @@ sealed class CommandErrors(
     data class UnknownLayoutStrategy(
         val strategyAsString: String,
     ) : CommandErrors(
-        type = "UnknownLayoutStrategy",
-        description = "Unknown layout strategy: $strategyAsString",
-    )
+            type = "UnknownLayoutStrategy",
+            description = "Unknown layout strategy: $strategyAsString",
+        )
 
     data class ViewmodelNotFounded(
         val message: String = "Viewmodel not founded",
     ) : CommandErrors(
-        type = "ViewmodelNotFounded",
-        description = message,
-    )
+            type = "ViewmodelNotFounded",
+            description = message,
+        )
 }

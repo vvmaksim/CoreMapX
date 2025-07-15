@@ -70,9 +70,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsPrimary.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionPrimary.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionPrimary.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -84,9 +85,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsPrimaryVariant.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionPrimaryVariant.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionPrimaryVariant.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -98,9 +100,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsSecondary.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionSecondary.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionSecondary.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -304,9 +307,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsCommandLineBackgroundColor.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionCommandLineBackgroundColor.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionCommandLineBackgroundColor.value,
+                ),
             isExpanded = isExpandedSettings,
         )
     }
