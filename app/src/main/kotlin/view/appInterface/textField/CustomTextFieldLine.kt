@@ -43,39 +43,41 @@ fun CustomTextFieldLine(
 ) {
     var expanded by remember { mutableStateOf(isExpanded) }
 
-    Row(
-        modifier =
-            modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier.weight(1f),
-        )
-        Spacer(Modifier.width(8.dp))
-        CustomTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.width(textFieldWidth),
-            placeholder = placeholder,
-            singleLine = singleLine,
-            isError = isError,
-        )
-        if (description != null) {
-            SettingsDescriptionIconButton(
-                onClick = { expanded = !expanded },
-                isExpanded = expanded,
+    Column {
+        Row(
+            modifier =
+                modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.weight(1f),
             )
+            Spacer(Modifier.width(8.dp))
+            CustomTextField(
+                value = value,
+                onValueChange = onValueChange,
+                modifier = Modifier.width(textFieldWidth),
+                placeholder = placeholder,
+                singleLine = singleLine,
+                isError = isError,
+            )
+            if (description != null) {
+                SettingsDescriptionIconButton(
+                    onClick = { expanded = !expanded },
+                    isExpanded = expanded,
+                )
+            }
+            Spacer(modifier = Modifier.padding(endSpacerWidth))
         }
-        Spacer(modifier = Modifier.padding(endSpacerWidth))
-    }
-    if (expanded && description != null) {
-        Spacer(modifier = Modifier.height(8.dp))
-        SettingsDescriptionText(description = description)
+        if (expanded && description != null) {
+            Spacer(modifier = Modifier.height(8.dp))
+            SettingsDescriptionText(description = description)
+        }
     }
 }
 
