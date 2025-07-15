@@ -63,8 +63,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
-            viewModel.graphViewModel = graph?.let { GraphViewModel(it, viewModel.showVerticesLabels) }
-            viewModel.graphViewModel?.let { _ ->
+            graph?.let { viewModel.updateGraphViewModel(GraphViewModel(it, viewModel.showVerticesLabels)) }
+            viewModel.graphViewModel.value?.let { _ ->
                 viewModel.resetGraphView()
             }
             viewModel.graphViewModel
@@ -132,7 +132,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 .fillMaxSize()
                 .background(MaterialTheme.colors.canvasBackground),
     ) {
-        graphViewModel?.let { graphViewModel ->
+        graphViewModel.value?.let { graphViewModel ->
             GraphView(
                 viewModel = graphViewModel,
                 offsetX = viewModel.offsetX.value,

@@ -58,7 +58,9 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
     val graph: State<Graph<E, V>?>
         get() = _graph
 
-    var graphViewModel: GraphViewModel<E, V>? = null
+    private var _graphViewModel = mutableStateOf<GraphViewModel<E, V>?>(null)
+    val graphViewModel: State<GraphViewModel<E, V>?>
+        get() = _graphViewModel
 
     var graphName: String = "None"
 
@@ -112,7 +114,7 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
     }
 
     fun resetGraphView() {
-        graphViewModel?.let {
+        _graphViewModel.value?.let {
             layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, it.vertices)
         }
     }
@@ -129,10 +131,14 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
         _layoutStrategy.value = newStrategy
     }
 
+    fun updateGraphViewModel(newViewModel: GraphViewModel<E, V>) {
+        _graphViewModel.value = newViewModel
+    }
+
     fun updateGraph(newGraph: Graph<E, V>) {
         _graph.value = newGraph
-        graphViewModel = GraphViewModel(newGraph, _showVerticesLabels)
-        layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, graphViewModel?.vertices)
+        updateGraphViewModel(GraphViewModel(newGraph, _showVerticesLabels))
+        layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, _graphViewModel.value?.vertices)
     }
 
     fun openGraphFile(): Result<List<String>> {
