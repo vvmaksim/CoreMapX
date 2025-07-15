@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.localization.LocalizationManager
+import view.appInterface.dialog.FindPath
 import view.appInterface.dialog.GenerateRandomGraph
 import viewmodel.MainScreenViewModel
 
@@ -33,6 +34,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
     var verticesExpanded by remember { mutableStateOf(false) }
     var edgesExpanded by remember { mutableStateOf(false) }
     var showGenerateRandomGraphDialog by remember { mutableStateOf(false) }
+    var showFindPathDialog by remember { mutableStateOf(false) }
 
     Row(
         modifier =
@@ -85,6 +87,17 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                         style = MaterialTheme.typography.button,
                     )
                 }
+                DropdownMenuItem(
+                    onClick = {
+                        showFindPathDialog = true
+                        actionsExpanded = false
+                    },
+                ) {
+                    Text(
+                        text = "Find path",
+                        style = MaterialTheme.typography.button,
+                    )
+                }
             }
         }
         Spacer(Modifier.width(8.dp))
@@ -133,6 +146,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             onGraphUpdate = { newGraph ->
                 viewModel.updateGraph(newGraph)
             },
+        )
+    }
+    if (showFindPathDialog) {
+        FindPath(
+            viewModel = viewModel,
+            onDismiss = { showFindPathDialog = false },
         )
     }
 }
