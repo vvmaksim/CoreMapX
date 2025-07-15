@@ -48,38 +48,40 @@ fun DropdownSelectLine(
 ) {
     var expanded by remember { mutableStateOf(isExpanded) }
 
-    Row(
-        modifier =
-            modifier
-                .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.body1,
-            modifier = Modifier.weight(1f),
-        )
-        Spacer(Modifier.width(8.dp))
-        DropdownSelectButton(
-            items = items,
-            selectedItem = selectedItem,
-            onItemSelected = onItemSelected,
-            modifier = Modifier.width(buttonWidth),
-            borderColor = borderColor,
-            borderWidth = borderWidth,
-            height = height,
-            iconSize = iconSize,
-            borderShape = borderShape,
-        )
-        SettingsDescriptionIconButton(
-            onClick = { expanded = !expanded },
-            isExpanded = expanded,
-        )
-    }
-    if (expanded) {
-        Spacer(modifier = Modifier.height(8.dp))
-        SettingsDescriptionText(description = description)
+    Column {
+        Row(
+            modifier =
+                modifier
+                    .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.body1,
+                modifier = Modifier.weight(1f),
+            )
+            Spacer(Modifier.width(8.dp))
+            DropdownSelectButton(
+                items = items,
+                selectedItem = selectedItem,
+                onItemSelected = onItemSelected,
+                modifier = Modifier.width(buttonWidth),
+                borderColor = borderColor,
+                borderWidth = borderWidth,
+                height = height,
+                iconSize = iconSize,
+                borderShape = borderShape,
+            )
+            SettingsDescriptionIconButton(
+                onClick = { expanded = !expanded },
+                isExpanded = expanded,
+            )
+        }
+        if (expanded) {
+            Spacer(modifier = Modifier.height(8.dp))
+            SettingsDescriptionText(description = description)
+        }
     }
 }
 
