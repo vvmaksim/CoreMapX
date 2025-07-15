@@ -159,6 +159,7 @@ topMenuActions=Actions
 topMenuDrawGraphAgain=Draw the graph again
 topMenuResetDefaultCanvasState=Reset default canvas state
 topMenuGenerateRandomGraph=Generate random graph
+topMenuFindPath=Find path
 topMenuVertices=Vertices
 topMenuEdges=Edges
 topMenuHideVerticesLabels=Hide vertices labels

@@ -44,6 +44,7 @@ object UIKeys {
     const val TOP_MENU_DRAW_GRAPH_AGAIN = "topMenuDrawGraphAgain"
     const val TOP_MENU_RESET_DEFAULT_CANVAS_STATE = "topMenuResetDefaultCanvasState"
     const val TOP_MENU_GENERATE_RANDOM_GRAPH = "topMenuGenerateRandomGraph"
+    const val TOP_MENU_FIND_PATH = "topMenuFindPath"
     const val TOP_MENU_VERTICES = "topMenuVertices"
     const val TOP_MENU_EDGES = "topMenuEdges"
     const val TOP_MENU_HIDE_VERTICES_LABELS = "topMenuHideVerticesLabels"

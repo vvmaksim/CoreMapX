@@ -155,6 +155,7 @@ topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
 topMenuResetDefaultCanvasState=Выставить позицию холста по умолчанию
 topMenuGenerateRandomGraph=Сгенерировать случайный граф
+topMenuFindPath=Поиск пути
 topMenuVertices=Вершины
 topMenuEdges=Рёбра
 topMenuHideVerticesLabels=Спрятать метки вершин

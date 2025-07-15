@@ -94,7 +94,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     },
                 ) {
                     Text(
-                        text = "Find path",
+                        text = LocalizationManager.states.ui.topMenuFindPath.value,
                         style = MaterialTheme.typography.button,
                     )
                 }

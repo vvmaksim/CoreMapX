@@ -47,6 +47,7 @@ class UIState : LocalizationState {
     var topMenuDrawGraphAgain = mutableStateOf("")
     var topMenuResetDefaultCanvasState = mutableStateOf("")
     var topMenuGenerateRandomGraph = mutableStateOf("")
+    var topMenuFindPath = mutableStateOf("")
     var topMenuHideVerticesLabels = mutableStateOf("")
     var topMenuVertices = mutableStateOf("")
     var topMenuEdges = mutableStateOf("")
@@ -104,6 +105,7 @@ class UIState : LocalizationState {
             UIKeys.TOP_MENU_DRAW_GRAPH_AGAIN -> topMenuDrawGraphAgain.value = value
             UIKeys.TOP_MENU_RESET_DEFAULT_CANVAS_STATE -> topMenuResetDefaultCanvasState.value = value
             UIKeys.TOP_MENU_GENERATE_RANDOM_GRAPH -> topMenuGenerateRandomGraph.value = value
+            UIKeys.TOP_MENU_FIND_PATH -> topMenuFindPath.value = value
             UIKeys.TOP_MENU_VERTICES -> topMenuVertices.value = value
             UIKeys.TOP_MENU_EDGES -> topMenuEdges.value = value
             UIKeys.TOP_MENU_HIDE_VERTICES_LABELS -> topMenuHideVerticesLabels.value = value
