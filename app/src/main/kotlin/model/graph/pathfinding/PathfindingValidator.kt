@@ -6,7 +6,7 @@ import model.result.Result
 
 class PathfindingValidator <E: Comparable<E>, V: Comparable<V>> {
     companion object {
-        fun <E: Comparable<E>, V: Comparable<V>> validate(
+        fun <E : Comparable<E>, V : Comparable<V>> validateParametersWithGraph(
             graph: Graph<E, V>?,
             start: V,
             end: V,
