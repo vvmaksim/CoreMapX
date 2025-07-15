@@ -15,7 +15,8 @@ class BFSStrategy <E: Comparable<E>, V: Comparable<V>>: PathfindingStrategy<E, V
     ): Result<List<List<E>>> {
         val validateResult = PathfindingValidator.validate(graph, start, end)
         if (validateResult is Result.Error) return validateResult
-        if (graph == null) return Result.Error(PathfindingErrors.EmptyGraph()) // This is checked in the validator, but here it is necessary for the Kotlin analyzer
+        if (graph == null) return Result.Error(PathfindingErrors.EmptyGraph())
+        // The graph is checked in the validator, but here it is necessary for the Kotlin analyzer
         if (start == end) return Result.Success(listOf(emptyList()))
 
         val result = mutableListOf<List<E>>()
