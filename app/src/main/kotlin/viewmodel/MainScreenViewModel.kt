@@ -25,6 +25,7 @@ import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
+import viewmodel.managers.PathfindingManager
 import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
@@ -71,6 +72,8 @@ class MainScreenViewModel<E : Comparable<E>, V : Comparable<V>>() {
     var graphFormat: FileExtensions? = null
 
     var graphId: Long? = null
+
+    val pathfindingManager = PathfindingManager<E, V>(graphViewModel, graph)
 
     private var _offsetX = mutableStateOf(0f)
     val offsetX: State<Float>
