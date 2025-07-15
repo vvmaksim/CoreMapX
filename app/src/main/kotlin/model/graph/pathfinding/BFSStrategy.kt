@@ -13,7 +13,7 @@ class BFSStrategy <E: Comparable<E>, V: Comparable<V>>: PathfindingStrategy<E, V
         end: V,
         maxPaths: Int,
     ): Result<List<List<E>>> {
-        val validateResult = PathfindingValidator.validate(graph, start, end)
+        val validateResult = PathfindingValidator.validateParametersWithGraph(graph, start, end)
         if (validateResult is Result.Error) return validateResult
         if (graph == null) return Result.Error(PathfindingErrors.EmptyGraph())
         // The graph is checked in the validator, but here it is necessary for the Kotlin analyzer
