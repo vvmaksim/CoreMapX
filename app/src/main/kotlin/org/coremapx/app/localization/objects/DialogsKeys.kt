@@ -134,4 +134,19 @@ object DialogsKeys {
     const val OPEN_REPOSITORY_VERTICES_COUNT = "openRepositoryVerticesCount"
     const val OPEN_REPOSITORY_EDGES_COUNT = "openRepositoryEdgesCount"
     const val OPEN_REPOSITORY_OPEN_BUTTON = "openRepositoryOpenButton"
+
+    // Find Path
+    const val FIND_PATH_TITLE = "findPathTitle"
+    const val FIND_PATH_SUBTITLE = "findPathSubtitle"
+    const val FIND_PATH_START_VERTEX_ID = "findPathStartVertexId"
+    const val FIND_PATH_START_VERTEX_DESCRIPTION = "findPathStartVertexDescription"
+    const val FIND_PATH_END_VERTEX_ID = "findPathEndVertexId"
+    const val FIND_PATH_END_VERTEX_DESCRIPTION = "findPathEndVertexDescription"
+    const val FIND_PATH_VERTEX_ID_PLACEHOLDER = "findPathVertexIdPlaceholder"
+    const val FIND_PATH_MAX_PATHS_COUNT = "findPathMaxPathsCount"
+    const val FIND_PATH_MAX_PATHS_DESCRIPTION = "findPathMaxPathsDescription"
+    const val FIND_PATH_MAX_PATHS_PLACEHOLDER = "findPathMaxPathsPlaceholder"
+    const val FIND_PATH_FIND_STRATEGY = "findPathFindStrategy"
+    const val FIND_PATH_FIND_STRATEGY_DESCRIPTION = "findPathFindStrategyDescription"
+    const val FIND_PATH_FIND_BUTTON = "findPathFindButton"
 }

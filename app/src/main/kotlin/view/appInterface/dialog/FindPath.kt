@@ -83,8 +83,8 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             DialogHeader(
-                title = "Find path",
-                subtitle = "Select the required path search parameters",
+                title = LocalizationManager.states.dialogs.findPathTitle.value,
+                subtitle = LocalizationManager.states.dialogs.findPathSubtitle.value,
                 onButtonClick = onDismiss,
             )
             Column(
@@ -92,35 +92,41 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 CustomTextFieldLine(
-                    title = "Start vertex id",
+                    title = LocalizationManager.states.dialogs.findPathStartVertexId.value,
                     value = startId,
                     onValueChange = { startId = it },
-                    description = "This is text field for start vertex id",
-                    placeholder = { Text("Vertex id") },
+                    description = LocalizationManager.states.dialogs.findPathStartVertexDescription.value,
+                    placeholder = { Text(LocalizationManager.states.dialogs.findPathVertexIdPlaceholder.value) },
                     isError = startError,
                     isExpanded = isExpanded,
                 )
                 CustomTextFieldLine(
-                    title = "End vertex id",
+                    title = LocalizationManager.states.dialogs.findPathEndVertexId.value,
                     value = endId,
                     onValueChange = { endId = it },
-                    description = "This is text field for end vertex id",
-                    placeholder = { Text("Vertex id") },
+                    description = LocalizationManager.states.dialogs.findPathEndVertexDescription.value,
+                    placeholder = { Text(LocalizationManager.states.dialogs.findPathVertexIdPlaceholder.value) },
                     isError = endError,
                     isExpanded = isExpanded,
                 )
                 CustomTextFieldLine(
-                    title = "Max paths",
+                    title = LocalizationManager.states.dialogs.findPathMaxPathsCount.value,
                     value = maxPaths,
                     onValueChange = { maxPaths = it },
-                    description = "This is text field for max paths",
-                    placeholder = { Text("Count max paths") },
+                    description =
+                        LocalizationFormatter.getStringWithLineBreak(
+                            startString = LocalizationManager.states.dialogs.findPathMaxPathsDescription.value,
+                        ),
+                    placeholder = { Text(LocalizationManager.states.dialogs.findPathMaxPathsPlaceholder.value) },
                     isError = maxPathsError,
                     isExpanded = isExpanded,
                 )
                 DropdownSelectLine(
-                    title = "Find strategy",
-                    description = "Some description",
+                    title = LocalizationManager.states.dialogs.findPathFindStrategy.value,
+                    description =
+                        LocalizationFormatter.getStringWithLineBreak(
+                            startString = LocalizationManager.states.dialogs.findPathFindStrategyDescription.value,
+                        ),
                     items = viewModel.pathfindingManager.getAllStrategiesAsList(),
                     selectedItem = viewModel.pathfindingManager.getCurrentStrategyAsString(),
                     onItemSelected = { newStrategyName: String ->
@@ -199,7 +205,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "Find",
+                    text = LocalizationManager.states.dialogs.findPathFindButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

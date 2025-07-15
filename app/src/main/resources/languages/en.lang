@@ -133,6 +133,27 @@ performanceCommandFieldScrollDelay=Command field scroll delay
 analyticsTitle=Analytics
 analyticsLayoutStrategyHint=Layout strategy:
 
+ ! Find Path
+findPathTitle=Find path
+findPathSubtitle=Select the required path search parameters
+findPathStartVertexId=Start vertex id
+findPathStartVertexDescription=A path search will start from the vertex with this ID
+findPathEndVertexId=End vertex id
+findPathEndVertexDescription=The path search will end with a vertex with this ID
+findPathVertexIdPlaceholder=Vertex id
+findPathMaxPathsCount=Max count of paths
+findPathMaxPathsDescription=You can specify the number of paths that the search algorithm will find.{nextLine}\
+    {nextLine}\
+    The shortest path will be highlighted in one color, and the rest of the paths in another. You can adjust the colors in the program settings.
+findPathMaxPathsPlaceholder=Path count
+findPathFindStrategy=Find strategy
+findPathFindStrategyDescription=BFS — finds the shortest path by the number of edges, works fast, but does not take into account the weights of the edges.{nextLine}\
+    {nextLine}\
+    Dijkstra — searches for a path with the minimum sum of edge weights, suitable for graphs with non-negative weights.{nextLine}\
+    {nextLine}\
+    Bellman-Ford — also searches for a path with minimal weight, works with negative edge weights, but slower than others.
+findPathFindButton=Find
+
  ! Top Menu
 topMenuActions=Actions
 topMenuDrawGraphAgain=Draw the graph again

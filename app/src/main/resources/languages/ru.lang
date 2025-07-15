@@ -129,6 +129,27 @@ workAreaCanvasLimit=Ограничитель холста
 performanceAnimationDuration=Продолжительность анимаций
 performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
+ ! Find Path
+findPathTitle=Поиск пути
+findPathSubtitle=Выберите необходимые параметры для поиска пути
+findPathStartVertexId=Id начальной вершины
+findPathStartVertexDescription=Поиск пути начнется с вершины с этим идентификатором
+findPathEndVertexId=Id конечной вершины
+findPathEndVertexDescription=Поиск пути завершится вершиной с этим идентификатором
+findPathVertexIdPlaceholder=Id вершины
+findPathMaxPathsCount=Максимальное количество путей
+findPathMaxPathsDescription=Вы можете указать количество путей, которые найдет алгоритм поиска.{nextLine}\
+    {nextLine}\
+    Кратчайший путь будет выделен одним цветом, а остальные пути - другим. Вы можете настроить цвета в настройках программы.
+findPathMaxPathsPlaceholder=Количество путей
+findPathFindStrategy=Стратегии поиска
+findPathFindStrategyDescription=BFS — находит кратчайший путь по количеству рёбер, работает быстро, но не учитывает веса рёбер.{nextLine}\
+    {nextLine}\
+    Dijkstra — ищет путь с минимальной суммой весов рёбер, подходит для графов с неотрицательными весами.{nextLine}\
+    {nextLine}\
+    Bellman-Ford — также ищет путь с минимальным весом, работает с отрицательными весами рёбер, но медленнее других.
+findPathFindButton=Искать
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
