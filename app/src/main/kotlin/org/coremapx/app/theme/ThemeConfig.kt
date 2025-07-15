@@ -20,6 +20,8 @@ data class ThemeConfig(
     val vertexMainColor: String,
     val hoveredBorderColor: String,
     val edgeMainColor: String,
+    val shortestPathColor: String,
+    val otherPathsColor: String,
     val canvasBackgroundColor: String,
     val commandLineBackgroundColor: String,
 )

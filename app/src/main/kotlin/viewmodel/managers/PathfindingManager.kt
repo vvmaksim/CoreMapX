@@ -78,14 +78,11 @@ class PathfindingManager<E : Comparable<E>, V : Comparable<V>>(
     private fun highlightPathsWithColors(paths: List<List<E>>) {
         resetEdgeColors()
 
-        val green = Color(0xFF4CAF50)
-        val orange = Color(0xFFFF9800)
-
         paths.drop(1).forEach { path ->
-            highlightEdges(path, orange)
+            highlightEdges(path, config.states.otherPathsColor.value)
         }
         if (paths.isNotEmpty()) {
-            highlightEdges(paths[0], green)
+            highlightEdges(paths[0], config.states.shortestPathColor.value)
         }
     }
 

@@ -27,6 +27,8 @@ object ConfigKeys {
     const val VERTEX_MAIN_COLOR = "vertexMainColor"
     const val HOVERED_BORDER_COLOR = "hoveredBorderColor"
     const val EDGE_MAIN_COLOR = "edgeMainColor"
+    const val SHORTEST_PATH_COLOR = "shortestPathColor"
+    const val OTHER_PATHS_COLOR = "otherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "canvasBackgroundColor"
     const val COMMAND_LINE_BACKGROUND_COLOR = "commandLineBackgroundColor"
 

@@ -22,10 +22,12 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.ON_ERROR
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_PRIMARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_SECONDARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.config.ConfigKeys.OTHER_PATHS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.PRIMARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.PRIMARY_VARIANT
 import org.coremapx.app.userDirectory.config.ConfigKeys.SECONDARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.config.ConfigKeys.SHORTEST_PATH_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SUCCESS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SURFACE
 import org.coremapx.app.userDirectory.config.ConfigKeys.SYSTEM_DIALOG_THEME
@@ -114,6 +116,8 @@ class ConfigRepository {
             setValue(VERTEX_MAIN_COLOR, vertexMainColor)
             setValue(HOVERED_BORDER_COLOR, hoveredBorderColor)
             setValue(EDGE_MAIN_COLOR, edgeMainColor)
+            setValue(SHORTEST_PATH_COLOR, shortestPathColor)
+            setValue(OTHER_PATHS_COLOR, otherPathsColor)
             setValue(CANVAS_BACKGROUND_COLOR, canvasBackgroundColor)
             setValue(COMMAND_LINE_BACKGROUND_COLOR, commandLineBackgroundColor)
             setValue(SYSTEM_DIALOG_THEME, if (isLight) "light" else "dark")

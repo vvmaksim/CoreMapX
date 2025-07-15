@@ -30,6 +30,8 @@ class ConfigStates(
     val vertexMainColor = mutableStateOf(configRepository.getColor(ConfigKeys.VERTEX_MAIN_COLOR))
     val hoveredBorderColor = mutableStateOf(configRepository.getColor(ConfigKeys.HOVERED_BORDER_COLOR))
     val edgeMainColor = mutableStateOf(configRepository.getColor(ConfigKeys.EDGE_MAIN_COLOR))
+    val shortestPathColor = mutableStateOf(configRepository.getColor(ConfigKeys.SHORTEST_PATH_COLOR))
+    val otherPathsColor = mutableStateOf(configRepository.getColor(ConfigKeys.OTHER_PATHS_COLOR))
     val canvasBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR))
     val commandLineBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR))
 
@@ -95,6 +97,8 @@ class ConfigStates(
             ConfigKeys.VERTEX_MAIN_COLOR -> vertexMainColor.value = configRepository.getColor(ConfigKeys.VERTEX_MAIN_COLOR)
             ConfigKeys.HOVERED_BORDER_COLOR -> hoveredBorderColor.value = configRepository.getColor(ConfigKeys.HOVERED_BORDER_COLOR)
             ConfigKeys.EDGE_MAIN_COLOR -> edgeMainColor.value = configRepository.getColor(ConfigKeys.EDGE_MAIN_COLOR)
+            ConfigKeys.SHORTEST_PATH_COLOR -> shortestPathColor.value = configRepository.getColor(ConfigKeys.SHORTEST_PATH_COLOR)
+            ConfigKeys.OTHER_PATHS_COLOR -> otherPathsColor.value = configRepository.getColor(ConfigKeys.OTHER_PATHS_COLOR)
             ConfigKeys.CANVAS_BACKGROUND_COLOR ->
                 canvasBackgroundColor.value =
                     configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR)

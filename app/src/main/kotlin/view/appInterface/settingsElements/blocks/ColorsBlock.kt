@@ -26,10 +26,12 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.ON_ERROR
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_PRIMARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_SECONDARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.config.ConfigKeys.OTHER_PATHS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.PRIMARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.PRIMARY_VARIANT
 import org.coremapx.app.userDirectory.config.ConfigKeys.SECONDARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.config.ConfigKeys.SHORTEST_PATH_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SUCCESS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SURFACE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
@@ -58,6 +60,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
     val vertexMainColor by remember { config.states.vertexMainColor }
     val hoveredBorderColor by remember { config.states.hoveredBorderColor }
     val edgeMainColor by remember { config.states.edgeMainColor }
+    val shortestPathColor by remember { config.states.shortestPathColor }
+    val otherPathsColor by remember { config.states.otherPathsColor }
     val canvasBackgroundColor by remember { config.states.canvasBackgroundColor }
     val commandLineBackgroundColor by remember { config.states.commandLineBackgroundColor }
 
@@ -284,6 +288,30 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsEdgeMainColor.value,
             description = LocalizationManager.states.descriptions.descriptionEdgeMainColor.value,
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        ColorPickLine(
+            selectedColor = shortestPathColor,
+            onColorSelected = {
+                config.setValue(SHORTEST_PATH_COLOR, it)
+                config.setThemeOnCustom()
+            },
+            modifier = Modifier.fillMaxWidth(),
+            title = "SHORTEST_PATH_COLOR",
+            description = "SHORTEST_PATH_COLOR",
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        ColorPickLine(
+            selectedColor = otherPathsColor,
+            onColorSelected = {
+                config.setValue(OTHER_PATHS_COLOR, it)
+                config.setThemeOnCustom()
+            },
+            modifier = Modifier.fillMaxWidth(),
+            title = "OTHER_PATHS_COLOR",
+            description = "OTHER_PATHS_COLOR",
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))

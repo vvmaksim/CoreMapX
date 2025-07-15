@@ -22,6 +22,8 @@ object DefaultThemes {
             vertexMainColor = "#F15BB5",
             hoveredBorderColor = "#6200EE",
             edgeMainColor = "#000000",
+            shortestPathColor = "#4CAF50",
+            otherPathsColor = "#FF9800",
             canvasBackgroundColor = "#FFFFFF",
             commandLineBackgroundColor = "#FFFFFF",
         )
@@ -47,6 +49,8 @@ object DefaultThemes {
             vertexMainColor = "#64B5F6",
             hoveredBorderColor = "#81D4FA",
             edgeMainColor = "#BDBDBD",
+            shortestPathColor = "#4CAF50",
+            otherPathsColor = "#FF9800",
             canvasBackgroundColor = "#2D2D2D",
             commandLineBackgroundColor = "#363636",
         )
