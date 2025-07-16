@@ -298,8 +298,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
-            title = "SHORTEST_PATH_COLOR",
-            description = "SHORTEST_PATH_COLOR",
+            title = LocalizationManager.states.dialogs.colorsShortestPathColor.value,
+            description = LocalizationManager.states.descriptions.descriptionShortestPathColor.value,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -310,8 +310,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
-            title = "OTHER_PATHS_COLOR",
-            description = "OTHER_PATHS_COLOR",
+            title = LocalizationManager.states.dialogs.colorsOtherPathsColor.value,
+            description = LocalizationManager.states.descriptions.descriptionOtherPathsColor.value,
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))

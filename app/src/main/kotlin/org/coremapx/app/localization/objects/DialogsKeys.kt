@@ -61,6 +61,8 @@ object DialogsKeys {
     const val COLORS_VERTEX_MAIN_COLOR = "colorsVertexMainColor"
     const val COLORS_HOVERED_BORDER_COLOR = "colorsHoveredBorderColor"
     const val COLORS_EDGE_MAIN_COLOR = "colorsEdgeMainColor"
+    const val COLORS_SHORTEST_PATH_COLOR = "colorsShortestPathColor"
+    const val COLORS_OTHER_PATHS_COLOR = "colorsOtherPathsColor"
     const val COLORS_CANVAS_BACKGROUND_COLOR = "colorsCanvasBackgroundColor"
     const val COLORS_COMMAND_LINE_BACKGROUND_COLOR = "colorsCommandLineBackgroundColor"
 

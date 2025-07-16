@@ -100,6 +100,8 @@ colorsWarningColor=Цвет предупреждения
 colorsVertexMainColor=Основной цвет вершин
 colorsHoveredBorderColor=Цвет границ при наведении
 colorsEdgeMainColor=Основной цвет ребра
+colorsShortestPathColor=Цвет кратчайшего найденного пути
+colorsOtherPathsColor=Цвет остальных найденных путей
 colorsCanvasBackgroundColor=Цвет фона холста
 colorsCommandLineBackgroundColor=Цвет фона командной строки
 # Main Screen Block
@@ -226,6 +228,8 @@ descriptionWarningColor=Цвет предупреждений: желтые зн
 descriptionVertexMainColor=Основной цвет для отображения вершин.
 descriptionHoveredBorderColor=Цвет границы при наведении курсора на вершину графа.
 descriptionEdgeMainColor=Основной цвет для отображения рёбер между вершинами на графе.
+descriptionShortestPathColor=Цвет для отображения рёбер кратчайшего найденного пути.
+descriptionOtherPathsColor=Цвет для отображения рёбер, которые не всегда относятся к кратчайшему пути.
 descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
 descriptionCommandLineBackgroundColor=Цвет фона для командной строки. {nextLine}\
     {nextLine}\

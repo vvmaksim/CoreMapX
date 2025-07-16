@@ -30,6 +30,8 @@ class DescriptionsStates : LocalizationState {
     val descriptionVertexMainColor = mutableStateOf("")
     val descriptionHoveredBorderColor = mutableStateOf("")
     val descriptionEdgeMainColor = mutableStateOf("")
+    val descriptionShortestPathColor = mutableStateOf("")
+    val descriptionOtherPathsColor = mutableStateOf("")
     val descriptionCanvasBackgroundColor = mutableStateOf("")
     val descriptionCommandLineBackgroundColor = mutableStateOf("")
 
@@ -100,6 +102,8 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.VERTEX_MAIN_COLOR -> descriptionVertexMainColor.value = value
             DescriptionsKeys.HOVERED_BORDER_COLOR -> descriptionHoveredBorderColor.value = value
             DescriptionsKeys.EDGE_MAIN_COLOR -> descriptionEdgeMainColor.value = value
+            DescriptionsKeys.SHORTEST_PATH_COLOR -> descriptionShortestPathColor.value = value
+            DescriptionsKeys.OTHER_PATHS_COLOR -> descriptionOtherPathsColor.value = value
             DescriptionsKeys.CANVAS_BACKGROUND_COLOR -> descriptionCanvasBackgroundColor.value = value
             DescriptionsKeys.COMMAND_LINE_BACKGROUND_COLOR -> descriptionCommandLineBackgroundColor.value = value
             // // Main Screen Block

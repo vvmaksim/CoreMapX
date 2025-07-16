@@ -64,6 +64,8 @@ class DialogsState : LocalizationState {
     val colorsVertexMainColor = mutableStateOf("")
     val colorsHoveredBorderColor = mutableStateOf("")
     val colorsEdgeMainColor = mutableStateOf("")
+    val colorsShortestPathColor = mutableStateOf("")
+    val colorsOtherPathsColor = mutableStateOf("")
     val colorsCanvasBackgroundColor = mutableStateOf("")
     val colorsCommandLineBackgroundColor = mutableStateOf("")
 
@@ -212,6 +214,8 @@ class DialogsState : LocalizationState {
             DialogsKeys.COLORS_VERTEX_MAIN_COLOR -> colorsVertexMainColor.value = value
             DialogsKeys.COLORS_HOVERED_BORDER_COLOR -> colorsHoveredBorderColor.value = value
             DialogsKeys.COLORS_EDGE_MAIN_COLOR -> colorsEdgeMainColor.value = value
+            DialogsKeys.COLORS_SHORTEST_PATH_COLOR -> colorsShortestPathColor.value = value
+            DialogsKeys.COLORS_OTHER_PATHS_COLOR -> colorsOtherPathsColor.value = value
             DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
             DialogsKeys.COLORS_COMMAND_LINE_BACKGROUND_COLOR -> colorsCommandLineBackgroundColor.value = value
             // // Main Screen Block
