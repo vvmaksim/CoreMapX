@@ -195,7 +195,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             )
             Spacer(Modifier.weight(1f))
             ZoomButtons(
-                modifier = Modifier.padding(8.dp),
+                modifier =
+                    Modifier
+                        .padding(8.dp)
+                        .align(Alignment.Bottom),
                 onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
             )
         }
