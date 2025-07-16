@@ -142,15 +142,11 @@ class DialogsState : LocalizationState {
     val findPathTitle = mutableStateOf("")
     val findPathSubtitle = mutableStateOf("")
     val findPathStartVertexId = mutableStateOf("")
-    val findPathStartVertexDescription = mutableStateOf("")
     val findPathEndVertexId = mutableStateOf("")
-    val findPathEndVertexDescription = mutableStateOf("")
     val findPathVertexIdPlaceholder = mutableStateOf("")
     val findPathMaxPathsCount = mutableStateOf("")
-    val findPathMaxPathsDescription = mutableStateOf("")
     val findPathMaxPathsPlaceholder = mutableStateOf("")
     val findPathFindStrategy = mutableStateOf("")
-    val findPathFindStrategyDescription = mutableStateOf("")
     val findPathFindButton = mutableStateOf("")
 
     override fun updateValue(
@@ -289,15 +285,11 @@ class DialogsState : LocalizationState {
             DialogsKeys.FIND_PATH_TITLE -> findPathTitle.value = value
             DialogsKeys.FIND_PATH_SUBTITLE -> findPathSubtitle.value = value
             DialogsKeys.FIND_PATH_START_VERTEX_ID -> findPathStartVertexId.value = value
-            DialogsKeys.FIND_PATH_START_VERTEX_DESCRIPTION -> findPathStartVertexDescription.value = value
             DialogsKeys.FIND_PATH_END_VERTEX_ID -> findPathEndVertexId.value = value
-            DialogsKeys.FIND_PATH_END_VERTEX_DESCRIPTION -> findPathEndVertexDescription.value = value
             DialogsKeys.FIND_PATH_VERTEX_ID_PLACEHOLDER -> findPathVertexIdPlaceholder.value = value
             DialogsKeys.FIND_PATH_MAX_PATHS_COUNT -> findPathMaxPathsCount.value = value
-            DialogsKeys.FIND_PATH_MAX_PATHS_DESCRIPTION -> findPathMaxPathsDescription.value = value
             DialogsKeys.FIND_PATH_MAX_PATHS_PLACEHOLDER -> findPathMaxPathsPlaceholder.value = value
             DialogsKeys.FIND_PATH_FIND_STRATEGY -> findPathFindStrategy.value = value
-            DialogsKeys.FIND_PATH_FIND_STRATEGY_DESCRIPTION -> findPathFindStrategyDescription.value = value
             DialogsKeys.FIND_PATH_FIND_BUTTON -> findPathFindButton.value = value
         }
     }

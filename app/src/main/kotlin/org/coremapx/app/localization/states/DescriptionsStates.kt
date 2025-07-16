@@ -64,6 +64,12 @@ class DescriptionsStates : LocalizationState {
     val descriptionAnimationDuration = mutableStateOf("")
     val descriptionCommandFieldScrollDelay = mutableStateOf("")
 
+    // Top Menu
+    val descriptionTopMenuFindPathStartVertex = mutableStateOf("")
+    val descriptionTopMenuFindPathEndVertex = mutableStateOf("")
+    val descriptionTopMenuFindPathMaxPaths = mutableStateOf("")
+    val descriptionTopMenuFindPathFindStrategy = mutableStateOf("")
+
     override fun updateValue(
         key: String,
         value: String,
@@ -122,6 +128,12 @@ class DescriptionsStates : LocalizationState {
             // // Performance Block
             DescriptionsKeys.ANIMATION_DURATION -> descriptionAnimationDuration.value = value
             DescriptionsKeys.COMMAND_FIELD_SCROLL_DELAY -> descriptionCommandFieldScrollDelay.value = value
+
+            // Top Menu
+            DescriptionsKeys.TOP_MENU_FIND_PATH_START_VERTEX -> descriptionTopMenuFindPathStartVertex.value = value
+            DescriptionsKeys.TOP_MENU_FIND_PATH_END_VERTEX -> descriptionTopMenuFindPathEndVertex.value = value
+            DescriptionsKeys.TOP_MENU_FIND_PATH_MAX_PATHS -> descriptionTopMenuFindPathMaxPaths.value = value
+            DescriptionsKeys.TOP_MENU_FIND_PATH_FIND_STRATEGY -> descriptionTopMenuFindPathFindStrategy.value = value
         }
     }
 }

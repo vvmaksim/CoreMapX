@@ -95,7 +95,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                     title = LocalizationManager.states.dialogs.findPathStartVertexId.value,
                     value = startId,
                     onValueChange = { startId = it },
-                    description = LocalizationManager.states.dialogs.findPathStartVertexDescription.value,
+                    description = LocalizationManager.states.descriptions.descriptionTopMenuFindPathStartVertex.value,
                     placeholder = { Text(LocalizationManager.states.dialogs.findPathVertexIdPlaceholder.value) },
                     isError = startError,
                     isExpanded = isExpanded,
@@ -104,7 +104,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                     title = LocalizationManager.states.dialogs.findPathEndVertexId.value,
                     value = endId,
                     onValueChange = { endId = it },
-                    description = LocalizationManager.states.dialogs.findPathEndVertexDescription.value,
+                    description = LocalizationManager.states.descriptions.descriptionTopMenuFindPathEndVertex.value,
                     placeholder = { Text(LocalizationManager.states.dialogs.findPathVertexIdPlaceholder.value) },
                     isError = endError,
                     isExpanded = isExpanded,
@@ -115,7 +115,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                     onValueChange = { maxPaths = it },
                     description =
                         LocalizationFormatter.getStringWithLineBreak(
-                            startString = LocalizationManager.states.dialogs.findPathMaxPathsDescription.value,
+                            startString = LocalizationManager.states.descriptions.descriptionTopMenuFindPathMaxPaths.value,
                         ),
                     placeholder = { Text(LocalizationManager.states.dialogs.findPathMaxPathsPlaceholder.value) },
                     isError = maxPathsError,
@@ -125,7 +125,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                     title = LocalizationManager.states.dialogs.findPathFindStrategy.value,
                     description =
                         LocalizationFormatter.getStringWithLineBreak(
-                            startString = LocalizationManager.states.dialogs.findPathFindStrategyDescription.value,
+                            startString = LocalizationManager.states.descriptions.descriptionTopMenuFindPathFindStrategy.value,
                         ),
                     items = viewModel.pathfindingManager.getAllStrategiesAsList(),
                     selectedItem = viewModel.pathfindingManager.getCurrentStrategyAsString(),
