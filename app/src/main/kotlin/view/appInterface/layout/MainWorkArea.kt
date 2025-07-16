@@ -51,7 +51,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
     val userCommands = remember { mutableStateOf(mutableListOf<String>()) }
     val scrollState = rememberScrollState()
-    val graph = viewModel.graph.value
+    val graph = viewModel.graphManager.graph.value
     var commandCount by remember { mutableStateOf(0) }
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     var commandHistoryIndex by remember { mutableStateOf(-1) }
@@ -63,11 +63,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
-            graph?.let { viewModel.updateGraphViewModel(GraphViewModel(it, viewModel.showVerticesLabels)) }
-            viewModel.graphViewModel.value?.let { _ ->
-                viewModel.resetGraphView()
+            graph?.let { viewModel.graphManager.updateGraphViewModel(GraphViewModel(it, viewModel.graphManager.showVerticesLabels)) }
+            viewModel.graphManager.graphViewModel.value?.let { _ ->
+                viewModel.graphManager.resetGraphView()
             }
-            viewModel.graphViewModel
+            viewModel.graphManager.graphViewModel
         }
     }
 
@@ -135,11 +135,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         graphViewModel.value?.let { graphViewModel ->
             GraphView(
                 viewModel = graphViewModel,
-                offsetX = viewModel.offsetX.value,
-                offsetY = viewModel.offsetY.value,
-                scale = viewModel.scale.value,
-                onPan = { dx, dy -> viewModel.moveCanvas(dx, dy) },
-                onZoom = { delta -> viewModel.zoomCanvas(delta) },
+                offsetX = viewModel.canvasManager.offsetX.value,
+                offsetY = viewModel.canvasManager.offsetY.value,
+                scale = viewModel.canvasManager.scale.value,
+                onPan = { dx, dy -> viewModel.canvasManager.moveCanvas(dx, dy) },
+                onZoom = { delta -> viewModel.canvasManager.zoomCanvas(delta) },
             )
         }
 
@@ -159,12 +159,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         ) {
             GraphElementCounters(
                 vertexCount =
-                    viewModel.graph.value
+                    viewModel.graphManager.graph.value
                         ?.vertices
                         ?.size
                         ?.toLong() ?: 0L,
                 edgeCount =
-                    viewModel.graph.value
+                    viewModel.graphManager.graph.value
                         ?.edges
                         ?.size
                         ?.toLong() ?: 0L,
@@ -196,7 +196,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             Spacer(Modifier.weight(1f))
             ZoomButtons(
                 modifier = Modifier.padding(8.dp),
-                onZoom = { zoomDelta -> viewModel.zoomCanvas(zoomDelta) },
+                onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
             )
         }
     }

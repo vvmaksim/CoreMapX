@@ -56,7 +56,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             ) {
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.resetGraphView()
+                        viewModel.graphManager.resetGraphView()
                         actionsExpanded = false
                     },
                 ) {
@@ -67,7 +67,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                 }
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.resetCanvas()
+                        viewModel.canvasManager.resetCanvas()
                         actionsExpanded = false
                     },
                 ) {
@@ -115,13 +115,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             ) {
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.setShowVerticesLabels(!viewModel.showVerticesLabels.value)
+                        viewModel.graphManager.setShowVerticesLabels(!viewModel.graphManager.showVerticesLabels.value)
                         verticesExpanded = false
                     },
                 ) {
                     Text(
                         text =
-                            if (viewModel.showVerticesLabels.value) {
+                            if (viewModel.graphManager.showVerticesLabels.value) {
                                 LocalizationManager.states.ui.topMenuHideVerticesLabels.value
                             } else {
                                 LocalizationManager.states.ui.topMenuShowVerticesLabels.value
@@ -145,7 +145,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
         GenerateRandomGraph(
             onDismiss = { showGenerateRandomGraphDialog = false },
             onGraphUpdate = { newGraph ->
-                viewModel.updateGraph(newGraph)
+                viewModel.graphManager.updateGraph(newGraph)
             },
         )
     }

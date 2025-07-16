@@ -141,10 +141,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
 
                 MainMenuTextButton(
                     onClick = {
-                        if (viewModel.graphPath == null) {
+                        if (viewModel.graphManager.graphPath == null) {
                             showSaveGraphAsDialog = true
                         } else {
-                            val saveResult = viewModel.saveGraph()
+                            val saveResult = viewModel.graphManager.saveGraph()
                             if (saveResult is Result.Error) {
                                 userNotificationMessage =
                                     LocalizationFormatter.getErrorMessage(
@@ -161,7 +161,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     iconVector = Icons.Filled.Save,
                     iconContentDescription = LocalizationManager.states.ui.mainMenuSaveIconDescription.value,
                     buttonText = LocalizationManager.states.ui.mainMenuButtonSave.value,
-                    isEnabled = viewModel.isGraphActive,
+                    isEnabled = viewModel.graphManager.isGraphActive,
                 )
 
                 MainMenuTextButton(
@@ -169,12 +169,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     iconVector = Icons.Filled.SaveAs,
                     iconContentDescription = LocalizationManager.states.ui.mainMenuSaveAsIconDescription.value,
                     buttonText = LocalizationManager.states.ui.mainMenuButtonSaveAs.value,
-                    isEnabled = viewModel.isGraphActive,
+                    isEnabled = viewModel.graphManager.isGraphActive,
                 )
 
                 MainMenuTextButton(
                     onClick = {
-                        val loadResult = viewModel.openGraphFile()
+                        val loadResult = viewModel.graphManager.openGraphFile()
                         warnings =
                             when (loadResult) {
                                 is Result.Success -> loadResult.data
@@ -196,7 +196,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
 
                 MainMenuTextButton(
                     onClick = {
-                        val openResult = viewModel.openGraphRepository()
+                        val openResult = viewModel.graphManager.openGraphRepository()
                         when (openResult) {
                             is Result.Error ->
                                 warnings =
@@ -301,8 +301,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             onDismiss = { showOpenRepositoryDialog = false },
             graphs = graphs,
             onGraphSelected = { graphId ->
-                viewModel.graphId = graphId
-                val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
+                viewModel.graphManager.graphId = graphId
+                val loadResult = viewModel.graphManager.loadGraphFromFile(selectedRepositoryFile)
                 if (loadResult is Result.Error) {
                     warnings =
                         listOf(
@@ -322,11 +322,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
 
     if (showSaveGraphAsDialog) {
         SaveGraphAs(
-            graphName = viewModel.graphName,
+            graphName = viewModel.graphManager.graphName,
             onDismiss = { showSaveGraphAsDialog = false },
             onSave = { savedGraphDetails ->
                 val saveResult =
-                    viewModel.saveGraph(
+                    viewModel.graphManager.saveGraph(
                         fileName = savedGraphDetails.fileName,
                         directoryPath = savedGraphDetails.directoryPath,
                         fileFormat = savedGraphDetails.fileFormat,
@@ -369,11 +369,11 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         NewGraph(
             onDismiss = { showNewGraphDialog = false },
             onCreate = { newGraphData ->
-                viewModel.graphName = newGraphData.graphName
-                viewModel.graphAuthor = "None"
-                viewModel.graphPath = null
-                viewModel.graphFormat = null
-                viewModel.updateGraph(newGraphData.graph)
+                viewModel.graphManager.graphName = newGraphData.graphName
+                viewModel.graphManager.graphAuthor = "None"
+                viewModel.graphManager.graphPath = null
+                viewModel.graphManager.graphFormat = null
+                viewModel.graphManager.updateGraph(newGraphData.graph)
             },
         )
     }
@@ -388,10 +388,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
         Analytics(
             onDismiss = { showAnalyticsDialog = false },
             onStrategyUpdate = { newStrategy: VisualizationStrategy ->
-                viewModel.updateLayoutStrategy(newStrategy)
+                viewModel.graphManager.updateLayoutStrategy(newStrategy)
             },
             selectedLayoutStrategy =
-                when (viewModel.layoutStrategy.value) {
+                when (viewModel.graphManager.layoutStrategy.value) {
                     is RandomStrategy -> "Random"
                     is CircularStrategy -> "Circular"
                     else -> "Random"

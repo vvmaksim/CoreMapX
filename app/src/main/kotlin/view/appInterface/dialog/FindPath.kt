@@ -166,7 +166,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
                         endId = endLong,
                         maxPaths = maxPathsInt,
                         isVertexExist = { vertexId: V ->
-                            viewModel.graph.value
+                            viewModel.graphManager.graph.value
                                 ?.vertices
                                 ?.containsKey(vertexId)
                         },
