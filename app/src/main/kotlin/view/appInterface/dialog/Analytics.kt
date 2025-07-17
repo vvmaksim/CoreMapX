@@ -79,7 +79,7 @@ fun AnalyticsContent(
                     style = MaterialTheme.typography.body2,
                 )
                 DropdownSelectButton(
-                    items = listOf("Random", "Circular"),
+                    items = listOf("Random", "Circular", "Force-Directed"),
                     selectedItem = selectedLayoutStrategy,
                     onItemSelected = { newStrategy: String ->
                         when (newStrategy) {
@@ -88,6 +88,9 @@ fun AnalyticsContent(
                             }
                             "Circular" -> {
                                 onStrategyUpdate(CircularStrategy())
+                            }
+                            "Force-Directed" -> {
+                                onStrategyUpdate(viewmodel.visualizationStrategy.ForceDirectedStrategy<Comparable<Any>, Comparable<Any>>())
                             }
                         }
                     },

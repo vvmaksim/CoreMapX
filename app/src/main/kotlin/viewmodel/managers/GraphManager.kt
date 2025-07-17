@@ -2,6 +2,7 @@ package viewmodel.managers
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import kotlinx.coroutines.CoroutineScope
 import model.command.concrete.Commands
 import model.database.sqlite.createDatabase
 import model.database.sqlite.repository.EdgeRepository
@@ -16,6 +17,7 @@ import model.graph.concrete.DirectedUnweightedGraph
 import model.graph.concrete.DirectedWeightedGraph
 import model.graph.concrete.UndirectedUnweightedGraph
 import model.graph.concrete.UndirectedWeightedGraph
+import model.graph.contracts.Edge
 import model.graph.contracts.Graph
 import model.graph.entities.WeightedEdge
 import model.ir.GraphIR
@@ -25,7 +27,9 @@ import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
+import viewmodel.graph.VertexViewModel
 import viewmodel.visualizationStrategy.CircularStrategy
+import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
@@ -68,9 +72,35 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     var graphId: Long? = null
 
+    var animationScope: CoroutineScope? = null
+
     fun resetGraphView() {
-        _graphViewModel.value?.let {
-            layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, it.vertices)
+        _graphViewModel.value?.let { viewModel ->
+            val strategy = layoutStrategy.value
+            if (strategy is ForceDirectedStrategy<*, *>) {
+                val forceStrategy = strategy as? ForceDirectedStrategy<Comparable<Any>, Comparable<Any>>
+                forceStrategy?.stopAnimation()
+                forceStrategy?.initializePositions(
+                    width = graphLayoutWidth,
+                    height = graphLayoutHeight,
+                    vertices = viewModel.vertices as? Collection<VertexViewModel<Comparable<Any>>>,
+                )
+                forceStrategy?.startAnimation(
+                    scope = animationScope ?: return,
+                    width = graphLayoutWidth,
+                    height = graphLayoutHeight,
+                    vertices = viewModel.vertices as? Collection<VertexViewModel<Comparable<Any>>>,
+                    edges =
+                        graph.value
+                            ?.edges
+                            ?.values
+                            ?.map { it as Edge<Comparable<Any>, Comparable<Any>> },
+                    iterations = 500,
+                    onFrame = { },
+                )
+            } else {
+                layoutStrategy.value.place(graphLayoutWidth, graphLayoutHeight, viewModel.vertices)
+            }
         }
     }
 
@@ -78,8 +108,15 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         _layoutStrategy.value = newStrategy
     }
 
+    fun updateGraph(newGraph: Graph<E, V>) {
+        _graph.value = newGraph
+        updateGraphViewModel(GraphViewModel(newGraph, _showVerticesLabels))
+        resetGraphView()
+    }
+
     fun updateGraphViewModel(newViewModel: GraphViewModel<E, V>) {
         _graphViewModel.value = newViewModel
+        resetGraphView()
     }
 
     fun setShowVerticesLabels(value: Boolean) {
@@ -90,18 +127,9 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         when (strategy.lowercase()) {
             "random" -> RandomStrategy()
             "circular" -> CircularStrategy()
+            "force-directed" -> ForceDirectedStrategy<Comparable<Any>, Comparable<Any>>()
             else -> null
         }
-
-    fun updateGraph(newGraph: Graph<E, V>) {
-        _graph.value = newGraph
-        updateGraphViewModel(GraphViewModel(newGraph, _showVerticesLabels))
-        layoutStrategy.value.place(
-            width = graphLayoutWidth,
-            height = graphLayoutHeight,
-            vertices = graphViewModel.value?.vertices,
-        )
-    }
 
     fun openGraphFile(): Result<List<String>> {
         val file =

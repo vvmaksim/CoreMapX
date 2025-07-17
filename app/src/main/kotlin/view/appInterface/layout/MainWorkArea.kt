@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,6 +57,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     var commandCount by remember { mutableStateOf(0) }
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     var commandHistoryIndex by remember { mutableStateOf(-1) }
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(Unit) {
+        viewModel.graphManager.animationScope = scope
+    }
 
     val maxCountMessages = config.states.maxCountMessages.value
     val maxUserCommands = config.states.maxCountUserCommands.value

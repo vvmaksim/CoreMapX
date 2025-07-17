@@ -57,6 +57,7 @@ import view.appInterface.dialog.UserNotification
 import view.appInterface.icon.Logo
 import viewmodel.MainScreenViewModel
 import viewmodel.visualizationStrategy.CircularStrategy
+import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
@@ -394,6 +395,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 when (viewModel.graphManager.layoutStrategy.value) {
                     is RandomStrategy -> "Random"
                     is CircularStrategy -> "Circular"
+                    is ForceDirectedStrategy<*, *> -> "Force-Directed"
                     else -> "Random"
                 },
         )
