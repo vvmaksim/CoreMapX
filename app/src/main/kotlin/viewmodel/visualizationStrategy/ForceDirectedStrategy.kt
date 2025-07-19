@@ -15,10 +15,8 @@ import kotlin.math.sqrt
 import kotlin.random.Random
 
 class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
-    private val area: Double = 4000000.0,
-    private val gravity: Double = 0.1,
-    private val speed: Double = 0.1,
-) : VisualizationStrategy {
+    private var params: AnimationParameters = AnimationParameters(),
+) : AnimatedVisualizationStrategy<E, V> {
     var edges: Collection<Edge<E, V>>? = null
     private var positions: MutableMap<VertexViewModel<V>, Pair<Double, Double>> = mutableMapOf()
     private var displacementMap: MutableMap<VertexViewModel<V>, Pair<Double, Double>> = mutableMapOf()
@@ -28,12 +26,12 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
     private var animationJob: Job? = null
     private var isAnimating = false
 
-    override fun <V2 : Comparable<V2>> place(
+    override fun place(
         width: Double,
         height: Double,
-        vertices: Collection<VertexViewModel<V2>>?,
+        vertices: Collection<VertexViewModel<V>>?,
     ) {
-        initializePositions(width, height, vertices as? Collection<VertexViewModel<V>>)
+        initializePositions(width, height, vertices)
     }
 
     fun initializePositions(
@@ -43,7 +41,7 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
     ) {
         if (vertices == null || vertices.size <= 1) return
         n = vertices.size
-        k = sqrt(area / n)
+        k = sqrt(params.area / n)
         positions =
             vertices
                 .associateWith {
@@ -63,14 +61,14 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
         }
     }
 
-    fun startAnimation(
+    override fun startAnimation(
         scope: CoroutineScope,
         width: Double,
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,
         edges: Collection<Edge<E, V>>?,
-        iterations: Int = 1500,
-        onFrame: (() -> Unit)? = null,
+        iterations: Int,
+        onFrame: (() -> Unit)?,
     ) {
         stopAnimation()
         isAnimating = true
@@ -90,11 +88,19 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
             }
     }
 
-    fun stopAnimation() {
+    override fun stopAnimation() {
         isAnimating = false
         animationJob?.cancel()
         animationJob = null
     }
+
+    override fun isRunning(): Boolean = isAnimating
+
+    override fun setParameters(params: AnimationParameters) {
+        this.params = params
+    }
+
+    override fun getParameters(): AnimationParameters = params.copy()
 
     fun nextIteration(
         width: Double,
@@ -162,12 +168,12 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
             var dx = 0.0
             var dy = 0.0
             if (dist > 0) {
-                val limitedDist = min(speed * dist, k)
+                val limitedDist = min(params.speed * dist, k)
                 dx = disp.first / dist * limitedDist
                 dy = disp.second / dist * limitedDist
             }
-            var x = pos.first + dx + (width / 2 - pos.first) * gravity
-            var y = pos.second + dy + (height / 2 - pos.second) * gravity
+            var x = pos.first + dx + (width / 2 - pos.first) * params.gravity
+            var y = pos.second + dy + (height / 2 - pos.second) * params.gravity
             x = min(width, max(0.0, x))
             y = min(height, max(0.0, y))
             positions[vertex] = Pair(x, y)

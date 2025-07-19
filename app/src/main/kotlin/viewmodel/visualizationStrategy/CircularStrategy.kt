@@ -6,10 +6,10 @@ import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
-class CircularStrategy(
+class CircularStrategy<E : Comparable<E>, V : Comparable<V>>(
     private val radius: Double = 2000.0,
-) : VisualizationStrategy {
-    override fun <V : Comparable<V>> place(
+) : VisualizationStrategy<E, V> {
+    override fun place(
         width: Double,
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,

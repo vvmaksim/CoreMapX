@@ -388,14 +388,14 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     if (showAnalyticsDialog) {
         Analytics(
             onDismiss = { showAnalyticsDialog = false },
-            onStrategyUpdate = { newStrategy: VisualizationStrategy ->
+            onStrategyUpdate = { newStrategy: VisualizationStrategy<E, V> ->
                 viewModel.graphManager.updateLayoutStrategy(newStrategy)
             },
             selectedLayoutStrategy =
                 when (viewModel.graphManager.layoutStrategy.value) {
-                    is RandomStrategy -> "Random"
-                    is CircularStrategy -> "Circular"
-                    is ForceDirectedStrategy<*, *> -> "Force-Directed"
+                    is RandomStrategy<E, V> -> "Random"
+                    is CircularStrategy<E, V> -> "Circular"
+                    is ForceDirectedStrategy<E, V> -> "Force-Directed"
                     else -> "Random"
                 },
         )

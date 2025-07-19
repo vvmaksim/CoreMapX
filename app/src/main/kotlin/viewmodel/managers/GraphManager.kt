@@ -54,8 +54,8 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     val graphViewModel: State<GraphViewModel<E, V>?>
         get() = _graphViewModel
 
-    private val _layoutStrategy = mutableStateOf<VisualizationStrategy>(RandomStrategy())
-    val layoutStrategy: State<VisualizationStrategy>
+    private val _layoutStrategy = mutableStateOf<VisualizationStrategy<E, V>>(RandomStrategy())
+    val layoutStrategy: State<VisualizationStrategy<E, V>>
         get() = _layoutStrategy
 
     private var _showVerticesLabels = mutableStateOf(false)
@@ -104,7 +104,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         }
     }
 
-    fun updateLayoutStrategy(newStrategy: VisualizationStrategy) {
+    fun updateLayoutStrategy(newStrategy: VisualizationStrategy<E, V>) {
         _layoutStrategy.value = newStrategy
     }
 
@@ -123,11 +123,11 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         _showVerticesLabels.value = value
     }
 
-    fun getLayoutStrategyByString(strategy: String): VisualizationStrategy? =
+    fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =
         when (strategy.lowercase()) {
             "random" -> RandomStrategy()
             "circular" -> CircularStrategy()
-            "force-directed" -> ForceDirectedStrategy<Comparable<Any>, Comparable<Any>>()
+            "force-directed" -> ForceDirectedStrategy()
             else -> null
         }
 

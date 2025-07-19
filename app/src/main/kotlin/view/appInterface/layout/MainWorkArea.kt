@@ -3,14 +3,20 @@ package view.appInterface.layout
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Slider
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -41,6 +47,8 @@ import view.appInterface.workspace.TopMenu
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
+import viewmodel.visualizationStrategy.AnimatedVisualizationStrategy
+import viewmodel.visualizationStrategy.AnimationParameters
 
 private val logger = KotlinLogging.logger {}
 
@@ -147,6 +155,66 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 onPan = { dx, dy -> viewModel.canvasManager.moveCanvas(dx, dy) },
                 onZoom = { delta -> viewModel.canvasManager.zoomCanvas(delta) },
             )
+        }
+
+        val animatedStrategy = viewModel.graphManager.layoutStrategy.value as? AnimatedVisualizationStrategy<E, V>
+        if (animatedStrategy != null) {
+            val params = animatedStrategy.getParameters()
+            var iterations by remember { mutableStateOf(params.iterations.toFloat()) }
+            var area by remember { mutableStateOf(params.area.toFloat()) }
+            var gravity by remember { mutableStateOf(params.gravity.toFloat()) }
+            var speed by remember { mutableStateOf(params.speed.toFloat()) }
+            val isRunning = animatedStrategy.isRunning()
+
+            Card(
+                modifier =
+                    Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(16.dp)
+                        .widthIn(min = 320.dp, max = 400.dp),
+                elevation = 16.dp,
+                shape = MaterialTheme.shapes.large,
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Text(
+                        text = "Force-Directed Animation",
+                        style = MaterialTheme.typography.h6,
+                    )
+                    Row {
+                        Button(onClick = {
+                            animatedStrategy.setParameters(
+                                AnimationParameters(
+                                    iterations = iterations.toInt(),
+                                    area = area.toDouble(),
+                                    gravity = gravity.toDouble(),
+                                    speed = speed.toDouble(),
+                                ),
+                            )
+                            viewModel.graphManager.resetGraphView()
+                        }) {
+                            Text("Применить")
+                        }
+                        Spacer(Modifier.width(8.dp))
+                        Button(onClick = {
+                            if (isRunning) {
+                                animatedStrategy.stopAnimation()
+                            } else {
+                                viewModel.graphManager.resetGraphView()
+                            }
+                        }) {
+                            Text(if (isRunning) "Стоп" else "Старт")
+                        }
+                    }
+                    Text("Итерации: ${iterations.toInt()}")
+                    Slider(value = iterations, onValueChange = { iterations = it }, valueRange = 100f..30000f)
+                    Text("Площадь: ${area.toInt()}")
+                    Slider(value = area, onValueChange = { area = it }, valueRange = 100_000f..10_000_000f)
+                    Text("Гравитация: $gravity")
+                    Slider(value = gravity, onValueChange = { gravity = it }, valueRange = 0.0001f..1.0f)
+                    Text("Скорость: $speed")
+                    Slider(value = speed, onValueChange = { speed = it }, valueRange = 0.0001f..1.0f)
+                }
+            }
         }
 
         TopMenu(

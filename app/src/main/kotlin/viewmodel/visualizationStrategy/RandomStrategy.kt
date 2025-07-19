@@ -4,8 +4,8 @@ import androidx.compose.ui.unit.dp
 import viewmodel.graph.VertexViewModel
 import kotlin.random.Random
 
-class RandomStrategy : VisualizationStrategy {
-    override fun <V : Comparable<V>> place(
+class RandomStrategy<E : Comparable<E>, V : Comparable<V>> : VisualizationStrategy<E, V> {
+    override fun place(
         width: Double,
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,

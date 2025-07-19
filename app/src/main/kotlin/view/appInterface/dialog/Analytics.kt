@@ -21,14 +21,15 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
 import viewmodel.visualizationStrategy.CircularStrategy
+import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun Analytics(
+fun <E : Comparable<E>, V : Comparable<V>> Analytics(
     onDismiss: () -> Unit,
-    onStrategyUpdate: (VisualizationStrategy) -> Unit,
+    onStrategyUpdate: (VisualizationStrategy<E, V>) -> Unit,
     selectedLayoutStrategy: String,
     dialogWidth: Dp = 650.dp,
 ) {
@@ -44,9 +45,9 @@ fun Analytics(
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun AnalyticsContent(
+fun <E : Comparable<E>, V : Comparable<V>> AnalyticsContent(
     onDismiss: () -> Unit,
-    onStrategyUpdate: (VisualizationStrategy) -> Unit,
+    onStrategyUpdate: (VisualizationStrategy<E, V>) -> Unit,
     selectedLayoutStrategy: String,
     dialogWidth: Dp = 650.dp,
 ) {
@@ -90,7 +91,7 @@ fun AnalyticsContent(
                                 onStrategyUpdate(CircularStrategy())
                             }
                             "Force-Directed" -> {
-                                onStrategyUpdate(viewmodel.visualizationStrategy.ForceDirectedStrategy<Comparable<Any>, Comparable<Any>>())
+                                onStrategyUpdate(ForceDirectedStrategy())
                             }
                         }
                     },
@@ -106,13 +107,13 @@ fun AnalyticsContent(
 private fun PreviewAnalytics() {
     AppTheme {
         Column {
-            AnalyticsContent(
+            AnalyticsContent<Long, Long>(
                 onDismiss = {},
                 onStrategyUpdate = {},
                 selectedLayoutStrategy = "Random",
             )
             Spacer(Modifier.height(8.dp))
-            AnalyticsContent(
+            AnalyticsContent<Long, Long>(
                 onDismiss = {},
                 onStrategyUpdate = {},
                 selectedLayoutStrategy = "Circular",
