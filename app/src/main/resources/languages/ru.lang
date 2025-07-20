@@ -153,6 +153,16 @@ topMenuEdges=Рёбра
 topMenuHideVerticesLabels=Спрятать метки вершин
 topMenuShowVerticesLabels=Показать метки вершин
 
+ ! Force-Directed Animation Menu
+forceDirectedMenuTitle=Меню анимации для Force-Directed стратегии
+forceDirectedMenuApply=Применить
+forceDirectedMenuStart=Старт
+forceDirectedMenuStop=Стоп
+forceDirectedMenuIterations=Итерации: {number}
+forceDirectedMenuArea=Площадь: {number}
+forceDirectedMenuGravity=Гравитация: {number}
+forceDirectedMenuSpeed=Скорость: {number}
+
  ! Analytics
 analyticsTitle=Аналитика
 analyticsLayoutStrategyHint=Стратегия расположения:

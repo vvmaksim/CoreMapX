@@ -50,6 +50,16 @@ object UIKeys {
     const val TOP_MENU_HIDE_VERTICES_LABELS = "topMenuHideVerticesLabels"
     const val TOP_MENU_SHOW_VERTICES_LABELS = "topMenuShowVerticesLabels"
 
+    // Force-Directed Animation Menu
+    const val FORCE_DIRECTED_MENU_TITLE = "forceDirectedMenuTitle"
+    const val FORCE_DIRECTED_MENU_APPLY = "forceDirectedMenuApply"
+    const val FORCE_DIRECTED_MENU_START = "forceDirectedMenuStart"
+    const val FORCE_DIRECTED_MENU_STOP = "forceDirectedMenuStop"
+    const val FORCE_DIRECTED_MENU_ITERATIONS = "forceDirectedMenuIterations"
+    const val FORCE_DIRECTED_MENU_AREA = "forceDirectedMenuArea"
+    const val FORCE_DIRECTED_MENU_GRAVITY = "forceDirectedMenuGravity"
+    const val FORCE_DIRECTED_MENU_SPEED = "forceDirectedMenuSpeed"
+
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"
     const val ERROR_NO_DESCRIPTION_MESSAGE = "errorNoDescriptionMessage"

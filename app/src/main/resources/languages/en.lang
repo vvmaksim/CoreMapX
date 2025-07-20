@@ -157,6 +157,16 @@ topMenuEdges=Edges
 topMenuHideVerticesLabels=Hide vertices labels
 topMenuShowVerticesLabels=Show vertices labels
 
+ ! Force-Directed Animation Menu
+forceDirectedMenuTitle=Animation menu for Force-Directed strategy
+forceDirectedMenuApply=Apply
+forceDirectedMenuStart=Start
+forceDirectedMenuStop=Stop
+forceDirectedMenuIterations=Iterations: {number}
+forceDirectedMenuArea=Area: {number}
+forceDirectedMenuGravity=Gravity: {number}
+forceDirectedMenuSpeed=Speed: {number}
+
  ! Generate Random Graph
 generateRandomGraphTitle=Random Graph
 generateRandomGraphVertexCountHint=Vertices Count

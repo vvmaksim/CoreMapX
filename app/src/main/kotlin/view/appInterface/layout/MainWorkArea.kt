@@ -177,7 +177,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Force-Directed Animation",
+                        text = LocalizationManager.states.ui.forceDirectedMenuTitle.value,
                         style = MaterialTheme.typography.h6,
                     )
                     Row {
@@ -192,7 +192,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                             )
                             viewModel.graphManager.resetGraphView()
                         }) {
-                            Text("Применить")
+                            Text(LocalizationManager.states.ui.forceDirectedMenuApply.value)
                         }
                         Spacer(Modifier.width(8.dp))
                         Button(onClick = {
@@ -202,17 +202,64 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                                 viewModel.graphManager.resetGraphView()
                             }
                         }) {
-                            Text(if (isRunning) "Стоп" else "Старт")
+                            Text(
+                                text =
+                                    if (isRunning) {
+                                        LocalizationManager.states.ui.forceDirectedMenuStop.value
+                                    } else {
+                                        LocalizationManager.states.ui.forceDirectedMenuStart.value
+                                    },
+                            )
                         }
                     }
-                    Text("Итерации: ${iterations.toInt()}")
-                    Slider(value = iterations, onValueChange = { iterations = it }, valueRange = 100f..30000f)
-                    Text("Площадь: ${area.toInt()}")
-                    Slider(value = area, onValueChange = { area = it }, valueRange = 100_000f..10_000_000f)
-                    Text("Гравитация: $gravity")
-                    Slider(value = gravity, onValueChange = { gravity = it }, valueRange = 0.0001f..1.0f)
-                    Text("Скорость: $speed")
-                    Slider(value = speed, onValueChange = { speed = it }, valueRange = 0.0001f..1.0f)
+                    Text(
+                        text =
+                            LocalizationFormatter.getStringWithOneNumber(
+                                startString = LocalizationManager.states.ui.forceDirectedMenuIterations.value,
+                                number = iterations.toLong(),
+                            ),
+                    )
+                    Slider(
+                        value = iterations,
+                        onValueChange = { iterations = it },
+                        valueRange = 100f..30000f,
+                    )
+                    Text(
+                        text =
+                            LocalizationFormatter.getStringWithOneNumber(
+                                startString = LocalizationManager.states.ui.forceDirectedMenuArea.value,
+                                number = area.toLong(),
+                            ),
+                    )
+                    Slider(
+                        value = area,
+                        onValueChange = { area = it },
+                        valueRange = 100_000f..10_000_000f,
+                    )
+                    Text(
+                        text =
+                            LocalizationFormatter.getStringWithOneNumber(
+                                startString = LocalizationManager.states.ui.forceDirectedMenuGravity.value,
+                                number = gravity,
+                            ),
+                    )
+                    Slider(
+                        value = gravity,
+                        onValueChange = { gravity = it },
+                        valueRange = 0.0001f..1.0f,
+                    )
+                    Text(
+                        text =
+                            LocalizationFormatter.getStringWithOneNumber(
+                                startString = LocalizationManager.states.ui.forceDirectedMenuSpeed.value,
+                                number = speed,
+                            ),
+                    )
+                    Slider(
+                        value = speed,
+                        onValueChange = { speed = it },
+                        valueRange = 0.0001f..1.0f,
+                    )
                 }
             }
         }

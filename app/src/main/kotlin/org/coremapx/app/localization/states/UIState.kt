@@ -53,6 +53,16 @@ class UIState : LocalizationState {
     var topMenuEdges = mutableStateOf("")
     var topMenuShowVerticesLabels = mutableStateOf("")
 
+    // Force-Directed Animation Menu
+    var forceDirectedMenuTitle = mutableStateOf("")
+    var forceDirectedMenuApply = mutableStateOf("")
+    var forceDirectedMenuStart = mutableStateOf("")
+    var forceDirectedMenuStop = mutableStateOf("")
+    var forceDirectedMenuIterations = mutableStateOf("")
+    var forceDirectedMenuArea = mutableStateOf("")
+    var forceDirectedMenuGravity = mutableStateOf("")
+    var forceDirectedMenuSpeed = mutableStateOf("")
+
     // Error Strings
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
@@ -110,6 +120,16 @@ class UIState : LocalizationState {
             UIKeys.TOP_MENU_EDGES -> topMenuEdges.value = value
             UIKeys.TOP_MENU_HIDE_VERTICES_LABELS -> topMenuHideVerticesLabels.value = value
             UIKeys.TOP_MENU_SHOW_VERTICES_LABELS -> topMenuShowVerticesLabels.value = value
+
+            // Force-Directed Animation Menu
+            UIKeys.FORCE_DIRECTED_MENU_TITLE -> forceDirectedMenuTitle.value = value
+            UIKeys.FORCE_DIRECTED_MENU_APPLY -> forceDirectedMenuApply.value = value
+            UIKeys.FORCE_DIRECTED_MENU_START -> forceDirectedMenuStart.value = value
+            UIKeys.FORCE_DIRECTED_MENU_STOP -> forceDirectedMenuStop.value = value
+            UIKeys.FORCE_DIRECTED_MENU_ITERATIONS -> forceDirectedMenuIterations.value = value
+            UIKeys.FORCE_DIRECTED_MENU_AREA -> forceDirectedMenuArea.value = value
+            UIKeys.FORCE_DIRECTED_MENU_GRAVITY -> forceDirectedMenuGravity.value = value
+            UIKeys.FORCE_DIRECTED_MENU_SPEED -> forceDirectedMenuSpeed.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value
