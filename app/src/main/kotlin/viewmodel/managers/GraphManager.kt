@@ -134,7 +134,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     fun openGraphFile(): Result<List<String>> {
         val file =
             DialogManager.showOpenFileDialog(directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH)
-                ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select one file"))
+                ?: return Result.Success(emptyList())
         return loadGraphFromFile(file)
     }
 
