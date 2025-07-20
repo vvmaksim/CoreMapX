@@ -36,7 +36,7 @@ object LocalizationFormatter {
 
     fun getStringWithOneNumber(
         startString: String,
-        number: Long,
+        number: Number,
     ): String =
         startString
             .replace(NUMBER, number.toString())
