@@ -138,13 +138,12 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         return loadGraphFromFile(file)
     }
 
-    fun openGraphRepository(): Result<File> {
+    fun openGraphRepository(): Result<File?> {
         val repository =
             DialogManager.showOpenFileDialog(
                 directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH,
                 title = "Select graph repository",
             )
-                ?: return Result.Error(FileErrors.ErrorReadingFile("You have to select repository"))
         return Result.Success(repository)
     }
 

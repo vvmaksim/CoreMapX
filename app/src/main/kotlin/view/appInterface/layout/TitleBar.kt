@@ -204,6 +204,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                                 )
 
                                         is Result.Success -> {
+                                            if (openResult.data == null) return@DropdownMenuItem
                                             selectedRepositoryFile = openResult.data
                                             showOpenRepositoryDialog = true
                                         }

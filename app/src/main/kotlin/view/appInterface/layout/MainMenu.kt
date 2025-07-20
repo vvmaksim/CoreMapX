@@ -210,6 +210,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                                     )
 
                             is Result.Success -> {
+                                if (openResult.data == null) return@MainMenuTextButton
                                 selectedRepositoryFile = openResult.data
                                 showOpenRepositoryDialog = true
                             }
