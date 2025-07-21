@@ -30,7 +30,7 @@ class SQLToIRConverter : FileConverter() {
             info.isDirected.toBooleanOrNull()
                 ?: return Result.Error(FileErrors.ConverterError("isDirected must be `1` or `0`"))
         val isWeighted =
-            info.isDirected.toBooleanOrNull()
+            info.isWeighted.toBooleanOrNull()
                 ?: return Result.Error(FileErrors.ConverterError("isWeighted must be `1` or `0`"))
 
         val vertices = VertexRepository(database).getVerticesByGraph(graphId)
