@@ -131,10 +131,6 @@ workAreaCanvasLimit=Canvas limit
 performanceAnimationDuration=Animation duration
 performanceCommandFieldScrollDelay=Command field scroll delay
 
- ! Analytics
-analyticsTitle=Analytics
-analyticsLayoutStrategyHint=Layout strategy:
-
  ! Find Path
 findPathTitle=Find path
 findPathSubtitle=Select the required path search parameters
@@ -166,6 +162,10 @@ forceDirectedMenuIterations=Iterations: {number}
 forceDirectedMenuArea=Area: {number}
 forceDirectedMenuGravity=Gravity: {number}
 forceDirectedMenuSpeed=Speed: {number}
+
+ ! Analytics
+analyticsTitle=Analytics
+analyticsLayoutStrategyHint=Layout strategy:
 
  ! Generate Random Graph
 generateRandomGraphTitle=Random Graph
