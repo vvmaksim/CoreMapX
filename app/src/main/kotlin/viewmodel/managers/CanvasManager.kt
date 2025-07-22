@@ -23,11 +23,12 @@ class CanvasManager {
         dx: Float,
         dy: Float,
     ) {
-        val compensatedDx = dx * _scale.value
-        val compensatedDy = dy * _scale.value
-        val scaledLimit = canvasLimit * _scale.value
-        _offsetX.value = (_offsetX.value + compensatedDx).coerceIn(-scaledLimit, scaledLimit)
-        _offsetY.value = (_offsetY.value + compensatedDy).coerceIn(-scaledLimit, scaledLimit)
+        val maxOffsetX = (canvasLimit / 2f) * (1 / _scale.value)
+        val minOffsetX = -(canvasLimit / 2f) * (1 / _scale.value)
+        val maxOffsetY = (canvasLimit / 2f) * (1 / _scale.value)
+        val minOffsetY = -(canvasLimit / 2f) * (1 / _scale.value)
+        _offsetX.value = (_offsetX.value + dx).coerceIn(minOffsetX, maxOffsetX)
+        _offsetY.value = (_offsetY.value + dy).coerceIn(minOffsetY, maxOffsetY)
     }
 
     fun zoomCanvas(delta: Float) {
