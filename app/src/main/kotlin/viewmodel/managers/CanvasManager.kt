@@ -33,7 +33,7 @@ class CanvasManager {
     fun zoomCanvas(delta: Float) {
         val zoomFactor = 0.5f
         val oldScale = _scale.value
-        val newScale = (oldScale * (1f + delta * zoomFactor)).coerceIn(0.1f, 5f)
+        val newScale = (oldScale * (1f + delta * zoomFactor)).coerceIn(0.01f, 5f)
 
         val scaleRatio = newScale / oldScale
         _offsetX.value = _offsetX.value * scaleRatio
