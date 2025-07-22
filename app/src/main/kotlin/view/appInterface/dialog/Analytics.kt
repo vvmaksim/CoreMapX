@@ -23,7 +23,9 @@ import view.appInterface.button.DropdownSelectButton
 import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategiesNames
 import viewmodel.visualizationStrategy.VisualizationStrategy
+import kotlin.reflect.full.memberProperties
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -80,17 +82,21 @@ fun <E : Comparable<E>, V : Comparable<V>> AnalyticsContent(
                     style = MaterialTheme.typography.body2,
                 )
                 DropdownSelectButton(
-                    items = listOf("Random", "Circular", "Force-Directed"),
+                    items =
+                        VisualizationStrategiesNames::class
+                            .memberProperties
+                            .filter { it.isConst }
+                            .map { it.getter.call() as String },
                     selectedItem = selectedLayoutStrategy,
                     onItemSelected = { newStrategy: String ->
                         when (newStrategy) {
-                            "Random" -> {
+                            VisualizationStrategiesNames.RANDOM -> {
                                 onStrategyUpdate(RandomStrategy())
                             }
-                            "Circular" -> {
+                            VisualizationStrategiesNames.CIRCULAR -> {
                                 onStrategyUpdate(CircularStrategy())
                             }
-                            "Force-Directed" -> {
+                            VisualizationStrategiesNames.FORCE_DIRECTED -> {
                                 onStrategyUpdate(ForceDirectedStrategy())
                             }
                         }

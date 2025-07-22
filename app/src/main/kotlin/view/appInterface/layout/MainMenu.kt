@@ -56,9 +56,6 @@ import view.appInterface.dialog.Settings
 import view.appInterface.dialog.UserNotification
 import view.appInterface.icon.Logo
 import viewmodel.MainScreenViewModel
-import viewmodel.visualizationStrategy.CircularStrategy
-import viewmodel.visualizationStrategy.ForceDirectedStrategy
-import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 
@@ -392,13 +389,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
             onStrategyUpdate = { newStrategy: VisualizationStrategy<E, V> ->
                 viewModel.graphManager.updateLayoutStrategy(newStrategy)
             },
-            selectedLayoutStrategy =
-                when (viewModel.graphManager.layoutStrategy.value) {
-                    is RandomStrategy<E, V> -> "Random"
-                    is CircularStrategy<E, V> -> "Circular"
-                    is ForceDirectedStrategy<E, V> -> "Force-Directed"
-                    else -> "Random"
-                },
+            selectedLayoutStrategy = viewModel.graphManager.getCurrentLayoutStrategyAsString(),
         )
     }
 }

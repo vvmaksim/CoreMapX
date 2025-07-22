@@ -31,6 +31,7 @@ import viewmodel.graph.VertexViewModel
 import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategiesNames
 import viewmodel.visualizationStrategy.VisualizationStrategy
 import java.io.File
 import kotlin.collections.forEach
@@ -125,10 +126,18 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =
         when (strategy.lowercase()) {
-            "random" -> RandomStrategy()
-            "circular" -> CircularStrategy()
-            "force-directed" -> ForceDirectedStrategy()
+            VisualizationStrategiesNames.RANDOM.lowercase() -> RandomStrategy()
+            VisualizationStrategiesNames.CIRCULAR.lowercase() -> CircularStrategy()
+            VisualizationStrategiesNames.FORCE_DIRECTED.lowercase() -> ForceDirectedStrategy()
             else -> null
+        }
+
+    fun getCurrentLayoutStrategyAsString(): String =
+        when (_layoutStrategy.value) {
+            is RandomStrategy<E, V> -> VisualizationStrategiesNames.RANDOM
+            is CircularStrategy<E, V> -> VisualizationStrategiesNames.CIRCULAR
+            is ForceDirectedStrategy<E, V> -> VisualizationStrategiesNames.FORCE_DIRECTED
+            else -> VisualizationStrategiesNames.RANDOM
         }
 
     fun openGraphFile(): Result<List<String>> {
