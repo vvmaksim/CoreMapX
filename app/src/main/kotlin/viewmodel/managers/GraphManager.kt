@@ -64,10 +64,15 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     val isVerticesLabelsVisible: State<Boolean>
         get() = _isVerticesLabelsVisible
 
+    private var _isEdgesWeightsVisible = mutableStateOf(true)
+    val isEdgesWeightsVisible: State<Boolean>
+        get() = _isEdgesWeightsVisible
+
     private var _visibleStates =
         mutableStateOf(
             VisibleStates(
                 verticesLabels = isVerticesLabelsVisible,
+                edgesWeights = isEdgesWeightsVisible,
             ),
         )
     val visibleStates: State<VisibleStates>
@@ -138,6 +143,10 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun setShowVerticesLabels(value: Boolean) {
         _isVerticesLabelsVisible.value = value
+    }
+
+    fun setIsEdgesWeightsVisible(value: Boolean) {
+        _isEdgesWeightsVisible.value = value
     }
 
     fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =

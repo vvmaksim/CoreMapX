@@ -1,5 +1,6 @@
 package viewmodel.graph
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import model.graph.concrete.DirectedUnweightedGraph
@@ -11,6 +12,7 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     val edgeId: E,
     val from: VertexViewModel<V>,
     val to: VertexViewModel<V>,
+    private val _weightVisible: State<Boolean>,
     color: Color = config.states.edgeMainColor.value,
     graph: Any,
     edge: Any,
@@ -24,4 +26,7 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
         set(value) {
             _color.value = value
         }
+
+    val weightVisible
+        get() = _weightVisible.value
 }

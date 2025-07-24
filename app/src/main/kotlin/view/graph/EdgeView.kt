@@ -100,15 +100,17 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
         }
 
         viewModel.weight?.let { weight ->
-            val midX = (viewModel.from.x + viewModel.to.x) / 2
-            val midY = (viewModel.from.y + viewModel.to.y) / 2
-            Text(
-                text = weight.toString(),
-                modifier = Modifier.offset(midX, midY),
-                color = MaterialTheme.colors.onSurface,
-                style = MaterialTheme.typography.body2,
-                fontSize = edgeLabelSize,
-            )
+            if (viewModel.weightVisible) {
+                val midX = (viewModel.from.x + viewModel.to.x) / 2
+                val midY = (viewModel.from.y + viewModel.to.y) / 2
+                Text(
+                    text = weight.toString(),
+                    modifier = Modifier.offset(midX, midY),
+                    color = MaterialTheme.colors.onSurface,
+                    style = MaterialTheme.typography.body2,
+                    fontSize = edgeLabelSize,
+                )
+            }
         }
     }
 }

@@ -139,6 +139,28 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     style = MaterialTheme.typography.button,
                 )
             }
+            DropdownMenu(
+                expanded = edgesExpanded,
+                onDismissRequest = { edgesExpanded = false },
+                modifier = Modifier.background(color = MaterialTheme.colors.background),
+            ) {
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.graphManager.setIsEdgesWeightsVisible(!viewModel.graphManager.isEdgesWeightsVisible.value)
+                        edgesExpanded = false
+                    },
+                ) {
+                    Text(
+                        text =
+                            if (viewModel.graphManager.isEdgesWeightsVisible.value) {
+                                "Спрятать веса вершин"
+                            } else {
+                                "Показать веса рёбер"
+                            },
+                        style = MaterialTheme.typography.button,
+                    )
+                }
+            }
         }
     }
     if (showGenerateRandomGraphDialog) {

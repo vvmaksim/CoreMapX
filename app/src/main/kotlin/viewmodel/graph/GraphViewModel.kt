@@ -33,6 +33,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
                 to = to,
                 graph = graph,
                 edge = edge,
+                _weightVisible = visibleStates.value.edgesWeights,
             )
         }
 
