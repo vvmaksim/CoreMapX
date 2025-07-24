@@ -77,7 +77,15 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
-            graph?.let { viewModel.graphManager.updateGraphViewModel(GraphViewModel(it, viewModel.graphManager.showVerticesLabels)) }
+            graph?.let {
+                viewModel.graphManager.updateGraphViewModel(
+                    newViewModel =
+                        GraphViewModel(
+                            graph = it,
+                            visibleStates = viewModel.graphManager.visibleStates,
+                        ),
+                )
+            }
             viewModel.graphManager.graphViewModel.value?.let { _ ->
                 viewModel.graphManager.resetGraphView()
             }

@@ -8,6 +8,7 @@ import model.database.sqlite.createDatabase
 import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
+import model.dto.VisibleStates
 import model.fileHandler.ConvertModes
 import model.fileHandler.DialogManager
 import model.fileHandler.FileExtensions
@@ -63,6 +64,15 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     val showVerticesLabels: State<Boolean>
         get() = _showVerticesLabels
 
+    private var _visibleStates =
+        mutableStateOf(
+            VisibleStates(
+                verticesLabels = showVerticesLabels,
+            ),
+        )
+    val visibleStates: State<VisibleStates>
+        get() = _visibleStates
+
     var graphName: String = "None"
 
     var graphAuthor: String = "None"
@@ -111,7 +121,13 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun updateGraph(newGraph: Graph<E, V>) {
         _graph.value = newGraph
-        updateGraphViewModel(GraphViewModel(newGraph, _showVerticesLabels))
+        updateGraphViewModel(
+            newViewModel =
+                GraphViewModel(
+                    graph = newGraph,
+                    visibleStates = visibleStates,
+                ),
+        )
         resetGraphView()
     }
 

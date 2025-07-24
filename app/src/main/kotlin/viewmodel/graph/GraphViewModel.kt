@@ -2,11 +2,12 @@ package viewmodel.graph
 
 import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
+import model.dto.VisibleStates
 import model.graph.contracts.Graph
 
 class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
     private val graph: Graph<E, V>,
-    private val showVerticesLabels: State<Boolean>,
+    private val visibleStates: State<VisibleStates>,
 ) {
     private val _vertices: Map<V, VertexViewModel<V>> =
         graph.vertices.mapValues { (_, vertex) ->
@@ -14,7 +15,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
                 x = 0.dp,
                 y = 0.dp,
                 vertex = vertex,
-                _labelVisible = showVerticesLabels,
+                _labelVisible = visibleStates.value.verticesLabels,
             )
         }
 
