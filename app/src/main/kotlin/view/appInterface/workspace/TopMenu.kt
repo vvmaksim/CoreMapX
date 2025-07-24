@@ -115,13 +115,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             ) {
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.graphManager.setShowVerticesLabels(!viewModel.graphManager.showVerticesLabels.value)
+                        viewModel.graphManager.setShowVerticesLabels(!viewModel.graphManager.isVerticesLabelsVisible.value)
                         verticesExpanded = false
                     },
                 ) {
                     Text(
                         text =
-                            if (viewModel.graphManager.showVerticesLabels.value) {
+                            if (viewModel.graphManager.isVerticesLabelsVisible.value) {
                                 LocalizationManager.states.ui.topMenuHideVerticesLabels.value
                             } else {
                                 LocalizationManager.states.ui.topMenuShowVerticesLabels.value

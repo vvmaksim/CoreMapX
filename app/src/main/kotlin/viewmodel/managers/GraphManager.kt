@@ -60,14 +60,14 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     val layoutStrategy: State<VisualizationStrategy<E, V>>
         get() = _layoutStrategy
 
-    private var _showVerticesLabels = mutableStateOf(false)
-    val showVerticesLabels: State<Boolean>
-        get() = _showVerticesLabels
+    private var _isVerticesLabelsVisible = mutableStateOf(false)
+    val isVerticesLabelsVisible: State<Boolean>
+        get() = _isVerticesLabelsVisible
 
     private var _visibleStates =
         mutableStateOf(
             VisibleStates(
-                verticesLabels = showVerticesLabels,
+                verticesLabels = isVerticesLabelsVisible,
             ),
         )
     val visibleStates: State<VisibleStates>
@@ -137,7 +137,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     }
 
     fun setShowVerticesLabels(value: Boolean) {
-        _showVerticesLabels.value = value
+        _isVerticesLabelsVisible.value = value
     }
 
     fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =
