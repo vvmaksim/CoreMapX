@@ -1,6 +1,7 @@
 package view.appInterface.layout
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -28,6 +29,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.PointerEventType
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import extensions.canvasBackground
@@ -152,184 +155,202 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
         modifier =
             modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colors.canvasBackground),
-    ) {
-        graphViewModel.value?.let { graphViewModel ->
-            GraphView(
-                viewModel = graphViewModel,
-                offsetX = viewModel.canvasManager.offsetX.value,
-                offsetY = viewModel.canvasManager.offsetY.value,
-                scale = viewModel.canvasManager.scale.value,
-                onPan = { dx, dy -> viewModel.canvasManager.moveCanvas(dx, dy) },
-                onZoom = { delta -> viewModel.canvasManager.zoomCanvas(delta) },
-            )
-        }
-
-        val animatedStrategy = viewModel.graphManager.layoutStrategy.value as? AnimatedVisualizationStrategy<E, V>
-        if (animatedStrategy != null) {
-            val params = animatedStrategy.getParameters()
-            var iterations by remember { mutableStateOf(params.iterations.toFloat()) }
-            var area by remember { mutableStateOf(params.area.toFloat()) }
-            var gravity by remember { mutableStateOf(params.gravity.toFloat()) }
-            var speed by remember { mutableStateOf(params.speed.toFloat()) }
-            val isRunning = animatedStrategy.isRunning()
-
-            Card(
-                modifier =
-                    Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(16.dp)
-                        .widthIn(min = 320.dp, max = 400.dp),
-                elevation = 16.dp,
-                shape = MaterialTheme.shapes.large,
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(
-                        text = LocalizationManager.states.ui.forceDirectedMenuTitle.value,
-                        style = MaterialTheme.typography.h6,
+                .background(MaterialTheme.colors.canvasBackground)
+                .pointerInput(Unit) {
+                    detectDragGestures(
+                        onDrag = { _, dragAmount ->
+                            viewModel.canvasManager.moveCanvas(dragAmount.x, dragAmount.y)
+                        },
                     )
-                    Row {
-                        Button(onClick = {
-                            animatedStrategy.setParameters(
-                                AnimationParameters(
-                                    iterations = iterations.toInt(),
-                                    area = area.toDouble(),
-                                    gravity = gravity.toDouble(),
-                                    speed = speed.toDouble(),
-                                ),
-                            )
-                            viewModel.graphManager.resetGraphView()
-                        }) {
-                            Text(LocalizationManager.states.ui.forceDirectedMenuApply.value)
-                        }
-                        Spacer(Modifier.width(8.dp))
-                        Button(onClick = {
-                            if (isRunning) {
-                                animatedStrategy.stopAnimation()
-                            } else {
-                                viewModel.graphManager.resetGraphView()
+                }.pointerInput(Unit) {
+                    awaitPointerEventScope {
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            if (event.type == PointerEventType.Scroll) {
+                                val scrollAmount = event.changes.first().scrollDelta
+                                viewModel.canvasManager.zoomCanvas(-scrollAmount.y * 0.1f)
                             }
-                        }) {
-                            Text(
-                                text =
-                                    if (isRunning) {
-                                        LocalizationManager.states.ui.forceDirectedMenuStop.value
-                                    } else {
-                                        LocalizationManager.states.ui.forceDirectedMenuStart.value
-                                    },
-                            )
                         }
                     }
-                    Text(
-                        text =
-                            LocalizationFormatter.getStringWithOneNumber(
-                                startString = LocalizationManager.states.ui.forceDirectedMenuIterations.value,
-                                number = iterations.toLong(),
-                            ),
-                    )
-                    Slider(
-                        value = iterations,
-                        onValueChange = { iterations = it },
-                        valueRange = 100f..30000f,
-                    )
-                    Text(
-                        text =
-                            LocalizationFormatter.getStringWithOneNumber(
-                                startString = LocalizationManager.states.ui.forceDirectedMenuArea.value,
-                                number = area.toLong(),
-                            ),
-                    )
-                    Slider(
-                        value = area,
-                        onValueChange = { area = it },
-                        valueRange = 100_000f..10_000_000f,
-                    )
-                    Text(
-                        text =
-                            LocalizationFormatter.getStringWithOneNumber(
-                                startString = LocalizationManager.states.ui.forceDirectedMenuGravity.value,
-                                number = gravity,
-                            ),
-                    )
-                    Slider(
-                        value = gravity,
-                        onValueChange = { gravity = it },
-                        valueRange = 0.0001f..1.0f,
-                    )
-                    Text(
-                        text =
-                            LocalizationFormatter.getStringWithOneNumber(
-                                startString = LocalizationManager.states.ui.forceDirectedMenuSpeed.value,
-                                number = speed,
-                            ),
-                    )
-                    Slider(
-                        value = speed,
-                        onValueChange = { speed = it },
-                        valueRange = 0.0001f..1.0f,
-                    )
+                },
+        content = {
+            graphViewModel.value?.let { graphViewModel ->
+                GraphView(
+                    viewModel = graphViewModel,
+                    offsetX = viewModel.canvasManager.offsetX.value,
+                    offsetY = viewModel.canvasManager.offsetY.value,
+                    scale = viewModel.canvasManager.scale.value,
+                    onPan = { dx, dy -> viewModel.canvasManager.moveCanvas(dx, dy) },
+                    onZoom = { delta -> viewModel.canvasManager.zoomCanvas(delta) },
+                )
+            }
+
+            val animatedStrategy = viewModel.graphManager.layoutStrategy.value as? AnimatedVisualizationStrategy<E, V>
+            if (animatedStrategy != null) {
+                val params = animatedStrategy.getParameters()
+                var iterations by remember { mutableStateOf(params.iterations.toFloat()) }
+                var area by remember { mutableStateOf(params.area.toFloat()) }
+                var gravity by remember { mutableStateOf(params.gravity.toFloat()) }
+                var speed by remember { mutableStateOf(params.speed.toFloat()) }
+                val isRunning = animatedStrategy.isRunning()
+
+                Card(
+                    modifier =
+                        Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(16.dp)
+                            .widthIn(min = 320.dp, max = 400.dp),
+                    elevation = 16.dp,
+                    shape = MaterialTheme.shapes.large,
+                ) {
+                    Column(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = LocalizationManager.states.ui.forceDirectedMenuTitle.value,
+                            style = MaterialTheme.typography.h6,
+                        )
+                        Row {
+                            Button(onClick = {
+                                animatedStrategy.setParameters(
+                                    AnimationParameters(
+                                        iterations = iterations.toInt(),
+                                        area = area.toDouble(),
+                                        gravity = gravity.toDouble(),
+                                        speed = speed.toDouble(),
+                                    ),
+                                )
+                                viewModel.graphManager.resetGraphView()
+                            }) {
+                                Text(LocalizationManager.states.ui.forceDirectedMenuApply.value)
+                            }
+                            Spacer(Modifier.width(8.dp))
+                            Button(onClick = {
+                                if (isRunning) {
+                                    animatedStrategy.stopAnimation()
+                                } else {
+                                    viewModel.graphManager.resetGraphView()
+                                }
+                            }) {
+                                Text(
+                                    text =
+                                        if (isRunning) {
+                                            LocalizationManager.states.ui.forceDirectedMenuStop.value
+                                        } else {
+                                            LocalizationManager.states.ui.forceDirectedMenuStart.value
+                                        },
+                                )
+                            }
+                        }
+                        Text(
+                            text =
+                                LocalizationFormatter.getStringWithOneNumber(
+                                    startString = LocalizationManager.states.ui.forceDirectedMenuIterations.value,
+                                    number = iterations.toLong(),
+                                ),
+                        )
+                        Slider(
+                            value = iterations,
+                            onValueChange = { iterations = it },
+                            valueRange = 100f..30000f,
+                        )
+                        Text(
+                            text =
+                                LocalizationFormatter.getStringWithOneNumber(
+                                    startString = LocalizationManager.states.ui.forceDirectedMenuArea.value,
+                                    number = area.toLong(),
+                                ),
+                        )
+                        Slider(
+                            value = area,
+                            onValueChange = { area = it },
+                            valueRange = 100_000f..10_000_000f,
+                        )
+                        Text(
+                            text =
+                                LocalizationFormatter.getStringWithOneNumber(
+                                    startString = LocalizationManager.states.ui.forceDirectedMenuGravity.value,
+                                    number = gravity,
+                                ),
+                        )
+                        Slider(
+                            value = gravity,
+                            onValueChange = { gravity = it },
+                            valueRange = 0.0001f..1.0f,
+                        )
+                        Text(
+                            text =
+                                LocalizationFormatter.getStringWithOneNumber(
+                                    startString = LocalizationManager.states.ui.forceDirectedMenuSpeed.value,
+                                    number = speed,
+                                ),
+                        )
+                        Slider(
+                            value = speed,
+                            onValueChange = { speed = it },
+                            valueRange = 0.0001f..1.0f,
+                        )
+                    }
                 }
             }
-        }
 
-        TopMenu(
-            viewModel = viewModel,
-            modifier = Modifier.align(Alignment.TopCenter),
-        )
-
-        Row(
-            modifier =
-                Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .horizontalScroll(scrollState)
-                    .padding(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            GraphElementCounters(
-                vertexCount =
-                    viewModel.graphManager.graph.value
-                        ?.vertices
-                        ?.size
-                        ?.toLong() ?: 0L,
-                edgeCount =
-                    viewModel.graphManager.graph.value
-                        ?.edges
-                        ?.size
-                        ?.toLong() ?: 0L,
-                vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
-                edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
-                modifier = Modifier.align(Alignment.Bottom),
+            TopMenu(
+                viewModel = viewModel,
+                modifier = Modifier.align(Alignment.TopStart),
             )
-            Spacer(Modifier.weight(1f))
-            CommandLine(
+
+            Row(
                 modifier =
                     Modifier
-                        .width(commandFieldWidth)
-                        .align(Alignment.Bottom),
-                outputMessages = outputMessages.value,
-                commandLineBackgroundColor =
-                    if (isTransparentCommandLine) {
-                        Color.Transparent
-                    } else {
-                        MaterialTheme.colors.commandLineBackground
-                    },
-                placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
-                onCommand = { command -> handleCommand(command) },
-                commandText = commandText,
-                onCommandTextChange = { commandText = it },
-                userCommands = userCommands.value,
-                commandHistoryIndex = commandHistoryIndex,
-                onCommandHistoryIndexChange = { commandHistoryIndex = it },
-            )
-            Spacer(Modifier.weight(1f))
-            ZoomButtons(
-                modifier =
-                    Modifier
-                        .padding(8.dp)
-                        .align(Alignment.Bottom),
-                onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
-            )
-        }
-    }
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .horizontalScroll(scrollState)
+                        .padding(8.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                GraphElementCounters(
+                    vertexCount =
+                        viewModel.graphManager.graph.value
+                            ?.vertices
+                            ?.size
+                            ?.toLong() ?: 0L,
+                    edgeCount =
+                        viewModel.graphManager.graph.value
+                            ?.edges
+                            ?.size
+                            ?.toLong() ?: 0L,
+                    vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
+                    edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
+                    modifier = Modifier.align(Alignment.Bottom),
+                )
+                Spacer(Modifier.weight(1f))
+                CommandLine(
+                    modifier =
+                        Modifier
+                            .width(commandFieldWidth)
+                            .align(Alignment.Bottom),
+                    outputMessages = outputMessages.value,
+                    commandLineBackgroundColor =
+                        if (isTransparentCommandLine) {
+                            Color.Transparent
+                        } else {
+                            MaterialTheme.colors.commandLineBackground
+                        },
+                    placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
+                    onCommand = { command -> handleCommand(command) },
+                    commandText = commandText,
+                    onCommandTextChange = { commandText = it },
+                    userCommands = userCommands.value,
+                    commandHistoryIndex = commandHistoryIndex,
+                    onCommandHistoryIndexChange = { commandHistoryIndex = it },
+                )
+                Spacer(Modifier.weight(1f))
+                ZoomButtons(
+                    modifier =
+                        Modifier
+                            .padding(8.dp)
+                            .align(Alignment.Bottom),
+                    onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
+                )
+            }
+        },
+    )
 }
