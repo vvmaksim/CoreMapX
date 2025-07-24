@@ -160,6 +160,22 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                         style = MaterialTheme.typography.button,
                     )
                 }
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.graphManager.setIsEdgesIdsVisible(!viewModel.graphManager.isEdgesIdsVisible.value)
+                        edgesExpanded = false
+                    },
+                ) {
+                    Text(
+                        text =
+                            if (viewModel.graphManager.isEdgesIdsVisible.value) {
+                                "Спрятать id вершин"
+                            } else {
+                                "Показать id рёбер"
+                            },
+                        style = MaterialTheme.typography.button,
+                    )
+                }
             }
         }
     }

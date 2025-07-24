@@ -13,6 +13,7 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     val from: VertexViewModel<V>,
     val to: VertexViewModel<V>,
     private val _weightVisible: State<Boolean>,
+    private val _idVisible: State<Boolean>,
     color: Color = config.states.edgeMainColor.value,
     graph: Any,
     edge: Any,
@@ -29,4 +30,22 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
 
     val weightVisible
         get() = _weightVisible.value
+
+    val idVisible
+        get() = _idVisible.value
+
+    fun getEdgeText(): String {
+        val weight = weight?.toString() ?: ""
+        return if (weightVisible || idVisible) {
+            if (weightVisible && idVisible) {
+                "id: $edgeId weight: $weight"
+            } else if (weightVisible) {
+                weight
+            } else {
+                "id: $edgeId"
+            }
+        } else {
+            ""
+        }
+    }
 }
