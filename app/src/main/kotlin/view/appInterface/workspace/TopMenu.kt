@@ -115,7 +115,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             ) {
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.graphManager.setShowVerticesLabels(!viewModel.graphManager.isVerticesLabelsVisible.value)
+                        viewModel.graphManager.setIsVerticesLabelsVisible(!viewModel.graphManager.isVerticesLabelsVisible.value)
                         verticesExpanded = false
                     },
                 ) {

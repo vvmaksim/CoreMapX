@@ -141,7 +141,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         resetGraphView()
     }
 
-    fun setShowVerticesLabels(value: Boolean) {
+    fun setIsVerticesLabelsVisible(value: Boolean) {
         _isVerticesLabelsVisible.value = value
     }
 
