@@ -1,4 +1,8 @@
-import io.mockk.*
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.verify
 import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.command.enums.CommandEntities
@@ -10,10 +14,10 @@ import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.contracts.Graph
 import model.graph.entities.Vertex
 import model.result.Result
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.Test
 import org.coremapx.app.userDirectory.UserDirectory
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import viewmodel.MainScreenViewModel
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
