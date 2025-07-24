@@ -129,6 +129,22 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                         style = MaterialTheme.typography.button,
                     )
                 }
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.graphManager.setIsVerticesIdsVisible(!viewModel.graphManager.isVerticesIdsVisible.value)
+                        verticesExpanded = false
+                    },
+                ) {
+                    Text(
+                        text =
+                            if (viewModel.graphManager.isVerticesIdsVisible.value) {
+                                "Спрятать id вершин"
+                            } else {
+                                "Показать id вершин"
+                            },
+                        style = MaterialTheme.typography.button,
+                    )
+                }
             }
         }
         Spacer(Modifier.width(8.dp))

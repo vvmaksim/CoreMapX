@@ -64,6 +64,10 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     val isVerticesLabelsVisible: State<Boolean>
         get() = _isVerticesLabelsVisible
 
+    private var _isVerticesIdsVisible = mutableStateOf(false)
+    val isVerticesIdsVisible: State<Boolean>
+        get() = _isVerticesIdsVisible
+
     private var _isEdgesWeightsVisible = mutableStateOf(true)
     val isEdgesWeightsVisible: State<Boolean>
         get() = _isEdgesWeightsVisible
@@ -76,6 +80,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         mutableStateOf(
             VisibleStates(
                 verticesLabels = isVerticesLabelsVisible,
+                verticesIds = isVerticesIdsVisible,
                 edgesWeights = isEdgesWeightsVisible,
                 edgesIds = isEdgesIdsVisible,
             ),
@@ -148,6 +153,10 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun setIsVerticesLabelsVisible(value: Boolean) {
         _isVerticesLabelsVisible.value = value
+    }
+
+    fun setIsVerticesIdsVisible(value: Boolean) {
+        _isVerticesIdsVisible.value = value
     }
 
     fun setIsEdgesWeightsVisible(value: Boolean) {

@@ -16,6 +16,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
                 y = 0.dp,
                 vertex = vertex,
                 _labelVisible = visibleStates.value.verticesLabels,
+                _idVisible = visibleStates.value.verticesIds,
             )
         }
 

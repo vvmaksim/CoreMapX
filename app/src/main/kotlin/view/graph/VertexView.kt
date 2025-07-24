@@ -63,17 +63,15 @@ fun <V : Comparable<V>> VertexView(
                     }
                 },
     ) {
-        if (viewModel.labelVisible) {
-            Text(
-                modifier =
-                    Modifier
-                        .align(Alignment.Center)
-                        .offset(0.dp, -viewModel.radius - 10.dp),
-                text = viewModel.label,
-                color = MaterialTheme.colors.onSurface,
-                style = MaterialTheme.typography.body2,
-                fontSize = vertexLabelSize,
-            )
-        }
+        Text(
+            modifier =
+                Modifier
+                    .align(Alignment.Center)
+                    .offset(0.dp, -viewModel.radius - 10.dp),
+            text = viewModel.getVertexText(),
+            color = MaterialTheme.colors.onSurface,
+            style = MaterialTheme.typography.body2,
+            fontSize = vertexLabelSize,
+        )
     }
 }
