@@ -56,7 +56,7 @@ class VertexViewModel<V : Comparable<V>>(
     fun getVertexText(): String =
         if (labelVisible || idVisible) {
             if (labelVisible && idVisible) {
-                "id: ${vertex.id} label: ${vertex.label}"
+                "id: ${vertex.id}\nlabel: ${vertex.label}"
             } else if (labelVisible) {
                 vertex.label
             } else {
