@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import extensions.hoveredBorder
 import org.coremapx.app.config
@@ -37,41 +36,42 @@ fun <V : Comparable<V>> VertexView(
     val hoveredBorderColor = MaterialTheme.colors.hoveredBorder
     val vertexLabelSize = config.states.vertexLabelSize.value.sp
     var isHovered by remember { mutableStateOf(false) }
-
     Box(
-        modifier =
-            modifier
-                .size(viewModel.radius * 2, viewModel.radius * 2)
-                .offset(viewModel.x, viewModel.y)
-                .background(
-                    color = viewModel.color,
-                    shape = CircleShape,
-                ).drawBehind {
-                    if (isHovered) {
-                        drawCircle(
-                            color = hoveredBorderColor,
-                            style = Stroke(width = 3f),
-                            radius = viewModel.radius.toPx(),
-                        )
-                    }
-                }.onPointerEvent(PointerEventType.Enter) { isHovered = true }
-                .onPointerEvent(PointerEventType.Exit) { isHovered = false }
-                .pointerInput(viewModel) {
-                    detectDragGestures { change, dragAmount ->
-                        change.consume()
-                        viewModel.onDrag(dragAmount)
-                    }
-                },
+        modifier = Modifier.offset(viewModel.x, viewModel.y),
     ) {
         Text(
             modifier =
                 Modifier
                     .align(Alignment.Center)
-                    .offset(0.dp, -viewModel.radius - 10.dp),
+                    .offset(viewModel.radius * 2, -viewModel.radius * 2),
             text = viewModel.getVertexText(),
             color = MaterialTheme.colors.onSurface,
             style = MaterialTheme.typography.body2,
             fontSize = vertexLabelSize,
+        )
+        Box(
+            modifier =
+                modifier
+                    .size(viewModel.radius * 2, viewModel.radius * 2)
+                    .background(
+                        color = viewModel.color,
+                        shape = CircleShape,
+                    ).drawBehind {
+                        if (isHovered) {
+                            drawCircle(
+                                color = hoveredBorderColor,
+                                style = Stroke(width = 3f),
+                                radius = viewModel.radius.toPx(),
+                            )
+                        }
+                    }.onPointerEvent(PointerEventType.Enter) { isHovered = true }
+                    .onPointerEvent(PointerEventType.Exit) { isHovered = false }
+                    .pointerInput(viewModel) {
+                        detectDragGestures { change, dragAmount ->
+                            change.consume()
+                            viewModel.onDrag(dragAmount)
+                        }
+                    },
         )
     }
 }
