@@ -152,6 +152,12 @@ topMenuVertices=Вершины
 topMenuEdges=Рёбра
 topMenuHideVerticesLabels=Спрятать метки вершин
 topMenuShowVerticesLabels=Показать метки вершин
+topMenuHideVerticesIds=Спрятать id вершин
+topMenuShowVerticesIds=Показать id вершин
+topMenuHideEdgesWeights=Спрятать вес рёбер
+topMenuShowEdgesWeights=Показать вес рёбер
+topMenuHideEdgesIds=Спрятать id рёбер
+topMenuShowEdgesIds=Показать id рёбер
 
  ! Force-Directed Animation Menu
 forceDirectedMenuTitle=Меню анимации для Force-Directed стратегии

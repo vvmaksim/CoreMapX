@@ -138,9 +138,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     Text(
                         text =
                             if (viewModel.graphManager.isVerticesIdsVisible.value) {
-                                "Спрятать id вершин"
+                                LocalizationManager.states.ui.topMenuHideVerticesIds.value
                             } else {
-                                "Показать id вершин"
+                                LocalizationManager.states.ui.topMenuShowVerticesIds.value
                             },
                         style = MaterialTheme.typography.button,
                     )
@@ -169,9 +169,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     Text(
                         text =
                             if (viewModel.graphManager.isEdgesWeightsVisible.value) {
-                                "Спрятать веса вершин"
+                                LocalizationManager.states.ui.topMenuHideEdgesWeights.value
                             } else {
-                                "Показать веса рёбер"
+                                LocalizationManager.states.ui.topMenuShowEdgesWeights.value
                             },
                         style = MaterialTheme.typography.button,
                     )
@@ -185,9 +185,9 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     Text(
                         text =
                             if (viewModel.graphManager.isEdgesIdsVisible.value) {
-                                "Спрятать id вершин"
+                                LocalizationManager.states.ui.topMenuHideEdgesIds.value
                             } else {
-                                "Показать id рёбер"
+                                LocalizationManager.states.ui.topMenuShowEdgesIds.value
                             },
                         style = MaterialTheme.typography.button,
                     )

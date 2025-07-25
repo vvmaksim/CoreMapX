@@ -48,10 +48,16 @@ class UIState : LocalizationState {
     var topMenuResetDefaultCanvasState = mutableStateOf("")
     var topMenuGenerateRandomGraph = mutableStateOf("")
     var topMenuFindPath = mutableStateOf("")
-    var topMenuHideVerticesLabels = mutableStateOf("")
     var topMenuVertices = mutableStateOf("")
     var topMenuEdges = mutableStateOf("")
+    var topMenuHideVerticesLabels = mutableStateOf("")
     var topMenuShowVerticesLabels = mutableStateOf("")
+    var topMenuHideVerticesIds = mutableStateOf("")
+    var topMenuShowVerticesIds = mutableStateOf("")
+    var topMenuHideEdgesWeights = mutableStateOf("")
+    var topMenuShowEdgesWeights = mutableStateOf("")
+    var topMenuHideEdgesIds = mutableStateOf("")
+    var topMenuShowEdgesIds = mutableStateOf("")
 
     // Force-Directed Animation Menu
     var forceDirectedMenuTitle = mutableStateOf("")
@@ -120,6 +126,12 @@ class UIState : LocalizationState {
             UIKeys.TOP_MENU_EDGES -> topMenuEdges.value = value
             UIKeys.TOP_MENU_HIDE_VERTICES_LABELS -> topMenuHideVerticesLabels.value = value
             UIKeys.TOP_MENU_SHOW_VERTICES_LABELS -> topMenuShowVerticesLabels.value = value
+            UIKeys.TOP_MENU_HIDE_VERTICES_IDS -> topMenuHideVerticesIds.value = value
+            UIKeys.TOP_MENU_SHOW_VERTICES_IDS -> topMenuShowVerticesIds.value = value
+            UIKeys.TOP_MENU_HIDE_EDGES_WEIGHTS -> topMenuHideEdgesWeights.value = value
+            UIKeys.TOP_MENU_SHOW_EDGES_WEIGHTS -> topMenuShowEdgesWeights.value = value
+            UIKeys.TOP_MENU_HIDE_EDGES_IDS -> topMenuHideEdgesIds.value = value
+            UIKeys.TOP_MENU_SHOW_EDGES_IDS -> topMenuShowEdgesIds.value = value
 
             // Force-Directed Animation Menu
             UIKeys.FORCE_DIRECTED_MENU_TITLE -> forceDirectedMenuTitle.value = value

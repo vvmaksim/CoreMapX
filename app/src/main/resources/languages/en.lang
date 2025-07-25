@@ -152,6 +152,12 @@ topMenuVertices=Vertices
 topMenuEdges=Edges
 topMenuHideVerticesLabels=Hide vertices labels
 topMenuShowVerticesLabels=Show vertices labels
+topMenuHideVerticesIds=Hide vertices ids
+topMenuShowVerticesIds=Show vertices ids
+topMenuHideEdgesWeights=Hide edges weights
+topMenuShowEdgesWeights=Show edges weights
+topMenuHideEdgesIds=Hide edges ids
+topMenuShowEdgesIds=Show edges ids
 
  ! Force-Directed Animation Menu
 forceDirectedMenuTitle=Animation menu for Force-Directed strategy
