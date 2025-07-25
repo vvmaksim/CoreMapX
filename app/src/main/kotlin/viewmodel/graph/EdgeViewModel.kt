@@ -38,7 +38,7 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
         val weight = weight?.toString() ?: ""
         return if (weightVisible || idVisible) {
             if (weightVisible && idVisible) {
-                "id: $edgeId weight: $weight"
+                "id: $edgeId\nweight: $weight"
             } else if (weightVisible) {
                 weight
             } else {
