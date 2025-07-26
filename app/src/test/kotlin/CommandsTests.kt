@@ -27,7 +27,9 @@ class CommandsTests {
         @JvmStatic
         @BeforeAll
         fun setupConfig() {
-            UserDirectory.init()
+            UserDirectory.initTestEnvironment(
+                testPath = System.getProperty("java.io.tmpdir") + "/coremapx_commands_test_" + System.currentTimeMillis(),
+            )
         }
     }
 

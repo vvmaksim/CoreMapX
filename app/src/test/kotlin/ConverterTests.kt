@@ -15,7 +15,9 @@ class ConverterTests {
         @JvmStatic
         @BeforeAll
         fun setup() {
-            UserDirectory.init()
+            UserDirectory.initTestEnvironment(
+                testPath = System.getProperty("java.io.tmpdir") + "/coremapx_converter_test_" + System.currentTimeMillis(),
+            )
         }
     }
 
