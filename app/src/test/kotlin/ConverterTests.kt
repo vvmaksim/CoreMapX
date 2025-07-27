@@ -138,4 +138,208 @@ class ConverterTests {
         assertEquals(expectedFile.name, result.data.name)
         assertEquals(expectedFile.readLines(), result.data.readLines())
     }
+
+    @Test
+    fun `convert and save json to is not weighted graph correct`() {
+        val file = File(tempDir, "test.json")
+        file.writeText(
+            """
+            {
+              "info": {
+                "name": "Template",
+                "author": "User",
+                "isDirected": true,
+                "isWeighted": false
+              },
+              "graph": {
+                "vertices": [
+                  {"id": 1, "label": "1"},
+                  {"id": 2, "label": "2"}
+                ],
+                "edges": [
+                  {"from": 1, "to": 2}
+                ]
+              }
+            }
+            """.trimIndent(),
+        )
+        val result = Converter.convert(file, FileExtensions.GRAPH, ConvertModes.SAVE, null)
+        assertTrue(result is Result.Success)
+        val expectedFile = File(tempDir, "test.graph")
+        expectedFile.writeText(
+            """
+            Info:
+            name=Template
+            author=User
+            isDirected=true
+            isWeighted=false
+            Graph:
+            add vertex 1 1
+            add vertex 2 2
+            add edge 1 2
+            """.trimIndent(),
+        )
+        assertEquals(expectedFile.name, result.data.name)
+        assertEquals(expectedFile.readLines(), result.data.readLines())
+    }
+
+    @Test
+    fun `convert IR to JSON weighted correct`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=Template
+            author=User
+            isDirected=true
+            isWeighted=true
+            Graph:
+            add vertex 1 1
+            add vertex 2 2
+            add edge 1 2 52
+            """.trimIndent(),
+        )
+        val result = Converter.convert(file, FileExtensions.JSON, ConvertModes.LOAD, null)
+        assertTrue(result is Result.Success)
+        val expectedFile = File(tempDir, "test.json")
+        expectedFile.writeText(
+            """
+            {
+                "info": {
+                    "name": "Template",
+                    "author": "User",
+                    "isDirected": true,
+                    "isWeighted": true
+                },
+                "graph": {
+                    "vertices": [
+                        {
+                            "id": 1,
+                            "label": "1"
+                        },
+                        {
+                            "id": 2,
+                            "label": "2"
+                        }
+                    ],
+                    "edges": [
+                        {
+                            "from": 1,
+                            "to": 2,
+                            "weight": 52
+                        }
+                    ]
+                }
+            }
+            """.trimIndent(),
+        )
+        assertEquals(expectedFile.name, result.data.name)
+        assertEquals(expectedFile.readLines(), result.data.readLines())
+    }
+
+    @Test
+    fun `convert IR to JSON unweighted correct`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=Template
+            author=User
+            isDirected=true
+            isWeighted=false
+            Graph:
+            add vertex 1 1
+            add vertex 2 2
+            add edge 1 2
+            """.trimIndent(),
+        )
+        val result = Converter.convert(file, FileExtensions.JSON, ConvertModes.LOAD, null)
+        assertTrue(result is Result.Success)
+        val expectedFile = File(tempDir, "test.json")
+        expectedFile.writeText(
+            """
+            {
+                "info": {
+                    "name": "Template",
+                    "author": "User",
+                    "isDirected": true,
+                    "isWeighted": false
+                },
+                "graph": {
+                    "vertices": [
+                        {
+                            "id": 1,
+                            "label": "1"
+                        },
+                        {
+                            "id": 2,
+                            "label": "2"
+                        }
+                    ],
+                    "edges": [
+                        {
+                            "from": 1,
+                            "to": 2
+                        }
+                    ]
+                }
+            }
+            """.trimIndent(),
+        )
+        assertEquals(expectedFile.name, result.data.name)
+        assertEquals(expectedFile.readLines(), result.data.readLines())
+    }
+
+    @Test
+    fun `convert and save IR to JSON unweighted correct`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=Template
+            author=User
+            isDirected=true
+            isWeighted=false
+            Graph:
+            add vertex 1 1
+            add vertex 2 2
+            add edge 1 2
+            """.trimIndent(),
+        )
+        val result = Converter.convert(file, FileExtensions.JSON, ConvertModes.SAVE, null)
+        assertTrue(result is Result.Success)
+        val expectedFile = File(tempDir, "test.json")
+        expectedFile.writeText(
+            """
+            {
+                "info": {
+                    "name": "Template",
+                    "author": "User",
+                    "isDirected": true,
+                    "isWeighted": false
+                },
+                "graph": {
+                    "vertices": [
+                        {
+                            "id": 1,
+                            "label": "1"
+                        },
+                        {
+                            "id": 2,
+                            "label": "2"
+                        }
+                    ],
+                    "edges": [
+                        {
+                            "from": 1,
+                            "to": 2
+                        }
+                    ]
+                }
+            }
+            """.trimIndent(),
+        )
+        assertEquals(expectedFile.name, result.data.name)
+        assertEquals(expectedFile.readLines(), result.data.readLines())
+    }
 }
