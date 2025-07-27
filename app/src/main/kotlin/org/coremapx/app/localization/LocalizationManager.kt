@@ -3,9 +3,9 @@ package org.coremapx.app.localization
 import model.result.LocalizationErrors
 import model.result.Result
 import org.coremapx.app.config.PrivateConfig
-import org.coremapx.app.localization.states.LocalizationStates
 import org.coremapx.app.localization.objects.LocalizationKeys
 import org.coremapx.app.localization.states.LocalizationState
+import org.coremapx.app.localization.states.LocalizationStates
 import java.io.File
 import java.io.InputStreamReader
 import java.util.Properties
@@ -42,8 +42,12 @@ object LocalizationManager {
 
     private fun getFallBackText(key: String): String = "Localization error for $key"
 
-    private fun updateStateGroup(stateGroup: LocalizationState, keysGroup: Any) {
-        keysGroup::class.members
+    private fun updateStateGroup(
+        stateGroup: LocalizationState,
+        keysGroup: Any,
+    ) {
+        keysGroup::class
+            .members
             .filter { it is kotlin.reflect.KProperty1<*, *> && it.isConst }
             .forEach { property ->
                 try {

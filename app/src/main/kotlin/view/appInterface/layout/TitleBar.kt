@@ -158,7 +158,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         ) {
                             DropdownMenuItem(
                                 onClick = {
-                                    val loadResult = viewModel.openGraphFile()
+                                    val loadResult = viewModel.graphManager.openGraphFile()
                                     warnings =
                                         when (loadResult) {
                                             is Result.Success -> loadResult.data
@@ -168,7 +168,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                                         startString = LocalizationManager.states.ui.errorBasicString.value,
                                                         errorType = loadResult.error.type,
                                                         errorDescription = loadResult.error.description,
-                                                    )
+                                                    ),
                                                 )
                                         }
                                     if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
@@ -191,7 +191,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             }
                             DropdownMenuItem(
                                 onClick = {
-                                    val openResult = viewModel.openGraphRepository()
+                                    val openResult = viewModel.graphManager.openGraphRepository()
                                     when (openResult) {
                                         is Result.Error ->
                                             warnings =
@@ -200,10 +200,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                                         startString = LocalizationManager.states.ui.errorBasicString.value,
                                                         errorType = openResult.error.type,
                                                         errorDescription = openResult.error.description,
-                                                    )
+                                                    ),
                                                 )
 
                                         is Result.Success -> {
+                                            if (openResult.data == null) return@DropdownMenuItem
                                             selectedRepositoryFile = openResult.data
                                             showOpenRepositoryDialog = true
                                         }
@@ -230,10 +231,10 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     }
                     DropdownMenuItem(
                         onClick = {
-                            if (viewModel.graphPath == null) {
+                            if (viewModel.graphManager.graphPath == null) {
                                 showSaveAsDialog = true
                             } else {
-                                val saveResult = viewModel.saveGraph()
+                                val saveResult = viewModel.graphManager.saveGraph()
                                 if (saveResult is Result.Error) {
                                     userNotificationMessage =
                                         LocalizationFormatter.getErrorMessage(
@@ -247,14 +248,14 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             }
                             showFileMenu = false
                         },
-                        enabled = viewModel.isGraphActive,
+                        enabled = viewModel.graphManager.isGraphActive,
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.Save,
                                 contentDescription = LocalizationManager.states.ui.titleBarFileSaveIconDescription.value,
                                 tint =
-                                    if (viewModel.isGraphActive) {
+                                    if (viewModel.graphManager.isGraphActive) {
                                         MaterialTheme.colors.primary
                                     } else {
                                         MaterialTheme.colors.onSurface.copy(
@@ -267,7 +268,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 text = LocalizationManager.states.ui.titleBarFileSaveButton.value,
                                 style = MaterialTheme.typography.button,
                                 color =
-                                    if (viewModel.isGraphActive) {
+                                    if (viewModel.graphManager.isGraphActive) {
                                         MaterialTheme.colors.onSurface
                                     } else {
                                         MaterialTheme.colors.onSurface
@@ -283,14 +284,14 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                             showFileMenu = false
                             showSaveAsDialog = true
                         },
-                        enabled = viewModel.isGraphActive,
+                        enabled = viewModel.graphManager.isGraphActive,
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Filled.SaveAs,
                                 contentDescription = LocalizationManager.states.ui.titleBarFileSaveAsIconDescription.value,
                                 tint =
-                                    if (viewModel.isGraphActive) {
+                                    if (viewModel.graphManager.isGraphActive) {
                                         MaterialTheme.colors.primary
                                     } else {
                                         MaterialTheme.colors.onSurface.copy(
@@ -303,7 +304,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 text = LocalizationManager.states.ui.titleBarFileSaveAsButton.value,
                                 style = MaterialTheme.typography.button,
                                 color =
-                                    if (viewModel.isGraphActive) {
+                                    if (viewModel.graphManager.isGraphActive) {
                                         MaterialTheme.colors.onSurface
                                     } else {
                                         MaterialTheme.colors.onSurface
@@ -353,10 +354,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 Icon(
                     imageVector = if (isMaximized) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
                     contentDescription =
-                        if (isMaximized)
+                        if (isMaximized) {
                             LocalizationManager.states.ui.titleBarRecoverIconDescription.value
-                        else
-                            LocalizationManager.states.ui.titleBarMaximizeIconDescription.value,
+                        } else {
+                            LocalizationManager.states.ui.titleBarMaximizeIconDescription.value
+                        },
                     tint = MaterialTheme.colors.onSurface,
                     modifier = Modifier.size(titleBarIconSize),
                 )
@@ -385,8 +387,8 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
             onDismiss = { showOpenRepositoryDialog = false },
             graphs = graphs,
             onGraphSelected = { graphId ->
-                viewModel.graphId = graphId
-                val loadResult = viewModel.loadGraphFromFile(selectedRepositoryFile)
+                viewModel.graphManager.graphId = graphId
+                val loadResult = viewModel.graphManager.loadGraphFromFile(selectedRepositoryFile)
                 if (loadResult is Result.Error) {
                     warnings =
                         listOf(
@@ -394,7 +396,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                                 startString = LocalizationManager.states.ui.errorBasicString.value,
                                 errorType = loadResult.error.type,
                                 errorDescription = loadResult.error.description,
-                            )
+                            ),
                         )
                 }
                 if (warnings.isNotEmpty()) showOpenGraphErrorsDialog = true
@@ -406,11 +408,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
 
     if (showSaveAsDialog) {
         SaveGraphAs(
-            graphName = viewModel.graphName,
+            graphName = viewModel.graphManager.graphName,
             onDismiss = { showSaveAsDialog = false },
             onSave = { savedGraphDetails ->
                 val saveResult =
-                    viewModel.saveGraph(
+                    viewModel.graphManager.saveGraph(
                         fileName = savedGraphDetails.fileName,
                         directoryPath = savedGraphDetails.directoryPath,
                         fileFormat = savedGraphDetails.fileFormat,
@@ -453,11 +455,11 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
         NewGraph(
             onDismiss = { showNewGraphDialog = false },
             onCreate = { newGraphData ->
-                viewModel.graphName = newGraphData.graphName
-                viewModel.graphAuthor = "None"
-                viewModel.graphPath = null
-                viewModel.graphFormat = null
-                viewModel.updateGraph(newGraphData.graph)
+                viewModel.graphManager.graphName = newGraphData.graphName
+                viewModel.graphManager.graphAuthor = "None"
+                viewModel.graphManager.graphPath = null
+                viewModel.graphManager.graphFormat = null
+                viewModel.graphManager.updateGraph(newGraphData.graph)
             },
         )
     }

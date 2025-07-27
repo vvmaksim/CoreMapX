@@ -15,6 +15,7 @@ class VertexViewModel<V : Comparable<V>>(
     color: Color = config.states.vertexMainColor.value,
     private val vertex: Vertex<V>,
     private val _labelVisible: State<Boolean>,
+    private val _idVisible: State<Boolean>,
     val radius: Dp = config.states.vertexRadius.value.dp,
 ) {
     private var _x = mutableStateOf(x)
@@ -44,8 +45,24 @@ class VertexViewModel<V : Comparable<V>>(
     val labelVisible
         get() = _labelVisible.value
 
+    val idVisible
+        get() = _idVisible.value
+
     fun onDrag(offset: Offset) {
         _x.value += offset.x.dp
         _y.value += offset.y.dp
     }
+
+    fun getVertexText(): String =
+        if (labelVisible || idVisible) {
+            if (labelVisible && idVisible) {
+                "id: ${vertex.id}\nlabel: ${vertex.label}"
+            } else if (labelVisible) {
+                vertex.label
+            } else {
+                "id: ${vertex.id}"
+            }
+        } else {
+            ""
+        }
 }

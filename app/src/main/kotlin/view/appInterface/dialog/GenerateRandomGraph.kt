@@ -201,7 +201,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                             ),
                     )
                     Text(
-                        text = LocalizationManager.states.dialogs.generateRandomGraphIsWeightedGraph.value,
+                        text = LocalizationManager.states.dialogs.generateRandomGraphIsDirectedGraph.value,
                         style = MaterialTheme.typography.body1,
                     )
                 }
@@ -241,7 +241,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                             LocalizationFormatter.getStringWithOneNumber(
                                 startString = LocalizationManager.states.dialogs.generateRandomGraphGeneratingProgress.value,
                                 number = (generationProgress * 100).toLong(),
-                        ),
+                            ),
                         style = MaterialTheme.typography.body2,
                     )
                 }

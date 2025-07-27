@@ -42,9 +42,10 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartHeight"),
             onValueChange = { config.setValue(MAIN_SCREEN_START_HEIGHT, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionMainScreenStartHeight.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionMainScreenStartHeight.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -53,9 +54,10 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             valueType = Int::class,
             value = TextFieldValue("$mainScreenStartWidth"),
             onValueChange = { config.setValue(MAIN_SCREEN_START_WIDTH, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionMainScreenStartWidth.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionMainScreenStartWidth.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -65,9 +67,10 @@ fun MainScreenBlock(isExpandedSettings: Boolean = config.states.isExpandedSettin
             selectedItem = startWindowPlacement,
             onItemSelected = { config.setValue(START_WINDOW_PLACEMENT, it) },
             modifier = dropdownSelectButtonModifier,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionStartWindowPlacement.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionStartWindowPlacement.value,
+                ),
             isExpanded = isExpandedSettings,
         )
     }

@@ -21,15 +21,17 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
 import viewmodel.visualizationStrategy.CircularStrategy
+import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategiesNames
 import viewmodel.visualizationStrategy.VisualizationStrategy
-
+import kotlin.reflect.full.memberProperties
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun Analytics(
+fun <E : Comparable<E>, V : Comparable<V>> Analytics(
     onDismiss: () -> Unit,
-    onStrategyUpdate: (VisualizationStrategy) -> Unit,
+    onStrategyUpdate: (VisualizationStrategy<E, V>) -> Unit,
     selectedLayoutStrategy: String,
     dialogWidth: Dp = 650.dp,
 ) {
@@ -43,10 +45,11 @@ fun Analytics(
     }
 }
 
+@Suppress("ktlint:standard:function-naming")
 @Composable
-fun AnalyticsContent(
+fun <E : Comparable<E>, V : Comparable<V>> AnalyticsContent(
     onDismiss: () -> Unit,
-    onStrategyUpdate: (VisualizationStrategy) -> Unit,
+    onStrategyUpdate: (VisualizationStrategy<E, V>) -> Unit,
     selectedLayoutStrategy: String,
     dialogWidth: Dp = 650.dp,
 ) {
@@ -79,12 +82,23 @@ fun AnalyticsContent(
                     style = MaterialTheme.typography.body2,
                 )
                 DropdownSelectButton(
-                    items = listOf("Random", "Circular"),
+                    items =
+                        VisualizationStrategiesNames::class
+                            .memberProperties
+                            .filter { it.isConst }
+                            .map { it.getter.call() as String },
                     selectedItem = selectedLayoutStrategy,
                     onItemSelected = { newStrategy: String ->
                         when (newStrategy) {
-                            "Random" -> { onStrategyUpdate(RandomStrategy()) }
-                            "Circular" -> { onStrategyUpdate(CircularStrategy()) }
+                            VisualizationStrategiesNames.RANDOM -> {
+                                onStrategyUpdate(RandomStrategy())
+                            }
+                            VisualizationStrategiesNames.CIRCULAR -> {
+                                onStrategyUpdate(CircularStrategy())
+                            }
+                            VisualizationStrategiesNames.FORCE_DIRECTED -> {
+                                onStrategyUpdate(ForceDirectedStrategy())
+                            }
                         }
                     },
                 )
@@ -99,13 +113,13 @@ fun AnalyticsContent(
 private fun PreviewAnalytics() {
     AppTheme {
         Column {
-            AnalyticsContent(
+            AnalyticsContent<Long, Long>(
                 onDismiss = {},
                 onStrategyUpdate = {},
                 selectedLayoutStrategy = "Random",
             )
             Spacer(Modifier.height(8.dp))
-            AnalyticsContent(
+            AnalyticsContent<Long, Long>(
                 onDismiss = {},
                 onStrategyUpdate = {},
                 selectedLayoutStrategy = "Circular",

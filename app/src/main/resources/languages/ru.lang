@@ -100,6 +100,8 @@ colorsWarningColor=Цвет предупреждения
 colorsVertexMainColor=Основной цвет вершин
 colorsHoveredBorderColor=Цвет границ при наведении
 colorsEdgeMainColor=Основной цвет ребра
+colorsShortestPathColor=Цвет кратчайшего найденного пути
+colorsOtherPathsColor=Цвет остальных найденных путей
 colorsCanvasBackgroundColor=Цвет фона холста
 colorsCommandLineBackgroundColor=Цвет фона командной строки
 # Main Screen Block
@@ -129,15 +131,43 @@ workAreaCanvasLimit=Ограничитель холста
 performanceAnimationDuration=Продолжительность анимаций
 performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
+ ! Find Path
+findPathTitle=Поиск пути
+findPathSubtitle=Выберите необходимые параметры для поиска пути
+findPathStartVertexId=Id начальной вершины
+findPathEndVertexId=Id конечной вершины
+findPathVertexIdPlaceholder=Id вершины
+findPathMaxPathsCount=Максимальное количество путей
+findPathMaxPathsPlaceholder=Количество путей
+findPathFindStrategy=Стратегии поиска
+findPathFindButton=Искать
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
 topMenuResetDefaultCanvasState=Выставить позицию холста по умолчанию
 topMenuGenerateRandomGraph=Сгенерировать случайный граф
+topMenuFindPath=Поиск пути
 topMenuVertices=Вершины
 topMenuEdges=Рёбра
 topMenuHideVerticesLabels=Спрятать метки вершин
 topMenuShowVerticesLabels=Показать метки вершин
+topMenuHideVerticesIds=Спрятать id вершин
+topMenuShowVerticesIds=Показать id вершин
+topMenuHideEdgesWeights=Спрятать вес рёбер
+topMenuShowEdgesWeights=Показать вес рёбер
+topMenuHideEdgesIds=Спрятать id рёбер
+topMenuShowEdgesIds=Показать id рёбер
+
+ ! Force-Directed Animation Menu
+forceDirectedMenuTitle=Меню анимации для Force-Directed стратегии
+forceDirectedMenuApply=Применить
+forceDirectedMenuStart=Старт
+forceDirectedMenuStop=Стоп
+forceDirectedMenuIterations=Итерации: {number}
+forceDirectedMenuArea=Площадь: {number}
+forceDirectedMenuGravity=Гравитация: {number}
+forceDirectedMenuSpeed=Скорость: {number}
 
  ! Analytics
 analyticsTitle=Аналитика
@@ -214,6 +244,8 @@ descriptionWarningColor=Цвет предупреждений: желтые зн
 descriptionVertexMainColor=Основной цвет для отображения вершин.
 descriptionHoveredBorderColor=Цвет границы при наведении курсора на вершину графа.
 descriptionEdgeMainColor=Основной цвет для отображения рёбер между вершинами на графе.
+descriptionShortestPathColor=Цвет для отображения рёбер кратчайшего найденного пути.
+descriptionOtherPathsColor=Цвет для отображения рёбер, которые не всегда относятся к кратчайшему пути.
 descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
 descriptionCommandLineBackgroundColor=Цвет фона для командной строки. {nextLine}\
     {nextLine}\
@@ -319,6 +351,19 @@ descriptionCommandFieldScrollDelay=При отправке команды в к�
     Минимально=10{nextLine}\
     Рекомендовано=50{nextLine}\
     Максимально=300
+
+# Top Menu
+## Find Path
+descriptionTopMenuFindPathStartVertex=Поиск пути начнется с вершины с этим идентификатором
+descriptionTopMenuFindPathEndVertex=Поиск пути завершится вершиной с этим идентификатором
+descriptionTopMenuFindPathMaxPaths=Вы можете указать количество путей, которые найдет алгоритм поиска.{nextLine}\
+    {nextLine}\
+    Кратчайший путь будет выделен одним цветом, а остальные пути - другим. Вы можете настроить цвета в настройках программы.
+descriptionTopMenuFindPathFindStrategy=BFS — находит кратчайший путь по количеству рёбер, работает быстро, но не учитывает веса рёбер.{nextLine}\
+    {nextLine}\
+    Dijkstra — ищет путь с минимальной суммой весов рёбер, подходит для графов с неотрицательными весами.{nextLine}\
+    {nextLine}\
+    Bellman-Ford — также ищет путь с минимальным весом, работает с отрицательными весами рёбер, но медленнее других.
 
  ! Error Strings
 

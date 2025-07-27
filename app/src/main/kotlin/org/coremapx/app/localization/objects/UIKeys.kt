@@ -44,10 +44,27 @@ object UIKeys {
     const val TOP_MENU_DRAW_GRAPH_AGAIN = "topMenuDrawGraphAgain"
     const val TOP_MENU_RESET_DEFAULT_CANVAS_STATE = "topMenuResetDefaultCanvasState"
     const val TOP_MENU_GENERATE_RANDOM_GRAPH = "topMenuGenerateRandomGraph"
+    const val TOP_MENU_FIND_PATH = "topMenuFindPath"
     const val TOP_MENU_VERTICES = "topMenuVertices"
     const val TOP_MENU_EDGES = "topMenuEdges"
     const val TOP_MENU_HIDE_VERTICES_LABELS = "topMenuHideVerticesLabels"
     const val TOP_MENU_SHOW_VERTICES_LABELS = "topMenuShowVerticesLabels"
+    const val TOP_MENU_HIDE_VERTICES_IDS = "topMenuHideVerticesIds"
+    const val TOP_MENU_SHOW_VERTICES_IDS = "topMenuShowVerticesIds"
+    const val TOP_MENU_HIDE_EDGES_WEIGHTS = "topMenuHideEdgesWeights"
+    const val TOP_MENU_SHOW_EDGES_WEIGHTS = "topMenuShowEdgesWeights"
+    const val TOP_MENU_HIDE_EDGES_IDS = "topMenuHideEdgesIds"
+    const val TOP_MENU_SHOW_EDGES_IDS = "topMenuShowEdgesIds"
+
+    // Force-Directed Animation Menu
+    const val FORCE_DIRECTED_MENU_TITLE = "forceDirectedMenuTitle"
+    const val FORCE_DIRECTED_MENU_APPLY = "forceDirectedMenuApply"
+    const val FORCE_DIRECTED_MENU_START = "forceDirectedMenuStart"
+    const val FORCE_DIRECTED_MENU_STOP = "forceDirectedMenuStop"
+    const val FORCE_DIRECTED_MENU_ITERATIONS = "forceDirectedMenuIterations"
+    const val FORCE_DIRECTED_MENU_AREA = "forceDirectedMenuArea"
+    const val FORCE_DIRECTED_MENU_GRAVITY = "forceDirectedMenuGravity"
+    const val FORCE_DIRECTED_MENU_SPEED = "forceDirectedMenuSpeed"
 
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"

@@ -45,9 +45,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$graphLayoutHeight"),
             onValueChange = { config.setValue(GRAPH_LAYOUT_HEIGHT, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionGraphLayoutHeight.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionGraphLayoutHeight.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -56,9 +57,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$graphLayoutWidth"),
             onValueChange = { config.setValue(GRAPH_LAYOUT_WIDTH, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionGraphLayoutWidth.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionGraphLayoutWidth.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -67,9 +69,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$vertexRadius"),
             onValueChange = { config.setValue(VERTEX_RADIUS, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionVertexRadius.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionVertexRadius.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -78,9 +81,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$vertexLabelSize"),
             onValueChange = { config.setValue(VERTEX_LABEL_SIZE, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionVertexLabelSize.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionVertexLabelSize.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -89,9 +93,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$edgeLabelSize"),
             onValueChange = { config.setValue(EDGE_LABEL_SIZE, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionEdgeLabelSize.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionEdgeLabelSize.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -100,9 +105,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Float::class,
             value = TextFieldValue("$edgeArrowSize"),
             onValueChange = { config.setValue(EDGE_ARROW_SIZE, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionEdgeArrowSize.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionEdgeArrowSize.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -111,9 +117,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Float::class,
             value = TextFieldValue("$edgeWidth"),
             onValueChange = { config.setValue(EDGE_WIDTH, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionEdgeWidth.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionEdgeWidth.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -122,9 +129,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Float::class,
             value = TextFieldValue("$canvasDragRatio"),
             onValueChange = { config.setValue(CANVAS_DRAG_RATIO, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionCanvasDragRatio.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionCanvasDragRatio.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -133,9 +141,10 @@ fun WorkAreaBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             valueType = Int::class,
             value = TextFieldValue("$canvasLimit"),
             onValueChange = { config.setValue(CANVAS_LIMIT, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionCanvasLimit.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionCanvasLimit.value,
+                ),
             isExpanded = isExpandedSettings,
         )
     }

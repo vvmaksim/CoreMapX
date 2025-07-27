@@ -31,9 +31,10 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
             valueType = Int::class,
             value = TextFieldValue("$animationDuration"),
             onValueChange = { config.setValue(ANIMATION_DURATION, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionAnimationDuration.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionAnimationDuration.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -42,9 +43,10 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
             valueType = Int::class,
             value = TextFieldValue("$commandFieldScrollDelay"),
             onValueChange = { config.setValue(COMMAND_FIELD_SCROLL_DELAY, it.text) },
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionCommandFieldScrollDelay.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionCommandFieldScrollDelay.value,
+                ),
             isExpanded = isExpandedSettings,
         )
     }

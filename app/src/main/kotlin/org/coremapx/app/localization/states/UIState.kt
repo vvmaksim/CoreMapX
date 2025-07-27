@@ -3,7 +3,7 @@ package org.coremapx.app.localization.states
 import androidx.compose.runtime.mutableStateOf
 import org.coremapx.app.localization.objects.UIKeys
 
-class UIState(): LocalizationState {
+class UIState : LocalizationState {
     // Main Menu Buttons
     val mainMenuButtonNewGraph = mutableStateOf("")
     val mainMenuNewGraphIconDescription = mutableStateOf("")
@@ -47,17 +47,37 @@ class UIState(): LocalizationState {
     var topMenuDrawGraphAgain = mutableStateOf("")
     var topMenuResetDefaultCanvasState = mutableStateOf("")
     var topMenuGenerateRandomGraph = mutableStateOf("")
-    var topMenuHideVerticesLabels = mutableStateOf("")
+    var topMenuFindPath = mutableStateOf("")
     var topMenuVertices = mutableStateOf("")
     var topMenuEdges = mutableStateOf("")
+    var topMenuHideVerticesLabels = mutableStateOf("")
     var topMenuShowVerticesLabels = mutableStateOf("")
+    var topMenuHideVerticesIds = mutableStateOf("")
+    var topMenuShowVerticesIds = mutableStateOf("")
+    var topMenuHideEdgesWeights = mutableStateOf("")
+    var topMenuShowEdgesWeights = mutableStateOf("")
+    var topMenuHideEdgesIds = mutableStateOf("")
+    var topMenuShowEdgesIds = mutableStateOf("")
+
+    // Force-Directed Animation Menu
+    var forceDirectedMenuTitle = mutableStateOf("")
+    var forceDirectedMenuApply = mutableStateOf("")
+    var forceDirectedMenuStart = mutableStateOf("")
+    var forceDirectedMenuStop = mutableStateOf("")
+    var forceDirectedMenuIterations = mutableStateOf("")
+    var forceDirectedMenuArea = mutableStateOf("")
+    var forceDirectedMenuGravity = mutableStateOf("")
+    var forceDirectedMenuSpeed = mutableStateOf("")
 
     // Error Strings
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
 
-    override fun updateValue(key: String, value: String) {
-        when(key) {
+    override fun updateValue(
+        key: String,
+        value: String,
+    ) {
+        when (key) {
             // Main Menu Buttons
             UIKeys.MAIN_MENU_BUTTON_NEW_GRAPH -> mainMenuButtonNewGraph.value = value
             UIKeys.MAIN_MENU_NEW_GRAPH_ICON_DESCRIPTION -> mainMenuNewGraphIconDescription.value = value
@@ -101,10 +121,27 @@ class UIState(): LocalizationState {
             UIKeys.TOP_MENU_DRAW_GRAPH_AGAIN -> topMenuDrawGraphAgain.value = value
             UIKeys.TOP_MENU_RESET_DEFAULT_CANVAS_STATE -> topMenuResetDefaultCanvasState.value = value
             UIKeys.TOP_MENU_GENERATE_RANDOM_GRAPH -> topMenuGenerateRandomGraph.value = value
+            UIKeys.TOP_MENU_FIND_PATH -> topMenuFindPath.value = value
             UIKeys.TOP_MENU_VERTICES -> topMenuVertices.value = value
             UIKeys.TOP_MENU_EDGES -> topMenuEdges.value = value
             UIKeys.TOP_MENU_HIDE_VERTICES_LABELS -> topMenuHideVerticesLabels.value = value
             UIKeys.TOP_MENU_SHOW_VERTICES_LABELS -> topMenuShowVerticesLabels.value = value
+            UIKeys.TOP_MENU_HIDE_VERTICES_IDS -> topMenuHideVerticesIds.value = value
+            UIKeys.TOP_MENU_SHOW_VERTICES_IDS -> topMenuShowVerticesIds.value = value
+            UIKeys.TOP_MENU_HIDE_EDGES_WEIGHTS -> topMenuHideEdgesWeights.value = value
+            UIKeys.TOP_MENU_SHOW_EDGES_WEIGHTS -> topMenuShowEdgesWeights.value = value
+            UIKeys.TOP_MENU_HIDE_EDGES_IDS -> topMenuHideEdgesIds.value = value
+            UIKeys.TOP_MENU_SHOW_EDGES_IDS -> topMenuShowEdgesIds.value = value
+
+            // Force-Directed Animation Menu
+            UIKeys.FORCE_DIRECTED_MENU_TITLE -> forceDirectedMenuTitle.value = value
+            UIKeys.FORCE_DIRECTED_MENU_APPLY -> forceDirectedMenuApply.value = value
+            UIKeys.FORCE_DIRECTED_MENU_START -> forceDirectedMenuStart.value = value
+            UIKeys.FORCE_DIRECTED_MENU_STOP -> forceDirectedMenuStop.value = value
+            UIKeys.FORCE_DIRECTED_MENU_ITERATIONS -> forceDirectedMenuIterations.value = value
+            UIKeys.FORCE_DIRECTED_MENU_AREA -> forceDirectedMenuArea.value = value
+            UIKeys.FORCE_DIRECTED_MENU_GRAVITY -> forceDirectedMenuGravity.value = value
+            UIKeys.FORCE_DIRECTED_MENU_SPEED -> forceDirectedMenuSpeed.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value

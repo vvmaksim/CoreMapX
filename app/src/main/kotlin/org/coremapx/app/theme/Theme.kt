@@ -17,9 +17,6 @@ object Theme {
     val hoveredBorderColor: Color
         get() = config.states.hoveredBorderColor.value
 
-    val edgeMainColor: Color
-        get() = config.states.edgeMainColor.value
-
     val canvasBackgroundColor: Color
         get() = config.states.canvasBackgroundColor.value
 

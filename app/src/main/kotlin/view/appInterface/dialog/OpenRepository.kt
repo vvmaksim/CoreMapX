@@ -175,20 +175,22 @@ fun OpenRepositoryContent(
                                                     val isWeighted = graph.isWeighted.toBooleanOrNull() ?: false
                                                     Text(
                                                         text =
-                                                            if (isDirected)
+                                                            if (isDirected) {
                                                                 LocalizationManager.states.dialogs.openRepositoryIsDirected.value
-                                                            else
-                                                                LocalizationManager.states.dialogs.openRepositoryIsUndirected.value,
+                                                            } else {
+                                                                LocalizationManager.states.dialogs.openRepositoryIsUndirected.value
+                                                            },
                                                         style = MaterialTheme.typography.body2,
                                                         modifier = Modifier.align(Alignment.CenterVertically),
                                                     )
                                                     Spacer(modifier = Modifier.width(8.dp))
                                                     Text(
                                                         text =
-                                                            if (isWeighted)
+                                                            if (isWeighted) {
                                                                 LocalizationManager.states.dialogs.openRepositoryIsWeighted.value
-                                                            else
-                                                                LocalizationManager.states.dialogs.openRepositoryIsUnweighted.value,
+                                                            } else {
+                                                                LocalizationManager.states.dialogs.openRepositoryIsUnweighted.value
+                                                            },
                                                         style = MaterialTheme.typography.body2,
                                                         modifier = Modifier.align(Alignment.CenterVertically),
                                                     )
@@ -203,7 +205,8 @@ fun OpenRepositoryContent(
                                                     Text(
                                                         text =
                                                             LocalizationFormatter.getStringWithOneNumber(
-                                                                startString = LocalizationManager.states.dialogs.openRepositoryVerticesCount.value,
+                                                                startString =
+                                                                    LocalizationManager.states.dialogs.openRepositoryVerticesCount.value,
                                                                 number = vertexCount,
                                                             ),
                                                         style = MaterialTheme.typography.body2,
@@ -213,7 +216,8 @@ fun OpenRepositoryContent(
                                                     Text(
                                                         text =
                                                             LocalizationFormatter.getStringWithOneNumber(
-                                                                startString = LocalizationManager.states.dialogs.openRepositoryEdgesCount.value,
+                                                                startString =
+                                                                    LocalizationManager.states.dialogs.openRepositoryEdgesCount.value,
                                                                 number = edgeCount,
                                                             ),
                                                         style = MaterialTheme.typography.body2,

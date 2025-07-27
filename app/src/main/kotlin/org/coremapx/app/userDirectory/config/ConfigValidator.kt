@@ -20,8 +20,9 @@ class ConfigValidator {
                 // Colors
                 ConfigKeys.PRIMARY, ConfigKeys.PRIMARY_VARIANT, ConfigKeys.SECONDARY, ConfigKeys.SECONDARY_VARIANT,
                 ConfigKeys.BACKGROUND, ConfigKeys.SURFACE, ConfigKeys.ERROR, ConfigKeys.ON_PRIMARY, ConfigKeys.ON_SECONDARY,
-                ConfigKeys.ON_BACKGROUND, ConfigKeys.ON_SURFACE, ConfigKeys.ON_ERROR, ConfigKeys.BORDER_COLOR, ConfigKeys.SUCCESS_COLOR, ConfigKeys.WARNING_COLOR, ConfigKeys.VERTEX_MAIN_COLOR,
-                ConfigKeys.HOVERED_BORDER_COLOR, ConfigKeys.EDGE_MAIN_COLOR, ConfigKeys.CANVAS_BACKGROUND_COLOR,
+                ConfigKeys.ON_BACKGROUND, ConfigKeys.ON_SURFACE, ConfigKeys.ON_ERROR, ConfigKeys.BORDER_COLOR, ConfigKeys.SUCCESS_COLOR,
+                ConfigKeys.WARNING_COLOR, ConfigKeys.VERTEX_MAIN_COLOR, ConfigKeys.HOVERED_BORDER_COLOR, ConfigKeys.EDGE_MAIN_COLOR,
+                ConfigKeys.SHORTEST_PATH_COLOR, ConfigKeys.OTHER_PATHS_COLOR, ConfigKeys.CANVAS_BACKGROUND_COLOR,
                 ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR,
                 -> colorValidator(key, value)
 

@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.localization.LocalizationManager
+import view.appInterface.dialog.FindPath
 import view.appInterface.dialog.GenerateRandomGraph
 import viewmodel.MainScreenViewModel
 
@@ -33,6 +34,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
     var verticesExpanded by remember { mutableStateOf(false) }
     var edgesExpanded by remember { mutableStateOf(false) }
     var showGenerateRandomGraphDialog by remember { mutableStateOf(false) }
+    var showFindPathDialog by remember { mutableStateOf(false) }
 
     Row(
         modifier =
@@ -54,7 +56,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             ) {
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.resetGraphView()
+                        viewModel.graphManager.resetGraphView()
                         actionsExpanded = false
                     },
                 ) {
@@ -65,7 +67,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                 }
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.resetCanvas()
+                        viewModel.canvasManager.resetCanvas()
                         actionsExpanded = false
                     },
                 ) {
@@ -82,6 +84,17 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                 ) {
                     Text(
                         text = LocalizationManager.states.ui.topMenuGenerateRandomGraph.value,
+                        style = MaterialTheme.typography.button,
+                    )
+                }
+                DropdownMenuItem(
+                    onClick = {
+                        showFindPathDialog = true
+                        actionsExpanded = false
+                    },
+                ) {
+                    Text(
+                        text = LocalizationManager.states.ui.topMenuFindPath.value,
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -102,16 +115,33 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
             ) {
                 DropdownMenuItem(
                     onClick = {
-                        viewModel.setShowVerticesLabels(!viewModel.showVerticesLabels.value)
+                        viewModel.graphManager.setIsVerticesLabelsVisible(!viewModel.graphManager.isVerticesLabelsVisible.value)
                         verticesExpanded = false
                     },
                 ) {
                     Text(
                         text =
-                            if (viewModel.showVerticesLabels.value)
+                            if (viewModel.graphManager.isVerticesLabelsVisible.value) {
                                 LocalizationManager.states.ui.topMenuHideVerticesLabels.value
-                            else
-                                LocalizationManager.states.ui.topMenuShowVerticesLabels.value,
+                            } else {
+                                LocalizationManager.states.ui.topMenuShowVerticesLabels.value
+                            },
+                        style = MaterialTheme.typography.button,
+                    )
+                }
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.graphManager.setIsVerticesIdsVisible(!viewModel.graphManager.isVerticesIdsVisible.value)
+                        verticesExpanded = false
+                    },
+                ) {
+                    Text(
+                        text =
+                            if (viewModel.graphManager.isVerticesIdsVisible.value) {
+                                LocalizationManager.states.ui.topMenuHideVerticesIds.value
+                            } else {
+                                LocalizationManager.states.ui.topMenuShowVerticesIds.value
+                            },
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -125,14 +155,58 @@ fun <E : Comparable<E>, V : Comparable<V>> TopMenu(
                     style = MaterialTheme.typography.button,
                 )
             }
+            DropdownMenu(
+                expanded = edgesExpanded,
+                onDismissRequest = { edgesExpanded = false },
+                modifier = Modifier.background(color = MaterialTheme.colors.background),
+            ) {
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.graphManager.setIsEdgesWeightsVisible(!viewModel.graphManager.isEdgesWeightsVisible.value)
+                        edgesExpanded = false
+                    },
+                ) {
+                    Text(
+                        text =
+                            if (viewModel.graphManager.isEdgesWeightsVisible.value) {
+                                LocalizationManager.states.ui.topMenuHideEdgesWeights.value
+                            } else {
+                                LocalizationManager.states.ui.topMenuShowEdgesWeights.value
+                            },
+                        style = MaterialTheme.typography.button,
+                    )
+                }
+                DropdownMenuItem(
+                    onClick = {
+                        viewModel.graphManager.setIsEdgesIdsVisible(!viewModel.graphManager.isEdgesIdsVisible.value)
+                        edgesExpanded = false
+                    },
+                ) {
+                    Text(
+                        text =
+                            if (viewModel.graphManager.isEdgesIdsVisible.value) {
+                                LocalizationManager.states.ui.topMenuHideEdgesIds.value
+                            } else {
+                                LocalizationManager.states.ui.topMenuShowEdgesIds.value
+                            },
+                        style = MaterialTheme.typography.button,
+                    )
+                }
+            }
         }
     }
     if (showGenerateRandomGraphDialog) {
         GenerateRandomGraph(
             onDismiss = { showGenerateRandomGraphDialog = false },
             onGraphUpdate = { newGraph ->
-                viewModel.updateGraph(newGraph)
+                viewModel.graphManager.updateGraph(newGraph)
             },
+        )
+    }
+    if (showFindPathDialog) {
+        FindPath(
+            viewModel = viewModel,
+            onDismiss = { showFindPathDialog = false },
         )
     }
 }

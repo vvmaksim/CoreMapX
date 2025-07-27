@@ -11,7 +11,7 @@ fun <E : Comparable<E>, V : Comparable<V>> WorkSpace(
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier,
 ) {
-    if (viewModel.isGraphActive) {
+    if (viewModel.graphManager.isGraphActive) {
         MainWorkArea(
             viewModel = viewModel,
             modifier = modifier,

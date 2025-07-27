@@ -61,10 +61,11 @@ fun SettingsBlock(
             Icon(
                 imageVector = if (isExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
                 contentDescription =
-                    if (isExpanded)
+                    if (isExpanded) {
                         LocalizationManager.states.anyIconDescriptionsStates.settingsCollapse.value
-                    else
-                        LocalizationManager.states.anyIconDescriptionsStates.settingsExpand.value,
+                    } else {
+                        LocalizationManager.states.anyIconDescriptionsStates.settingsExpand.value
+                    },
                 tint = MaterialTheme.colors.primary,
             )
         }

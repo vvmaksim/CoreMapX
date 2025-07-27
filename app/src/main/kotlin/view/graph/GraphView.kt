@@ -3,6 +3,7 @@ package view.graph
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.material.MaterialTheme
@@ -12,7 +13,7 @@ import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalDensity
 import extensions.canvasBackground
 import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
@@ -27,45 +28,60 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
     onPan: (Float, Float) -> Unit,
     onZoom: (Float) -> Unit,
 ) {
-    val canvasDragRatio = config.states.canvasDragRatio.value
-
-    Box(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .background(color = MaterialTheme.colors.canvasBackground)
-                .pointerInput(Unit) {
-                    awaitPointerEventScope {
-                        while (true) {
-                            val event = awaitPointerEvent()
-                            if (event.type == PointerEventType.Scroll) {
-                                val scrollAmount = event.changes.first().scrollDelta
-                                onZoom(-scrollAmount.y * 0.1f)
-                            }
-                        }
-                    }
-                }.pointerInput(Unit) {
-                    detectDragGestures(
-                        onDrag = { change, dragAmount ->
-                            change.consume()
-                            onPan(dragAmount.x * canvasDragRatio, dragAmount.y * canvasDragRatio)
-                        },
-                    )
-                },
-    ) {
+    BoxWithConstraints {
+        val density = LocalDensity.current
+        val canvasWidth = with(density) { maxWidth.toPx() }
+        val canvasHeight = with(density) { maxHeight.toPx() }
+        val graphLayoutWidth =
+            config.states.graphLayoutWidth.value
+                .toFloat()
+        val graphLayoutHeight =
+            config.states.graphLayoutHeight.value
+                .toFloat()
         Box(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .offset(offsetX.dp, offsetY.dp)
-                    .graphicsLayer(
-                        scaleX = scale,
-                        scaleY = scale,
-                        transformOrigin = TransformOrigin(0.5f, 0.5f),
-                    ),
+                    .background(color = MaterialTheme.colors.canvasBackground)
+                    .pointerInput(Unit) {
+                        awaitPointerEventScope {
+                            while (true) {
+                                val event = awaitPointerEvent()
+                                if (event.type == PointerEventType.Scroll) {
+                                    val scrollAmount = event.changes.first().scrollDelta
+                                    onZoom(-scrollAmount.y * 0.1f)
+                                }
+                            }
+                        }
+                    }.pointerInput(Unit) {
+                        detectDragGestures(
+                            onDrag = { change, dragAmount ->
+                                change.consume()
+                                onPan(
+                                    dragAmount.x * config.states.canvasDragRatio.value,
+                                    dragAmount.y * config.states.canvasDragRatio.value,
+                                )
+                            },
+                        )
+                    },
         ) {
-            viewModel.edges.forEach { edgeViewModel -> EdgeView(edgeViewModel) }
-            viewModel.vertices.forEach { vertexViewModel -> VertexView(vertexViewModel) }
+            val offsetXDp = with(density) { ((offsetX + (canvasWidth / 2f) - (graphLayoutWidth * scale / 2f))).toDp() }
+            val offsetYDp = with(density) { ((offsetY + (canvasHeight / 2f) - (graphLayoutHeight * scale / 2f))).toDp() }
+            Box(
+                modifier =
+                    Modifier
+                        .offset(
+                            x = offsetXDp,
+                            y = offsetYDp,
+                        ).graphicsLayer(
+                            scaleX = scale,
+                            scaleY = scale,
+                            transformOrigin = TransformOrigin(0f, 0f),
+                        ),
+            ) {
+                viewModel.edges.forEach { edgeViewModel -> EdgeView(edgeViewModel) }
+                viewModel.vertices.forEach { vertexViewModel -> VertexView(vertexViewModel) }
+            }
         }
     }
 }

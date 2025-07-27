@@ -2,12 +2,13 @@ package org.coremapx.app.localization.objects
 
 object DescriptionsKeys {
     // Settings
-    //// General Block
+    // // General Block
     const val LANGUAGE = "descriptionLanguage"
     const val THEME = "descriptionTheme"
     const val SYSTEM_DIALOG_THEME = "descriptionSystemDialogTheme"
     const val IS_EXPANDED_SETTINGS = "descriptionIsExpandedSettings"
-    //// Colors Block
+
+    // // Colors Block
     const val PRIMARY = "descriptionPrimary"
     const val PRIMARY_VARIANT = "descriptionPrimaryVariant"
     const val SECONDARY = "descriptionSecondary"
@@ -26,22 +27,28 @@ object DescriptionsKeys {
     const val VERTEX_MAIN_COLOR = "descriptionVertexMainColor"
     const val HOVERED_BORDER_COLOR = "descriptionHoveredBorderColor"
     const val EDGE_MAIN_COLOR = "descriptionEdgeMainColor"
+    const val SHORTEST_PATH_COLOR = "descriptionShortestPathColor"
+    const val OTHER_PATHS_COLOR = "descriptionOtherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "descriptionCanvasBackgroundColor"
     const val COMMAND_LINE_BACKGROUND_COLOR = "descriptionCommandLineBackgroundColor"
-    //// Main Screen Block
+
+    // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "descriptionMainScreenStartHeight"
     const val MAIN_SCREEN_START_WIDTH = "descriptionMainScreenStartWidth"
     const val START_WINDOW_PLACEMENT = "descriptionStartWindowPlacement"
-    //// Title Bar Block
+
+    // // Title Bar Block
     const val TITLE_BAR_HEIGHT = "descriptionTitleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "descriptionTitleBarIconSize"
-    //// Command Field Block
+
+    // // Command Field Block
     const val MESSAGE_OUTPUT_HEIGHT = "descriptionMessageOutputHeight"
     const val MAX_COUNT_MESSAGES = "descriptionMaxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "descriptionMaxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "descriptionCommandFieldWidth"
     const val IS_TRANSPARENT_COMMAND_LINE = "descriptionIsTransparentCommandLine"
-    //// Work Area Block
+
+    // // Work Area Block
     const val GRAPH_LAYOUT_HEIGHT = "descriptionGraphLayoutHeight"
     const val GRAPH_LAYOUT_WIDTH = "descriptionGraphLayoutWidth"
     const val VERTEX_RADIUS = "descriptionVertexRadius"
@@ -51,7 +58,14 @@ object DescriptionsKeys {
     const val EDGE_WIDTH = "descriptionEdgeWidth"
     const val CANVAS_DRAG_RATIO = "descriptionCanvasDragRatio"
     const val CANVAS_LIMIT = "descriptionCanvasLimit"
-    //// Performance Block
+
+    // // Performance Block
     const val ANIMATION_DURATION = "descriptionAnimationDuration"
     const val COMMAND_FIELD_SCROLL_DELAY = "descriptionCommandFieldScrollDelay"
+
+    // Top Menu
+    const val TOP_MENU_FIND_PATH_START_VERTEX = "descriptionTopMenuFindPathStartVertex"
+    const val TOP_MENU_FIND_PATH_END_VERTEX = "descriptionTopMenuFindPathEndVertex"
+    const val TOP_MENU_FIND_PATH_MAX_PATHS = "descriptionTopMenuFindPathMaxPaths"
+    const val TOP_MENU_FIND_PATH_FIND_STRATEGY = "descriptionTopMenuFindPathFindStrategy"
 }

@@ -12,7 +12,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.sp
-import extensions.edgeMain
 import org.coremapx.app.config
 import viewmodel.graph.EdgeViewModel
 import kotlin.math.atan2
@@ -26,7 +25,6 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
     viewModel: EdgeViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
-    val edgeMainColor = MaterialTheme.colors.edgeMain
     val edgeWidth = config.states.edgeWidth.value
     val edgeArrowSize = config.states.edgeArrowSize.value
     val edgeLabelSize = config.states.edgeLabelSize.value.sp
@@ -66,7 +64,7 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
             drawLine(
                 start = start,
                 end = end,
-                color = edgeMainColor,
+                color = viewModel.color,
                 strokeWidth = edgeWidth,
             )
 
@@ -95,7 +93,7 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
 
                 drawPath(
                     path = path,
-                    color = edgeMainColor,
+                    color = viewModel.color,
                     style = Stroke(width = edgeWidth),
                 )
             }
@@ -105,7 +103,7 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
             val midX = (viewModel.from.x + viewModel.to.x) / 2
             val midY = (viewModel.from.y + viewModel.to.y) / 2
             Text(
-                text = weight.toString(),
+                text = viewModel.getEdgeText(),
                 modifier = Modifier.offset(midX, midY),
                 color = MaterialTheme.colors.onSurface,
                 style = MaterialTheme.typography.body2,

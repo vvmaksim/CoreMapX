@@ -3,14 +3,15 @@ package org.coremapx.app.localization.states
 import androidx.compose.runtime.mutableStateOf
 import org.coremapx.app.localization.objects.DescriptionsKeys
 
-class DescriptionsStates: LocalizationState {
+class DescriptionsStates : LocalizationState {
     // Settings
-    //// General Block
+    // // General Block
     val descriptionLanguage = mutableStateOf("")
     val descriptionTheme = mutableStateOf("")
     val descriptionSystemDialogTheme = mutableStateOf("")
     val descriptionIsExpandedSettings = mutableStateOf("")
-    //// Colors Block
+
+    // // Colors Block
     val descriptionPrimary = mutableStateOf("")
     val descriptionPrimaryVariant = mutableStateOf("")
     val descriptionSecondary = mutableStateOf("")
@@ -29,22 +30,28 @@ class DescriptionsStates: LocalizationState {
     val descriptionVertexMainColor = mutableStateOf("")
     val descriptionHoveredBorderColor = mutableStateOf("")
     val descriptionEdgeMainColor = mutableStateOf("")
+    val descriptionShortestPathColor = mutableStateOf("")
+    val descriptionOtherPathsColor = mutableStateOf("")
     val descriptionCanvasBackgroundColor = mutableStateOf("")
     val descriptionCommandLineBackgroundColor = mutableStateOf("")
-    //// Main Screen Block
+
+    // // Main Screen Block
     val descriptionMainScreenStartHeight = mutableStateOf("")
     val descriptionMainScreenStartWidth = mutableStateOf("")
     val descriptionStartWindowPlacement = mutableStateOf("")
-    //// Title Bar Block
+
+    // // Title Bar Block
     val descriptionTitleBarHeight = mutableStateOf("")
     val descriptionTitleBarIconSize = mutableStateOf("")
-    //// Command Field Block
+
+    // // Command Field Block
     val descriptionMessageOutputHeight = mutableStateOf("")
     val descriptionMaxCountMessages = mutableStateOf("")
     val descriptionMaxCountUserCommands = mutableStateOf("")
     val descriptionCommandFieldWidth = mutableStateOf("")
     val descriptionIsTransparentCommandLine = mutableStateOf("")
-    //// Work Area Block
+
+    // // Work Area Block
     val descriptionGraphLayoutHeight = mutableStateOf("")
     val descriptionGraphLayoutWidth = mutableStateOf("")
     val descriptionVertexRadius = mutableStateOf("")
@@ -54,19 +61,29 @@ class DescriptionsStates: LocalizationState {
     val descriptionEdgeWidth = mutableStateOf("")
     val descriptionCanvasDragRatio = mutableStateOf("")
     val descriptionCanvasLimit = mutableStateOf("")
-    //// Performance Block
+
+    // // Performance Block
     val descriptionAnimationDuration = mutableStateOf("")
     val descriptionCommandFieldScrollDelay = mutableStateOf("")
 
-    override fun updateValue(key: String, value: String) {
-        when(key) {
+    // Top Menu
+    val descriptionTopMenuFindPathStartVertex = mutableStateOf("")
+    val descriptionTopMenuFindPathEndVertex = mutableStateOf("")
+    val descriptionTopMenuFindPathMaxPaths = mutableStateOf("")
+    val descriptionTopMenuFindPathFindStrategy = mutableStateOf("")
+
+    override fun updateValue(
+        key: String,
+        value: String,
+    ) {
+        when (key) {
             // Settings
-            //// General Block
+            // // General Block
             DescriptionsKeys.LANGUAGE -> descriptionLanguage.value = value
             DescriptionsKeys.THEME -> descriptionTheme.value = value
             DescriptionsKeys.SYSTEM_DIALOG_THEME -> descriptionSystemDialogTheme.value = value
             DescriptionsKeys.IS_EXPANDED_SETTINGS -> descriptionIsExpandedSettings.value = value
-            //// Colors Block
+            // // Colors Block
             DescriptionsKeys.PRIMARY -> descriptionPrimary.value = value
             DescriptionsKeys.PRIMARY_VARIANT -> descriptionPrimaryVariant.value = value
             DescriptionsKeys.SECONDARY -> descriptionSecondary.value = value
@@ -85,22 +102,24 @@ class DescriptionsStates: LocalizationState {
             DescriptionsKeys.VERTEX_MAIN_COLOR -> descriptionVertexMainColor.value = value
             DescriptionsKeys.HOVERED_BORDER_COLOR -> descriptionHoveredBorderColor.value = value
             DescriptionsKeys.EDGE_MAIN_COLOR -> descriptionEdgeMainColor.value = value
+            DescriptionsKeys.SHORTEST_PATH_COLOR -> descriptionShortestPathColor.value = value
+            DescriptionsKeys.OTHER_PATHS_COLOR -> descriptionOtherPathsColor.value = value
             DescriptionsKeys.CANVAS_BACKGROUND_COLOR -> descriptionCanvasBackgroundColor.value = value
             DescriptionsKeys.COMMAND_LINE_BACKGROUND_COLOR -> descriptionCommandLineBackgroundColor.value = value
-            //// Main Screen Block
+            // // Main Screen Block
             DescriptionsKeys.MAIN_SCREEN_START_HEIGHT -> descriptionMainScreenStartHeight.value = value
             DescriptionsKeys.MAIN_SCREEN_START_WIDTH -> descriptionMainScreenStartWidth.value = value
             DescriptionsKeys.START_WINDOW_PLACEMENT -> descriptionStartWindowPlacement.value = value
-            //// Title Bar Block
+            // // Title Bar Block
             DescriptionsKeys.TITLE_BAR_HEIGHT -> descriptionTitleBarHeight.value = value
             DescriptionsKeys.TITLE_BAR_ICON_SIZE -> descriptionTitleBarIconSize.value = value
-            //// Command Field Block
+            // // Command Field Block
             DescriptionsKeys.MESSAGE_OUTPUT_HEIGHT -> descriptionMessageOutputHeight.value = value
             DescriptionsKeys.MAX_COUNT_MESSAGES -> descriptionMaxCountMessages.value = value
             DescriptionsKeys.MAX_COUNT_USER_COMMANDS -> descriptionMaxCountUserCommands.value = value
             DescriptionsKeys.COMMAND_FIELD_WIDTH -> descriptionCommandFieldWidth.value = value
             DescriptionsKeys.IS_TRANSPARENT_COMMAND_LINE -> descriptionIsTransparentCommandLine.value = value
-            //// Work Area Block
+            // // Work Area Block
             DescriptionsKeys.GRAPH_LAYOUT_HEIGHT -> descriptionGraphLayoutHeight.value = value
             DescriptionsKeys.GRAPH_LAYOUT_WIDTH -> descriptionGraphLayoutWidth.value = value
             DescriptionsKeys.VERTEX_RADIUS -> descriptionVertexRadius.value = value
@@ -110,9 +129,15 @@ class DescriptionsStates: LocalizationState {
             DescriptionsKeys.EDGE_WIDTH -> descriptionEdgeWidth.value = value
             DescriptionsKeys.CANVAS_DRAG_RATIO -> descriptionCanvasDragRatio.value = value
             DescriptionsKeys.CANVAS_LIMIT -> descriptionCanvasLimit.value = value
-            //// Performance Block
+            // // Performance Block
             DescriptionsKeys.ANIMATION_DURATION -> descriptionAnimationDuration.value = value
             DescriptionsKeys.COMMAND_FIELD_SCROLL_DELAY -> descriptionCommandFieldScrollDelay.value = value
+
+            // Top Menu
+            DescriptionsKeys.TOP_MENU_FIND_PATH_START_VERTEX -> descriptionTopMenuFindPathStartVertex.value = value
+            DescriptionsKeys.TOP_MENU_FIND_PATH_END_VERTEX -> descriptionTopMenuFindPathEndVertex.value = value
+            DescriptionsKeys.TOP_MENU_FIND_PATH_MAX_PATHS -> descriptionTopMenuFindPathMaxPaths.value = value
+            DescriptionsKeys.TOP_MENU_FIND_PATH_FIND_STRATEGY -> descriptionTopMenuFindPathFindStrategy.value = value
         }
     }
 }

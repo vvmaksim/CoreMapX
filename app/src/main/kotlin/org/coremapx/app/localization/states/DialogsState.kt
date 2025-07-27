@@ -3,7 +3,7 @@ package org.coremapx.app.localization.states
 import androidx.compose.runtime.mutableStateOf
 import org.coremapx.app.localization.objects.DialogsKeys
 
-class DialogsState: LocalizationState {
+class DialogsState : LocalizationState {
     // New Graph
     val newGraphTitle = mutableStateOf("")
     val newGraphTextFieldPlaceholder = mutableStateOf("")
@@ -38,12 +38,14 @@ class DialogsState: LocalizationState {
     val settingsCommandFieldBlockName = mutableStateOf("")
     val settingsWorkAreaBlockName = mutableStateOf("")
     val settingsPerformanceBlockName = mutableStateOf("")
-    //// General Block
+
+    // // General Block
     val generalLanguage = mutableStateOf("")
     val generalTheme = mutableStateOf("")
     val generalSystemDialogTheme = mutableStateOf("")
     val generalExpanded = mutableStateOf("")
-    //// Colors Block
+
+    // // Colors Block
     val colorsPrimary = mutableStateOf("")
     val colorsPrimaryVariant = mutableStateOf("")
     val colorsSecondary = mutableStateOf("")
@@ -62,22 +64,28 @@ class DialogsState: LocalizationState {
     val colorsVertexMainColor = mutableStateOf("")
     val colorsHoveredBorderColor = mutableStateOf("")
     val colorsEdgeMainColor = mutableStateOf("")
+    val colorsShortestPathColor = mutableStateOf("")
+    val colorsOtherPathsColor = mutableStateOf("")
     val colorsCanvasBackgroundColor = mutableStateOf("")
     val colorsCommandLineBackgroundColor = mutableStateOf("")
-    //// Main Screen Block
+
+    // // Main Screen Block
     val mainScreenStartHeight = mutableStateOf("")
     val mainScreenStartWidth = mutableStateOf("")
     val mainScreenPlacement = mutableStateOf("")
-    //// Title Bar Block
+
+    // // Title Bar Block
     val titleBarHeight = mutableStateOf("")
     val titleBarIconSize = mutableStateOf("")
-    //// Command Field Block
+
+    // // Command Field Block
     val commandFieldMessageOutputHeight = mutableStateOf("")
     val commandFieldMaxCountMessages = mutableStateOf("")
     val commandFieldMaxCountUserCommands = mutableStateOf("")
     val commandFieldWidth = mutableStateOf("")
     val commandFieldIsTransparent = mutableStateOf("")
-    //// Work Area Block
+
+    // // Work Area Block
     val workAreaGraphLayoutHeight = mutableStateOf("")
     val workAreaGraphLayoutWidth = mutableStateOf("")
     val workAreaVertexRadius = mutableStateOf("")
@@ -87,7 +95,8 @@ class DialogsState: LocalizationState {
     val workAreaEdgeWidth = mutableStateOf("")
     val workAreaCanvasDragRatio = mutableStateOf("")
     val workAreaCanvasLimit = mutableStateOf("")
-    //// Performance Block
+
+    // // Performance Block
     val performanceAnimationDuration = mutableStateOf("")
     val performanceCommandFieldScrollDelay = mutableStateOf("")
 
@@ -131,8 +140,22 @@ class DialogsState: LocalizationState {
     val openRepositoryEdgesCount = mutableStateOf("")
     val openRepositoryOpenButton = mutableStateOf("")
 
-    override fun updateValue(key: String, value: String) {
-        when(key) {
+    // Find Path
+    val findPathTitle = mutableStateOf("")
+    val findPathSubtitle = mutableStateOf("")
+    val findPathStartVertexId = mutableStateOf("")
+    val findPathEndVertexId = mutableStateOf("")
+    val findPathVertexIdPlaceholder = mutableStateOf("")
+    val findPathMaxPathsCount = mutableStateOf("")
+    val findPathMaxPathsPlaceholder = mutableStateOf("")
+    val findPathFindStrategy = mutableStateOf("")
+    val findPathFindButton = mutableStateOf("")
+
+    override fun updateValue(
+        key: String,
+        value: String,
+    ) {
+        when (key) {
             // New Graph
             DialogsKeys.NEW_GRAPH_TITLE -> newGraphTitle.value = value
             DialogsKeys.NEW_GRAPH_TEXT_FIELD_PLACEHOLDER -> newGraphTextFieldPlaceholder.value = value
@@ -167,12 +190,12 @@ class DialogsState: LocalizationState {
             DialogsKeys.SETTINGS_COMMAND_FIELD_BLOCK_NAME -> settingsCommandFieldBlockName.value = value
             DialogsKeys.SETTINGS_WORK_AREA_BLOCK_NAME -> settingsWorkAreaBlockName.value = value
             DialogsKeys.SETTINGS_PERFORMANCE_BLOCK_NAME -> settingsPerformanceBlockName.value = value
-            //// General Block
+            // // General Block
             DialogsKeys.GENERAL_LANGUAGE -> generalLanguage.value = value
             DialogsKeys.GENERAL_THEME -> generalTheme.value = value
             DialogsKeys.GENERAL_SYSTEM_DIALOG_THEME -> generalSystemDialogTheme.value = value
             DialogsKeys.GENERAL_EXPANDED -> generalExpanded.value = value
-            //// Colors Block
+            // // Colors Block
             DialogsKeys.COLORS_PRIMARY -> colorsPrimary.value = value
             DialogsKeys.COLORS_PRIMARY_VARIANT -> colorsPrimaryVariant.value = value
             DialogsKeys.COLORS_SECONDARY -> colorsSecondary.value = value
@@ -191,22 +214,24 @@ class DialogsState: LocalizationState {
             DialogsKeys.COLORS_VERTEX_MAIN_COLOR -> colorsVertexMainColor.value = value
             DialogsKeys.COLORS_HOVERED_BORDER_COLOR -> colorsHoveredBorderColor.value = value
             DialogsKeys.COLORS_EDGE_MAIN_COLOR -> colorsEdgeMainColor.value = value
+            DialogsKeys.COLORS_SHORTEST_PATH_COLOR -> colorsShortestPathColor.value = value
+            DialogsKeys.COLORS_OTHER_PATHS_COLOR -> colorsOtherPathsColor.value = value
             DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
             DialogsKeys.COLORS_COMMAND_LINE_BACKGROUND_COLOR -> colorsCommandLineBackgroundColor.value = value
-            //// Main Screen Block
+            // // Main Screen Block
             DialogsKeys.MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = value
             DialogsKeys.MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = value
             DialogsKeys.MAIN_SCREEN_PLACEMENT -> mainScreenPlacement.value = value
-            //// Title Bar Block
+            // // Title Bar Block
             DialogsKeys.TITLE_BAR_HEIGHT -> titleBarHeight.value = value
             DialogsKeys.TITLE_BAR_ICON_SIZE -> titleBarIconSize.value = value
-            //// Command Field Block
+            // // Command Field Block
             DialogsKeys.COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT -> commandFieldMessageOutputHeight.value = value
             DialogsKeys.COMMAND_FIELD_MAX_COUNT_MESSAGES -> commandFieldMaxCountMessages.value = value
             DialogsKeys.COMMAND_FIELD_MAX_COUNT_USER_COMMANDS -> commandFieldMaxCountUserCommands.value = value
             DialogsKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = value
             DialogsKeys.COMMAND_FIELD_IS_TRANSPARENT -> commandFieldIsTransparent.value = value
-            //// Command Field Block
+            // // Command Field Block
             DialogsKeys.WORK_AREA_GRAPH_LAYOUT_HEIGHT -> workAreaGraphLayoutHeight.value = value
             DialogsKeys.WORK_AREA_GRAPH_LAYOUT_WIDTH -> workAreaGraphLayoutWidth.value = value
             DialogsKeys.WORK_AREA_VERTEX_RADIUS -> workAreaVertexRadius.value = value
@@ -216,7 +241,7 @@ class DialogsState: LocalizationState {
             DialogsKeys.WORK_AREA_EDGE_WIDTH -> workAreaEdgeWidth.value = value
             DialogsKeys.WORK_AREA_CANVAS_DRAG_RATIO -> workAreaCanvasDragRatio.value = value
             DialogsKeys.WORK_AREA_CANVAS_LIMIT -> workAreaCanvasLimit.value = value
-            //// Title Bar Block
+            // // Title Bar Block
             DialogsKeys.PERFORMANCE_ANIMATION_DURATION -> performanceAnimationDuration.value = value
             DialogsKeys.PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY -> performanceCommandFieldScrollDelay.value = value
 
@@ -259,6 +284,17 @@ class DialogsState: LocalizationState {
             DialogsKeys.OPEN_REPOSITORY_VERTICES_COUNT -> openRepositoryVerticesCount.value = value
             DialogsKeys.OPEN_REPOSITORY_EDGES_COUNT -> openRepositoryEdgesCount.value = value
             DialogsKeys.OPEN_REPOSITORY_OPEN_BUTTON -> openRepositoryOpenButton.value = value
+
+            // Find Path
+            DialogsKeys.FIND_PATH_TITLE -> findPathTitle.value = value
+            DialogsKeys.FIND_PATH_SUBTITLE -> findPathSubtitle.value = value
+            DialogsKeys.FIND_PATH_START_VERTEX_ID -> findPathStartVertexId.value = value
+            DialogsKeys.FIND_PATH_END_VERTEX_ID -> findPathEndVertexId.value = value
+            DialogsKeys.FIND_PATH_VERTEX_ID_PLACEHOLDER -> findPathVertexIdPlaceholder.value = value
+            DialogsKeys.FIND_PATH_MAX_PATHS_COUNT -> findPathMaxPathsCount.value = value
+            DialogsKeys.FIND_PATH_MAX_PATHS_PLACEHOLDER -> findPathMaxPathsPlaceholder.value = value
+            DialogsKeys.FIND_PATH_FIND_STRATEGY -> findPathFindStrategy.value = value
+            DialogsKeys.FIND_PATH_FIND_BUTTON -> findPathFindButton.value = value
         }
     }
 }

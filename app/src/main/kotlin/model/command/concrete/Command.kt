@@ -69,10 +69,16 @@ class Command private constructor(
             val isCommandWithExplicitParameters = paramElements.any { it.contains(":") }
 
             when (type) {
-                CommandTypes.ADD -> { getParametersForAddType(isCommandWithExplicitParameters, paramElements, params, entity) }
-                CommandTypes.RM -> { getParametersForRmType(isCommandWithExplicitParameters, paramElements, params, entity) }
-                CommandTypes.SET -> { getParametersForSetType(isCommandWithExplicitParameters, paramElements, params, entity) }
-                //No parameters
+                CommandTypes.ADD -> {
+                    getParametersForAddType(isCommandWithExplicitParameters, paramElements, params, entity)
+                }
+                CommandTypes.RM -> {
+                    getParametersForRmType(isCommandWithExplicitParameters, paramElements, params, entity)
+                }
+                CommandTypes.SET -> {
+                    getParametersForSetType(isCommandWithExplicitParameters, paramElements, params, entity)
+                }
+                // No parameters
                 CommandTypes.CLEAR -> {}
                 CommandTypes.HELP -> {}
             }

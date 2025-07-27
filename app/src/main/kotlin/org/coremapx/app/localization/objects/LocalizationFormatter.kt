@@ -10,26 +10,34 @@ import org.coremapx.app.localization.objects.TemplateKeys.NEXT_LINE
 import org.coremapx.app.localization.objects.TemplateKeys.NUMBER
 
 object LocalizationFormatter {
-    fun getErrorMessage(startString: String, errorType: String, errorDescription: String?): String {
-        return startString
+    fun getErrorMessage(
+        startString: String,
+        errorType: String,
+        errorDescription: String?,
+    ): String =
+        startString
             .replace(ERROR_TYPE, errorType)
             .replace(ERROR_DESCRIPTION, errorDescription ?: LocalizationManager.states.ui.errorNoDescriptionMessage.value)
-    }
 
-    fun getSaveGraphSuccessMessage(startString: String, fileName: String, directoryPath: String, fileFormat: String): String {
-        return startString
+    fun getSaveGraphSuccessMessage(
+        startString: String,
+        fileName: String,
+        directoryPath: String,
+        fileFormat: String,
+    ): String =
+        startString
             .replace(FILE_NAME, fileName)
             .replace(DIRECTORY_PATH, directoryPath)
             .replace(FILE_FORMAT, fileFormat)
-    }
 
-    fun getStringWithLineBreak(startString: String): String {
-        return startString
+    fun getStringWithLineBreak(startString: String): String =
+        startString
             .replace(NEXT_LINE, "\n")
-    }
 
-    fun getStringWithOneNumber(startString: String, number: Long): String {
-        return startString
+    fun getStringWithOneNumber(
+        startString: String,
+        number: Number,
+    ): String =
+        startString
             .replace(NUMBER, number.toString())
-    }
 }

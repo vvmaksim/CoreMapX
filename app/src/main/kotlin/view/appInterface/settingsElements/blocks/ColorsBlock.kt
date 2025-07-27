@@ -26,10 +26,12 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.ON_ERROR
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_PRIMARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_SECONDARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.ON_SURFACE
+import org.coremapx.app.userDirectory.config.ConfigKeys.OTHER_PATHS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.PRIMARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.PRIMARY_VARIANT
 import org.coremapx.app.userDirectory.config.ConfigKeys.SECONDARY
 import org.coremapx.app.userDirectory.config.ConfigKeys.SECONDARY_VARIANT
+import org.coremapx.app.userDirectory.config.ConfigKeys.SHORTEST_PATH_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SUCCESS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SURFACE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
@@ -58,6 +60,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
     val vertexMainColor by remember { config.states.vertexMainColor }
     val hoveredBorderColor by remember { config.states.hoveredBorderColor }
     val edgeMainColor by remember { config.states.edgeMainColor }
+    val shortestPathColor by remember { config.states.shortestPathColor }
+    val otherPathsColor by remember { config.states.otherPathsColor }
     val canvasBackgroundColor by remember { config.states.canvasBackgroundColor }
     val commandLineBackgroundColor by remember { config.states.commandLineBackgroundColor }
 
@@ -70,9 +74,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsPrimary.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionPrimary.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionPrimary.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -84,9 +89,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsPrimaryVariant.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionPrimaryVariant.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionPrimaryVariant.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -98,9 +104,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsSecondary.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionSecondary.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionSecondary.value,
+                ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
@@ -285,6 +292,30 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
+            selectedColor = shortestPathColor,
+            onColorSelected = {
+                config.setValue(SHORTEST_PATH_COLOR, it)
+                config.setThemeOnCustom()
+            },
+            modifier = Modifier.fillMaxWidth(),
+            title = LocalizationManager.states.dialogs.colorsShortestPathColor.value,
+            description = LocalizationManager.states.descriptions.descriptionShortestPathColor.value,
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        ColorPickLine(
+            selectedColor = otherPathsColor,
+            onColorSelected = {
+                config.setValue(OTHER_PATHS_COLOR, it)
+                config.setThemeOnCustom()
+            },
+            modifier = Modifier.fillMaxWidth(),
+            title = LocalizationManager.states.dialogs.colorsOtherPathsColor.value,
+            description = LocalizationManager.states.descriptions.descriptionOtherPathsColor.value,
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        ColorPickLine(
             selectedColor = canvasBackgroundColor,
             onColorSelected = {
                 config.setValue(CANVAS_BACKGROUND_COLOR, it)
@@ -304,9 +335,10 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsCommandLineBackgroundColor.value,
-            description = LocalizationFormatter.getStringWithLineBreak(
-                startString = LocalizationManager.states.descriptions.descriptionCommandLineBackgroundColor.value,
-            ),
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionCommandLineBackgroundColor.value,
+                ),
             isExpanded = isExpandedSettings,
         )
     }
