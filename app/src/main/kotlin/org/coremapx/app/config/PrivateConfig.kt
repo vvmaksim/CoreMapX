@@ -19,6 +19,10 @@ object PrivateConfig {
                 LOGS_DIR_PATH = "$DIR_PATH/logs"
                 CONFIG_DIR_PATH = "$DIR_PATH/config"
                 FONTS_DIR_PATH = "$DIR_PATH/config/fonts"
+                REGULAR_FONT_PATH = "$FONTS_DIR_PATH/Font-Regular.ttf"
+                BOLD_FONT_PATH = "$FONTS_DIR_PATH/Font-Bold.ttf"
+                MEDIUM_FONT_PATH = "$FONTS_DIR_PATH/Font-Medium.ttf"
+                LIGHT_FONT_PATH = "$FONTS_DIR_PATH/Font-Light.ttf"
                 DATA_DIR_PATH = "$DIR_PATH/data"
                 TEMP_DIR_PATH = "$DIR_PATH/data/temp"
                 GRAPHS_DIR_PATH = "$DIR_PATH/data/graphs"
@@ -45,6 +49,18 @@ object PrivateConfig {
             private set
 
         var FONTS_DIR_PATH = "$DIR_PATH/config/fonts"
+            private set
+
+        var REGULAR_FONT_PATH = "$FONTS_DIR_PATH/Font-Regular.ttf"
+            private set
+
+        var BOLD_FONT_PATH = "$FONTS_DIR_PATH/Font-Bold.ttf"
+            private set
+
+        var MEDIUM_FONT_PATH = "$FONTS_DIR_PATH/Font-Medium.ttf"
+            private set
+
+        var LIGHT_FONT_PATH = "$FONTS_DIR_PATH/Font-Light.ttf"
             private set
 
         var DATA_DIR_PATH = "$DIR_PATH/data"
