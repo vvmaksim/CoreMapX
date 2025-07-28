@@ -4,10 +4,22 @@ import androidx.compose.material.Shapes
 import androidx.compose.ui.graphics.Color
 import org.coremapx.app.theme.AppShapes
 import org.coremapx.app.theme.Theme
+import org.coremapx.app.userDirectory.UserDirectory
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class ExtensionsTests {
+    companion object {
+        @JvmStatic
+        @BeforeAll
+        fun setupConfig() {
+            UserDirectory.initTestEnvironment(
+                testPath = System.getProperty("java.io.tmpdir") + "/coremapx_extensions_test_" + System.currentTimeMillis(),
+            )
+        }
+    }
+
     @Test
     fun `Boolean to Long`() {
         assertEquals(1L, true.toLong())
