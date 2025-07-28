@@ -1,3 +1,5 @@
+package org
+
 import org.coremapx.app.localization.objects.LanguageCodes
 import org.coremapx.app.localization.objects.LanguageCodesManager.FALLBACK_LANGUAGE_CODE
 import org.coremapx.app.localization.objects.LanguageCodesManager.getAllFullLanguagesNames

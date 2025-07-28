@@ -1,16 +1,7 @@
+package extensions
+
 import androidx.compose.material.Shapes
 import androidx.compose.ui.graphics.Color
-import extensions.border
-import extensions.canvasBackground
-import extensions.commandLineBackground
-import extensions.hoveredBorder
-import extensions.huge
-import extensions.success
-import extensions.toBooleanOrNull
-import extensions.toColorOrNull
-import extensions.toHexString
-import extensions.toLong
-import extensions.warning
 import org.coremapx.app.theme.AppShapes
 import org.coremapx.app.theme.Theme
 import org.junit.jupiter.api.Test

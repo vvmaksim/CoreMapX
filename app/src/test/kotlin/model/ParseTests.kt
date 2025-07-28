@@ -1,3 +1,5 @@
+package model
+
 import model.command.concrete.Command
 import model.fileHandler.Parser
 import model.result.Result

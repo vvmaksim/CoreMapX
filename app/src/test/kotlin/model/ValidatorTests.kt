@@ -1,3 +1,5 @@
+package model
+
 import model.fileHandler.Validator
 import model.result.Result
 import org.junit.jupiter.api.Assertions.assertTrue

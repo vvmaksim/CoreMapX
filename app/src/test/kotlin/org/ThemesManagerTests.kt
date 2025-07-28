@@ -1,3 +1,5 @@
+package org
+
 import org.coremapx.app.theme.AppThemes
 import org.coremapx.app.theme.SystemDialogThemes
 import org.coremapx.app.theme.ThemesManager.getAllAppThemes
