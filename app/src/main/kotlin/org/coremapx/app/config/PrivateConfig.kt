@@ -90,6 +90,8 @@ object PrivateConfig {
     object AppResources {
         const val DEFAULT_CONFIG_PATH = "config/DefaultConfig.cfg"
         const val DEFAULT_FONTS_DIRECTORY_PATH = "fonts"
+        const val LOGO_BACKGROUND = "drawable/logo_background.svg"
+        const val LOGO_ICON = "drawable/logo_icon.svg"
 
         var EN_LANGUAGE_PATH = "app/src/main/resources/languages/en.lang"
             private set

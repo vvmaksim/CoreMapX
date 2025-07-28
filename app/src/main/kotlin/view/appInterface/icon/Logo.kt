@@ -19,6 +19,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
@@ -35,7 +36,7 @@ fun Logo(
 ) {
     Box(modifier = modifier) {
         Image(
-            painter = painterResource("drawable/logo_background.svg"),
+            painter = painterResource(PrivateConfig.AppResources.LOGO_BACKGROUND),
             contentDescription = LocalizationManager.states.anyIconDescriptionsStates.logoBackground.value,
             modifier =
                 Modifier
@@ -46,7 +47,7 @@ fun Logo(
         )
 
         Image(
-            painter = painterResource("drawable/logo_icon.svg"),
+            painter = painterResource(PrivateConfig.AppResources.LOGO_ICON),
             contentDescription = LocalizationManager.states.anyIconDescriptionsStates.logoIcon.value,
             modifier =
                 Modifier
