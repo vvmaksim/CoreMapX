@@ -3,6 +3,8 @@ package org.coremapx.app.localization
 import model.result.LocalizationErrors
 import model.result.Result
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.localization.objects.LanguageCodes
+import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsString
 import org.coremapx.app.localization.objects.LocalizationKeys
 import org.coremapx.app.localization.states.LocalizationState
 import org.coremapx.app.localization.states.LocalizationStates
@@ -21,9 +23,9 @@ object LocalizationManager {
     fun updateLanguage(language: String): Result<Boolean> {
         val loadLanguageResult =
             when (language) {
-                "en" -> loadLanguage(PrivateConfig.AppResources.EN_LANGUAGE_PATH)
-                "ru" -> loadLanguage(PrivateConfig.AppResources.RU_LANGUAGE_PATH)
-                "custom" -> loadLanguage(PrivateConfig.AppResources.CUSTOM_LANGUAGE_PATH)
+                getCodeAsString(LanguageCodes.EN) -> loadLanguage(PrivateConfig.AppResources.EN_LANGUAGE_PATH)
+                getCodeAsString(LanguageCodes.RU) -> loadLanguage(PrivateConfig.AppResources.RU_LANGUAGE_PATH)
+                getCodeAsString(LanguageCodes.CUSTOM) -> loadLanguage(PrivateConfig.AppResources.CUSTOM_LANGUAGE_PATH)
                 else -> Result.Error(LocalizationErrors.UnknownLanguage(language))
             }
         if (loadLanguageResult is Result.Error) return loadLanguageResult
