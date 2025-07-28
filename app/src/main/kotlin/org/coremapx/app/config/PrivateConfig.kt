@@ -111,4 +111,13 @@ object PrivateConfig {
         const val DISABLED_ALPHA = 0.38F
         const val DESCRIPTION_ALPHA = 0.6F
     }
+
+    object LayoutStrategies {
+        object ForceDirected {
+            val iterationsRange = 100f..30000f
+            val areaRange = 100_000f..10_000_000f
+            val gravityRange = 0.0001f..1.0f
+            val speedRange = 0.0001f..1.0f
+        }
+    }
 }
