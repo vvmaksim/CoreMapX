@@ -35,14 +35,13 @@ object LanguageCodesManager {
             LanguageCodes.CUSTOM -> "Custom"
         }
 
-    fun getFullLanguageNameByStringCode(codeAsString: String): String? {
-        return when (codeAsString) {
+    fun getFullLanguageNameByStringCode(codeAsString: String): String? =
+        when (codeAsString) {
             getCodeAsString(LanguageCodes.EN) -> getFullLanguageName(LanguageCodes.EN)
             getCodeAsString(LanguageCodes.RU) -> getFullLanguageName(LanguageCodes.RU)
             getCodeAsString(LanguageCodes.CUSTOM) -> getFullLanguageName(LanguageCodes.CUSTOM)
             else -> null
         }
-    }
 
     fun getFullLanguageNameByStringCodeWithFallback(codeAsString: String): String =
         getFullLanguageNameByStringCode(codeAsString) ?: getFullLanguageName(LanguageCodes.EN)
