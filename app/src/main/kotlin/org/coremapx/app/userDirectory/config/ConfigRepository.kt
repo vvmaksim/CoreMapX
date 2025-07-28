@@ -8,8 +8,11 @@ import model.result.Result
 import model.result.showConfigErrorDialog
 import mu.KotlinLogging
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.theme.AppThemes
 import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
+import org.coremapx.app.theme.ThemesManager.getAppThemeAsString
+import org.coremapx.app.theme.ThemesManager.getSystemDialogThemeAsStringByIsLight
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
@@ -85,16 +88,16 @@ class ConfigRepository {
 
     fun updateTheme() {
         val theme = states.theme.value
-        if (theme != "custom") {
+        if (theme != getAppThemeAsString(theme = AppThemes.CUSTOM, makeLower = true)) {
             when (theme) {
-                "light" -> setTheme(DefaultThemes.light)
-                "dark" -> setTheme(DefaultThemes.dark)
+                getAppThemeAsString(theme = AppThemes.LIGHT, makeLower = true) -> setTheme(DefaultThemes.light)
+                getAppThemeAsString(theme = AppThemes.DARK, makeLower = true) -> setTheme(DefaultThemes.dark)
                 else -> showConfigErrorDialog("Unknown theme: $theme")
             }
         }
     }
 
-    fun setThemeOnCustom() = setValue(THEME, "custom")
+    fun setThemeOnCustom() = setValue(THEME, getAppThemeAsString(theme = AppThemes.CUSTOM, makeLower = true))
 
     private fun setTheme(themeConfig: ThemeConfig) {
         with(themeConfig) {
@@ -120,7 +123,7 @@ class ConfigRepository {
             setValue(OTHER_PATHS_COLOR, otherPathsColor)
             setValue(CANVAS_BACKGROUND_COLOR, canvasBackgroundColor)
             setValue(COMMAND_LINE_BACKGROUND_COLOR, commandLineBackgroundColor)
-            setValue(SYSTEM_DIALOG_THEME, if (isLight) "light" else "dark")
+            setValue(SYSTEM_DIALOG_THEME, getSystemDialogThemeAsStringByIsLight(isLight = isLight, makeLower = true))
         }
     }
 

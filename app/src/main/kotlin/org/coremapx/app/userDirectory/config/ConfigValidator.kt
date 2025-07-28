@@ -5,6 +5,8 @@ import model.result.ConfigErrors
 import model.result.Result
 import org.coremapx.app.localization.objects.LanguageCodes
 import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsString
+import org.coremapx.app.theme.ThemesManager.getAllAppThemes
+import org.coremapx.app.theme.ThemesManager.getAllSystemDialogThemes
 
 class ConfigValidator {
     companion object {
@@ -25,8 +27,18 @@ class ConfigValidator {
                                 getCodeAsString(LanguageCodes.CUSTOM),
                             ),
                     )
-                ConfigKeys.THEME -> enumStringValidator(key, value, listOf("light", "dark", "custom"))
-                ConfigKeys.SYSTEM_DIALOG_THEME -> enumStringValidator(key, value, listOf("light", "dark"))
+                ConfigKeys.THEME ->
+                    enumStringValidator(
+                        key = key,
+                        value = value,
+                        correctValues = getAllAppThemes(makeLower = true),
+                    )
+                ConfigKeys.SYSTEM_DIALOG_THEME ->
+                    enumStringValidator(
+                        key = key,
+                        value = value,
+                        correctValues = getAllSystemDialogThemes(makeLower = true),
+                    )
                 ConfigKeys.IS_EXPANDED_SETTINGS -> booleanValidator(key, value)
 
                 // Colors
