@@ -26,7 +26,7 @@ object LanguageCodesManager {
         }
 
     fun getCodeAsStringByFullNameWithFallback(fullLanguageName: String): String =
-        getCodeAsStringByFullName(fullLanguageName) ?: getFullLanguageName(FALLBACK_LANGUAGE_CODE)
+        getCodeAsStringByFullName(fullLanguageName) ?: getCodeAsString(FALLBACK_LANGUAGE_CODE)
 
     fun getFullLanguageName(code: LanguageCodes): String =
         when (code) {
