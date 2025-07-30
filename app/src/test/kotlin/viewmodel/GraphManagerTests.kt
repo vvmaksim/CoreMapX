@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import model.fileHandler.FileExtensions
 import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.entities.UnweightedEdge
 import model.graph.entities.Vertex
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
@@ -14,8 +15,10 @@ import viewmodel.managers.GraphManager
 import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
+import viewmodel.visualizationStrategy.VisualizationStrategiesNames
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -37,6 +40,11 @@ class GraphManagerTests {
         config.states.graphLayoutWidth.value
             .toDouble()
     val defaultLayoutStrategy = RandomStrategy<Long, Long>()
+    val defaultIsVerticesLabelsVisible = false
+    val defaultIsVerticesIdsVisible = false
+    val defaultIsEdgesWeightsVisible = true
+    val defaultIsEdgesIdsVisible = false
+    val unknownLayoutStrategyName = "unknownLayoutStrategyName"
 
     lateinit var graphManager: GraphManager<Long, Long>
 
@@ -159,7 +167,99 @@ class GraphManagerTests {
 
     @Test
     fun `check resetGraphView with ForceDirectedStrategy`() {
+        val graph = UndirectedUnweightedGraph<Long>()
+        val vertex1 = Vertex(1L, "1")
+        val vertex2 = Vertex(2L, "2")
+        graph.addVertex(vertex1)
+        graph.addVertex(vertex2)
+        graph.addEdge(UnweightedEdge(1L, vertex1, vertex2))
+
+        val forceDirectedStrategy = ForceDirectedStrategy<Long, Long>()
+        graphManager.updateLayoutStrategy(forceDirectedStrategy)
+        assertEquals(forceDirectedStrategy::class, graphManager.layoutStrategy.value::class)
+
+        val scope = CoroutineScope(Dispatchers.Unconfined)
+        graphManager.animationScope = scope
+        graphManager.updateGraph(graph)
+
+        val strategy = graphManager.layoutStrategy.value as ForceDirectedStrategy<Long, Long>
+        assertTrue(strategy.isRunning())
+    }
+
+    @Test
+    fun `check setIsVerticesLabelsVisible`() {
+        assertEquals(defaultIsVerticesLabelsVisible, graphManager.isVerticesLabelsVisible.value)
+        val newValue = !defaultIsVerticesLabelsVisible
+        graphManager.setIsVerticesLabelsVisible(newValue)
+        assertEquals(newValue, graphManager.isVerticesLabelsVisible.value)
+    }
+
+    @Test
+    fun `check setIsVerticesIdsVisible`() {
+        assertEquals(defaultIsVerticesIdsVisible, graphManager.isVerticesIdsVisible.value)
+        val newValue = !defaultIsVerticesIdsVisible
+        graphManager.setIsVerticesIdsVisible(newValue)
+        assertEquals(newValue, graphManager.isVerticesIdsVisible.value)
+    }
+
+    @Test
+    fun `check setIsEdgesWeightsVisible`() {
+        assertEquals(defaultIsEdgesWeightsVisible, graphManager.isEdgesWeightsVisible.value)
+        val newValue = !defaultIsEdgesWeightsVisible
+        graphManager.setIsEdgesWeightsVisible(newValue)
+        assertEquals(newValue, graphManager.isEdgesWeightsVisible.value)
+    }
+
+    @Test
+    fun `check setIsEdgesIdsVisible`() {
+        assertEquals(defaultIsEdgesIdsVisible, graphManager.isEdgesIdsVisible.value)
+        val newValue = !defaultIsEdgesIdsVisible
+        graphManager.setIsEdgesIdsVisible(newValue)
+        assertEquals(newValue, graphManager.isEdgesIdsVisible.value)
+    }
+
+    @Test
+    fun `check getLayoutStrategyByString with RandomStrategy`() {
+        val resultGetRandom = graphManager.getLayoutStrategyByString(VisualizationStrategiesNames.RANDOM)
+        assertNotNull(resultGetRandom)
+        assertEquals(RandomStrategy<Long, Long>()::class, resultGetRandom::class)
+    }
+
+    @Test
+    fun `check getLayoutStrategyByString with CircularStrategy`() {
+        val resultGetCircular = graphManager.getLayoutStrategyByString(VisualizationStrategiesNames.CIRCULAR)
+        assertNotNull(resultGetCircular)
+        assertEquals(CircularStrategy<Long, Long>()::class, resultGetCircular::class)
+    }
+
+    @Test
+    fun `check getLayoutStrategyByString with ForceDirectedStrategy`() {
+        val resultGetForceDirected = graphManager.getLayoutStrategyByString(VisualizationStrategiesNames.FORCE_DIRECTED)
+        assertNotNull(resultGetForceDirected)
+        assertEquals(ForceDirectedStrategy<Long, Long>()::class, resultGetForceDirected::class)
+    }
+
+    @Test
+    fun `check getLayoutStrategyByString with unknownLayoutStrategyName`() {
+        val resultGetForceDirected = graphManager.getLayoutStrategyByString(unknownLayoutStrategyName)
+        assertNull(resultGetForceDirected)
+    }
+
+    @Test
+    fun `check getCurrentLayoutStrategyAsString with RandomStrategy`() {
+        graphManager.updateLayoutStrategy(RandomStrategy())
+        assertEquals(VisualizationStrategiesNames.RANDOM, graphManager.getCurrentLayoutStrategyAsString())
+    }
+
+    @Test
+    fun `check getCurrentLayoutStrategyAsString with CircularStrategy`() {
+        graphManager.updateLayoutStrategy(CircularStrategy())
+        assertEquals(VisualizationStrategiesNames.CIRCULAR, graphManager.getCurrentLayoutStrategyAsString())
+    }
+
+    @Test
+    fun `check getCurrentLayoutStrategyAsString with ForceDirectedStrategy`() {
         graphManager.updateLayoutStrategy(ForceDirectedStrategy())
-        graphManager.resetGraphView()
+        assertEquals(VisualizationStrategiesNames.FORCE_DIRECTED, graphManager.getCurrentLayoutStrategyAsString())
     }
 }
