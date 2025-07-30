@@ -2,20 +2,28 @@ package viewmodel
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import model.fileHandler.ConvertModes
 import model.fileHandler.FileExtensions
+import model.fileHandler.converter.Converter
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
 import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.entities.UnweightedEdge
 import model.graph.entities.Vertex
+import model.result.Result
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
 import viewmodel.managers.GraphManager
 import viewmodel.visualizationStrategy.CircularStrategy
 import viewmodel.visualizationStrategy.ForceDirectedStrategy
 import viewmodel.visualizationStrategy.RandomStrategy
 import viewmodel.visualizationStrategy.VisualizationStrategiesNames
+import java.io.File
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
@@ -47,6 +55,9 @@ class GraphManagerTests {
     val unknownLayoutStrategyName = "unknownLayoutStrategyName"
 
     lateinit var graphManager: GraphManager<Long, Long>
+
+    @TempDir
+    lateinit var tempDir: File
 
     @BeforeEach
     fun setup() {
@@ -261,5 +272,140 @@ class GraphManagerTests {
     fun `check getCurrentLayoutStrategyAsString with ForceDirectedStrategy`() {
         graphManager.updateLayoutStrategy(ForceDirectedStrategy())
         assertEquals(VisualizationStrategiesNames.FORCE_DIRECTED, graphManager.getCurrentLayoutStrategyAsString())
+    }
+
+    @Test
+    fun `load UndirectedUnweighted graph from file`() {
+        val graphName = "TestGraph"
+        val graphAuthor = "TestAuthor"
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=$graphName
+            author=$graphAuthor
+            isDirected=false
+            isWeighted=false
+            Graph:
+            add vertex 1 1
+            add vertex 2 2
+            add edge 1 2
+            """.trimIndent(),
+        )
+
+        val result = graphManager.loadGraphFromFile(file)
+        assertTrue(result is Result.Success)
+        assertEquals(emptyList(), result.data)
+
+        assertTrue(graphManager.isGraphActive)
+        assertEquals(graphName, graphManager.graphName)
+        assertEquals(graphAuthor, graphManager.graphAuthor)
+        assertEquals(file.absolutePath, graphManager.graphPath)
+        assertEquals(FileExtensions.GRAPH, graphManager.graphFormat)
+
+        val loadedGraph = graphManager.graph.value
+        assertNotNull(loadedGraph)
+        assertEquals(UndirectedUnweightedGraph<Long>()::class, loadedGraph::class)
+        assertEquals(2, loadedGraph.vertices.size)
+        assertEquals(1, loadedGraph.edges.size)
+
+        assertTrue(loadedGraph.vertices.containsKey(1L))
+        assertTrue(loadedGraph.vertices.containsKey(2L))
+        assertEquals("1", loadedGraph.vertices[1L]?.label)
+        assertEquals("2", loadedGraph.vertices[2L]?.label)
+
+        assertTrue(loadedGraph.edges.containsKey(0L))
+    }
+
+    @Test
+    fun `load DirectedWeighted graph from file`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=TestGraph
+            author=TestAuthor
+            isDirected=true
+            isWeighted=true
+            Graph:
+            """.trimIndent(),
+        )
+        assertTrue(graphManager.loadGraphFromFile(file) is Result.Success)
+        val loadedGraph = graphManager.graph.value
+        assertNotNull(loadedGraph)
+        assertEquals(DirectedWeightedGraph<Long>()::class, loadedGraph::class)
+    }
+
+    @Test
+    fun `load DirectedUnweighted graph from file`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=TestGraph
+            author=TestAuthor
+            isDirected=true
+            isWeighted=false
+            Graph:
+            """.trimIndent(),
+        )
+        assertTrue(graphManager.loadGraphFromFile(file) is Result.Success)
+        val loadedGraph = graphManager.graph.value
+        assertNotNull(loadedGraph)
+        assertEquals(DirectedUnweightedGraph<Long>()::class, loadedGraph::class)
+    }
+
+    @Test
+    fun `load UndirectedWeighted graph from file`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=TestGraph
+            author=TestAuthor
+            isDirected=false
+            isWeighted=true
+            Graph:
+            """.trimIndent(),
+        )
+        assertTrue(graphManager.loadGraphFromFile(file) is Result.Success)
+        val loadedGraph = graphManager.graph.value
+        assertNotNull(loadedGraph)
+        assertEquals(UndirectedWeightedGraph<Long>()::class, loadedGraph::class)
+    }
+
+    @Test
+    fun `load incorrect graph from file`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=TestGraph
+            author=TestAuthor
+            isDirected=false
+            isWeighted=true
+            Graph:
+            add vertex someIncorrectId someLabel
+            """.trimIndent(),
+        )
+        assertTrue(graphManager.loadGraphFromFile(file) is Result.Error)
+    }
+
+    @Test
+    fun `load graph from file with json file extension`() {
+        val file = File(tempDir, "test.graph")
+        file.writeText(
+            """
+            Info:
+            name=TestGraph
+            author=TestAuthor
+            isDirected=false
+            isWeighted=true
+            Graph:
+            """.trimIndent(),
+        )
+        val jsonFileResult = Converter.convert(file, FileExtensions.JSON, ConvertModes.SAVE, null)
+        assertTrue(jsonFileResult is Result.Success)
+        assertTrue(graphManager.loadGraphFromFile(jsonFileResult.data) is Result.Success)
     }
 }
