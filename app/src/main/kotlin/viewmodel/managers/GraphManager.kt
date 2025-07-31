@@ -237,11 +237,18 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun saveGraph(
         fileName: String = graphName,
-        directoryPath: String? = graphPath,
+        directoryPath: String? = null,
         fileFormat: FileExtensions? = graphFormat,
     ): Result<String> {
         try {
-            if (directoryPath == null) return Result.Error(FileErrors.InvalidParameter("directoryPath", "This parameter cannot be null"))
+            val graphPathCopy = graphPath
+            if (directoryPath == null &&
+                graphPathCopy == null
+            ) {
+                return Result.Error(
+                    FileErrors.InvalidParameter("directoryPath", "This parameter cannot be null when graphPath is null"),
+                )
+            }
             if (fileFormat == null) return Result.Error(FileErrors.InvalidParameter("fileFormat", "This parameter cannot be null"))
 
             val isDirected =
@@ -285,7 +292,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
             when (fileFormat) {
                 FileExtensions.GRAPH -> {
-                    val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.graph"
+                    val path = if (directoryPath != null) "$directoryPath/$fileName.graph" else graphPathCopy ?: "unknownSituation"
                     val fileIR = File(path)
                     fileIR.writeText(ir.toString())
                     return Result.Success("File was saved as GRAPH")
@@ -297,7 +304,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                     when (convertResult) {
                         is Result.Error -> return convertResult
                         is Result.Success -> {
-                            val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.json"
+                            val path = if (directoryPath != null) "$directoryPath/$fileName.json" else graphPathCopy ?: "unknownSituation"
                             val renameToResult = convertResult.data.renameTo(File(path))
                             if (!renameToResult) {
                                 return Result.Error(
@@ -312,7 +319,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                     var graphId =
                         graphId
                             ?: return Result.Error(FileErrors.ErrorSavingFile("graphId can not be null"))
-                    val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.db"
+                    val path = if (directoryPath != null) "$directoryPath/$fileName.db" else graphPathCopy ?: "unknownSituation"
                     val database = createDatabase(path)
 
                     val graphRepository = GraphRepository(database)
