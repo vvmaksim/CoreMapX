@@ -54,6 +54,11 @@ class GraphManagerTests {
     val defaultIsEdgesIdsVisible = false
     val unknownLayoutStrategyName = "unknownLayoutStrategyName"
 
+    val vertex1 = Vertex(1L, "1")
+    val vertex2 = Vertex(2L, "2")
+    val vertex3 = Vertex(3L, "3")
+    val vertex4 = Vertex(4L, "4")
+
     lateinit var graphManager: GraphManager<Long, Long>
 
     @TempDir
@@ -407,5 +412,321 @@ class GraphManagerTests {
         val jsonFileResult = Converter.convert(file, FileExtensions.JSON, ConvertModes.SAVE, null)
         assertTrue(jsonFileResult is Result.Success)
         assertTrue(graphManager.loadGraphFromFile(jsonFileResult.data) is Result.Success)
+    }
+
+    @Test
+    fun `save empty graph to graph file format`() {
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save empty graph to graph file format without fileName`() {
+        val saveResult =
+            graphManager.saveGraph(
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save graph with fileName only`() {
+        val saveResult = graphManager.saveGraph(fileName = "testGraph")
+        assertTrue(saveResult is Result.Error)
+        assertEquals("InvalidParameter", saveResult.error.type)
+    }
+
+    @Test
+    fun `save graph without fileFormat`() {
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Error)
+        assertEquals("InvalidParameter", saveResult.error.type)
+    }
+
+    @Test
+    fun `save graph with incorrect fileFormat`() {
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = null,
+            )
+        assertTrue(saveResult is Result.Error)
+        assertEquals("InvalidParameter", saveResult.error.type)
+    }
+
+    @Test
+    fun `save UndirectedUnweighted graph`() {
+        val newGraph = UndirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2)
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save UndirectedWeighted graph`() {
+        val newGraph = UndirectedWeightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2, 52)
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedUnweighted graph`() {
+        val newGraph = DirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2)
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedWeighted graph`() {
+        val newGraph = DirectedWeightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2, 52)
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedWeighted graph without vertices`() {
+        val newGraph = DirectedWeightedGraph<Long>()
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedUnweighted graph without vertices`() {
+        val newGraph = DirectedUnweightedGraph<Long>()
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedWeighted graph without edges`() {
+        val newGraph = DirectedWeightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedUnweighted graph without edges`() {
+        val newGraph = DirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        graphManager.updateGraph(newGraph)
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save graph to graph file format without directoryPath`() {
+        graphManager.saveGraph(
+            fileName = "test",
+            fileFormat = FileExtensions.GRAPH,
+            directoryPath = tempDir.absolutePath,
+        )
+        val newGraph = UndirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2)
+        graphManager.updateGraph(newGraph)
+        graphManager.graphPath = "${tempDir.absolutePath}/test.graph"
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.GRAPH,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save empty graph to json file format`() {
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.JSON,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save graph to json file format without directoryPath`() {
+        graphManager.saveGraph(
+            fileName = "test",
+            fileFormat = FileExtensions.JSON,
+            directoryPath = tempDir.absolutePath,
+        )
+        val newGraph = UndirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2)
+        graphManager.updateGraph(newGraph)
+        graphManager.graphPath = "${tempDir.absolutePath}/test.json"
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.JSON,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save empty graph to sql file format`() {
+        graphManager.graphId = 1L
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.SQL,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save graph to sql file format without directoryPath`() {
+        graphManager.saveGraph(
+            fileName = "test",
+            fileFormat = FileExtensions.SQL,
+            directoryPath = tempDir.absolutePath,
+        )
+        val newGraph = UndirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2)
+        graphManager.updateGraph(newGraph)
+        graphManager.graphPath = "${tempDir.absolutePath}/test.db"
+        graphManager.graphId = 1L
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.SQL,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `try save empty graph to sql file format with null graphId`() {
+        graphManager.graphId = null
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.SQL,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Error)
+        assertEquals("ErrorSavingFile", saveResult.error.type)
+    }
+
+    @Test
+    fun `double save DirectedWeighted graph to sql file format`() {
+        val newGraph = DirectedWeightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2, 52)
+        graphManager.updateGraph(newGraph)
+        graphManager.graphId = 1L
+        var saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.SQL,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
+        newGraph.clear()
+        newGraph.addVertex(vertex3)
+        newGraph.addVertex(vertex4)
+        newGraph.addEdge(vertex3, vertex4, 25)
+        graphManager.updateGraph(newGraph)
+        graphManager.graphPath = "${tempDir.absolutePath}/testGraph.db"
+        saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.SQL,
+            )
+        assertTrue(saveResult is Result.Success)
+    }
+
+    @Test
+    fun `save DirectedUnweighted graph to sql file format`() {
+        val newGraph = DirectedUnweightedGraph<Long>()
+        newGraph.addVertex(vertex1)
+        newGraph.addVertex(vertex2)
+        newGraph.addEdge(vertex1, vertex2)
+        graphManager.updateGraph(newGraph)
+        graphManager.graphId = 1L
+        val saveResult =
+            graphManager.saveGraph(
+                fileName = "testGraph",
+                fileFormat = FileExtensions.SQL,
+                directoryPath = tempDir.absolutePath,
+            )
+        assertTrue(saveResult is Result.Success)
     }
 }
