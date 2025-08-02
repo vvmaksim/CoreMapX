@@ -67,7 +67,7 @@ class PathfindingValidator<E : Comparable<E>, V : Comparable<V>> {
                 onSetErrorMessage("Vertex with $startId id not found in graph")
                 return
             }
-            if (startExist && !endExist) {
+            if (!endExist) {
                 onEndError()
                 onSetErrorMessage("Vertex with $endId id not found in graph")
                 return
