@@ -1,4 +1,4 @@
-package viewmodel
+package viewmodel.managers
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -17,7 +17,6 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import viewmodel.graph.GraphViewModel
-import viewmodel.managers.PathfindingManager
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

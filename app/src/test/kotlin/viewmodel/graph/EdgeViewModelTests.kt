@@ -1,4 +1,4 @@
-package viewmodel
+package viewmodel.graph
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
@@ -10,8 +10,6 @@ import org.coremapx.app.userDirectory.UserDirectory
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import viewmodel.graph.EdgeViewModel
-import viewmodel.graph.VertexViewModel
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 

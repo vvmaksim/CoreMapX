@@ -1,11 +1,10 @@
-package viewmodel
+package viewmodel.managers
 
 import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import viewmodel.managers.CanvasManager
 import kotlin.test.assertEquals
 
 class CanvasManagerTests {
