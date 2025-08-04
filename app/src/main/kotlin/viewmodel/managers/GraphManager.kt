@@ -143,7 +143,6 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                     visibleStates = visibleStates,
                 ),
         )
-        resetGraphView()
     }
 
     fun updateGraphViewModel(newViewModel: GraphViewModel<E, V>) {
