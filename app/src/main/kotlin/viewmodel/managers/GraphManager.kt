@@ -121,7 +121,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                             ?.edges
                             ?.values
                             ?.map { it as Edge<Comparable<Any>, Comparable<Any>> },
-                    iterations = 500,
+                    iterations = strategy.getParameters().iterations,
                     onFrame = { },
                 )
             } else {
