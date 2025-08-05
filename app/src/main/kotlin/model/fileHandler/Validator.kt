@@ -10,6 +10,7 @@ import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.serializableEntities.GraphData
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import java.io.File
 
 class Validator {
@@ -18,13 +19,15 @@ class Validator {
         private val requiredProperties = listOf("isDirected", "isWeighted")
         private val allBooleanProperties = listOf("isDirected", "isWeighted")
 
-        fun validate(file: File): Result<String> =
-            when (file.extension) {
+        fun validate(file: File): Result<String> {
+            logDebug("Launched validate() from Validator with fileAbsolutePath:${file.absolutePath}")
+            return when (file.extension) {
                 "graph" -> validateIR(file)
                 "json" -> validateJSON(file)
                 "db" -> validateSQLDB(file)
                 else -> Result.Error(FileErrors.UnknownFileExtension())
             }
+        }
 
         private fun validateIR(file: File): Result<String> {
             val lines: List<String>

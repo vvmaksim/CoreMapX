@@ -1,12 +1,10 @@
 package model.result
 
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logInfo
 import org.coremapx.app.userDirectory.UserDirectory.copyDefaultConfig
 import java.io.File
 import javax.swing.JOptionPane
 import kotlin.system.exitProcess
-
-private val logger = KotlinLogging.logger {}
 
 fun showConfigErrorDialog(message: String) {
     val buttons = arrayOf("OK", "Apply default config")
@@ -25,17 +23,17 @@ fun showConfigErrorDialog(message: String) {
             buttons[0],
         )
     when (result) {
-        0 -> logger.info { "The user clicked `OK' in the error window" }
+        0 -> logInfo("Click on `OK' in the error window")
         1 -> {
-            logger.info { "The user clicked `Apply default config' in the error window" }
+            logInfo("Click on `Apply default config' in the error window")
             val targetConfigPath = "${System.getProperty("user.home")}/.coremapx/config/Config.gcfg"
             val targetConfigFile = File(targetConfigPath)
             if (targetConfigFile.exists()) {
                 targetConfigFile.delete()
-                logger.info { "The Config.cfg file from $targetConfigPath has been deleted." }
+                logInfo("The Config.cfg file from $targetConfigPath has been deleted.")
             }
             copyDefaultConfig()
-            logger.info { "The default configuration file was copied to $targetConfigPath" }
+            logInfo("The default configuration file was copied to $targetConfigPath")
         }
     }
     exitProcess(1)

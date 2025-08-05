@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.huge
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 
@@ -50,7 +51,10 @@ fun ZoomButtons(
     ) {
         Row {
             IconButton(
-                onClick = { onZoom(zoomFactor) },
+                onClick = {
+                    logDebug("Click on Add zoom button")
+                    onZoom(zoomFactor)
+                },
                 modifier = Modifier.size(iconSize),
             ) {
                 Icon(
@@ -61,7 +65,10 @@ fun ZoomButtons(
             }
 
             IconButton(
-                onClick = { onZoom(-zoomFactor) },
+                onClick = {
+                    logDebug("Click on Remove zoom button")
+                    onZoom(-zoomFactor)
+                },
                 modifier = Modifier.size(iconSize),
             ) {
                 Icon(

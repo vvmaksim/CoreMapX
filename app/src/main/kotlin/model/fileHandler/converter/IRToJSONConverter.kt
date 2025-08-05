@@ -13,6 +13,7 @@ import model.fileHandler.serializableEntities.GraphInfo
 import model.fileHandler.serializableEntities.Vertex
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config.PrivateConfig
 import java.io.File
 import java.io.IOException
@@ -23,6 +24,9 @@ class IRToJSONConverter : FileConverter() {
         convertMode: ConvertModes,
         graphId: Long?,
     ): Result<File> {
+        logDebug(
+            "Launched convert() from IRToJSONConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+        )
         val lines: List<String>
         try {
             lines = file.readLines().map { it.trim() }.filter { it.isNotEmpty() }

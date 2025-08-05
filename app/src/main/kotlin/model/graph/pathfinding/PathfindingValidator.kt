@@ -3,6 +3,7 @@ package model.graph.pathfinding
 import model.graph.contracts.Graph
 import model.result.PathfindingErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 
 class PathfindingValidator<E : Comparable<E>, V : Comparable<V>> {
     companion object {
@@ -11,6 +12,7 @@ class PathfindingValidator<E : Comparable<E>, V : Comparable<V>> {
             start: V,
             end: V,
         ): Result<Boolean> {
+            logDebug("Launched validateParametersWithGraph() from PathfindingValidator with startId:$start, endId:$end")
             if (graph == null) return Result.Error(PathfindingErrors.EmptyGraph())
             if (graph.vertices.isEmpty() || graph.edges.isEmpty()) return Result.Error(PathfindingErrors.EmptyGraph())
             if (!graph.vertices.containsKey(start)) return Result.Error(PathfindingErrors.VertexNotFound(start as Long))
@@ -28,6 +30,7 @@ class PathfindingValidator<E : Comparable<E>, V : Comparable<V>> {
             onMaxPathsError: () -> Unit,
             onSetErrorMessage: (String) -> Unit,
         ) {
+            logDebug("Launched validateInputParameters() from PathfindingValidator with startId:$startId, endId:$endId, maxPaths:$maxPaths")
             if (startId == null || endId == null) {
                 if (startId == null) onStartError()
                 if (endId == null) onEndError()

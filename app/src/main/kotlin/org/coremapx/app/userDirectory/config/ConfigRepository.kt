@@ -6,7 +6,9 @@ import model.result.ConfigErrors
 import model.result.FileErrors
 import model.result.Result
 import model.result.showConfigErrorDialog
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logError
+import org.coremapx.app.AppLogger.logInfo
+import org.coremapx.app.AppLogger.logWarning
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.AppThemes
 import org.coremapx.app.theme.DefaultThemes
@@ -39,8 +41,6 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
 import java.io.File
 import java.util.Properties
-
-private val logger = KotlinLogging.logger {}
 
 class ConfigRepository {
     private val configPath = PrivateConfig.UserDirectory.CONFIG_FILE_PATH
@@ -82,7 +82,7 @@ class ConfigRepository {
         if (updateConfigFileResult is Result.Error) return updateConfigFileResult
         userConfig[key] = value
         states.updateValue(key, value)
-        logger.info { "Updated config. For key: $key new value: $value" }
+        logInfo("Updated config. For key: $key new value: $value")
         return Result.Success(true)
     }
 
@@ -134,7 +134,7 @@ class ConfigRepository {
         val configFile = File(configPath)
         if (!configFile.exists()) {
             val message = "There is nothing to update, the configuration file has not been found"
-            logger.error { message }
+            logError(message)
             return Result.Error(FileErrors.ErrorReadingFile(message))
         }
         var keyFound = false
@@ -148,7 +148,7 @@ class ConfigRepository {
                 }
             }
         if (!keyFound) {
-            logger.warn { "Key '$key' not found in config file" }
+            logWarning("Key '$key' not found in config file")
             return Result.Error(ConfigErrors.UnknownProperty(key))
         }
         configFile.bufferedWriter().use { writer ->
@@ -201,9 +201,9 @@ class ConfigRepository {
         try {
             comparisonWithDefaultConfig()
             validateUserConfigValues()
-            logger.info { "Config has been loaded successfully" }
+            logInfo("Config has been loaded successfully")
         } catch (ex: IllegalArgumentException) {
-            logger.error { "Config validation failed" }
+            logError("Config validation failed")
             showConfigErrorDialog(ex.message ?: "Config error")
         }
     }

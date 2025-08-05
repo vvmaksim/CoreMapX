@@ -39,7 +39,8 @@ import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.result.CommandErrors
 import model.result.Result
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logInfo
+import org.coremapx.app.AppLogger.logWarning
 import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
@@ -53,8 +54,6 @@ import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategy.AnimatedVisualizationStrategy
 import viewmodel.visualizationStrategy.AnimationParameters
-
-private val logger = KotlinLogging.logger {}
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -135,18 +134,18 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     when (executeResult) {
                         is Result.Success -> {
                             updateOutputMessages(executeResult.data)
-                            logger.info(executeResult.data)
+                            logInfo(executeResult.data)
                             commandCount++
                         }
                         is Result.Error -> {
                             updateOutputMessages(errorMessage(executeResult))
-                            logger.warn(errorMessage(executeResult))
+                            logWarning(errorMessage(executeResult))
                         }
                     }
                 }
                 is Result.Error -> {
                     updateOutputMessages(errorMessage(commandResult))
-                    logger.warn(errorMessage(commandResult))
+                    logWarning(errorMessage(commandResult))
                 }
             }
         }

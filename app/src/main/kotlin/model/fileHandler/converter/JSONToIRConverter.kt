@@ -5,6 +5,7 @@ import model.fileHandler.ConvertModes
 import model.fileHandler.serializableEntities.GraphData
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config.PrivateConfig
 import java.io.File
 
@@ -14,6 +15,9 @@ class JSONToIRConverter : FileConverter() {
         convertMode: ConvertModes,
         graphId: Long?,
     ): Result<File> {
+        logDebug(
+            "Launched convert() from JSONToIRConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+        )
         val json = Json { ignoreUnknownKeys = true }
         val graphData: GraphData
         try {

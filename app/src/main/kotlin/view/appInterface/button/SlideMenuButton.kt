@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 
@@ -25,7 +26,10 @@ fun SlideMenuButton(
     size: Dp = 60.dp,
 ) {
     Button(
-        onClick = onClick,
+        onClick = {
+            logDebug("Click on SlideMenuButton")
+            onClick
+        },
         modifier = Modifier.size(size),
         elevation =
             ButtonDefaults.elevation(

@@ -7,6 +7,7 @@ import model.graph.contracts.Graph
 import model.graph.entities.WeightedEdge
 import model.result.PathfindingErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 
 class BellmanFordStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStrategy<E, V> {
     override fun findPath(
@@ -15,6 +16,7 @@ class BellmanFordStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStr
         end: V,
         maxPaths: Int,
     ): Result<List<List<E>>> {
+        logDebug("Launched findPath() from BellmanFordStrategy with startId:$start, endId:$end, maxPaths:$maxPaths")
         val validateResult = PathfindingValidator.validateParametersWithGraph(graph, start, end)
         if (validateResult is Result.Error) return validateResult
         if (graph == null) return Result.Error(PathfindingErrors.EmptyGraph())
