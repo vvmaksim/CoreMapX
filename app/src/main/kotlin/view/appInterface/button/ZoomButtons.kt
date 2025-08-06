@@ -53,7 +53,7 @@ fun ZoomButtons(
         Row {
             IconButton(
                 onClick = {
-                    logDebug("Click on Add zoom button")
+                    logDebug("Click on zoomIn button")
                     onZoom(zoomFactor)
                 },
                 modifier =
@@ -70,7 +70,7 @@ fun ZoomButtons(
 
             IconButton(
                 onClick = {
-                    logDebug("Click on Remove zoom button")
+                    logDebug("Click on zoomOut button")
                     onZoom(-zoomFactor)
                 },
                 modifier =
