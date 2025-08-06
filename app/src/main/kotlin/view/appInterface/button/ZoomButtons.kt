@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
@@ -46,7 +47,7 @@ fun ZoomButtons(
                             color = MaterialTheme.colors.border,
                         ),
                     shape = MaterialTheme.shapes.huge,
-                ),
+                ).testTag("ZoomButtonsContainer"),
         contentAlignment = Alignment.Center,
     ) {
         Row {
@@ -55,7 +56,10 @@ fun ZoomButtons(
                     logDebug("Click on Add zoom button")
                     onZoom(zoomFactor)
                 },
-                modifier = Modifier.size(iconSize),
+                modifier =
+                    Modifier
+                        .size(iconSize)
+                        .testTag("ZoomInButton"),
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -69,7 +73,10 @@ fun ZoomButtons(
                     logDebug("Click on Remove zoom button")
                     onZoom(-zoomFactor)
                 },
-                modifier = Modifier.size(iconSize),
+                modifier =
+                    Modifier
+                        .size(iconSize)
+                        .testTag("ZoomOutButton"),
             ) {
                 Icon(
                     imageVector = Icons.Default.Remove,
