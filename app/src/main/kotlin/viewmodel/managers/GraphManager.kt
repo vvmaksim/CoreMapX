@@ -24,6 +24,7 @@ import model.graph.entities.WeightedEdge
 import model.ir.GraphIR
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import orgcoremapxapp.Graphs
@@ -101,6 +102,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     var animationScope: CoroutineScope? = null
 
     fun resetGraphView() {
+        logDebug("Launched resetGraphView() function from GraphManager")
         _graphViewModel.value?.let { viewModel ->
             val strategy = layoutStrategy.value
             if (strategy is ForceDirectedStrategy<*, *>) {
@@ -121,7 +123,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                             ?.edges
                             ?.values
                             ?.map { it as Edge<Comparable<Any>, Comparable<Any>> },
-                    iterations = 500,
+                    iterations = strategy.getParameters().iterations,
                     onFrame = { },
                 )
             } else {
@@ -132,9 +134,11 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun updateLayoutStrategy(newStrategy: VisualizationStrategy<E, V>) {
         _layoutStrategy.value = newStrategy
+        logDebug("Update layout strategy on ${newStrategy::class.simpleName ?: "NoStrategyName"}")
     }
 
     fun updateGraph(newGraph: Graph<E, V>) {
+        logDebug("Launched updateGraph() function from GraphManager")
         _graph.value = newGraph
         updateGraphViewModel(
             newViewModel =
@@ -143,7 +147,6 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                     visibleStates = visibleStates,
                 ),
         )
-        resetGraphView()
     }
 
     fun updateGraphViewModel(newViewModel: GraphViewModel<E, V>) {
@@ -153,18 +156,22 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun setIsVerticesLabelsVisible(value: Boolean) {
         _isVerticesLabelsVisible.value = value
+        logDebug("Set isVerticesLabelsVisible on $value")
     }
 
     fun setIsVerticesIdsVisible(value: Boolean) {
         _isVerticesIdsVisible.value = value
+        logDebug("Set isVerticesIdsVisible on $value")
     }
 
     fun setIsEdgesWeightsVisible(value: Boolean) {
         _isEdgesWeightsVisible.value = value
+        logDebug("Set isEdgesWeightsVisible on $value")
     }
 
     fun setIsEdgesIdsVisible(value: Boolean) {
         _isEdgesIdsVisible.value = value
+        logDebug("Set isEdgesIdsVisible on $value")
     }
 
     fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =
@@ -184,6 +191,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         }
 
     fun openGraphFile(): Result<List<String>> {
+        logDebug("Open file dialog for graph file")
         val file =
             DialogManager.showOpenFileDialog(directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH)
                 ?: return Result.Success(emptyList())
@@ -191,6 +199,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     }
 
     fun openGraphRepository(): Result<File?> {
+        logDebug("Open file dialog for graph repository")
         val repository =
             DialogManager.showOpenFileDialog(
                 directory = PrivateConfig.UserDirectory.GRAPHS_DIR_PATH,
@@ -200,6 +209,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     }
 
     fun loadGraphFromFile(file: File): Result<List<String>> {
+        logDebug("Load graph from file or directory from absolutePath:${file.absolutePath}")
         val parseResult = Parser.parse(file, graphId)
         val graphIR: GraphIR
         when (parseResult) {
@@ -237,11 +247,21 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
     fun saveGraph(
         fileName: String = graphName,
-        directoryPath: String? = graphPath,
+        directoryPath: String? = null,
         fileFormat: FileExtensions? = graphFormat,
     ): Result<String> {
+        logDebug(
+            "Save graph as fileFormat:${fileFormat?.name ?: "NoNameFileFormat"} with fileName:$fileName to directoryPath:${directoryPath ?: "Unknown directoryPath"}",
+        )
         try {
-            if (directoryPath == null) return Result.Error(FileErrors.InvalidParameter("directoryPath", "This parameter cannot be null"))
+            val graphPathCopy = graphPath
+            if (directoryPath == null &&
+                graphPathCopy == null
+            ) {
+                return Result.Error(
+                    FileErrors.InvalidParameter("directoryPath", "This parameter cannot be null when graphPath is null"),
+                )
+            }
             if (fileFormat == null) return Result.Error(FileErrors.InvalidParameter("fileFormat", "This parameter cannot be null"))
 
             val isDirected =
@@ -285,7 +305,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
 
             when (fileFormat) {
                 FileExtensions.GRAPH -> {
-                    val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.graph"
+                    val path = if (directoryPath != null) "$directoryPath/$fileName.graph" else graphPathCopy ?: "unknownSituation"
                     val fileIR = File(path)
                     fileIR.writeText(ir.toString())
                     return Result.Success("File was saved as GRAPH")
@@ -297,7 +317,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                     when (convertResult) {
                         is Result.Error -> return convertResult
                         is Result.Success -> {
-                            val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.json"
+                            val path = if (directoryPath != null) "$directoryPath/$fileName.json" else graphPathCopy ?: "unknownSituation"
                             val renameToResult = convertResult.data.renameTo(File(path))
                             if (!renameToResult) {
                                 return Result.Error(
@@ -312,7 +332,7 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                     var graphId =
                         graphId
                             ?: return Result.Error(FileErrors.ErrorSavingFile("graphId can not be null"))
-                    val path = if (directoryPath == graphPath) directoryPath else "$directoryPath/$fileName.db"
+                    val path = if (directoryPath != null) "$directoryPath/$fileName.db" else graphPathCopy ?: "unknownSituation"
                     val database = createDatabase(path)
 
                     val graphRepository = GraphRepository(database)

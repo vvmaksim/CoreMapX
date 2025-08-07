@@ -5,6 +5,8 @@ import model.fileHandler.FileExtensions
 import model.fileHandler.Validator
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
+import org.coremapx.app.AppLogger.logError
 import java.io.File
 
 class Converter {
@@ -15,6 +17,9 @@ class Converter {
             mode: ConvertModes,
             graphId: Long?,
         ): Result<File> {
+            logDebug(
+                "Launched convert() from Converter with fileAbsolutePath:${file.absolutePath}, to:${to.name}, mode:${mode.name}, graphId:$graphId",
+            )
             val validateResult = Validator.Companion.validate(file)
             if (validateResult is Result.Error) return validateResult
 
@@ -31,6 +36,7 @@ class Converter {
                 val converter = FileConverter.createConverter(from, to)
                 return converter.convert(file, mode, graphId)
             } catch (ex: IllegalArgumentException) {
+                logError("ex:$ex")
                 return Result.Error(FileErrors.UnknownFileExtension())
             }
         }

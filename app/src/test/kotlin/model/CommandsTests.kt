@@ -1,3 +1,5 @@
+package model
+
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just

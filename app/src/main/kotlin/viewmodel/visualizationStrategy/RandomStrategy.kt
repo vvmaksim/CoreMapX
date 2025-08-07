@@ -1,6 +1,7 @@
 package viewmodel.visualizationStrategy
 
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.AppLogger.logDebug
 import viewmodel.graph.VertexViewModel
 import kotlin.random.Random
 
@@ -10,6 +11,7 @@ class RandomStrategy<E : Comparable<E>, V : Comparable<V>> : VisualizationStrate
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,
     ) {
+        logDebug("Launched place() function from RandomStrategy")
         val padding = 50.0
         val minX = padding
         val maxX = width - padding

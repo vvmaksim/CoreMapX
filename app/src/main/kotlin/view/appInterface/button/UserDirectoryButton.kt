@@ -13,24 +13,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logDebug
+import org.coremapx.app.AppLogger.logError
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import java.awt.Desktop
 import java.io.File
 
-private val logger = KotlinLogging.logger {}
-
 @Suppress("ktlint:standard:function-naming")
 @Composable
 fun UserDirectoryButton(size: Dp = 60.dp) {
     Button(
         onClick = {
+            logDebug("Click on UserDirectoryButton")
             try {
                 Desktop.getDesktop().open(File(PrivateConfig.UserDirectory.DIR_PATH))
             } catch (ex: Exception) {
-                logger.error("The user directory cannot be opened. Error: $ex")
+                logError("The user directory cannot be opened. Error: $ex")
             }
         },
         modifier = Modifier.size(size),

@@ -10,6 +10,7 @@ import model.graph.pathfinding.DijkstraStrategy
 import model.graph.pathfinding.PathfindingStrategiesNames
 import model.graph.pathfinding.PathfindingStrategy
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config
 import viewmodel.graph.GraphViewModel
 
@@ -50,6 +51,7 @@ class PathfindingManager<E : Comparable<E>, V : Comparable<V>>(
         end: V,
         maxPaths: Int = 1,
     ): Result<Boolean> {
+        logDebug("Launched findPath with stratId:$start, endId:$end, maxPaths:$maxPaths")
         val resultFindPaths =
             pathfindingStrategy.value.findPath(
                 graph.value,
@@ -95,5 +97,6 @@ class PathfindingManager<E : Comparable<E>, V : Comparable<V>>(
 
     private fun updatePathfindingStrategy(newStrategy: PathfindingStrategy<E, V>) {
         _pathfindingStrategy.value = newStrategy
+        logDebug("Set pathfindingStrategy on ${newStrategy::class.simpleName}")
     }
 }

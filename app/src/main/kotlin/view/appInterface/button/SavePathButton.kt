@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import extensions.border
 import model.fileHandler.DialogManager
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
@@ -60,6 +61,7 @@ fun SavePathButton(
                     border = BorderStroke(borderWidth, borderColor),
                     shape = borderShape,
                 ).clickable {
+                    logDebug("Click on SavePathButton")
                     val dir = DialogManager.showSelectDirectoryDialog(directory = currentPath) ?: currentPath
                     currentPath = dir
                     onPathSelected(dir)

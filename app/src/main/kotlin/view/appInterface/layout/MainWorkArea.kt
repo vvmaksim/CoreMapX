@@ -39,8 +39,10 @@ import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.result.CommandErrors
 import model.result.Result
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logInfo
+import org.coremapx.app.AppLogger.logWarning
 import org.coremapx.app.config
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import view.appInterface.button.ZoomButtons
@@ -52,8 +54,6 @@ import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
 import viewmodel.visualizationStrategy.AnimatedVisualizationStrategy
 import viewmodel.visualizationStrategy.AnimationParameters
-
-private val logger = KotlinLogging.logger {}
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -134,18 +134,18 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     when (executeResult) {
                         is Result.Success -> {
                             updateOutputMessages(executeResult.data)
-                            logger.info(executeResult.data)
+                            logInfo(executeResult.data)
                             commandCount++
                         }
                         is Result.Error -> {
                             updateOutputMessages(errorMessage(executeResult))
-                            logger.warn(errorMessage(executeResult))
+                            logWarning(errorMessage(executeResult))
                         }
                     }
                 }
                 is Result.Error -> {
                     updateOutputMessages(errorMessage(commandResult))
-                    logger.warn(errorMessage(commandResult))
+                    logWarning(errorMessage(commandResult))
                 }
             }
         }
@@ -250,7 +250,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         Slider(
                             value = iterations,
                             onValueChange = { iterations = it },
-                            valueRange = 100f..30000f,
+                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.iterationsRange,
                         )
                         Text(
                             text =
@@ -262,7 +262,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         Slider(
                             value = area,
                             onValueChange = { area = it },
-                            valueRange = 100_000f..10_000_000f,
+                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.areaRange,
                         )
                         Text(
                             text =
@@ -274,7 +274,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         Slider(
                             value = gravity,
                             onValueChange = { gravity = it },
-                            valueRange = 0.0001f..1.0f,
+                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.gravityRange,
                         )
                         Text(
                             text =
@@ -286,7 +286,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                         Slider(
                             value = speed,
                             onValueChange = { speed = it },
-                            valueRange = 0.0001f..1.0f,
+                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.speedRange,
                         )
                     }
                 }

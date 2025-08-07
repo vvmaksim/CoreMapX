@@ -7,6 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import model.graph.contracts.Edge
+import org.coremapx.app.AppLogger.logDebug
 import viewmodel.graph.VertexViewModel
 import kotlin.math.hypot
 import kotlin.math.max
@@ -31,6 +32,7 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,
     ) {
+        logDebug("Launched place() function for ForceDirectedStrategy")
         initializePositions(width, height, vertices)
     }
 
@@ -39,6 +41,7 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,
     ) {
+        logDebug("Launched initializePositions() function for ForceDirectedStrategy")
         if (vertices == null || vertices.size <= 1) return
         n = vertices.size
         k = sqrt(params.area / n)
@@ -70,6 +73,7 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
         iterations: Int,
         onFrame: (() -> Unit)?,
     ) {
+        logDebug("Launched startAnimation() function for ForceDirectedStrategy")
         stopAnimation()
         isAnimating = true
         if (vertices == null || edges == null) return
@@ -89,6 +93,7 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
     }
 
     override fun stopAnimation() {
+        logDebug("Launched stopAnimation() function for ForceDirectedStrategy")
         isAnimating = false
         animationJob?.cancel()
         animationJob = null
@@ -98,6 +103,9 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
 
     override fun setParameters(params: AnimationParameters) {
         this.params = params
+        logDebug(
+            "Set parameters in ForceDirectedStrategy on: iterations:${params.iterations}, gravity:${params.gravity}, area:${params.area}, speed:${params.speed}",
+        )
     }
 
     override fun getParameters(): AnimationParameters = params.copy()

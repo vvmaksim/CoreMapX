@@ -13,8 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LanguageCodesManager.getAllFullLanguagesNames
+import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsStringByFullNameWithFallback
+import org.coremapx.app.localization.objects.LanguageCodesManager.getFullLanguageNameByStringCodeWithFallback
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.theme.ThemesManager.getAllAppThemes
+import org.coremapx.app.theme.ThemesManager.getAllSystemDialogThemes
 import org.coremapx.app.userDirectory.config.ConfigKeys.IS_EXPANDED_SETTINGS
 import org.coremapx.app.userDirectory.config.ConfigKeys.LANGUAGE
 import org.coremapx.app.userDirectory.config.ConfigKeys.SYSTEM_DIALOG_THEME
@@ -38,24 +43,12 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
     Column {
         DropdownSelectLine(
             title = LocalizationManager.states.dialogs.generalLanguage.value,
-            items = listOf("English", "Русский", "Custom"),
-            selectedItem =
-                when (language) {
-                    "en" -> "English"
-                    "ru" -> "Русский"
-                    "custom" -> "Custom"
-                    else -> "English"
-                },
+            items = getAllFullLanguagesNames(),
+            selectedItem = getFullLanguageNameByStringCodeWithFallback(codeAsString = language),
             onItemSelected = { selectedLanguage: String ->
                 config.setValue(
                     key = LANGUAGE,
-                    value =
-                        when (selectedLanguage) {
-                            "English" -> "en"
-                            "Русский" -> "ru"
-                            "Custom" -> "custom"
-                            else -> "English"
-                        },
+                    value = getCodeAsStringByFullNameWithFallback(selectedLanguage),
                 )
             },
             modifier = dropdownSelectButtonModifier,
@@ -65,7 +58,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
             title = LocalizationManager.states.dialogs.generalTheme.value,
-            items = listOf("Light", "Dark", "Custom"),
+            items = getAllAppThemes(),
             selectedItem = theme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
                 config.setValue(THEME, it.lowercase())
@@ -78,7 +71,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
         Spacer(Modifier.height(8.dp))
         DropdownSelectLine(
             title = LocalizationManager.states.dialogs.generalSystemDialogTheme.value,
-            items = listOf("Light", "Dark"),
+            items = getAllSystemDialogThemes(),
             selectedItem = systemDialogTheme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
                 config.setValue(SYSTEM_DIALOG_THEME, it.lowercase())

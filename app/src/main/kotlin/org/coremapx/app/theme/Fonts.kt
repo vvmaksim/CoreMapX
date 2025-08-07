@@ -7,12 +7,11 @@ import org.coremapx.app.config.PrivateConfig
 import java.io.File
 
 object Fonts {
-    private val fontsDirPath = PrivateConfig.UserDirectory.FONTS_DIR_PATH
     val fontFamily =
         FontFamily(
-            Font(File("$fontsDirPath/Font-Regular.ttf"), FontWeight.Normal),
-            Font(File("$fontsDirPath/Font-Bold.ttf"), FontWeight.Bold),
-            Font(File("$fontsDirPath/Font-Medium.ttf"), FontWeight.Medium),
-            Font(File("$fontsDirPath/Font-Light.ttf"), FontWeight.Light),
+            Font(File(PrivateConfig.UserDirectory.REGULAR_FONT_PATH), FontWeight.Normal),
+            Font(File(PrivateConfig.UserDirectory.BOLD_FONT_PATH), FontWeight.Bold),
+            Font(File(PrivateConfig.UserDirectory.MEDIUM_FONT_PATH), FontWeight.Medium),
+            Font(File(PrivateConfig.UserDirectory.LIGHT_FONT_PATH), FontWeight.Light),
         )
 }

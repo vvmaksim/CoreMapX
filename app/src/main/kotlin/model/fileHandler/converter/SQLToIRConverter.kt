@@ -8,6 +8,7 @@ import model.database.sqlite.repository.VertexRepository
 import model.fileHandler.ConvertModes
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.graph.GraphDatabase
 import java.io.File
@@ -18,6 +19,9 @@ class SQLToIRConverter : FileConverter() {
         convertMode: ConvertModes,
         graphId: Long?,
     ): Result<File> {
+        logDebug(
+            "Launched convert() from FileConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+        )
         if (graphId == null) return Result.Error(FileErrors.ConverterError("graphId can not be null"))
 
         val database: GraphDatabase = createDatabase(file.absolutePath)

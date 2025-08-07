@@ -19,6 +19,10 @@ object PrivateConfig {
                 LOGS_DIR_PATH = "$DIR_PATH/logs"
                 CONFIG_DIR_PATH = "$DIR_PATH/config"
                 FONTS_DIR_PATH = "$DIR_PATH/config/fonts"
+                REGULAR_FONT_PATH = "$FONTS_DIR_PATH/Font-Regular.ttf"
+                BOLD_FONT_PATH = "$FONTS_DIR_PATH/Font-Bold.ttf"
+                MEDIUM_FONT_PATH = "$FONTS_DIR_PATH/Font-Medium.ttf"
+                LIGHT_FONT_PATH = "$FONTS_DIR_PATH/Font-Light.ttf"
                 DATA_DIR_PATH = "$DIR_PATH/data"
                 TEMP_DIR_PATH = "$DIR_PATH/data/temp"
                 GRAPHS_DIR_PATH = "$DIR_PATH/data/graphs"
@@ -45,6 +49,18 @@ object PrivateConfig {
             private set
 
         var FONTS_DIR_PATH = "$DIR_PATH/config/fonts"
+            private set
+
+        var REGULAR_FONT_PATH = "$FONTS_DIR_PATH/Font-Regular.ttf"
+            private set
+
+        var BOLD_FONT_PATH = "$FONTS_DIR_PATH/Font-Bold.ttf"
+            private set
+
+        var MEDIUM_FONT_PATH = "$FONTS_DIR_PATH/Font-Medium.ttf"
+            private set
+
+        var LIGHT_FONT_PATH = "$FONTS_DIR_PATH/Font-Light.ttf"
             private set
 
         var DATA_DIR_PATH = "$DIR_PATH/data"
@@ -74,6 +90,8 @@ object PrivateConfig {
     object AppResources {
         const val DEFAULT_CONFIG_PATH = "config/DefaultConfig.cfg"
         const val DEFAULT_FONTS_DIRECTORY_PATH = "fonts"
+        const val LOGO_BACKGROUND = "drawable/logo_background.svg"
+        const val LOGO_ICON = "drawable/logo_icon.svg"
 
         var EN_LANGUAGE_PATH = "app/src/main/resources/languages/en.lang"
             private set
@@ -92,5 +110,14 @@ object PrivateConfig {
     object View {
         const val DISABLED_ALPHA = 0.38F
         const val DESCRIPTION_ALPHA = 0.6F
+    }
+
+    object LayoutStrategies {
+        object ForceDirected {
+            val iterationsRange = 100f..30000f
+            val areaRange = 100_000f..10_000_000f
+            val gravityRange = 0.0001f..1.0f
+            val speedRange = 0.0001f..1.0f
+        }
     }
 }

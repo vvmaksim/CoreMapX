@@ -12,6 +12,7 @@ import model.fileHandler.serializableEntities.Edge
 import model.fileHandler.serializableEntities.Vertex
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config.PrivateConfig
 import java.io.File
 import java.io.IOException
@@ -22,6 +23,9 @@ class IRToSQLConverter : FileConverter() {
         convertMode: ConvertModes,
         graphId: Long?,
     ): Result<File> {
+        logDebug(
+            "Launched convert() from IRToSQLConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+        )
         val lines: List<String>
         try {
             lines = file.readLines().map { it.trim() }.filter { it.isNotEmpty() }

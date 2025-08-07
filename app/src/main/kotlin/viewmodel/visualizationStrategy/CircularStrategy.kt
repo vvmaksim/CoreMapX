@@ -1,6 +1,7 @@
 package viewmodel.visualizationStrategy
 
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.AppLogger.logDebug
 import viewmodel.graph.VertexViewModel
 import kotlin.math.PI
 import kotlin.math.cos
@@ -14,6 +15,7 @@ class CircularStrategy<E : Comparable<E>, V : Comparable<V>>(
         height: Double,
         vertices: Collection<VertexViewModel<V>>?,
     ) {
+        logDebug("Launched place() function for CircularStrategy")
         val n = vertices?.size ?: return
         if (n == 0) return
 

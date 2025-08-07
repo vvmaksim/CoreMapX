@@ -1,3 +1,5 @@
+package model
+
 import model.command.concrete.Command
 import model.command.enums.CommandEntities
 import model.command.enums.CommandTypes

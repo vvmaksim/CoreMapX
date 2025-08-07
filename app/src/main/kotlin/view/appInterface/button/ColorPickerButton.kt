@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.toHexString
 import model.fileHandler.DialogManager
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
@@ -60,6 +61,7 @@ fun ColorPickerButton(
                         ),
                     shape = borderShape,
                 ).clickable {
+                    logDebug("Click on ColorPickerButton")
                     DialogManager.showSelectColorDialog(initialColor = selectedColor)?.let { hexColor ->
                         onColorSelected(hexColor)
                     }

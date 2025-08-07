@@ -6,10 +6,15 @@ import model.result.ConfigErrors
 import model.result.FileErrors
 import model.result.Result
 import model.result.showConfigErrorDialog
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logError
+import org.coremapx.app.AppLogger.logInfo
+import org.coremapx.app.AppLogger.logWarning
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.theme.AppThemes
 import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
+import org.coremapx.app.theme.ThemesManager.getAppThemeAsString
+import org.coremapx.app.theme.ThemesManager.getSystemDialogThemeAsStringByIsLight
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
@@ -36,8 +41,6 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
 import java.io.File
 import java.util.Properties
-
-private val logger = KotlinLogging.logger {}
 
 class ConfigRepository {
     private val configPath = PrivateConfig.UserDirectory.CONFIG_FILE_PATH
@@ -79,22 +82,22 @@ class ConfigRepository {
         if (updateConfigFileResult is Result.Error) return updateConfigFileResult
         userConfig[key] = value
         states.updateValue(key, value)
-        logger.info { "Updated config. For key: $key new value: $value" }
+        logInfo("Updated config. For key: $key new value: $value")
         return Result.Success(true)
     }
 
     fun updateTheme() {
         val theme = states.theme.value
-        if (theme != "custom") {
+        if (theme != getAppThemeAsString(theme = AppThemes.CUSTOM, makeLower = true)) {
             when (theme) {
-                "light" -> setTheme(DefaultThemes.light)
-                "dark" -> setTheme(DefaultThemes.dark)
+                getAppThemeAsString(theme = AppThemes.LIGHT, makeLower = true) -> setTheme(DefaultThemes.light)
+                getAppThemeAsString(theme = AppThemes.DARK, makeLower = true) -> setTheme(DefaultThemes.dark)
                 else -> showConfigErrorDialog("Unknown theme: $theme")
             }
         }
     }
 
-    fun setThemeOnCustom() = setValue(THEME, "custom")
+    fun setThemeOnCustom() = setValue(THEME, getAppThemeAsString(theme = AppThemes.CUSTOM, makeLower = true))
 
     private fun setTheme(themeConfig: ThemeConfig) {
         with(themeConfig) {
@@ -120,7 +123,7 @@ class ConfigRepository {
             setValue(OTHER_PATHS_COLOR, otherPathsColor)
             setValue(CANVAS_BACKGROUND_COLOR, canvasBackgroundColor)
             setValue(COMMAND_LINE_BACKGROUND_COLOR, commandLineBackgroundColor)
-            setValue(SYSTEM_DIALOG_THEME, if (isLight) "light" else "dark")
+            setValue(SYSTEM_DIALOG_THEME, getSystemDialogThemeAsStringByIsLight(isLight = isLight, makeLower = true))
         }
     }
 
@@ -131,7 +134,7 @@ class ConfigRepository {
         val configFile = File(configPath)
         if (!configFile.exists()) {
             val message = "There is nothing to update, the configuration file has not been found"
-            logger.error { message }
+            logError(message)
             return Result.Error(FileErrors.ErrorReadingFile(message))
         }
         var keyFound = false
@@ -145,7 +148,7 @@ class ConfigRepository {
                 }
             }
         if (!keyFound) {
-            logger.warn { "Key '$key' not found in config file" }
+            logWarning("Key '$key' not found in config file")
             return Result.Error(ConfigErrors.UnknownProperty(key))
         }
         configFile.bufferedWriter().use { writer ->
@@ -198,9 +201,9 @@ class ConfigRepository {
         try {
             comparisonWithDefaultConfig()
             validateUserConfigValues()
-            logger.info { "Config has been loaded successfully" }
+            logInfo("Config has been loaded successfully")
         } catch (ex: IllegalArgumentException) {
-            logger.error { "Config validation failed" }
+            logError("Config validation failed")
             showConfigErrorDialog(ex.message ?: "Config error")
         }
     }

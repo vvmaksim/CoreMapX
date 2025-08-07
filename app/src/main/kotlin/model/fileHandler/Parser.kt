@@ -5,6 +5,7 @@ import model.fileHandler.converter.Converter
 import model.ir.GraphIR
 import model.result.FileErrors
 import model.result.Result
+import org.coremapx.app.AppLogger.logDebug
 import java.io.File
 
 class Parser {
@@ -15,6 +16,7 @@ class Parser {
             file: File,
             graphId: Long?,
         ): Result<GraphIR> {
+            logDebug("Launched parse() from Parser with fileAbsolutePath:${file.absolutePath}, graphId:$graphId")
             var fileIR: File
             val converterResult =
                 Converter.convert(

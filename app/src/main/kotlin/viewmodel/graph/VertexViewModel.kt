@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.graph.entities.Vertex
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config
 
 class VertexViewModel<V : Comparable<V>>(
@@ -51,6 +52,7 @@ class VertexViewModel<V : Comparable<V>>(
     fun onDrag(offset: Offset) {
         _x.value += offset.x.dp
         _y.value += offset.y.dp
+        logDebug("Launched onDrag() function in VertexViewModel with offsetX:${offset.x} and offsetY:${offset.y}")
     }
 
     fun getVertexText(): String =

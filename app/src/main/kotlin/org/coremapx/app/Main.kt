@@ -17,7 +17,9 @@ import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
 import androidx.compose.ui.zIndex
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logAppShutdown
+import org.coremapx.app.AppLogger.logAppStartup
+import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.UserDirectory
@@ -26,7 +28,6 @@ import view.appInterface.layout.TitleBar
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension
 
-private val logger = KotlinLogging.logger {}
 val userDirectory = UserDirectory.init()
 val config = ConfigRepository()
 
@@ -35,7 +36,7 @@ val startScreenHeight = config.states.mainScreenStartHeight.value
 
 fun main() =
     application {
-        logger.info("Started CoreMapX app")
+        logAppStartup()
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
         val startWindowPlacement = config.states.startWindowPlacement.value
         val viewModel = MainScreenViewModel<Long, Long>()
@@ -50,7 +51,7 @@ fun main() =
         }
         Window(
             onCloseRequest = {
-                logger.info("Closed CoreMapX app")
+                logAppShutdown()
                 exitApplication()
             },
             title = "CoreMapX",
@@ -76,11 +77,24 @@ fun main() =
                 WindowDraggableArea(modifier = Modifier.zIndex(1f)) {
                     AppTheme {
                         TitleBar(
-                            onClose = { exitApplication() },
-                            onMinimize = { windowState.isMinimized = true },
+                            onClose = {
+                                logAppShutdown()
+                                exitApplication()
+                            },
+                            onMinimize = {
+                                logDebug("Click on minimize button")
+                                windowState.isMinimized = true
+                            },
                             onMaximize = {
                                 isMaximized = !isMaximized
-                                windowState.placement = if (isMaximized) WindowPlacement.Maximized else WindowPlacement.Floating
+                                windowState.placement =
+                                    if (isMaximized) {
+                                        logDebug("Click on maximize button")
+                                        WindowPlacement.Maximized
+                                    } else {
+                                        logDebug("Click on floating button")
+                                        WindowPlacement.Floating
+                                    }
                             },
                             isMaximized = isMaximized,
                             viewModel = viewModel,

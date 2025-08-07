@@ -1,14 +1,13 @@
 package org.coremapx.app.userDirectory
 
 import model.result.showConfigErrorDialog
-import mu.KotlinLogging
+import org.coremapx.app.AppLogger.logError
+import org.coremapx.app.AppLogger.logInfo
 import org.coremapx.app.config.PrivateConfig
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
-
-private val logger = KotlinLogging.logger {}
 
 object UserDirectory {
     private var isTest: Boolean = false
@@ -32,7 +31,7 @@ object UserDirectory {
     }
 
     fun init() {
-        logger.info { "Checking the existence of a user directory" }
+        logInfo("Checking the existence of a user directory")
         try {
             createBaseUserDir()
             createUserDirs()
@@ -40,7 +39,7 @@ object UserDirectory {
             copyDefaultFonts()
             copyCustomLanguageTemplate()
         } catch (ex: Exception) {
-            logger.error { "Failed to create directories. Ex: ${ex.message}" }
+            logError("Failed to create directories. Ex: ${ex.message}")
         }
     }
 
@@ -49,7 +48,7 @@ object UserDirectory {
         val targetConfigFile = File(targetConfigPath)
 
         if (!targetConfigFile.exists()) {
-            logger.info { "Copying default config to $targetConfigPath" }
+            logInfo("Copying default config to $targetConfigPath")
             try {
                 val resourceStream = this::class.java.classLoader.getResourceAsStream(PrivateConfig.AppResources.DEFAULT_CONFIG_PATH)
                 if (resourceStream != null) {
@@ -58,13 +57,13 @@ object UserDirectory {
                         Paths.get(targetConfigPath),
                         StandardCopyOption.REPLACE_EXISTING,
                     )
-                    logger.info { "Default config copied successfully" }
+                    logInfo("Default config copied successfully")
                 } else {
-                    logger.error { "Failed to find default config resource: ${PrivateConfig.AppResources.DEFAULT_CONFIG_PATH}" }
+                    logError("Failed to find default config resource: ${PrivateConfig.AppResources.DEFAULT_CONFIG_PATH}")
                     showConfigErrorDialog("Failed to find default config resource: ${PrivateConfig.AppResources.DEFAULT_CONFIG_PATH}")
                 }
             } catch (ex: Exception) {
-                logger.error { "Failed to copy default config. Error: ${ex.message}" }
+                logError("Failed to copy default config. Error: ${ex.message}")
                 showConfigErrorDialog("Failed to copy default config. Error: ${ex.message}")
             }
         }
@@ -74,7 +73,7 @@ object UserDirectory {
         val targetCustomLanguagePath = PrivateConfig.AppResources.CUSTOM_LANGUAGE_PATH
         val targetCustomLanguageFile = File(targetCustomLanguagePath)
         if (!targetCustomLanguageFile.exists()) {
-            logger.info { "Copying custom language template to $targetCustomLanguagePath" }
+            logInfo("Copying custom language template to $targetCustomLanguagePath")
             try {
                 if (isTest) {
                     val resourceStream = this::class.java.classLoader.getResourceAsStream(PrivateConfig.AppResources.EN_LANGUAGE_PATH)
@@ -85,7 +84,7 @@ object UserDirectory {
                             StandardCopyOption.REPLACE_EXISTING,
                         )
                     } else {
-                        logger.error { "Failed to find language template resource: ${PrivateConfig.AppResources.EN_LANGUAGE_PATH}" }
+                        logError("Failed to find language template resource: ${PrivateConfig.AppResources.EN_LANGUAGE_PATH}")
                         showConfigErrorDialog("Failed to find language template resource: ${PrivateConfig.AppResources.EN_LANGUAGE_PATH}")
                     }
                 } else {
@@ -95,9 +94,9 @@ object UserDirectory {
                         StandardCopyOption.REPLACE_EXISTING,
                     )
                 }
-                logger.info { "Custom language template copied successfully" }
+                logInfo("Custom language template copied successfully")
             } catch (ex: Exception) {
-                logger.error { "Failed to copy custom language template. Error: ${ex.message}" }
+                logError("Failed to copy custom language template. Error: ${ex.message}")
                 showConfigErrorDialog("Failed to copy custom language template. Error: ${ex.message}")
             }
         }
@@ -115,13 +114,13 @@ object UserDirectory {
         targetPath: String,
     ) {
         if (!File(targetPath).exists()) {
-            logger.info { "Copying default font $sourcePath to $userFontsDirPath" }
+            logInfo("Copying default font $sourcePath to $userFontsDirPath")
             try {
                 val targetFile = File(targetPath)
                 targetFile.parentFile?.also { parent ->
                     if (!parent.exists()) {
                         parent.mkdirs()
-                        logger.info { "Created parent directory for fonts: ${parent.absolutePath}" }
+                        logInfo("Created parent directory for fonts: ${parent.absolutePath}")
                     }
                 }
 
@@ -132,12 +131,12 @@ object UserDirectory {
                         Paths.get(targetPath),
                         StandardCopyOption.REPLACE_EXISTING,
                     )
-                    logger.info { "Default font $targetPath copied successfully" }
+                    logInfo("Default font $targetPath copied successfully")
                 } else {
-                    logger.error { "Failed to find font resource: $sourcePath" }
+                    logError("Failed to find font resource: $sourcePath")
                 }
             } catch (ex: Exception) {
-                logger.error { "Failed to copy default font from $sourcePath to $targetPath. Error: ${ex.message}" }
+                logError("Failed to copy default font from $sourcePath to $targetPath. Error: ${ex.message}")
             }
         }
     }
@@ -148,13 +147,13 @@ object UserDirectory {
             baseUserDir.parentFile?.also { parent ->
                 if (!parent.exists()) {
                     parent.mkdirs()
-                    logger.info { "Created parent directory ${parent.absolutePath}" }
+                    logInfo("Created parent directory ${parent.absolutePath}")
                 }
             }
 
-            logger.info { "Creating base user directory $userDirPath" }
+            logInfo("Creating base user directory $userDirPath")
             Files.createDirectory(Paths.get(userDirPath))
-            logger.info { "Created base user directory $userDirPath" }
+            logInfo("Created base user directory $userDirPath")
         }
     }
 
@@ -165,13 +164,13 @@ object UserDirectory {
                 dir.parentFile?.also { parent ->
                     if (!parent.exists()) {
                         parent.mkdirs()
-                        logger.info { "Created parent directory ${parent.absolutePath}" }
+                        logInfo("Created parent directory ${parent.absolutePath}")
                     }
                 }
 
-                logger.info { "Creating directory $dirPath" }
+                logInfo("Creating directory $dirPath")
                 Files.createDirectory(Paths.get(dirPath))
-                logger.info { "Created directory $dirPath" }
+                logInfo("Created directory $dirPath")
             }
         }
     }
