@@ -27,6 +27,12 @@ sqldelight {
     }
 }
 
+ktlint {
+    filter {
+        exclude { it.file.path.contains("build/generated/") }
+    }
+}
+
 application {
     mainClass = "org.coremapx.app.MainKt"
 }
