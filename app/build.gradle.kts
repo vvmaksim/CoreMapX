@@ -30,3 +30,7 @@ sqldelight {
 application {
     mainClass = "org.coremapx.app.MainKt"
 }
+
+tasks.named<JavaExec>("run") {
+    workingDir = file("$projectDir/..")
+}
