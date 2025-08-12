@@ -174,6 +174,14 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         logDebug("Set isEdgesIdsVisible on $value")
     }
 
+    fun initGraphParameters(newGraphName: String) {
+        graphName = newGraphName
+        graphAuthor = "None"
+        graphPath = null
+        graphFormat = null
+        graphId = 0
+    }
+
     fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =
         when (strategy.lowercase()) {
             VisualizationStrategiesNames.RANDOM.lowercase() -> RandomStrategy()
