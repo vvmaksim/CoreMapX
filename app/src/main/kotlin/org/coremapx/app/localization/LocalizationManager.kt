@@ -55,7 +55,8 @@ object LocalizationManager {
         keysGroup: Any,
     ) {
         logDebug(
-            "Launched updateStateGroup() from LocalizationManager with stateGroup:${stateGroup::class.simpleName}, keysGroup:${keysGroup::class.simpleName}",
+            "Launched updateStateGroup() from LocalizationManager with stateGroup:${stateGroup::class.simpleName}, " +
+                "keysGroup:${keysGroup::class.simpleName}",
         )
         keysGroup::class
             .members

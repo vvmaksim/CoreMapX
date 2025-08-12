@@ -20,7 +20,8 @@ class SQLToIRConverter : FileConverter() {
         graphId: Long?,
     ): Result<File> {
         logDebug(
-            "Launched convert() from FileConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+            "Launched convert() from FileConverter with fileAbsolutePath:${file.absolutePath}, " +
+                "convertMode:${convertMode.name}, graphId:$graphId",
         )
         if (graphId == null) return Result.Error(FileErrors.ConverterError("graphId can not be null"))
 

@@ -25,7 +25,8 @@ class IRToJSONConverter : FileConverter() {
         graphId: Long?,
     ): Result<File> {
         logDebug(
-            "Launched convert() from IRToJSONConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+            "Launched convert() from IRToJSONConverter with fileAbsolutePath:${file.absolutePath}, " +
+                "convertMode:${convertMode.name}, graphId:$graphId",
         )
         val lines: List<String>
         try {

@@ -16,7 +16,8 @@ class JSONToIRConverter : FileConverter() {
         graphId: Long?,
     ): Result<File> {
         logDebug(
-            "Launched convert() from JSONToIRConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+            "Launched convert() from JSONToIRConverter with fileAbsolutePath:${file.absolutePath}, " +
+                "convertMode:${convertMode.name}, graphId:$graphId",
         )
         val json = Json { ignoreUnknownKeys = true }
         val graphData: GraphData

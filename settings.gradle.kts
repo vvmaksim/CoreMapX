@@ -3,4 +3,4 @@ plugins {
 }
 
 rootProject.name = "CoreMapX"
-include("app", "utilities")
+include("app")

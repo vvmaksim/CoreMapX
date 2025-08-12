@@ -174,6 +174,14 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         logDebug("Set isEdgesIdsVisible on $value")
     }
 
+    fun initGraphParameters(newGraphName: String) {
+        graphName = newGraphName
+        graphAuthor = "None"
+        graphPath = null
+        graphFormat = null
+        graphId = 0
+    }
+
     fun getLayoutStrategyByString(strategy: String): VisualizationStrategy<E, V>? =
         when (strategy.lowercase()) {
             VisualizationStrategiesNames.RANDOM.lowercase() -> RandomStrategy()
@@ -228,7 +236,12 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
                 else -> UndirectedUnweightedGraph<V>()
             } as Graph<E, V>
         commandResults.forEach { commandResult ->
-            val executeResult = Commands((commandResult as Result.Success).data, newGraph, mutableListOf()).execute()
+            val executeResult =
+                Commands(
+                    command = (commandResult as Result.Success).data,
+                    graph = newGraph,
+                    outputMessages = mutableListOf(),
+                ).execute()
             if (executeResult is Result.Error) return executeResult
         }
         graphName = graphIR.name

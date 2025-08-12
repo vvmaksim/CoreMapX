@@ -104,7 +104,8 @@ class ForceDirectedStrategy<E : Comparable<E>, V : Comparable<V>>(
     override fun setParameters(params: AnimationParameters) {
         this.params = params
         logDebug(
-            "Set parameters in ForceDirectedStrategy on: iterations:${params.iterations}, gravity:${params.gravity}, area:${params.area}, speed:${params.speed}",
+            "Set parameters in ForceDirectedStrategy on: iterations:${params.iterations}, gravity:${params.gravity}, " +
+                "area:${params.area}, speed:${params.speed}",
         )
     }
 
