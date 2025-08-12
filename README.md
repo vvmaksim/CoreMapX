@@ -1,5 +1,9 @@
 # ***CoreMapX***
 
+<div align="center" style="margin: 20px 0;">
+    <img src="app/src/main/resources/drawable/logo_icon.svg" alt="CoreMapX Logo" width="150"/>
+</div>
+
 This is a Kotlin desktop application for analyzing and visualizing graphs on a plane.
 Supported graph types:
 
@@ -35,10 +39,10 @@ Supported pathfinding strategies:
 
 ## ***Features***
 
-+ Interactive graph editing through command line interface
-+ Customizable UI
-+ Multi-language support (English, Russian, and custom languages)
-+ Graph generation capabilities
++ Interactive graph editing via the command line interface
++ Highly customizable user interface (Interface colors, fonts, etc.)
++ Support for multiple languages (English, Russian and custom languages)
++ The ability to generate random graphs
 + Configuration management
 
 ## ***Usage***
