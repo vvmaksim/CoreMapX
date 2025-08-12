@@ -1,7 +1,7 @@
 plugins {
     id("buildlogic.kotlin-application-conventions")
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
-    id("org.jlleitschuh.gradle.ktlint") version "12.3.0"
+    id("org.jlleitschuh.gradle.ktlint") version "13.0.0"
     id("app.cash.sqldelight") version libs.versions.sqldelight
 }
 
