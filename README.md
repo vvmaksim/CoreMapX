@@ -3,23 +3,21 @@
 This is a Kotlin desktop application for analyzing and visualizing graphs on a plane.
 Supported graph types:
 
-+ **GRAPH**
-+ **JSON**
-+ **SQL DB**
++ **GRAPH** - Custom text-based format
++ **JSON** - Standard JSON format
++ **SQL DB** - SQLite database format
 
 Supported layout strategies:
 
-+ **Random**
-+ **Circular**
-+ **Force-Directed**
++ **Random** - Places vertices randomly
++ **Circular** - Arranges vertices in a circle
++ **Force-Directed** - Uses physics-based layout algorithm
 
 Supported pathfinding strategies:
 
-+ **BFS**
-+ **Dijkstra**
-+ **Bellman Ford**
-
-The specifics of each graph storage format will be described in the README file below.
++ **BFS** - Breadth-First Search algorithm
++ **Dijkstra** - Dijkstra's shortest path algorithm
++ **Bellman Ford** - Bellman-Ford algorithm for graphs with negative weights
 
 ## ***Technologies***
 
@@ -36,6 +34,12 @@ The specifics of each graph storage format will be described in the README file 
 + and others...
 
 ## ***Features***
+
++ Interactive graph editing through command line interface
++ Customizable UI
++ Multi-language support (English, Russian, and custom languages)
++ Graph generation capabilities
++ Configuration management
 
 ## ***Usage***
 
@@ -73,11 +77,13 @@ The specifics of each graph storage format will be described in the README file 
   
     To do this, press the following buttons in the UI:
 
-    **`New Graph`** -> **`Actions`** -> **`Generate Ranmdom Graph`**
+    **`New Graph`** -> **`Actions`** -> **`Generate Random Graph`**
 
 ### ***Graph Formats***
 
-#### ***GRAPH***
+The application supports three different graph storage formats, each with its own extension and structure.
+
+#### ***GRAPH*** (.graph)
 
 Graphs in this format are saved with an extension **`.graph`**.
 
@@ -86,6 +92,8 @@ The graph in this format is a text file with a specific structure. Two blocks ar
 Two parameters are required in the **`Info:`** block: **`isDirected`** and **`isWeighted`**. But, if possible, it is better to specify all the data.
 
 In the **`Graph:`** block, the graph is stored as a set of commands (they will be described in the README file below). Only the add (vertex or edge) commands are allowed.
+
+Example:
 
 ``` graph
 Info:
@@ -100,9 +108,13 @@ add vertex 1 label_for_vertex_1
 add edge 0 1 52
 ```
 
-#### ***JSON***
+#### ***JSON*** (.json)
 
 Graphs in this format are saved with an extension **`.json`**.
+
+This format represents the graph as a structured JSON document with separate sections for metadata (info) and graph elements (vertices and edges).
+
+Example:
 
 ``` json
 {
@@ -134,54 +146,70 @@ Graphs in this format are saved with an extension **`.json`**.
 }
 ```
 
-#### ***SQL DB***
+#### ***SQL DB*** (.db)
 
 Graphs in this format are saved with an extension **`.db`**.
 
-There are three tables in the database:
+This format uses a SQLite database with three tables:
 
-+ graphs
-+ vertices
-+ edges
++ `graphs` - Contains graph metadata
++ `vertices` - Contains vertex data
++ `edges` - Contains edge data
 
 The database is designed in such a way that it can store several graphs at once. To open a graph that is stored in a database, you need to open it as a repository, and then select the graph from the database that you need.
 
-### ***User Directory***
+## ***User Directory***
 
-The user directory is created in the home directory. They have a different path on different operating systems:
+The user directory is created in the home directory. The path differs depending on the operating system:
 
-+ For Windows: `C:\Users\UserName`
-+ For UNIX-like systems: `/home/UserName`
++ For Windows: `C:\Users\UserName\.coremapx`
++ For UNIX-like systems: `/home/UserName/.coremapx`
 
 **Do not edit configuration files while the application is running**, as this may lead to **errors**. It is better to change the config in the application settings (When changing a parameter by writing a new value through the text field, press **`Enter`** to confirm that the parameter value has been saved).
 
 Graphs are saved in the `.coremapx/data/graphs` directory by default.
 
-### ***Commands***
+## ***Commands***
 
 You can interact with the graph through commands. Each command looks like this:
 `<Type> <Object> <Parameters>`
 
 For example: `add vertex 1 label_1` or `set strategy circular`
 
-Supported command types:
+**Supported command types:**
 
-+ add
-+ rm (or remove)
-+ set
-+ clear
++ `add` - Add elements to the graph
++ `rm` or `remove` - Remove elements from the graph
++ `set` - Set application parameters
++ `clear` - Clear the command output or completely clear the graph
 
-Supported command entities:
+**Supported command entities:**
 
-+ vertex
-+ edge
-+ strategy
++ `vertex`
++ `edge`
++ `strategy`
 
-Supported command parameters:
+**Supported command parameters:**
 
-+ For vertex: id(Long) and label(String)
-+ For edge: from(vertex id) and to(vertex id). If graph is weighted weight(Int)
++ For vertex: `id` (Long) and `label` (String)
+
+  ``` CoreMapX console
+  add vertex 1 VertexLabel
+  add vertex id:2 label:AnotherVertex
+  ```
+
++ For edge: `from` (vertex id) and `to` (vertex id). If graph is weighted, also `weight` (Int)
+
+  ``` CoreMapX console
+  add edge 1 2
+  add edge from:1 to:2 weight:10
+  ```
+
 + For strategy: strategy(Random, Circular or Force-Directed)
+
+  ``` CoreMapX console
+  set strategy Force-Directed
+  ```
 
 The command parameters can be specified explicitly or implicitly. If the form is implicit, then they should be specified in strict order. If it is explicit, then you can specify the parameters in any order.
 
