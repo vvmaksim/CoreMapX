@@ -459,6 +459,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                 viewModel.graphManager.graphAuthor = "None"
                 viewModel.graphManager.graphPath = null
                 viewModel.graphManager.graphFormat = null
+                viewModel.graphManager.graphId = 0
                 viewModel.graphManager.updateGraph(newGraphData.graph)
             },
         )

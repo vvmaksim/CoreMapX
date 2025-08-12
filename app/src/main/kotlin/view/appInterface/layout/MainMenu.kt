@@ -372,6 +372,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 viewModel.graphManager.graphAuthor = "None"
                 viewModel.graphManager.graphPath = null
                 viewModel.graphManager.graphFormat = null
+                viewModel.graphManager.graphId = 0
                 viewModel.graphManager.updateGraph(newGraphData.graph)
             },
         )
