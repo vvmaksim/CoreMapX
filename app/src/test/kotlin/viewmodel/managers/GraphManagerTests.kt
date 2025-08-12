@@ -234,6 +234,22 @@ class GraphManagerTests {
     }
 
     @Test
+    fun `check initGraphParameters`() {
+        val newGraphName = "NewGraphName"
+        assertEquals("None", graphManager.graphName)
+        assertEquals("None", graphManager.graphAuthor)
+        assertEquals(null, graphManager.graphId)
+        assertEquals(null, graphManager.graphPath)
+        assertEquals(null, graphManager.graphFormat)
+        graphManager.initGraphParameters(newGraphName)
+        assertEquals(newGraphName, graphManager.graphName)
+        assertEquals("None", graphManager.graphAuthor)
+        assertEquals(0, graphManager.graphId)
+        assertEquals(null, graphManager.graphPath)
+        assertEquals(null, graphManager.graphFormat)
+    }
+
+    @Test
     fun `check getLayoutStrategyByString with RandomStrategy`() {
         val resultGetRandom = graphManager.getLayoutStrategyByString(VisualizationStrategiesNames.RANDOM)
         assertNotNull(resultGetRandom)
