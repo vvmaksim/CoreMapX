@@ -24,7 +24,8 @@ class IRToSQLConverter : FileConverter() {
         graphId: Long?,
     ): Result<File> {
         logDebug(
-            "Launched convert() from IRToSQLConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+            "Launched convert() from IRToSQLConverter with fileAbsolutePath:${file.absolutePath}, " +
+                "convertMode:${convertMode.name}, graphId:$graphId",
         )
         val lines: List<String>
         try {

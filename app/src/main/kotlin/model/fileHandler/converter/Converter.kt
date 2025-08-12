@@ -18,7 +18,8 @@ class Converter {
             graphId: Long?,
         ): Result<File> {
             logDebug(
-                "Launched convert() from Converter with fileAbsolutePath:${file.absolutePath}, to:${to.name}, mode:${mode.name}, graphId:$graphId",
+                "Launched convert() from Converter with fileAbsolutePath:${file.absolutePath}, " +
+                    "to:${to.name}, mode:${mode.name}, graphId:$graphId",
             )
             val validateResult = Validator.Companion.validate(file)
             if (validateResult is Result.Error) return validateResult

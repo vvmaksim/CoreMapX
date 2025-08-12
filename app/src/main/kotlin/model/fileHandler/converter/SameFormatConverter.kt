@@ -12,7 +12,8 @@ class SameFormatConverter : FileConverter() {
         graphId: Long?,
     ): Result<File> {
         logDebug(
-            "Launched convert() from SameFormatConverter with fileAbsolutePath:${file.absolutePath}, convertMode:${convertMode.name}, graphId:$graphId",
+            "Launched convert() from SameFormatConverter with fileAbsolutePath:${file.absolutePath}, " +
+                "convertMode:${convertMode.name}, graphId:$graphId",
         )
         return Result.Success(file)
     }
