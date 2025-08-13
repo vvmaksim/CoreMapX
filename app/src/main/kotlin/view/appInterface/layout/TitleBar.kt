@@ -46,6 +46,7 @@ import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.graph.GraphDatabase
+import view.appInterface.dialog.Help
 import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
 import view.appInterface.dialog.OpenRepository
@@ -75,6 +76,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     var showOpenRepositoryDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
     var showSettingsDialog by remember { mutableStateOf(false) }
+    var showHelpDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var userNotificationTitle by remember { mutableStateOf("") }
     var userNotificationMessage by remember { mutableStateOf("") }
@@ -327,13 +329,15 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         color = MaterialTheme.colors.onSurface,
                     )
                 }
-//                TextButton(onClick = { }) { // Временно недоступно
-//                    Text(
-//                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
-//                        style = MaterialTheme.typography.button,
-//                        color = MaterialTheme.colors.onSurface,
-//                    )
-//                }
+                TextButton(
+                    onClick = { showHelpDialog = true },
+                ) {
+                    Text(
+                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
+                        style = MaterialTheme.typography.button,
+                        color = MaterialTheme.colors.onSurface,
+                    )
+                }
             } else {
                 IconButton(onClick = { showMenuButtons = true }) {
                     Icon(
@@ -450,6 +454,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     if (showSettingsDialog) {
         Settings(
             onDismiss = { showSettingsDialog = false },
+        )
+    }
+
+    if (showHelpDialog) {
+        Help(
+            onDismiss = { showHelpDialog = false },
         )
     }
 
