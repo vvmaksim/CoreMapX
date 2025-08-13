@@ -1,4 +1,4 @@
-package view.appInterface.dialogElements.blocks.settingsBlocks
+package view.appInterface.dialogElements.blocks
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -34,7 +34,7 @@ import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SettingsBlock(
+fun BaseBlock(
     title: String,
     content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
@@ -85,7 +85,7 @@ fun SettingsBlock(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewSettingsBlock() {
+private fun PreviewBaseBlock() {
     AppTheme {
         val content: @Composable () -> Unit = {
             ColorPickLine(
@@ -100,13 +100,13 @@ private fun PreviewSettingsBlock() {
                 Column(
                     modifier = Modifier.padding(8.dp),
                 ) {
-                    SettingsBlock(
+                    BaseBlock(
                         title = "Some settings block 1",
                         content = content,
                         isExpanded = false,
                     )
                     Spacer(Modifier.height(8.dp))
-                    SettingsBlock(
+                    BaseBlock(
                         title = "Some settings block 2",
                         content = content,
                         isExpanded = true,

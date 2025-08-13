@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import view.appInterface.dialogElements.blocks.settingsBlocks.SettingsBlock
+import view.appInterface.dialogElements.blocks.BaseBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -82,7 +82,7 @@ fun HelpContent(
                         .heightIn(max = dialogHeight)
                         .verticalScroll(rememberScrollState()),
             ) {
-                SettingsBlock(
+                BaseBlock(
                     title = "Команды",
                     content = { }, // Пока пусто=)
                     isExpanded = isCommandExpanded,
