@@ -50,6 +50,7 @@ import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
 import view.appInterface.dialog.OpenRepository
 import view.appInterface.dialog.SaveGraphAs
+import view.appInterface.dialog.Settings
 import view.appInterface.dialog.UserNotification
 import viewmodel.MainScreenViewModel
 import java.io.File
@@ -73,6 +74,7 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     var showNewGraphDialog by remember { mutableStateOf(false) }
     var showOpenRepositoryDialog by remember { mutableStateOf(false) }
     var showUserNotification by remember { mutableStateOf(false) }
+    var showSettingsDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var userNotificationTitle by remember { mutableStateOf("") }
     var userNotificationMessage by remember { mutableStateOf("") }
@@ -316,20 +318,22 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         }
                     }
                 }
-                TextButton(onClick = { }) {
+                TextButton(
+                    onClick = { showSettingsDialog = true },
+                ) {
                     Text(
                         text = LocalizationManager.states.ui.titleBarSettingsButton.value,
                         style = MaterialTheme.typography.button,
                         color = MaterialTheme.colors.onSurface,
                     )
                 }
-                TextButton(onClick = { }) {
-                    Text(
-                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
-                        style = MaterialTheme.typography.button,
-                        color = MaterialTheme.colors.onSurface,
-                    )
-                }
+//                TextButton(onClick = { }) { // Временно недоступно
+//                    Text(
+//                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
+//                        style = MaterialTheme.typography.button,
+//                        color = MaterialTheme.colors.onSurface,
+//                    )
+//                }
             } else {
                 IconButton(onClick = { showMenuButtons = true }) {
                     Icon(
@@ -440,6 +444,12 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                     }
                 showUserNotification = true
             },
+        )
+    }
+
+    if (showSettingsDialog) {
+        Settings(
+            onDismiss = { showSettingsDialog = false },
         )
     }
 
