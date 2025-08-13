@@ -327,13 +327,13 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
                         color = MaterialTheme.colors.onSurface,
                     )
                 }
-                TextButton(onClick = { }) {
-                    Text(
-                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
-                        style = MaterialTheme.typography.button,
-                        color = MaterialTheme.colors.onSurface,
-                    )
-                }
+//                TextButton(onClick = { }) { // Временно недоступно
+//                    Text(
+//                        text = LocalizationManager.states.ui.titleBarHelpButton.value,
+//                        style = MaterialTheme.typography.button,
+//                        color = MaterialTheme.colors.onSurface,
+//                    )
+//                }
             } else {
                 IconButton(onClick = { showMenuButtons = true }) {
                     Icon(
