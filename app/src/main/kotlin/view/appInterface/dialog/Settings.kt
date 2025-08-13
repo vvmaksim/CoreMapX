@@ -25,14 +25,14 @@ import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
-import view.appInterface.dialogElements.blocks.ColorsBlock
-import view.appInterface.dialogElements.blocks.CommandFieldBlock
-import view.appInterface.dialogElements.blocks.GeneralBlock
-import view.appInterface.dialogElements.blocks.MainScreenBlock
-import view.appInterface.dialogElements.blocks.PerformanceBlock
-import view.appInterface.dialogElements.blocks.SettingsBlock
-import view.appInterface.dialogElements.blocks.TitleBarBlock
-import view.appInterface.dialogElements.blocks.WorkAreaBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.ColorsBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.CommandFieldBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.GeneralBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.MainScreenBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.PerformanceBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.SettingsBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.TitleBarBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.WorkAreaBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

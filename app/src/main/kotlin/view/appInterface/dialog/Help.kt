@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
-import view.appInterface.dialogElements.blocks.SettingsBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.SettingsBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

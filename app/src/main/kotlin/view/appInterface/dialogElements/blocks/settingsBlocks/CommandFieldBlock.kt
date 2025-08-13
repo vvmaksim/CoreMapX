@@ -1,4 +1,4 @@
-package view.appInterface.dialogElements.blocks
+package view.appInterface.dialogElements.blocks.settingsBlocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -19,9 +19,9 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_L
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_USER_COMMANDS
 import org.coremapx.app.userDirectory.config.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
-import view.appInterface.preview.PreviewSurface
 import view.appInterface.dialogElements.lines.NumberTextFieldLine
 import view.appInterface.dialogElements.lines.SwitchLine
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

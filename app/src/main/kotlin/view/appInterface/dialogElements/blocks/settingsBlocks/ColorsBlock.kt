@@ -1,4 +1,4 @@
-package view.appInterface.dialogElements.blocks
+package view.appInterface.dialogElements.blocks.settingsBlocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -36,8 +36,8 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.SUCCESS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SURFACE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
-import view.appInterface.preview.PreviewSurface
 import view.appInterface.dialogElements.lines.ColorPickLine
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

@@ -1,4 +1,4 @@
-package view.appInterface.dialogElements.blocks
+package view.appInterface.dialogElements.blocks.settingsBlocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -16,8 +16,8 @@ import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigKeys.TITLE_BAR_HEIGHT
 import org.coremapx.app.userDirectory.config.ConfigKeys.TITLE_BAR_ICON_SIZE
-import view.appInterface.preview.PreviewSurface
 import view.appInterface.dialogElements.lines.NumberTextFieldLine
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
