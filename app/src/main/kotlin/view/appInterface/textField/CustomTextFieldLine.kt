@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.dialogElements.description.DescriptionIconButton
-import view.appInterface.dialogElements.description.SettingsDescriptionText
+import view.appInterface.dialogElements.description.DescriptionText
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
@@ -76,7 +76,7 @@ fun CustomTextFieldLine(
         }
         if (expanded && description != null) {
             Spacer(modifier = Modifier.height(8.dp))
-            SettingsDescriptionText(description = description)
+            DescriptionText(description = description)
         }
     }
 }

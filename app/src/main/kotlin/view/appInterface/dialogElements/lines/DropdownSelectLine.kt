@@ -26,7 +26,7 @@ import extensions.border
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.DropdownSelectButton
 import view.appInterface.dialogElements.description.DescriptionIconButton
-import view.appInterface.dialogElements.description.SettingsDescriptionText
+import view.appInterface.dialogElements.description.DescriptionText
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
@@ -80,7 +80,7 @@ fun DropdownSelectLine(
         }
         if (expanded) {
             Spacer(modifier = Modifier.height(8.dp))
-            SettingsDescriptionText(description = description)
+            DescriptionText(description = description)
         }
     }
 }
