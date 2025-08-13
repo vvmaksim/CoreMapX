@@ -25,9 +25,9 @@ import androidx.compose.ui.unit.dp
 import extensions.border
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.ColorPickerButton
-import view.appInterface.preview.PreviewSurface
-import view.appInterface.dialogElements.description.SettingsDescriptionIconButton
+import view.appInterface.dialogElements.description.DescriptionIconButton
 import view.appInterface.dialogElements.description.SettingsDescriptionText
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -71,7 +71,7 @@ fun ColorPickLine(
             buttonWidth = buttonWidth,
             colorPreviewSize = colorPreviewSize,
         )
-        SettingsDescriptionIconButton(
+        DescriptionIconButton(
             onClick = { expanded = !expanded },
             isExpanded = expanded,
         )

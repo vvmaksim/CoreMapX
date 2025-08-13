@@ -21,7 +21,7 @@ import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SettingsDescriptionIconButton(
+fun DescriptionIconButton(
     onClick: () -> Unit,
     isExpanded: Boolean,
     iconTintColor: Color = MaterialTheme.colors.primary,
@@ -45,19 +45,19 @@ fun SettingsDescriptionIconButton(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewSettingsDescriptionIconButton() {
+private fun PreviewDescriptionIconButton() {
     AppTheme {
         PreviewSurface(
             content = {
                 Column(
                     modifier = Modifier.padding(8.dp),
                 ) {
-                    SettingsDescriptionIconButton(
+                    DescriptionIconButton(
                         onClick = {},
                         isExpanded = true,
                     )
                     Spacer(Modifier.height(8.dp))
-                    SettingsDescriptionIconButton(
+                    DescriptionIconButton(
                         onClick = {},
                         isExpanded = false,
                     )
