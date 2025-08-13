@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.blocks
+package view.appInterface.dialogElements.blocks
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -30,7 +30,7 @@ import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.lines.ColorPickLine
+import view.appInterface.dialogElements.lines.ColorPickLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

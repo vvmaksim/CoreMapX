@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.blocks
+package view.appInterface.dialogElements.blocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -24,7 +24,7 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.GRAPH_LAYOUT_WIDTH
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_LABEL_SIZE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_RADIUS
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.lines.NumberTextFieldLine
+import view.appInterface.dialogElements.lines.NumberTextFieldLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

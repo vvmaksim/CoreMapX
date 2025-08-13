@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.blocks
+package view.appInterface.dialogElements.blocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -21,8 +21,8 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_HEIGHT
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAIN_SCREEN_START_WIDTH
 import org.coremapx.app.userDirectory.config.ConfigKeys.START_WINDOW_PLACEMENT
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.lines.DropdownSelectLine
-import view.appInterface.settingsElements.lines.NumberTextFieldLine
+import view.appInterface.dialogElements.lines.DropdownSelectLine
+import view.appInterface.dialogElements.lines.NumberTextFieldLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

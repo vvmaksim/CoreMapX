@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.blocks
+package view.appInterface.dialogElements.blocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -25,8 +25,8 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.LANGUAGE
 import org.coremapx.app.userDirectory.config.ConfigKeys.SYSTEM_DIALOG_THEME
 import org.coremapx.app.userDirectory.config.ConfigKeys.THEME
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.lines.DropdownSelectLine
-import view.appInterface.settingsElements.lines.SwitchLine
+import view.appInterface.dialogElements.lines.DropdownSelectLine
+import view.appInterface.dialogElements.lines.SwitchLine
 import java.util.Locale.getDefault
 
 @Suppress("ktlint:standard:function-naming")

@@ -22,9 +22,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.dialogElements.description.SettingsDescriptionIconButton
+import view.appInterface.dialogElements.description.SettingsDescriptionText
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
-import view.appInterface.settingsElements.description.SettingsDescriptionText
 
 @Suppress("ktlint:standard:function-naming")
 @Composable

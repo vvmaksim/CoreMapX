@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.lines
+package view.appInterface.dialogElements.lines
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -21,8 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
-import view.appInterface.settingsElements.description.SettingsDescriptionText
+import view.appInterface.dialogElements.description.SettingsDescriptionIconButton
+import view.appInterface.dialogElements.description.SettingsDescriptionText
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
