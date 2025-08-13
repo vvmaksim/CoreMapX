@@ -1,7 +1,7 @@
 # ***CoreMapX***
 
 <div align="center" style="margin: 20px 0;">
-    <img src="app/src/main/resources/drawable/logo_icon.svg" alt="CoreMapX Logo" width="150"/>
+    <img src="app/src/main/resources/drawable/logo_icon.svg" alt="CoreMapX Logo" width="250"/>
 </div>
 
 This is a Kotlin desktop application for analyzing and visualizing graphs on a plane.
@@ -186,6 +186,7 @@ For example: `add vertex 1 label_1` or `set strategy circular`
 + `rm` or `remove` - Remove elements from the graph
 + `set` - Set application parameters
 + `clear` - Clear the command output or completely clear the graph
++ `help` - A little help on commands
 
 **Supported command entities:**
 
