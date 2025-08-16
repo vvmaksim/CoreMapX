@@ -108,3 +108,17 @@ private fun PreviewHelp() {
         )
     }
 }
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+private fun PreviewHelpImplicit() {
+    AppTheme {
+        HelpContent(
+            onDismiss = {},
+            dialogWidth = 800.dp,
+            dialogHeight = 1000.dp,
+            isExpandedSettings = false,
+        )
+    }
+}
