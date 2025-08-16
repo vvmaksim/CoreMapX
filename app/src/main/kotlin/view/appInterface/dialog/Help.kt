@@ -98,7 +98,7 @@ fun HelpContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewHelp() {
+private fun PreviewHelpExpanded() {
     AppTheme {
         HelpContent(
             onDismiss = {},
