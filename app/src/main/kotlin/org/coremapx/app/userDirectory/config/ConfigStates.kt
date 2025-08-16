@@ -6,6 +6,7 @@ class ConfigStates(
     private val configRepository: ConfigRepository,
 ) {
     // General
+    val version = mutableStateOf(configRepository.getStringValue(ConfigKeys.VERSION))
     val language = mutableStateOf(configRepository.getStringValue(ConfigKeys.LANGUAGE))
     val theme = mutableStateOf(configRepository.getStringValue(ConfigKeys.THEME))
     val systemDialogTheme = mutableStateOf(configRepository.getStringValue(ConfigKeys.SYSTEM_DIALOG_THEME))
@@ -73,6 +74,7 @@ class ConfigStates(
     ) {
         when (key) {
             // General
+            ConfigKeys.VERSION -> version.value = value
             ConfigKeys.LANGUAGE -> language.value = value
             ConfigKeys.THEME -> theme.value = value
             ConfigKeys.SYSTEM_DIALOG_THEME -> systemDialogTheme.value = value

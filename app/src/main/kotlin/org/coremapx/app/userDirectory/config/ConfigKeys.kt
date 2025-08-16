@@ -2,6 +2,7 @@ package org.coremapx.app.userDirectory.config
 
 object ConfigKeys {
     // General
+    const val VERSION = "version"
     const val LANGUAGE = "language"
     const val THEME = "theme"
     const val SYSTEM_DIALOG_THEME = "systemDialogTheme"

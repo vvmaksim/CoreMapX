@@ -16,6 +16,7 @@ class ConfigValidator {
         ): Result<Boolean> =
             when (key) {
                 // General
+                ConfigKeys.VERSION -> Result.Success(true) // This parameter is not validated yet.
                 ConfigKeys.LANGUAGE ->
                     enumStringValidator(
                         key = key,
