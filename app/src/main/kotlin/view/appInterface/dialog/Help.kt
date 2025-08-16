@@ -73,7 +73,7 @@ fun HelpContent(
             DialogHeader(
                 title = "Справка",
                 onButtonClick = onDismiss,
-                subtitle = "Здесь вы можете узнать различные особенности реализации",
+                subtitle = "Здесь Вы можете узнать различную информацию о работе в CoreMapX",
             )
             Spacer(modifier = Modifier.height(24.dp))
             Column(
