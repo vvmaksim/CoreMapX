@@ -3,6 +3,7 @@ package org.coremapx.app.userDirectory.config
 import extensions.toColorOrNull
 import model.result.ConfigErrors
 import model.result.Result
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.objects.LanguageCodes
 import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsString
 import org.coremapx.app.theme.ThemesManager.getAllAppThemes
@@ -16,7 +17,11 @@ class ConfigValidator {
         ): Result<Boolean> =
             when (key) {
                 // General
-                ConfigKeys.VERSION -> Result.Success(true) // This parameter is not validated yet.
+                ConfigKeys.VERSION ->
+                    versionValidator(
+                        key = key,
+                        currentValue = value,
+                    )
                 ConfigKeys.LANGUAGE ->
                     enumStringValidator(
                         key = key,
@@ -151,5 +156,16 @@ class ConfigValidator {
             }
             return Result.Success(true)
         }
+
+        private fun versionValidator(
+            key: String,
+            currentValue: String,
+            correctValue: String = PrivateConfig.General.APP_VERSION,
+        ): Result<Boolean> =
+            if (correctValue != currentValue) {
+                Result.Error(ConfigErrors.IncorrectVersion(key, currentValue, correctValue))
+            } else {
+                Result.Success(true)
+            }
     }
 }
