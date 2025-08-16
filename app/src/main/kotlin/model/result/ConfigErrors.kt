@@ -124,4 +124,13 @@ sealed class ConfigErrors(
             type = "IncorrectBoolean",
             description = "$propertyName value $incorrectValue is incorrect. $propertyName must be `true` or `false`",
         )
+
+    data class IncorrectVersion(
+        val propertyName: String,
+        val incorrectValue: String,
+        val correctVersion: String,
+    ) : ConfigErrors(
+            type = "IncorrectVersion",
+            description = "$propertyName value $incorrectValue is incorrect. $propertyName must be $correctVersion",
+        )
 }
