@@ -26,6 +26,7 @@ import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.dialogElements.blocks.BaseBlock
 import view.appInterface.dialogElements.blocks.helpBlocks.CommandBlock
+import view.appInterface.dialogElements.blocks.helpBlocks.FileFormatsBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -54,6 +55,7 @@ fun HelpContent(
     isExpandedSettings: Boolean = config.states.isExpandedSettings.value,
 ) {
     var isCommandExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isFileFormatsExpanded by remember { mutableStateOf(isExpandedSettings) }
 
     Surface(
         modifier =
@@ -88,6 +90,13 @@ fun HelpContent(
                     content = { CommandBlock() },
                     isExpanded = isCommandExpanded,
                     onClick = { isCommandExpanded = it },
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                BaseBlock(
+                    title = "Форматы графов",
+                    content = { FileFormatsBlock() },
+                    isExpanded = isFileFormatsExpanded,
+                    onClick = { isFileFormatsExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
