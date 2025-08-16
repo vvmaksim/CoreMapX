@@ -5,6 +5,10 @@ import org.coremapx.app.config.PrivateConfig.UserDirectory.DIR_PATH
 
 @Suppress("ktlint:standard:property-naming")
 object PrivateConfig {
+    object General {
+        const val APP_VERSION = "1.0.0"
+    }
+
     object MainMenu {
         const val LOGO_SIZE = 52
     }
