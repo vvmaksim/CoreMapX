@@ -25,6 +25,7 @@ import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.dialogElements.blocks.BaseBlock
+import view.appInterface.dialogElements.blocks.helpBlocks.CommandBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -84,7 +85,7 @@ fun HelpContent(
             ) {
                 BaseBlock(
                     title = "Команды",
-                    content = { }, // Пока пусто=)
+                    content = { CommandBlock() },
                     isExpanded = isCommandExpanded,
                     onClick = { isCommandExpanded = it },
                 )
