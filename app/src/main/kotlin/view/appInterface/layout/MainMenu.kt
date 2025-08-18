@@ -239,8 +239,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 MainMenuTextButton(
                     onClick = { showHelpDialog = true },
                     iconVector = Icons.AutoMirrored.Filled.Help,
-                    iconContentDescription = "Help Button",
-                    buttonText = "Help",
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuHelpIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonHelp.value,
                 )
 
                 Spacer(Modifier.weight(1f))

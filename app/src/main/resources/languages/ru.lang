@@ -14,6 +14,8 @@ mainMenuButtonAnalytics=Аналитика
 mainMenuAnalyticsIconDescription=Иконка аналитики
 mainMenuButtonSettings=Настройки
 mainMenuSettingsIconDescription=Иконка настроек
+mainMenuButtonHelp=Справка
+mainMenuHelpIconDescription=Иконка справки
 
  ! Title Bar
 

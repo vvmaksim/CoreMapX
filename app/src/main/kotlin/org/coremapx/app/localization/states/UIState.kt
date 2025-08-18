@@ -19,6 +19,8 @@ class UIState : LocalizationState {
     val mainMenuAnalyticsIconDescription = mutableStateOf("")
     val mainMenuButtonSettings = mutableStateOf("")
     val mainMenuSettingsIconDescription = mutableStateOf("")
+    val mainMenuButtonHelp = mutableStateOf("")
+    val mainMenuHelpIconDescription = mutableStateOf("")
 
     // Title Bar
     var titleBarMenuIconDescription = mutableStateOf("")
@@ -93,6 +95,8 @@ class UIState : LocalizationState {
             UIKeys.MAIN_MENU_ANALYTICS_ICON_DESCRIPTION -> mainMenuAnalyticsIconDescription.value = value
             UIKeys.MAIN_MENU_BUTTON_SETTINGS -> mainMenuButtonSettings.value = value
             UIKeys.MAIN_MENU_SETTINGS_ICON_DESCRIPTION -> mainMenuSettingsIconDescription.value = value
+            UIKeys.MAIN_MENU_BUTTON_HELP -> mainMenuButtonHelp.value = value
+            UIKeys.MAIN_MENU_HELP_ICON_DESCRIPTION -> mainMenuHelpIconDescription.value = value
 
             // Title Bar
             UIKeys.TITLE_BAR_MENU_ICON_DESCRIPTION -> titleBarMenuIconDescription.value = value

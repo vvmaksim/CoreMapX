@@ -14,6 +14,8 @@ mainMenuButtonAnalytics=Analytics
 mainMenuAnalyticsIconDescription=Analytics Icon
 mainMenuButtonSettings=Settings
 mainMenuSettingsIconDescription=Settings Icon
+mainMenuButtonHelp=Help
+mainMenuHelpIconDescription=Help Icon
 
  ! Title Bar
 
