@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.dialogElements.blocks.BaseBlock
 import view.appInterface.dialogElements.blocks.helpBlocks.CommandBlock
@@ -76,9 +77,9 @@ fun HelpContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Справка",
+                title = LocalizationManager.states.dialogs.helpTitle.value,
                 onButtonClick = onDismiss,
-                subtitle = "Здесь Вы можете узнать различную информацию о работе в CoreMapX",
+                subtitle = LocalizationManager.states.dialogs.helpSubTitle.value,
             )
             Spacer(modifier = Modifier.height(24.dp))
             Column(
@@ -88,21 +89,21 @@ fun HelpContent(
                         .verticalScroll(rememberScrollState()),
             ) {
                 BaseBlock(
-                    title = "Команды",
+                    title = LocalizationManager.states.dialogs.helpCommandBlockName.value,
                     content = { CommandBlock() },
                     isExpanded = isCommandExpanded,
                     onClick = { isCommandExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 BaseBlock(
-                    title = "Форматы графов",
+                    title = LocalizationManager.states.dialogs.helpGraphFormatsBlockName.value,
                     content = { FileFormatsBlock() },
                     isExpanded = isFileFormatsExpanded,
                     onClick = { isFileFormatsExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 BaseBlock(
-                    title = "Пользовательская директория",
+                    title = LocalizationManager.states.dialogs.helpUserDirectoryBlockName.value,
                     content = { UserDirectoryBlock() },
                     isExpanded = isUserDirectoryExpanded,
                     onClick = { isUserDirectoryExpanded = it },

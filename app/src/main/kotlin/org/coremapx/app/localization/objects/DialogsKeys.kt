@@ -147,4 +147,11 @@ object DialogsKeys {
     const val FIND_PATH_MAX_PATHS_PLACEHOLDER = "findPathMaxPathsPlaceholder"
     const val FIND_PATH_FIND_STRATEGY = "findPathFindStrategy"
     const val FIND_PATH_FIND_BUTTON = "findPathFindButton"
+
+    // Help
+    const val HELP_TITLE = "helpTitle"
+    const val HELP_SUB_TITLE = "helpSubTitle"
+    const val HELP_COMMAND_BLOCK_NAME = "helpCommandBlockName"
+    const val HELP_GRAPH_FORMATS_BLOCK_NAME = "helpGraphFormatsBlockName"
+    const val HELP_USER_DIRECTORY_BLOCK_NAME = "helpUserDirectoryBlockName"
 }

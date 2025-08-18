@@ -151,6 +151,13 @@ class DialogsState : LocalizationState {
     val findPathFindStrategy = mutableStateOf("")
     val findPathFindButton = mutableStateOf("")
 
+    // Help
+    val helpTitle = mutableStateOf("")
+    val helpSubTitle = mutableStateOf("")
+    val helpCommandBlockName = mutableStateOf("")
+    val helpGraphFormatsBlockName = mutableStateOf("")
+    val helpUserDirectoryBlockName = mutableStateOf("")
+
     override fun updateValue(
         key: String,
         value: String,
@@ -295,6 +302,13 @@ class DialogsState : LocalizationState {
             DialogsKeys.FIND_PATH_MAX_PATHS_PLACEHOLDER -> findPathMaxPathsPlaceholder.value = value
             DialogsKeys.FIND_PATH_FIND_STRATEGY -> findPathFindStrategy.value = value
             DialogsKeys.FIND_PATH_FIND_BUTTON -> findPathFindButton.value = value
+
+            // Help
+            DialogsKeys.HELP_TITLE -> helpTitle.value = value
+            DialogsKeys.HELP_SUB_TITLE -> helpSubTitle.value = value
+            DialogsKeys.HELP_COMMAND_BLOCK_NAME -> helpCommandBlockName.value = value
+            DialogsKeys.HELP_GRAPH_FORMATS_BLOCK_NAME -> helpGraphFormatsBlockName.value = value
+            DialogsKeys.HELP_USER_DIRECTORY_BLOCK_NAME -> helpUserDirectoryBlockName.value = value
         }
     }
 }

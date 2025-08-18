@@ -144,6 +144,13 @@ findPathMaxPathsPlaceholder=Количество путей
 findPathFindStrategy=Стратегии поиска
 findPathFindButton=Искать
 
+! Help
+helpTitle=Справка
+helpSubTitle=по использованию CoreMapX
+helpCommandBlockName=Команды
+helpGraphFormatsBlockName=Форматы графов
+helpUserDirectoryBlockName=Пользовательская директория
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
