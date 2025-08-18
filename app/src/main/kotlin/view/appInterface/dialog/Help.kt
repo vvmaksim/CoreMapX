@@ -27,6 +27,7 @@ import org.coremapx.app.theme.AppTheme
 import view.appInterface.dialogElements.blocks.BaseBlock
 import view.appInterface.dialogElements.blocks.helpBlocks.CommandBlock
 import view.appInterface.dialogElements.blocks.helpBlocks.FileFormatsBlock
+import view.appInterface.dialogElements.blocks.helpBlocks.UserDirectoryBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -56,6 +57,7 @@ fun HelpContent(
 ) {
     var isCommandExpanded by remember { mutableStateOf(isExpandedSettings) }
     var isFileFormatsExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isUserDirectoryExpanded by remember { mutableStateOf(isExpandedSettings) }
 
     Surface(
         modifier =
@@ -97,6 +99,13 @@ fun HelpContent(
                     content = { FileFormatsBlock() },
                     isExpanded = isFileFormatsExpanded,
                     onClick = { isFileFormatsExpanded = it },
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                BaseBlock(
+                    title = "Пользовательская директория",
+                    content = { UserDirectoryBlock() },
+                    isExpanded = isUserDirectoryExpanded,
+                    onClick = { isUserDirectoryExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
             }
