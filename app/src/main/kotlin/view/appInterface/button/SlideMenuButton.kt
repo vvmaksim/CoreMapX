@@ -28,7 +28,7 @@ fun SlideMenuButton(
     Button(
         onClick = {
             logDebug("Click on SlideMenuButton")
-            onClick
+            onClick()
         },
         modifier = Modifier.size(size),
         elevation =
