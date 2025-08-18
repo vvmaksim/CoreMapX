@@ -150,6 +150,26 @@ helpSubTitle=for using CoreMapX
 helpCommandBlockName=Commands
 helpGraphFormatsBlockName=Graph formats
 helpUserDirectoryBlockName=User directory
+# User Directory Block
+userDirectoryGeneralInformationTitle=General information
+userDirectoryGeneralInformationText1=The user directory is used to store configuration files, localization, \
+    temporary files, fonts, and application logs. By default, graphs are saved and opened from \
+    the folder `.coremapx/data/graphs`.{nextLine}\
+    {nextLine}\
+    The directory is created in the home folder of your system. The path depends on the operating system:{nextLine}\
+    • UNIX-подобные системы: `/home/UserName/.coremapx`{nextLine}\
+    • Windows: `C:\Users\UserName\.coremapx`
+userDirectoryAttention3Point1=ATTENTION 3.1 {nextLine}\
+    Do not change the configuration file while the application is running, as this may lead to errors. \
+    Use the application settings to change the configuration.
+userDirectoryAttention3Point2=ATTENTION 3.2 {nextLine}\
+    When changing the parameters in the text field, press the `Enter` key to save. \
+    After that, a notification about the result of the operation will appear.
+userDirectoryInterfaceLanguageConfigurationTitle=Configuring the interface language
+userDirectoryInterfaceLanguageConfigurationText1=The application supports interface translation into any UTF-8 encoded language. \
+    To do this, the `.coremapx/config/` directory contains the `custom_language.lang` file, \
+    in which the text is set using the keys used in the application. \
+    To apply the translation, select the `Custom` language in the settings.
 
  ! Top Menu
 topMenuActions=Actions

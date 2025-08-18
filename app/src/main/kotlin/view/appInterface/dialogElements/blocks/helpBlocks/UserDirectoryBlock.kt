@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -21,47 +23,40 @@ fun UserDirectoryBlock() {
         modifier = Modifier.padding(16.dp),
     ) {
         Text(
-            text = "Общая информация",
+            text = LocalizationManager.states.dialogs.userDirectoryGeneralInformationTitle.value,
             style = MaterialTheme.typography.h5,
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "Пользовательская директория используется для хранения конфигурационных файлов, локализации, " +
-                    "временных файлов, шрифтов и логов приложения. По умолчанию графы сохраняются и открываются из " +
-                    "папки `.coremapx/data/graphs`.\n\n" +
-                    "Директория создаётся в домашней папке вашей системы. Путь зависит от операционной системы:\n" +
-                    "   UNIX-подобные системы: `/home/UserName/.coremapx`\n" +
-                    "   Windows: `C:\\Users\\UserName\\.coremapx`",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.userDirectoryGeneralInformationText1.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "ПРИМЕЧАНИЕ 3.1\n" +
-                    "Не изменяйте конфигурационный файл во время работы приложения, это может привести к ошибкам. " +
-                    "Используйте настройки приложения для изменения конфигурации.",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.userDirectoryAttention3Point1.value,
+                ),
             color = config.states.warningColor.value,
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "ПРИМЕЧАНИЕ 3.2\n" +
-                    "При изменении параметров в текстовом поле нажмите клавишу `Enter` для сохранения. " +
-                    "После этого появится уведомление о результате операции.",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.userDirectoryAttention3Point2.value,
+                ),
             color = config.states.warningColor.value,
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Настройка языка интерфейса",
+            text = LocalizationManager.states.dialogs.userDirectoryInterfaceLanguageConfigurationTitle.value,
             style = MaterialTheme.typography.h5,
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text =
-                "Приложение поддерживает перевод интерфейса на любой язык с кодировкой UTF-8. " +
-                    "Для этого в директории `.coremapx/config/` находится файл `custom_language.lang`, " +
-                    "в котором текст задаётся по ключам, используемым в приложении. " +
-                    "Чтобы применить перевод, в настройках выберите язык `Custom`.",
+            text = LocalizationManager.states.dialogs.userDirectoryInterfaceLanguageConfigurationText1.value,
         )
         Spacer(Modifier.height(8.dp))
     }

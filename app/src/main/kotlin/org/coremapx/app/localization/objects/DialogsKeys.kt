@@ -154,4 +154,12 @@ object DialogsKeys {
     const val HELP_COMMAND_BLOCK_NAME = "helpCommandBlockName"
     const val HELP_GRAPH_FORMATS_BLOCK_NAME = "helpGraphFormatsBlockName"
     const val HELP_USER_DIRECTORY_BLOCK_NAME = "helpUserDirectoryBlockName"
+
+    // // User Directory Block
+    const val USER_DIRECTORY_GENERAL_INFORMATION_TITLE = "userDirectoryGeneralInformationTitle"
+    const val USER_DIRECTORY_GENERAL_INFORMATION_TEXT1 = "userDirectoryGeneralInformationText1"
+    const val USER_DIRECTORY_ATTENTION_3_POINT_1 = "userDirectoryAttention3Point1"
+    const val USER_DIRECTORY_ATTENTION_3_POINT_2 = "userDirectoryAttention3Point2"
+    const val USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TITLE = "userDirectoryInterfaceLanguageConfigurationTitle"
+    const val USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TEXT1 = "userDirectoryInterfaceLanguageConfigurationText1"
 }

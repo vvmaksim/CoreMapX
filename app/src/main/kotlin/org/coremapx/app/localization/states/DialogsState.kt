@@ -158,6 +158,14 @@ class DialogsState : LocalizationState {
     val helpGraphFormatsBlockName = mutableStateOf("")
     val helpUserDirectoryBlockName = mutableStateOf("")
 
+    // // User Directory Block
+    val userDirectoryGeneralInformationTitle = mutableStateOf("")
+    val userDirectoryGeneralInformationText1 = mutableStateOf("")
+    val userDirectoryAttention3Point1 = mutableStateOf("")
+    val userDirectoryAttention3Point2 = mutableStateOf("")
+    val userDirectoryInterfaceLanguageConfigurationTitle = mutableStateOf("")
+    val userDirectoryInterfaceLanguageConfigurationText1 = mutableStateOf("")
+
     override fun updateValue(
         key: String,
         value: String,
@@ -309,6 +317,17 @@ class DialogsState : LocalizationState {
             DialogsKeys.HELP_COMMAND_BLOCK_NAME -> helpCommandBlockName.value = value
             DialogsKeys.HELP_GRAPH_FORMATS_BLOCK_NAME -> helpGraphFormatsBlockName.value = value
             DialogsKeys.HELP_USER_DIRECTORY_BLOCK_NAME -> helpUserDirectoryBlockName.value = value
+            // // User Directory Block
+            DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TITLE -> userDirectoryGeneralInformationTitle.value = value
+            DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TEXT1 -> userDirectoryGeneralInformationText1.value = value
+            DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_1 -> userDirectoryAttention3Point1.value = value
+            DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_2 -> userDirectoryAttention3Point2.value = value
+            DialogsKeys.USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TITLE ->
+                userDirectoryInterfaceLanguageConfigurationTitle.value =
+                    value
+            DialogsKeys.USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TEXT1 ->
+                userDirectoryInterfaceLanguageConfigurationText1.value =
+                    value
         }
     }
 }

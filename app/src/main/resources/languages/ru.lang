@@ -150,6 +150,26 @@ helpSubTitle=по использованию CoreMapX
 helpCommandBlockName=Команды
 helpGraphFormatsBlockName=Форматы графов
 helpUserDirectoryBlockName=Пользовательская директория
+# User Directory Block
+userDirectoryGeneralInformationTitle=Общая информация
+userDirectoryGeneralInformationText1=Пользовательская директория используется для хранения конфигурационных файлов, локализации, \
+    временных файлов, шрифтов и логов приложения. По умолчанию графы сохраняются и открываются из \
+    папки `.coremapx/data/graphs`.{nextLine}\
+    {nextLine}\
+    Директория создаётся в домашней папке вашей системы. Путь зависит от операционной системы:{nextLine}\
+    • UNIX-подобные системы: `/home/UserName/.coremapx`{nextLine}\
+    • Windows: `C:\Users\UserName\.coremapx`
+userDirectoryAttention3Point1=ПРИМЕЧАНИЕ 3.1 {nextLine}\
+    Не изменяйте конфигурационный файл во время работы приложения, это может привести к ошибкам. \
+    Используйте настройки приложения для изменения конфигурации.
+userDirectoryAttention3Point2=ПРИМЕЧАНИЕ 3.2 {nextLine}\
+    При изменении параметров в текстовом поле нажмите клавишу `Enter` для сохранения. \
+    После этого появится уведомление о результате операции.
+userDirectoryInterfaceLanguageConfigurationTitle=Настройка языка интерфейса
+userDirectoryInterfaceLanguageConfigurationText1=Приложение поддерживает перевод интерфейса на любой язык с кодировкой UTF-8. \
+    Для этого в директории `.coremapx/config/` находится файл `custom_language.lang`, \
+    в котором текст задаётся по ключам, используемым в приложении. \
+    Чтобы применить перевод, в настройках выберите язык `Custom`.
 
  ! Top Menu
 topMenuActions=Действия
