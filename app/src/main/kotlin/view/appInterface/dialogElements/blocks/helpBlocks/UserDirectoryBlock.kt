@@ -51,6 +51,19 @@ fun UserDirectoryBlock() {
             color = config.states.warningColor.value,
         )
         Spacer(Modifier.height(8.dp))
+        Text(
+            text = "Настройка языка интерфейса",
+            style = MaterialTheme.typography.h5,
+        )
+        Spacer(Modifier.height(8.dp))
+        Text(
+            text =
+                "Приложение поддерживает перевод интерфейса на любой язык с кодировкой UTF-8. " +
+                    "Для этого в директории `.coremapx/config/` находится файл `custom_language.lang`, " +
+                    "в котором текст задаётся по ключам, используемым в приложении. " +
+                    "Чтобы применить перевод, в настройках выберите язык `Custom`.",
+        )
+        Spacer(Modifier.height(8.dp))
     }
 }
 
