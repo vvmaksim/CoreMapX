@@ -150,6 +150,62 @@ helpSubTitle=по использованию CoreMapX
 helpCommandBlockName=Команды
 helpGraphFormatsBlockName=Форматы графов
 helpUserDirectoryBlockName=Пользовательская директория
+# Command Block
+commandGeneralInformationTitle=Общая информация
+commandGeneralInformationText1=Большинство команд имеют формат: `<Тип> <Объект> <Параметры>`.{nextLine}\
+    {nextLine}\
+    Для выполнения нескольких команд используйте разделитель `;`.{nextLine}\
+    {nextLine}\
+    В справке приведены примеры команд, которые можно опробовать, создав новый граф.{nextLine}\
+    {nextLine}\
+    Параметры можно задавать явно через символ двоеточия (с указанием имени, например, `id:1`) \
+    или неявно (без имени, в строгом порядке).
+commandAttention1Point1=ПРИМЕЧАНИЕ 1.1{nextLine}\
+    Смешивание явной и неявной форм записи запрещено. Например, команда `add vertex 1 label:label1` недопустима.
+commandExample1Point1=Пример 1.1{nextLine}\
+    Взвешенный граф с вершинами и рёбрами, заданными явно и неявно:
+commandAttention1Point2=ПРИМЕЧАНИЕ 1.2{nextLine}\
+    В невзвешенных графах параметр `weight` не требуется и игнорируется.
+commandAddTitle=Команда add
+commandAddText1=Для `add vertex` доступны параметры (в порядке неявной записи):{nextLine}\
+    • `id` — число типа Long (8 байт){nextLine}\
+    • `label` — строка без пробелов и символов `:` двоеточия{nextLine}\
+    {nextLine}\
+    Для `add edge` доступны параметры (в порядке неявной записи):{nextLine}\
+    • `from` — id вершины, от которой идёт ребро{nextLine}\
+    • `to` — id вершины, в которую идёт ребро{nextLine}\
+    • `weight` — число типа Long (8 байт), указывается для взвешенных графов
+commandRmTitle=Команда rm/remove
+commandAttention1Point3=ПРИМЕЧАНИЕ 1.3{nextLine}\
+    Команды `rm` и `remove` эквивалентны, можно использовать любую форму.
+commandRmText1=Для `rm vertex` используется параметр:{nextLine}\
+    • `id` — число типа Long (8 байт){nextLine}\
+    {nextLine}\
+    Для `rm edge` используются параметры (в порядке неявной записи):{nextLine}\
+    • `from` — id вершины, от которой удаляется ребро{nextLine}\
+    • `to` — id вершины, до которой удаляется ребро{nextLine}\
+    {nextLine}\
+    Также можно удалить ребро по его уникальному `id`, автоматически присваиваемому каждому ребру.
+commandAttention1Point4=ПРИМЕЧАНИЕ 1.4{nextLine}\
+    Пусть существует граф с вершинами 1 и 2, а так же ребром (1, 2). \
+    Выполнение команды `rm edge from:2 to:1` удалит ребро (1, 2), \
+    так как в ненаправленном графе (1, 2) и (2, 1) — одно и то же ребро. \
+    В направленном графе ребро (1, 2) останется.
+commandSetTitle=Команда set
+commandSetText1=Для `set strategy` используется параметр:{nextLine}\
+    • `strategy` — строка с названием стратегии расположения вершин графа. \
+    Допустимые значения: Random, Circular, Force-Directed.
+commandSetText2=Смена стратегии на Random (Случайное расположение вершин):
+commandSetText3=Смена стратегии на Circular (Вершины располагаются по окружности):
+commandSetText4=Смена стратегии на Force-Directed \
+    (Вершины динамически перемещаются определённое количество итераций по алгоритму):
+commandClearTitle=Команда clear
+commandClearText1=Для `clear` параметры не задаются. Она нужна для отчистки сообщений в консоли.
+commandGraphClearTitle=Команда graph_clear
+commandGraphClearText1=Для `graph_clear` параметры не задаются. Она нужна для полной отчистки графа \
+    (Будут удалены все вершины и рёбра). Будьте с ней осторожны.
+commandHelpTitle=Команда help
+commandHelpText1=Для `help` параметры не задаются. Она нужна для получения краткой справки по самым популярным командам.
 # Graph Formats Block
 graphFormatsGeneralInformationTitle=Общая информация
 graphFormatsGeneralInformationText1=В этом разделе описаны особенности поддерживаемых форматов хранения графа: \

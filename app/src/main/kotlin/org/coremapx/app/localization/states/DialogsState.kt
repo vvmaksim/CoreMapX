@@ -158,6 +158,30 @@ class DialogsState : LocalizationState {
     val helpGraphFormatsBlockName = mutableStateOf("")
     val helpUserDirectoryBlockName = mutableStateOf("")
 
+    // // Command Block
+    val commandGeneralInformationTitle = mutableStateOf("")
+    val commandGeneralInformationText1 = mutableStateOf("")
+    val commandAttention1Point1 = mutableStateOf("")
+    val commandExample1Point1 = mutableStateOf("")
+    val commandAttention1Point2 = mutableStateOf("")
+    val commandAddTitle = mutableStateOf("")
+    val commandAddText1 = mutableStateOf("")
+    val commandRmTitle = mutableStateOf("")
+    val commandAttention1Point3 = mutableStateOf("")
+    val commandRmText1 = mutableStateOf("")
+    val commandAttention1Point4 = mutableStateOf("")
+    val commandSetTitle = mutableStateOf("")
+    val commandSetText1 = mutableStateOf("")
+    val commandSetText2 = mutableStateOf("")
+    val commandSetText3 = mutableStateOf("")
+    val commandSetText4 = mutableStateOf("")
+    val commandClearTitle = mutableStateOf("")
+    val commandClearText1 = mutableStateOf("")
+    val commandGraphClearTitle = mutableStateOf("")
+    val commandGraphClearText1 = mutableStateOf("")
+    val commandHelpTitle = mutableStateOf("")
+    val commandHelpText1 = mutableStateOf("")
+
     // // Graph Formats Block
     val graphFormatsGeneralInformationTitle = mutableStateOf("")
     val graphFormatsGeneralInformationText1 = mutableStateOf("")
@@ -329,6 +353,29 @@ class DialogsState : LocalizationState {
             DialogsKeys.HELP_COMMAND_BLOCK_NAME -> helpCommandBlockName.value = value
             DialogsKeys.HELP_GRAPH_FORMATS_BLOCK_NAME -> helpGraphFormatsBlockName.value = value
             DialogsKeys.HELP_USER_DIRECTORY_BLOCK_NAME -> helpUserDirectoryBlockName.value = value
+            // // Command Block
+            DialogsKeys.COMMAND_GENERAL_INFORMATION_TITLE -> commandGeneralInformationTitle.value = value
+            DialogsKeys.COMMAND_GENERAL_INFORMATION_TEXT1 -> commandGeneralInformationText1.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_1 -> commandAttention1Point1.value = value
+            DialogsKeys.COMMAND_EXAMPLE_1_POINT_1 -> commandExample1Point1.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_2 -> commandAttention1Point2.value = value
+            DialogsKeys.COMMAND_ADD_TITLE -> commandAddTitle.value = value
+            DialogsKeys.COMMAND_ADD_TEXT1 -> commandAddText1.value = value
+            DialogsKeys.COMMAND_RM_TITLE -> commandRmTitle.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_3 -> commandAttention1Point3.value = value
+            DialogsKeys.COMMAND_RM_TEXT1 -> commandRmText1.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_4 -> commandAttention1Point4.value = value
+            DialogsKeys.COMMAND_SET_TITLE -> commandSetTitle.value = value
+            DialogsKeys.COMMAND_SET_TEXT1 -> commandSetText1.value = value
+            DialogsKeys.COMMAND_SET_TEXT2 -> commandSetText2.value = value
+            DialogsKeys.COMMAND_SET_TEXT3 -> commandSetText3.value = value
+            DialogsKeys.COMMAND_SET_TEXT4 -> commandSetText4.value = value
+            DialogsKeys.COMMAND_CLEAR_TITLE -> commandClearTitle.value = value
+            DialogsKeys.COMMAND_CLEAR_TEXT1 -> commandClearText1.value = value
+            DialogsKeys.COMMAND_GRAPH_CLEAR_TITLE -> commandGraphClearTitle.value = value
+            DialogsKeys.COMMAND_GRAPH_CLEAR_TEXT1 -> commandGraphClearText1.value = value
+            DialogsKeys.COMMAND_HELP_TITLE -> commandHelpTitle.value = value
+            DialogsKeys.COMMAND_HELP_TEXT1 -> commandHelpText1.value = value
             // // Graph Formats Block
             DialogsKeys.GRAPH_FORMATS_GENERAL_INFORMATION_TITLE -> graphFormatsGeneralInformationTitle.value = value
             DialogsKeys.GRAPH_FORMATS_GENERAL_INFORMATION_TEXT1 -> graphFormatsGeneralInformationText1.value = value
