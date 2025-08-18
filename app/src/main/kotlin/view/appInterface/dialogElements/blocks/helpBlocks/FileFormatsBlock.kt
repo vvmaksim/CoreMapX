@@ -10,6 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
 
@@ -20,37 +22,34 @@ fun FileFormatsBlock() {
         modifier = Modifier.padding(16.dp),
     ) {
         Text(
-            text = "Общие сведения",
+            text = LocalizationManager.states.dialogs.graphFormatsGeneralInformationTitle.value,
             style = MaterialTheme.typography.h5,
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "В этом разделе описаны особенности поддерживаемых форматов хранения графа: " +
-                    "GRAPH (.graph), JSON (.json) и SQLite DB (.db).\n\n" +
-                    "Основной формат — GRAPH. При открытии файла в любом формате он конвертируется в " +
-                    "GRAPH, что упрощает преобразование графа между форматами.",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.graphFormatsGeneralInformationText1.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Формат GRAPH (.graph)",
+            text = LocalizationManager.states.dialogs.graphFormatsGraphFormatTitle.value,
             style = MaterialTheme.typography.h5,
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "Формат GRAPH — текстовый файл с двумя блоками: `Info:` и `Graph:`.\n\n" +
-                    "Блок `Info:` содержит обязательные параметры `isDirected` и `isWeighted`. " +
-                    "Рекомендуется указывать все параметры: `name`, `author`, `isDirected`, `isWeighted`.\n\n" +
-                    "Блок `Graph:` включает команды добавления (только с типом `add`). " +
-                    "Рекомендуется сначала добавлять все вершины, затем рёбра, " +
-                    "так как команды обрабатываются последовательно сверху вниз.",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.graphFormatsGraphFormatText1.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "Пример 2.1\n" +
-                    "Взвешенный направленный граф в формате GRAPH:",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.graphFormatsExample2Point1.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         CodeBlock(
@@ -68,22 +67,22 @@ fun FileFormatsBlock() {
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Формат JSON (.json)",
+            text = LocalizationManager.states.dialogs.graphFormatsJsonFormatTitle.value,
             style = MaterialTheme.typography.h5,
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "Формат JSON — текстовый файл с двумя блоками: `info` и `graph`.\n\n" +
-                    "Блок `info` содержит обязательные параметры `isDirected` и `isWeighted`. " +
-                    "Рекомендуется указывать все параметры: `name`, `author`, `isDirected`, `isWeighted`.\n\n" +
-                    "Блок `graph` включает два списка: `vertices` (вершины) и `edges` (рёбра).",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.graphFormatsJsonFormatText1.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "Пример 2.2\n" +
-                    "Взвешенный направленный граф в формате JSON:",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.graphFormatsExample2Point2.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         CodeBlock(
@@ -118,16 +117,15 @@ fun FileFormatsBlock() {
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Формат SQL DB (.db)",
+            text = LocalizationManager.states.dialogs.graphFormatsSqliteDbFormatTitle.value,
             style = MaterialTheme.typography.h5,
         )
         Spacer(Modifier.height(8.dp))
         Text(
             text =
-                "Формат SQLite DB — база данных с тремя таблицами: `graphs`, `vertices` и `edges`. " +
-                    "Такой подход позволяет хранить несколько графов в одном файле (репозитории). " +
-                    "Файлы .db открываются отдельной кнопкой в главном меню.\n\n" +
-                    "Ниже приведены структуры таблиц на языке SQL.",
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.graphFormatsSqliteDbFormatText1.value,
+                ),
         )
         Spacer(Modifier.height(8.dp))
         CodeBlock(

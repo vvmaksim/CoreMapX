@@ -150,6 +150,39 @@ helpSubTitle=по использованию CoreMapX
 helpCommandBlockName=Команды
 helpGraphFormatsBlockName=Форматы графов
 helpUserDirectoryBlockName=Пользовательская директория
+# Graph Formats Block
+graphFormatsGeneralInformationTitle=Общие сведения
+graphFormatsGeneralInformationText1=В этом разделе описаны особенности поддерживаемых форматов хранения графа: \
+    GRAPH (.graph), JSON (.json) и SQLite DB (.db).{nextLine}\
+    {nextLine}\
+    Основной формат — GRAPH. При открытии файла в любом формате он конвертируется в \
+    GRAPH, что упрощает преобразование графа между форматами.
+graphFormatsGraphFormatTitle=Формат GRAPH (.graph)
+graphFormatsGraphFormatText1=Формат GRAPH — текстовый файл с двумя блоками: `Info:` и `Graph:`.{nextLine}\
+    {nextLine}\
+    Блок `Info:` содержит обязательные параметры `isDirected` и `isWeighted`. \
+    Рекомендуется указывать все параметры: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    Блок `Graph:` включает команды добавления (только с типом `add`). \
+    Рекомендуется сначала добавлять все вершины, затем рёбра, \
+    так как команды обрабатываются последовательно сверху вниз.
+graphFormatsExample2Point1=Пример 2.1{nextLine}\
+    Взвешенный направленный граф в формате GRAPH:
+graphFormatsJsonFormatTitle=Формат JSON (.json)
+graphFormatsJsonFormatText1=Формат JSON — текстовый файл с двумя блоками: `info` и `graph`.{nextLine}\
+    {nextLine}\
+    Блок `info` содержит обязательные параметры `isDirected` и `isWeighted`. \
+    Рекомендуется указывать все параметры: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    Блок `graph` включает два списка: `vertices` (вершины) и `edges` (рёбра).
+graphFormatsExample2Point2=Пример 2.2{nextLine}\
+    Взвешенный направленный граф в формате JSON:
+graphFormatsSqliteDbFormatTitle=Формат SQL DB (.db)
+graphFormatsSqliteDbFormatText1=Формат SQLite DB — база данных с тремя таблицами: `graphs`, `vertices` и `edges`. \
+    Такой подход позволяет хранить несколько графов в одном файле (репозитории). \
+    Файлы .db открываются отдельной кнопкой в главном меню.{nextLine}\
+    {nextLine}\
+    Ниже приведены структуры таблиц на языке SQL.
 # User Directory Block
 userDirectoryGeneralInformationTitle=Общая информация
 userDirectoryGeneralInformationText1=Пользовательская директория используется для хранения конфигурационных файлов, локализации, \

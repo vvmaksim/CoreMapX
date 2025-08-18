@@ -155,6 +155,18 @@ object DialogsKeys {
     const val HELP_GRAPH_FORMATS_BLOCK_NAME = "helpGraphFormatsBlockName"
     const val HELP_USER_DIRECTORY_BLOCK_NAME = "helpUserDirectoryBlockName"
 
+    // // Graph Formats Block
+    const val GRAPH_FORMATS_GENERAL_INFORMATION_TITLE = "graphFormatsGeneralInformationTitle"
+    const val GRAPH_FORMATS_GENERAL_INFORMATION_TEXT1 = "graphFormatsGeneralInformationText1"
+    const val GRAPH_FORMATS_GRAPH_FORMAT_TITLE = "graphFormatsGraphFormatTitle"
+    const val GRAPH_FORMATS_GRAPH_FORMAT_TEXT1 = "graphFormatsGraphFormatText1"
+    const val GRAPH_FORMATS_EXAMPLE_2_POINT_1 = "graphFormatsExample2Point1"
+    const val GRAPH_FORMATS_JSON_FORMAT_TITLE = "graphFormatsJsonFormatTitle"
+    const val GRAPH_FORMATS_JSON_FORMAT_TEXT1 = "graphFormatsJsonFormatText1"
+    const val GRAPH_FORMATS_EXAMPLE_2_POINT_2 = "graphFormatsExample2Point2"
+    const val GRAPH_FORMATS_SQLITE_DB_FORMAT_TITLE = "graphFormatsSqliteDbFormatTitle"
+    const val GRAPH_FORMATS_SQLITE_DB_FORMAT_TEXT1 = "graphFormatsSqliteDbFormatText1"
+
     // // User Directory Block
     const val USER_DIRECTORY_GENERAL_INFORMATION_TITLE = "userDirectoryGeneralInformationTitle"
     const val USER_DIRECTORY_GENERAL_INFORMATION_TEXT1 = "userDirectoryGeneralInformationText1"

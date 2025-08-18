@@ -158,6 +158,18 @@ class DialogsState : LocalizationState {
     val helpGraphFormatsBlockName = mutableStateOf("")
     val helpUserDirectoryBlockName = mutableStateOf("")
 
+    // // Graph Formats Block
+    val graphFormatsGeneralInformationTitle = mutableStateOf("")
+    val graphFormatsGeneralInformationText1 = mutableStateOf("")
+    val graphFormatsGraphFormatTitle = mutableStateOf("")
+    val graphFormatsGraphFormatText1 = mutableStateOf("")
+    val graphFormatsExample2Point1 = mutableStateOf("")
+    val graphFormatsJsonFormatTitle = mutableStateOf("")
+    val graphFormatsJsonFormatText1 = mutableStateOf("")
+    val graphFormatsExample2Point2 = mutableStateOf("")
+    val graphFormatsSqliteDbFormatTitle = mutableStateOf("")
+    val graphFormatsSqliteDbFormatText1 = mutableStateOf("")
+
     // // User Directory Block
     val userDirectoryGeneralInformationTitle = mutableStateOf("")
     val userDirectoryGeneralInformationText1 = mutableStateOf("")
@@ -317,6 +329,17 @@ class DialogsState : LocalizationState {
             DialogsKeys.HELP_COMMAND_BLOCK_NAME -> helpCommandBlockName.value = value
             DialogsKeys.HELP_GRAPH_FORMATS_BLOCK_NAME -> helpGraphFormatsBlockName.value = value
             DialogsKeys.HELP_USER_DIRECTORY_BLOCK_NAME -> helpUserDirectoryBlockName.value = value
+            // // Graph Formats Block
+            DialogsKeys.GRAPH_FORMATS_GENERAL_INFORMATION_TITLE -> graphFormatsGeneralInformationTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_GENERAL_INFORMATION_TEXT1 -> graphFormatsGeneralInformationText1.value = value
+            DialogsKeys.GRAPH_FORMATS_GRAPH_FORMAT_TITLE -> graphFormatsGraphFormatTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_GRAPH_FORMAT_TEXT1 -> graphFormatsGraphFormatText1.value = value
+            DialogsKeys.GRAPH_FORMATS_EXAMPLE_2_POINT_1 -> graphFormatsExample2Point1.value = value
+            DialogsKeys.GRAPH_FORMATS_JSON_FORMAT_TITLE -> graphFormatsJsonFormatTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_JSON_FORMAT_TEXT1 -> graphFormatsJsonFormatText1.value = value
+            DialogsKeys.GRAPH_FORMATS_EXAMPLE_2_POINT_2 -> graphFormatsExample2Point2.value = value
+            DialogsKeys.GRAPH_FORMATS_SQLITE_DB_FORMAT_TITLE -> graphFormatsSqliteDbFormatTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_SQLITE_DB_FORMAT_TEXT1 -> graphFormatsSqliteDbFormatText1.value = value
             // // User Directory Block
             DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TITLE -> userDirectoryGeneralInformationTitle.value = value
             DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TEXT1 -> userDirectoryGeneralInformationText1.value = value

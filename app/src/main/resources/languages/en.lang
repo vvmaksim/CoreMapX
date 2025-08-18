@@ -150,6 +150,39 @@ helpSubTitle=for using CoreMapX
 helpCommandBlockName=Commands
 helpGraphFormatsBlockName=Graph formats
 helpUserDirectoryBlockName=User directory
+# Graph Formats Block
+graphFormatsGeneralInformationTitle=General information
+graphFormatsGeneralInformationText1=This section describes the features of the supported graph storage formats: \
+    GRAPH (.graph), JSON (.json) and SQLite DB (.db).{nextLine}\
+    {nextLine}\
+    The main format is GRAPH. When opening a file in any format, it is converted to \
+    GRAPH, which simplifies graph conversion between formats.
+graphFormatsGraphFormatTitle=GRAPH format (.graph)
+graphFormatsGraphFormatText1=GRAPH format is a text file with two blocks: `Info:` and `Graph`:{nextLine}\
+    {nextLine}\
+    The `Info` block contains the required parameters `isDirected` and `isWeighted`. \
+    It is recommended to specify all the parameters: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    The `Graph:` block includes add commands (only with the `add` type). \
+    It is recommended to add all the vertices first, then the edges, \
+    as the commands are processed sequentially from top to bottom.
+graphFormatsExample2Point1=Example 2.1{nextLine}\
+    Weighted directed graph in GRAPH format:
+graphFormatsJsonFormatTitle=JSON format (.json)
+graphFormatsJsonFormatText1=The JSON format is a text file with two blocks: `info` and `graph`.{nextLine}\
+    {nextLine}\
+    The `info` block contains the required `isDirected` and `isWeighted` parameters. \
+    It is recommended to specify all the parameters: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    The graph block includes two lists: `vertices` and `edges`.
+graphFormatsExample2Point2=Example 2.2{nextLine}\
+    Weighted directed graph in JSON format:
+graphFormatsSqliteDbFormatTitle=SQL DB format (.db)
+graphFormatsSqliteDbFormatText1=SQLite DB format is a database with three tables: `graphs`, `vertices` and `edges`. \
+    This approach allows you to store multiple graphs in a single file (repository). \
+    The .db files are opened by a separate button in the main menu.{nextLine}\
+    {nextLine}\
+    The table structures in SQL are shown below.
 # User Directory Block
 userDirectoryGeneralInformationTitle=General information
 userDirectoryGeneralInformationText1=The user directory is used to store configuration files, localization, \
