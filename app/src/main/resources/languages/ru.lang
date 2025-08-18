@@ -151,7 +151,7 @@ helpCommandBlockName=Команды
 helpGraphFormatsBlockName=Форматы графов
 helpUserDirectoryBlockName=Пользовательская директория
 # Graph Formats Block
-graphFormatsGeneralInformationTitle=Общие сведения
+graphFormatsGeneralInformationTitle=Общая информация
 graphFormatsGeneralInformationText1=В этом разделе описаны особенности поддерживаемых форматов хранения графа: \
     GRAPH (.graph), JSON (.json) и SQLite DB (.db).{nextLine}\
     {nextLine}\
