@@ -194,7 +194,7 @@ fun CommandBlock() {
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewGeneralBlock() {
+private fun PreviewCommandBlock() {
     AppTheme {
         PreviewSurface(content = { CommandBlock() })
     }
