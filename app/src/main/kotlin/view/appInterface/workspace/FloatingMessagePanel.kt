@@ -1,5 +1,7 @@
 package view.appInterface.workspace
 
+import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -47,6 +49,8 @@ import androidx.compose.ui.window.PopupPositionProvider
 import extensions.border
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
+import org.coremapx.app.theme.AppTheme
+import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -58,16 +62,8 @@ fun FloatingMessagePanel(
     borderColor: Color = MaterialTheme.colors.border,
 ) {
     var position by remember { mutableStateOf(initialPosition) }
-    var isExpanded by remember { mutableStateOf(true) }
-
-    val maxPanelWidth = config.states.commandFieldWidth.value.dp
-    val maxPanelHeight = 300.dp
-    val minPanelWidth = 200.dp
-    val collapsedHeight = 30.dp
 
     val scrollState = rememberScrollState()
-
-    val panelShape = MaterialTheme.shapes.medium
 
     LaunchedEffect(outputMessages.size) {
         if (outputMessages.isNotEmpty()) {
@@ -89,141 +85,186 @@ fun FloatingMessagePanel(
                     ): IntOffset = IntOffset(position.x.toInt(), position.y.toInt())
                 },
         ) {
-            Box(
-                modifier =
-                    Modifier
-                        .width(if (isExpanded) maxPanelWidth else minPanelWidth)
-                        .height(if (isExpanded) maxPanelHeight else collapsedHeight)
-                        .clip(panelShape)
-                        .background(
-                            color = backgroundColor,
-                            shape = panelShape,
-                        ).border(
-                            width = 1.dp,
-                            color = borderColor,
-                            shape = panelShape,
-                        ),
+            FloatingMessagePanelContent(
+                outputMessages = outputMessages,
+                onDrag = { dragAmount: Offset ->
+                    position += dragAmount
+                },
+                scrollState = scrollState,
+                backgroundColor = backgroundColor,
+                borderColor = borderColor,
+            )
+        }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+fun FloatingMessagePanelContent(
+    outputMessages: List<String>,
+    onDrag: (dragAmount: Offset) -> Unit,
+    scrollState: ScrollState,
+    backgroundColor: Color = MaterialTheme.colors.background,
+    borderColor: Color = MaterialTheme.colors.border,
+) {
+    var isExpanded by remember { mutableStateOf(true) }
+
+    val maxPanelWidth = config.states.commandFieldWidth.value.dp
+    val maxPanelHeight = 300.dp
+    val minPanelWidth = 200.dp
+    val collapsedHeight = 30.dp
+    val panelShape = MaterialTheme.shapes.medium
+
+    Box(
+        modifier =
+            Modifier
+                .width(if (isExpanded) maxPanelWidth else minPanelWidth)
+                .height(if (isExpanded) maxPanelHeight else collapsedHeight)
+                .clip(panelShape)
+                .background(
+                    color = backgroundColor,
+                    shape = panelShape,
+                ).border(
+                    width = 1.dp,
+                    color = borderColor,
+                    shape = panelShape,
+                ),
+    ) {
+        if (isExpanded) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
             ) {
-                if (isExpanded) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                    ) {
-                        Box(
-                            modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .height(30.dp)
-                                    .background(MaterialTheme.colors.primary)
-                                    .pointerInput(Unit) {
-                                        detectDragGestures(
-                                            onDrag = { change, dragAmount ->
-                                                position += dragAmount
-                                            },
-                                        )
+                Box(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .height(30.dp)
+                            .background(MaterialTheme.colors.primary)
+                            .pointerInput(Unit) {
+                                detectDragGestures(
+                                    onDrag = { change, dragAmount ->
+                                        onDrag(dragAmount)
                                     },
-                        ) {
-                            Row(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalAlignment = Alignment.CenterVertically,
-                            ) {
-                                Text(
-                                    text = "Messages",
-                                    color = MaterialTheme.colors.onPrimary,
-                                    modifier = Modifier.weight(1f).padding(start = 8.dp),
                                 )
-
-                                IconButton(
-                                    onClick = { isExpanded = false },
-                                    modifier = Modifier.size(24.dp),
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.KeyboardArrowDown,
-                                        contentDescription = "Collapse",
-                                        tint = MaterialTheme.colors.onPrimary,
-                                    )
-                                }
-                            }
-                        }
-
-                        Box(
-                            modifier =
-                                Modifier
-                                    .weight(1f)
-                                    .padding(8.dp)
-                                    .verticalScroll(scrollState),
-                        ) {
-                            Column(
-                                modifier = Modifier.fillMaxWidth(),
-                            ) {
-                                // It just takes the first word of the template with an error.
-                                val errorWord =
-                                    LocalizationManager.states.ui.errorBasicString.value
-                                        .split(" ")[0]
-                                outputMessages.forEach { message ->
-                                    val parts = message.split(errorWord, limit = 2)
-                                    val annotatedText =
-                                        buildAnnotatedString {
-                                            if (parts.size == 2) {
-                                                withStyle(style = SpanStyle(color = MaterialTheme.colors.error)) {
-                                                    append(errorWord)
-                                                }
-                                                withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
-                                                    append(parts[1])
-                                                }
-                                            } else {
-                                                withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
-                                                    append(message)
-                                                }
-                                            }
-                                        }
-                                    Text(
-                                        text = annotatedText,
-                                        modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
-                                    )
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    Box(
-                        modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colors.primary)
-                                .pointerInput(Unit) {
-                                    detectDragGestures(
-                                        onDrag = { change, dragAmount ->
-                                            position += dragAmount
-                                        },
-                                    )
-                                }.pointerInput(Unit) {
-                                    detectTapGestures(
-                                        onTap = {
-                                            isExpanded = true
-                                        },
-                                    )
-                                },
-                        contentAlignment = Alignment.CenterStart,
+                            },
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(start = 8.dp),
+                        Text(
+                            text = "Messages",
+                            color = MaterialTheme.colors.onPrimary,
+                            modifier = Modifier.weight(1f).padding(start = 8.dp),
+                        )
+
+                        IconButton(
+                            onClick = { isExpanded = false },
+                            modifier = Modifier.size(24.dp),
                         ) {
                             Icon(
-                                imageVector = Icons.Default.KeyboardArrowUp,
-                                contentDescription = "Expand",
+                                imageVector = Icons.Default.KeyboardArrowDown,
+                                contentDescription = "Collapse",
                                 tint = MaterialTheme.colors.onPrimary,
-                                modifier = Modifier.size(16.dp),
                             )
+                        }
+                    }
+                }
+
+                Box(
+                    modifier =
+                        Modifier
+                            .weight(1f)
+                            .padding(8.dp)
+                            .verticalScroll(scrollState),
+                ) {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        // It just takes the first word of the template with an error.
+                        val errorWord =
+                            LocalizationManager.states.ui.errorBasicString.value
+                                .split(" ")[0]
+                        outputMessages.forEach { message ->
+                            val parts = message.split(errorWord, limit = 2)
+                            val annotatedText =
+                                buildAnnotatedString {
+                                    if (parts.size == 2) {
+                                        withStyle(style = SpanStyle(color = MaterialTheme.colors.error)) {
+                                            append(errorWord)
+                                        }
+                                        withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
+                                            append(parts[1])
+                                        }
+                                    } else {
+                                        withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
+                                            append(message)
+                                        }
+                                    }
+                                }
                             Text(
-                                text = "Messages",
-                                color = MaterialTheme.colors.onPrimary,
-                                modifier = Modifier.padding(start = 4.dp),
+                                text = annotatedText,
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 2.dp),
                             )
                         }
                     }
                 }
             }
+        } else {
+            Box(
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colors.primary)
+                        .pointerInput(Unit) {
+                            detectDragGestures(
+                                onDrag = { change, dragAmount ->
+                                    onDrag(dragAmount)
+                                },
+                            )
+                        }.pointerInput(Unit) {
+                            detectTapGestures(
+                                onTap = {
+                                    isExpanded = true
+                                },
+                            )
+                        },
+                contentAlignment = Alignment.CenterStart,
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(start = 8.dp),
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowUp,
+                        contentDescription = "Expand",
+                        tint = MaterialTheme.colors.onPrimary,
+                        modifier = Modifier.size(16.dp),
+                    )
+                    Text(
+                        text = "Messages",
+                        color = MaterialTheme.colors.onPrimary,
+                        modifier = Modifier.padding(start = 4.dp),
+                    )
+                }
+            }
         }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+private fun PreviewFloatingMessagePanel() {
+    AppTheme {
+        PreviewSurface(
+            content = {
+                FloatingMessagePanelContent(
+                    outputMessages = listOf("ERROR_MESSAGE", "Next message", "..."),
+                    onDrag = { },
+                    scrollState = rememberScrollState(),
+                )
+            },
+        )
     }
 }
