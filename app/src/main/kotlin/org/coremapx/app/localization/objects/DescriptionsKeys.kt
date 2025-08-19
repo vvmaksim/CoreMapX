@@ -46,7 +46,7 @@ object DescriptionsKeys {
     const val MAX_COUNT_MESSAGES = "descriptionMaxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "descriptionMaxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "descriptionCommandFieldWidth"
-    const val IS_TRANSPARENT_COMMAND_LINE = "descriptionIsTransparentCommandLine"
+    const val IS_TRANSPARENT_COMMAND_LINE_BLOCK = "descriptionIsTransparentCommandLineBlock"
 
     // // Work Area Block
     const val GRAPH_LAYOUT_HEIGHT = "descriptionGraphLayoutHeight"

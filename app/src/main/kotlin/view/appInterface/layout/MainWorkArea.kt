@@ -82,7 +82,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val maxCountMessages = config.states.maxCountMessages.value
     val maxUserCommands = config.states.maxCountUserCommands.value
     val commandFieldWidth = config.states.commandFieldWidth.value.dp
-    val isTransparentCommandLine = config.states.isTransparentCommandLine.value
+    val isTransparentCommandLineBlock = config.states.isTransparentCommandLineBlock.value
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -352,7 +352,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                                     )
                                 },
                             backgroundColor =
-                                if (isTransparentCommandLine) {
+                                if (isTransparentCommandLineBlock) {
                                     Color.Transparent
                                 } else {
                                     MaterialTheme.colors.commandLineBlockBackground
@@ -374,7 +374,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                                     commandLineHeight = coordinates.size.height.toFloat()
                                 },
                         commandLineBackgroundColor =
-                            if (isTransparentCommandLine) {
+                            if (isTransparentCommandLineBlock) {
                                 Color.Transparent
                             } else {
                                 MaterialTheme.colors.commandLineBlockBackground

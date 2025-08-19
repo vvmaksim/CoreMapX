@@ -49,7 +49,7 @@ class DescriptionsStates : LocalizationState {
     val descriptionMaxCountMessages = mutableStateOf("")
     val descriptionMaxCountUserCommands = mutableStateOf("")
     val descriptionCommandFieldWidth = mutableStateOf("")
-    val descriptionIsTransparentCommandLine = mutableStateOf("")
+    val descriptionIsTransparentCommandLineBlock = mutableStateOf("")
 
     // // Work Area Block
     val descriptionGraphLayoutHeight = mutableStateOf("")
@@ -118,7 +118,7 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.MAX_COUNT_MESSAGES -> descriptionMaxCountMessages.value = value
             DescriptionsKeys.MAX_COUNT_USER_COMMANDS -> descriptionMaxCountUserCommands.value = value
             DescriptionsKeys.COMMAND_FIELD_WIDTH -> descriptionCommandFieldWidth.value = value
-            DescriptionsKeys.IS_TRANSPARENT_COMMAND_LINE -> descriptionIsTransparentCommandLine.value = value
+            DescriptionsKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK -> descriptionIsTransparentCommandLineBlock.value = value
             // // Work Area Block
             DescriptionsKeys.GRAPH_LAYOUT_HEIGHT -> descriptionGraphLayoutHeight.value = value
             DescriptionsKeys.GRAPH_LAYOUT_WIDTH -> descriptionGraphLayoutWidth.value = value

@@ -62,7 +62,7 @@ class ConfigTests {
         assertEquals(100, config.states.maxCountMessages.value)
         assertEquals(200, config.states.maxCountUserCommands.value)
         assertEquals(700, config.states.commandFieldWidth.value)
-        assertEquals(false, config.states.isTransparentCommandLine.value)
+        assertEquals(false, config.states.isTransparentCommandLineBlock.value)
         assertEquals(7000, config.states.graphLayoutHeight.value)
         assertEquals(7000, config.states.graphLayoutWidth.value)
         assertEquals(15, config.states.vertexRadius.value)
@@ -112,7 +112,7 @@ class ConfigTests {
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MAX_COUNT_MESSAGES, "152"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MAX_COUNT_USER_COMMANDS, "252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.COMMAND_FIELD_WIDTH, "752"))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE, "true"))
+        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK, "true"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.GRAPH_LAYOUT_HEIGHT, "5252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.GRAPH_LAYOUT_WIDTH, "5252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.VERTEX_RADIUS, "52"))
@@ -161,7 +161,7 @@ class ConfigTests {
         assertEquals(152, config.states.maxCountMessages.value)
         assertEquals(252, config.states.maxCountUserCommands.value)
         assertEquals(752, config.states.commandFieldWidth.value)
-        assertEquals(true, config.states.isTransparentCommandLine.value)
+        assertEquals(true, config.states.isTransparentCommandLineBlock.value)
         assertEquals(5252, config.states.graphLayoutHeight.value)
         assertEquals(5252, config.states.graphLayoutWidth.value)
         assertEquals(52, config.states.vertexRadius.value)
@@ -198,7 +198,7 @@ class ConfigTests {
 
     @Test
     fun `set value for boolean on invalid value`() {
-        val setResult = config.setValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE, "incorrectBoolean")
+        val setResult = config.setValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK, "incorrectBoolean")
         assertIs<Result.Error>(setResult)
         assertEquals("IncorrectBoolean", setResult.error.type)
     }

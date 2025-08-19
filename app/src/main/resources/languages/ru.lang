@@ -118,7 +118,7 @@ commandFieldMessageOutputHeight=Высота области для вывода 
 commandFieldMaxCountMessages=Максимальное количество сообщений
 commandFieldMaxCountUserCommands=Максимальное количество пользовательских команд
 commandFieldWidth=Ширина командной строки
-commandFieldIsTransparent=Командная строка является прозрачной
+commandFieldIsTransparent=Командная строка и её вывод прозрачны
 # Work Area Block
 workAreaGraphLayoutHeight=Высота раскладки графа
 workAreaGraphLayoutWidth=Ширина раскладки графа
@@ -367,7 +367,7 @@ descriptionOtherPathsColor=Цвет для отображения рёбер, к
 descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
 descriptionCommandLineBlockBackgroundColor=Цвет фона для командной строки и её вывода. {nextLine}\
     {nextLine}\
-    Этот цвет применяется, если параметр `isTransparentCommandLine` отключен.
+    Этот цвет применяется, если параметр `isTransparentCommandLineBlock` отключен.
 ## Main Screen Block
 descriptionMainScreenStartHeight=Начальная высота окна приложения.{nextLine}\
     {nextLine}\
@@ -414,10 +414,10 @@ descriptionCommandFieldWidth=Ширина командной строки.{nextL
     Минимально=400{nextLine}\
     Рекомендовано=700{nextLine}\
     Максимально=900
-descriptionIsTransparentCommandLine=Этот параметр отвечает за прозрачность фона командной строки.{nextLine}\
+descriptionIsTransparentCommandLineBlock=Этот параметр отвечает за прозрачность фона командной строки и её вывода.{nextLine}\
     {nextLine}\
-    Если он включен, фон текстового поля будет прозрачным.{nextLine}\
-    Если он выключен, фон текстового поля примет цвет, указанный в соответствующем параметре в настройках цвета.
+    Если он включен, фоны будут прозрачными.{nextLine}\
+    Если он выключен, фоны примут цвет, указанный в соответствующем параметре в настройках цвета.
 ## Work Area Block
 descriptionGraphLayoutHeight=Граф рисуется на определенной плоскости, вы можете изменить высоту этой плоскости.{nextLine}\
     {nextLine}\

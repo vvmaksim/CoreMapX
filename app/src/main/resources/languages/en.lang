@@ -118,7 +118,7 @@ commandFieldMessageOutputHeight=Message output height
 commandFieldMaxCountMessages=Max count messages
 commandFieldMaxCountUserCommands=Max count user commands
 commandFieldWidth=Command field width
-commandFieldIsTransparent=Command field is transparent
+commandFieldIsTransparent=Command line block is transparent
 # Work Area Block
 workAreaGraphLayoutHeight=Graph layout height
 workAreaGraphLayoutWidth=Graph layout width
@@ -367,7 +367,7 @@ descriptionOtherPathsColor=Color to display edges that are not always on the sho
 descriptionCanvasBackgroundColor=The background color for graph visualization.
 descriptionCommandLineBlockBackgroundColor=The background color of the command line and its output.{nextLine}\
     {nextLine}\
-    This color is applied if the `isTransparentCommandLine` parameter is disabled.
+    This color is applied if the `isTransparentCommandLineBlock` parameter is disabled.
 ## Main Screen Block
 descriptionMainScreenStartHeight=The starting height of the application window.{nextLine}\
     {nextLine}\
@@ -414,10 +414,11 @@ descriptionCommandFieldWidth=The width of the command line.{nextLine}\
     Min=400{nextLine}\
     Recommended=700{nextLine}\
     Max=900
-descriptionIsTransparentCommandLine=This parameter is responsible for the transparency of the command line background.{nextLine}\
+descriptionIsTransparentCommandLineBlock=This parameter is responsible for the transparency of the background of the \
+    command line and its output.{nextLine}\
     {nextLine}\
-    If it is enabled, the background of the text field will be transparent.{nextLine}\
-    If it is turned off, the background of the text field will take on the color specified in the corresponding parameter in the color settings.
+    If it is enabled, the backgrounds will be transparent.{nextLine}\
+    If it is turned off, the backgrounds will take on the color specified in the corresponding parameter in the color settings.
 ## Work Area Block
 descriptionGraphLayoutHeight=The graph is drawn on a certain plane, you can change the height of this plane.{nextLine}\
     {nextLine}\

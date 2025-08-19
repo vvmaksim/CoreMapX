@@ -15,7 +15,7 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_WIDTH
-import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE
+import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_USER_COMMANDS
 import org.coremapx.app.userDirectory.config.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
@@ -30,7 +30,7 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
     val maxCountMessages by remember { config.states.maxCountMessages }
     val maxCountUserCommands by remember { config.states.maxCountUserCommands }
     val commandFieldWidth by remember { config.states.commandFieldWidth }
-    val isTransparentCommandLine by remember { config.states.isTransparentCommandLine }
+    val isTransparentCommandLineBlock by remember { config.states.isTransparentCommandLineBlock }
 
     Column {
         NumberTextFieldLine(
@@ -89,10 +89,10 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             title = LocalizationManager.states.dialogs.commandFieldIsTransparent.value,
             description =
                 LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionIsTransparentCommandLine.value,
+                    startString = LocalizationManager.states.descriptions.descriptionIsTransparentCommandLineBlock.value,
                 ),
-            checked = isTransparentCommandLine,
-            onCheckedChange = { config.setValue(IS_TRANSPARENT_COMMAND_LINE, it.toString()) },
+            checked = isTransparentCommandLineBlock,
+            onCheckedChange = { config.setValue(IS_TRANSPARENT_COMMAND_LINE_BLOCK, it.toString()) },
             isExpanded = isExpandedSettings,
         )
     }

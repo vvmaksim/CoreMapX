@@ -47,7 +47,7 @@ object ConfigKeys {
     const val MAX_COUNT_MESSAGES = "maxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "maxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
-    const val IS_TRANSPARENT_COMMAND_LINE = "isTransparentCommandLine"
+    const val IS_TRANSPARENT_COMMAND_LINE_BLOCK = "isTransparentCommandLineBlock"
 
     // Work Area
     const val GRAPH_LAYOUT_HEIGHT = "graphLayoutHeight"
