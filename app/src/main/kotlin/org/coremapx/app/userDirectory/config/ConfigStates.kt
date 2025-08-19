@@ -34,7 +34,7 @@ class ConfigStates(
     val shortestPathColor = mutableStateOf(configRepository.getColor(ConfigKeys.SHORTEST_PATH_COLOR))
     val otherPathsColor = mutableStateOf(configRepository.getColor(ConfigKeys.OTHER_PATHS_COLOR))
     val canvasBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR))
-    val commandLineBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR))
+    val commandLineBlockBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR))
 
     // Main Screen
     val mainScreenStartHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAIN_SCREEN_START_HEIGHT))
@@ -104,10 +104,10 @@ class ConfigStates(
             ConfigKeys.CANVAS_BACKGROUND_COLOR ->
                 canvasBackgroundColor.value =
                     configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR)
-            ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR ->
-                commandLineBackgroundColor.value =
+            ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR ->
+                commandLineBlockBackgroundColor.value =
                     configRepository.getColor(
-                        ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR,
+                        ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR,
                     )
 
             // Main Screen

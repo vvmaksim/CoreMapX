@@ -105,7 +105,7 @@ colorsEdgeMainColor=Основной цвет ребра
 colorsShortestPathColor=Цвет кратчайшего найденного пути
 colorsOtherPathsColor=Цвет остальных найденных путей
 colorsCanvasBackgroundColor=Цвет фона холста
-colorsCommandLineBackgroundColor=Цвет фона командной строки
+colorsCommandLineBlockBackgroundColor=Цвет фона командной строки и её вывода
 # Main Screen Block
 mainScreenStartHeight=Начальная высота основного экрана
 mainScreenStartWidth=Начальная ширина основного экрана
@@ -365,7 +365,7 @@ descriptionEdgeMainColor=Основной цвет для отображения
 descriptionShortestPathColor=Цвет для отображения рёбер кратчайшего найденного пути.
 descriptionOtherPathsColor=Цвет для отображения рёбер, которые не всегда относятся к кратчайшему пути.
 descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
-descriptionCommandLineBackgroundColor=Цвет фона для командной строки. {nextLine}\
+descriptionCommandLineBlockBackgroundColor=Цвет фона для командной строки и её вывода. {nextLine}\
     {nextLine}\
     Этот цвет применяется, если параметр `isTransparentCommandLine` отключен.
 ## Main Screen Block

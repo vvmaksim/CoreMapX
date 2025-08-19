@@ -105,7 +105,7 @@ colorsEdgeMainColor=Edge Main Color
 colorsShortestPathColor=Shortest path found color
 colorsOtherPathsColor=Other found paths color
 colorsCanvasBackgroundColor=Canvas Background Color
-colorsCommandLineBackgroundColor=Command Line Background Color
+colorsCommandLineBlockBackgroundColor=Command Line Block Background Color
 # Main Screen Block
 mainScreenStartHeight=Main screen start height
 mainScreenStartWidth=Main screen start width
@@ -365,7 +365,7 @@ descriptionEdgeMainColor=The primary color for displaying edges between vertices
 descriptionShortestPathColor=Color to display edges of the shortest path found.
 descriptionOtherPathsColor=Color to display edges that are not always on the shortest path.
 descriptionCanvasBackgroundColor=The background color for graph visualization.
-descriptionCommandLineBackgroundColor=The background color for the command line.{nextLine}\
+descriptionCommandLineBlockBackgroundColor=The background color of the command line and its output.{nextLine}\
     {nextLine}\
     This color is applied if the `isTransparentCommandLine` parameter is disabled.
 ## Main Screen Block

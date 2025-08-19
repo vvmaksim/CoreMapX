@@ -30,7 +30,7 @@ object DescriptionsKeys {
     const val SHORTEST_PATH_COLOR = "descriptionShortestPathColor"
     const val OTHER_PATHS_COLOR = "descriptionOtherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "descriptionCanvasBackgroundColor"
-    const val COMMAND_LINE_BACKGROUND_COLOR = "descriptionCommandLineBackgroundColor"
+    const val COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "descriptionCommandLineBlockBackgroundColor"
 
     // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "descriptionMainScreenStartHeight"

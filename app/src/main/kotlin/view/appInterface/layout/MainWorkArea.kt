@@ -39,7 +39,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.canvasBackground
-import extensions.commandLineBackground
+import extensions.commandLineBlockBackground
 import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.result.CommandErrors
@@ -355,7 +355,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                                 if (isTransparentCommandLine) {
                                     Color.Transparent
                                 } else {
-                                    MaterialTheme.colors.commandLineBackground
+                                    MaterialTheme.colors.commandLineBlockBackground
                                 },
                             borderColor = MaterialTheme.colors.border,
                         )
@@ -377,7 +377,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                             if (isTransparentCommandLine) {
                                 Color.Transparent
                             } else {
-                                MaterialTheme.colors.commandLineBackground
+                                MaterialTheme.colors.commandLineBlockBackground
                             },
                         placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
                         onCommand = { command -> handleCommand(command) },

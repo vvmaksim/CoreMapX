@@ -67,7 +67,7 @@ class DialogsState : LocalizationState {
     val colorsShortestPathColor = mutableStateOf("")
     val colorsOtherPathsColor = mutableStateOf("")
     val colorsCanvasBackgroundColor = mutableStateOf("")
-    val colorsCommandLineBackgroundColor = mutableStateOf("")
+    val colorsCommandLineBlockBackgroundColor = mutableStateOf("")
 
     // // Main Screen Block
     val mainScreenStartHeight = mutableStateOf("")
@@ -268,7 +268,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.COLORS_SHORTEST_PATH_COLOR -> colorsShortestPathColor.value = value
             DialogsKeys.COLORS_OTHER_PATHS_COLOR -> colorsOtherPathsColor.value = value
             DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
-            DialogsKeys.COLORS_COMMAND_LINE_BACKGROUND_COLOR -> colorsCommandLineBackgroundColor.value = value
+            DialogsKeys.COLORS_COMMAND_LINE_BLOCK_BACKGROUND_COLOR -> colorsCommandLineBlockBackgroundColor.value = value
             // // Main Screen Block
             DialogsKeys.MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = value
             DialogsKeys.MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = value

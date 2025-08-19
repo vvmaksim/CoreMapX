@@ -40,7 +40,7 @@ class ExtensionsTests {
         assertEquals(Theme.warningColor, Theme.colors.warning)
         assertEquals(Theme.hoveredBorderColor, Theme.colors.hoveredBorder)
         assertEquals(Theme.canvasBackgroundColor, Theme.colors.canvasBackground)
-        assertEquals(Theme.commandLineBackgroundColor, Theme.colors.commandLineBackground)
+        assertEquals(Theme.commandLineBlockBackgroundColor, Theme.colors.commandLineBlockBackground)
     }
 
     @Test

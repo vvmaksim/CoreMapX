@@ -31,7 +31,7 @@ object ConfigKeys {
     const val SHORTEST_PATH_COLOR = "shortestPathColor"
     const val OTHER_PATHS_COLOR = "otherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "canvasBackgroundColor"
-    const val COMMAND_LINE_BACKGROUND_COLOR = "commandLineBackgroundColor"
+    const val COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "commandLineBlockBackgroundColor"
 
     // Main Screen
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"

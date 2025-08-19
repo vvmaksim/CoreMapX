@@ -64,7 +64,7 @@ object DialogsKeys {
     const val COLORS_SHORTEST_PATH_COLOR = "colorsShortestPathColor"
     const val COLORS_OTHER_PATHS_COLOR = "colorsOtherPathsColor"
     const val COLORS_CANVAS_BACKGROUND_COLOR = "colorsCanvasBackgroundColor"
-    const val COLORS_COMMAND_LINE_BACKGROUND_COLOR = "colorsCommandLineBackgroundColor"
+    const val COLORS_COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "colorsCommandLineBlockBackgroundColor"
 
     // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
