@@ -254,6 +254,11 @@ userDirectoryAttention3Point1=ATTENTION 3.1 {nextLine}\
 userDirectoryAttention3Point2=ATTENTION 3.2 {nextLine}\
     When changing the parameters in the text field, press the `Enter` key to save. \
     After that, a notification about the result of the operation will appear.
+userDirectoryAttention3Point3=ATTENTION 3.3 {nextLine}\
+    If you have problems with localization or with the configuration file when upgrading to a new version of CoreMapX, \
+    then try deleting the `.coremapx/config` directory.{nextLine}\
+    ATTENTION! After that, your settings will be lost, and the configuration files will be created again the next \
+    time the application is launched, but with default values.
 userDirectoryInterfaceLanguageConfigurationTitle=Configuring the interface language
 userDirectoryInterfaceLanguageConfigurationText1=The application supports interface translation into any UTF-8 encoded language. \
     To do this, the `.coremapx/config/` directory contains the `custom_language.lang` file, \

@@ -51,6 +51,14 @@ fun UserDirectoryBlock() {
         )
         Spacer(Modifier.height(8.dp))
         Text(
+            text =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.dialogs.userDirectoryAttention3Point3.value,
+                ),
+            color = config.states.warningColor.value,
+        )
+        Spacer(Modifier.height(8.dp))
+        Text(
             text = LocalizationManager.states.dialogs.userDirectoryInterfaceLanguageConfigurationTitle.value,
             style = MaterialTheme.typography.h5,
         )

@@ -254,6 +254,11 @@ userDirectoryAttention3Point1=ПРИМЕЧАНИЕ 3.1 {nextLine}\
 userDirectoryAttention3Point2=ПРИМЕЧАНИЕ 3.2 {nextLine}\
     При изменении параметров в текстовом поле нажмите клавишу `Enter` для сохранения. \
     После этого появится уведомление о результате операции.
+userDirectoryAttention3Point3=ПРИМЕЧАНИЕ 3.3 {nextLine}\
+    Если у Вас возникли проблемы с локализацией или же с конфигурационным файлом при обновлении на новую версию CoreMapX, \
+    то попробуйте удалить директорию `.coremapx/config`.{nextLine}\
+    ВНИМАНИЕ! После этого ваши настройки будут утеряны, а конфигурационные файлы создадутся вновь при следующем запуске приложения, \
+    но уже со значениями по умолчанию.
 userDirectoryInterfaceLanguageConfigurationTitle=Настройка языка интерфейса
 userDirectoryInterfaceLanguageConfigurationText1=Приложение поддерживает перевод интерфейса на любой язык с кодировкой UTF-8. \
     Для этого в директории `.coremapx/config/` находится файл `custom_language.lang`, \

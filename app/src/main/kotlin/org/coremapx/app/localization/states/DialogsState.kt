@@ -199,6 +199,7 @@ class DialogsState : LocalizationState {
     val userDirectoryGeneralInformationText1 = mutableStateOf("")
     val userDirectoryAttention3Point1 = mutableStateOf("")
     val userDirectoryAttention3Point2 = mutableStateOf("")
+    val userDirectoryAttention3Point3 = mutableStateOf("")
     val userDirectoryInterfaceLanguageConfigurationTitle = mutableStateOf("")
     val userDirectoryInterfaceLanguageConfigurationText1 = mutableStateOf("")
 
@@ -392,6 +393,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TEXT1 -> userDirectoryGeneralInformationText1.value = value
             DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_1 -> userDirectoryAttention3Point1.value = value
             DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_2 -> userDirectoryAttention3Point2.value = value
+            DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_3 -> userDirectoryAttention3Point3.value = value
             DialogsKeys.USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TITLE ->
                 userDirectoryInterfaceLanguageConfigurationTitle.value =
                     value
