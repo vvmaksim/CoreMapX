@@ -509,11 +509,15 @@ zoomReduce=Уменьшить
 # Any Words
 vertices=вершин
 edges=рёбер
+messages=Сообщения
 enterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть
 settingsExpand=Раскрыть
 settingsHideDescription=Спрятать описание
 settingsShowDescription=Показать описание
+# Floating Message Panel
+floatingMessagePanelCollapse=Свернуть
+floatingMessagePanelExpand=Развернуть
 # Text Field
 textField=Текстовое поле

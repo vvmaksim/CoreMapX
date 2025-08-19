@@ -227,7 +227,7 @@ fun FloatingMessagePanelContent(
 @Composable
 private fun FloatingMessagePanelTitle(
     isExpanded: Boolean,
-    titleText: String = "Messages",
+    titleText: String = LocalizationManager.states.anyTextStates.messages.value,
 ) {
     Row(
         modifier = Modifier.fillMaxSize(),
@@ -240,7 +240,12 @@ private fun FloatingMessagePanelTitle(
         )
         Icon(
             imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
-            contentDescription = if (isExpanded) "Collapse" else "Expand",
+            contentDescription =
+                if (isExpanded) {
+                    LocalizationManager.states.anyIconDescriptionsStates.floatingMessagePanelCollapse.value
+                } else {
+                    LocalizationManager.states.anyIconDescriptionsStates.floatingMessagePanelExpand.value
+                },
             tint = MaterialTheme.colors.onPrimary,
             modifier = Modifier.size(24.dp),
         )

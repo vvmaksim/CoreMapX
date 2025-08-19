@@ -33,6 +33,10 @@ class AnyIconDescriptionsStates : LocalizationState {
     val settingsHideDescription = mutableStateOf("")
     val settingsShowDescription = mutableStateOf("")
 
+    // Floating Message Panel
+    val floatingMessagePanelCollapse = mutableStateOf("")
+    val floatingMessagePanelExpand = mutableStateOf("")
+
     // Text Field
     val textField = mutableStateOf("")
 
@@ -69,6 +73,10 @@ class AnyIconDescriptionsStates : LocalizationState {
             AnyIconDescriptionsKeys.SETTINGS_EXPAND -> settingsExpand.value = value
             AnyIconDescriptionsKeys.SETTINGS_HIDE_DESCRIPTION -> settingsHideDescription.value = value
             AnyIconDescriptionsKeys.SETTINGS_SHOW_DESCRIPTION -> settingsShowDescription.value = value
+
+            // Floating Message Panel
+            AnyIconDescriptionsKeys.FLOATING_MESSAGE_PANEL_COLLAPSE -> floatingMessagePanelCollapse.value = value
+            AnyIconDescriptionsKeys.FLOATING_MESSAGE_PANEL_EXPAND -> floatingMessagePanelExpand.value = value
 
             // Text Field
             AnyIconDescriptionsKeys.TEXT_FIELD -> textField.value = value

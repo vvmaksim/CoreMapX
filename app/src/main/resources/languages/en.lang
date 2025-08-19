@@ -510,11 +510,15 @@ zoomReduce=Reduce
 # Any Words
 vertices=vertices
 edges=edges
+messages=Messages
 enterCommand=Enter command
 # Settings
 settingsCollapse=Collapse
 settingsExpand=Expand
 settingsHideDescription=Hide description
 settingsShowDescription=Show description
+# Floating Message Panel
+floatingMessagePanelCollapse=Collapse
+floatingMessagePanelExpand=Expand
 # Text Field
 textField=Text field
