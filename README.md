@@ -1,7 +1,7 @@
 # ***CoreMapX***
 
 <div align="center" style="margin: 20px 0;">
-    <img src="app/src/main/resources/drawable/logo_icon.svg" alt="CoreMapX Logo" width="250"/>
+    <img src="docs/icons/logo_icon.svg" alt="CoreMapX Logo" width="250"/>
 </div>
 
 This is a Kotlin desktop application for analyzing and visualizing graphs on a plane.
@@ -45,6 +45,8 @@ Supported pathfinding strategies:
 + The ability to generate random graphs
 + Configuration management
 
+![Screenshot1](docs/screenshots/CoreMapX_screenshot1.png)
+
 ## ***Usage***
 
 ### ***Quick start***
@@ -82,6 +84,10 @@ Supported pathfinding strategies:
     To do this, press the following buttons in the UI:
 
     **`New Graph`** -> **`Actions`** -> **`Generate Random Graph`**
+
+### ***Important***
+**Before using the application, it is worth reading the background information that you can find in the main menu of the application. 
+It tells you more deeply about the intricacies of CoreMapX.**
 
 ### ***Graph Formats***
 
