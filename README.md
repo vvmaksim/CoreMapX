@@ -179,6 +179,11 @@ The user directory is created in the home directory. The path differs depending 
 
 Graphs are saved in the `.coremapx/data/graphs` directory by default.
 
+If you have problems with localization or with the configuration file when upgrading to a new version of CoreMapX,
+then try deleting the `.coremapx/config` directory.
+**ATTENTION!** After that, your settings will be lost, and the configuration files will be created again the next
+time the application is launched, but with default values.
+
 ## ***Commands***
 
 You can interact with the graph through commands. Each command looks like this:
