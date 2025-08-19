@@ -46,6 +46,7 @@ import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupPositionProvider
 import extensions.border
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -154,13 +155,17 @@ fun FloatingMessagePanel(
                             Column(
                                 modifier = Modifier.fillMaxWidth(),
                             ) {
+                                // It just takes the first word of the template with an error.
+                                val errorWord =
+                                    LocalizationManager.states.ui.errorBasicString.value
+                                        .split(" ")[0]
                                 outputMessages.forEach { message ->
-                                    val parts = message.split("Error:", limit = 2)
+                                    val parts = message.split(errorWord, limit = 2)
                                     val annotatedText =
                                         buildAnnotatedString {
                                             if (parts.size == 2) {
                                                 withStyle(style = SpanStyle(color = MaterialTheme.colors.error)) {
-                                                    append("Error:")
+                                                    append(errorWord)
                                                 }
                                                 withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
                                                     append(parts[1])
