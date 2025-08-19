@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,7 +19,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -110,16 +110,16 @@ fun FloatingMessagePanelContent(
     var isExpanded by remember { mutableStateOf(true) }
 
     val maxPanelWidth = config.states.commandFieldWidth.value.dp
-    val maxPanelHeight = 300.dp
+    val maxPanelHeight = config.states.messageOutputHeight.value.dp
     val minPanelWidth = 200.dp
-    val collapsedHeight = 30.dp
+    val titleBarHeight = 30.dp
     val panelShape = MaterialTheme.shapes.medium
 
     Box(
         modifier =
             Modifier
                 .width(if (isExpanded) maxPanelWidth else minPanelWidth)
-                .height(if (isExpanded) maxPanelHeight else collapsedHeight)
+                .height(if (isExpanded) maxPanelHeight else titleBarHeight)
                 .clip(panelShape)
                 .background(
                     color = backgroundColor,
@@ -138,7 +138,7 @@ fun FloatingMessagePanelContent(
                     modifier =
                         Modifier
                             .fillMaxWidth()
-                            .height(30.dp)
+                            .height(titleBarHeight)
                             .background(MaterialTheme.colors.primary)
                             .pointerInput(Unit) {
                                 detectDragGestures(
@@ -146,29 +146,15 @@ fun FloatingMessagePanelContent(
                                         onDrag(dragAmount)
                                     },
                                 )
+                            }.pointerInput(Unit) {
+                                detectTapGestures(
+                                    onTap = {
+                                        isExpanded = false
+                                    },
+                                )
                             },
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            text = "Messages",
-                            color = MaterialTheme.colors.onPrimary,
-                            modifier = Modifier.weight(1f).padding(start = 8.dp),
-                        )
-
-                        IconButton(
-                            onClick = { isExpanded = false },
-                            modifier = Modifier.size(24.dp),
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.KeyboardArrowDown,
-                                contentDescription = "Collapse",
-                                tint = MaterialTheme.colors.onPrimary,
-                            )
-                        }
-                    }
+                    FloatingMessagePanelTitle(isExpanded)
                 }
 
                 Box(
@@ -231,24 +217,45 @@ fun FloatingMessagePanelContent(
                         },
                 contentAlignment = Alignment.CenterStart,
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(start = 8.dp),
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.KeyboardArrowUp,
-                        contentDescription = "Expand",
-                        tint = MaterialTheme.colors.onPrimary,
-                        modifier = Modifier.size(16.dp),
-                    )
-                    Text(
-                        text = "Messages",
-                        color = MaterialTheme.colors.onPrimary,
-                        modifier = Modifier.padding(start = 4.dp),
-                    )
-                }
+                FloatingMessagePanelTitle(isExpanded)
             }
         }
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Composable
+private fun FloatingMessagePanelTitle(
+    isExpanded: Boolean,
+    titleText: String = "Messages",
+) {
+    Row(
+        modifier = Modifier.fillMaxSize(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            text = titleText,
+            color = MaterialTheme.colors.onPrimary,
+        )
+        Icon(
+            imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+            contentDescription = if (isExpanded) "Collapse" else "Expand",
+            tint = MaterialTheme.colors.onPrimary,
+            modifier = Modifier.size(24.dp),
+        )
+    }
+}
+
+@Suppress("ktlint:standard:function-naming")
+@Preview
+@Composable
+private fun PreviewFloatingMessagePanelTitle() {
+    AppTheme {
+        FloatingMessagePanelTitle(
+            isExpanded = true,
+            titleText = "Messages",
+        )
     }
 }
 
