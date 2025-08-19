@@ -330,7 +330,6 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 Spacer(Modifier.weight(1f))
 
                 var commandLinePosition by remember { mutableStateOf(Offset.Zero) }
-                var commandLineHeight by remember { mutableStateOf(0f) }
                 val density = LocalDensity.current
 
                 Column(
@@ -348,7 +347,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                                 with(density) {
                                     Offset(
                                         x = commandLinePosition.x,
-                                        y = commandLinePosition.y - 224.dp.toPx() - commandLineHeight,
+                                        y =
+                                            commandLinePosition.y -
+                                                config.states.messageOutputHeight.value.dp
+                                                    .toPx(),
                                     )
                                 },
                             backgroundColor =
@@ -371,7 +373,6 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                                             x = coordinates.positionInWindow().x,
                                             y = coordinates.positionInWindow().y,
                                         )
-                                    commandLineHeight = coordinates.size.height.toFloat()
                                 },
                         commandLineBackgroundColor =
                             if (isTransparentCommandLineBlock) {
