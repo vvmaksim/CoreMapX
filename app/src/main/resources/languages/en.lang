@@ -14,6 +14,8 @@ mainMenuButtonAnalytics=Analytics
 mainMenuAnalyticsIconDescription=Analytics Icon
 mainMenuButtonSettings=Settings
 mainMenuSettingsIconDescription=Settings Icon
+mainMenuButtonHelp=Help
+mainMenuHelpIconDescription=Help Icon
 
  ! Title Bar
 
@@ -103,7 +105,7 @@ colorsEdgeMainColor=Edge Main Color
 colorsShortestPathColor=Shortest path found color
 colorsOtherPathsColor=Other found paths color
 colorsCanvasBackgroundColor=Canvas Background Color
-colorsCommandLineBackgroundColor=Command Line Background Color
+colorsCommandLineBlockBackgroundColor=Command Line Block Background Color
 # Main Screen Block
 mainScreenStartHeight=Main screen start height
 mainScreenStartWidth=Main screen start width
@@ -116,7 +118,7 @@ commandFieldMessageOutputHeight=Message output height
 commandFieldMaxCountMessages=Max count messages
 commandFieldMaxCountUserCommands=Max count user commands
 commandFieldWidth=Command field width
-commandFieldIsTransparent=Command field is transparent
+commandFieldIsTransparent=Command line block is transparent
 # Work Area Block
 workAreaGraphLayoutHeight=Graph layout height
 workAreaGraphLayoutWidth=Graph layout width
@@ -141,6 +143,127 @@ findPathMaxPathsCount=Max count of paths
 findPathMaxPathsPlaceholder=Path count
 findPathFindStrategy=Find strategy
 findPathFindButton=Find
+
+! Help
+helpTitle=Help
+helpSubTitle=for using CoreMapX
+helpCommandBlockName=Commands
+helpGraphFormatsBlockName=Graph formats
+helpUserDirectoryBlockName=User directory
+# Command Block
+commandGeneralInformationTitle=General information
+commandGeneralInformationText1=Most commands have the format: `<Type> <Entity> <Parameters>`.{nextLine}\
+    {nextLine}\
+    To execute multiple commands, use the separator `;`.{nextLine}\
+    {nextLine}\
+    The help provides examples of commands that can be tested by creating a new graph.{nextLine}\
+    {nextLine}\
+    Parameters can be set explicitly using a colon character (with a name, for example, `id:1`) \
+    or implicitly (without a name, in strict order).
+commandAttention1Point1=ATTENTION 1.1{nextLine}\
+    Mixing explicit and implicit writing forms is prohibited. For example, the command `add vertex 1 label:label1` is invalid.
+commandExample1Point1=Example 1.1{nextLine}\
+    A weighted graph with vertices and edges defined explicitly and implicitly:
+commandAttention1Point2=ATTENTION 1.2{nextLine}\
+    In unweighted graphs, the `weight` parameter is not required and is ignored.
+commandAddTitle=The add command
+commandAddText1=Parameters are available for `add vertex` (in the order of the implicit entry):{nextLine}\
+    • `id` — a Long number (8 bytes){nextLine}\
+    • `label` — string without spaces and characters `:` colons{nextLine}\
+    {nextLine}\
+    Options are available for `add edge` (in the order of the implicit entry):{nextLine}\
+    • `from` — id of the vertex from which the edge originates{nextLine}\
+    • `to` — id of the vertex the edge goes to{nextLine}\
+    • `weight` — a Long number (8 bytes), specified for weighted graphs
+commandRmTitle=The rm/remove command
+commandAttention1Point3=ATTENTION 1.3{nextLine}\
+    The `rm` and `remove` commands are equivalent, and any form can be used.
+commandRmText1=The parameter is used for the `rm vertex`:{nextLine}\
+    • `id` — a Long number (8 bytes){nextLine}\
+    {nextLine}\
+    For `rm edge`, the parameters are used (in the order of the implicit entry):{nextLine}\
+    • `from` — id of the vertex from which the edge is being removed{nextLine}\
+    • `to` — id of the vertex to which the edge is being deleted{nextLine}\
+    {nextLine}\
+    You can also delete an edge by its unique `id`, which is automatically assigned to each edge.
+commandAttention1Point4=ATTENTION 1.4{nextLine}\
+    Let there be a graph with vertices 1 and 2, as well as edges (1, 2). \
+    Executing the `rm edge from:2 to:1` command will remove the edge (1, 2), \
+    since in an undirected graph (1, 2) and (2, 1) are the same edge. \
+    In a directed graph, edges (1, 2) will remain.
+commandSetTitle=The set command
+commandSetText1=The `set strategy` parameter is used:{nextLine}\
+    • `strategy` — a string with the name of the graph vertex placement strategy. \
+    Acceptable values: Random, Circular, Force-Directed.
+commandSetText2=Changing the strategy to Random (Random vertex location):
+commandSetText3=Changing the strategy to Circular (The vertices are arranged in a circle):
+commandSetText4=Changing strategy to Force-Directed \
+    (The vertices are dynamically moved a certain number of iterations according to the algorithm):
+commandClearTitle=The clear command
+commandClearText1=No parameters are set for `clear`. It is needed to clear messages in the console.
+commandGraphClearTitle=The graph_clear command
+commandGraphClearText1=No parameters are set for `graph_clear`. She's needed to completely clean up the count \
+    (All vertices and edges will be deleted.). Be careful with her.
+commandHelpTitle=The help command
+commandHelpText1=No parameters are set for `help`. You need it to get a quick reference on the most popular commands.
+# Graph Formats Block
+graphFormatsGeneralInformationTitle=General information
+graphFormatsGeneralInformationText1=This section describes the features of the supported graph storage formats: \
+    GRAPH (.graph), JSON (.json) and SQLite DB (.db).{nextLine}\
+    {nextLine}\
+    The main format is GRAPH. When opening a file in any format, it is converted to \
+    GRAPH, which simplifies graph conversion between formats.
+graphFormatsGraphFormatTitle=GRAPH format (.graph)
+graphFormatsGraphFormatText1=GRAPH format is a text file with two blocks: `Info:` and `Graph`:{nextLine}\
+    {nextLine}\
+    The `Info` block contains the required parameters `isDirected` and `isWeighted`. \
+    It is recommended to specify all the parameters: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    The `Graph:` block includes add commands (only with the `add` type). \
+    It is recommended to add all the vertices first, then the edges, \
+    as the commands are processed sequentially from top to bottom.
+graphFormatsExample2Point1=Example 2.1{nextLine}\
+    Weighted directed graph in GRAPH format:
+graphFormatsJsonFormatTitle=JSON format (.json)
+graphFormatsJsonFormatText1=The JSON format is a text file with two blocks: `info` and `graph`.{nextLine}\
+    {nextLine}\
+    The `info` block contains the required `isDirected` and `isWeighted` parameters. \
+    It is recommended to specify all the parameters: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    The graph block includes two lists: `vertices` and `edges`.
+graphFormatsExample2Point2=Example 2.2{nextLine}\
+    Weighted directed graph in JSON format:
+graphFormatsSqliteDbFormatTitle=SQL DB format (.db)
+graphFormatsSqliteDbFormatText1=SQLite DB format is a database with three tables: `graphs`, `vertices` and `edges`. \
+    This approach allows you to store multiple graphs in a single file (repository). \
+    The .db files are opened by a separate button in the main menu.{nextLine}\
+    {nextLine}\
+    The table structures in SQL are shown below.
+# User Directory Block
+userDirectoryGeneralInformationTitle=General information
+userDirectoryGeneralInformationText1=The user directory is used to store configuration files, localization, \
+    temporary files, fonts, and application logs. By default, graphs are saved and opened from \
+    the folder `.coremapx/data/graphs`.{nextLine}\
+    {nextLine}\
+    The directory is created in the home folder of your system. The path depends on the operating system:{nextLine}\
+    • UNIX-подобные системы: `/home/UserName/.coremapx`{nextLine}\
+    • Windows: `C:\Users\UserName\.coremapx`
+userDirectoryAttention3Point1=ATTENTION 3.1 {nextLine}\
+    Do not change the configuration file while the application is running, as this may lead to errors. \
+    Use the application settings to change the configuration.
+userDirectoryAttention3Point2=ATTENTION 3.2 {nextLine}\
+    When changing the parameters in the text field, press the `Enter` key to save. \
+    After that, a notification about the result of the operation will appear.
+userDirectoryAttention3Point3=ATTENTION 3.3 {nextLine}\
+    If you have problems with localization or with the configuration file when upgrading to a new version of CoreMapX, \
+    then try deleting the `.coremapx/config` directory.{nextLine}\
+    ATTENTION! After that, your settings will be lost, and the configuration files will be created again the next \
+    time the application is launched, but with default values.
+userDirectoryInterfaceLanguageConfigurationTitle=Configuring the interface language
+userDirectoryInterfaceLanguageConfigurationText1=The application supports interface translation into any UTF-8 encoded language. \
+    To do this, the `.coremapx/config/` directory contains the `custom_language.lang` file, \
+    in which the text is set using the keys used in the application. \
+    To apply the translation, select the `Custom` language in the settings.
 
  ! Top Menu
 topMenuActions=Actions
@@ -247,9 +370,9 @@ descriptionEdgeMainColor=The primary color for displaying edges between vertices
 descriptionShortestPathColor=Color to display edges of the shortest path found.
 descriptionOtherPathsColor=Color to display edges that are not always on the shortest path.
 descriptionCanvasBackgroundColor=The background color for graph visualization.
-descriptionCommandLineBackgroundColor=The background color for the command line.{nextLine}\
+descriptionCommandLineBlockBackgroundColor=The background color of the command line and its output.{nextLine}\
     {nextLine}\
-    This color is applied if the `isTransparentCommandLine` parameter is disabled.
+    This color is applied if the `isTransparentCommandLineBlock` parameter is disabled.
 ## Main Screen Block
 descriptionMainScreenStartHeight=The starting height of the application window.{nextLine}\
     {nextLine}\
@@ -296,10 +419,11 @@ descriptionCommandFieldWidth=The width of the command line.{nextLine}\
     Min=400{nextLine}\
     Recommended=700{nextLine}\
     Max=900
-descriptionIsTransparentCommandLine=This parameter is responsible for the transparency of the command line background.{nextLine}\
+descriptionIsTransparentCommandLineBlock=This parameter is responsible for the transparency of the background of the \
+    command line and its output.{nextLine}\
     {nextLine}\
-    If it is enabled, the background of the text field will be transparent.{nextLine}\
-    If it is turned off, the background of the text field will take on the color specified in the corresponding parameter in the color settings.
+    If it is enabled, the backgrounds will be transparent.{nextLine}\
+    If it is turned off, the backgrounds will take on the color specified in the corresponding parameter in the color settings.
 ## Work Area Block
 descriptionGraphLayoutHeight=The graph is drawn on a certain plane, you can change the height of this plane.{nextLine}\
     {nextLine}\
@@ -391,11 +515,15 @@ zoomReduce=Reduce
 # Any Words
 vertices=vertices
 edges=edges
+messages=Messages
 enterCommand=Enter command
 # Settings
 settingsCollapse=Collapse
 settingsExpand=Expand
 settingsHideDescription=Hide description
 settingsShowDescription=Show description
+# Floating Message Panel
+floatingMessagePanelCollapse=Collapse
+floatingMessagePanelExpand=Expand
 # Text Field
 textField=Text field

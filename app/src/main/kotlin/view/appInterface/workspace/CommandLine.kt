@@ -3,22 +3,16 @@ package view.appInterface.workspace
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerBasedShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key
@@ -27,15 +21,10 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.preview.PreviewSurface
@@ -45,7 +34,6 @@ import view.appInterface.textField.CustomTextField
 @Composable
 fun CommandLine(
     modifier: Modifier = Modifier,
-    outputMessages: MutableList<String> = mutableListOf(),
     commandLineBackgroundColor: Color = Color.Transparent,
     borderShape: CornerBasedShape = MaterialTheme.shapes.medium,
     placeholderText: String = LocalizationManager.states.anyTextStates.enterCommand.value,
@@ -57,17 +45,6 @@ fun CommandLine(
     commandHistoryIndex: Int,
     onCommandHistoryIndexChange: (Int) -> Unit,
 ) {
-    val scrollState = rememberScrollState()
-    val commandFieldScrollDelay =
-        config.states.commandFieldScrollDelay.value
-            .toLong()
-    val messageOutputHeight = config.states.messageOutputHeight.value.dp
-
-    LaunchedEffect(outputMessages.size) {
-        delay(commandFieldScrollDelay)
-        scrollState.animateScrollTo(scrollState.maxValue)
-    }
-
     val onPreviewKeyEvent: (KeyEvent) -> Boolean = { event ->
         if (event.type == KeyEventType.KeyDown) {
             when (event.key) {
@@ -111,50 +88,12 @@ fun CommandLine(
         }
     }
 
-    Column(
+    Box(
         modifier =
             modifier
                 .fillMaxWidth()
                 .padding(8.dp),
     ) {
-        Box(
-            modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .heightIn(max = messageOutputHeight)
-                    .padding(8.dp)
-                    .verticalScroll(scrollState),
-        ) {
-            Column(
-                modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.BottomStart),
-            ) {
-                outputMessages.forEach { message ->
-                    val parts = message.split("Error:", limit = 2)
-                    val annotatedText =
-                        buildAnnotatedString {
-                            if (parts.size == 2) {
-                                withStyle(style = SpanStyle(color = MaterialTheme.colors.error)) {
-                                    append("Error:")
-                                }
-                                withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
-                                    append(parts[1])
-                                }
-                            } else {
-                                withStyle(style = SpanStyle(color = MaterialTheme.colors.onSurface)) {
-                                    append(message)
-                                }
-                            }
-                        }
-                    Text(
-                        text = annotatedText,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
-                }
-            }
-        }
         CustomTextField(
             value = commandText,
             onValueChange = {
@@ -189,12 +128,6 @@ private fun PreviewCommandLine() {
         PreviewSurface(
             content = {
                 CommandLine(
-                    outputMessages =
-                        mutableListOf(
-                            "123",
-                            "52",
-                            "Some text",
-                        ),
                     placeholderText = "Some placeholder text",
                     onCommand = {},
                     commandText = commandText,

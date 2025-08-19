@@ -16,6 +16,8 @@ object UIKeys {
     const val MAIN_MENU_ANALYTICS_ICON_DESCRIPTION = "mainMenuAnalyticsIconDescription"
     const val MAIN_MENU_BUTTON_SETTINGS = "mainMenuButtonSettings"
     const val MAIN_MENU_SETTINGS_ICON_DESCRIPTION = "mainMenuSettingsIconDescription"
+    const val MAIN_MENU_BUTTON_HELP = "mainMenuButtonHelp"
+    const val MAIN_MENU_HELP_ICON_DESCRIPTION = "mainMenuHelpIconDescription"
 
     // Title Bar
     const val TITLE_BAR_MENU_ICON_DESCRIPTION = "titleBarMenuIconDescription"

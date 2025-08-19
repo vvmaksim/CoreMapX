@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.blocks
+package view.appInterface.dialogElements.blocks.settingsBlocks
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
-import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.ERROR
 import org.coremapx.app.userDirectory.config.ConfigKeys.HOVERED_BORDER_COLOR
@@ -36,8 +36,8 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.SUCCESS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SURFACE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
+import view.appInterface.dialogElements.lines.ColorPickLine
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.lines.ColorPickLine
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -63,7 +63,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
     val shortestPathColor by remember { config.states.shortestPathColor }
     val otherPathsColor by remember { config.states.otherPathsColor }
     val canvasBackgroundColor by remember { config.states.canvasBackgroundColor }
-    val commandLineBackgroundColor by remember { config.states.commandLineBackgroundColor }
+    val commandLineBackgroundColor by remember { config.states.commandLineBlockBackgroundColor }
 
     Column {
         ColorPickLine(
@@ -330,14 +330,14 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = commandLineBackgroundColor,
             onColorSelected = {
-                config.setValue(COMMAND_LINE_BACKGROUND_COLOR, it)
+                config.setValue(COMMAND_LINE_BLOCK_BACKGROUND_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
-            title = LocalizationManager.states.dialogs.colorsCommandLineBackgroundColor.value,
+            title = LocalizationManager.states.dialogs.colorsCommandLineBlockBackgroundColor.value,
             description =
                 LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionCommandLineBackgroundColor.value,
+                    startString = LocalizationManager.states.descriptions.descriptionCommandLineBlockBackgroundColor.value,
                 ),
             isExpanded = isExpandedSettings,
         )

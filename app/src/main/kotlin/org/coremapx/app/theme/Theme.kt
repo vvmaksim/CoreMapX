@@ -20,8 +20,8 @@ object Theme {
     val canvasBackgroundColor: Color
         get() = config.states.canvasBackgroundColor.value
 
-    val commandLineBackgroundColor: Color
-        get() = config.states.commandLineBackgroundColor.value
+    val commandLineBlockBackgroundColor: Color
+        get() = config.states.commandLineBlockBackgroundColor.value
 
     val colors: Colors
         get() {

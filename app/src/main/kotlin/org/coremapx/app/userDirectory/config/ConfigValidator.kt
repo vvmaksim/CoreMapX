@@ -3,6 +3,7 @@ package org.coremapx.app.userDirectory.config
 import extensions.toColorOrNull
 import model.result.ConfigErrors
 import model.result.Result
+import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.objects.LanguageCodes
 import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsString
 import org.coremapx.app.theme.ThemesManager.getAllAppThemes
@@ -16,6 +17,11 @@ class ConfigValidator {
         ): Result<Boolean> =
             when (key) {
                 // General
+                ConfigKeys.VERSION ->
+                    versionValidator(
+                        key = key,
+                        currentValue = value,
+                    )
                 ConfigKeys.LANGUAGE ->
                     enumStringValidator(
                         key = key,
@@ -47,7 +53,7 @@ class ConfigValidator {
                 ConfigKeys.ON_BACKGROUND, ConfigKeys.ON_SURFACE, ConfigKeys.ON_ERROR, ConfigKeys.BORDER_COLOR, ConfigKeys.SUCCESS_COLOR,
                 ConfigKeys.WARNING_COLOR, ConfigKeys.VERTEX_MAIN_COLOR, ConfigKeys.HOVERED_BORDER_COLOR, ConfigKeys.EDGE_MAIN_COLOR,
                 ConfigKeys.SHORTEST_PATH_COLOR, ConfigKeys.OTHER_PATHS_COLOR, ConfigKeys.CANVAS_BACKGROUND_COLOR,
-                ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR,
+                ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR,
                 -> colorValidator(key, value)
 
                 // Main Screen
@@ -64,7 +70,7 @@ class ConfigValidator {
                 ConfigKeys.MAX_COUNT_MESSAGES -> intValidator(key, value, minValue = 1, maxValue = 10000)
                 ConfigKeys.MAX_COUNT_USER_COMMANDS -> intValidator(key, value, minValue = 1, maxValue = 1000)
                 ConfigKeys.COMMAND_FIELD_WIDTH -> intValidator(key, value, minValue = 400, maxValue = 900)
-                ConfigKeys.IS_TRANSPARENT_COMMAND_LINE -> booleanValidator(key, value)
+                ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK -> booleanValidator(key, value)
 
                 // Work Area
                 ConfigKeys.GRAPH_LAYOUT_HEIGHT -> intValidator(key, value, minValue = 2000)
@@ -150,5 +156,16 @@ class ConfigValidator {
             }
             return Result.Success(true)
         }
+
+        private fun versionValidator(
+            key: String,
+            currentValue: String,
+            correctValue: String = PrivateConfig.General.APP_VERSION,
+        ): Result<Boolean> =
+            if (correctValue != currentValue) {
+                Result.Error(ConfigErrors.IncorrectVersion(key, currentValue, correctValue))
+            } else {
+                Result.Success(true)
+            }
     }
 }

@@ -33,7 +33,7 @@ class DescriptionsStates : LocalizationState {
     val descriptionShortestPathColor = mutableStateOf("")
     val descriptionOtherPathsColor = mutableStateOf("")
     val descriptionCanvasBackgroundColor = mutableStateOf("")
-    val descriptionCommandLineBackgroundColor = mutableStateOf("")
+    val descriptionCommandLineBlockBackgroundColor = mutableStateOf("")
 
     // // Main Screen Block
     val descriptionMainScreenStartHeight = mutableStateOf("")
@@ -49,7 +49,7 @@ class DescriptionsStates : LocalizationState {
     val descriptionMaxCountMessages = mutableStateOf("")
     val descriptionMaxCountUserCommands = mutableStateOf("")
     val descriptionCommandFieldWidth = mutableStateOf("")
-    val descriptionIsTransparentCommandLine = mutableStateOf("")
+    val descriptionIsTransparentCommandLineBlock = mutableStateOf("")
 
     // // Work Area Block
     val descriptionGraphLayoutHeight = mutableStateOf("")
@@ -105,7 +105,7 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.SHORTEST_PATH_COLOR -> descriptionShortestPathColor.value = value
             DescriptionsKeys.OTHER_PATHS_COLOR -> descriptionOtherPathsColor.value = value
             DescriptionsKeys.CANVAS_BACKGROUND_COLOR -> descriptionCanvasBackgroundColor.value = value
-            DescriptionsKeys.COMMAND_LINE_BACKGROUND_COLOR -> descriptionCommandLineBackgroundColor.value = value
+            DescriptionsKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR -> descriptionCommandLineBlockBackgroundColor.value = value
             // // Main Screen Block
             DescriptionsKeys.MAIN_SCREEN_START_HEIGHT -> descriptionMainScreenStartHeight.value = value
             DescriptionsKeys.MAIN_SCREEN_START_WIDTH -> descriptionMainScreenStartWidth.value = value
@@ -118,7 +118,7 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.MAX_COUNT_MESSAGES -> descriptionMaxCountMessages.value = value
             DescriptionsKeys.MAX_COUNT_USER_COMMANDS -> descriptionMaxCountUserCommands.value = value
             DescriptionsKeys.COMMAND_FIELD_WIDTH -> descriptionCommandFieldWidth.value = value
-            DescriptionsKeys.IS_TRANSPARENT_COMMAND_LINE -> descriptionIsTransparentCommandLine.value = value
+            DescriptionsKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK -> descriptionIsTransparentCommandLineBlock.value = value
             // // Work Area Block
             DescriptionsKeys.GRAPH_LAYOUT_HEIGHT -> descriptionGraphLayoutHeight.value = value
             DescriptionsKeys.GRAPH_LAYOUT_WIDTH -> descriptionGraphLayoutWidth.value = value

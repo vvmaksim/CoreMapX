@@ -25,14 +25,14 @@ import androidx.compose.ui.window.Dialog
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
-import view.appInterface.settingsElements.blocks.ColorsBlock
-import view.appInterface.settingsElements.blocks.CommandFieldBlock
-import view.appInterface.settingsElements.blocks.GeneralBlock
-import view.appInterface.settingsElements.blocks.MainScreenBlock
-import view.appInterface.settingsElements.blocks.PerformanceBlock
-import view.appInterface.settingsElements.blocks.SettingsBlock
-import view.appInterface.settingsElements.blocks.TitleBarBlock
-import view.appInterface.settingsElements.blocks.WorkAreaBlock
+import view.appInterface.dialogElements.blocks.BaseBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.ColorsBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.CommandFieldBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.GeneralBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.MainScreenBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.PerformanceBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.TitleBarBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.WorkAreaBlock
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -96,49 +96,49 @@ fun SettingsContent(
                         .heightIn(max = dialogHeight)
                         .verticalScroll(rememberScrollState()),
             ) {
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsGeneralBlockName.value,
                     content = { GeneralBlock(isExpandedSettings) },
                     isExpanded = isThemeExpanded,
                     onClick = { isThemeExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsColorsBlockName.value,
                     content = { ColorsBlock(isExpandedSettings) },
                     isExpanded = isColorsExpanded,
                     onClick = { isColorsExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsMainScreenBlockName.value,
                     content = { MainScreenBlock(isExpandedSettings) },
                     isExpanded = isMainScreenExpanded,
                     onClick = { isMainScreenExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsTitleBarBlockName.value,
                     content = { TitleBarBlock(isExpandedSettings) },
                     isExpanded = isTitleBarExpanded,
                     onClick = { isTitleBarExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsCommandFieldBlockName.value,
                     content = { CommandFieldBlock(isExpandedSettings) },
                     isExpanded = isCommandFieldExpanded,
                     onClick = { isCommandFieldExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsWorkAreaBlockName.value,
                     content = { WorkAreaBlock(isExpandedSettings) },
                     isExpanded = isWorkAreaExpanded,
                     onClick = { isWorkAreaExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                SettingsBlock(
+                BaseBlock(
                     title = LocalizationManager.states.dialogs.settingsPerformanceBlockName.value,
                     content = { PerformanceBlock(isExpandedSettings) },
                     isExpanded = isPerformanceExpanded,

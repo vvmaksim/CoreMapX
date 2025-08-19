@@ -14,6 +14,8 @@ mainMenuButtonAnalytics=Аналитика
 mainMenuAnalyticsIconDescription=Иконка аналитики
 mainMenuButtonSettings=Настройки
 mainMenuSettingsIconDescription=Иконка настроек
+mainMenuButtonHelp=Справка
+mainMenuHelpIconDescription=Иконка справки
 
  ! Title Bar
 
@@ -32,7 +34,7 @@ titleBarFileSaveButton=Сохранить
 titleBarFileSaveAsIconDescription=Иконка сохранения как
 titleBarFileSaveAsButton=Сохранить как..
 titleBarSettingsButton=Настройки
-titleBarHelpButton=Помощь
+titleBarHelpButton=Справка
 titleBarMinimizeIconDescription=Свернуть
 titleBarRecoverIconDescription=Восстановить
 titleBarMaximizeIconDescription=Развернуть
@@ -103,7 +105,7 @@ colorsEdgeMainColor=Основной цвет ребра
 colorsShortestPathColor=Цвет кратчайшего найденного пути
 colorsOtherPathsColor=Цвет остальных найденных путей
 colorsCanvasBackgroundColor=Цвет фона холста
-colorsCommandLineBackgroundColor=Цвет фона командной строки
+colorsCommandLineBlockBackgroundColor=Цвет фона командной строки и её вывода
 # Main Screen Block
 mainScreenStartHeight=Начальная высота основного экрана
 mainScreenStartWidth=Начальная ширина основного экрана
@@ -116,7 +118,7 @@ commandFieldMessageOutputHeight=Высота области для вывода 
 commandFieldMaxCountMessages=Максимальное количество сообщений
 commandFieldMaxCountUserCommands=Максимальное количество пользовательских команд
 commandFieldWidth=Ширина командной строки
-commandFieldIsTransparent=Командная строка является прозрачной
+commandFieldIsTransparent=Командная строка и её вывод прозрачны
 # Work Area Block
 workAreaGraphLayoutHeight=Высота раскладки графа
 workAreaGraphLayoutWidth=Ширина раскладки графа
@@ -141,6 +143,127 @@ findPathMaxPathsCount=Максимальное количество путей
 findPathMaxPathsPlaceholder=Количество путей
 findPathFindStrategy=Стратегии поиска
 findPathFindButton=Искать
+
+! Help
+helpTitle=Справка
+helpSubTitle=по использованию CoreMapX
+helpCommandBlockName=Команды
+helpGraphFormatsBlockName=Форматы графов
+helpUserDirectoryBlockName=Пользовательская директория
+# Command Block
+commandGeneralInformationTitle=Общая информация
+commandGeneralInformationText1=Большинство команд имеют формат: `<Тип> <Объект> <Параметры>`.{nextLine}\
+    {nextLine}\
+    Для выполнения нескольких команд используйте разделитель `;`.{nextLine}\
+    {nextLine}\
+    В справке приведены примеры команд, которые можно опробовать, создав новый граф.{nextLine}\
+    {nextLine}\
+    Параметры можно задавать явно через символ двоеточия (с указанием имени, например, `id:1`) \
+    или неявно (без имени, в строгом порядке).
+commandAttention1Point1=ПРИМЕЧАНИЕ 1.1{nextLine}\
+    Смешивание явной и неявной форм записи запрещено. Например, команда `add vertex 1 label:label1` недопустима.
+commandExample1Point1=Пример 1.1{nextLine}\
+    Взвешенный граф с вершинами и рёбрами, заданными явно и неявно:
+commandAttention1Point2=ПРИМЕЧАНИЕ 1.2{nextLine}\
+    В невзвешенных графах параметр `weight` не требуется и игнорируется.
+commandAddTitle=Команда add
+commandAddText1=Для `add vertex` доступны параметры (в порядке неявной записи):{nextLine}\
+    • `id` — число типа Long (8 байт){nextLine}\
+    • `label` — строка без пробелов и символов `:` двоеточия{nextLine}\
+    {nextLine}\
+    Для `add edge` доступны параметры (в порядке неявной записи):{nextLine}\
+    • `from` — id вершины, от которой идёт ребро{nextLine}\
+    • `to` — id вершины, в которую идёт ребро{nextLine}\
+    • `weight` — число типа Long (8 байт), указывается для взвешенных графов
+commandRmTitle=Команда rm/remove
+commandAttention1Point3=ПРИМЕЧАНИЕ 1.3{nextLine}\
+    Команды `rm` и `remove` эквивалентны, можно использовать любую форму.
+commandRmText1=Для `rm vertex` используется параметр:{nextLine}\
+    • `id` — число типа Long (8 байт){nextLine}\
+    {nextLine}\
+    Для `rm edge` используются параметры (в порядке неявной записи):{nextLine}\
+    • `from` — id вершины, от которой удаляется ребро{nextLine}\
+    • `to` — id вершины, до которой удаляется ребро{nextLine}\
+    {nextLine}\
+    Также можно удалить ребро по его уникальному `id`, автоматически присваиваемому каждому ребру.
+commandAttention1Point4=ПРИМЕЧАНИЕ 1.4{nextLine}\
+    Пусть существует граф с вершинами 1 и 2, а так же ребром (1, 2). \
+    Выполнение команды `rm edge from:2 to:1` удалит ребро (1, 2), \
+    так как в ненаправленном графе (1, 2) и (2, 1) — одно и то же ребро. \
+    В направленном графе ребро (1, 2) останется.
+commandSetTitle=Команда set
+commandSetText1=Для `set strategy` используется параметр:{nextLine}\
+    • `strategy` — строка с названием стратегии расположения вершин графа. \
+    Допустимые значения: Random, Circular, Force-Directed.
+commandSetText2=Смена стратегии на Random (Случайное расположение вершин):
+commandSetText3=Смена стратегии на Circular (Вершины располагаются по окружности):
+commandSetText4=Смена стратегии на Force-Directed \
+    (Вершины динамически перемещаются определённое количество итераций по алгоритму):
+commandClearTitle=Команда clear
+commandClearText1=Для `clear` параметры не задаются. Она нужна для отчистки сообщений в консоли.
+commandGraphClearTitle=Команда graph_clear
+commandGraphClearText1=Для `graph_clear` параметры не задаются. Она нужна для полной отчистки графа \
+    (Будут удалены все вершины и рёбра). Будьте с ней осторожны.
+commandHelpTitle=Команда help
+commandHelpText1=Для `help` параметры не задаются. Она нужна для получения краткой справки по самым популярным командам.
+# Graph Formats Block
+graphFormatsGeneralInformationTitle=Общая информация
+graphFormatsGeneralInformationText1=В этом разделе описаны особенности поддерживаемых форматов хранения графа: \
+    GRAPH (.graph), JSON (.json) и SQLite DB (.db).{nextLine}\
+    {nextLine}\
+    Основной формат — GRAPH. При открытии файла в любом формате он конвертируется в \
+    GRAPH, что упрощает преобразование графа между форматами.
+graphFormatsGraphFormatTitle=Формат GRAPH (.graph)
+graphFormatsGraphFormatText1=Формат GRAPH — текстовый файл с двумя блоками: `Info:` и `Graph:`.{nextLine}\
+    {nextLine}\
+    Блок `Info:` содержит обязательные параметры `isDirected` и `isWeighted`. \
+    Рекомендуется указывать все параметры: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    Блок `Graph:` включает команды добавления (только с типом `add`). \
+    Рекомендуется сначала добавлять все вершины, затем рёбра, \
+    так как команды обрабатываются последовательно сверху вниз.
+graphFormatsExample2Point1=Пример 2.1{nextLine}\
+    Взвешенный направленный граф в формате GRAPH:
+graphFormatsJsonFormatTitle=Формат JSON (.json)
+graphFormatsJsonFormatText1=Формат JSON — текстовый файл с двумя блоками: `info` и `graph`.{nextLine}\
+    {nextLine}\
+    Блок `info` содержит обязательные параметры `isDirected` и `isWeighted`. \
+    Рекомендуется указывать все параметры: `name`, `author`, `isDirected`, `isWeighted`.{nextLine}\
+    {nextLine}\
+    Блок `graph` включает два списка: `vertices` (вершины) и `edges` (рёбра).
+graphFormatsExample2Point2=Пример 2.2{nextLine}\
+    Взвешенный направленный граф в формате JSON:
+graphFormatsSqliteDbFormatTitle=Формат SQL DB (.db)
+graphFormatsSqliteDbFormatText1=Формат SQLite DB — база данных с тремя таблицами: `graphs`, `vertices` и `edges`. \
+    Такой подход позволяет хранить несколько графов в одном файле (репозитории). \
+    Файлы .db открываются отдельной кнопкой в главном меню.{nextLine}\
+    {nextLine}\
+    Ниже приведены структуры таблиц на языке SQL.
+# User Directory Block
+userDirectoryGeneralInformationTitle=Общая информация
+userDirectoryGeneralInformationText1=Пользовательская директория используется для хранения конфигурационных файлов, локализации, \
+    временных файлов, шрифтов и логов приложения. По умолчанию графы сохраняются и открываются из \
+    папки `.coremapx/data/graphs`.{nextLine}\
+    {nextLine}\
+    Директория создаётся в домашней папке вашей системы. Путь зависит от операционной системы:{nextLine}\
+    • UNIX-подобные системы: `/home/UserName/.coremapx`{nextLine}\
+    • Windows: `C:\Users\UserName\.coremapx`
+userDirectoryAttention3Point1=ПРИМЕЧАНИЕ 3.1 {nextLine}\
+    Не изменяйте конфигурационный файл во время работы приложения, это может привести к ошибкам. \
+    Используйте настройки приложения для изменения конфигурации.
+userDirectoryAttention3Point2=ПРИМЕЧАНИЕ 3.2 {nextLine}\
+    При изменении параметров в текстовом поле нажмите клавишу `Enter` для сохранения. \
+    После этого появится уведомление о результате операции.
+userDirectoryAttention3Point3=ПРИМЕЧАНИЕ 3.3 {nextLine}\
+    Если у Вас возникли проблемы с локализацией или же с конфигурационным файлом при обновлении на новую версию CoreMapX, \
+    то попробуйте удалить директорию `.coremapx/config`.{nextLine}\
+    ВНИМАНИЕ! После этого ваши настройки будут утеряны, а конфигурационные файлы создадутся вновь при следующем запуске приложения, \
+    но уже со значениями по умолчанию.
+userDirectoryInterfaceLanguageConfigurationTitle=Настройка языка интерфейса
+userDirectoryInterfaceLanguageConfigurationText1=Приложение поддерживает перевод интерфейса на любой язык с кодировкой UTF-8. \
+    Для этого в директории `.coremapx/config/` находится файл `custom_language.lang`, \
+    в котором текст задаётся по ключам, используемым в приложении. \
+    Чтобы применить перевод, в настройках выберите язык `Custom`.
 
  ! Top Menu
 topMenuActions=Действия
@@ -247,9 +370,9 @@ descriptionEdgeMainColor=Основной цвет для отображения
 descriptionShortestPathColor=Цвет для отображения рёбер кратчайшего найденного пути.
 descriptionOtherPathsColor=Цвет для отображения рёбер, которые не всегда относятся к кратчайшему пути.
 descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
-descriptionCommandLineBackgroundColor=Цвет фона для командной строки. {nextLine}\
+descriptionCommandLineBlockBackgroundColor=Цвет фона для командной строки и её вывода. {nextLine}\
     {nextLine}\
-    Этот цвет применяется, если параметр `isTransparentCommandLine` отключен.
+    Этот цвет применяется, если параметр `isTransparentCommandLineBlock` отключен.
 ## Main Screen Block
 descriptionMainScreenStartHeight=Начальная высота окна приложения.{nextLine}\
     {nextLine}\
@@ -296,10 +419,10 @@ descriptionCommandFieldWidth=Ширина командной строки.{nextL
     Минимально=400{nextLine}\
     Рекомендовано=700{nextLine}\
     Максимально=900
-descriptionIsTransparentCommandLine=Этот параметр отвечает за прозрачность фона командной строки.{nextLine}\
+descriptionIsTransparentCommandLineBlock=Этот параметр отвечает за прозрачность фона командной строки и её вывода.{nextLine}\
     {nextLine}\
-    Если он включен, фон текстового поля будет прозрачным.{nextLine}\
-    Если он выключен, фон текстового поля примет цвет, указанный в соответствующем параметре в настройках цвета.
+    Если он включен, фоны будут прозрачными.{nextLine}\
+    Если он выключен, фоны примут цвет, указанный в соответствующем параметре в настройках цвета.
 ## Work Area Block
 descriptionGraphLayoutHeight=Граф рисуется на определенной плоскости, вы можете изменить высоту этой плоскости.{nextLine}\
     {nextLine}\
@@ -391,11 +514,15 @@ zoomReduce=Уменьшить
 # Any Words
 vertices=вершин
 edges=рёбер
+messages=Сообщения
 enterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть
 settingsExpand=Раскрыть
 settingsHideDescription=Спрятать описание
 settingsShowDescription=Показать описание
+# Floating Message Panel
+floatingMessagePanelCollapse=Свернуть
+floatingMessagePanelExpand=Развернуть
 # Text Field
 textField=Текстовое поле

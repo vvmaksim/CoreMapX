@@ -1,6 +1,9 @@
 package view.appInterface.button
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -28,7 +31,7 @@ fun SlideMenuButton(
     Button(
         onClick = {
             logDebug("Click on SlideMenuButton")
-            onClick
+            onClick()
         },
         modifier = Modifier.size(size),
         elevation =
@@ -64,8 +67,18 @@ fun SlideMenuButton(
 @Composable
 private fun PreviewSlideMenuButton() {
     AppTheme {
-        SlideMenuButton(
-            onClick = {},
-        )
+        Column(
+            modifier = Modifier.padding(16.dp),
+        ) {
+            SlideMenuButton(
+                onClick = {},
+                isReversed = false,
+            )
+            Spacer(Modifier.padding(8.dp))
+            SlideMenuButton(
+                onClick = {},
+                isReversed = true,
+            )
+        }
     }
 }

@@ -2,6 +2,7 @@ package org.coremapx.app.userDirectory.config
 
 object ConfigKeys {
     // General
+    const val VERSION = "version"
     const val LANGUAGE = "language"
     const val THEME = "theme"
     const val SYSTEM_DIALOG_THEME = "systemDialogTheme"
@@ -30,7 +31,7 @@ object ConfigKeys {
     const val SHORTEST_PATH_COLOR = "shortestPathColor"
     const val OTHER_PATHS_COLOR = "otherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "canvasBackgroundColor"
-    const val COMMAND_LINE_BACKGROUND_COLOR = "commandLineBackgroundColor"
+    const val COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "commandLineBlockBackgroundColor"
 
     // Main Screen
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
@@ -46,7 +47,7 @@ object ConfigKeys {
     const val MAX_COUNT_MESSAGES = "maxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "maxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
-    const val IS_TRANSPARENT_COMMAND_LINE = "isTransparentCommandLine"
+    const val IS_TRANSPARENT_COMMAND_LINE_BLOCK = "isTransparentCommandLineBlock"
 
     // Work Area
     const val GRAPH_LAYOUT_HEIGHT = "graphLayoutHeight"

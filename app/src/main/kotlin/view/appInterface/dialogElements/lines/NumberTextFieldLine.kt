@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.lines
+package view.appInterface.dialogElements.lines
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -39,9 +39,9 @@ import extensions.success
 import model.result.Result
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
+import view.appInterface.dialogElements.description.DescriptionIconButton
+import view.appInterface.dialogElements.description.DescriptionText
 import view.appInterface.preview.PreviewSurface
-import view.appInterface.settingsElements.description.SettingsDescriptionIconButton
-import view.appInterface.settingsElements.description.SettingsDescriptionText
 import view.appInterface.textField.CustomTextField
 import kotlin.reflect.KClass
 
@@ -207,7 +207,7 @@ fun NumberTextFieldLine(
                         shape = shape,
                         colors = customColors,
                     )
-                    SettingsDescriptionIconButton(
+                    DescriptionIconButton(
                         onClick = { expanded = !expanded },
                         isExpanded = expanded,
                     )
@@ -237,7 +237,7 @@ fun NumberTextFieldLine(
         }
         if (expanded) {
             Spacer(modifier = Modifier.height(8.dp))
-            SettingsDescriptionText(description = description)
+            DescriptionText(description = description)
         }
     }
 }

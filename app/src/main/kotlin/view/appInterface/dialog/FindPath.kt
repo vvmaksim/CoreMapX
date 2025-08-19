@@ -29,7 +29,7 @@ import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
-import view.appInterface.settingsElements.lines.DropdownSelectLine
+import view.appInterface.dialogElements.lines.DropdownSelectLine
 import view.appInterface.textField.CustomTextFieldLine
 import viewmodel.MainScreenViewModel
 

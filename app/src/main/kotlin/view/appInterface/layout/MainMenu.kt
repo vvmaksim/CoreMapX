@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.FolderOpen
@@ -48,6 +49,7 @@ import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.SlideMenuButton
 import view.appInterface.button.UserDirectoryButton
 import view.appInterface.dialog.Analytics
+import view.appInterface.dialog.Help
 import view.appInterface.dialog.NewGraph
 import view.appInterface.dialog.OpenGraphErrors
 import view.appInterface.dialog.OpenRepository
@@ -76,6 +78,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     var showNewGraphDialog by remember { mutableStateOf(false) }
     var showAnalyticsDialog by remember { mutableStateOf(false) }
     var showSettingsDialog by remember { mutableStateOf(false) }
+    var showHelpDialog by remember { mutableStateOf(false) }
     var warnings by remember { mutableStateOf<List<String>>(emptyList()) }
     var userNotificationTitle by remember { mutableStateOf("") }
     var userNotificationMessage by remember { mutableStateOf("") }
@@ -233,6 +236,13 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                     buttonText = LocalizationManager.states.ui.mainMenuButtonSettings.value,
                 )
 
+                MainMenuTextButton(
+                    onClick = { showHelpDialog = true },
+                    iconVector = Icons.AutoMirrored.Filled.Help,
+                    iconContentDescription = LocalizationManager.states.ui.mainMenuHelpIconDescription.value,
+                    buttonText = LocalizationManager.states.ui.mainMenuButtonHelp.value,
+                )
+
                 Spacer(Modifier.weight(1f))
                 Row(
                     modifier =
@@ -387,6 +397,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
                 viewModel.graphManager.updateLayoutStrategy(newStrategy)
             },
             selectedLayoutStrategy = viewModel.graphManager.getCurrentLayoutStrategyAsString(),
+        )
+    }
+
+    if (showHelpDialog) {
+        Help(
+            onDismiss = { showHelpDialog = false },
         )
     }
 }

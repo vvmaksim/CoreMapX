@@ -28,13 +28,18 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import extensions.border
 import extensions.canvasBackground
-import extensions.commandLineBackground
+import extensions.commandLineBlockBackground
 import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.result.CommandErrors
@@ -47,6 +52,7 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import view.appInterface.button.ZoomButtons
 import view.appInterface.workspace.CommandLine
+import view.appInterface.workspace.FloatingMessagePanel
 import view.appInterface.workspace.GraphElementCounters
 import view.appInterface.workspace.TopMenu
 import view.graph.GraphView
@@ -76,7 +82,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     val maxCountMessages = config.states.maxCountMessages.value
     val maxUserCommands = config.states.maxCountUserCommands.value
     val commandFieldWidth = config.states.commandFieldWidth.value.dp
-    val isTransparentCommandLine = config.states.isTransparentCommandLine.value
+    val isTransparentCommandLineBlock = config.states.isTransparentCommandLineBlock.value
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -322,26 +328,67 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     modifier = Modifier.align(Alignment.Bottom),
                 )
                 Spacer(Modifier.weight(1f))
-                CommandLine(
+
+                var commandLinePosition by remember { mutableStateOf(Offset.Zero) }
+                val density = LocalDensity.current
+
+                Column(
                     modifier =
                         Modifier
                             .width(commandFieldWidth)
                             .align(Alignment.Bottom),
-                    outputMessages = outputMessages.value,
-                    commandLineBackgroundColor =
-                        if (isTransparentCommandLine) {
-                            Color.Transparent
-                        } else {
-                            MaterialTheme.colors.commandLineBackground
-                        },
-                    placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
-                    onCommand = { command -> handleCommand(command) },
-                    commandText = commandText,
-                    onCommandTextChange = { commandText = it },
-                    userCommands = userCommands.value,
-                    commandHistoryIndex = commandHistoryIndex,
-                    onCommandHistoryIndexChange = { commandHistoryIndex = it },
-                )
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    if (commandLinePosition != Offset.Zero) {
+                        FloatingMessagePanel(
+                            outputMessages = outputMessages.value,
+                            modifier = Modifier,
+                            initialPosition =
+                                with(density) {
+                                    Offset(
+                                        x = commandLinePosition.x,
+                                        y =
+                                            commandLinePosition.y -
+                                                config.states.messageOutputHeight.value.dp
+                                                    .toPx(),
+                                    )
+                                },
+                            backgroundColor =
+                                if (isTransparentCommandLineBlock) {
+                                    Color.Transparent
+                                } else {
+                                    MaterialTheme.colors.commandLineBlockBackground
+                                },
+                            borderColor = MaterialTheme.colors.border,
+                        )
+                    }
+                    CommandLine(
+                        modifier =
+                            Modifier
+                                .width(commandFieldWidth)
+                                .align(Alignment.CenterHorizontally)
+                                .onGloballyPositioned { coordinates ->
+                                    commandLinePosition =
+                                        Offset(
+                                            x = coordinates.positionInWindow().x,
+                                            y = coordinates.positionInWindow().y,
+                                        )
+                                },
+                        commandLineBackgroundColor =
+                            if (isTransparentCommandLineBlock) {
+                                Color.Transparent
+                            } else {
+                                MaterialTheme.colors.commandLineBlockBackground
+                            },
+                        placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
+                        onCommand = { command -> handleCommand(command) },
+                        commandText = commandText,
+                        onCommandTextChange = { commandText = it },
+                        userCommands = userCommands.value,
+                        commandHistoryIndex = commandHistoryIndex,
+                        onCommandHistoryIndexChange = { commandHistoryIndex = it },
+                    )
+                }
                 Spacer(Modifier.weight(1f))
                 ZoomButtons(
                     modifier =

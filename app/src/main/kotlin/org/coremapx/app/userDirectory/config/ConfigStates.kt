@@ -6,6 +6,7 @@ class ConfigStates(
     private val configRepository: ConfigRepository,
 ) {
     // General
+    val version = mutableStateOf(configRepository.getStringValue(ConfigKeys.VERSION))
     val language = mutableStateOf(configRepository.getStringValue(ConfigKeys.LANGUAGE))
     val theme = mutableStateOf(configRepository.getStringValue(ConfigKeys.THEME))
     val systemDialogTheme = mutableStateOf(configRepository.getStringValue(ConfigKeys.SYSTEM_DIALOG_THEME))
@@ -33,7 +34,7 @@ class ConfigStates(
     val shortestPathColor = mutableStateOf(configRepository.getColor(ConfigKeys.SHORTEST_PATH_COLOR))
     val otherPathsColor = mutableStateOf(configRepository.getColor(ConfigKeys.OTHER_PATHS_COLOR))
     val canvasBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR))
-    val commandLineBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR))
+    val commandLineBlockBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR))
 
     // Main Screen
     val mainScreenStartHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAIN_SCREEN_START_HEIGHT))
@@ -49,8 +50,8 @@ class ConfigStates(
     val maxCountMessages = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAX_COUNT_MESSAGES))
     val maxCountUserCommands = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS))
     val commandFieldWidth = mutableStateOf(configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH))
-    val isTransparentCommandLine =
-        mutableStateOf(configRepository.getBooleanValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE))
+    val isTransparentCommandLineBlock =
+        mutableStateOf(configRepository.getBooleanValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK))
 
     // Work Area
     val graphLayoutHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.GRAPH_LAYOUT_HEIGHT))
@@ -73,6 +74,7 @@ class ConfigStates(
     ) {
         when (key) {
             // General
+            ConfigKeys.VERSION -> version.value = value
             ConfigKeys.LANGUAGE -> language.value = value
             ConfigKeys.THEME -> theme.value = value
             ConfigKeys.SYSTEM_DIALOG_THEME -> systemDialogTheme.value = value
@@ -102,10 +104,10 @@ class ConfigStates(
             ConfigKeys.CANVAS_BACKGROUND_COLOR ->
                 canvasBackgroundColor.value =
                     configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR)
-            ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR ->
-                commandLineBackgroundColor.value =
+            ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR ->
+                commandLineBlockBackgroundColor.value =
                     configRepository.getColor(
-                        ConfigKeys.COMMAND_LINE_BACKGROUND_COLOR,
+                        ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR,
                     )
 
             // Main Screen
@@ -128,10 +130,10 @@ class ConfigStates(
                 maxCountUserCommands.value =
                     configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS)
             ConfigKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH)
-            ConfigKeys.IS_TRANSPARENT_COMMAND_LINE ->
-                isTransparentCommandLine.value =
+            ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK ->
+                isTransparentCommandLineBlock.value =
                     configRepository.getBooleanValue(
-                        ConfigKeys.IS_TRANSPARENT_COMMAND_LINE,
+                        ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK,
                     )
 
             // Work Area

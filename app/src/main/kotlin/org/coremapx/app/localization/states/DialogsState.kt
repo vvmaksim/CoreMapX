@@ -67,7 +67,7 @@ class DialogsState : LocalizationState {
     val colorsShortestPathColor = mutableStateOf("")
     val colorsOtherPathsColor = mutableStateOf("")
     val colorsCanvasBackgroundColor = mutableStateOf("")
-    val colorsCommandLineBackgroundColor = mutableStateOf("")
+    val colorsCommandLineBlockBackgroundColor = mutableStateOf("")
 
     // // Main Screen Block
     val mainScreenStartHeight = mutableStateOf("")
@@ -151,6 +151,58 @@ class DialogsState : LocalizationState {
     val findPathFindStrategy = mutableStateOf("")
     val findPathFindButton = mutableStateOf("")
 
+    // Help
+    val helpTitle = mutableStateOf("")
+    val helpSubTitle = mutableStateOf("")
+    val helpCommandBlockName = mutableStateOf("")
+    val helpGraphFormatsBlockName = mutableStateOf("")
+    val helpUserDirectoryBlockName = mutableStateOf("")
+
+    // // Command Block
+    val commandGeneralInformationTitle = mutableStateOf("")
+    val commandGeneralInformationText1 = mutableStateOf("")
+    val commandAttention1Point1 = mutableStateOf("")
+    val commandExample1Point1 = mutableStateOf("")
+    val commandAttention1Point2 = mutableStateOf("")
+    val commandAddTitle = mutableStateOf("")
+    val commandAddText1 = mutableStateOf("")
+    val commandRmTitle = mutableStateOf("")
+    val commandAttention1Point3 = mutableStateOf("")
+    val commandRmText1 = mutableStateOf("")
+    val commandAttention1Point4 = mutableStateOf("")
+    val commandSetTitle = mutableStateOf("")
+    val commandSetText1 = mutableStateOf("")
+    val commandSetText2 = mutableStateOf("")
+    val commandSetText3 = mutableStateOf("")
+    val commandSetText4 = mutableStateOf("")
+    val commandClearTitle = mutableStateOf("")
+    val commandClearText1 = mutableStateOf("")
+    val commandGraphClearTitle = mutableStateOf("")
+    val commandGraphClearText1 = mutableStateOf("")
+    val commandHelpTitle = mutableStateOf("")
+    val commandHelpText1 = mutableStateOf("")
+
+    // // Graph Formats Block
+    val graphFormatsGeneralInformationTitle = mutableStateOf("")
+    val graphFormatsGeneralInformationText1 = mutableStateOf("")
+    val graphFormatsGraphFormatTitle = mutableStateOf("")
+    val graphFormatsGraphFormatText1 = mutableStateOf("")
+    val graphFormatsExample2Point1 = mutableStateOf("")
+    val graphFormatsJsonFormatTitle = mutableStateOf("")
+    val graphFormatsJsonFormatText1 = mutableStateOf("")
+    val graphFormatsExample2Point2 = mutableStateOf("")
+    val graphFormatsSqliteDbFormatTitle = mutableStateOf("")
+    val graphFormatsSqliteDbFormatText1 = mutableStateOf("")
+
+    // // User Directory Block
+    val userDirectoryGeneralInformationTitle = mutableStateOf("")
+    val userDirectoryGeneralInformationText1 = mutableStateOf("")
+    val userDirectoryAttention3Point1 = mutableStateOf("")
+    val userDirectoryAttention3Point2 = mutableStateOf("")
+    val userDirectoryAttention3Point3 = mutableStateOf("")
+    val userDirectoryInterfaceLanguageConfigurationTitle = mutableStateOf("")
+    val userDirectoryInterfaceLanguageConfigurationText1 = mutableStateOf("")
+
     override fun updateValue(
         key: String,
         value: String,
@@ -217,7 +269,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.COLORS_SHORTEST_PATH_COLOR -> colorsShortestPathColor.value = value
             DialogsKeys.COLORS_OTHER_PATHS_COLOR -> colorsOtherPathsColor.value = value
             DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
-            DialogsKeys.COLORS_COMMAND_LINE_BACKGROUND_COLOR -> colorsCommandLineBackgroundColor.value = value
+            DialogsKeys.COLORS_COMMAND_LINE_BLOCK_BACKGROUND_COLOR -> colorsCommandLineBlockBackgroundColor.value = value
             // // Main Screen Block
             DialogsKeys.MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = value
             DialogsKeys.MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = value
@@ -295,6 +347,59 @@ class DialogsState : LocalizationState {
             DialogsKeys.FIND_PATH_MAX_PATHS_PLACEHOLDER -> findPathMaxPathsPlaceholder.value = value
             DialogsKeys.FIND_PATH_FIND_STRATEGY -> findPathFindStrategy.value = value
             DialogsKeys.FIND_PATH_FIND_BUTTON -> findPathFindButton.value = value
+
+            // Help
+            DialogsKeys.HELP_TITLE -> helpTitle.value = value
+            DialogsKeys.HELP_SUB_TITLE -> helpSubTitle.value = value
+            DialogsKeys.HELP_COMMAND_BLOCK_NAME -> helpCommandBlockName.value = value
+            DialogsKeys.HELP_GRAPH_FORMATS_BLOCK_NAME -> helpGraphFormatsBlockName.value = value
+            DialogsKeys.HELP_USER_DIRECTORY_BLOCK_NAME -> helpUserDirectoryBlockName.value = value
+            // // Command Block
+            DialogsKeys.COMMAND_GENERAL_INFORMATION_TITLE -> commandGeneralInformationTitle.value = value
+            DialogsKeys.COMMAND_GENERAL_INFORMATION_TEXT1 -> commandGeneralInformationText1.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_1 -> commandAttention1Point1.value = value
+            DialogsKeys.COMMAND_EXAMPLE_1_POINT_1 -> commandExample1Point1.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_2 -> commandAttention1Point2.value = value
+            DialogsKeys.COMMAND_ADD_TITLE -> commandAddTitle.value = value
+            DialogsKeys.COMMAND_ADD_TEXT1 -> commandAddText1.value = value
+            DialogsKeys.COMMAND_RM_TITLE -> commandRmTitle.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_3 -> commandAttention1Point3.value = value
+            DialogsKeys.COMMAND_RM_TEXT1 -> commandRmText1.value = value
+            DialogsKeys.COMMAND_ATTENTION_1_POINT_4 -> commandAttention1Point4.value = value
+            DialogsKeys.COMMAND_SET_TITLE -> commandSetTitle.value = value
+            DialogsKeys.COMMAND_SET_TEXT1 -> commandSetText1.value = value
+            DialogsKeys.COMMAND_SET_TEXT2 -> commandSetText2.value = value
+            DialogsKeys.COMMAND_SET_TEXT3 -> commandSetText3.value = value
+            DialogsKeys.COMMAND_SET_TEXT4 -> commandSetText4.value = value
+            DialogsKeys.COMMAND_CLEAR_TITLE -> commandClearTitle.value = value
+            DialogsKeys.COMMAND_CLEAR_TEXT1 -> commandClearText1.value = value
+            DialogsKeys.COMMAND_GRAPH_CLEAR_TITLE -> commandGraphClearTitle.value = value
+            DialogsKeys.COMMAND_GRAPH_CLEAR_TEXT1 -> commandGraphClearText1.value = value
+            DialogsKeys.COMMAND_HELP_TITLE -> commandHelpTitle.value = value
+            DialogsKeys.COMMAND_HELP_TEXT1 -> commandHelpText1.value = value
+            // // Graph Formats Block
+            DialogsKeys.GRAPH_FORMATS_GENERAL_INFORMATION_TITLE -> graphFormatsGeneralInformationTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_GENERAL_INFORMATION_TEXT1 -> graphFormatsGeneralInformationText1.value = value
+            DialogsKeys.GRAPH_FORMATS_GRAPH_FORMAT_TITLE -> graphFormatsGraphFormatTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_GRAPH_FORMAT_TEXT1 -> graphFormatsGraphFormatText1.value = value
+            DialogsKeys.GRAPH_FORMATS_EXAMPLE_2_POINT_1 -> graphFormatsExample2Point1.value = value
+            DialogsKeys.GRAPH_FORMATS_JSON_FORMAT_TITLE -> graphFormatsJsonFormatTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_JSON_FORMAT_TEXT1 -> graphFormatsJsonFormatText1.value = value
+            DialogsKeys.GRAPH_FORMATS_EXAMPLE_2_POINT_2 -> graphFormatsExample2Point2.value = value
+            DialogsKeys.GRAPH_FORMATS_SQLITE_DB_FORMAT_TITLE -> graphFormatsSqliteDbFormatTitle.value = value
+            DialogsKeys.GRAPH_FORMATS_SQLITE_DB_FORMAT_TEXT1 -> graphFormatsSqliteDbFormatText1.value = value
+            // // User Directory Block
+            DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TITLE -> userDirectoryGeneralInformationTitle.value = value
+            DialogsKeys.USER_DIRECTORY_GENERAL_INFORMATION_TEXT1 -> userDirectoryGeneralInformationText1.value = value
+            DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_1 -> userDirectoryAttention3Point1.value = value
+            DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_2 -> userDirectoryAttention3Point2.value = value
+            DialogsKeys.USER_DIRECTORY_ATTENTION_3_POINT_3 -> userDirectoryAttention3Point3.value = value
+            DialogsKeys.USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TITLE ->
+                userDirectoryInterfaceLanguageConfigurationTitle.value =
+                    value
+            DialogsKeys.USER_DIRECTORY_INTERFACE_LANGUAGE_CONFIGURATION_TEXT1 ->
+                userDirectoryInterfaceLanguageConfigurationText1.value =
+                    value
         }
     }
 }

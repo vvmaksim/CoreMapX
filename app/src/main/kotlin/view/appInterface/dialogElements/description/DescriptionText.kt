@@ -1,4 +1,4 @@
-package view.appInterface.settingsElements.description
+package view.appInterface.dialogElements.description
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,7 @@ import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun SettingsDescriptionText(
+fun DescriptionText(
     description: String,
     textStyle: TextStyle = MaterialTheme.typography.body2,
     textColor: Color = MaterialTheme.colors.onSurface.copy(alpha = PrivateConfig.View.DESCRIPTION_ALPHA),
@@ -35,18 +35,18 @@ fun SettingsDescriptionText(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewSettingsDescriptionText() {
+private fun PreviewDescriptionText() {
     AppTheme {
         PreviewSurface(
             content = {
                 Column(
                     modifier = Modifier.padding(8.dp),
                 ) {
-                    SettingsDescriptionText(
+                    DescriptionText(
                         description = "Some description",
                     )
                     Spacer(Modifier.height(8.dp))
-                    SettingsDescriptionText(
+                    DescriptionText(
                         description =
                             """
                             Some long description

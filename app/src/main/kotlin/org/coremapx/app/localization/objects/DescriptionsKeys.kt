@@ -30,7 +30,7 @@ object DescriptionsKeys {
     const val SHORTEST_PATH_COLOR = "descriptionShortestPathColor"
     const val OTHER_PATHS_COLOR = "descriptionOtherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "descriptionCanvasBackgroundColor"
-    const val COMMAND_LINE_BACKGROUND_COLOR = "descriptionCommandLineBackgroundColor"
+    const val COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "descriptionCommandLineBlockBackgroundColor"
 
     // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "descriptionMainScreenStartHeight"
@@ -46,7 +46,7 @@ object DescriptionsKeys {
     const val MAX_COUNT_MESSAGES = "descriptionMaxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "descriptionMaxCountUserCommands"
     const val COMMAND_FIELD_WIDTH = "descriptionCommandFieldWidth"
-    const val IS_TRANSPARENT_COMMAND_LINE = "descriptionIsTransparentCommandLine"
+    const val IS_TRANSPARENT_COMMAND_LINE_BLOCK = "descriptionIsTransparentCommandLineBlock"
 
     // // Work Area Block
     const val GRAPH_LAYOUT_HEIGHT = "descriptionGraphLayoutHeight"
