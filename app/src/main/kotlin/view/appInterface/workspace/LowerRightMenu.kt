@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.coremapx.app.config
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.ZoomButtons
@@ -58,15 +59,15 @@ fun LowerRightMenu(
             MainMenuTextButton(
                 onClick = onAddVertex,
                 iconVector = Icons.Default.Add,
-                iconContentDescription = "Add Vertex Icon",
-                buttonText = "Add Vertex",
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddEdgeIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuAddVertexButton.value,
                 modifier = Modifier.padding(2.dp),
             )
             MainMenuTextButton(
                 onClick = onAddEdge,
                 iconVector = Icons.Default.Add,
-                iconContentDescription = "Add Edge Icon",
-                buttonText = "Add Edge",
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddEdgeIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuAddEdgeButton.value,
                 modifier = Modifier.padding(2.dp),
             )
             ZoomButtons(

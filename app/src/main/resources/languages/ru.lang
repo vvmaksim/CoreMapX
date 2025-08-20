@@ -292,6 +292,12 @@ forceDirectedMenuArea=Площадь: {number}
 forceDirectedMenuGravity=Гравитация: {number}
 forceDirectedMenuSpeed=Скорость: {number}
 
+ ! Lower Right Menu
+lowerRightMenuAddVertexButton=Добавить вершину
+lowerRightMenuAddVertexIconDescription=Иконка добавления вершины
+lowerRightMenuAddEdgeButton=Добавить ребро
+lowerRightMenuAddEdgeIconDescription=Иконка добавления ребра
+
  ! Analytics
 analyticsTitle=Аналитика
 analyticsLayoutStrategyHint=Стратегия расположения:

@@ -292,6 +292,12 @@ forceDirectedMenuArea=Area: {number}
 forceDirectedMenuGravity=Gravity: {number}
 forceDirectedMenuSpeed=Speed: {number}
 
+ ! Lower Right Menu
+lowerRightMenuAddVertexButton=Add vertex
+lowerRightMenuAddVertexIconDescription=Add vertex icon
+lowerRightMenuAddEdgeButton=Add edge
+lowerRightMenuAddEdgeIconDescription=Add edge icon
+
  ! Analytics
 analyticsTitle=Analytics
 analyticsLayoutStrategyHint=Layout strategy:

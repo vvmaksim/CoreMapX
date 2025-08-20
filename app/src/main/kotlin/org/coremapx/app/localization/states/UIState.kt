@@ -71,6 +71,12 @@ class UIState : LocalizationState {
     var forceDirectedMenuGravity = mutableStateOf("")
     var forceDirectedMenuSpeed = mutableStateOf("")
 
+    // Lower Right Menu
+    var lowerRightMenuAddVertexButton = mutableStateOf("")
+    var lowerRightMenuAddVertexIconDescription = mutableStateOf("")
+    var lowerRightMenuAddEdgeButton = mutableStateOf("")
+    var lowerRightMenuAddEdgeIconDescription = mutableStateOf("")
+
     // Error Strings
     val errorBasicString = mutableStateOf("")
     val errorNoDescriptionMessage = mutableStateOf("")
@@ -146,6 +152,12 @@ class UIState : LocalizationState {
             UIKeys.FORCE_DIRECTED_MENU_AREA -> forceDirectedMenuArea.value = value
             UIKeys.FORCE_DIRECTED_MENU_GRAVITY -> forceDirectedMenuGravity.value = value
             UIKeys.FORCE_DIRECTED_MENU_SPEED -> forceDirectedMenuSpeed.value = value
+
+            // Lower Right Menu
+            UIKeys.LOWER_RIGHT_MENU_ADD_VERTEX_BUTTON -> lowerRightMenuAddVertexButton.value = value
+            UIKeys.LOWER_RIGHT_MENU_ADD_VERTEX_ICON_DESCRIPTION -> lowerRightMenuAddVertexIconDescription.value = value
+            UIKeys.LOWER_RIGHT_MENU_ADD_EDGE_BUTTON -> lowerRightMenuAddEdgeButton.value = value
+            UIKeys.LOWER_RIGHT_MENU_ADD_EDGE_ICON_DESCRIPTION -> lowerRightMenuAddEdgeIconDescription.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value
