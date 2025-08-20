@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.textField.CustomTextField
 
@@ -75,7 +76,7 @@ fun AddEdgeContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Добавьте ребро",
+                title = LocalizationManager.states.dialogs.addEdgeTitle.value,
                 onButtonClick = onDismiss,
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -86,9 +87,8 @@ fun AddEdgeContent(
                     showFromVertexIdError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Id вершины") },
                 isError = showFromVertexIdError,
-                label = { Text("Id вершины from") },
+                label = { Text(LocalizationManager.states.dialogs.addEdgeFromVertexIdFieldLabel.value) },
             )
             Spacer(modifier = Modifier.height(24.dp))
             CustomTextField(
@@ -98,9 +98,8 @@ fun AddEdgeContent(
                     showToVertexIdError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Id вершины") },
                 isError = showToVertexIdError,
-                label = { Text("Id вершины to") },
+                label = { Text(LocalizationManager.states.dialogs.addEdgeToVertexIdFieldLabel.value) },
             )
 
             if (isWeighted) {
@@ -112,9 +111,8 @@ fun AddEdgeContent(
                         showWeightError = false
                     },
                     modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Вес ребра") },
                     isError = showWeightError,
-                    label = { Text("Вес ребра") },
+                    label = { Text(LocalizationManager.states.dialogs.addEdgeWeightFieldLabel.value) },
                 )
             }
 
@@ -134,23 +132,23 @@ fun AddEdgeContent(
                     val isToVertexIdEmpty = toVertexId.text.isEmpty()
                     if (isFromVertexIdEmpty || isToVertexIdEmpty) {
                         if (isFromVertexIdEmpty && isToVertexIdEmpty) {
-                            errorMessage = "Поля FromVertexId и ToVertexId не могут быть пустыми"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeFromVertexIdAndToVertexIdCannotBeEmpty.value
                             showFromVertexIdError = true
                             showToVertexIdError = true
                         }
                         if (isFromVertexIdEmpty && !isToVertexIdEmpty) {
-                            errorMessage = "Поле FromVertexId не может быть пустым"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeFromVertexIdCannotBeEmpty.value
                             showFromVertexIdError = true
                         }
                         if (!isFromVertexIdEmpty && isToVertexIdEmpty) {
-                            errorMessage = "Поле ToVertexId не может быть пустым"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeToVertexIdCannotBeEmpty.value
                             showToVertexIdError = true
                         }
                         return@Button
                     }
                     if (isWeighted) {
                         if (weight.text.isEmpty()) {
-                            errorMessage = "Поле Weight не может быть пустым"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeWeightCannotBeEmpty.value
                             showWeightError = true
                             return@Button
                         }
@@ -159,23 +157,23 @@ fun AddEdgeContent(
                     val isToVertexIdNotLong = toVertexId.text.toLongOrNull() == null
                     if (isFromVertexIdNotLong || isToVertexIdNotLong) {
                         if (isFromVertexIdNotLong && isToVertexIdNotLong) {
-                            errorMessage = "Поля FromVertexId и ToVertexId должны быть числами типа Long (8 байт)"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeFromVertexIdAndToVertexIdMustBeLong.value
                             showFromVertexIdError = true
                             showToVertexIdError = true
                         }
                         if (isFromVertexIdNotLong && !isToVertexIdNotLong) {
-                            errorMessage = "Поле FromVertexId должно быть числом типа Long (8 байт)"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeFromVertexIdMustBeLong.value
                             showFromVertexIdError = true
                         }
                         if (!isFromVertexIdNotLong && isToVertexIdNotLong) {
-                            errorMessage = "Поле ToVertexId должно быть числом типа Long (8 байт)"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeToVertexIdMustBeLong.value
                             showToVertexIdError = true
                         }
                         return@Button
                     }
                     if (isWeighted) {
                         if (weight.text.toLongOrNull() == null) {
-                            errorMessage = "Поле Weight должно быть числом типа Long (8 байт)"
+                            errorMessage = LocalizationManager.states.dialogs.addEdgeWeightMustBeLong.value
                             showWeightError = true
                             return@Button
                         }
@@ -191,7 +189,7 @@ fun AddEdgeContent(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "Добавить ребро",
+                    text = LocalizationManager.states.dialogs.addEdgeButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

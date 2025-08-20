@@ -275,6 +275,21 @@ addVertexVertexLabelCannotBeEmpty=The VertexLabel field cannot be empty
 addVertexVertexIdMustBeLong=The VertexId field must be a Long number (8 bytes)
 addVertexButton=Add
 
+ ! Add Edge
+addEdgeTitle=Add an edge
+addEdgeFromVertexIdFieldLabel=fromVertexId
+addEdgeToVertexIdFieldLabel=toVertexId
+addEdgeWeightFieldLabel=Weight
+addEdgeFromVertexIdAndToVertexIdCannotBeEmpty=The FromVertexId and ToVertexId fields cannot be empty
+addEdgeFromVertexIdCannotBeEmpty=The FromVertexId field cannot be empty
+addEdgeToVertexIdCannotBeEmpty=The ToVertexId field cannot be empty
+addEdgeWeightCannotBeEmpty=The Weight field cannot be empty
+addEdgeFromVertexIdAndToVertexIdMustBeLong=The FromVertexId and ToVertexId fields must be Long numbers (8 bytes)
+addEdgeFromVertexIdMustBeLong=The FromVertexId field must be a Long number (8 bytes)
+addEdgeToVertexIdMustBeLong=The ToVertexId field must be a Long number (8 bytes)
+addEdgeWeightMustBeLong=The Weight field must be a Long number (8 bytes)
+addEdgeButton=Add
+
  ! Top Menu
 topMenuActions=Actions
 topMenuDrawGraphAgain=Draw the graph again

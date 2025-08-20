@@ -158,6 +158,21 @@ object DialogsKeys {
     const val ADD_VERTEX_VERTEX_ID_MUST_BE_LONG = "addVertexVertexIdMustBeLong"
     const val ADD_VERTEX_BUTTON = "addVertexButton"
 
+    // Add Edge
+    const val ADD_EDGE_TITLE = "addEdgeTitle"
+    const val ADD_EDGE_FROM_VERTEX_ID_FIELD_LABEL = "addEdgeFromVertexIdFieldLabel"
+    const val ADD_EDGE_TO_VERTEX_ID_FIELD_LABEL = "addEdgeToVertexIdFieldLabel"
+    const val ADD_EDGE_WEIGHT_FIELD_LABEL = "addEdgeWeightFieldLabel"
+    const val ADD_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_CANNOT_BE_EMPTY = "addEdgeFromVertexIdAndToVertexIdCannotBeEmpty"
+    const val ADD_EDGE_FROM_VERTEX_ID_CANNOT_BE_EMPTY = "addEdgeFromVertexIdCannotBeEmpty"
+    const val ADD_EDGE_TO_VERTEX_ID_CANNOT_BE_EMPTY = "addEdgeToVertexIdCannotBeEmpty"
+    const val ADD_EDGE_WEIGHT_CANNOT_BE_EMPTY = "addEdgeWeightCannotBeEmpty"
+    const val ADD_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_MUST_BE_LONG = "addEdgeFromVertexIdAndToVertexIdMustBeLong"
+    const val ADD_EDGE_FROM_VERTEX_ID_MUST_BE_LONG = "addEdgeFromVertexIdMustBeLong"
+    const val ADD_EDGE_TO_VERTEX_ID_MUST_BE_LONG = "addEdgeToVertexIdMustBeLong"
+    const val ADD_EDGE_WEIGHT_MUST_BE_LONG = "addEdgeWeightMustBeLong"
+    const val ADD_EDGE_BUTTON = "addEdgeButton"
+
     // Help
     const val HELP_TITLE = "helpTitle"
     const val HELP_SUB_TITLE = "helpSubTitle"

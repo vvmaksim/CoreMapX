@@ -275,6 +275,21 @@ addVertexVertexLabelCannotBeEmpty=Поле VertexLabel не может быть 
 addVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
 addVertexButton=Добавить
 
+ ! Add Edge
+addEdgeTitle=Добавьте ребро
+addEdgeFromVertexIdFieldLabel=fromVertexId
+addEdgeToVertexIdFieldLabel=toVertexId
+addEdgeWeightFieldLabel=Вес
+addEdgeFromVertexIdAndToVertexIdCannotBeEmpty=Поля FromVertexId и ToVertexId не могут быть пустыми
+addEdgeFromVertexIdCannotBeEmpty=Поле FromVertexId не может быть пустым
+addEdgeToVertexIdCannotBeEmpty=Поле ToVertexId не может быть пустым
+addEdgeWeightCannotBeEmpty=Поле Weight не может быть пустым
+addEdgeFromVertexIdAndToVertexIdMustBeLong=Поля FromVertexId и ToVertexId должны быть числами типа Long (8 байт)
+addEdgeFromVertexIdMustBeLong=Поле FromVertexId должно быть числом типа Long (8 байт)
+addEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть числом типа Long (8 байт)
+addEdgeWeightMustBeLong=Поле Weight должно быть числом типа Long (8 байт)
+addEdgeButton=Добавить ребро
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
