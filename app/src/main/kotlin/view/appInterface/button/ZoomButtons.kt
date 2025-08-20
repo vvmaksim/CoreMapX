@@ -31,8 +31,8 @@ import org.coremapx.app.theme.AppTheme
 fun ZoomButtons(
     onZoom: (Float) -> Unit,
     modifier: Modifier = Modifier,
-    buttonSize: Dp = 68.dp,
-    iconSize: Dp = 36.dp,
+    buttonSize: Dp = 64.dp,
+    iconSize: Dp = 32.dp,
     zoomFactor: Float = 0.5f,
     borderWidth: Dp = 1.dp,
 ) {
