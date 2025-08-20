@@ -148,6 +148,16 @@ object DialogsKeys {
     const val FIND_PATH_FIND_STRATEGY = "findPathFindStrategy"
     const val FIND_PATH_FIND_BUTTON = "findPathFindButton"
 
+    // Add Vertex
+    const val ADD_VERTEX_TITLE = "addVertexTitle"
+    const val ADD_VERTEX_VERTEX_ID_FIELD_LABEL = "addVertexVertexIdFieldLabel"
+    const val ADD_VERTEX_VERTEX_LABEL_FIELD_LABEL = "addVertexVertexLabelFieldLabel"
+    const val ADD_VERTEX_VERTEX_ID_AND_VERTEX_LABEL_CANNOT_BE_EMPTY = "addVertexVertexIdAndVertexLabelCannotBeEmpty"
+    const val ADD_VERTEX_VERTEX_ID_CANNOT_BE_EMPTY = "addVertexVertexIdCannotBeEmpty"
+    const val ADD_VERTEX_VERTEX_LABEL_CANNOT_BE_EMPTY = "addVertexVertexLabelCannotBeEmpty"
+    const val ADD_VERTEX_VERTEX_ID_MUST_BE_LONG = "addVertexVertexIdMustBeLong"
+    const val ADD_VERTEX_BUTTON = "addVertexButton"
+
     // Help
     const val HELP_TITLE = "helpTitle"
     const val HELP_SUB_TITLE = "helpSubTitle"

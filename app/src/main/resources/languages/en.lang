@@ -265,6 +265,16 @@ userDirectoryInterfaceLanguageConfigurationText1=The application supports interf
     in which the text is set using the keys used in the application. \
     To apply the translation, select the `Custom` language in the settings.
 
+ ! Add Vertex
+addVertexTitle=Add a vertex
+addVertexVertexIdFieldLabel=Id
+addVertexVertexLabelFieldLabel=Label
+addVertexVertexIdAndVertexLabelCannotBeEmpty=The VertexId and VertexLabel fields cannot be empty
+addVertexVertexIdCannotBeEmpty=The VertexId field cannot be empty
+addVertexVertexLabelCannotBeEmpty=The VertexLabel field cannot be empty
+addVertexVertexIdMustBeLong=The VertexId field must be a Long number (8 bytes)
+addVertexButton=Add
+
  ! Top Menu
 topMenuActions=Actions
 topMenuDrawGraphAgain=Draw the graph again

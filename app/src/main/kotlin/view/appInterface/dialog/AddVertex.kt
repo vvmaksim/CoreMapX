@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.textField.CustomTextField
 
@@ -70,7 +71,7 @@ fun AddVertexContent(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             DialogHeader(
-                title = "Добавьте вершину",
+                title = LocalizationManager.states.dialogs.addVertexTitle.value,
                 onButtonClick = onDismiss,
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -81,7 +82,7 @@ fun AddVertexContent(
                     showVertexIdError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Введите Id вершины") },
+                label = { Text(LocalizationManager.states.dialogs.addVertexVertexIdFieldLabel.value) },
                 isError = showVertexIdError,
             )
             Spacer(modifier = Modifier.height(24.dp))
@@ -92,7 +93,7 @@ fun AddVertexContent(
                     showVertexLabelError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = { Text("Введите Label вершины") },
+                label = { Text(LocalizationManager.states.dialogs.addVertexVertexLabelFieldLabel.value) },
                 isError = showVertexLabelError,
             )
 
@@ -112,22 +113,22 @@ fun AddVertexContent(
                     val isVertexLabelEmpty = vertexLabel.text.isEmpty()
                     if (isVertexIdEmpty || isVertexLabelEmpty) {
                         if (isVertexIdEmpty && isVertexLabelEmpty) {
-                            errorMessage = "Поля VertexId и VertexLabel не могут быть пустыми"
+                            errorMessage = LocalizationManager.states.dialogs.addVertexVertexIdAndVertexLabelCannotBeEmpty.value
                             showVertexIdError = true
                             showVertexLabelError = true
                         }
                         if (isVertexIdEmpty && !isVertexLabelEmpty) {
-                            errorMessage = "Поле VertexId не может быть пустым"
+                            errorMessage = LocalizationManager.states.dialogs.addVertexVertexIdCannotBeEmpty.value
                             showVertexIdError = true
                         }
                         if (!isVertexIdEmpty && isVertexLabelEmpty) {
-                            errorMessage = "Поле VertexLabel не может быть пустым"
+                            errorMessage = LocalizationManager.states.dialogs.addVertexVertexLabelFieldLabel.value
                             showVertexLabelError = true
                         }
                         return@Button
                     }
                     if (vertexId.text.toLongOrNull() == null) {
-                        errorMessage = "Поле VertexId должно быть числом типа Long (8 байт)"
+                        errorMessage = LocalizationManager.states.dialogs.addVertexVertexIdMustBeLong.value
                         showVertexIdError = true
                         return@Button
                     }
@@ -138,7 +139,7 @@ fun AddVertexContent(
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 Text(
-                    text = "Добавить вершину",
+                    text = LocalizationManager.states.dialogs.addVertexButton.value,
                     style = MaterialTheme.typography.button,
                 )
             }

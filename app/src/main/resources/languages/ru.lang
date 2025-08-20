@@ -265,6 +265,16 @@ userDirectoryInterfaceLanguageConfigurationText1=Приложение подде
     в котором текст задаётся по ключам, используемым в приложении. \
     Чтобы применить перевод, в настройках выберите язык `Custom`.
 
+ ! Add Vertex
+addVertexTitle=Добавьте вершину
+addVertexVertexIdFieldLabel=Id
+addVertexVertexLabelFieldLabel=Label
+addVertexVertexIdAndVertexLabelCannotBeEmpty=Поля VertexId и VertexLabel не могут быть пустыми
+addVertexVertexIdCannotBeEmpty=Поле VertexId не может быть пустым
+addVertexVertexLabelCannotBeEmpty=Поле VertexLabel не может быть пустым
+addVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
+addVertexButton=Добавить
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова

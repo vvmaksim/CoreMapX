@@ -151,6 +151,16 @@ class DialogsState : LocalizationState {
     val findPathFindStrategy = mutableStateOf("")
     val findPathFindButton = mutableStateOf("")
 
+    // Add Vertex
+    val addVertexTitle = mutableStateOf("")
+    val addVertexVertexIdFieldLabel = mutableStateOf("")
+    val addVertexVertexLabelFieldLabel = mutableStateOf("")
+    val addVertexVertexIdAndVertexLabelCannotBeEmpty = mutableStateOf("")
+    val addVertexVertexIdCannotBeEmpty = mutableStateOf("")
+    val addVertexVertexLabelCannotBeEmpty = mutableStateOf("")
+    val addVertexVertexIdMustBeLong = mutableStateOf("")
+    val addVertexButton = mutableStateOf("")
+
     // Help
     val helpTitle = mutableStateOf("")
     val helpSubTitle = mutableStateOf("")
@@ -347,6 +357,16 @@ class DialogsState : LocalizationState {
             DialogsKeys.FIND_PATH_MAX_PATHS_PLACEHOLDER -> findPathMaxPathsPlaceholder.value = value
             DialogsKeys.FIND_PATH_FIND_STRATEGY -> findPathFindStrategy.value = value
             DialogsKeys.FIND_PATH_FIND_BUTTON -> findPathFindButton.value = value
+
+            // Add Vertex
+            DialogsKeys.ADD_VERTEX_TITLE -> addVertexTitle.value = value
+            DialogsKeys.ADD_VERTEX_VERTEX_ID_FIELD_LABEL -> addVertexVertexIdFieldLabel.value = value
+            DialogsKeys.ADD_VERTEX_VERTEX_LABEL_FIELD_LABEL -> addVertexVertexLabelFieldLabel.value = value
+            DialogsKeys.ADD_VERTEX_VERTEX_ID_AND_VERTEX_LABEL_CANNOT_BE_EMPTY -> addVertexVertexIdAndVertexLabelCannotBeEmpty.value = value
+            DialogsKeys.ADD_VERTEX_VERTEX_ID_CANNOT_BE_EMPTY -> addVertexVertexIdCannotBeEmpty.value = value
+            DialogsKeys.ADD_VERTEX_VERTEX_LABEL_CANNOT_BE_EMPTY -> addVertexVertexLabelCannotBeEmpty.value = value
+            DialogsKeys.ADD_VERTEX_VERTEX_ID_MUST_BE_LONG -> addVertexVertexIdMustBeLong.value = value
+            DialogsKeys.ADD_VERTEX_BUTTON -> addVertexButton.value = value
 
             // Help
             DialogsKeys.HELP_TITLE -> helpTitle.value = value
