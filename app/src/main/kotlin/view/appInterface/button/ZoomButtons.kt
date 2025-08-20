@@ -11,8 +11,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.filled.ZoomIn
+import androidx.compose.material.icons.filled.ZoomOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +31,8 @@ import org.coremapx.app.theme.AppTheme
 fun ZoomButtons(
     onZoom: (Float) -> Unit,
     modifier: Modifier = Modifier,
-    iconSize: Dp = 62.dp,
+    buttonSize: Dp = 68.dp,
+    iconSize: Dp = 36.dp,
     zoomFactor: Float = 0.5f,
     borderWidth: Dp = 1.dp,
 ) {
@@ -58,13 +59,14 @@ fun ZoomButtons(
                 },
                 modifier =
                     Modifier
-                        .size(iconSize)
+                        .size(buttonSize)
                         .testTag("ZoomInButton"),
             ) {
                 Icon(
-                    imageVector = Icons.Default.Add,
+                    imageVector = Icons.Default.ZoomIn,
                     contentDescription = LocalizationManager.states.anyIconDescriptionsStates.zoomIncrease.value,
                     tint = MaterialTheme.colors.primary,
+                    modifier = Modifier.size(iconSize),
                 )
             }
 
@@ -75,13 +77,14 @@ fun ZoomButtons(
                 },
                 modifier =
                     Modifier
-                        .size(iconSize)
+                        .size(buttonSize)
                         .testTag("ZoomOutButton"),
             ) {
                 Icon(
-                    imageVector = Icons.Default.Remove,
+                    imageVector = Icons.Default.ZoomOut,
                     contentDescription = LocalizationManager.states.anyIconDescriptionsStates.zoomReduce.value,
                     tint = MaterialTheme.colors.primary,
+                    modifier = Modifier.size(iconSize),
                 )
             }
         }
