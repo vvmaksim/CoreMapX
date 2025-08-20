@@ -42,6 +42,10 @@ import extensions.canvasBackground
 import extensions.commandLineBlockBackground
 import model.command.concrete.Command
 import model.command.concrete.Commands
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
+import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
 import model.result.CommandErrors
 import model.result.Result
 import org.coremapx.app.AppLogger.logInfo
@@ -50,10 +54,12 @@ import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
-import view.appInterface.button.ZoomButtons
+import view.appInterface.dialog.AddEdge
+import view.appInterface.dialog.AddVertex
 import view.appInterface.workspace.CommandLine
 import view.appInterface.workspace.FloatingMessagePanel
 import view.appInterface.workspace.GraphElementCounters
+import view.appInterface.workspace.LowerRightMenu
 import view.appInterface.workspace.TopMenu
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
@@ -74,6 +80,8 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     var commandCount by remember { mutableStateOf(0) }
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     var commandHistoryIndex by remember { mutableStateOf(-1) }
+    var showAddVertexDialog by remember { mutableStateOf(false) }
+    var showAddEdgeDialog by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) {
         viewModel.graphManager.animationScope = scope
@@ -390,12 +398,40 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     )
                 }
                 Spacer(Modifier.weight(1f))
-                ZoomButtons(
+                LowerRightMenu(
+                    onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
+                    onAddVertex = { showAddVertexDialog = true },
+                    onAddEdge = { showAddEdgeDialog = true },
                     modifier =
                         Modifier
                             .padding(8.dp)
                             .align(Alignment.Bottom),
-                    onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
+                )
+            }
+
+            if (showAddVertexDialog) {
+                AddVertex(
+                    onDismiss = { showAddVertexDialog = false },
+                    onAdd = { commandLine: String ->
+                        handleCommand(commandLine)
+                    },
+                )
+            }
+
+            if (showAddEdgeDialog) {
+                AddEdge(
+                    onDismiss = { showAddEdgeDialog = false },
+                    onAdd = { commandLine: String ->
+                        handleCommand(commandLine)
+                    },
+                    isWeighted =
+                        when (viewModel.graphManager.graph.value) {
+                            is UndirectedUnweightedGraph -> false
+                            is UndirectedWeightedGraph -> true
+                            is DirectedUnweightedGraph -> false
+                            is DirectedWeightedGraph -> true
+                            else -> true
+                        },
                 )
             }
         },
