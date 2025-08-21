@@ -49,7 +49,7 @@ import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun FloatingMessagePanel(
+fun Console(
     outputMessages: List<String>,
     userCommands: MutableState<MutableList<String>>,
     onCommand: (commandLine: String) -> Unit,
@@ -115,7 +115,7 @@ fun FloatingMessagePanel(
                                 )
                             },
                 ) {
-                    FloatingMessagePanelTitle(isExpanded)
+                    ConsoleTitle(isExpanded)
                 }
 
                 Box(
@@ -189,7 +189,7 @@ fun FloatingMessagePanel(
                         },
                 contentAlignment = Alignment.CenterStart,
             ) {
-                FloatingMessagePanelTitle(isExpanded)
+                ConsoleTitle(isExpanded)
             }
         }
     }
@@ -197,7 +197,7 @@ fun FloatingMessagePanel(
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-private fun FloatingMessagePanelTitle(
+private fun ConsoleTitle(
     isExpanded: Boolean,
     titleText: String = LocalizationManager.states.anyTextStates.messages.value,
 ) {
@@ -227,9 +227,9 @@ private fun FloatingMessagePanelTitle(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewFloatingMessagePanelTitle() {
+private fun PreviewConsoleTitle() {
     AppTheme {
-        FloatingMessagePanelTitle(
+        ConsoleTitle(
             isExpanded = true,
             titleText = "Messages",
         )
@@ -239,11 +239,11 @@ private fun PreviewFloatingMessagePanelTitle() {
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewFloatingMessagePanel() {
+private fun PreviewConsole() {
     AppTheme {
         PreviewSurface(
             content = {
-                FloatingMessagePanel(
+                Console(
                     outputMessages = listOf("ERROR_MESSAGE", "Next message", "..."),
                     userCommands = mutableStateOf(mutableListOf()),
                     onDrag = { },

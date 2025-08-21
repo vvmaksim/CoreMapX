@@ -48,7 +48,7 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import view.appInterface.dialog.AddEdge
 import view.appInterface.dialog.AddVertex
-import view.appInterface.workspace.FloatingMessagePanel
+import view.appInterface.workspace.Console
 import view.appInterface.workspace.GraphElementCounters
 import view.appInterface.workspace.LowerRightMenu
 import view.appInterface.workspace.TopMenu
@@ -353,7 +353,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
-        FloatingMessagePanel(
+        Console(
             outputMessages = outputMessages.value,
             userCommands = userCommands,
             onCommand = { commandLine: String ->
