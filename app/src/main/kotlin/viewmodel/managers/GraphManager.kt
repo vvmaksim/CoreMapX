@@ -277,22 +277,8 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
             }
             if (fileFormat == null) return Result.Error(FileErrors.InvalidParameter("fileFormat", "This parameter cannot be null"))
 
-            val isDirected =
-                when (graph.value) {
-                    is UndirectedWeightedGraph<V> -> false
-                    is UndirectedUnweightedGraph<V> -> false
-                    is DirectedWeightedGraph<V> -> true
-                    is DirectedUnweightedGraph<V> -> true
-                    else -> false
-                }
-            val isWeighted =
-                when (graph.value) {
-                    is UndirectedWeightedGraph<V> -> true
-                    is UndirectedUnweightedGraph<V> -> false
-                    is DirectedWeightedGraph<V> -> true
-                    is DirectedUnweightedGraph<V> -> false
-                    else -> false
-                }
+            val isDirected = graph.value?.isDirected ?: false
+            val isWeighted = graph.value?.isWeighted ?: false
 
             val ir =
                 StringBuilder().apply {

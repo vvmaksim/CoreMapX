@@ -300,7 +300,7 @@ fun <E : Comparable<E>, V : Comparable<V>> GenerateRandomGraphDialogContent(
                             for (i in 0L until actualEdgesCount) {
                                 val fromId = Random.nextInt(actualVerticesCount.toInt())
                                 val toId = Random.nextInt(actualVerticesCount.toInt())
-                                if (newGraph is UndirectedUnweightedGraph || newGraph is DirectedUnweightedGraph) {
+                                if (!newGraph.isWeighted) {
                                     newGraph.addEdge(
                                         UnweightedEdge(
                                             id = i,
