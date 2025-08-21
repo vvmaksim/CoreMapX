@@ -5,6 +5,8 @@ import model.graph.entities.Vertex
 interface Graph<E : Comparable<E>, V : Comparable<V>> {
     val vertices: Map<V, Vertex<V>>
     val edges: Map<E, Edge<E, V>>
+    val isDirected: Boolean
+    val isWeighted: Boolean
 
     fun addVertex(vertex: Vertex<V>): V
 
