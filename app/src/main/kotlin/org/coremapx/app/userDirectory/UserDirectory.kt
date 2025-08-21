@@ -23,11 +23,15 @@ object UserDirectory {
     private const val FONTS_DIRECTORY_PATH = PrivateConfig.AppResources.DEFAULT_FONTS_DIRECTORY_PATH
 
     fun initTestEnvironment(testPath: String) {
-        isTest = true
-        PrivateConfig.UserDirectory.HOME_DIR_PATH = testPath
-        PrivateConfig.AppResources.setLanguageResourcesPathsForTests()
-        createBaseUserDir()
-        createUserDirs()
+        try {
+            isTest = true
+            PrivateConfig.UserDirectory.HOME_DIR_PATH = testPath
+            PrivateConfig.AppResources.setLanguageResourcesPathsForTests()
+            createBaseUserDir()
+            createUserDirs()
+        } catch (ex: Exception) {
+            logError("Failed to create test environment. Error: $ex")
+        }
     }
 
     fun init() {
@@ -39,7 +43,7 @@ object UserDirectory {
             copyDefaultFonts()
             copyCustomLanguageTemplate()
         } catch (ex: Exception) {
-            logError("Failed to create directories. Ex: ${ex.message}")
+            logError("Failed to create app environment. Error: $ex")
         }
     }
 
@@ -63,8 +67,8 @@ object UserDirectory {
                     showConfigErrorDialog("Failed to find default config resource: ${PrivateConfig.AppResources.DEFAULT_CONFIG_PATH}")
                 }
             } catch (ex: Exception) {
-                logError("Failed to copy default config. Error: ${ex.message}")
-                showConfigErrorDialog("Failed to copy default config. Error: ${ex.message}")
+                logError("Failed to copy default config. Error: $ex")
+                showConfigErrorDialog("Failed to copy default config. Error: $ex")
             }
         }
     }
@@ -96,8 +100,8 @@ object UserDirectory {
                 }
                 logInfo("Custom language template copied successfully")
             } catch (ex: Exception) {
-                logError("Failed to copy custom language template. Error: ${ex.message}")
-                showConfigErrorDialog("Failed to copy custom language template. Error: ${ex.message}")
+                logError("Failed to copy custom language template. Error: $ex")
+                showConfigErrorDialog("Failed to copy custom language template. Error: $ex")
             }
         }
     }
@@ -136,7 +140,7 @@ object UserDirectory {
                     logError("Failed to find font resource: $sourcePath")
                 }
             } catch (ex: Exception) {
-                logError("Failed to copy default font from $sourcePath to $targetPath. Error: ${ex.message}")
+                logError("Failed to copy default font from $sourcePath to $targetPath. Error: $ex")
             }
         }
     }

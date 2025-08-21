@@ -204,7 +204,7 @@ class ConfigRepository {
             logInfo("Config has been loaded successfully")
         } catch (ex: IllegalArgumentException) {
             logError("Config validation failed")
-            showConfigErrorDialog(ex.message ?: "Config error")
+            showConfigErrorDialog(ex.toString())
         }
     }
 

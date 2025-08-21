@@ -3,6 +3,7 @@ package model.fileHandler
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.formdev.flatlaf.FlatLightLaf
+import org.coremapx.app.AppLogger.logError
 import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.ThemesManager.isDarkSystemDialogTheme
@@ -50,7 +51,8 @@ class DialogManager {
                 } else {
                     UIManager.setLookAndFeel(FlatLightLaf())
                 }
-            } catch (e: Exception) {
+            } catch (ex: Exception) {
+                logError("fileDialogManager ERROR: $ex")
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
             }
 
@@ -95,7 +97,8 @@ class DialogManager {
                 } else {
                     UIManager.setLookAndFeel(FlatLightLaf())
                 }
-            } catch (e: Exception) {
+            } catch (ex: Exception) {
+                logError("colorDialogManager ERROR: $ex")
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
             }
 

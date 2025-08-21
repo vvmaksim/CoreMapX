@@ -15,7 +15,6 @@ import model.result.Result
 import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.config.PrivateConfig
 import java.io.File
-import java.io.IOException
 
 class IRToSQLConverter : FileConverter() {
     override fun convert(
@@ -30,7 +29,7 @@ class IRToSQLConverter : FileConverter() {
         val lines: List<String>
         try {
             lines = file.readLines().map { it.trim() }.filter { it.isNotEmpty() }
-        } catch (ex: IOException) {
+        } catch (ex: Exception) {
             return Result.Error(FileErrors.ErrorReadingFile(ex.toString()))
         }
 
