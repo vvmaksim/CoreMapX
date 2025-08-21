@@ -183,6 +183,7 @@ class CommandsTests {
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
+        every { (graph as UndirectedUnweightedGraph).isDirected } returns false
         every { (graph as UndirectedUnweightedGraph).removeEdge(1, 2) } returns 0
         every { (graph as UndirectedUnweightedGraph).removeEdge(2, 1) } returns 0
 
@@ -201,6 +202,7 @@ class CommandsTests {
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
+        every { (graph as UndirectedWeightedGraph).isDirected } returns false
         every { (graph as UndirectedWeightedGraph).removeEdge(1, 2) } returns 0
         every { (graph as UndirectedWeightedGraph).removeEdge(2, 1) } returns 0
 
@@ -219,6 +221,7 @@ class CommandsTests {
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
+        every { (graph as DirectedUnweightedGraph).isDirected } returns true
         every { (graph as DirectedUnweightedGraph).removeEdge(1, 2) } returns 0
 
         val result = commands.execute()
@@ -235,6 +238,7 @@ class CommandsTests {
         every { command.type } returns CommandTypes.RM
         every { command.entity } returns CommandEntities.EDGE
         every { command.parameters } returns mapOf("from" to "1", "to" to "2")
+        every { (graph as DirectedWeightedGraph).isDirected } returns true
         every { (graph as DirectedWeightedGraph).removeEdge(1, 2) } returns 0
 
         val result = commands.execute()
