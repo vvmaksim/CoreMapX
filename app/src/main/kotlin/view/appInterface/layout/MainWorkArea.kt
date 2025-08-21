@@ -2,17 +2,16 @@ package view.appInterface.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -32,10 +31,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.canvasBackground
@@ -52,7 +48,6 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import view.appInterface.dialog.AddEdge
 import view.appInterface.dialog.AddVertex
-import view.appInterface.workspace.CommandLine
 import view.appInterface.workspace.FloatingMessagePanel
 import view.appInterface.workspace.GraphElementCounters
 import view.appInterface.workspace.LowerRightMenu
@@ -69,24 +64,20 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
-    val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
-    val userCommands = remember { mutableStateOf(mutableListOf<String>()) }
-    val scrollState = rememberScrollState()
-    val graph = viewModel.graphManager.graph.value
     var commandCount by remember { mutableStateOf(0) }
-    var commandText by remember { mutableStateOf(TextFieldValue("")) }
-    var commandHistoryIndex by remember { mutableStateOf(-1) }
     var showAddVertexDialog by remember { mutableStateOf(false) }
     var showAddEdgeDialog by remember { mutableStateOf(false) }
+    var consolePosition by remember { mutableStateOf(Offset.Zero) }
+
+    val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
+    val userCommands = remember { mutableStateOf(mutableListOf<String>()) }
+
     val scope = rememberCoroutineScope()
+    val graph = viewModel.graphManager.graph.value
+
     LaunchedEffect(Unit) {
         viewModel.graphManager.animationScope = scope
     }
-
-    val maxCountMessages = config.states.maxCountMessages.value
-    val maxUserCommands = config.states.maxCountUserCommands.value
-    val commandFieldWidth = config.states.commandFieldWidth.value.dp
-    val isTransparentCommandLineBlock = config.states.isTransparentCommandLineBlock.value
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -108,12 +99,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun updateOutputMessages(newMessage: String) {
         outputMessages.value.add(newMessage)
-        outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
+        outputMessages.value = outputMessages.value.takeLast(config.states.maxCountMessages.value).toMutableList()
     }
 
     fun updateUserCommands(newCommand: String) {
         userCommands.value.add(newCommand)
-        userCommands.value = userCommands.value.takeLast(maxUserCommands).toMutableList()
+        userCommands.value = userCommands.value.takeLast(config.states.maxCountUserCommands.value).toMutableList()
     }
 
     fun errorMessage(errorResult: Result.Error): String =
@@ -307,103 +298,34 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 modifier = Modifier.align(Alignment.TopStart),
             )
 
-            Row(
+            GraphElementCounters(
+                vertexCount =
+                    viewModel.graphManager.graph.value
+                        ?.vertices
+                        ?.size
+                        ?.toLong() ?: 0L,
+                edgeCount =
+                    viewModel.graphManager.graph.value
+                        ?.edges
+                        ?.size
+                        ?.toLong() ?: 0L,
+                vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
+                edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
                 modifier =
                     Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .horizontalScroll(scrollState)
-                        .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                GraphElementCounters(
-                    vertexCount =
-                        viewModel.graphManager.graph.value
-                            ?.vertices
-                            ?.size
-                            ?.toLong() ?: 0L,
-                    edgeCount =
-                        viewModel.graphManager.graph.value
-                            ?.edges
-                            ?.size
-                            ?.toLong() ?: 0L,
-                    vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
-                    edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
-                    modifier = Modifier.align(Alignment.Bottom),
-                )
-                Spacer(Modifier.weight(1f))
+                        .padding(16.dp)
+                        .align(Alignment.BottomStart),
+            )
 
-                var commandLinePosition by remember { mutableStateOf(Offset.Zero) }
-                val density = LocalDensity.current
-
-                Column(
-                    modifier =
-                        Modifier
-                            .width(commandFieldWidth)
-                            .align(Alignment.Bottom),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    if (commandLinePosition != Offset.Zero) {
-                        FloatingMessagePanel(
-                            outputMessages = outputMessages.value,
-                            modifier = Modifier,
-                            initialPosition =
-                                with(density) {
-                                    Offset(
-                                        x = commandLinePosition.x,
-                                        y =
-                                            commandLinePosition.y -
-                                                config.states.messageOutputHeight.value.dp
-                                                    .toPx(),
-                                    )
-                                },
-                            backgroundColor =
-                                if (isTransparentCommandLineBlock) {
-                                    Color.Transparent
-                                } else {
-                                    MaterialTheme.colors.commandLineBlockBackground
-                                },
-                            borderColor = MaterialTheme.colors.border,
-                        )
-                    }
-                    CommandLine(
-                        modifier =
-                            Modifier
-                                .width(commandFieldWidth)
-                                .align(Alignment.CenterHorizontally)
-                                .onGloballyPositioned { coordinates ->
-                                    commandLinePosition =
-                                        Offset(
-                                            x = coordinates.positionInWindow().x,
-                                            y = coordinates.positionInWindow().y,
-                                        )
-                                },
-                        commandLineBackgroundColor =
-                            if (isTransparentCommandLineBlock) {
-                                Color.Transparent
-                            } else {
-                                MaterialTheme.colors.commandLineBlockBackground
-                            },
-                        placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
-                        onCommand = { command -> handleCommand(command) },
-                        commandText = commandText,
-                        onCommandTextChange = { commandText = it },
-                        userCommands = userCommands.value,
-                        commandHistoryIndex = commandHistoryIndex,
-                        onCommandHistoryIndexChange = { commandHistoryIndex = it },
-                    )
-                }
-                Spacer(Modifier.weight(1f))
-                LowerRightMenu(
-                    onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
-                    onAddVertex = { showAddVertexDialog = true },
-                    onAddEdge = { showAddEdgeDialog = true },
-                    modifier =
-                        Modifier
-                            .padding(8.dp)
-                            .align(Alignment.Bottom),
-                )
-            }
+            LowerRightMenu(
+                onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
+                onAddVertex = { showAddVertexDialog = true },
+                onAddEdge = { showAddEdgeDialog = true },
+                modifier =
+                    Modifier
+                        .padding(16.dp)
+                        .align(Alignment.BottomEnd),
+            )
 
             if (showAddVertexDialog) {
                 AddVertex(
@@ -427,4 +349,31 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             }
         },
     )
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        FloatingMessagePanel(
+            outputMessages = outputMessages.value,
+            userCommands = userCommands,
+            onCommand = { commandLine: String ->
+                handleCommand(commandLine)
+            },
+            modifier =
+                Modifier
+                    .offset { IntOffset(consolePosition.x.toInt(), consolePosition.y.toInt()) }
+                    .padding(bottom = 16.dp)
+                    .align(Alignment.BottomCenter),
+            backgroundColor =
+                if (config.states.isTransparentCommandLineBlock.value) {
+                    Color.Transparent
+                } else {
+                    MaterialTheme.colors.commandLineBlockBackground
+                },
+            borderColor = MaterialTheme.colors.border,
+            onDrag = { dragAmount: Offset ->
+                consolePosition += dragAmount
+            },
+        )
+    }
 }

@@ -1,7 +1,6 @@
 package view.appInterface.workspace
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.detectDragGestures
@@ -26,6 +25,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,14 +38,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.IntRect
-import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
-import androidx.compose.ui.window.PopupPositionProvider
 import extensions.border
 import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
@@ -56,12 +51,22 @@ import view.appInterface.preview.PreviewSurface
 @Composable
 fun FloatingMessagePanel(
     outputMessages: List<String>,
+    userCommands: MutableState<MutableList<String>>,
+    onCommand: (commandLine: String) -> Unit,
     modifier: Modifier = Modifier,
-    initialPosition: Offset = Offset(100f, 100f),
     backgroundColor: Color = MaterialTheme.colors.background,
     borderColor: Color = MaterialTheme.colors.border,
+    onDrag: (dragAmount: Offset) -> Unit = {},
 ) {
-    var position by remember { mutableStateOf(initialPosition) }
+    var isExpanded by remember { mutableStateOf(true) }
+    var commandText by remember { mutableStateOf(TextFieldValue("")) }
+    var commandHistoryIndex by remember { mutableStateOf(-1) }
+
+    val maxPanelWidth = config.states.commandFieldWidth.value.dp
+    val maxPanelHeight = config.states.messageOutputHeight.value.dp
+    val minPanelWidth = 200.dp
+    val titleBarHeight = 30.dp
+    val panelShape = MaterialTheme.shapes.medium
 
     val scrollState = rememberScrollState()
 
@@ -72,52 +77,8 @@ fun FloatingMessagePanel(
     }
 
     Box(
-        modifier = modifier,
-    ) {
-        Popup(
-            popupPositionProvider =
-                object : PopupPositionProvider {
-                    override fun calculatePosition(
-                        anchorBounds: IntRect,
-                        windowSize: IntSize,
-                        layoutDirection: LayoutDirection,
-                        popupContentSize: IntSize,
-                    ): IntOffset = IntOffset(position.x.toInt(), position.y.toInt())
-                },
-        ) {
-            FloatingMessagePanelContent(
-                outputMessages = outputMessages,
-                onDrag = { dragAmount: Offset ->
-                    position += dragAmount
-                },
-                scrollState = scrollState,
-                backgroundColor = backgroundColor,
-                borderColor = borderColor,
-            )
-        }
-    }
-}
-
-@Suppress("ktlint:standard:function-naming")
-@Composable
-fun FloatingMessagePanelContent(
-    outputMessages: List<String>,
-    onDrag: (dragAmount: Offset) -> Unit,
-    scrollState: ScrollState,
-    backgroundColor: Color = MaterialTheme.colors.background,
-    borderColor: Color = MaterialTheme.colors.border,
-) {
-    var isExpanded by remember { mutableStateOf(true) }
-
-    val maxPanelWidth = config.states.commandFieldWidth.value.dp
-    val maxPanelHeight = config.states.messageOutputHeight.value.dp
-    val minPanelWidth = 200.dp
-    val titleBarHeight = 30.dp
-    val panelShape = MaterialTheme.shapes.medium
-
-    Box(
         modifier =
-            Modifier
+            modifier
                 .width(if (isExpanded) maxPanelWidth else minPanelWidth)
                 .height(if (isExpanded) maxPanelHeight else titleBarHeight)
                 .clip(panelShape)
@@ -195,6 +156,17 @@ fun FloatingMessagePanelContent(
                         }
                     }
                 }
+                CommandLine(
+                    modifier = Modifier.fillMaxWidth(),
+                    commandLineBackgroundColor = backgroundColor,
+                    placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
+                    onCommand = onCommand,
+                    commandText = commandText,
+                    onCommandTextChange = { commandText = it },
+                    userCommands = userCommands.value,
+                    commandHistoryIndex = commandHistoryIndex,
+                    onCommandHistoryIndexChange = { commandHistoryIndex = it },
+                )
             }
         } else {
             Box(
@@ -271,10 +243,11 @@ private fun PreviewFloatingMessagePanel() {
     AppTheme {
         PreviewSurface(
             content = {
-                FloatingMessagePanelContent(
+                FloatingMessagePanel(
                     outputMessages = listOf("ERROR_MESSAGE", "Next message", "..."),
+                    userCommands = mutableStateOf(mutableListOf()),
                     onDrag = { },
-                    scrollState = rememberScrollState(),
+                    onCommand = { },
                 )
             },
         )
