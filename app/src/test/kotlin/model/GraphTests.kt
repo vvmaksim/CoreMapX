@@ -411,9 +411,9 @@ class GraphTests {
     }
 
     @Test
-    fun `undirected unweighted graph get isDirected and isWeighted values`() {
-        val graph = UndirectedUnweightedGraph<Long>()
-        assertEquals(false, graph.isWeighted)
-        assertEquals(false, graph.isDirected)
+    fun `directed weighted graph get isDirected and isWeighted values`() {
+        val graph = DirectedWeightedGraph<Long>()
+        assertEquals(true, graph.isWeighted)
+        assertEquals(true, graph.isDirected)
     }
 }
