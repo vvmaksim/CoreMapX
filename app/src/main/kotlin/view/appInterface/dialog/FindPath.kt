@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import model.graph.pathfinding.PathfindingValidator
 import model.result.Result
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialogElements.lines.DropdownSelectLine
 import view.appInterface.textField.CustomTextFieldLine
 import viewmodel.MainScreenViewModel
@@ -39,7 +39,7 @@ fun <E : Comparable<E>, V : Comparable<V>> FindPath(
     viewModel: MainScreenViewModel<E, V>,
     onDismiss: () -> Unit,
     dialogWidth: Dp = 550.dp,
-    isExpanded: Boolean = config.states.isExpandedSettings.value,
+    isExpanded: Boolean = ConfigRepository.states.isExpandedSettings.value,
 ) {
     Dialog(onDismissRequest = onDismiss) {
         FindPathContent(
@@ -57,7 +57,7 @@ private fun <E : Comparable<E>, V : Comparable<V>> FindPathContent(
     viewModel: MainScreenViewModel<E, V>,
     onDismiss: () -> Unit,
     dialogWidth: Dp = 550.dp,
-    isExpanded: Boolean = config.states.isExpandedSettings.value,
+    isExpanded: Boolean = ConfigRepository.states.isExpandedSettings.value,
 ) {
     var startId by remember { mutableStateOf(TextFieldValue()) }
     var endId by remember { mutableStateOf(TextFieldValue()) }

@@ -42,9 +42,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import extensions.border
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
@@ -62,8 +62,8 @@ fun Console(
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     var commandHistoryIndex by remember { mutableStateOf(-1) }
 
-    val consoleWidth = config.states.consoleWidth.value.dp
-    val consoleHeight = config.states.consoleHeight.value.dp
+    val consoleWidth = ConfigRepository.states.consoleWidth.value.dp
+    val consoleHeight = ConfigRepository.states.consoleHeight.value.dp
     val minPanelWidth = 200.dp
     val titleBarHeight = 30.dp
     val panelShape = MaterialTheme.shapes.medium

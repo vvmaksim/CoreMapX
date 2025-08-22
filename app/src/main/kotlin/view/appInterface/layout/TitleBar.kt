@@ -41,10 +41,10 @@ import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
 import model.result.Result
-import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import org.coremapx.graph.GraphDatabase
 import view.appInterface.dialog.Help
 import view.appInterface.dialog.NewGraph
@@ -65,8 +65,8 @@ fun <E : Comparable<E>, V : Comparable<V>> TitleBar(
     isMaximized: Boolean,
     viewModel: MainScreenViewModel<E, V>,
 ) {
-    val titleBarHeight = config.states.titleBarHeight.value.dp
-    val titleBarIconSize = config.states.titleBarIconSize.value.dp
+    val titleBarHeight = ConfigRepository.states.titleBarHeight.value.dp
+    val titleBarIconSize = ConfigRepository.states.titleBarIconSize.value.dp
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showMenuButtons by remember { mutableStateOf(false) }

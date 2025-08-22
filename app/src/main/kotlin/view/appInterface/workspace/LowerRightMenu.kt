@@ -18,9 +18,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.ZoomButtons
 
@@ -41,12 +41,12 @@ fun LowerRightMenu(
                 .width(menuWidth)
                 .clip(borderShape)
                 .background(
-                    color = config.states.background.value,
+                    color = ConfigRepository.states.background.value,
                     shape = borderShape,
                 ).border(
                     width = borderWidth,
                     shape = borderShape,
-                    color = config.states.borderColor.value,
+                    color = ConfigRepository.states.borderColor.value,
                 ),
     ) {
         Column(

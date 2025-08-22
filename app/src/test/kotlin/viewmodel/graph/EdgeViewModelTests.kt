@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.Color
 import model.graph.entities.UnweightedEdge
 import model.graph.entities.Vertex
 import model.graph.entities.WeightedEdge
-import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -24,7 +24,7 @@ class EdgeViewModelTests {
         }
     }
 
-    val defaultEdgeColor = config.states.edgeMainColor.value
+    val defaultEdgeColor = ConfigRepository.states.edgeMainColor.value
 
     val fromVertex = Vertex(1L, "1")
     val toVertex = Vertex(2L, "2")

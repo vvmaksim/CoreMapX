@@ -4,9 +4,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.formdev.flatlaf.FlatLightLaf
 import org.coremapx.app.AppLogger.logError
-import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.theme.ThemesManager.isDarkSystemDialogTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import java.io.File
 import javax.swing.JColorChooser
 import javax.swing.JFileChooser
@@ -18,7 +18,7 @@ class DialogManager {
         fun showOpenFileDialog(
             title: String = "Select graph file",
             directory: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
-            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = config.states.systemDialogTheme.value),
+            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = ConfigRepository.states.systemDialogTheme.value),
         ): File? =
             fileDialogManager(
                 selectionMode = JFileChooser.FILES_ONLY,
@@ -30,7 +30,7 @@ class DialogManager {
         fun showSelectDirectoryDialog(
             title: String = "Select Directory",
             directory: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
-            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = config.states.systemDialogTheme.value),
+            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = ConfigRepository.states.systemDialogTheme.value),
         ): String? =
             fileDialogManager(
                 selectionMode = JFileChooser.DIRECTORIES_ONLY,
@@ -43,7 +43,7 @@ class DialogManager {
             selectionMode: Int,
             title: String,
             directory: String = PrivateConfig.UserDirectory.HOME_DIR_PATH,
-            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = config.states.systemDialogTheme.value),
+            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = ConfigRepository.states.systemDialogTheme.value),
         ): JFileChooser? {
             try {
                 if (useDarkTheme) {
@@ -80,7 +80,7 @@ class DialogManager {
 
         fun showSelectColorDialog(
             initialColor: Color,
-            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = config.states.systemDialogTheme.value),
+            useDarkTheme: Boolean = isDarkSystemDialogTheme(systemDialogThemeAsString = ConfigRepository.states.systemDialogTheme.value),
         ): String? =
             colorDialogManager(
                 initialColor = initialColor,

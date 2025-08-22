@@ -10,10 +10,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
@@ -39,7 +39,7 @@ fun UserDirectoryBlock() {
                 LocalizationFormatter.getStringWithLineBreak(
                     startString = LocalizationManager.states.dialogs.userDirectoryAttention3Point1.value,
                 ),
-            color = config.states.warningColor.value,
+            color = ConfigRepository.states.warningColor.value,
         )
         Spacer(Modifier.height(8.dp))
         Text(
@@ -47,7 +47,7 @@ fun UserDirectoryBlock() {
                 LocalizationFormatter.getStringWithLineBreak(
                     startString = LocalizationManager.states.dialogs.userDirectoryAttention3Point2.value,
                 ),
-            color = config.states.warningColor.value,
+            color = ConfigRepository.states.warningColor.value,
         )
         Spacer(Modifier.height(8.dp))
         Text(
@@ -55,7 +55,7 @@ fun UserDirectoryBlock() {
                 LocalizationFormatter.getStringWithLineBreak(
                     startString = LocalizationManager.states.dialogs.userDirectoryAttention3Point3.value,
                 ),
-            color = config.states.warningColor.value,
+            color = ConfigRepository.states.warningColor.value,
         )
         Spacer(Modifier.height(8.dp))
         Text(

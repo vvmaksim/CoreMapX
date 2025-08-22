@@ -40,10 +40,10 @@ import model.database.sqlite.repository.EdgeRepository
 import model.database.sqlite.repository.GraphRepository
 import model.database.sqlite.repository.VertexRepository
 import model.result.Result
-import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import org.coremapx.graph.GraphDatabase
 import view.appInterface.button.MainMenuTextButton
 import view.appInterface.button.SlideMenuButton
@@ -69,7 +69,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainMenu(
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier,
 ) {
-    val animationDuration = config.states.animationDuration.value
+    val animationDuration = ConfigRepository.states.animationDuration.value
 
     var showOpenGraphErrorsDialog by remember { mutableStateOf(false) }
     var showOpenRepositoryDialog by remember { mutableStateOf(false) }

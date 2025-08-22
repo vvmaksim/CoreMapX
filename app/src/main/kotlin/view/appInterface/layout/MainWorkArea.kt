@@ -34,9 +34,9 @@ import model.result.CommandErrors
 import model.result.Result
 import org.coremapx.app.AppLogger.logInfo
 import org.coremapx.app.AppLogger.logWarning
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialog.AddEdge
 import view.appInterface.dialog.AddVertex
 import view.appInterface.workspace.Console
@@ -89,12 +89,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun updateOutputMessages(newMessage: String) {
         outputMessages.value.add(newMessage)
-        outputMessages.value = outputMessages.value.takeLast(config.states.maxCountMessages.value).toMutableList()
+        outputMessages.value = outputMessages.value.takeLast(ConfigRepository.states.maxCountMessages.value).toMutableList()
     }
 
     fun updateUserCommands(newCommand: String) {
         userCommands.value.add(newCommand)
-        userCommands.value = userCommands.value.takeLast(config.states.maxCountUserCommands.value).toMutableList()
+        userCommands.value = userCommands.value.takeLast(ConfigRepository.states.maxCountUserCommands.value).toMutableList()
     }
 
     fun errorMessage(errorResult: Result.Error): String =
@@ -257,7 +257,7 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     .padding(bottom = 16.dp)
                     .align(Alignment.BottomCenter),
             backgroundColor =
-                if (config.states.isTransparentConsoleBlock.value) {
+                if (ConfigRepository.states.isTransparentConsoleBlock.value) {
                     Color.Transparent
                 } else {
                     MaterialTheme.colors.consoleBackground

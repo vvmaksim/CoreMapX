@@ -26,9 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialogElements.lines.ColorPickLine
 import view.appInterface.preview.PreviewSurface
 
@@ -41,7 +41,7 @@ fun BaseBlock(
     isExpanded: Boolean = true,
     onClick: (Boolean) -> Unit = {},
 ) {
-    val animationDuration = config.states.animationDuration.value
+    val animationDuration = ConfigRepository.states.animationDuration.value
 
     Column(modifier = modifier) {
         Row(

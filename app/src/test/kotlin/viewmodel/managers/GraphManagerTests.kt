@@ -12,8 +12,8 @@ import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.entities.UnweightedEdge
 import model.graph.entities.Vertex
 import model.result.Result
-import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -41,10 +41,10 @@ class GraphManagerTests {
     }
 
     val defaultGraphLayoutHeight =
-        config.states.graphLayoutHeight.value
+        ConfigRepository.states.graphLayoutHeight.value
             .toDouble()
     val defaultGraphLayoutWidth =
-        config.states.graphLayoutWidth.value
+        ConfigRepository.states.graphLayoutWidth.value
             .toDouble()
     val defaultLayoutStrategy = RandomStrategy<Long, Long>()
     val defaultIsVerticesLabelsVisible = false

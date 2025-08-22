@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LanguageCodesManager.getAllFullLanguagesNames
 import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsStringByFullNameWithFallback
@@ -24,6 +23,7 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.IS_EXPANDED_SETTINGS
 import org.coremapx.app.userDirectory.config.ConfigKeys.LANGUAGE
 import org.coremapx.app.userDirectory.config.ConfigKeys.SYSTEM_DIALOG_THEME
 import org.coremapx.app.userDirectory.config.ConfigKeys.THEME
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialogElements.lines.DropdownSelectLine
 import view.appInterface.dialogElements.lines.SwitchLine
 import view.appInterface.preview.PreviewSurface
@@ -31,10 +31,10 @@ import java.util.Locale.getDefault
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
-    val language by remember { config.states.language }
-    val theme by remember { config.states.theme }
-    val systemDialogTheme by remember { config.states.systemDialogTheme }
+fun GeneralBlock(isExpandedSettings: Boolean = ConfigRepository.states.isExpandedSettings.value) {
+    val language by remember { ConfigRepository.states.language }
+    val theme by remember { ConfigRepository.states.theme }
+    val systemDialogTheme by remember { ConfigRepository.states.systemDialogTheme }
 
     val dropdownSelectButtonModifier =
         Modifier
@@ -46,7 +46,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             items = getAllFullLanguagesNames(),
             selectedItem = getFullLanguageNameByStringCodeWithFallback(codeAsString = language),
             onItemSelected = { selectedLanguage: String ->
-                config.setValue(
+                ConfigRepository.setValue(
                     key = LANGUAGE,
                     value = getCodeAsStringByFullNameWithFallback(selectedLanguage),
                 )
@@ -61,8 +61,8 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             items = getAllAppThemes(),
             selectedItem = theme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
-                config.setValue(THEME, it.lowercase())
-                config.updateTheme()
+                ConfigRepository.setValue(THEME, it.lowercase())
+                ConfigRepository.updateTheme()
             },
             modifier = dropdownSelectButtonModifier,
             description = LocalizationManager.states.descriptions.descriptionTheme.value,
@@ -74,8 +74,8 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
             items = getAllSystemDialogThemes(),
             selectedItem = systemDialogTheme.replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
             onItemSelected = {
-                config.setValue(SYSTEM_DIALOG_THEME, it.lowercase())
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(SYSTEM_DIALOG_THEME, it.lowercase())
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = dropdownSelectButtonModifier,
             description =
@@ -92,7 +92,7 @@ fun GeneralBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.
                     startString = LocalizationManager.states.descriptions.descriptionIsExpandedSettings.value,
                 ),
             checked = isExpandedSettings,
-            onCheckedChange = { config.setValue(IS_EXPANDED_SETTINGS, it.toString()) },
+            onCheckedChange = { ConfigRepository.setValue(IS_EXPANDED_SETTINGS, it.toString()) },
             isExpanded = isExpandedSettings,
         )
     }
