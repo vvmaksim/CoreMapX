@@ -3,8 +3,6 @@ package viewmodel.graph
 import androidx.compose.runtime.State
 import androidx.compose.ui.unit.dp
 import model.dto.VisibleStates
-import model.graph.concrete.DirectedUnweightedGraph
-import model.graph.concrete.DirectedWeightedGraph
 import model.graph.contracts.Graph
 
 class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
@@ -35,7 +33,7 @@ class GraphViewModel<E : Comparable<E>, V : Comparable<V>>(
                 from = from,
                 to = to,
                 edge = edge,
-                isDirected = graph is DirectedUnweightedGraph<*> || graph is DirectedWeightedGraph<*>,
+                isDirected = graph.isDirected,
                 _weightVisible = visibleStates.value.edgesWeights,
                 _idVisible = visibleStates.value.edgesIds,
             )

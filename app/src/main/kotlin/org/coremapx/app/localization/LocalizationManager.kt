@@ -3,6 +3,7 @@ package org.coremapx.app.localization
 import model.result.LocalizationErrors
 import model.result.Result
 import org.coremapx.app.AppLogger.logDebug
+import org.coremapx.app.AppLogger.logError
 import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.objects.LanguageCodes
 import org.coremapx.app.localization.objects.LanguageCodesManager.getCodeAsString
@@ -67,6 +68,7 @@ object LocalizationManager {
                     val value = localizationMap[key] ?: getFallBackText(key)
                     stateGroup.updateValue(key, value)
                 } catch (ex: Exception) {
+                    logError("updateStateGroup ERROR for $property ${property.call(keysGroup) as String}. Error: $ex")
                     failedKeys.add(property.call(keysGroup) as String)
                 }
             }

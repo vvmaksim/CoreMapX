@@ -52,17 +52,17 @@ class ConfigTests {
         assertEquals(Color(0xFF4CAF50), config.states.shortestPathColor.value)
         assertEquals(Color(0xFFFF9800), config.states.otherPathsColor.value)
         assertEquals(Color(0xFFFFFFFF), config.states.canvasBackgroundColor.value)
-        assertEquals(Color(0xFFFFFFFF), config.states.commandLineBlockBackgroundColor.value)
+        assertEquals(Color(0xFFFFFFFF), config.states.consoleBackgroundColor.value)
         assertEquals(720, config.states.mainScreenStartHeight.value)
         assertEquals(1280, config.states.mainScreenStartWidth.value)
         assertEquals("Maximized", config.states.startWindowPlacement.value)
         assertEquals(40, config.states.titleBarHeight.value)
         assertEquals(20, config.states.titleBarIconSize.value)
-        assertEquals(200, config.states.messageOutputHeight.value)
+        assertEquals(325, config.states.consoleHeight.value)
         assertEquals(100, config.states.maxCountMessages.value)
         assertEquals(200, config.states.maxCountUserCommands.value)
-        assertEquals(700, config.states.commandFieldWidth.value)
-        assertEquals(false, config.states.isTransparentCommandLineBlock.value)
+        assertEquals(750, config.states.consoleWidth.value)
+        assertEquals(false, config.states.isTransparentConsoleBlock.value)
         assertEquals(10000, config.states.graphLayoutHeight.value)
         assertEquals(10000, config.states.graphLayoutWidth.value)
         assertEquals(15, config.states.vertexRadius.value)
@@ -73,7 +73,6 @@ class ConfigTests {
         assertEquals(1.0F, config.states.canvasDragRatio.value)
         assertEquals(10000, config.states.canvasLimit.value)
         assertEquals(300, config.states.animationDuration.value)
-        assertEquals(50, config.states.commandFieldScrollDelay.value)
 
         // Set all values
         val color = "#525252"
@@ -102,17 +101,17 @@ class ConfigTests {
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.SHORTEST_PATH_COLOR, color))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.OTHER_PATHS_COLOR, color))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CANVAS_BACKGROUND_COLOR, color))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR, color))
+        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CONSOLE_BACKGROUND_COLOR, color))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MAIN_SCREEN_START_HEIGHT, "1720"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MAIN_SCREEN_START_WIDTH, "2280"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.START_WINDOW_PLACEMENT, "Floating"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.TITLE_BAR_HEIGHT, "52"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.TITLE_BAR_ICON_SIZE, "52"))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT, "252"))
+        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CONSOLE_HEIGHT, "252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MAX_COUNT_MESSAGES, "152"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.MAX_COUNT_USER_COMMANDS, "252"))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.COMMAND_FIELD_WIDTH, "752"))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK, "true"))
+        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CONSOLE_WIDTH, "752"))
+        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.IS_TRANSPARENT_CONSOLE, "true"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.GRAPH_LAYOUT_HEIGHT, "5252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.GRAPH_LAYOUT_WIDTH, "5252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.VERTEX_RADIUS, "52"))
@@ -123,7 +122,6 @@ class ConfigTests {
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CANVAS_DRAG_RATIO, "5.5"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CANVAS_LIMIT, "5252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.ANIMATION_DURATION, "520"))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.COMMAND_FIELD_SCROLL_DELAY, "52"))
 
         // Check new values
         assertEquals("ru", config.states.language.value)
@@ -151,17 +149,17 @@ class ConfigTests {
         assertEquals(color.toColorOrNull(), config.states.shortestPathColor.value)
         assertEquals(color.toColorOrNull(), config.states.otherPathsColor.value)
         assertEquals(color.toColorOrNull(), config.states.canvasBackgroundColor.value)
-        assertEquals(color.toColorOrNull(), config.states.commandLineBlockBackgroundColor.value)
+        assertEquals(color.toColorOrNull(), config.states.consoleBackgroundColor.value)
         assertEquals(1720, config.states.mainScreenStartHeight.value)
         assertEquals(2280, config.states.mainScreenStartWidth.value)
         assertEquals("Floating", config.states.startWindowPlacement.value)
         assertEquals(52, config.states.titleBarHeight.value)
         assertEquals(52, config.states.titleBarIconSize.value)
-        assertEquals(252, config.states.messageOutputHeight.value)
+        assertEquals(252, config.states.consoleHeight.value)
         assertEquals(152, config.states.maxCountMessages.value)
         assertEquals(252, config.states.maxCountUserCommands.value)
-        assertEquals(752, config.states.commandFieldWidth.value)
-        assertEquals(true, config.states.isTransparentCommandLineBlock.value)
+        assertEquals(752, config.states.consoleWidth.value)
+        assertEquals(true, config.states.isTransparentConsoleBlock.value)
         assertEquals(5252, config.states.graphLayoutHeight.value)
         assertEquals(5252, config.states.graphLayoutWidth.value)
         assertEquals(52, config.states.vertexRadius.value)
@@ -172,7 +170,6 @@ class ConfigTests {
         assertEquals(5.5F, config.states.canvasDragRatio.value)
         assertEquals(5252, config.states.canvasLimit.value)
         assertEquals(520, config.states.animationDuration.value)
-        assertEquals(52, config.states.commandFieldScrollDelay.value)
     }
 
     @Test
@@ -198,7 +195,7 @@ class ConfigTests {
 
     @Test
     fun `set value for boolean on invalid value`() {
-        val setResult = config.setValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK, "incorrectBoolean")
+        val setResult = config.setValue(ConfigKeys.IS_TRANSPARENT_CONSOLE, "incorrectBoolean")
         assertIs<Result.Error>(setResult)
         assertEquals("IncorrectBoolean", setResult.error.type)
     }
@@ -219,14 +216,14 @@ class ConfigTests {
 
     @Test
     fun `set value for integer on incorrect less then minValue value, maxValue and minValue exist`() {
-        val setResult = config.setValue(ConfigKeys.COMMAND_FIELD_WIDTH, "52")
+        val setResult = config.setValue(ConfigKeys.CONSOLE_WIDTH, "52")
         assertIs<Result.Error>(setResult)
         assertEquals("WithoutIntRange", setResult.error.type)
     }
 
     @Test
     fun `set value for integer on incorrect less then minValue value, only minValue exist`() {
-        val setResult = config.setValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT, "52")
+        val setResult = config.setValue(ConfigKeys.CONSOLE_HEIGHT, "52")
         assertIs<Result.Error>(setResult)
         assertEquals("IntDisadvantage", setResult.error.type)
     }

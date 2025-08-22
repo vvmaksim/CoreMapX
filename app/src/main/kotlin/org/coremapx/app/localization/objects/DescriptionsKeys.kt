@@ -30,7 +30,7 @@ object DescriptionsKeys {
     const val SHORTEST_PATH_COLOR = "descriptionShortestPathColor"
     const val OTHER_PATHS_COLOR = "descriptionOtherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "descriptionCanvasBackgroundColor"
-    const val COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "descriptionCommandLineBlockBackgroundColor"
+    const val CONSOLE_BACKGROUND_COLOR = "descriptionConsoleBackgroundColor"
 
     // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "descriptionMainScreenStartHeight"
@@ -41,12 +41,12 @@ object DescriptionsKeys {
     const val TITLE_BAR_HEIGHT = "descriptionTitleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "descriptionTitleBarIconSize"
 
-    // // Command Field Block
-    const val MESSAGE_OUTPUT_HEIGHT = "descriptionMessageOutputHeight"
+    // // Console Block
+    const val CONSOLE_HEIGHT = "descriptionConsoleHeight"
+    const val CONSOLE_WIDTH = "descriptionConsoleWidth"
     const val MAX_COUNT_MESSAGES = "descriptionMaxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "descriptionMaxCountUserCommands"
-    const val COMMAND_FIELD_WIDTH = "descriptionCommandFieldWidth"
-    const val IS_TRANSPARENT_COMMAND_LINE_BLOCK = "descriptionIsTransparentCommandLineBlock"
+    const val IS_TRANSPARENT_CONSOLE = "descriptionIsTransparentConsole"
 
     // // Work Area Block
     const val GRAPH_LAYOUT_HEIGHT = "descriptionGraphLayoutHeight"
@@ -61,7 +61,6 @@ object DescriptionsKeys {
 
     // // Performance Block
     const val ANIMATION_DURATION = "descriptionAnimationDuration"
-    const val COMMAND_FIELD_SCROLL_DELAY = "descriptionCommandFieldScrollDelay"
 
     // Top Menu
     const val TOP_MENU_FIND_PATH_START_VERTEX = "descriptionTopMenuFindPathStartVertex"

@@ -32,7 +32,7 @@ object DialogsKeys {
     const val SETTINGS_COLORS_BLOCK_NAME = "settingsColorsBlockName"
     const val SETTINGS_MAIN_SCREEN_BLOCK_NAME = "settingsMainScreenBlockName"
     const val SETTINGS_TITLE_BAR_BLOCK_NAME = "settingsTitleBarBlockName"
-    const val SETTINGS_COMMAND_FIELD_BLOCK_NAME = "settingsCommandFieldBlockName"
+    const val SETTINGS_CONSOLE_BLOCK_NAME = "settingsConsoleBlockName"
     const val SETTINGS_WORK_AREA_BLOCK_NAME = "settingsWorkAreaBlockName"
     const val SETTINGS_PERFORMANCE_BLOCK_NAME = "settingsPerformanceBlockName"
 
@@ -64,7 +64,7 @@ object DialogsKeys {
     const val COLORS_SHORTEST_PATH_COLOR = "colorsShortestPathColor"
     const val COLORS_OTHER_PATHS_COLOR = "colorsOtherPathsColor"
     const val COLORS_CANVAS_BACKGROUND_COLOR = "colorsCanvasBackgroundColor"
-    const val COLORS_COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "colorsCommandLineBlockBackgroundColor"
+    const val COLORS_CONSOLE_BACKGROUND_COLOR = "colorsConsoleBackgroundColor"
 
     // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
@@ -75,12 +75,12 @@ object DialogsKeys {
     const val TITLE_BAR_HEIGHT = "titleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "titleBarIconSize"
 
-    // // Command Field Block
-    const val COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT = "commandFieldMessageOutputHeight"
-    const val COMMAND_FIELD_MAX_COUNT_MESSAGES = "commandFieldMaxCountMessages"
-    const val COMMAND_FIELD_MAX_COUNT_USER_COMMANDS = "commandFieldMaxCountUserCommands"
-    const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
-    const val COMMAND_FIELD_IS_TRANSPARENT = "commandFieldIsTransparent"
+    // // Console Block
+    const val CONSOLE_HEIGHT = "consoleHeight"
+    const val CONSOLE_WIDTH = "consoleWidth"
+    const val CONSOLE_MAX_COUNT_MESSAGES = "consoleMaxCountMessages"
+    const val CONSOLE_MAX_COUNT_USER_COMMANDS = "consoleMaxCountUserCommands"
+    const val CONSOLE_IS_TRANSPARENT = "consoleIsTransparent"
 
     // // Work Area Block
     const val WORK_AREA_GRAPH_LAYOUT_HEIGHT = "workAreaGraphLayoutHeight"
@@ -95,7 +95,6 @@ object DialogsKeys {
 
     // // Performance Block
     const val PERFORMANCE_ANIMATION_DURATION = "performanceAnimationDuration"
-    const val PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY = "performanceCommandFieldScrollDelay"
 
     // Analytics
     const val ANALYTICS_TITLE = "analyticsTitle"
@@ -147,6 +146,31 @@ object DialogsKeys {
     const val FIND_PATH_MAX_PATHS_PLACEHOLDER = "findPathMaxPathsPlaceholder"
     const val FIND_PATH_FIND_STRATEGY = "findPathFindStrategy"
     const val FIND_PATH_FIND_BUTTON = "findPathFindButton"
+
+    // Add Vertex
+    const val ADD_VERTEX_TITLE = "addVertexTitle"
+    const val ADD_VERTEX_VERTEX_ID_FIELD_LABEL = "addVertexVertexIdFieldLabel"
+    const val ADD_VERTEX_VERTEX_LABEL_FIELD_LABEL = "addVertexVertexLabelFieldLabel"
+    const val ADD_VERTEX_VERTEX_ID_AND_VERTEX_LABEL_CANNOT_BE_EMPTY = "addVertexVertexIdAndVertexLabelCannotBeEmpty"
+    const val ADD_VERTEX_VERTEX_ID_CANNOT_BE_EMPTY = "addVertexVertexIdCannotBeEmpty"
+    const val ADD_VERTEX_VERTEX_LABEL_CANNOT_BE_EMPTY = "addVertexVertexLabelCannotBeEmpty"
+    const val ADD_VERTEX_VERTEX_ID_MUST_BE_LONG = "addVertexVertexIdMustBeLong"
+    const val ADD_VERTEX_BUTTON = "addVertexButton"
+
+    // Add Edge
+    const val ADD_EDGE_TITLE = "addEdgeTitle"
+    const val ADD_EDGE_FROM_VERTEX_ID_FIELD_LABEL = "addEdgeFromVertexIdFieldLabel"
+    const val ADD_EDGE_TO_VERTEX_ID_FIELD_LABEL = "addEdgeToVertexIdFieldLabel"
+    const val ADD_EDGE_WEIGHT_FIELD_LABEL = "addEdgeWeightFieldLabel"
+    const val ADD_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_CANNOT_BE_EMPTY = "addEdgeFromVertexIdAndToVertexIdCannotBeEmpty"
+    const val ADD_EDGE_FROM_VERTEX_ID_CANNOT_BE_EMPTY = "addEdgeFromVertexIdCannotBeEmpty"
+    const val ADD_EDGE_TO_VERTEX_ID_CANNOT_BE_EMPTY = "addEdgeToVertexIdCannotBeEmpty"
+    const val ADD_EDGE_WEIGHT_CANNOT_BE_EMPTY = "addEdgeWeightCannotBeEmpty"
+    const val ADD_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_MUST_BE_LONG = "addEdgeFromVertexIdAndToVertexIdMustBeLong"
+    const val ADD_EDGE_FROM_VERTEX_ID_MUST_BE_LONG = "addEdgeFromVertexIdMustBeLong"
+    const val ADD_EDGE_TO_VERTEX_ID_MUST_BE_LONG = "addEdgeToVertexIdMustBeLong"
+    const val ADD_EDGE_WEIGHT_MUST_BE_LONG = "addEdgeWeightMustBeLong"
+    const val ADD_EDGE_BUTTON = "addEdgeButton"
 
     // Help
     const val HELP_TITLE = "helpTitle"

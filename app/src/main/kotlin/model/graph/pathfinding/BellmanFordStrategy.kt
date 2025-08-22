@@ -1,7 +1,5 @@
 package model.graph.pathfinding
 
-import model.graph.concrete.DirectedUnweightedGraph
-import model.graph.concrete.DirectedWeightedGraph
 import model.graph.contracts.Edge
 import model.graph.contracts.Graph
 import model.graph.entities.WeightedEdge
@@ -39,7 +37,7 @@ class BellmanFordStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStr
                     distances[v] = distances.getValue(u) + weight
                     previous[v] = u to edge.id
                 }
-                if (!isDirected(graph)) {
+                if (!graph.isDirected) {
                     if (distances.getValue(v) != Long.MAX_VALUE && distances.getValue(v) + weight < distances.getValue(u)) {
                         distances[u] = distances.getValue(v) + weight
                         previous[u] = v to edge.id
@@ -55,7 +53,7 @@ class BellmanFordStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStr
             if (distances.getValue(u) != Long.MAX_VALUE && distances.getValue(u) + weight < distances.getValue(v)) {
                 return Result.Error(PathfindingErrors.NegativeCycle())
             }
-            if (!isDirected(graph)) {
+            if (!graph.isDirected) {
                 if (distances.getValue(v) != Long.MAX_VALUE && distances.getValue(v) + weight < distances.getValue(u)) {
                     return Result.Error(PathfindingErrors.NegativeCycle())
                 }
@@ -79,6 +77,4 @@ class BellmanFordStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStr
     }
 
     private fun getEdgeWeight(edge: Edge<E, V>): Long = if (edge is WeightedEdge<E, V>) edge.weight else 1L
-
-    private fun isDirected(graph: Graph<E, V>): Boolean = graph is DirectedUnweightedGraph || graph is DirectedWeightedGraph
 }

@@ -17,7 +17,7 @@ import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
-import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.config.ConfigKeys.CONSOLE_BACKGROUND_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.ERROR
 import org.coremapx.app.userDirectory.config.ConfigKeys.HOVERED_BORDER_COLOR
@@ -63,7 +63,7 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
     val shortestPathColor by remember { config.states.shortestPathColor }
     val otherPathsColor by remember { config.states.otherPathsColor }
     val canvasBackgroundColor by remember { config.states.canvasBackgroundColor }
-    val commandLineBackgroundColor by remember { config.states.commandLineBlockBackgroundColor }
+    val consoleBackgroundColor by remember { config.states.consoleBackgroundColor }
 
     Column {
         ColorPickLine(
@@ -328,16 +328,16 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         )
         Spacer(Modifier.height(8.dp))
         ColorPickLine(
-            selectedColor = commandLineBackgroundColor,
+            selectedColor = consoleBackgroundColor,
             onColorSelected = {
-                config.setValue(COMMAND_LINE_BLOCK_BACKGROUND_COLOR, it)
+                config.setValue(CONSOLE_BACKGROUND_COLOR, it)
                 config.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
-            title = LocalizationManager.states.dialogs.colorsCommandLineBlockBackgroundColor.value,
+            title = LocalizationManager.states.dialogs.colorsConsoleBackgroundColor.value,
             description =
                 LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionCommandLineBlockBackgroundColor.value,
+                    startString = LocalizationManager.states.descriptions.descriptionConsoleBackgroundColor.value,
                 ),
             isExpanded = isExpandedSettings,
         )

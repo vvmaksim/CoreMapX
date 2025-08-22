@@ -1,5 +1,9 @@
 package model.graph.base
 
+import model.graph.concrete.DirectedUnweightedGraph
+import model.graph.concrete.DirectedWeightedGraph
+import model.graph.concrete.UndirectedUnweightedGraph
+import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.contracts.Edge
 import model.graph.contracts.Graph
 import model.graph.entities.Vertex
@@ -18,6 +22,24 @@ abstract class AbstractGraph<E : Comparable<E>, V : Comparable<V>> : Graph<E, V>
 
     override val edges: Map<E, Edge<E, V>>
         get() = _edges.toMap()
+
+    override val isDirected: Boolean =
+        when (this) {
+            is UndirectedUnweightedGraph -> false
+            is UndirectedWeightedGraph -> false
+            is DirectedUnweightedGraph -> true
+            is DirectedWeightedGraph -> true
+            else -> false // This is fallback
+        }
+
+    override val isWeighted: Boolean =
+        when (this) {
+            is UndirectedUnweightedGraph -> false
+            is UndirectedWeightedGraph -> true
+            is DirectedUnweightedGraph -> false
+            is DirectedWeightedGraph -> true
+            else -> false // This is fallback
+        }
 
     override fun getVertex(id: V): Vertex<V>? = _vertices[id]
 

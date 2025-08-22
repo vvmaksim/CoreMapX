@@ -68,6 +68,12 @@ object UIKeys {
     const val FORCE_DIRECTED_MENU_GRAVITY = "forceDirectedMenuGravity"
     const val FORCE_DIRECTED_MENU_SPEED = "forceDirectedMenuSpeed"
 
+    // Lower Right Menu
+    const val LOWER_RIGHT_MENU_ADD_VERTEX_BUTTON = "lowerRightMenuAddVertexButton"
+    const val LOWER_RIGHT_MENU_ADD_VERTEX_ICON_DESCRIPTION = "lowerRightMenuAddVertexIconDescription"
+    const val LOWER_RIGHT_MENU_ADD_EDGE_BUTTON = "lowerRightMenuAddEdgeButton"
+    const val LOWER_RIGHT_MENU_ADD_EDGE_ICON_DESCRIPTION = "lowerRightMenuAddEdgeIconDescription"
+
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"
     const val ERROR_NO_DESCRIPTION_MESSAGE = "errorNoDescriptionMessage"

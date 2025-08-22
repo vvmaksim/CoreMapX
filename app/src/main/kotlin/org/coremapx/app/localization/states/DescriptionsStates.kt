@@ -33,7 +33,7 @@ class DescriptionsStates : LocalizationState {
     val descriptionShortestPathColor = mutableStateOf("")
     val descriptionOtherPathsColor = mutableStateOf("")
     val descriptionCanvasBackgroundColor = mutableStateOf("")
-    val descriptionCommandLineBlockBackgroundColor = mutableStateOf("")
+    val descriptionConsoleBackgroundColor = mutableStateOf("")
 
     // // Main Screen Block
     val descriptionMainScreenStartHeight = mutableStateOf("")
@@ -44,12 +44,12 @@ class DescriptionsStates : LocalizationState {
     val descriptionTitleBarHeight = mutableStateOf("")
     val descriptionTitleBarIconSize = mutableStateOf("")
 
-    // // Command Field Block
-    val descriptionMessageOutputHeight = mutableStateOf("")
+    // // Console Block
+    val descriptionConsoleHeight = mutableStateOf("")
+    val descriptionConsoleWidth = mutableStateOf("")
     val descriptionMaxCountMessages = mutableStateOf("")
     val descriptionMaxCountUserCommands = mutableStateOf("")
-    val descriptionCommandFieldWidth = mutableStateOf("")
-    val descriptionIsTransparentCommandLineBlock = mutableStateOf("")
+    val descriptionIsTransparentConsole = mutableStateOf("")
 
     // // Work Area Block
     val descriptionGraphLayoutHeight = mutableStateOf("")
@@ -64,7 +64,6 @@ class DescriptionsStates : LocalizationState {
 
     // // Performance Block
     val descriptionAnimationDuration = mutableStateOf("")
-    val descriptionCommandFieldScrollDelay = mutableStateOf("")
 
     // Top Menu
     val descriptionTopMenuFindPathStartVertex = mutableStateOf("")
@@ -105,7 +104,7 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.SHORTEST_PATH_COLOR -> descriptionShortestPathColor.value = value
             DescriptionsKeys.OTHER_PATHS_COLOR -> descriptionOtherPathsColor.value = value
             DescriptionsKeys.CANVAS_BACKGROUND_COLOR -> descriptionCanvasBackgroundColor.value = value
-            DescriptionsKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR -> descriptionCommandLineBlockBackgroundColor.value = value
+            DescriptionsKeys.CONSOLE_BACKGROUND_COLOR -> descriptionConsoleBackgroundColor.value = value
             // // Main Screen Block
             DescriptionsKeys.MAIN_SCREEN_START_HEIGHT -> descriptionMainScreenStartHeight.value = value
             DescriptionsKeys.MAIN_SCREEN_START_WIDTH -> descriptionMainScreenStartWidth.value = value
@@ -113,12 +112,12 @@ class DescriptionsStates : LocalizationState {
             // // Title Bar Block
             DescriptionsKeys.TITLE_BAR_HEIGHT -> descriptionTitleBarHeight.value = value
             DescriptionsKeys.TITLE_BAR_ICON_SIZE -> descriptionTitleBarIconSize.value = value
-            // // Command Field Block
-            DescriptionsKeys.MESSAGE_OUTPUT_HEIGHT -> descriptionMessageOutputHeight.value = value
+            // // Console Block
+            DescriptionsKeys.CONSOLE_HEIGHT -> descriptionConsoleHeight.value = value
+            DescriptionsKeys.CONSOLE_WIDTH -> descriptionConsoleWidth.value = value
             DescriptionsKeys.MAX_COUNT_MESSAGES -> descriptionMaxCountMessages.value = value
             DescriptionsKeys.MAX_COUNT_USER_COMMANDS -> descriptionMaxCountUserCommands.value = value
-            DescriptionsKeys.COMMAND_FIELD_WIDTH -> descriptionCommandFieldWidth.value = value
-            DescriptionsKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK -> descriptionIsTransparentCommandLineBlock.value = value
+            DescriptionsKeys.IS_TRANSPARENT_CONSOLE -> descriptionIsTransparentConsole.value = value
             // // Work Area Block
             DescriptionsKeys.GRAPH_LAYOUT_HEIGHT -> descriptionGraphLayoutHeight.value = value
             DescriptionsKeys.GRAPH_LAYOUT_WIDTH -> descriptionGraphLayoutWidth.value = value
@@ -131,7 +130,6 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.CANVAS_LIMIT -> descriptionCanvasLimit.value = value
             // // Performance Block
             DescriptionsKeys.ANIMATION_DURATION -> descriptionAnimationDuration.value = value
-            DescriptionsKeys.COMMAND_FIELD_SCROLL_DELAY -> descriptionCommandFieldScrollDelay.value = value
 
             // Top Menu
             DescriptionsKeys.TOP_MENU_FIND_PATH_START_VERTEX -> descriptionTopMenuFindPathStartVertex.value = value

@@ -75,7 +75,7 @@ settingsGeneralBlockName=Основные
 settingsColorsBlockName=Цвета
 settingsMainScreenBlockName=Основной экран
 settingsTitleBarBlockName=Заголовочная панель
-settingsCommandFieldBlockName=Командная строка
+settingsConsoleBlockName=Консоль
 settingsWorkAreaBlockName=Рабочая область
 settingsPerformanceBlockName=Анимации
 # General Block
@@ -105,7 +105,7 @@ colorsEdgeMainColor=Основной цвет ребра
 colorsShortestPathColor=Цвет кратчайшего найденного пути
 colorsOtherPathsColor=Цвет остальных найденных путей
 colorsCanvasBackgroundColor=Цвет фона холста
-colorsCommandLineBlockBackgroundColor=Цвет фона командной строки и её вывода
+colorsConsoleBackgroundColor=Цвет фона консоли
 # Main Screen Block
 mainScreenStartHeight=Начальная высота основного экрана
 mainScreenStartWidth=Начальная ширина основного экрана
@@ -113,12 +113,12 @@ mainScreenPlacement=Начальное размещение основного �
 # Title Bar Block
 titleBarHeight=Высота заголовочной панели
 titleBarIconSize=Размер иконок на заголовочной панели
-# Command Field Block
-commandFieldMessageOutputHeight=Высота области для вывода выходных сообщений командной строки
-commandFieldMaxCountMessages=Максимальное количество сообщений
-commandFieldMaxCountUserCommands=Максимальное количество пользовательских команд
-commandFieldWidth=Ширина командной строки
-commandFieldIsTransparent=Командная строка и её вывод прозрачны
+# Console Block
+consoleHeight=Высота консоли
+consoleWidth=Ширина консоли
+consoleMaxCountMessages=Максимальное количество сообщений
+consoleMaxCountUserCommands=Максимальное количество сохранённых команд
+consoleIsTransparent=Консоль прозрачна
 # Work Area Block
 workAreaGraphLayoutHeight=Высота раскладки графа
 workAreaGraphLayoutWidth=Ширина раскладки графа
@@ -131,7 +131,6 @@ workAreaCanvasDragRatio=Коэффициент перемещения холст
 workAreaCanvasLimit=Ограничитель холста
 # Performance Block
 performanceAnimationDuration=Продолжительность анимаций
-performanceCommandFieldScrollDelay=Задержка отправки выходных сообщений командной строки
 
  ! Find Path
 findPathTitle=Поиск пути
@@ -265,6 +264,31 @@ userDirectoryInterfaceLanguageConfigurationText1=Приложение подде
     в котором текст задаётся по ключам, используемым в приложении. \
     Чтобы применить перевод, в настройках выберите язык `Custom`.
 
+ ! Add Vertex
+addVertexTitle=Добавьте вершину
+addVertexVertexIdFieldLabel=Id
+addVertexVertexLabelFieldLabel=Label
+addVertexVertexIdAndVertexLabelCannotBeEmpty=Поля VertexId и VertexLabel не могут быть пустыми
+addVertexVertexIdCannotBeEmpty=Поле VertexId не может быть пустым
+addVertexVertexLabelCannotBeEmpty=Поле VertexLabel не может быть пустым
+addVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
+addVertexButton=Добавить
+
+ ! Add Edge
+addEdgeTitle=Добавьте ребро
+addEdgeFromVertexIdFieldLabel=fromVertexId
+addEdgeToVertexIdFieldLabel=toVertexId
+addEdgeWeightFieldLabel=Вес
+addEdgeFromVertexIdAndToVertexIdCannotBeEmpty=Поля FromVertexId и ToVertexId не могут быть пустыми
+addEdgeFromVertexIdCannotBeEmpty=Поле FromVertexId не может быть пустым
+addEdgeToVertexIdCannotBeEmpty=Поле ToVertexId не может быть пустым
+addEdgeWeightCannotBeEmpty=Поле Weight не может быть пустым
+addEdgeFromVertexIdAndToVertexIdMustBeLong=Поля FromVertexId и ToVertexId должны быть числами типа Long (8 байт)
+addEdgeFromVertexIdMustBeLong=Поле FromVertexId должно быть числом типа Long (8 байт)
+addEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть числом типа Long (8 байт)
+addEdgeWeightMustBeLong=Поле Weight должно быть числом типа Long (8 байт)
+addEdgeButton=Добавить ребро
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
@@ -291,6 +315,12 @@ forceDirectedMenuIterations=Итерации: {number}
 forceDirectedMenuArea=Площадь: {number}
 forceDirectedMenuGravity=Гравитация: {number}
 forceDirectedMenuSpeed=Скорость: {number}
+
+ ! Lower Right Menu
+lowerRightMenuAddVertexButton=Добавить вершину
+lowerRightMenuAddVertexIconDescription=Иконка добавления вершины
+lowerRightMenuAddEdgeButton=Добавить ребро
+lowerRightMenuAddEdgeIconDescription=Иконка добавления ребра
 
  ! Analytics
 analyticsTitle=Аналитика
@@ -370,9 +400,9 @@ descriptionEdgeMainColor=Основной цвет для отображения
 descriptionShortestPathColor=Цвет для отображения рёбер кратчайшего найденного пути.
 descriptionOtherPathsColor=Цвет для отображения рёбер, которые не всегда относятся к кратчайшему пути.
 descriptionCanvasBackgroundColor=Цвет фона для визуализации графа.
-descriptionCommandLineBlockBackgroundColor=Цвет фона для командной строки и её вывода. {nextLine}\
+descriptionConsoleBackgroundColor=Цвет фона консоли. {nextLine}\
     {nextLine}\
-    Этот цвет применяется, если параметр `isTransparentCommandLineBlock` отключен.
+    Этот цвет применяется, если параметр `isTransparentConsole` отключен.
 ## Main Screen Block
 descriptionMainScreenStartHeight=Начальная высота окна приложения.{nextLine}\
     {nextLine}\
@@ -399,11 +429,16 @@ descriptionTitleBarIconSize=Размер иконок в заголовочно�
     {nextLine}\
     Минимально=16{nextLine}\
     Рекомендовано=20
-## Command Field Block
-descriptionMessageOutputHeight=Максимальная высота подъёма для выходных сообщений командной строки.{nextLine}\
+## Console Block
+descriptionConsoleHeight=Высота консоли.{nextLine}\
     {nextLine}\
     Минимально=150{nextLine}\
     Рекомендовано=200
+descriptionConsoleWidth=Ширина консоли.{nextLine}\
+    {nextLine}\
+    Минимально=400{nextLine}\
+    Рекомендовано=700{nextLine}\
+    Максимально=900
 descriptionMaxCountMessages=Максимальное количество выводимых сообщений, которые запоминаются.{nextLine}\
     {nextLine}\
     Минимально=1{nextLine}\
@@ -414,15 +449,10 @@ descriptionMaxCountUserCommands=Максимальное количество з
     Минимально=1{nextLine}\
     Рекомендовано=200{nextLine}\
     Максимально=1000
-descriptionCommandFieldWidth=Ширина командной строки.{nextLine}\
+descriptionIsTransparentConsole=Этот параметр отвечает за прозрачность фона консоли.{nextLine}\
     {nextLine}\
-    Минимально=400{nextLine}\
-    Рекомендовано=700{nextLine}\
-    Максимально=900
-descriptionIsTransparentCommandLineBlock=Этот параметр отвечает за прозрачность фона командной строки и её вывода.{nextLine}\
-    {nextLine}\
-    Если он включен, фоны будут прозрачными.{nextLine}\
-    Если он выключен, фоны примут цвет, указанный в соответствующем параметре в настройках цвета.
+    Если он включен, фон будет прозрачным.{nextLine}\
+    Если он выключен, фон примет цвет, указанный в соответствующем параметре в настройках цвета.
 ## Work Area Block
 descriptionGraphLayoutHeight=Граф рисуется на определенной плоскости, вы можете изменить высоту этой плоскости.{nextLine}\
     {nextLine}\
@@ -469,11 +499,6 @@ descriptionAnimationDuration=Этот параметр используется 
     Минимально=100{nextLine}\
     Рекомендовано=300{nextLine}\
     Максимально=1500
-descriptionCommandFieldScrollDelay=При отправке команды в командной строке проходит определенное количество времени.{nextLine}\
-    {nextLine}\
-    Минимально=10{nextLine}\
-    Рекомендовано=50{nextLine}\
-    Максимально=300
 
 # Top Menu
 ## Find Path
@@ -514,15 +539,15 @@ zoomReduce=Уменьшить
 # Any Words
 vertices=вершин
 edges=рёбер
-messages=Сообщения
+console=Консоль
 enterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть
 settingsExpand=Раскрыть
 settingsHideDescription=Спрятать описание
 settingsShowDescription=Показать описание
-# Floating Message Panel
-floatingMessagePanelCollapse=Свернуть
-floatingMessagePanelExpand=Развернуть
+# Console
+consoleCollapse=Свернуть
+consoleExpand=Развернуть
 # Text Field
 textField=Текстовое поле

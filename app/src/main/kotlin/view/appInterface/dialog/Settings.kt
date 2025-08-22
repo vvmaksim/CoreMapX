@@ -27,7 +27,7 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
 import view.appInterface.dialogElements.blocks.BaseBlock
 import view.appInterface.dialogElements.blocks.settingsBlocks.ColorsBlock
-import view.appInterface.dialogElements.blocks.settingsBlocks.CommandFieldBlock
+import view.appInterface.dialogElements.blocks.settingsBlocks.ConsoleBlock
 import view.appInterface.dialogElements.blocks.settingsBlocks.GeneralBlock
 import view.appInterface.dialogElements.blocks.settingsBlocks.MainScreenBlock
 import view.appInterface.dialogElements.blocks.settingsBlocks.PerformanceBlock
@@ -64,7 +64,7 @@ fun SettingsContent(
     var isColorsExpanded by remember { mutableStateOf(isExpandedSettings) }
     var isMainScreenExpanded by remember { mutableStateOf(isExpandedSettings) }
     var isTitleBarExpanded by remember { mutableStateOf(isExpandedSettings) }
-    var isCommandFieldExpanded by remember { mutableStateOf(isExpandedSettings) }
+    var isConsoleExpanded by remember { mutableStateOf(isExpandedSettings) }
     var isWorkAreaExpanded by remember { mutableStateOf(isExpandedSettings) }
     var isPerformanceExpanded by remember { mutableStateOf(isExpandedSettings) }
 
@@ -125,10 +125,10 @@ fun SettingsContent(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 BaseBlock(
-                    title = LocalizationManager.states.dialogs.settingsCommandFieldBlockName.value,
-                    content = { CommandFieldBlock(isExpandedSettings) },
-                    isExpanded = isCommandFieldExpanded,
-                    onClick = { isCommandFieldExpanded = it },
+                    title = LocalizationManager.states.dialogs.settingsConsoleBlockName.value,
+                    content = { ConsoleBlock(isExpandedSettings) },
+                    isExpanded = isConsoleExpanded,
+                    onClick = { isConsoleExpanded = it },
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 BaseBlock(

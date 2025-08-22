@@ -2,22 +2,13 @@ package view.appInterface.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.Button
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Slider
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -32,14 +23,11 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInWindow
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.canvasBackground
-import extensions.commandLineBlockBackground
+import extensions.consoleBackground
 import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.result.CommandErrors
@@ -47,19 +35,18 @@ import model.result.Result
 import org.coremapx.app.AppLogger.logInfo
 import org.coremapx.app.AppLogger.logWarning
 import org.coremapx.app.config
-import org.coremapx.app.config.PrivateConfig
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
-import view.appInterface.button.ZoomButtons
-import view.appInterface.workspace.CommandLine
-import view.appInterface.workspace.FloatingMessagePanel
+import view.appInterface.dialog.AddEdge
+import view.appInterface.dialog.AddVertex
+import view.appInterface.workspace.Console
+import view.appInterface.workspace.ForceDirectedMenu
 import view.appInterface.workspace.GraphElementCounters
+import view.appInterface.workspace.LowerRightMenu
 import view.appInterface.workspace.TopMenu
 import view.graph.GraphView
 import viewmodel.MainScreenViewModel
 import viewmodel.graph.GraphViewModel
-import viewmodel.visualizationStrategy.AnimatedVisualizationStrategy
-import viewmodel.visualizationStrategy.AnimationParameters
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
@@ -67,22 +54,20 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
     viewModel: MainScreenViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
+    var commandCount by remember { mutableStateOf(0) }
+    var showAddVertexDialog by remember { mutableStateOf(false) }
+    var showAddEdgeDialog by remember { mutableStateOf(false) }
+    var consolePosition by remember { mutableStateOf(Offset.Zero) }
+
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
     val userCommands = remember { mutableStateOf(mutableListOf<String>()) }
-    val scrollState = rememberScrollState()
-    val graph = viewModel.graphManager.graph.value
-    var commandCount by remember { mutableStateOf(0) }
-    var commandText by remember { mutableStateOf(TextFieldValue("")) }
-    var commandHistoryIndex by remember { mutableStateOf(-1) }
+
     val scope = rememberCoroutineScope()
+    val graph = viewModel.graphManager.graph.value
+
     LaunchedEffect(Unit) {
         viewModel.graphManager.animationScope = scope
     }
-
-    val maxCountMessages = config.states.maxCountMessages.value
-    val maxUserCommands = config.states.maxCountUserCommands.value
-    val commandFieldWidth = config.states.commandFieldWidth.value.dp
-    val isTransparentCommandLineBlock = config.states.isTransparentCommandLineBlock.value
 
     val graphViewModel by remember(graph, commandCount) {
         derivedStateOf {
@@ -104,12 +89,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 
     fun updateOutputMessages(newMessage: String) {
         outputMessages.value.add(newMessage)
-        outputMessages.value = outputMessages.value.takeLast(maxCountMessages).toMutableList()
+        outputMessages.value = outputMessages.value.takeLast(config.states.maxCountMessages.value).toMutableList()
     }
 
     fun updateUserCommands(newCommand: String) {
         userCommands.value.add(newCommand)
-        userCommands.value = userCommands.value.takeLast(maxUserCommands).toMutableList()
+        userCommands.value = userCommands.value.takeLast(config.states.maxCountUserCommands.value).toMutableList()
     }
 
     fun errorMessage(errorResult: Result.Error): String =
@@ -191,213 +176,96 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 )
             }
 
-            val animatedStrategy = viewModel.graphManager.layoutStrategy.value as? AnimatedVisualizationStrategy<E, V>
-            if (animatedStrategy != null) {
-                val params = animatedStrategy.getParameters()
-                var iterations by remember { mutableStateOf(params.iterations.toFloat()) }
-                var area by remember { mutableStateOf(params.area.toFloat()) }
-                var gravity by remember { mutableStateOf(params.gravity.toFloat()) }
-                var speed by remember { mutableStateOf(params.speed.toFloat()) }
-                val isRunning = animatedStrategy.isRunning()
-
-                Card(
-                    modifier =
-                        Modifier
-                            .align(Alignment.TopEnd)
-                            .padding(16.dp)
-                            .widthIn(min = 320.dp, max = 400.dp),
-                    elevation = 16.dp,
-                    shape = MaterialTheme.shapes.large,
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = LocalizationManager.states.ui.forceDirectedMenuTitle.value,
-                            style = MaterialTheme.typography.h6,
-                        )
-                        Row {
-                            Button(onClick = {
-                                animatedStrategy.setParameters(
-                                    AnimationParameters(
-                                        iterations = iterations.toInt(),
-                                        area = area.toDouble(),
-                                        gravity = gravity.toDouble(),
-                                        speed = speed.toDouble(),
-                                    ),
-                                )
-                                viewModel.graphManager.resetGraphView()
-                            }) {
-                                Text(LocalizationManager.states.ui.forceDirectedMenuApply.value)
-                            }
-                            Spacer(Modifier.width(8.dp))
-                            Button(onClick = {
-                                if (isRunning) {
-                                    animatedStrategy.stopAnimation()
-                                } else {
-                                    viewModel.graphManager.resetGraphView()
-                                }
-                            }) {
-                                Text(
-                                    text =
-                                        if (isRunning) {
-                                            LocalizationManager.states.ui.forceDirectedMenuStop.value
-                                        } else {
-                                            LocalizationManager.states.ui.forceDirectedMenuStart.value
-                                        },
-                                )
-                            }
-                        }
-                        Text(
-                            text =
-                                LocalizationFormatter.getStringWithOneNumber(
-                                    startString = LocalizationManager.states.ui.forceDirectedMenuIterations.value,
-                                    number = iterations.toLong(),
-                                ),
-                        )
-                        Slider(
-                            value = iterations,
-                            onValueChange = { iterations = it },
-                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.iterationsRange,
-                        )
-                        Text(
-                            text =
-                                LocalizationFormatter.getStringWithOneNumber(
-                                    startString = LocalizationManager.states.ui.forceDirectedMenuArea.value,
-                                    number = area.toLong(),
-                                ),
-                        )
-                        Slider(
-                            value = area,
-                            onValueChange = { area = it },
-                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.areaRange,
-                        )
-                        Text(
-                            text =
-                                LocalizationFormatter.getStringWithOneNumber(
-                                    startString = LocalizationManager.states.ui.forceDirectedMenuGravity.value,
-                                    number = gravity,
-                                ),
-                        )
-                        Slider(
-                            value = gravity,
-                            onValueChange = { gravity = it },
-                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.gravityRange,
-                        )
-                        Text(
-                            text =
-                                LocalizationFormatter.getStringWithOneNumber(
-                                    startString = LocalizationManager.states.ui.forceDirectedMenuSpeed.value,
-                                    number = speed,
-                                ),
-                        )
-                        Slider(
-                            value = speed,
-                            onValueChange = { speed = it },
-                            valueRange = PrivateConfig.LayoutStrategies.ForceDirected.speedRange,
-                        )
-                    }
-                }
-            }
+            ForceDirectedMenu(
+                viewModel = viewModel,
+                modifier =
+                    Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(16.dp)
+                        .widthIn(min = 320.dp, max = 400.dp),
+            )
 
             TopMenu(
                 viewModel = viewModel,
                 modifier = Modifier.align(Alignment.TopStart),
             )
 
-            Row(
+            GraphElementCounters(
+                vertexCount =
+                    viewModel.graphManager.graph.value
+                        ?.vertices
+                        ?.size
+                        ?.toLong() ?: 0L,
+                edgeCount =
+                    viewModel.graphManager.graph.value
+                        ?.edges
+                        ?.size
+                        ?.toLong() ?: 0L,
+                vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
+                edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
                 modifier =
                     Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .horizontalScroll(scrollState)
-                        .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                GraphElementCounters(
-                    vertexCount =
-                        viewModel.graphManager.graph.value
-                            ?.vertices
-                            ?.size
-                            ?.toLong() ?: 0L,
-                    edgeCount =
-                        viewModel.graphManager.graph.value
-                            ?.edges
-                            ?.size
-                            ?.toLong() ?: 0L,
-                    vertexLabel = LocalizationManager.states.anyTextStates.vertices.value,
-                    edgeLabel = LocalizationManager.states.anyTextStates.edges.value,
-                    modifier = Modifier.align(Alignment.Bottom),
+                        .padding(16.dp)
+                        .align(Alignment.BottomStart),
+            )
+
+            LowerRightMenu(
+                onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
+                onAddVertex = { showAddVertexDialog = true },
+                onAddEdge = { showAddEdgeDialog = true },
+                modifier =
+                    Modifier
+                        .padding(16.dp)
+                        .align(Alignment.BottomEnd),
+            )
+
+            if (showAddVertexDialog) {
+                AddVertex(
+                    onDismiss = { showAddVertexDialog = false },
+                    onAdd = { commandLine: String ->
+                        handleCommand(commandLine)
+                    },
                 )
-                Spacer(Modifier.weight(1f))
+            }
 
-                var commandLinePosition by remember { mutableStateOf(Offset.Zero) }
-                val density = LocalDensity.current
-
-                Column(
-                    modifier =
-                        Modifier
-                            .width(commandFieldWidth)
-                            .align(Alignment.Bottom),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    if (commandLinePosition != Offset.Zero) {
-                        FloatingMessagePanel(
-                            outputMessages = outputMessages.value,
-                            modifier = Modifier,
-                            initialPosition =
-                                with(density) {
-                                    Offset(
-                                        x = commandLinePosition.x,
-                                        y =
-                                            commandLinePosition.y -
-                                                config.states.messageOutputHeight.value.dp
-                                                    .toPx(),
-                                    )
-                                },
-                            backgroundColor =
-                                if (isTransparentCommandLineBlock) {
-                                    Color.Transparent
-                                } else {
-                                    MaterialTheme.colors.commandLineBlockBackground
-                                },
-                            borderColor = MaterialTheme.colors.border,
-                        )
-                    }
-                    CommandLine(
-                        modifier =
-                            Modifier
-                                .width(commandFieldWidth)
-                                .align(Alignment.CenterHorizontally)
-                                .onGloballyPositioned { coordinates ->
-                                    commandLinePosition =
-                                        Offset(
-                                            x = coordinates.positionInWindow().x,
-                                            y = coordinates.positionInWindow().y,
-                                        )
-                                },
-                        commandLineBackgroundColor =
-                            if (isTransparentCommandLineBlock) {
-                                Color.Transparent
-                            } else {
-                                MaterialTheme.colors.commandLineBlockBackground
-                            },
-                        placeholderText = LocalizationManager.states.anyTextStates.enterCommand.value,
-                        onCommand = { command -> handleCommand(command) },
-                        commandText = commandText,
-                        onCommandTextChange = { commandText = it },
-                        userCommands = userCommands.value,
-                        commandHistoryIndex = commandHistoryIndex,
-                        onCommandHistoryIndexChange = { commandHistoryIndex = it },
-                    )
-                }
-                Spacer(Modifier.weight(1f))
-                ZoomButtons(
-                    modifier =
-                        Modifier
-                            .padding(8.dp)
-                            .align(Alignment.Bottom),
-                    onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
+            if (showAddEdgeDialog) {
+                AddEdge(
+                    onDismiss = { showAddEdgeDialog = false },
+                    onAdd = { commandLine: String ->
+                        handleCommand(commandLine)
+                    },
+                    isWeighted =
+                        viewModel.graphManager.graph.value
+                            ?.isWeighted ?: true,
                 )
             }
         },
     )
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        Console(
+            outputMessages = outputMessages.value,
+            userCommands = userCommands,
+            onCommand = { commandLine: String ->
+                handleCommand(commandLine)
+            },
+            modifier =
+                Modifier
+                    .offset { IntOffset(consolePosition.x.toInt(), consolePosition.y.toInt()) }
+                    .padding(bottom = 16.dp)
+                    .align(Alignment.BottomCenter),
+            backgroundColor =
+                if (config.states.isTransparentConsoleBlock.value) {
+                    Color.Transparent
+                } else {
+                    MaterialTheme.colors.consoleBackground
+                },
+            borderColor = MaterialTheme.colors.border,
+            onDrag = { dragAmount: Offset ->
+                consolePosition += dragAmount
+            },
+        )
+    }
 }

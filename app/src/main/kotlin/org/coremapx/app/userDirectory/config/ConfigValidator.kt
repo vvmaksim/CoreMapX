@@ -53,7 +53,7 @@ class ConfigValidator {
                 ConfigKeys.ON_BACKGROUND, ConfigKeys.ON_SURFACE, ConfigKeys.ON_ERROR, ConfigKeys.BORDER_COLOR, ConfigKeys.SUCCESS_COLOR,
                 ConfigKeys.WARNING_COLOR, ConfigKeys.VERTEX_MAIN_COLOR, ConfigKeys.HOVERED_BORDER_COLOR, ConfigKeys.EDGE_MAIN_COLOR,
                 ConfigKeys.SHORTEST_PATH_COLOR, ConfigKeys.OTHER_PATHS_COLOR, ConfigKeys.CANVAS_BACKGROUND_COLOR,
-                ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR,
+                ConfigKeys.CONSOLE_BACKGROUND_COLOR,
                 -> colorValidator(key, value)
 
                 // Main Screen
@@ -65,12 +65,12 @@ class ConfigValidator {
                 ConfigKeys.TITLE_BAR_HEIGHT -> intValidator(key, value, minValue = 35)
                 ConfigKeys.TITLE_BAR_ICON_SIZE -> intValidator(key, value, minValue = 16)
 
-                // Command Field
-                ConfigKeys.MESSAGE_OUTPUT_HEIGHT -> intValidator(key, value, minValue = 150)
+                // Console
+                ConfigKeys.CONSOLE_HEIGHT -> intValidator(key, value, minValue = 150)
                 ConfigKeys.MAX_COUNT_MESSAGES -> intValidator(key, value, minValue = 1, maxValue = 10000)
                 ConfigKeys.MAX_COUNT_USER_COMMANDS -> intValidator(key, value, minValue = 1, maxValue = 1000)
-                ConfigKeys.COMMAND_FIELD_WIDTH -> intValidator(key, value, minValue = 400, maxValue = 900)
-                ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK -> booleanValidator(key, value)
+                ConfigKeys.CONSOLE_WIDTH -> intValidator(key, value, minValue = 400, maxValue = 900)
+                ConfigKeys.IS_TRANSPARENT_CONSOLE -> booleanValidator(key, value)
 
                 // Work Area
                 ConfigKeys.GRAPH_LAYOUT_HEIGHT -> intValidator(key, value, minValue = 2000)
@@ -85,7 +85,6 @@ class ConfigValidator {
 
                 // Performance
                 ConfigKeys.ANIMATION_DURATION -> intValidator(key, value, minValue = 100, maxValue = 1500)
-                ConfigKeys.COMMAND_FIELD_SCROLL_DELAY -> intValidator(key, value, minValue = 10, maxValue = 300)
 
                 else -> Result.Error(ConfigErrors.UnknownProperty(key))
             }

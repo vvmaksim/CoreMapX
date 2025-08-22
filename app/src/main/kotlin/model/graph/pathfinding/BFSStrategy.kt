@@ -1,7 +1,5 @@
 package model.graph.pathfinding
 
-import model.graph.concrete.UndirectedUnweightedGraph
-import model.graph.concrete.UndirectedWeightedGraph
 import model.graph.contracts.Graph
 import model.result.PathfindingErrors
 import model.result.Result
@@ -37,7 +35,7 @@ class BFSStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStrategy<E,
                 if (edge.from.id == current && edge.to.id !in visited) {
                     queue.add(edge.to.id to path + edge.id)
                 }
-                if (graph is UndirectedUnweightedGraph<*> || graph is UndirectedWeightedGraph<*>) {
+                if (!graph.isDirected) {
                     if (edge.to.id == current && edge.from.id !in visited) {
                         queue.add(edge.from.id to path + edge.id)
                     }

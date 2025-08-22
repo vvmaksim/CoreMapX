@@ -409,4 +409,11 @@ class GraphTests {
         graph.addEdge(vertex1, vertex3)
         assertEquals(null, graph.removeEdge(vertex1.id, vertex2.id))
     }
+
+    @Test
+    fun `directed weighted graph get isDirected and isWeighted values`() {
+        val graph = DirectedWeightedGraph<Long>()
+        assertEquals(true, graph.isWeighted)
+        assertEquals(true, graph.isDirected)
+    }
 }

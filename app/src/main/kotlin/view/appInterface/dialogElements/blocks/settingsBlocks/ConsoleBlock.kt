@@ -14,39 +14,51 @@ import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_WIDTH
-import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK
+import org.coremapx.app.userDirectory.config.ConfigKeys.CONSOLE_HEIGHT
+import org.coremapx.app.userDirectory.config.ConfigKeys.CONSOLE_WIDTH
+import org.coremapx.app.userDirectory.config.ConfigKeys.IS_TRANSPARENT_CONSOLE
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_MESSAGES
 import org.coremapx.app.userDirectory.config.ConfigKeys.MAX_COUNT_USER_COMMANDS
-import org.coremapx.app.userDirectory.config.ConfigKeys.MESSAGE_OUTPUT_HEIGHT
 import view.appInterface.dialogElements.lines.NumberTextFieldLine
 import view.appInterface.dialogElements.lines.SwitchLine
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
-    val messageOutputHeight by remember { config.states.messageOutputHeight }
+fun ConsoleBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
+    val consoleHeight by remember { config.states.consoleHeight }
+    val consoleWidth by remember { config.states.consoleWidth }
     val maxCountMessages by remember { config.states.maxCountMessages }
     val maxCountUserCommands by remember { config.states.maxCountUserCommands }
-    val commandFieldWidth by remember { config.states.commandFieldWidth }
-    val isTransparentCommandLineBlock by remember { config.states.isTransparentCommandLineBlock }
+    val isTransparentConsoleBlock by remember { config.states.isTransparentConsoleBlock }
 
     Column {
         NumberTextFieldLine(
-            title = LocalizationManager.states.dialogs.commandFieldMessageOutputHeight.value,
+            title = LocalizationManager.states.dialogs.consoleHeight.value,
             valueType = Int::class,
-            value = TextFieldValue("$messageOutputHeight"),
-            onValueChange = { config.setValue(MESSAGE_OUTPUT_HEIGHT, it.text) },
+            value = TextFieldValue("$consoleHeight"),
+            onValueChange = { config.setValue(CONSOLE_HEIGHT, it.text) },
             description =
                 LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionMessageOutputHeight.value,
+                    startString = LocalizationManager.states.descriptions.descriptionConsoleHeight.value,
                 ),
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = LocalizationManager.states.dialogs.commandFieldMaxCountMessages.value,
+            title = LocalizationManager.states.dialogs.consoleWidth.value,
+            valueType = Int::class,
+            value = TextFieldValue("$consoleWidth"),
+            onValueChange = { config.setValue(CONSOLE_WIDTH, it.text) },
+            description =
+                LocalizationFormatter.getStringWithLineBreak(
+                    startString = LocalizationManager.states.descriptions.descriptionConsoleWidth.value,
+                ),
+            isExpanded = isExpandedSettings,
+        )
+        Spacer(Modifier.height(8.dp))
+        NumberTextFieldLine(
+            title = LocalizationManager.states.dialogs.consoleMaxCountMessages.value,
             valueType = Int::class,
             value = TextFieldValue("$maxCountMessages"),
             onValueChange = {
@@ -60,7 +72,7 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = LocalizationManager.states.dialogs.commandFieldMaxCountUserCommands.value,
+            title = LocalizationManager.states.dialogs.consoleMaxCountUserCommands.value,
             valueType = Int::class,
             value = TextFieldValue("$maxCountUserCommands"),
             onValueChange = {
@@ -73,26 +85,14 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
             isExpanded = isExpandedSettings,
         )
         Spacer(Modifier.height(8.dp))
-        NumberTextFieldLine(
-            title = LocalizationManager.states.dialogs.commandFieldWidth.value,
-            valueType = Int::class,
-            value = TextFieldValue("$commandFieldWidth"),
-            onValueChange = { config.setValue(COMMAND_FIELD_WIDTH, it.text) },
-            description =
-                LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionCommandFieldWidth.value,
-                ),
-            isExpanded = isExpandedSettings,
-        )
-        Spacer(Modifier.height(8.dp))
         SwitchLine(
-            title = LocalizationManager.states.dialogs.commandFieldIsTransparent.value,
+            title = LocalizationManager.states.dialogs.consoleIsTransparent.value,
             description =
                 LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionIsTransparentCommandLineBlock.value,
+                    startString = LocalizationManager.states.descriptions.descriptionIsTransparentConsole.value,
                 ),
-            checked = isTransparentCommandLineBlock,
-            onCheckedChange = { config.setValue(IS_TRANSPARENT_COMMAND_LINE_BLOCK, it.toString()) },
+            checked = isTransparentConsoleBlock,
+            onCheckedChange = { config.setValue(IS_TRANSPARENT_CONSOLE, it.toString()) },
             isExpanded = isExpandedSettings,
         )
     }
@@ -101,8 +101,8 @@ fun CommandFieldBlock(isExpandedSettings: Boolean = config.states.isExpandedSett
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewCommandFieldBlock() {
+private fun PreviewConsoleBlock() {
     AppTheme {
-        PreviewSurface(content = { CommandFieldBlock() })
+        PreviewSurface(content = { ConsoleBlock() })
     }
 }

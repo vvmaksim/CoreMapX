@@ -25,7 +25,7 @@ object DefaultThemes {
             shortestPathColor = "#4CAF50",
             otherPathsColor = "#FF9800",
             canvasBackgroundColor = "#FFFFFF",
-            commandLineBackgroundColor = "#FFFFFF",
+            consoleBackgroundColor = "#FFFFFF",
         )
 
     val dark =
@@ -52,6 +52,6 @@ object DefaultThemes {
             shortestPathColor = "#4CAF50",
             otherPathsColor = "#FF9800",
             canvasBackgroundColor = "#2D2D2D",
-            commandLineBackgroundColor = "#363636",
+            consoleBackgroundColor = "#363636",
         )
 }

@@ -1,7 +1,5 @@
 package model.graph.pathfinding
 
-import model.graph.concrete.DirectedUnweightedGraph
-import model.graph.concrete.DirectedWeightedGraph
 import model.graph.contracts.Edge
 import model.graph.contracts.Graph
 import model.graph.entities.WeightedEdge
@@ -44,7 +42,7 @@ class DijkstraStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStrate
                 val (neighbor, weight) =
                     when {
                         edge.from.id == current -> edge.to.id to getEdgeWeight(edge)
-                        edge.to.id == current && !isDirected(graph) -> edge.from.id to getEdgeWeight(edge)
+                        edge.to.id == current && !graph.isDirected -> edge.from.id to getEdgeWeight(edge)
                         else -> continue
                     }
                 if (neighbor in visited) continue
@@ -74,6 +72,4 @@ class DijkstraStrategy<E : Comparable<E>, V : Comparable<V>> : PathfindingStrate
     }
 
     private fun getEdgeWeight(edge: Edge<E, V>): Long = if (edge is WeightedEdge<E, V>) edge.weight else 1L
-
-    private fun isDirected(graph: Graph<E, V>): Boolean = graph is DirectedUnweightedGraph || graph is DirectedWeightedGraph
 }
