@@ -318,7 +318,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.WORK_AREA_EDGE_WIDTH -> workAreaEdgeWidth.value = value
             DialogsKeys.WORK_AREA_CANVAS_DRAG_RATIO -> workAreaCanvasDragRatio.value = value
             DialogsKeys.WORK_AREA_CANVAS_LIMIT -> workAreaCanvasLimit.value = value
-            // // Title Bar Block
+            // // Performance Block
             DialogsKeys.PERFORMANCE_ANIMATION_DURATION -> performanceAnimationDuration.value = value
             DialogsKeys.PERFORMANCE_CONSOLE_SCROLL_DELAY -> performanceConsoleScrollDelay.value = value
 
