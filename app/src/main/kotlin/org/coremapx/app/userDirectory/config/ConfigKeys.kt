@@ -31,7 +31,7 @@ object ConfigKeys {
     const val SHORTEST_PATH_COLOR = "shortestPathColor"
     const val OTHER_PATHS_COLOR = "otherPathsColor"
     const val CANVAS_BACKGROUND_COLOR = "canvasBackgroundColor"
-    const val COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "commandLineBlockBackgroundColor"
+    const val CONSOLE_BACKGROUND_COLOR = "consoleBackgroundColor"
 
     // Main Screen
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
@@ -42,12 +42,12 @@ object ConfigKeys {
     const val TITLE_BAR_HEIGHT = "titleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "titleBarIconSize"
 
-    // Command Field
-    const val MESSAGE_OUTPUT_HEIGHT = "messageOutputHeight"
+    // Console
+    const val CONSOLE_HEIGHT = "consoleHeight"
+    const val CONSOLE_WIDTH = "consoleWidth"
     const val MAX_COUNT_MESSAGES = "maxCountMessages"
     const val MAX_COUNT_USER_COMMANDS = "maxCountUserCommands"
-    const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
-    const val IS_TRANSPARENT_COMMAND_LINE_BLOCK = "isTransparentCommandLineBlock"
+    const val IS_TRANSPARENT_CONSOLE = "isTransparentConsole"
 
     // Work Area
     const val GRAPH_LAYOUT_HEIGHT = "graphLayoutHeight"
@@ -62,5 +62,5 @@ object ConfigKeys {
 
     // Performance
     const val ANIMATION_DURATION = "animationDuration"
-    const val COMMAND_FIELD_SCROLL_DELAY = "commandFieldScrollDelay"
+    const val CONSOLE_SCROLL_DELAY = "consoleScrollDelay"
 }

@@ -34,7 +34,7 @@ class ConfigStates(
     val shortestPathColor = mutableStateOf(configRepository.getColor(ConfigKeys.SHORTEST_PATH_COLOR))
     val otherPathsColor = mutableStateOf(configRepository.getColor(ConfigKeys.OTHER_PATHS_COLOR))
     val canvasBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR))
-    val commandLineBlockBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR))
+    val consoleBackgroundColor = mutableStateOf(configRepository.getColor(ConfigKeys.CONSOLE_BACKGROUND_COLOR))
 
     // Main Screen
     val mainScreenStartHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAIN_SCREEN_START_HEIGHT))
@@ -45,13 +45,13 @@ class ConfigStates(
     val titleBarHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.TITLE_BAR_HEIGHT))
     val titleBarIconSize = mutableStateOf(configRepository.getIntValue(ConfigKeys.TITLE_BAR_ICON_SIZE))
 
-    // Command Field
-    val messageOutputHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT))
+    // Console
+    val consoleHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.CONSOLE_HEIGHT))
+    val consoleWidth = mutableStateOf(configRepository.getIntValue(ConfigKeys.CONSOLE_WIDTH))
     val maxCountMessages = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAX_COUNT_MESSAGES))
     val maxCountUserCommands = mutableStateOf(configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS))
-    val commandFieldWidth = mutableStateOf(configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH))
-    val isTransparentCommandLineBlock =
-        mutableStateOf(configRepository.getBooleanValue(ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK))
+    val isTransparentConsoleBlock =
+        mutableStateOf(configRepository.getBooleanValue(ConfigKeys.IS_TRANSPARENT_CONSOLE))
 
     // Work Area
     val graphLayoutHeight = mutableStateOf(configRepository.getIntValue(ConfigKeys.GRAPH_LAYOUT_HEIGHT))
@@ -66,7 +66,7 @@ class ConfigStates(
 
     // Performance
     val animationDuration = mutableStateOf(configRepository.getIntValue(ConfigKeys.ANIMATION_DURATION))
-    val commandFieldScrollDelay = mutableStateOf(configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_SCROLL_DELAY))
+    val consoleScrollDelay = mutableStateOf(configRepository.getIntValue(ConfigKeys.CONSOLE_SCROLL_DELAY))
 
     fun updateValue(
         key: String,
@@ -104,10 +104,10 @@ class ConfigStates(
             ConfigKeys.CANVAS_BACKGROUND_COLOR ->
                 canvasBackgroundColor.value =
                     configRepository.getColor(ConfigKeys.CANVAS_BACKGROUND_COLOR)
-            ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR ->
-                commandLineBlockBackgroundColor.value =
+            ConfigKeys.CONSOLE_BACKGROUND_COLOR ->
+                consoleBackgroundColor.value =
                     configRepository.getColor(
-                        ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR,
+                        ConfigKeys.CONSOLE_BACKGROUND_COLOR,
                     )
 
             // Main Screen
@@ -123,17 +123,17 @@ class ConfigStates(
             ConfigKeys.TITLE_BAR_HEIGHT -> titleBarHeight.value = configRepository.getIntValue(ConfigKeys.TITLE_BAR_HEIGHT)
             ConfigKeys.TITLE_BAR_ICON_SIZE -> titleBarIconSize.value = configRepository.getIntValue(ConfigKeys.TITLE_BAR_ICON_SIZE)
 
-            // Command Field
-            ConfigKeys.MESSAGE_OUTPUT_HEIGHT -> messageOutputHeight.value = configRepository.getIntValue(ConfigKeys.MESSAGE_OUTPUT_HEIGHT)
+            // Console
+            ConfigKeys.CONSOLE_HEIGHT -> consoleHeight.value = configRepository.getIntValue(ConfigKeys.CONSOLE_HEIGHT)
             ConfigKeys.MAX_COUNT_MESSAGES -> maxCountMessages.value = configRepository.getIntValue(ConfigKeys.MAX_COUNT_MESSAGES)
             ConfigKeys.MAX_COUNT_USER_COMMANDS ->
                 maxCountUserCommands.value =
                     configRepository.getIntValue(ConfigKeys.MAX_COUNT_USER_COMMANDS)
-            ConfigKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = configRepository.getIntValue(ConfigKeys.COMMAND_FIELD_WIDTH)
-            ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK ->
-                isTransparentCommandLineBlock.value =
+            ConfigKeys.CONSOLE_WIDTH -> consoleWidth.value = configRepository.getIntValue(ConfigKeys.CONSOLE_WIDTH)
+            ConfigKeys.IS_TRANSPARENT_CONSOLE ->
+                isTransparentConsoleBlock.value =
                     configRepository.getBooleanValue(
-                        ConfigKeys.IS_TRANSPARENT_COMMAND_LINE_BLOCK,
+                        ConfigKeys.IS_TRANSPARENT_CONSOLE,
                     )
 
             // Work Area
@@ -149,10 +149,10 @@ class ConfigStates(
 
             // Performance
             ConfigKeys.ANIMATION_DURATION -> animationDuration.value = configRepository.getIntValue(ConfigKeys.ANIMATION_DURATION)
-            ConfigKeys.COMMAND_FIELD_SCROLL_DELAY ->
-                commandFieldScrollDelay.value =
+            ConfigKeys.CONSOLE_SCROLL_DELAY ->
+                consoleScrollDelay.value =
                     configRepository.getIntValue(
-                        ConfigKeys.COMMAND_FIELD_SCROLL_DELAY,
+                        ConfigKeys.CONSOLE_SCROLL_DELAY,
                     )
         }
     }

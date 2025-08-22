@@ -18,7 +18,7 @@ import org.coremapx.app.theme.ThemesManager.getSystemDialogThemeAsStringByIsLigh
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
-import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_LINE_BLOCK_BACKGROUND_COLOR
+import org.coremapx.app.userDirectory.config.ConfigKeys.CONSOLE_BACKGROUND_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.EDGE_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.ERROR
 import org.coremapx.app.userDirectory.config.ConfigKeys.HOVERED_BORDER_COLOR
@@ -122,7 +122,7 @@ class ConfigRepository {
             setValue(SHORTEST_PATH_COLOR, shortestPathColor)
             setValue(OTHER_PATHS_COLOR, otherPathsColor)
             setValue(CANVAS_BACKGROUND_COLOR, canvasBackgroundColor)
-            setValue(COMMAND_LINE_BLOCK_BACKGROUND_COLOR, commandLineBackgroundColor)
+            setValue(CONSOLE_BACKGROUND_COLOR, consoleBackgroundColor)
             setValue(SYSTEM_DIALOG_THEME, getSystemDialogThemeAsStringByIsLight(isLight = isLight, makeLower = true))
         }
     }

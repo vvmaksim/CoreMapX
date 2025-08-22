@@ -15,7 +15,7 @@ import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigKeys.ANIMATION_DURATION
-import org.coremapx.app.userDirectory.config.ConfigKeys.COMMAND_FIELD_SCROLL_DELAY
+import org.coremapx.app.userDirectory.config.ConfigKeys.CONSOLE_SCROLL_DELAY
 import view.appInterface.dialogElements.lines.NumberTextFieldLine
 import view.appInterface.preview.PreviewSurface
 
@@ -23,7 +23,7 @@ import view.appInterface.preview.PreviewSurface
 @Composable
 fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
     val animationDuration by remember { config.states.animationDuration }
-    val commandFieldScrollDelay by remember { config.states.commandFieldScrollDelay }
+    val consoleScrollDelay by remember { config.states.consoleScrollDelay }
 
     Column {
         NumberTextFieldLine(
@@ -39,13 +39,13 @@ fun PerformanceBlock(isExpandedSettings: Boolean = config.states.isExpandedSetti
         )
         Spacer(Modifier.height(8.dp))
         NumberTextFieldLine(
-            title = LocalizationManager.states.dialogs.performanceCommandFieldScrollDelay.value,
+            title = LocalizationManager.states.dialogs.performanceConsoleScrollDelay.value,
             valueType = Int::class,
-            value = TextFieldValue("$commandFieldScrollDelay"),
-            onValueChange = { config.setValue(COMMAND_FIELD_SCROLL_DELAY, it.text) },
+            value = TextFieldValue("$consoleScrollDelay"),
+            onValueChange = { config.setValue(CONSOLE_SCROLL_DELAY, it.text) },
             description =
                 LocalizationFormatter.getStringWithLineBreak(
-                    startString = LocalizationManager.states.descriptions.descriptionCommandFieldScrollDelay.value,
+                    startString = LocalizationManager.states.descriptions.descriptionConsoleScrollDelay.value,
                 ),
             isExpanded = isExpandedSettings,
         )

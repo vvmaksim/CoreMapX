@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import extensions.border
 import extensions.canvasBackground
-import extensions.commandLineBlockBackground
+import extensions.consoleBackground
 import model.command.concrete.Command
 import model.command.concrete.Commands
 import model.result.CommandErrors
@@ -365,10 +365,10 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     .padding(bottom = 16.dp)
                     .align(Alignment.BottomCenter),
             backgroundColor =
-                if (config.states.isTransparentCommandLineBlock.value) {
+                if (config.states.isTransparentConsoleBlock.value) {
                     Color.Transparent
                 } else {
-                    MaterialTheme.colors.commandLineBlockBackground
+                    MaterialTheme.colors.consoleBackground
                 },
             borderColor = MaterialTheme.colors.border,
             onDrag = { dragAmount: Offset ->

@@ -30,9 +30,9 @@ object AnyIconDescriptionsKeys {
     const val SETTINGS_HIDE_DESCRIPTION = "settingsHideDescription"
     const val SETTINGS_SHOW_DESCRIPTION = "settingsShowDescription"
 
-    // Floating Message Panel
-    const val FLOATING_MESSAGE_PANEL_COLLAPSE = "floatingMessagePanelCollapse"
-    const val FLOATING_MESSAGE_PANEL_EXPAND = "floatingMessagePanelExpand"
+    // Console
+    const val CONSOLE_COLLAPSE = "consoleCollapse"
+    const val CONSOLE_EXPAND = "consoleExpand"
 
     // Text Field
     const val TEXT_FIELD = "textField"

@@ -5,7 +5,7 @@ object AnyTextKeys {
     const val VERTICES = "vertices"
     const val EDGES = "edges"
     const val ENTER_COMMAND = "enterCommand"
-    const val MESSAGES = "messages"
+    const val CONSOLE = "console"
 
     // Save Path
     const val SAVE_PATH_SELECT_DIRECTORY = "savePathSelectDirectory"

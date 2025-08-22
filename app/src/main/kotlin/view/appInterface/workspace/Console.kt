@@ -62,8 +62,8 @@ fun Console(
     var commandText by remember { mutableStateOf(TextFieldValue("")) }
     var commandHistoryIndex by remember { mutableStateOf(-1) }
 
-    val maxPanelWidth = config.states.commandFieldWidth.value.dp
-    val maxPanelHeight = config.states.messageOutputHeight.value.dp
+    val consoleWidth = config.states.consoleWidth.value.dp
+    val consoleHeight = config.states.consoleHeight.value.dp
     val minPanelWidth = 200.dp
     val titleBarHeight = 30.dp
     val panelShape = MaterialTheme.shapes.medium
@@ -79,8 +79,8 @@ fun Console(
     Box(
         modifier =
             modifier
-                .width(if (isExpanded) maxPanelWidth else minPanelWidth)
-                .height(if (isExpanded) maxPanelHeight else titleBarHeight)
+                .width(if (isExpanded) consoleWidth else minPanelWidth)
+                .height(if (isExpanded) consoleHeight else titleBarHeight)
                 .clip(panelShape)
                 .background(
                     color = backgroundColor,
@@ -199,7 +199,7 @@ fun Console(
 @Composable
 private fun ConsoleTitle(
     isExpanded: Boolean,
-    titleText: String = LocalizationManager.states.anyTextStates.messages.value,
+    titleText: String = LocalizationManager.states.anyTextStates.console.value,
 ) {
     Row(
         modifier = Modifier.fillMaxSize(),
@@ -214,9 +214,9 @@ private fun ConsoleTitle(
             imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
             contentDescription =
                 if (isExpanded) {
-                    LocalizationManager.states.anyIconDescriptionsStates.floatingMessagePanelCollapse.value
+                    LocalizationManager.states.anyIconDescriptionsStates.consoleCollapse.value
                 } else {
-                    LocalizationManager.states.anyIconDescriptionsStates.floatingMessagePanelExpand.value
+                    LocalizationManager.states.anyIconDescriptionsStates.consoleExpand.value
                 },
             tint = MaterialTheme.colors.onPrimary,
             modifier = Modifier.size(24.dp),

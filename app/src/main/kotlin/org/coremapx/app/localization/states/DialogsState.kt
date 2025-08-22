@@ -35,7 +35,7 @@ class DialogsState : LocalizationState {
     val settingsColorsBlockName = mutableStateOf("")
     val settingsMainScreenBlockName = mutableStateOf("")
     val settingsTitleBarBlockName = mutableStateOf("")
-    val settingsCommandFieldBlockName = mutableStateOf("")
+    val settingsConsoleBlockName = mutableStateOf("")
     val settingsWorkAreaBlockName = mutableStateOf("")
     val settingsPerformanceBlockName = mutableStateOf("")
 
@@ -67,7 +67,7 @@ class DialogsState : LocalizationState {
     val colorsShortestPathColor = mutableStateOf("")
     val colorsOtherPathsColor = mutableStateOf("")
     val colorsCanvasBackgroundColor = mutableStateOf("")
-    val colorsCommandLineBlockBackgroundColor = mutableStateOf("")
+    val colorsConsoleBackgroundColor = mutableStateOf("")
 
     // // Main Screen Block
     val mainScreenStartHeight = mutableStateOf("")
@@ -78,12 +78,12 @@ class DialogsState : LocalizationState {
     val titleBarHeight = mutableStateOf("")
     val titleBarIconSize = mutableStateOf("")
 
-    // // Command Field Block
-    val commandFieldMessageOutputHeight = mutableStateOf("")
-    val commandFieldMaxCountMessages = mutableStateOf("")
-    val commandFieldMaxCountUserCommands = mutableStateOf("")
-    val commandFieldWidth = mutableStateOf("")
-    val commandFieldIsTransparent = mutableStateOf("")
+    // // Console Block
+    val consoleHeight = mutableStateOf("")
+    val consoleMaxCountMessages = mutableStateOf("")
+    val consoleMaxCountUserCommands = mutableStateOf("")
+    val consoleWidth = mutableStateOf("")
+    val consoleIsTransparent = mutableStateOf("")
 
     // // Work Area Block
     val workAreaGraphLayoutHeight = mutableStateOf("")
@@ -98,7 +98,7 @@ class DialogsState : LocalizationState {
 
     // // Performance Block
     val performanceAnimationDuration = mutableStateOf("")
-    val performanceCommandFieldScrollDelay = mutableStateOf("")
+    val performanceConsoleScrollDelay = mutableStateOf("")
 
     // Analytics
     val analyticsTitle = mutableStateOf("")
@@ -264,7 +264,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.SETTINGS_COLORS_BLOCK_NAME -> settingsColorsBlockName.value = value
             DialogsKeys.SETTINGS_MAIN_SCREEN_BLOCK_NAME -> settingsMainScreenBlockName.value = value
             DialogsKeys.SETTINGS_TITLE_BAR_BLOCK_NAME -> settingsTitleBarBlockName.value = value
-            DialogsKeys.SETTINGS_COMMAND_FIELD_BLOCK_NAME -> settingsCommandFieldBlockName.value = value
+            DialogsKeys.SETTINGS_CONSOLE_BLOCK_NAME -> settingsConsoleBlockName.value = value
             DialogsKeys.SETTINGS_WORK_AREA_BLOCK_NAME -> settingsWorkAreaBlockName.value = value
             DialogsKeys.SETTINGS_PERFORMANCE_BLOCK_NAME -> settingsPerformanceBlockName.value = value
             // // General Block
@@ -294,7 +294,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.COLORS_SHORTEST_PATH_COLOR -> colorsShortestPathColor.value = value
             DialogsKeys.COLORS_OTHER_PATHS_COLOR -> colorsOtherPathsColor.value = value
             DialogsKeys.COLORS_CANVAS_BACKGROUND_COLOR -> colorsCanvasBackgroundColor.value = value
-            DialogsKeys.COLORS_COMMAND_LINE_BLOCK_BACKGROUND_COLOR -> colorsCommandLineBlockBackgroundColor.value = value
+            DialogsKeys.COLORS_CONSOLE_BACKGROUND_COLOR -> colorsConsoleBackgroundColor.value = value
             // // Main Screen Block
             DialogsKeys.MAIN_SCREEN_START_HEIGHT -> mainScreenStartHeight.value = value
             DialogsKeys.MAIN_SCREEN_START_WIDTH -> mainScreenStartWidth.value = value
@@ -302,13 +302,13 @@ class DialogsState : LocalizationState {
             // // Title Bar Block
             DialogsKeys.TITLE_BAR_HEIGHT -> titleBarHeight.value = value
             DialogsKeys.TITLE_BAR_ICON_SIZE -> titleBarIconSize.value = value
-            // // Command Field Block
-            DialogsKeys.COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT -> commandFieldMessageOutputHeight.value = value
-            DialogsKeys.COMMAND_FIELD_MAX_COUNT_MESSAGES -> commandFieldMaxCountMessages.value = value
-            DialogsKeys.COMMAND_FIELD_MAX_COUNT_USER_COMMANDS -> commandFieldMaxCountUserCommands.value = value
-            DialogsKeys.COMMAND_FIELD_WIDTH -> commandFieldWidth.value = value
-            DialogsKeys.COMMAND_FIELD_IS_TRANSPARENT -> commandFieldIsTransparent.value = value
-            // // Command Field Block
+            // // Console Block
+            DialogsKeys.CONSOLE_HEIGHT -> consoleHeight.value = value
+            DialogsKeys.CONSOLE_MAX_COUNT_MESSAGES -> consoleMaxCountMessages.value = value
+            DialogsKeys.CONSOLE_MAX_COUNT_USER_COMMANDS -> consoleMaxCountUserCommands.value = value
+            DialogsKeys.CONSOLE_WIDTH -> consoleWidth.value = value
+            DialogsKeys.CONSOLE_IS_TRANSPARENT -> consoleIsTransparent.value = value
+            // // Work Area Block
             DialogsKeys.WORK_AREA_GRAPH_LAYOUT_HEIGHT -> workAreaGraphLayoutHeight.value = value
             DialogsKeys.WORK_AREA_GRAPH_LAYOUT_WIDTH -> workAreaGraphLayoutWidth.value = value
             DialogsKeys.WORK_AREA_VERTEX_RADIUS -> workAreaVertexRadius.value = value
@@ -320,7 +320,7 @@ class DialogsState : LocalizationState {
             DialogsKeys.WORK_AREA_CANVAS_LIMIT -> workAreaCanvasLimit.value = value
             // // Title Bar Block
             DialogsKeys.PERFORMANCE_ANIMATION_DURATION -> performanceAnimationDuration.value = value
-            DialogsKeys.PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY -> performanceCommandFieldScrollDelay.value = value
+            DialogsKeys.PERFORMANCE_CONSOLE_SCROLL_DELAY -> performanceConsoleScrollDelay.value = value
 
             // Analytics
             DialogsKeys.ANALYTICS_TITLE -> analyticsTitle.value = value

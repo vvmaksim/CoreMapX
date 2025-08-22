@@ -75,7 +75,7 @@ settingsGeneralBlockName=General
 settingsColorsBlockName=Colors
 settingsMainScreenBlockName=Main Screen
 settingsTitleBarBlockName=Title Bar
-settingsCommandFieldBlockName=Command Field
+settingsConsoleBlockName=Console
 settingsWorkAreaBlockName=Work Area
 settingsPerformanceBlockName=Performance
 # General Block
@@ -105,7 +105,7 @@ colorsEdgeMainColor=Edge Main Color
 colorsShortestPathColor=Shortest path found color
 colorsOtherPathsColor=Other found paths color
 colorsCanvasBackgroundColor=Canvas Background Color
-colorsCommandLineBlockBackgroundColor=Command Line Block Background Color
+colorsConsoleBackgroundColor=Console Background Color
 # Main Screen Block
 mainScreenStartHeight=Main screen start height
 mainScreenStartWidth=Main screen start width
@@ -113,12 +113,12 @@ mainScreenPlacement=Start window placement
 # Title Bar Block
 titleBarHeight=Title bar height
 titleBarIconSize=Title bar icon size
-# Command Field Block
-commandFieldMessageOutputHeight=Message output height
-commandFieldMaxCountMessages=Max count messages
-commandFieldMaxCountUserCommands=Max count user commands
-commandFieldWidth=Command field width
-commandFieldIsTransparent=Command line block is transparent
+# Console Block
+consoleHeight=Console height
+consoleWidth=Console width
+consoleMaxCountMessages=Max count messages
+consoleMaxCountUserCommands=Max count user commands
+consoleIsTransparent=Console is transparent
 # Work Area Block
 workAreaGraphLayoutHeight=Graph layout height
 workAreaGraphLayoutWidth=Graph layout width
@@ -131,7 +131,7 @@ workAreaCanvasDragRatio=Canvas drag ratio
 workAreaCanvasLimit=Canvas limit
 # Performance Block
 performanceAnimationDuration=Animation duration
-performanceCommandFieldScrollDelay=Command field scroll delay
+performanceConsoleScrollDelay=Console scroll delay
 
  ! Find Path
 findPathTitle=Find path
@@ -401,9 +401,9 @@ descriptionEdgeMainColor=The primary color for displaying edges between vertices
 descriptionShortestPathColor=Color to display edges of the shortest path found.
 descriptionOtherPathsColor=Color to display edges that are not always on the shortest path.
 descriptionCanvasBackgroundColor=The background color for graph visualization.
-descriptionCommandLineBlockBackgroundColor=The background color of the command line and its output.{nextLine}\
+descriptionConsoleBackgroundColor=The background color of the console.{nextLine}\
     {nextLine}\
-    This color is applied if the `isTransparentCommandLineBlock` parameter is disabled.
+    This color is applied if the `isTransparentConsole` parameter is disabled.
 ## Main Screen Block
 descriptionMainScreenStartHeight=The starting height of the application window.{nextLine}\
     {nextLine}\
@@ -430,11 +430,16 @@ descriptionTitleBarIconSize=Size of the title bar icons.{nextLine}\
     {nextLine}\
     Min=16{nextLine}\
     Recommended=20
-## Command Field Block
-descriptionMessageOutputHeight=Maximum lifting height for command line output messages.{nextLine}\
+## Console Block
+descriptionConsoleHeight=Console height.{nextLine}\
     {nextLine}\
     Min=150{nextLine}\
     Recommended=200
+descriptionConsoleWidth=Console width.{nextLine}\
+    {nextLine}\
+    Min=400{nextLine}\
+    Recommended=700{nextLine}\
+    Max=900
 descriptionMaxCountMessages=The maximum number of output messages that are remembered.{nextLine}\
     {nextLine}\
     Min=1{nextLine}\
@@ -445,16 +450,10 @@ descriptionMaxCountUserCommands=The maximum number of history user commands that
     Min=1{nextLine}\
     Recommended=200{nextLine}\
     Max=1000
-descriptionCommandFieldWidth=The width of the command line.{nextLine}\
+descriptionIsTransparentConsole=This parameter is responsible for the transparency of the console background.{nextLine}\
     {nextLine}\
-    Min=400{nextLine}\
-    Recommended=700{nextLine}\
-    Max=900
-descriptionIsTransparentCommandLineBlock=This parameter is responsible for the transparency of the background of the \
-    command line and its output.{nextLine}\
-    {nextLine}\
-    If it is enabled, the backgrounds will be transparent.{nextLine}\
-    If it is turned off, the backgrounds will take on the color specified in the corresponding parameter in the color settings.
+    If it is enabled, the background will be transparent.{nextLine}\
+    If it is turned off, the background will take on the color specified in the corresponding parameter in the color settings.
 ## Work Area Block
 descriptionGraphLayoutHeight=The graph is drawn on a certain plane, you can change the height of this plane.{nextLine}\
     {nextLine}\
@@ -501,7 +500,7 @@ descriptionAnimationDuration=This parameter is used to specify the speed of anim
     Min=100{nextLine}\
     Recommended=300{nextLine}\
     Max=1500
-descriptionCommandFieldScrollDelay=A certain amount of time passes when sending a command on the command line.{nextLine}\
+descriptionConsoleScrollDelay=A certain amount of time passes when sending a command to the console.{nextLine}\
     {nextLine}\
     Min=10{nextLine}\
     Recommended=50{nextLine}\
@@ -546,15 +545,15 @@ zoomReduce=Reduce
 # Any Words
 vertices=vertices
 edges=edges
-messages=Messages
+console=Console
 enterCommand=Enter command
 # Settings
 settingsCollapse=Collapse
 settingsExpand=Expand
 settingsHideDescription=Hide description
 settingsShowDescription=Show description
-# Floating Message Panel
-floatingMessagePanelCollapse=Collapse
-floatingMessagePanelExpand=Expand
+# Console
+consoleCollapse=Collapse
+consoleExpand=Expand
 # Text Field
 textField=Text field

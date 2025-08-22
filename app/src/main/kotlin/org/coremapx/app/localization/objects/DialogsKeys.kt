@@ -32,7 +32,7 @@ object DialogsKeys {
     const val SETTINGS_COLORS_BLOCK_NAME = "settingsColorsBlockName"
     const val SETTINGS_MAIN_SCREEN_BLOCK_NAME = "settingsMainScreenBlockName"
     const val SETTINGS_TITLE_BAR_BLOCK_NAME = "settingsTitleBarBlockName"
-    const val SETTINGS_COMMAND_FIELD_BLOCK_NAME = "settingsCommandFieldBlockName"
+    const val SETTINGS_CONSOLE_BLOCK_NAME = "settingsConsoleBlockName"
     const val SETTINGS_WORK_AREA_BLOCK_NAME = "settingsWorkAreaBlockName"
     const val SETTINGS_PERFORMANCE_BLOCK_NAME = "settingsPerformanceBlockName"
 
@@ -64,7 +64,7 @@ object DialogsKeys {
     const val COLORS_SHORTEST_PATH_COLOR = "colorsShortestPathColor"
     const val COLORS_OTHER_PATHS_COLOR = "colorsOtherPathsColor"
     const val COLORS_CANVAS_BACKGROUND_COLOR = "colorsCanvasBackgroundColor"
-    const val COLORS_COMMAND_LINE_BLOCK_BACKGROUND_COLOR = "colorsCommandLineBlockBackgroundColor"
+    const val COLORS_CONSOLE_BACKGROUND_COLOR = "colorsConsoleBackgroundColor"
 
     // // Main Screen Block
     const val MAIN_SCREEN_START_HEIGHT = "mainScreenStartHeight"
@@ -75,12 +75,12 @@ object DialogsKeys {
     const val TITLE_BAR_HEIGHT = "titleBarHeight"
     const val TITLE_BAR_ICON_SIZE = "titleBarIconSize"
 
-    // // Command Field Block
-    const val COMMAND_FIELD_MESSAGE_OUTPUT_HEIGHT = "commandFieldMessageOutputHeight"
-    const val COMMAND_FIELD_MAX_COUNT_MESSAGES = "commandFieldMaxCountMessages"
-    const val COMMAND_FIELD_MAX_COUNT_USER_COMMANDS = "commandFieldMaxCountUserCommands"
-    const val COMMAND_FIELD_WIDTH = "commandFieldWidth"
-    const val COMMAND_FIELD_IS_TRANSPARENT = "commandFieldIsTransparent"
+    // // Console Block
+    const val CONSOLE_HEIGHT = "consoleHeight"
+    const val CONSOLE_WIDTH = "consoleWidth"
+    const val CONSOLE_MAX_COUNT_MESSAGES = "consoleMaxCountMessages"
+    const val CONSOLE_MAX_COUNT_USER_COMMANDS = "consoleMaxCountUserCommands"
+    const val CONSOLE_IS_TRANSPARENT = "consoleIsTransparent"
 
     // // Work Area Block
     const val WORK_AREA_GRAPH_LAYOUT_HEIGHT = "workAreaGraphLayoutHeight"
@@ -95,7 +95,7 @@ object DialogsKeys {
 
     // // Performance Block
     const val PERFORMANCE_ANIMATION_DURATION = "performanceAnimationDuration"
-    const val PERFORMANCE_COMMAND_FIELD_SCROLL_DELAY = "performanceCommandFieldScrollDelay"
+    const val PERFORMANCE_CONSOLE_SCROLL_DELAY = "performanceConsoleScrollDelay"
 
     // Analytics
     const val ANALYTICS_TITLE = "analyticsTitle"

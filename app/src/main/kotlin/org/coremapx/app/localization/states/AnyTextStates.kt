@@ -8,7 +8,7 @@ class AnyTextStates : LocalizationState {
     val vertices = mutableStateOf("")
     val edges = mutableStateOf("")
     val enterCommand = mutableStateOf("")
-    val messages = mutableStateOf("")
+    val console = mutableStateOf("")
 
     // Save Path
     val savePathSelectDirectory = mutableStateOf("")
@@ -21,7 +21,7 @@ class AnyTextStates : LocalizationState {
             // Any words
             AnyTextKeys.VERTICES -> vertices.value = value
             AnyTextKeys.EDGES -> edges.value = value
-            AnyTextKeys.MESSAGES -> messages.value = value
+            AnyTextKeys.CONSOLE -> console.value = value
 
             // Save Path
             AnyTextKeys.SAVE_PATH_SELECT_DIRECTORY -> savePathSelectDirectory.value = value

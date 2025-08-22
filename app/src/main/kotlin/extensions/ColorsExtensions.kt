@@ -19,5 +19,5 @@ val Colors.hoveredBorder: Color
 val Colors.canvasBackground: Color
     get() = Theme.canvasBackgroundColor
 
-val Colors.commandLineBlockBackground: Color
-    get() = Theme.commandLineBlockBackgroundColor
+val Colors.consoleBackground: Color
+    get() = Theme.consoleBackgroundColor

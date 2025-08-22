@@ -23,5 +23,5 @@ data class ThemeConfig(
     val shortestPathColor: String,
     val otherPathsColor: String,
     val canvasBackgroundColor: String,
-    val commandLineBackgroundColor: String,
+    val consoleBackgroundColor: String,
 )
