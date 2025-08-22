@@ -131,7 +131,6 @@ workAreaCanvasDragRatio=Canvas drag ratio
 workAreaCanvasLimit=Canvas limit
 # Performance Block
 performanceAnimationDuration=Animation duration
-performanceConsoleScrollDelay=Console scroll delay
 
  ! Find Path
 findPathTitle=Find path
@@ -500,11 +499,6 @@ descriptionAnimationDuration=This parameter is used to specify the speed of anim
     Min=100{nextLine}\
     Recommended=300{nextLine}\
     Max=1500
-descriptionConsoleScrollDelay=A certain amount of time passes when sending a command to the console.{nextLine}\
-    {nextLine}\
-    Min=10{nextLine}\
-    Recommended=50{nextLine}\
-    Max=300
 
 # Top Menu
 ## Find Path

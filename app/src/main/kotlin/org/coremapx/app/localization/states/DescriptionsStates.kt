@@ -64,7 +64,6 @@ class DescriptionsStates : LocalizationState {
 
     // // Performance Block
     val descriptionAnimationDuration = mutableStateOf("")
-    val descriptionConsoleScrollDelay = mutableStateOf("")
 
     // Top Menu
     val descriptionTopMenuFindPathStartVertex = mutableStateOf("")
@@ -131,7 +130,6 @@ class DescriptionsStates : LocalizationState {
             DescriptionsKeys.CANVAS_LIMIT -> descriptionCanvasLimit.value = value
             // // Performance Block
             DescriptionsKeys.ANIMATION_DURATION -> descriptionAnimationDuration.value = value
-            DescriptionsKeys.CONSOLE_SCROLL_DELAY -> descriptionConsoleScrollDelay.value = value
 
             // Top Menu
             DescriptionsKeys.TOP_MENU_FIND_PATH_START_VERTEX -> descriptionTopMenuFindPathStartVertex.value = value

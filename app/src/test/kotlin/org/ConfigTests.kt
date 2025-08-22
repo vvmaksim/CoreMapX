@@ -73,7 +73,6 @@ class ConfigTests {
         assertEquals(1.0F, config.states.canvasDragRatio.value)
         assertEquals(10000, config.states.canvasLimit.value)
         assertEquals(300, config.states.animationDuration.value)
-        assertEquals(50, config.states.consoleScrollDelay.value)
 
         // Set all values
         val color = "#525252"
@@ -123,7 +122,6 @@ class ConfigTests {
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CANVAS_DRAG_RATIO, "5.5"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CANVAS_LIMIT, "5252"))
         assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.ANIMATION_DURATION, "520"))
-        assertIs<Result.Success<Boolean>>(config.setValue(ConfigKeys.CONSOLE_SCROLL_DELAY, "52"))
 
         // Check new values
         assertEquals("ru", config.states.language.value)
@@ -172,7 +170,6 @@ class ConfigTests {
         assertEquals(5.5F, config.states.canvasDragRatio.value)
         assertEquals(5252, config.states.canvasLimit.value)
         assertEquals(520, config.states.animationDuration.value)
-        assertEquals(52, config.states.consoleScrollDelay.value)
     }
 
     @Test

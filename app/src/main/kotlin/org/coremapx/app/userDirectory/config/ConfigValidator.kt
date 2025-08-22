@@ -85,7 +85,6 @@ class ConfigValidator {
 
                 // Performance
                 ConfigKeys.ANIMATION_DURATION -> intValidator(key, value, minValue = 100, maxValue = 1500)
-                ConfigKeys.CONSOLE_SCROLL_DELAY -> intValidator(key, value, minValue = 10, maxValue = 300)
 
                 else -> Result.Error(ConfigErrors.UnknownProperty(key))
             }

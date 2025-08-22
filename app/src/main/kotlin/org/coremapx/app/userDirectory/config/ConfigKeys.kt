@@ -62,5 +62,4 @@ object ConfigKeys {
 
     // Performance
     const val ANIMATION_DURATION = "animationDuration"
-    const val CONSOLE_SCROLL_DELAY = "consoleScrollDelay"
 }

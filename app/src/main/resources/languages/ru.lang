@@ -131,7 +131,6 @@ workAreaCanvasDragRatio=Коэффициент перемещения холст
 workAreaCanvasLimit=Ограничитель холста
 # Performance Block
 performanceAnimationDuration=Продолжительность анимаций
-performanceConsoleScrollDelay=Задержка отправки сообщений консоли
 
  ! Find Path
 findPathTitle=Поиск пути
@@ -500,11 +499,6 @@ descriptionAnimationDuration=Этот параметр используется 
     Минимально=100{nextLine}\
     Рекомендовано=300{nextLine}\
     Максимально=1500
-descriptionConsoleScrollDelay=При отправке команды в консоль проходит определенное количество времени.{nextLine}\
-    {nextLine}\
-    Минимально=10{nextLine}\
-    Рекомендовано=50{nextLine}\
-    Максимально=300
 
 # Top Menu
 ## Find Path

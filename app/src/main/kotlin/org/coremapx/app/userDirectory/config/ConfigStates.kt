@@ -66,7 +66,6 @@ class ConfigStates(
 
     // Performance
     val animationDuration = mutableStateOf(configRepository.getIntValue(ConfigKeys.ANIMATION_DURATION))
-    val consoleScrollDelay = mutableStateOf(configRepository.getIntValue(ConfigKeys.CONSOLE_SCROLL_DELAY))
 
     fun updateValue(
         key: String,
@@ -149,11 +148,6 @@ class ConfigStates(
 
             // Performance
             ConfigKeys.ANIMATION_DURATION -> animationDuration.value = configRepository.getIntValue(ConfigKeys.ANIMATION_DURATION)
-            ConfigKeys.CONSOLE_SCROLL_DELAY ->
-                consoleScrollDelay.value =
-                    configRepository.getIntValue(
-                        ConfigKeys.CONSOLE_SCROLL_DELAY,
-                    )
         }
     }
 }

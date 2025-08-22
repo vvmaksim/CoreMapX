@@ -61,7 +61,6 @@ object DescriptionsKeys {
 
     // // Performance Block
     const val ANIMATION_DURATION = "descriptionAnimationDuration"
-    const val CONSOLE_SCROLL_DELAY = "descriptionConsoleScrollDelay"
 
     // Top Menu
     const val TOP_MENU_FIND_PATH_START_VERTEX = "descriptionTopMenuFindPathStartVertex"

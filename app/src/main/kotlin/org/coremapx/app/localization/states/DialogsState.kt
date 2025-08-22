@@ -98,7 +98,6 @@ class DialogsState : LocalizationState {
 
     // // Performance Block
     val performanceAnimationDuration = mutableStateOf("")
-    val performanceConsoleScrollDelay = mutableStateOf("")
 
     // Analytics
     val analyticsTitle = mutableStateOf("")
@@ -320,7 +319,6 @@ class DialogsState : LocalizationState {
             DialogsKeys.WORK_AREA_CANVAS_LIMIT -> workAreaCanvasLimit.value = value
             // // Performance Block
             DialogsKeys.PERFORMANCE_ANIMATION_DURATION -> performanceAnimationDuration.value = value
-            DialogsKeys.PERFORMANCE_CONSOLE_SCROLL_DELAY -> performanceConsoleScrollDelay.value = value
 
             // Analytics
             DialogsKeys.ANALYTICS_TITLE -> analyticsTitle.value = value
