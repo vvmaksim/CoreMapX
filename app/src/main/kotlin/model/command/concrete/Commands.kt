@@ -143,8 +143,6 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             val toAsV = to.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
 
             graph.removeEdge(fromAsV, toAsV)
-            // !graph.isDirected
-//            if (graph is UndirectedUnweightedGraph || graph is UndirectedWeightedGraph) {
             if (!graph.isDirected) {
                 graph.removeEdge(toAsV, fromAsV)
             }
