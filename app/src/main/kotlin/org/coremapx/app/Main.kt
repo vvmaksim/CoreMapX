@@ -27,12 +27,11 @@ import view.appInterface.layout.TitleBar
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension
 
-val startScreenWidth = ConfigRepository.states.mainScreenStartWidth.value
-val startScreenHeight = ConfigRepository.states.mainScreenStartHeight.value
-
 fun main() =
     application {
         logAppStartup()
+        val startScreenWidth = ConfigRepository.states.mainScreenStartWidth.value
+        val startScreenHeight = ConfigRepository.states.mainScreenStartHeight.value
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
         val startWindowPlacement = ConfigRepository.states.startWindowPlacement.value
         val viewModel = MainScreenViewModel<Long, Long>()
