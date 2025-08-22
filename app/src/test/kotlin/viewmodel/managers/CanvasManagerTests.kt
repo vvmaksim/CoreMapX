@@ -1,7 +1,7 @@
 package viewmodel.managers
 
-import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -18,7 +18,7 @@ class CanvasManagerTests {
         }
     }
 
-    val defaultCanvasLimit = config.states.canvasLimit.value
+    val defaultCanvasLimit = ConfigRepository.states.canvasLimit.value
 
     lateinit var canvasManager: CanvasManager
 

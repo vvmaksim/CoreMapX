@@ -22,9 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialogElements.blocks.BaseBlock
 import view.appInterface.dialogElements.blocks.helpBlocks.CommandBlock
 import view.appInterface.dialogElements.blocks.helpBlocks.FileFormatsBlock
@@ -36,7 +36,7 @@ fun Help(
     onDismiss: () -> Unit,
     dialogWidth: Dp = 800.dp,
     dialogHeight: Dp = 1000.dp,
-    isExpandedSettings: Boolean = config.states.isExpandedSettings.value,
+    isExpandedSettings: Boolean = ConfigRepository.states.isExpandedSettings.value,
 ) {
     Dialog(onDismissRequest = onDismiss) {
         HelpContent(
@@ -54,7 +54,7 @@ fun HelpContent(
     onDismiss: () -> Unit,
     dialogWidth: Dp = 800.dp,
     dialogHeight: Dp = 1000.dp,
-    isExpandedSettings: Boolean = config.states.isExpandedSettings.value,
+    isExpandedSettings: Boolean = ConfigRepository.states.isExpandedSettings.value,
 ) {
     var isCommandExpanded by remember { mutableStateOf(isExpandedSettings) }
     var isFileFormatsExpanded by remember { mutableStateOf(isExpandedSettings) }

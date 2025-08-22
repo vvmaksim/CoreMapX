@@ -12,7 +12,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.sp
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import viewmodel.graph.EdgeViewModel
 import kotlin.math.atan2
 import kotlin.math.cos
@@ -25,9 +25,9 @@ fun <E : Comparable<E>, V : Comparable<V>> EdgeView(
     viewModel: EdgeViewModel<E, V>,
     modifier: Modifier = Modifier,
 ) {
-    val edgeWidth = config.states.edgeWidth.value
-    val edgeArrowSize = config.states.edgeArrowSize.value
-    val edgeLabelSize = config.states.edgeLabelSize.value.sp
+    val edgeWidth = ConfigRepository.states.edgeWidth.value
+    val edgeArrowSize = ConfigRepository.states.edgeArrowSize.value
+    val edgeLabelSize = ConfigRepository.states.edgeLabelSize.value.sp
 
     Box(modifier = modifier.fillMaxSize()) {
         Canvas(modifier = modifier.fillMaxSize()) {

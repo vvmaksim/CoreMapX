@@ -10,27 +10,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
 import org.coremapx.app.userDirectory.config.ConfigKeys.TITLE_BAR_HEIGHT
 import org.coremapx.app.userDirectory.config.ConfigKeys.TITLE_BAR_ICON_SIZE
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialogElements.lines.NumberTextFieldLine
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
-    val titleBarHeight by remember { config.states.titleBarHeight }
-    val titleBarIconSize by remember { config.states.titleBarIconSize }
+fun TitleBarBlock(isExpandedSettings: Boolean = ConfigRepository.states.isExpandedSettings.value) {
+    val titleBarHeight by remember { ConfigRepository.states.titleBarHeight }
+    val titleBarIconSize by remember { ConfigRepository.states.titleBarIconSize }
 
     Column {
         NumberTextFieldLine(
             title = LocalizationManager.states.dialogs.titleBarHeight.value,
             valueType = Int::class,
             value = TextFieldValue("$titleBarHeight"),
-            onValueChange = { config.setValue(TITLE_BAR_HEIGHT, it.text) },
+            onValueChange = { ConfigRepository.setValue(TITLE_BAR_HEIGHT, it.text) },
             description =
                 LocalizationFormatter.getStringWithLineBreak(
                     startString = LocalizationManager.states.descriptions.descriptionTitleBarHeight.value,
@@ -42,7 +42,7 @@ fun TitleBarBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings
             title = LocalizationManager.states.dialogs.titleBarIconSize.value,
             valueType = Int::class,
             value = TextFieldValue("$titleBarIconSize"),
-            onValueChange = { config.setValue(TITLE_BAR_ICON_SIZE, it.text) },
+            onValueChange = { ConfigRepository.setValue(TITLE_BAR_ICON_SIZE, it.text) },
             description =
                 LocalizationFormatter.getStringWithLineBreak(
                     startString = LocalizationManager.states.descriptions.descriptionTitleBarIconSize.value,

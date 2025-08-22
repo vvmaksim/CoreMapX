@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
@@ -36,41 +35,42 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.SUCCESS_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.SURFACE
 import org.coremapx.app.userDirectory.config.ConfigKeys.VERTEX_MAIN_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialogElements.lines.ColorPickLine
 import view.appInterface.preview.PreviewSurface
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.value) {
-    val primary by remember { config.states.primary }
-    val primaryVariant by remember { config.states.primaryVariant }
-    val secondary by remember { config.states.secondary }
-    val secondaryVariant by remember { config.states.secondaryVariant }
-    val background by remember { config.states.background }
-    val surface by remember { config.states.surface }
-    val error by remember { config.states.error }
-    val onPrimary by remember { config.states.onPrimary }
-    val onSecondary by remember { config.states.onSecondary }
-    val onBackground by remember { config.states.onBackground }
-    val onSurface by remember { config.states.onSurface }
-    val onError by remember { config.states.onError }
-    val borderColor by remember { config.states.borderColor }
-    val successColor by remember { config.states.successColor }
-    val warningColor by remember { config.states.warningColor }
-    val vertexMainColor by remember { config.states.vertexMainColor }
-    val hoveredBorderColor by remember { config.states.hoveredBorderColor }
-    val edgeMainColor by remember { config.states.edgeMainColor }
-    val shortestPathColor by remember { config.states.shortestPathColor }
-    val otherPathsColor by remember { config.states.otherPathsColor }
-    val canvasBackgroundColor by remember { config.states.canvasBackgroundColor }
-    val consoleBackgroundColor by remember { config.states.consoleBackgroundColor }
+fun ColorsBlock(isExpandedSettings: Boolean = ConfigRepository.states.isExpandedSettings.value) {
+    val primary by remember { ConfigRepository.states.primary }
+    val primaryVariant by remember { ConfigRepository.states.primaryVariant }
+    val secondary by remember { ConfigRepository.states.secondary }
+    val secondaryVariant by remember { ConfigRepository.states.secondaryVariant }
+    val background by remember { ConfigRepository.states.background }
+    val surface by remember { ConfigRepository.states.surface }
+    val error by remember { ConfigRepository.states.error }
+    val onPrimary by remember { ConfigRepository.states.onPrimary }
+    val onSecondary by remember { ConfigRepository.states.onSecondary }
+    val onBackground by remember { ConfigRepository.states.onBackground }
+    val onSurface by remember { ConfigRepository.states.onSurface }
+    val onError by remember { ConfigRepository.states.onError }
+    val borderColor by remember { ConfigRepository.states.borderColor }
+    val successColor by remember { ConfigRepository.states.successColor }
+    val warningColor by remember { ConfigRepository.states.warningColor }
+    val vertexMainColor by remember { ConfigRepository.states.vertexMainColor }
+    val hoveredBorderColor by remember { ConfigRepository.states.hoveredBorderColor }
+    val edgeMainColor by remember { ConfigRepository.states.edgeMainColor }
+    val shortestPathColor by remember { ConfigRepository.states.shortestPathColor }
+    val otherPathsColor by remember { ConfigRepository.states.otherPathsColor }
+    val canvasBackgroundColor by remember { ConfigRepository.states.canvasBackgroundColor }
+    val consoleBackgroundColor by remember { ConfigRepository.states.consoleBackgroundColor }
 
     Column {
         ColorPickLine(
             selectedColor = primary,
             onColorSelected = {
-                config.setValue(PRIMARY, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(PRIMARY, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsPrimary.value,
@@ -84,8 +84,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = primaryVariant,
             onColorSelected = {
-                config.setValue(PRIMARY_VARIANT, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(PRIMARY_VARIANT, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsPrimaryVariant.value,
@@ -99,8 +99,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = secondary,
             onColorSelected = {
-                config.setValue(SECONDARY, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(SECONDARY, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsSecondary.value,
@@ -114,8 +114,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = secondaryVariant,
             onColorSelected = {
-                config.setValue(SECONDARY_VARIANT, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(SECONDARY_VARIANT, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsSecondaryVariant.value,
@@ -126,8 +126,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = background,
             onColorSelected = {
-                config.setValue(BACKGROUND, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(BACKGROUND, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsBackground.value,
@@ -138,8 +138,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = surface,
             onColorSelected = {
-                config.setValue(SURFACE, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(SURFACE, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsSurface.value,
@@ -150,8 +150,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = error,
             onColorSelected = {
-                config.setValue(ERROR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(ERROR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsError.value,
@@ -162,8 +162,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onPrimary,
             onColorSelected = {
-                config.setValue(ON_PRIMARY, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(ON_PRIMARY, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsOnPrimary.value,
@@ -174,8 +174,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onSecondary,
             onColorSelected = {
-                config.setValue(ON_SECONDARY, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(ON_SECONDARY, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsOnSecondary.value,
@@ -186,8 +186,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onBackground,
             onColorSelected = {
-                config.setValue(ON_BACKGROUND, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(ON_BACKGROUND, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsOnBackground.value,
@@ -198,8 +198,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onSurface,
             onColorSelected = {
-                config.setValue(ON_SURFACE, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(ON_SURFACE, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsOnSurface.value,
@@ -210,8 +210,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = onError,
             onColorSelected = {
-                config.setValue(ON_ERROR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(ON_ERROR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsOnError.value,
@@ -222,8 +222,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = borderColor,
             onColorSelected = {
-                config.setValue(BORDER_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(BORDER_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsBorderColor.value,
@@ -234,8 +234,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = successColor,
             onColorSelected = {
-                config.setValue(SUCCESS_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(SUCCESS_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsSuccessColor.value,
@@ -246,8 +246,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = warningColor,
             onColorSelected = {
-                config.setValue(WARNING_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(WARNING_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsWarningColor.value,
@@ -258,8 +258,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = vertexMainColor,
             onColorSelected = {
-                config.setValue(VERTEX_MAIN_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(VERTEX_MAIN_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsVertexMainColor.value,
@@ -270,8 +270,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = hoveredBorderColor,
             onColorSelected = {
-                config.setValue(HOVERED_BORDER_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(HOVERED_BORDER_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsHoveredBorderColor.value,
@@ -282,8 +282,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = edgeMainColor,
             onColorSelected = {
-                config.setValue(EDGE_MAIN_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(EDGE_MAIN_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsEdgeMainColor.value,
@@ -294,8 +294,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = shortestPathColor,
             onColorSelected = {
-                config.setValue(SHORTEST_PATH_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(SHORTEST_PATH_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsShortestPathColor.value,
@@ -306,8 +306,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = otherPathsColor,
             onColorSelected = {
-                config.setValue(OTHER_PATHS_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(OTHER_PATHS_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsOtherPathsColor.value,
@@ -318,8 +318,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = canvasBackgroundColor,
             onColorSelected = {
-                config.setValue(CANVAS_BACKGROUND_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(CANVAS_BACKGROUND_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsCanvasBackgroundColor.value,
@@ -330,8 +330,8 @@ fun ColorsBlock(isExpandedSettings: Boolean = config.states.isExpandedSettings.v
         ColorPickLine(
             selectedColor = consoleBackgroundColor,
             onColorSelected = {
-                config.setValue(CONSOLE_BACKGROUND_COLOR, it)
-                config.setThemeOnCustom()
+                ConfigRepository.setValue(CONSOLE_BACKGROUND_COLOR, it)
+                ConfigRepository.setThemeOnCustom()
             },
             modifier = Modifier.fillMaxWidth(),
             title = LocalizationManager.states.dialogs.colorsConsoleBackgroundColor.value,

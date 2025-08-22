@@ -25,8 +25,8 @@ import model.ir.GraphIR
 import model.result.FileErrors
 import model.result.Result
 import org.coremapx.app.AppLogger.logDebug
-import org.coremapx.app.config
 import org.coremapx.app.config.PrivateConfig
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import orgcoremapxapp.Graphs
 import viewmodel.graph.GraphViewModel
 import viewmodel.graph.VertexViewModel
@@ -40,10 +40,10 @@ import kotlin.collections.forEach
 
 class GraphManager<E : Comparable<E>, V : Comparable<V>> {
     val graphLayoutHeight =
-        config.states.graphLayoutHeight.value
+        ConfigRepository.states.graphLayoutHeight.value
             .toDouble()
     val graphLayoutWidth =
-        config.states.graphLayoutWidth.value
+        ConfigRepository.states.graphLayoutWidth.value
             .toDouble()
 
     private var _graph = mutableStateOf<Graph<E, V>?>(null)

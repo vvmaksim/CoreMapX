@@ -22,30 +22,25 @@ import org.coremapx.app.AppLogger.logAppStartup
 import org.coremapx.app.AppLogger.logDebug
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.theme.AppTheme
-import org.coremapx.app.userDirectory.UserDirectory
 import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.layout.TitleBar
 import viewmodel.MainScreenViewModel
 import java.awt.Dimension
 
-val userDirectory = UserDirectory.init()
-val config = ConfigRepository()
-
-val startScreenWidth = config.states.mainScreenStartWidth.value
-val startScreenHeight = config.states.mainScreenStartHeight.value
-
 fun main() =
     application {
         logAppStartup()
+        val startScreenWidth = ConfigRepository.states.mainScreenStartWidth.value
+        val startScreenHeight = ConfigRepository.states.mainScreenStartHeight.value
         val windowState = rememberWindowState(width = startScreenWidth.dp, height = startScreenHeight.dp)
-        val startWindowPlacement = config.states.startWindowPlacement.value
+        val startWindowPlacement = ConfigRepository.states.startWindowPlacement.value
         val viewModel = MainScreenViewModel<Long, Long>()
         when (startWindowPlacement) {
             "FullScreen" -> windowState.placement = WindowPlacement.Fullscreen
             "Floating" -> windowState.placement = WindowPlacement.Floating
             "Maximized" -> windowState.placement = WindowPlacement.Maximized
         }
-        val language by config.states.language
+        val language by ConfigRepository.states.language
         LaunchedEffect(language) {
             LocalizationManager.updateLanguage(language)
         }
@@ -58,7 +53,7 @@ fun main() =
             undecorated = true,
             state = windowState,
         ) {
-            val titleBarHeight = config.states.titleBarHeight.value.dp
+            val titleBarHeight = ConfigRepository.states.titleBarHeight.value.dp
             var isMaximized by remember { mutableStateOf(windowState.placement == WindowPlacement.Maximized) }
             window.minimumSize = Dimension(startScreenWidth, startScreenHeight)
 

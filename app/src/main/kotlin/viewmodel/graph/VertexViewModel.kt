@@ -8,16 +8,16 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import model.graph.entities.Vertex
 import org.coremapx.app.AppLogger.logDebug
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 
 class VertexViewModel<V : Comparable<V>>(
     x: Dp = 0.dp,
     y: Dp = 0.dp,
-    color: Color = config.states.vertexMainColor.value,
+    color: Color = ConfigRepository.states.vertexMainColor.value,
     private val vertex: Vertex<V>,
     private val _labelVisible: State<Boolean>,
     private val _idVisible: State<Boolean>,
-    val radius: Dp = config.states.vertexRadius.value.dp,
+    val radius: Dp = ConfigRepository.states.vertexRadius.value.dp,
 ) {
     private var _x = mutableStateOf(x)
     var x: Dp

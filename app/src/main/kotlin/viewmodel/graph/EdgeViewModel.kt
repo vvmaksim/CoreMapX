@@ -4,7 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import model.graph.entities.WeightedEdge
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 
 class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     val edgeId: E,
@@ -13,7 +13,7 @@ class EdgeViewModel<E : Comparable<E>, V : Comparable<V>>(
     val isDirected: Boolean,
     private val _weightVisible: State<Boolean>,
     private val _idVisible: State<Boolean>,
-    color: Color = config.states.edgeMainColor.value,
+    color: Color = ConfigRepository.states.edgeMainColor.value,
     edge: Any,
 ) {
     val weight: Long? = if (edge is WeightedEdge<*, *>) edge.weight else null

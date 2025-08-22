@@ -3,10 +3,10 @@ package viewmodel.managers
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import org.coremapx.app.AppLogger.logDebug
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 
 class CanvasManager {
-    val canvasLimit = config.states.canvasLimit.value
+    val canvasLimit = ConfigRepository.states.canvasLimit.value
 
     private var _offsetX = mutableStateOf(0f)
     val offsetX: State<Float>

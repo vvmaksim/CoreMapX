@@ -2,41 +2,41 @@ package org.coremapx.app.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 
 object Theme {
     val borderColor: Color
-        get() = config.states.borderColor.value
+        get() = ConfigRepository.states.borderColor.value
 
     val successColor: Color
-        get() = config.states.successColor.value
+        get() = ConfigRepository.states.successColor.value
 
     val warningColor: Color
-        get() = config.states.warningColor.value
+        get() = ConfigRepository.states.warningColor.value
 
     val hoveredBorderColor: Color
-        get() = config.states.hoveredBorderColor.value
+        get() = ConfigRepository.states.hoveredBorderColor.value
 
     val canvasBackgroundColor: Color
-        get() = config.states.canvasBackgroundColor.value
+        get() = ConfigRepository.states.canvasBackgroundColor.value
 
     val consoleBackgroundColor: Color
-        get() = config.states.consoleBackgroundColor.value
+        get() = ConfigRepository.states.consoleBackgroundColor.value
 
     val colors: Colors
         get() {
-            val primary = config.states.primary.value
-            val primaryVariant = config.states.primaryVariant.value
-            val secondary = config.states.secondary.value
-            val secondaryVariant = config.states.secondaryVariant.value
-            val background = config.states.background.value
-            val surface = config.states.surface.value
-            val error = config.states.error.value
-            val onPrimary = config.states.onPrimary.value
-            val onSecondary = config.states.onSecondary.value
-            val onBackground = config.states.onBackground.value
-            val onSurface = config.states.onSurface.value
-            val onError = config.states.onError.value
+            val primary = ConfigRepository.states.primary.value
+            val primaryVariant = ConfigRepository.states.primaryVariant.value
+            val secondary = ConfigRepository.states.secondary.value
+            val secondaryVariant = ConfigRepository.states.secondaryVariant.value
+            val background = ConfigRepository.states.background.value
+            val surface = ConfigRepository.states.surface.value
+            val error = ConfigRepository.states.error.value
+            val onPrimary = ConfigRepository.states.onPrimary.value
+            val onSecondary = ConfigRepository.states.onSecondary.value
+            val onBackground = ConfigRepository.states.onBackground.value
+            val onSurface = ConfigRepository.states.onSurface.value
+            val onError = ConfigRepository.states.onError.value
 
             return Colors(
                 primary = primary,

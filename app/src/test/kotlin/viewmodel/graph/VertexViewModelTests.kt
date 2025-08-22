@@ -5,8 +5,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.graph.entities.Vertex
-import org.coremapx.app.config
 import org.coremapx.app.userDirectory.UserDirectory
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -23,8 +23,8 @@ class VertexViewModelTests {
         }
     }
 
-    val defaultColor = config.states.vertexMainColor.value
-    val defaultRadius = config.states.vertexRadius.value.dp
+    val defaultColor = ConfigRepository.states.vertexMainColor.value
+    val defaultRadius = ConfigRepository.states.vertexRadius.value.dp
     val testLabel = "1"
     val testId = 1L
     val testIsLabelVisible = true

@@ -15,6 +15,7 @@ import org.coremapx.app.theme.DefaultThemes
 import org.coremapx.app.theme.ThemeConfig
 import org.coremapx.app.theme.ThemesManager.getAppThemeAsString
 import org.coremapx.app.theme.ThemesManager.getSystemDialogThemeAsStringByIsLight
+import org.coremapx.app.userDirectory.UserDirectory
 import org.coremapx.app.userDirectory.config.ConfigKeys.BACKGROUND
 import org.coremapx.app.userDirectory.config.ConfigKeys.BORDER_COLOR
 import org.coremapx.app.userDirectory.config.ConfigKeys.CANVAS_BACKGROUND_COLOR
@@ -42,9 +43,9 @@ import org.coremapx.app.userDirectory.config.ConfigKeys.WARNING_COLOR
 import java.io.File
 import java.util.Properties
 
-class ConfigRepository {
+object ConfigRepository {
     private val configPath = PrivateConfig.UserDirectory.CONFIG_FILE_PATH
-    private val defaultConfigPath = PrivateConfig.AppResources.DEFAULT_CONFIG_PATH
+    private const val DEFAULT_CONFIG_PATH = PrivateConfig.AppResources.DEFAULT_CONFIG_PATH
 
     private val userConfig: MutableMap<String, String> = mutableMapOf()
     private val defaultConfig: MutableMap<String, String> = mutableMapOf()
@@ -53,6 +54,7 @@ class ConfigRepository {
         private set
 
     init {
+        UserDirectory.init()
         loadUserConfig()
         validateUserConfig()
         states = ConfigStates(this)
@@ -167,7 +169,7 @@ class ConfigRepository {
     }
 
     private fun loadDefaultConfig() {
-        loadConfig(defaultConfigPath, defaultConfig)
+        loadConfig(DEFAULT_CONFIG_PATH, defaultConfig)
     }
 
     private fun loadConfig(

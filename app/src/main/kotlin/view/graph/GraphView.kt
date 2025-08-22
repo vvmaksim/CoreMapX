@@ -15,7 +15,7 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import extensions.canvasBackground
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import viewmodel.graph.GraphViewModel
 
 @Suppress("ktlint:standard:function-naming")
@@ -33,10 +33,10 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
         val canvasWidth = with(density) { maxWidth.toPx() }
         val canvasHeight = with(density) { maxHeight.toPx() }
         val graphLayoutWidth =
-            config.states.graphLayoutWidth.value
+            ConfigRepository.states.graphLayoutWidth.value
                 .toFloat()
         val graphLayoutHeight =
-            config.states.graphLayoutHeight.value
+            ConfigRepository.states.graphLayoutHeight.value
                 .toFloat()
         Box(
             modifier =
@@ -58,8 +58,8 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
                             onDrag = { change, dragAmount ->
                                 change.consume()
                                 onPan(
-                                    dragAmount.x * config.states.canvasDragRatio.value,
-                                    dragAmount.y * config.states.canvasDragRatio.value,
+                                    dragAmount.x * ConfigRepository.states.canvasDragRatio.value,
+                                    dragAmount.y * ConfigRepository.states.canvasDragRatio.value,
                                 )
                             },
                         )

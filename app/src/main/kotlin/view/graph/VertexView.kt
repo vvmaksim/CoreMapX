@@ -23,7 +23,7 @@ import androidx.compose.ui.input.pointer.onPointerEvent
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.sp
 import extensions.hoveredBorder
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import viewmodel.graph.VertexViewModel
 
 @Suppress("ktlint:standard:function-naming")
@@ -34,7 +34,7 @@ fun <V : Comparable<V>> VertexView(
     modifier: Modifier = Modifier,
 ) {
     val hoveredBorderColor = MaterialTheme.colors.hoveredBorder
-    val vertexLabelSize = config.states.vertexLabelSize.value.sp
+    val vertexLabelSize = ConfigRepository.states.vertexLabelSize.value.sp
     var isHovered by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier.offset(viewModel.x, viewModel.y),

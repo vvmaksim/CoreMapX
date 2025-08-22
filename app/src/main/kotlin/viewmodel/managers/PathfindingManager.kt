@@ -11,7 +11,7 @@ import model.graph.pathfinding.PathfindingStrategiesNames
 import model.graph.pathfinding.PathfindingStrategy
 import model.result.Result
 import org.coremapx.app.AppLogger.logDebug
-import org.coremapx.app.config
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import viewmodel.graph.GraphViewModel
 
 class PathfindingManager<E : Comparable<E>, V : Comparable<V>>(
@@ -81,15 +81,15 @@ class PathfindingManager<E : Comparable<E>, V : Comparable<V>>(
         resetEdgeColors()
 
         paths.drop(1).forEach { path ->
-            highlightEdges(path, config.states.otherPathsColor.value)
+            highlightEdges(path, ConfigRepository.states.otherPathsColor.value)
         }
         if (paths.isNotEmpty()) {
-            highlightEdges(paths[0], config.states.shortestPathColor.value)
+            highlightEdges(paths[0], ConfigRepository.states.shortestPathColor.value)
         }
     }
 
     private fun resetEdgeColors() {
-        val defaultColor = config.states.edgeMainColor.value
+        val defaultColor = ConfigRepository.states.edgeMainColor.value
         graphViewModel.value?.edges?.forEach { edgeViewModel ->
             edgeViewModel.color = defaultColor
         }

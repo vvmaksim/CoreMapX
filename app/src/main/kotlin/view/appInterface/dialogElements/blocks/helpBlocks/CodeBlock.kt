@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.coremapx.app.config
 import org.coremapx.app.theme.AppTheme
+import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.preview.PreviewSurface
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
@@ -29,7 +29,7 @@ import java.awt.datatransfer.StringSelection
 @Composable
 fun CodeBlock(
     text: String,
-    backgroundColor: Color = config.states.borderColor.value,
+    backgroundColor: Color = ConfigRepository.states.borderColor.value,
 ) {
     Box(
         modifier =
