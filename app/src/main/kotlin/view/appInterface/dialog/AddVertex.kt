@@ -93,7 +93,7 @@ fun AddVertexContent(
                     showVertexLabelError = false
                 },
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text(LocalizationManager.states.dialogs.addVertexVertexLabelFieldLabel.value) },
+                label = { Text(LocalizationManager.states.dialogs.addVertexVertexLabelCannotBeEmpty.value) },
                 isError = showVertexLabelError,
             )
 
