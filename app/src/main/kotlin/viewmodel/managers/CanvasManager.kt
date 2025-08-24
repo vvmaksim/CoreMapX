@@ -24,10 +24,10 @@ class CanvasManager {
         dx: Float,
         dy: Float,
     ) {
-        val maxOffsetX = (canvasLimit / 2f) * (1 / _scale.value)
-        val minOffsetX = -(canvasLimit / 2f) * (1 / _scale.value)
-        val maxOffsetY = (canvasLimit / 2f) * (1 / _scale.value)
-        val minOffsetY = -(canvasLimit / 2f) * (1 / _scale.value)
+        val maxOffsetX = (canvasLimit / 2f) * (_scale.value)
+        val minOffsetX = -(canvasLimit / 2f) * (_scale.value)
+        val maxOffsetY = (canvasLimit / 2f) * (_scale.value)
+        val minOffsetY = -(canvasLimit / 2f) * (_scale.value)
         _offsetX.value = (_offsetX.value + dx).coerceIn(minOffsetX, maxOffsetX)
         _offsetY.value = (_offsetY.value + dy).coerceIn(minOffsetY, maxOffsetY)
         logDebug("Move canvas: dx:$dx, dy:$dy, offsetX:${_offsetX.value}, offsetY:${_offsetY.value}")
