@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,7 @@ fun LowerRightMenu(
     onZoom: (Float) -> Unit,
     onAddVertex: () -> Unit,
     onAddEdge: () -> Unit,
+    onGraphClear: (command: String) -> Unit,
     modifier: Modifier = Modifier,
     menuWidth: Dp = 188.dp,
     borderWidth: Dp = 1.dp,
@@ -70,6 +72,13 @@ fun LowerRightMenu(
                 buttonText = LocalizationManager.states.ui.lowerRightMenuAddEdgeButton.value,
                 modifier = Modifier.padding(2.dp),
             )
+            MainMenuTextButton(
+                onClick = { onGraphClear("graph_clear") },
+                iconVector = Icons.Default.Delete,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuGraphClearIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuGraphClearButton.value,
+                modifier = Modifier.padding(2.dp),
+            )
             ZoomButtons(
                 onZoom = onZoom,
                 modifier = Modifier.padding(bottom = 8.dp),
@@ -87,6 +96,7 @@ private fun PreviewLowerRightMenu() {
             onZoom = {},
             onAddVertex = {},
             onAddEdge = {},
+            onGraphClear = {},
         )
     }
 }

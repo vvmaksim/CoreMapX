@@ -321,6 +321,8 @@ lowerRightMenuAddVertexButton=Add vertex
 lowerRightMenuAddVertexIconDescription=Add vertex icon
 lowerRightMenuAddEdgeButton=Add edge
 lowerRightMenuAddEdgeIconDescription=Add edge icon
+lowerRightMenuGraphClearButton=Graph clear
+lowerRightMenuGraphClearIconDescription=Graph clear icon
 
  ! Analytics
 analyticsTitle=Analytics

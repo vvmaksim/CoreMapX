@@ -321,6 +321,8 @@ lowerRightMenuAddVertexButton=Добавить вершину
 lowerRightMenuAddVertexIconDescription=Иконка добавления вершины
 lowerRightMenuAddEdgeButton=Добавить ребро
 lowerRightMenuAddEdgeIconDescription=Иконка добавления ребра
+lowerRightMenuGraphClearButton=Очистить граф
+lowerRightMenuGraphClearIconDescription=Иконка очистки графа
 
  ! Analytics
 analyticsTitle=Аналитика

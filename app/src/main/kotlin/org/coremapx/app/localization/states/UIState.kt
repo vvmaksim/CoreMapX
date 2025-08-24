@@ -76,6 +76,8 @@ class UIState : LocalizationState {
     var lowerRightMenuAddVertexIconDescription = mutableStateOf("")
     var lowerRightMenuAddEdgeButton = mutableStateOf("")
     var lowerRightMenuAddEdgeIconDescription = mutableStateOf("")
+    var lowerRightMenuGraphClearButton = mutableStateOf("")
+    var lowerRightMenuGraphClearIconDescription = mutableStateOf("")
 
     // Error Strings
     val errorBasicString = mutableStateOf("")
@@ -158,6 +160,8 @@ class UIState : LocalizationState {
             UIKeys.LOWER_RIGHT_MENU_ADD_VERTEX_ICON_DESCRIPTION -> lowerRightMenuAddVertexIconDescription.value = value
             UIKeys.LOWER_RIGHT_MENU_ADD_EDGE_BUTTON -> lowerRightMenuAddEdgeButton.value = value
             UIKeys.LOWER_RIGHT_MENU_ADD_EDGE_ICON_DESCRIPTION -> lowerRightMenuAddEdgeIconDescription.value = value
+            UIKeys.LOWER_RIGHT_MENU_GRAPH_CLEAR_BUTTON -> lowerRightMenuGraphClearButton.value = value
+            UIKeys.LOWER_RIGHT_MENU_GRAPH_CLEAR_ICON_DESCRIPTION -> lowerRightMenuGraphClearIconDescription.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value

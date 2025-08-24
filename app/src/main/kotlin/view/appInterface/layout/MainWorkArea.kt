@@ -213,6 +213,9 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
                 onAddVertex = { showAddVertexDialog = true },
                 onAddEdge = { showAddEdgeDialog = true },
+                onGraphClear = { commandLine: String ->
+                    handleCommand(commandLine)
+                },
                 modifier =
                     Modifier
                         .padding(16.dp)

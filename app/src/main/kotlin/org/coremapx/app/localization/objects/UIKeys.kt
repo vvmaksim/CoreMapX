@@ -73,6 +73,8 @@ object UIKeys {
     const val LOWER_RIGHT_MENU_ADD_VERTEX_ICON_DESCRIPTION = "lowerRightMenuAddVertexIconDescription"
     const val LOWER_RIGHT_MENU_ADD_EDGE_BUTTON = "lowerRightMenuAddEdgeButton"
     const val LOWER_RIGHT_MENU_ADD_EDGE_ICON_DESCRIPTION = "lowerRightMenuAddEdgeIconDescription"
+    const val LOWER_RIGHT_MENU_GRAPH_CLEAR_BUTTON = "lowerRightMenuGraphClearButton"
+    const val LOWER_RIGHT_MENU_GRAPH_CLEAR_ICON_DESCRIPTION = "lowerRightMenuGraphClearIconDescription"
 
     // Error Strings
     const val ERROR_BASIC_STRING = "errorBasicString"
