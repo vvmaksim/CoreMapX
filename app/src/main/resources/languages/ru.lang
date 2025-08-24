@@ -296,6 +296,18 @@ addEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть число
 addEdgeWeightMustBeLong=Поле Weight должно быть числом типа Long (8 байт)
 addEdgeButton=Добавить ребро
 
+ ! Rm Edge
+rmEdgeTitle=Удалить ребро
+rmEdgeFromVertexIdFieldLabel=fromVertexId
+rmEdgeToVertexIdFieldLabel=toVertexId
+rmEdgeFromVertexIdAndToVertexIdCannotBeEmpty=Поля FromVertexId и ToVertexId не могут быть пустыми
+rmEdgeFromVertexIdCannotBeEmpty=Поле FromVertexId не может быть пустым
+rmEdgeToVertexIdCannotBeEmpty=Поле ToVertexId не может быть пустым
+rmEdgeFromVertexIdAndToVertexIdMustBeLong=Поля FromVertexId и ToVertexId должны быть числами типа Long (8 байт)
+rmEdgeFromVertexIdMustBeLong=Поле FromVertexId должно быть числом типа Long (8 байт)
+rmEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть числом типа Long (8 байт)
+rmEdgeButton=Удалить
+
  ! Top Menu
 topMenuActions=Действия
 topMenuDrawGraphAgain=Отрисовать граф снова
@@ -330,6 +342,8 @@ lowerRightMenuRmVertexButton=Удалить вершину
 lowerRightMenuRmVertexIconDescription=Иконка удаления вершины
 lowerRightMenuAddEdgeButton=Добавить ребро
 lowerRightMenuAddEdgeIconDescription=Иконка добавления ребра
+lowerRightMenuRmEdgeButton=Удалить ребро
+lowerRightMenuRmEdgeIconDescription=Иконка удаления ребра
 lowerRightMenuGraphClearButton=Очистить граф
 lowerRightMenuGraphClearIconDescription=Иконка очистки графа
 

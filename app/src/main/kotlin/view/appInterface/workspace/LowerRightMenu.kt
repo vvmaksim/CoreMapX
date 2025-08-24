@@ -33,6 +33,7 @@ fun LowerRightMenu(
     onAddVertex: () -> Unit,
     onRmVertex: () -> Unit,
     onAddEdge: () -> Unit,
+    onRmEdge: () -> Unit,
     onGraphClear: (command: String) -> Unit,
     modifier: Modifier = Modifier,
     menuWidth: Dp = 188.dp,
@@ -82,6 +83,13 @@ fun LowerRightMenu(
                 modifier = Modifier.padding(2.dp),
             )
             MainMenuTextButton(
+                onClick = onRmEdge,
+                iconVector = Icons.Default.Remove,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuRmEdgeIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuRmEdgeButton.value,
+                modifier = Modifier.padding(2.dp),
+            )
+            MainMenuTextButton(
                 onClick = { onGraphClear("graph_clear") },
                 iconVector = Icons.Default.Delete,
                 iconContentDescription = LocalizationManager.states.ui.lowerRightMenuGraphClearIconDescription.value,
@@ -107,6 +115,7 @@ private fun PreviewLowerRightMenu() {
             onAddEdge = {},
             onGraphClear = {},
             onRmVertex = {},
+            onRmEdge = {},
         )
     }
 }
