@@ -130,7 +130,7 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
     private fun removeVertex(): Result<String> {
         val id = command.parameters["id"] ?: return Result.Error(CommandErrors.MissingParameters("id is required"))
         val idAsV = id.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("id", "Long"))
-        graph.removeVertex(idAsV)
+        graph.removeVertex(idAsV) ?: return Result.Error(CommandErrors.VertexNotFound(id))
         return Result.Success("Vertex with id:$id removed")
     }
 
@@ -142,9 +142,12 @@ class Commands<E : Comparable<E>, V : Comparable<V>>(
             val fromAsV = from.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("from", "Long"))
             val toAsV = to.toLongOrNull() as? V ?: return Result.Error(CommandErrors.InvalidParameterType("to", "Long"))
 
-            graph.removeEdge(fromAsV, toAsV)
+            var removeResult = graph.removeEdge(fromAsV, toAsV)
             if (!graph.isDirected) {
-                graph.removeEdge(toAsV, fromAsV)
+                removeResult = graph.removeEdge(toAsV, fromAsV)
+            }
+            if (removeResult == null) {
+                return Result.Error(CommandErrors.EdgeDoesNotExist(from, to))
             }
             return Result.Success("Edge with from:$from and to:$to removed")
         } else if (command.parameters.containsKey("id")) {
