@@ -294,7 +294,7 @@ addEdgeFromVertexIdAndToVertexIdMustBeLong=Поля FromVertexId и ToVertexId �
 addEdgeFromVertexIdMustBeLong=Поле FromVertexId должно быть числом типа Long (8 байт)
 addEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть числом типа Long (8 байт)
 addEdgeWeightMustBeLong=Поле Weight должно быть числом типа Long (8 байт)
-addEdgeButton=Добавить ребро
+addEdgeButton=Добавить
 
  ! Rm Edge
 rmEdgeTitle=Удалить ребро
