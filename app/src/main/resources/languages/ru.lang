@@ -562,9 +562,12 @@ userDirectoryOpen=Открыть директорию пользователя
 zoomIncrease=Увеличить
 zoomReduce=Уменьшить
 # Any Words
+vertexWithNumber=Вершина {number}
 vertices=вершин
 edges=рёбер
 console=Консоль
+removeLast=Удалить последнюю
+addMore=Добавить ещё...
 enterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть

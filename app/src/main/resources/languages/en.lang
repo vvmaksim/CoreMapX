@@ -562,9 +562,12 @@ userDirectoryOpen=Open user directory
 zoomIncrease=Increase
 zoomReduce=Reduce
 # Any Words
+vertexWithNumber=Vertex {number}
 vertices=vertices
 edges=edges
 console=Console
+removeLast=Remove last
+addMore=Add more...
 enterCommand=Enter command
 # Settings
 settingsCollapse=Collapse
