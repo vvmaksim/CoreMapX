@@ -562,6 +562,7 @@ userDirectoryOpen=Open user directory
 zoomIncrease=Increase
 zoomReduce=Reduce
 # Any Words
+edgeWithNumber=Edge {number}
 vertexWithNumber=Vertex {number}
 vertices=vertices
 edges=edges

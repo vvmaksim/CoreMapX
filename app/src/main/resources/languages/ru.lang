@@ -562,6 +562,7 @@ userDirectoryOpen=Открыть директорию пользователя
 zoomIncrease=Увеличить
 zoomReduce=Уменьшить
 # Any Words
+edgeWithNumber=Ребро {number}
 vertexWithNumber=Вершина {number}
 vertices=вершин
 edges=рёбер

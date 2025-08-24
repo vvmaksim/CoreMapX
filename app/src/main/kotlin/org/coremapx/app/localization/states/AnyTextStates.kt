@@ -6,6 +6,7 @@ import org.coremapx.app.localization.objects.AnyTextKeys
 class AnyTextStates : LocalizationState {
     // Any words
     val vertexWithNumber = mutableStateOf("")
+    val edgeWithNumber = mutableStateOf("")
     val vertices = mutableStateOf("")
     val edges = mutableStateOf("")
     val enterCommand = mutableStateOf("")
@@ -22,6 +23,7 @@ class AnyTextStates : LocalizationState {
     ) {
         when (key) {
             // Any words
+            AnyTextKeys.EDGE_WITH_NUMBER -> edgeWithNumber.value = value
             AnyTextKeys.VERTEX_WITH_NUMBER -> vertexWithNumber.value = value
             AnyTextKeys.VERTICES -> vertices.value = value
             AnyTextKeys.EDGES -> edges.value = value
