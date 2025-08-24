@@ -274,6 +274,13 @@ addVertexVertexLabelCannotBeEmpty=The VertexLabel field cannot be empty
 addVertexVertexIdMustBeLong=The VertexId field must be a Long number (8 bytes)
 addVertexButton=Add
 
+ ! Rm Vertex
+rmVertexTitle=Remove a vertex
+rmVertexVertexIdFieldLabel=Id
+rmVertexVertexIdCannotBeEmpty=The VertexId field cannot be empty
+rmVertexVertexIdMustBeLong=The VertexId field must be a Long number (8 bytes)
+rmVertexButton=Remove
+
  ! Add Edge
 addEdgeTitle=Add an edge
 addEdgeFromVertexIdFieldLabel=fromVertexId
@@ -288,6 +295,18 @@ addEdgeFromVertexIdMustBeLong=The FromVertexId field must be a Long number (8 by
 addEdgeToVertexIdMustBeLong=The ToVertexId field must be a Long number (8 bytes)
 addEdgeWeightMustBeLong=The Weight field must be a Long number (8 bytes)
 addEdgeButton=Add
+
+ ! Rm Edge
+rmEdgeTitle=Remove an edge
+rmEdgeFromVertexIdFieldLabel=fromVertexId
+rmEdgeToVertexIdFieldLabel=toVertexId
+rmEdgeFromVertexIdAndToVertexIdCannotBeEmpty=The FromVertexId and ToVertexId fields cannot be empty
+rmEdgeFromVertexIdCannotBeEmpty=The FromVertexId field cannot be empty
+rmEdgeToVertexIdCannotBeEmpty=The ToVertexId field cannot be empty
+rmEdgeFromVertexIdAndToVertexIdMustBeLong=The FromVertexId and ToVertexId fields must be Long numbers (8 bytes)
+rmEdgeFromVertexIdMustBeLong=The FromVertexId field must be a Long number (8 bytes)
+rmEdgeToVertexIdMustBeLong=The ToVertexId field must be a Long number (8 bytes)
+rmEdgeButton=Remove
 
  ! Top Menu
 topMenuActions=Actions
@@ -319,8 +338,14 @@ forceDirectedMenuSpeed=Speed: {number}
  ! Lower Right Menu
 lowerRightMenuAddVertexButton=Add vertex
 lowerRightMenuAddVertexIconDescription=Add vertex icon
+lowerRightMenuRmVertexButton=Remove vertex
+lowerRightMenuRmVertexIconDescription=Remove vertex icon
 lowerRightMenuAddEdgeButton=Add edge
 lowerRightMenuAddEdgeIconDescription=Add edge icon
+lowerRightMenuRmEdgeButton=Remove edge
+lowerRightMenuRmEdgeIconDescription=Remove edge icon
+lowerRightMenuGraphClearButton=Graph clear
+lowerRightMenuGraphClearIconDescription=Graph clear icon
 
  ! Analytics
 analyticsTitle=Analytics
@@ -537,9 +562,13 @@ userDirectoryOpen=Open user directory
 zoomIncrease=Increase
 zoomReduce=Reduce
 # Any Words
+edgeWithNumber=Edge {number}
+vertexWithNumber=Vertex {number}
 vertices=vertices
 edges=edges
 console=Console
+removeLast=Remove last
+addMore=Add more...
 enterCommand=Enter command
 # Settings
 settingsCollapse=Collapse

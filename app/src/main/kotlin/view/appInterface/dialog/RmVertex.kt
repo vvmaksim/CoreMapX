@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import model.dto.AddVertexData
+import model.dto.RmVertexData
 import org.coremapx.app.localization.LocalizationManager
 import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.theme.AppTheme
@@ -34,15 +34,15 @@ import view.appInterface.textField.CustomTextField
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun AddVertex(
+fun RmVertex(
     onDismiss: () -> Unit,
-    onAdd: (commandLine: String) -> Unit,
+    onRm: (commandLine: String) -> Unit,
     dialogWidth: Dp = 450.dp,
 ) {
     Dialog(onDismissRequest = onDismiss) {
-        AddVertexContent(
+        RmVertexContent(
             onDismiss = onDismiss,
-            onAdd = onAdd,
+            onRm = onRm,
             dialogWidth = dialogWidth,
         )
     }
@@ -50,39 +50,26 @@ fun AddVertex(
 
 @Suppress("ktlint:standard:function-naming")
 @Composable
-fun AddVertexContent(
+fun RmVertexContent(
     onDismiss: () -> Unit,
-    onAdd: (commandLine: String) -> Unit,
+    onRm: (commandLine: String) -> Unit,
     dialogWidth: Dp = 450.dp,
 ) {
-    val vertices = remember { mutableStateListOf(AddVertexData()) }
+    val vertices = remember { mutableStateListOf(RmVertexData()) }
     var redrawTrigger by remember { mutableStateOf(0) }
     val scrollState = rememberScrollState()
 
     fun checkParameters(index: Int): Boolean {
         val vertex = vertices[index]
         vertex.showVertexIdError = false
-        vertex.showVertexLabelError = false
-        val isVertexIdEmpty = vertex.vertexId.text.isEmpty()
-        val isVertexLabelEmpty = vertex.vertexLabel.text.isEmpty()
 
-        if (isVertexIdEmpty || isVertexLabelEmpty) {
-            if (isVertexIdEmpty && isVertexLabelEmpty) {
-                vertex.errorMessage = LocalizationManager.states.dialogs.addVertexVertexIdAndVertexLabelCannotBeEmpty.value
-                vertex.showVertexIdError = true
-                vertex.showVertexLabelError = true
-            } else if (isVertexIdEmpty && !isVertexLabelEmpty) {
-                vertex.errorMessage = LocalizationManager.states.dialogs.addVertexVertexIdCannotBeEmpty.value
-                vertex.showVertexIdError = true
-            } else if (!isVertexIdEmpty && isVertexLabelEmpty) {
-                vertex.errorMessage = LocalizationManager.states.dialogs.addVertexVertexLabelCannotBeEmpty.value
-                vertex.showVertexLabelError = true
-            }
+        if (vertex.vertexId.text.isEmpty()) {
+            vertex.errorMessage = LocalizationManager.states.dialogs.rmVertexVertexIdCannotBeEmpty.value
+            vertex.showVertexIdError = true
             return false
         }
-
         if (vertex.vertexId.text.toLongOrNull() == null) {
-            vertex.errorMessage = LocalizationManager.states.dialogs.addVertexVertexIdMustBeLong.value
+            vertex.errorMessage = LocalizationManager.states.dialogs.rmVertexVertexIdMustBeLong.value
             vertex.showVertexIdError = true
             return false
         }
@@ -119,18 +106,15 @@ fun AddVertexContent(
         ) {
             key(redrawTrigger) {
                 DialogHeader(
-                    title = LocalizationManager.states.dialogs.addVertexTitle.value,
+                    title = LocalizationManager.states.dialogs.rmVertexTitle.value,
                     onButtonClick = onDismiss,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-
                 Column {
                     vertices.forEachIndexed { index, _ ->
                         var vertexId by remember { mutableStateOf(vertices[index].vertexId) }
-                        var vertexLabel by remember { mutableStateOf(vertices[index].vertexLabel) }
                         var errorMessage by remember { mutableStateOf(vertices[index].errorMessage) }
                         var showVertexIdError by remember { mutableStateOf(vertices[index].showVertexIdError) }
-                        var showVertexLabelError by remember { mutableStateOf(vertices[index].showVertexLabelError) }
 
                         Column {
                             Text(
@@ -150,29 +134,13 @@ fun AddVertexContent(
                                     checkParameters(index)
                                     errorMessage = vertices[index].errorMessage
                                     showVertexIdError = vertices[index].showVertexIdError
-                                    showVertexLabelError = vertices[index].showVertexLabelError
                                 },
                                 modifier = Modifier.fillMaxWidth(),
-                                label = { Text(LocalizationManager.states.dialogs.addVertexVertexIdFieldLabel.value) },
+                                label = { Text(LocalizationManager.states.dialogs.rmVertexVertexIdFieldLabel.value) },
                                 isError = showVertexIdError,
                             )
-                            Spacer(modifier = Modifier.height(24.dp))
-                            CustomTextField(
-                                value = vertexLabel,
-                                onValueChange = { newValue ->
-                                    vertexLabel = newValue
-                                    vertices[index].vertexLabel = newValue
-                                    checkParameters(index)
-                                    errorMessage = vertices[index].errorMessage
-                                    showVertexIdError = vertices[index].showVertexIdError
-                                    showVertexLabelError = vertices[index].showVertexLabelError
-                                },
-                                modifier = Modifier.fillMaxWidth(),
-                                label = { Text(LocalizationManager.states.dialogs.addVertexVertexLabelFieldLabel.value) },
-                                isError = showVertexLabelError,
-                            )
 
-                            if (showVertexIdError || showVertexLabelError) {
+                            if (showVertexIdError) {
                                 Spacer(modifier = Modifier.height(24.dp))
                                 Text(
                                     text = errorMessage,
@@ -203,7 +171,7 @@ fun AddVertexContent(
                 }
                 Button(
                     onClick = {
-                        vertices.add(AddVertexData())
+                        vertices.add(RmVertexData())
                     },
                     shape = MaterialTheme.shapes.medium,
                     modifier = Modifier.fillMaxWidth(),
@@ -222,9 +190,9 @@ fun AddVertexContent(
                         if (validateAll() && vertices.isNotEmpty()) {
                             val commandLine =
                                 vertices.joinToString("; ") { vertex ->
-                                    "add vertex id:${vertex.vertexId.text} label:${vertex.vertexLabel.text}"
+                                    "rm vertex id:${vertex.vertexId.text}"
                                 }
-                            onAdd(commandLine)
+                            onRm(commandLine)
                             onDismiss()
                         } else {
                             redrawTrigger++
@@ -234,7 +202,7 @@ fun AddVertexContent(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        text = LocalizationManager.states.dialogs.addVertexButton.value,
+                        text = LocalizationManager.states.dialogs.rmVertexButton.value,
                         style = MaterialTheme.typography.button,
                     )
                 }
@@ -246,12 +214,12 @@ fun AddVertexContent(
 @Suppress("ktlint:standard:function-naming")
 @Preview
 @Composable
-private fun PreviewAddVertex() {
+private fun PreviewRmVertex() {
     AppTheme {
-        AddVertexContent(
+        RmVertexContent(
             dialogWidth = 450.dp,
             onDismiss = {},
-            onAdd = {},
+            onRm = {},
         )
     }
 }

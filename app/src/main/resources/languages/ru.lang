@@ -274,6 +274,13 @@ addVertexVertexLabelCannotBeEmpty=Поле VertexLabel не может быть 
 addVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
 addVertexButton=Добавить
 
+ ! Rm Vertex
+rmVertexTitle=Удалите вершину
+rmVertexVertexIdFieldLabel=Id
+rmVertexVertexIdCannotBeEmpty=Поле VertexId не может быть пустым
+rmVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
+rmVertexButton=Удалить
+
  ! Add Edge
 addEdgeTitle=Добавьте ребро
 addEdgeFromVertexIdFieldLabel=fromVertexId
@@ -287,7 +294,19 @@ addEdgeFromVertexIdAndToVertexIdMustBeLong=Поля FromVertexId и ToVertexId �
 addEdgeFromVertexIdMustBeLong=Поле FromVertexId должно быть числом типа Long (8 байт)
 addEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть числом типа Long (8 байт)
 addEdgeWeightMustBeLong=Поле Weight должно быть числом типа Long (8 байт)
-addEdgeButton=Добавить ребро
+addEdgeButton=Добавить
+
+ ! Rm Edge
+rmEdgeTitle=Удалить ребро
+rmEdgeFromVertexIdFieldLabel=fromVertexId
+rmEdgeToVertexIdFieldLabel=toVertexId
+rmEdgeFromVertexIdAndToVertexIdCannotBeEmpty=Поля FromVertexId и ToVertexId не могут быть пустыми
+rmEdgeFromVertexIdCannotBeEmpty=Поле FromVertexId не может быть пустым
+rmEdgeToVertexIdCannotBeEmpty=Поле ToVertexId не может быть пустым
+rmEdgeFromVertexIdAndToVertexIdMustBeLong=Поля FromVertexId и ToVertexId должны быть числами типа Long (8 байт)
+rmEdgeFromVertexIdMustBeLong=Поле FromVertexId должно быть числом типа Long (8 байт)
+rmEdgeToVertexIdMustBeLong=Поле ToVertexId должно быть числом типа Long (8 байт)
+rmEdgeButton=Удалить
 
  ! Top Menu
 topMenuActions=Действия
@@ -319,8 +338,14 @@ forceDirectedMenuSpeed=Скорость: {number}
  ! Lower Right Menu
 lowerRightMenuAddVertexButton=Добавить вершину
 lowerRightMenuAddVertexIconDescription=Иконка добавления вершины
+lowerRightMenuRmVertexButton=Удалить вершину
+lowerRightMenuRmVertexIconDescription=Иконка удаления вершины
 lowerRightMenuAddEdgeButton=Добавить ребро
 lowerRightMenuAddEdgeIconDescription=Иконка добавления ребра
+lowerRightMenuRmEdgeButton=Удалить ребро
+lowerRightMenuRmEdgeIconDescription=Иконка удаления ребра
+lowerRightMenuGraphClearButton=Очистить граф
+lowerRightMenuGraphClearIconDescription=Иконка очистки графа
 
  ! Analytics
 analyticsTitle=Аналитика
@@ -537,9 +562,13 @@ userDirectoryOpen=Открыть директорию пользователя
 zoomIncrease=Увеличить
 zoomReduce=Уменьшить
 # Any Words
+edgeWithNumber=Ребро {number}
+vertexWithNumber=Вершина {number}
 vertices=вершин
 edges=рёбер
 console=Консоль
+removeLast=Удалить последнюю
+addMore=Добавить ещё...
 enterCommand=Введите команду
 # Settings
 settingsCollapse=Сокрыть

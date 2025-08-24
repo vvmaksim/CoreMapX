@@ -70,6 +70,14 @@ sealed class CommandErrors(
             description = "Failed to add edge: from=$from, to=$to $details",
         )
 
+    data class EdgeDoesNotExist(
+        val from: String,
+        val to: String,
+    ) : CommandErrors(
+            type = "EdgeDoesNotExist",
+            description = "The edge with from:$from and to:$to does not exist",
+        )
+
     data class UnknownGraphType(
         val graphType: String,
     ) : CommandErrors(

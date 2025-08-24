@@ -30,7 +30,7 @@ class ConfigTests {
         assertEquals("en", ConfigRepository.states.language.value)
         assertEquals("light", ConfigRepository.states.theme.value)
         assertEquals("light", ConfigRepository.states.systemDialogTheme.value)
-        assertEquals(true, ConfigRepository.states.isExpandedSettings.value)
+        assertEquals(false, ConfigRepository.states.isExpandedSettings.value)
         assertEquals(Color(0xFF6200EE), ConfigRepository.states.primary.value)
         assertEquals(Color(0xFF757575), ConfigRepository.states.primaryVariant.value)
         assertEquals(Color(0xFFFFC107), ConfigRepository.states.secondary.value)

@@ -39,6 +39,8 @@ import org.coremapx.app.localization.objects.LocalizationFormatter
 import org.coremapx.app.userDirectory.config.ConfigRepository
 import view.appInterface.dialog.AddEdge
 import view.appInterface.dialog.AddVertex
+import view.appInterface.dialog.RmEdge
+import view.appInterface.dialog.RmVertex
 import view.appInterface.workspace.Console
 import view.appInterface.workspace.ForceDirectedMenu
 import view.appInterface.workspace.GraphElementCounters
@@ -56,7 +58,9 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
 ) {
     var commandCount by remember { mutableStateOf(0) }
     var showAddVertexDialog by remember { mutableStateOf(false) }
+    var showRmVertexDialog by remember { mutableStateOf(false) }
     var showAddEdgeDialog by remember { mutableStateOf(false) }
+    var showRmEdgeDialog by remember { mutableStateOf(false) }
     var consolePosition by remember { mutableStateOf(Offset.Zero) }
 
     val outputMessages = remember { mutableStateOf(mutableListOf<String>()) }
@@ -212,7 +216,12 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
             LowerRightMenu(
                 onZoom = { zoomDelta -> viewModel.canvasManager.zoomCanvas(zoomDelta) },
                 onAddVertex = { showAddVertexDialog = true },
+                onRmVertex = { showRmVertexDialog = true },
                 onAddEdge = { showAddEdgeDialog = true },
+                onRmEdge = { showRmEdgeDialog = true },
+                onGraphClear = { commandLine: String ->
+                    handleCommand(commandLine)
+                },
                 modifier =
                     Modifier
                         .padding(16.dp)
@@ -228,6 +237,15 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                 )
             }
 
+            if (showRmVertexDialog) {
+                RmVertex(
+                    onDismiss = { showRmVertexDialog = false },
+                    onRm = { commandLine: String ->
+                        handleCommand(commandLine)
+                    },
+                )
+            }
+
             if (showAddEdgeDialog) {
                 AddEdge(
                     onDismiss = { showAddEdgeDialog = false },
@@ -237,6 +255,15 @@ fun <E : Comparable<E>, V : Comparable<V>> MainWorkArea(
                     isWeighted =
                         viewModel.graphManager.graph.value
                             ?.isWeighted ?: true,
+                )
+            }
+
+            if (showRmEdgeDialog) {
+                RmEdge(
+                    onDismiss = { showRmEdgeDialog = false },
+                    onRm = { commandLine: String ->
+                        handleCommand(commandLine)
+                    },
                 )
             }
         },

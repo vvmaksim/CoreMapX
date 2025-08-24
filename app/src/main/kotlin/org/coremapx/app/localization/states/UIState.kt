@@ -74,8 +74,14 @@ class UIState : LocalizationState {
     // Lower Right Menu
     var lowerRightMenuAddVertexButton = mutableStateOf("")
     var lowerRightMenuAddVertexIconDescription = mutableStateOf("")
+    var lowerRightMenuRmVertexButton = mutableStateOf("")
+    var lowerRightMenuRmVertexIconDescription = mutableStateOf("")
     var lowerRightMenuAddEdgeButton = mutableStateOf("")
     var lowerRightMenuAddEdgeIconDescription = mutableStateOf("")
+    var lowerRightMenuRmEdgeButton = mutableStateOf("")
+    var lowerRightMenuRmEdgeIconDescription = mutableStateOf("")
+    var lowerRightMenuGraphClearButton = mutableStateOf("")
+    var lowerRightMenuGraphClearIconDescription = mutableStateOf("")
 
     // Error Strings
     val errorBasicString = mutableStateOf("")
@@ -156,8 +162,14 @@ class UIState : LocalizationState {
             // Lower Right Menu
             UIKeys.LOWER_RIGHT_MENU_ADD_VERTEX_BUTTON -> lowerRightMenuAddVertexButton.value = value
             UIKeys.LOWER_RIGHT_MENU_ADD_VERTEX_ICON_DESCRIPTION -> lowerRightMenuAddVertexIconDescription.value = value
+            UIKeys.LOWER_RIGHT_MENU_RM_VERTEX_BUTTON -> lowerRightMenuRmVertexButton.value = value
+            UIKeys.LOWER_RIGHT_MENU_RM_VERTEX_ICON_DESCRIPTION -> lowerRightMenuRmVertexIconDescription.value = value
             UIKeys.LOWER_RIGHT_MENU_ADD_EDGE_BUTTON -> lowerRightMenuAddEdgeButton.value = value
             UIKeys.LOWER_RIGHT_MENU_ADD_EDGE_ICON_DESCRIPTION -> lowerRightMenuAddEdgeIconDescription.value = value
+            UIKeys.LOWER_RIGHT_MENU_RM_EDGE_BUTTON -> lowerRightMenuRmEdgeButton.value = value
+            UIKeys.LOWER_RIGHT_MENU_RM_EDGE_ICON_DESCRIPTION -> lowerRightMenuRmEdgeIconDescription.value = value
+            UIKeys.LOWER_RIGHT_MENU_GRAPH_CLEAR_BUTTON -> lowerRightMenuGraphClearButton.value = value
+            UIKeys.LOWER_RIGHT_MENU_GRAPH_CLEAR_ICON_DESCRIPTION -> lowerRightMenuGraphClearIconDescription.value = value
 
             // Error Strings
             UIKeys.ERROR_BASIC_STRING -> errorBasicString.value = value

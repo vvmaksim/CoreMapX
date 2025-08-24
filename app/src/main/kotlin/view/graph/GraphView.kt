@@ -32,12 +32,6 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
         val density = LocalDensity.current
         val canvasWidth = with(density) { maxWidth.toPx() }
         val canvasHeight = with(density) { maxHeight.toPx() }
-        val graphLayoutWidth =
-            ConfigRepository.states.graphLayoutWidth.value
-                .toFloat()
-        val graphLayoutHeight =
-            ConfigRepository.states.graphLayoutHeight.value
-                .toFloat()
         Box(
             modifier =
                 Modifier
@@ -65,8 +59,28 @@ fun <E : Comparable<E>, V : Comparable<V>> GraphView(
                         )
                     },
         ) {
-            val offsetXDp = with(density) { ((offsetX + (canvasWidth / 2f) - (graphLayoutWidth * scale / 2f))).toDp() }
-            val offsetYDp = with(density) { ((offsetY + (canvasHeight / 2f) - (graphLayoutHeight * scale / 2f))).toDp() }
+            val offsetXDp =
+                with(density) {
+                    (
+                        (
+                            offsetX + (canvasWidth / 2f) - (
+                                ConfigRepository.states.graphLayoutWidth.value
+                                    .toFloat() * scale / 2f
+                            )
+                        )
+                    ).toDp()
+                }
+            val offsetYDp =
+                with(density) {
+                    (
+                        (
+                            offsetY + (canvasHeight / 2f) - (
+                                ConfigRepository.states.graphLayoutHeight.value
+                                    .toFloat() * scale / 2f
+                            )
+                        )
+                    ).toDp()
+                }
             Box(
                 modifier =
                     Modifier

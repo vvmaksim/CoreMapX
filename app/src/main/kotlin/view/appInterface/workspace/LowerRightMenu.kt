@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Remove
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,7 +31,10 @@ import view.appInterface.button.ZoomButtons
 fun LowerRightMenu(
     onZoom: (Float) -> Unit,
     onAddVertex: () -> Unit,
+    onRmVertex: () -> Unit,
     onAddEdge: () -> Unit,
+    onRmEdge: () -> Unit,
+    onGraphClear: (command: String) -> Unit,
     modifier: Modifier = Modifier,
     menuWidth: Dp = 188.dp,
     borderWidth: Dp = 1.dp,
@@ -59,8 +64,15 @@ fun LowerRightMenu(
             MainMenuTextButton(
                 onClick = onAddVertex,
                 iconVector = Icons.Default.Add,
-                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddEdgeIconDescription.value,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddVertexIconDescription.value,
                 buttonText = LocalizationManager.states.ui.lowerRightMenuAddVertexButton.value,
+                modifier = Modifier.padding(2.dp),
+            )
+            MainMenuTextButton(
+                onClick = onRmVertex,
+                iconVector = Icons.Default.Remove,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuRmVertexIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuRmVertexButton.value,
                 modifier = Modifier.padding(2.dp),
             )
             MainMenuTextButton(
@@ -68,6 +80,20 @@ fun LowerRightMenu(
                 iconVector = Icons.Default.Add,
                 iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddEdgeIconDescription.value,
                 buttonText = LocalizationManager.states.ui.lowerRightMenuAddEdgeButton.value,
+                modifier = Modifier.padding(2.dp),
+            )
+            MainMenuTextButton(
+                onClick = onRmEdge,
+                iconVector = Icons.Default.Remove,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuRmEdgeIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuRmEdgeButton.value,
+                modifier = Modifier.padding(2.dp),
+            )
+            MainMenuTextButton(
+                onClick = { onGraphClear("graph_clear") },
+                iconVector = Icons.Default.Delete,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuGraphClearIconDescription.value,
+                buttonText = LocalizationManager.states.ui.lowerRightMenuGraphClearButton.value,
                 modifier = Modifier.padding(2.dp),
             )
             ZoomButtons(
@@ -87,6 +113,9 @@ private fun PreviewLowerRightMenu() {
             onZoom = {},
             onAddVertex = {},
             onAddEdge = {},
+            onGraphClear = {},
+            onRmVertex = {},
+            onRmEdge = {},
         )
     }
 }

@@ -160,6 +160,13 @@ class DialogsState : LocalizationState {
     val addVertexVertexIdMustBeLong = mutableStateOf("")
     val addVertexButton = mutableStateOf("")
 
+    // Rm Vertex
+    val rmVertexTitle = mutableStateOf("")
+    val rmVertexVertexIdFieldLabel = mutableStateOf("")
+    val rmVertexVertexIdCannotBeEmpty = mutableStateOf("")
+    val rmVertexVertexIdMustBeLong = mutableStateOf("")
+    val rmVertexButton = mutableStateOf("")
+
     // Add Edge
     val addEdgeTitle = mutableStateOf("")
     val addEdgeFromVertexIdFieldLabel = mutableStateOf("")
@@ -174,6 +181,18 @@ class DialogsState : LocalizationState {
     val addEdgeToVertexIdMustBeLong = mutableStateOf("")
     val addEdgeWeightMustBeLong = mutableStateOf("")
     val addEdgeButton = mutableStateOf("")
+
+    // Rm Edge
+    val rmEdgeTitle = mutableStateOf("")
+    val rmEdgeFromVertexIdFieldLabel = mutableStateOf("")
+    val rmEdgeToVertexIdFieldLabel = mutableStateOf("")
+    val rmEdgeFromVertexIdAndToVertexIdCannotBeEmpty = mutableStateOf("")
+    val rmEdgeFromVertexIdCannotBeEmpty = mutableStateOf("")
+    val rmEdgeToVertexIdCannotBeEmpty = mutableStateOf("")
+    val rmEdgeFromVertexIdAndToVertexIdMustBeLong = mutableStateOf("")
+    val rmEdgeFromVertexIdMustBeLong = mutableStateOf("")
+    val rmEdgeToVertexIdMustBeLong = mutableStateOf("")
+    val rmEdgeButton = mutableStateOf("")
 
     // Help
     val helpTitle = mutableStateOf("")
@@ -381,6 +400,13 @@ class DialogsState : LocalizationState {
             DialogsKeys.ADD_VERTEX_VERTEX_ID_MUST_BE_LONG -> addVertexVertexIdMustBeLong.value = value
             DialogsKeys.ADD_VERTEX_BUTTON -> addVertexButton.value = value
 
+            // Rm Vertex
+            DialogsKeys.RM_VERTEX_TITLE -> rmVertexTitle.value = value
+            DialogsKeys.RM_VERTEX_VERTEX_ID_FIELD_LABEL -> rmVertexVertexIdFieldLabel.value = value
+            DialogsKeys.RM_VERTEX_VERTEX_ID_CANNOT_BE_EMPTY -> rmVertexVertexIdCannotBeEmpty.value = value
+            DialogsKeys.RM_VERTEX_VERTEX_ID_MUST_BE_LONG -> rmVertexVertexIdMustBeLong.value = value
+            DialogsKeys.RM_VERTEX_BUTTON -> rmVertexButton.value = value
+
             // Add Edge
             DialogsKeys.ADD_EDGE_TITLE -> addEdgeTitle.value = value
             DialogsKeys.ADD_EDGE_FROM_VERTEX_ID_FIELD_LABEL -> addEdgeFromVertexIdFieldLabel.value = value
@@ -397,6 +423,20 @@ class DialogsState : LocalizationState {
             DialogsKeys.ADD_EDGE_TO_VERTEX_ID_MUST_BE_LONG -> addEdgeToVertexIdMustBeLong.value = value
             DialogsKeys.ADD_EDGE_WEIGHT_MUST_BE_LONG -> addEdgeWeightMustBeLong.value = value
             DialogsKeys.ADD_EDGE_BUTTON -> addEdgeButton.value = value
+
+            // Rm Edge
+            DialogsKeys.RM_EDGE_TITLE -> rmEdgeTitle.value = value
+            DialogsKeys.RM_EDGE_FROM_VERTEX_ID_FIELD_LABEL -> rmEdgeFromVertexIdFieldLabel.value = value
+            DialogsKeys.RM_EDGE_TO_VERTEX_ID_FIELD_LABEL -> rmEdgeToVertexIdFieldLabel.value = value
+            DialogsKeys.RM_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_CANNOT_BE_EMPTY ->
+                rmEdgeFromVertexIdAndToVertexIdCannotBeEmpty.value =
+                    value
+            DialogsKeys.RM_EDGE_FROM_VERTEX_ID_CANNOT_BE_EMPTY -> rmEdgeFromVertexIdCannotBeEmpty.value = value
+            DialogsKeys.RM_EDGE_TO_VERTEX_ID_CANNOT_BE_EMPTY -> rmEdgeToVertexIdCannotBeEmpty.value = value
+            DialogsKeys.RM_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_MUST_BE_LONG -> rmEdgeFromVertexIdAndToVertexIdMustBeLong.value = value
+            DialogsKeys.RM_EDGE_FROM_VERTEX_ID_MUST_BE_LONG -> rmEdgeFromVertexIdMustBeLong.value = value
+            DialogsKeys.RM_EDGE_TO_VERTEX_ID_MUST_BE_LONG -> rmEdgeToVertexIdMustBeLong.value = value
+            DialogsKeys.RM_EDGE_BUTTON -> rmEdgeButton.value = value
 
             // Help
             DialogsKeys.HELP_TITLE -> helpTitle.value = value

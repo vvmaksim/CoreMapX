@@ -39,13 +39,6 @@ import java.io.File
 import kotlin.collections.forEach
 
 class GraphManager<E : Comparable<E>, V : Comparable<V>> {
-    val graphLayoutHeight =
-        ConfigRepository.states.graphLayoutHeight.value
-            .toDouble()
-    val graphLayoutWidth =
-        ConfigRepository.states.graphLayoutWidth.value
-            .toDouble()
-
     private var _graph = mutableStateOf<Graph<E, V>?>(null)
     val graph: State<Graph<E, V>?>
         get() = _graph
@@ -105,6 +98,12 @@ class GraphManager<E : Comparable<E>, V : Comparable<V>> {
         logDebug("Launched resetGraphView() function from GraphManager")
         _graphViewModel.value?.let { viewModel ->
             val strategy = layoutStrategy.value
+            val graphLayoutHeight =
+                ConfigRepository.states.graphLayoutHeight.value
+                    .toDouble()
+            val graphLayoutWidth =
+                ConfigRepository.states.graphLayoutWidth.value
+                    .toDouble()
             if (strategy is ForceDirectedStrategy<*, *>) {
                 val forceStrategy = strategy as? ForceDirectedStrategy<Comparable<Any>, Comparable<Any>>
                 forceStrategy?.stopAnimation()

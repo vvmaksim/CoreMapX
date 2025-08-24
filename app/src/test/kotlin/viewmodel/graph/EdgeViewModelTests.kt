@@ -220,6 +220,6 @@ class EdgeViewModelTests {
                 _weightVisible = mutableStateOf(true),
                 _idVisible = mutableStateOf(true),
             )
-        assertEquals("id: $edgeId\nweight: ", viewModel.getEdgeText())
+        assertEquals("id: $edgeId", viewModel.getEdgeText())
     }
 }

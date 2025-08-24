@@ -157,6 +157,13 @@ object DialogsKeys {
     const val ADD_VERTEX_VERTEX_ID_MUST_BE_LONG = "addVertexVertexIdMustBeLong"
     const val ADD_VERTEX_BUTTON = "addVertexButton"
 
+    // Rm Vertex
+    const val RM_VERTEX_TITLE = "rmVertexTitle"
+    const val RM_VERTEX_VERTEX_ID_FIELD_LABEL = "rmVertexVertexIdFieldLabel"
+    const val RM_VERTEX_VERTEX_ID_CANNOT_BE_EMPTY = "rmVertexVertexIdCannotBeEmpty"
+    const val RM_VERTEX_VERTEX_ID_MUST_BE_LONG = "rmVertexVertexIdMustBeLong"
+    const val RM_VERTEX_BUTTON = "rmVertexButton"
+
     // Add Edge
     const val ADD_EDGE_TITLE = "addEdgeTitle"
     const val ADD_EDGE_FROM_VERTEX_ID_FIELD_LABEL = "addEdgeFromVertexIdFieldLabel"
@@ -171,6 +178,18 @@ object DialogsKeys {
     const val ADD_EDGE_TO_VERTEX_ID_MUST_BE_LONG = "addEdgeToVertexIdMustBeLong"
     const val ADD_EDGE_WEIGHT_MUST_BE_LONG = "addEdgeWeightMustBeLong"
     const val ADD_EDGE_BUTTON = "addEdgeButton"
+
+    // Rm Edge
+    const val RM_EDGE_TITLE = "rmEdgeTitle"
+    const val RM_EDGE_FROM_VERTEX_ID_FIELD_LABEL = "rmEdgeFromVertexIdFieldLabel"
+    const val RM_EDGE_TO_VERTEX_ID_FIELD_LABEL = "rmEdgeToVertexIdFieldLabel"
+    const val RM_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_CANNOT_BE_EMPTY = "rmEdgeFromVertexIdAndToVertexIdCannotBeEmpty"
+    const val RM_EDGE_FROM_VERTEX_ID_CANNOT_BE_EMPTY = "rmEdgeFromVertexIdCannotBeEmpty"
+    const val RM_EDGE_TO_VERTEX_ID_CANNOT_BE_EMPTY = "rmEdgeToVertexIdCannotBeEmpty"
+    const val RM_EDGE_FROM_VERTEX_ID_AND_TO_VERTEX_ID_MUST_BE_LONG = "rmEdgeFromVertexIdAndToVertexIdMustBeLong"
+    const val RM_EDGE_FROM_VERTEX_ID_MUST_BE_LONG = "rmEdgeFromVertexIdMustBeLong"
+    const val RM_EDGE_TO_VERTEX_ID_MUST_BE_LONG = "rmEdgeToVertexIdMustBeLong"
+    const val RM_EDGE_BUTTON = "rmEdgeButton"
 
     // Help
     const val HELP_TITLE = "helpTitle"
