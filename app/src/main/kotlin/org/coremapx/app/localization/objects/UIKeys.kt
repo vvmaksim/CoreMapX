@@ -71,6 +71,8 @@ object UIKeys {
     // Lower Right Menu
     const val LOWER_RIGHT_MENU_ADD_VERTEX_BUTTON = "lowerRightMenuAddVertexButton"
     const val LOWER_RIGHT_MENU_ADD_VERTEX_ICON_DESCRIPTION = "lowerRightMenuAddVertexIconDescription"
+    const val LOWER_RIGHT_MENU_RM_VERTEX_BUTTON = "lowerRightMenuRmVertexButton"
+    const val LOWER_RIGHT_MENU_RM_VERTEX_ICON_DESCRIPTION = "lowerRightMenuRmVertexIconDescription"
     const val LOWER_RIGHT_MENU_ADD_EDGE_BUTTON = "lowerRightMenuAddEdgeButton"
     const val LOWER_RIGHT_MENU_ADD_EDGE_ICON_DESCRIPTION = "lowerRightMenuAddEdgeIconDescription"
     const val LOWER_RIGHT_MENU_GRAPH_CLEAR_BUTTON = "lowerRightMenuGraphClearButton"

@@ -157,6 +157,13 @@ object DialogsKeys {
     const val ADD_VERTEX_VERTEX_ID_MUST_BE_LONG = "addVertexVertexIdMustBeLong"
     const val ADD_VERTEX_BUTTON = "addVertexButton"
 
+    // Rm Vertex
+    const val RM_VERTEX_TITLE = "rmVertexTitle"
+    const val RM_VERTEX_VERTEX_ID_FIELD_LABEL = "rmVertexVertexIdFieldLabel"
+    const val RM_VERTEX_VERTEX_ID_CANNOT_BE_EMPTY = "rmVertexVertexIdCannotBeEmpty"
+    const val RM_VERTEX_VERTEX_ID_MUST_BE_LONG = "rmVertexVertexIdMustBeLong"
+    const val RM_VERTEX_BUTTON = "rmVertexButton"
+
     // Add Edge
     const val ADD_EDGE_TITLE = "addEdgeTitle"
     const val ADD_EDGE_FROM_VERTEX_ID_FIELD_LABEL = "addEdgeFromVertexIdFieldLabel"

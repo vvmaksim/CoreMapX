@@ -274,6 +274,13 @@ addVertexVertexLabelCannotBeEmpty=Поле VertexLabel не может быть 
 addVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
 addVertexButton=Добавить
 
+ ! Rm Vertex
+rmVertexTitle=Удалите вершину
+rmVertexVertexIdFieldLabel=Id
+rmVertexVertexIdCannotBeEmpty=Поле VertexId не может быть пустым
+rmVertexVertexIdMustBeLong=Поле VertexId должно быть числом типа Long (8 байт)
+rmVertexButton=Удалить
+
  ! Add Edge
 addEdgeTitle=Добавьте ребро
 addEdgeFromVertexIdFieldLabel=fromVertexId
@@ -319,6 +326,8 @@ forceDirectedMenuSpeed=Скорость: {number}
  ! Lower Right Menu
 lowerRightMenuAddVertexButton=Добавить вершину
 lowerRightMenuAddVertexIconDescription=Иконка добавления вершины
+lowerRightMenuRmVertexButton=Удалить вершину
+lowerRightMenuRmVertexIconDescription=Иконка удаления вершины
 lowerRightMenuAddEdgeButton=Добавить ребро
 lowerRightMenuAddEdgeIconDescription=Иконка добавления ребра
 lowerRightMenuGraphClearButton=Очистить граф

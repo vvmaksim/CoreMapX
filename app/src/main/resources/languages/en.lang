@@ -274,6 +274,13 @@ addVertexVertexLabelCannotBeEmpty=The VertexLabel field cannot be empty
 addVertexVertexIdMustBeLong=The VertexId field must be a Long number (8 bytes)
 addVertexButton=Add
 
+ ! Rm Vertex
+rmVertexTitle=Remove a vertex
+rmVertexVertexIdFieldLabel=Id
+rmVertexVertexIdCannotBeEmpty=The VertexId field cannot be empty
+rmVertexVertexIdMustBeLong=The VertexId field must be a Long number (8 bytes)
+rmVertexButton=Remove
+
  ! Add Edge
 addEdgeTitle=Add an edge
 addEdgeFromVertexIdFieldLabel=fromVertexId
@@ -319,6 +326,8 @@ forceDirectedMenuSpeed=Speed: {number}
  ! Lower Right Menu
 lowerRightMenuAddVertexButton=Add vertex
 lowerRightMenuAddVertexIconDescription=Add vertex icon
+lowerRightMenuRmVertexButton=Remove vertex
+lowerRightMenuRmVertexIconDescription=Remove vertex icon
 lowerRightMenuAddEdgeButton=Add edge
 lowerRightMenuAddEdgeIconDescription=Add edge icon
 lowerRightMenuGraphClearButton=Graph clear
