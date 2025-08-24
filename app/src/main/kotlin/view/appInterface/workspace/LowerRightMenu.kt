@@ -64,7 +64,7 @@ fun LowerRightMenu(
             MainMenuTextButton(
                 onClick = onAddVertex,
                 iconVector = Icons.Default.Add,
-                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddEdgeIconDescription.value,
+                iconContentDescription = LocalizationManager.states.ui.lowerRightMenuAddVertexIconDescription.value,
                 buttonText = LocalizationManager.states.ui.lowerRightMenuAddVertexButton.value,
                 modifier = Modifier.padding(2.dp),
             )
